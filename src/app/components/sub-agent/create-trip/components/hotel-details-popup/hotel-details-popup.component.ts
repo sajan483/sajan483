@@ -1,11 +1,11 @@
 import {Component,DoCheck,EventEmitter,Input,OnChanges,OnInit,Output,} from "@angular/core";
 import { TranslateService } from "@ngx-translate/core";
-import { CreateTripAdapter } from "src/app/adapters/create-trip-adapter";
+import { CreateTripAdapter } from "src/app/adapters/sub-agent/create-trip-adapter";
 import { HelperService } from "src/app/common/services/helper-service";
-import { CreateTripHelper } from "src/app/helpers/create-trip-helpers";
+import { CreateTripHelper } from "src/app/helpers/sub-agent/create-trip-helpers";
 import { SelectedHotel } from "src/app/models/selected_hotel";
 import { Room } from "src/app/models/visaTypes";
-import { NotificationService } from "src/app/notification.service";
+import { NotificationService } from "src/app/common/services/notification.service";
 import { AppStore } from "src/app/stores/app.store";
 import { ApiService } from "../../create-trip-api-service";
 

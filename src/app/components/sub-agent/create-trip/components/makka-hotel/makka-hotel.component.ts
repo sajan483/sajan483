@@ -3,10 +3,10 @@ import { DoCheck, EventEmitter, Input,Output } from "@angular/core";
 import { Component, OnInit } from "@angular/core";
 import { Router } from "@angular/router";
 import { TranslateService } from "@ngx-translate/core";
-import { CreateTripAdapter } from "src/app/adapters/create-trip-adapter";
+import { CreateTripAdapter } from "src/app/adapters/sub-agent/create-trip-adapter";
 import { HelperService } from "src/app/common/services/helper-service";
-import { CreateTripHelper } from "src/app/helpers/create-trip-helpers";
-import { NotificationService } from "src/app/notification.service";
+import { CreateTripHelper } from "src/app/helpers/sub-agent/create-trip-helpers";
+import { NotificationService } from "src/app/common/services/notification.service";
 import { AppStore } from "src/app/stores/app.store";
 import { ApiService } from "../../create-trip-api-service";
 

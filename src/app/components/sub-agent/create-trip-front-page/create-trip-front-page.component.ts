@@ -10,11 +10,11 @@ import {
 import { IDropdownSettings } from "ng-multiselect-dropdown";
 import { Router} from "@angular/router";
 import { TranslateService } from "@ngx-translate/core";
-import { NotificationService } from "../../../notification.service";
+import { NotificationService } from "../../../common/services/notification.service";
 import { CreateTripComponent } from "../create-trip/create-trip.component";
 import { AppStore } from "../../../stores/app.store";
 import { LooseObject, Room, Travellers } from "src/app/models/visaTypes";
-import { listHistory } from "../../../listHistory"
+import { listHistory } from "../../../models/listHistory"
 import { AuthService } from "src/app/common/services/auth-services";
 import { HelperService } from "src/app/common/services/helper-service";
 import { CommonApiService } from "src/app/common/services/common-api-services";

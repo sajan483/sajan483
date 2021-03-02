@@ -2,7 +2,7 @@ import { Component, OnInit,Input } from '@angular/core';
 import { TranslateService } from "@ngx-translate/core";
 import { Router} from '@angular/router';
 import { AppStore } from 'src/app/stores/app.store';
-import { NotificationService } from 'src/app/notification.service';
+import { NotificationService } from 'src/app/common/services/notification.service';
 
 
 @Component({

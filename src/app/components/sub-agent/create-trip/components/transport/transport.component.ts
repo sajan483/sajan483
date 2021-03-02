@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from "@angular/core";
 import { TranslateService } from "@ngx-translate/core";
 import { HelperService } from "src/app/common/services/helper-service";
-import { NotificationService } from "src/app/notification.service";
+import { NotificationService } from "src/app/common/services/notification.service";
 import { AppStore } from "src/app/stores/app.store";
 import { ApiService } from "../../create-trip-api-service";
 
