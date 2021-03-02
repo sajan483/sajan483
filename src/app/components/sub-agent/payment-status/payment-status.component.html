@@ -1,0 +1,687 @@
+<div class="container-fluid pl-0 pr-0" id="top" >
+    <div class="top_section" *ngIf="status == 'success'" >
+        <img class="tick_img" src="/assets/images/check_mark.svg" alt="">
+        <h5 class="payment_sucess_heading" style="color: #fff;">{{'Payment Successful' | translate}}</h5>
+        <p class="secondary_heading">{{'Book on' | translate}} {{tripData?.booking_date | date: 'mediumDate'}}</p>
+    </div>
+    <div class="top_section"  *ngIf="status == 'failure'" >
+        <img class="tick_img" src="/assets/images/close.svg" style="height: 50px;padding-bottom: 4px;" alt="">
+        <h5 class="payment_sucess_heading" *ngIf="status == 'success'" style="color: #fff;">Payment Failed</h5>
+        <p class="secondary_heading">{{'Book on' | translate}} {{tripData?.booking_date | date: 'mediumDate'}}</p>
+    </div>       
+        <div class="container">
+            <div class="algn justify-content-between pt-3 pb-2">
+                <div *ngIf="reference_no" class="bookingRefNo ">
+                    <p class="reffno"><strong>{{'Booking Reference No' | translate}} :</strong> {{reference_no}} </p>
+                </div>
+                <div class="algnTopBtns">
+                    <!-- <select class=" selectborder pding" (change)="voucherClick($event)">
+                        <option value="" disabled selected>{{'VOUCHER' | translate}}</option>
+                        <option value="View">View</option>
+                        <option value="Download">Download</option>
+                    </select> -->
+                    <div class="dropdown">
+                        <button class="dropbtn selectborder ml10">{{'VOUCHER' | translate}}</button>
+                        <div class="dropdown-content">
+                            <a (click)="voucherClick('View')">View</a>
+                            <a (click)="voucherClick('Download')">Download</a>
+                        </div>
+                    </div>
+                    <!-- <div>
+                        <button (click)="downlodvoucher();" class="itinerarybutton">{{'Voucher' | translate}}</button>
+                    </div> -->
+                    <!-- <div>
+                        <button (click)="downlodinvoice();" class="itinerarybutton">{{'Invoice' | translate}}</button>
+                    </div> -->
+                    <!-- <select class=" selectborder pding" style="margin-left: 10px;" (change)="invoiceClick($event)">
+                        <option value="" disabled selected>{{'INVOICE' | translate}}</option>
+                        <option value="View">View</option>
+                        <option value="Download">Download</option>
+                    </select> -->
+                    <div class="dropdown">
+                        <button class="dropbtn selectborder" style="margin-left: 10px;">{{'INVOICE' | translate}}</button>
+                        <div class="dropdown-content">
+                            <a (click)="invoiceClick('View')">View</a>
+                            <a (click)="invoiceClick('Download')">Download</a>
+                        </div>
+                    </div>
+                    <div class="itenarySet">
+                        <button class="itinerarybutton w150 mrgn" href="#" data-toggle="tooltip" data-placement="left" title="You will receive an Email" (click)="sentItenaryButtonClicked()">{{'SENT Itinerary' | translate}}</button>
+                    </div>
+                    <div class="cancellationbutton">
+                        <div><button id="checkCancellationBtn" (click)="checkCancellation()" type="submit" class="bttnprimary">{{'CHECK CANCELLATION' | translate}}</button> </div>
+                    </div>
+                </div>
+            </div>
+            
+            
+           
+            <div class="col-md-12 review_detaiols_div outer-payment-div pl-0 pr-0 pb-0" *ngIf="tripMakkahHotel">
+                <div class="ribbon col-md-12" *ngIf="makkahCancellation">
+                    <span class="ribbon3" >
+                        <div class="refund_available" *ngIf="makkahCancellation?.success == true">
+                            <p class="status">{{makkahCancellation?.cancellation_prices?.cancellation_status}}</p>
+                            <p class="refund_amount">{{'Refund Amount' | translate}}: {{makkahCancellation?.cancellation_prices?.total_refund}}</p>
+                        </div>
+                        <div class="no_cancellation" *ngIf="makkahCancellation?.success == false">
+                            {{'No Cancellation Policy Found' | translate}}<i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
+                        </div>
+                    </span> 
+                   </div>
+                <div class="top-section">
+                    <div class="row">
+                        <h2 class="flight-name textright pl-3">
+                            <span class="departure-Section">{{'Makkah' | translate}}</span> 
+                        </h2>
+                        <div class="ml-auto mr-2 " id="toggleTopBtn1">
+                            <div class="arrowPosition">
+                                <div *ngIf="!makka">
+                                        <button (click)="toggleMakkaUp()"><i class="fa fa-angle-up"></i></button>
+                                </div>
+                                <div *ngIf="makka">
+                                    <button (click)="toggleMakkaDown()"><i class="fa fa-angle-down"></i></button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="makka">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div style="display: flex;">
+                                <span class="hotelName">{{tripMakkahHotel.trip_hotel.hotel.name}}
+                                    <span *ngIf="tripMakkahHotel.brn"> - {{tripMakkahHotel.brn}}</span>
+                                </span>
+                                <div style="padding-left: 10px;">
+                                <ngb-rating [(rate)]="tripMakkahHotelrating" [max]=5>
+                                    <ng-template let-fill="fill" let-index="index">
+                                    <span class="star" [class.filled]="fill === 100" [class.bad]="index < 2">&#9733;</span>
+                                    </ng-template>
+                                </ngb-rating>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4 departure refund-txt-color textright" >
+                            <span class="status_color">{{'Status' | translate}}:</span> {{tripMakkahHotel.status}}
+                            <p *ngIf="tripMakkahHotel.brn">{{'BRN' | translate}}: {{tripMakkahHotel.brn}}</p>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="departure fare_rule_txt"><button class="policies_bttn"
+                                data-toggle="modal" [attr.data-target]="'#hotelPolicy'+ tripMakkahHotel.trip_hotel.hotel.id">{{'Policies' | translate}}  <i class="fa fa-info-circle" aria-hidden="true"></i></button></div>
+                        </div>
+                        <div class="modal" id="hotelPolicy{{tripMakkahHotel.trip_hotel.hotel.id}}">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header" style="border-bottom: none;padding-bottom: 0px;">
+                                        <h6 class="modal-title">{{'Policies' | translate}}</h6>
+                                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                    </div>
+                                    <div class="modal-body mb-4">
+                                    
+                                            <div class="container p-3 paymentpage_policies">
+                                                
+                                                        <p  *ngFor="let policy of tripMakkahHotel.trip_hotel.hotel.policies" class="pb-1">
+                                                            <i class="fa fa-check" aria-hidden="true"></i>  {{policy.description}}
+                                                        </p> 
+                                                        <div  *ngFor="let x of tripMakkahHotel.trip_hotel.room_variations">
+                                                            <p *ngFor="let policy of x.room.policies">
+                                                                <i class="fa fa-check" aria-hidden="true"></i>  {{policy.description}}
+                                                            </p>
+                                                        </div>  
+                                                
+                                                    <p *ngIf="!tripMakkahHotel.trip_hotel.hotel.policies[0] && !tripMakkahHotel.trip_hotel.room_variations[0].room.policies[0]" class="centerText">
+                                                        {{'No Policies Found' | translate}} 
+                                                    </p>
+                                            </div>
+                                            
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-2 customTooltip txtAlgn">
+                                <h2 class="htlprz">{{tripMakkahHotel?.currency}} {{tripMakkahHotel?.total_price | number:'1.2-2'}}</h2>
+                                
+                        </div>
+                    </div>
+                    
+                    
+               
+                <div>
+                    <div class="row col-md-12 pl-0 pr-0 m-0 pt-2 pb-2 content-section" *ngIf="tripMakkahHotel">
+                        <div class="col-md-3">
+                            <img class="hotelimageriview" src="{{tripMakkahHotel.trip_hotel.hotel.images[0]?.image_url}}" alt="">
+                        </div>
+                        <div class="col-md-9" >
+                            <div class="row detail_review">
+                                <div class="col-md-4 pb-1 textright">
+                                    <p><strong>{{'Check In' | translate}} : </strong> {{tripMakkahHotel.trip_hotel.check_in_time | date: 'short'}}</p>
+                                </div>
+                                <div class="col-md-4 pb-1 textright">
+                                    <p><strong>{{'Check Out' | translate}} : </strong> {{tripMakkahHotel.trip_hotel.check_out_time | date: 'short'}}</p>
+                                </div>
+                                <div class="col-md-4 pb-1 textright">
+                                    <p><strong>{{'Phone No.' | translate}} : </strong> {{tripMakkahHotel.trip_hotel.hotel.phone_number}}</p>
+                                </div>
+                                <div class="col-md-4 pb-1 textright">
+                                    <p><strong>{{'Email' | translate}} : </strong> {{tripMakkahHotel.trip_hotel.hotel.email}}</p>
+                                </div>
+                                <div class="col-md-4 pb-1 textright">
+                                    <p><strong>{{'Total Room' | translate}} : </strong> {{tripMakkahHotel?.trip_hotel.room_variations?.length}}</p>
+                                </div>
+                                <div class="col-md-4 pb-1 textright">
+                                    <p><strong>{{'Haram Distance' | translate}} : </strong> {{tripMakkahHotel.trip_hotel.hotel.distance}} KM</p>
+                                </div>
+                                <div class="col-md-12 pb-1 textright">
+                                    <p><strong>{{'Address' | translate}} : </strong>{{tripMakkahHotel.trip_hotel.hotel.address}} </p>
+                                </div>
+                                <div class="col-md-12 pb-1 textright">
+                                    <p>{{tripMakkahHotel.free_cancellation_time}} </p>
+                                </div>
+                                
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row col-md-12 pl-0 pr-0 m-0 pt-2 w-100 content-section">
+                        <div class="col-md-12 ">
+                            <ul class="pLeft listStyle">
+                                <li class="pb-1" *ngFor="let room of tripMakkahHotel?.trip_hotel.room_variations">
+                                    <div class="algn justify-content-between roomtype">
+                                        <div class="normaltext">{{room.title}}</div>
+                                        <div class="departure refund-txt-color" *ngIf="room.room.is_refundable">
+                                                 {{room.room.is_refundable}}
+                                        </div>
+                                        <!-- <div class="departure refund-txt-color" style="color: red;" *ngIf="!room.room.is_refundable">
+                                            Non Refundable
+                                        </div> -->
+                                        <div><strong>{{room.max_guests}}</strong> GUESTS</div>
+                                        <div class="normaltext" style="padding-right: 150px;">{{room.currency}} {{room.room.amount}}</div>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div> 
+                    </div>
+                </div>
+                <div class="col-md-12 pt-2 mt-2 pb-2 payment-sucess-policy">
+                    <div class="col-md-12 pl-0 textright">
+                        <h6>{{'Cancellation Policy' | translate}}</h6>
+                    </div>
+                    <div class="col-md-12 pl-0 textright">
+                        <ul class="mb-0">
+                            <li *ngFor="let policy of tripMakkahHotel.trip_hotel.hotel.policies">
+                                {{policy.description}}
+                            </li>
+                            <div *ngFor="let x of tripMakkahHotel.trip_hotel.room_variations">
+                            <li *ngFor="let policy of x.room.policies">
+                                {{policy.description}}
+                            </li>
+                            <li *ngIf="x.room.cancellation_policy.description">
+                                {{x.room.cancellation_policy.description}}
+                            </li>
+                            <p *ngIf="tripMakkahHotel.trip_hotel.hotel.policies?.length == 0 && tripMakkahHotel.trip_hotel.room_variations[0].room.policies?.length == 0 && !tripMakkahHotel.trip_hotel.room_variations[0].room.cancellation_policy.description">{{'No Policies Found' | translate}} </p>
+                            </div>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+            
+            <div class="col-md-12 review_detaiols_div outer-payment-div pl-0 pr-0 pb-0" *ngIf="tripMadeenaHotel">
+               <div class="ribbon col-md-12" *ngIf="medinahCancellation">
+                <span class="ribbon3" >
+                    <div class="refund_available" *ngIf="medinahCancellation?.success == true">
+                        <p class="status">{{medinahCancellation?.cancellation_prices?.cancellation_status}}</p>
+                        <p class="refund_amount">{{'Refund Amount' | translate}}: {{medinahCancellation?.cancellation_prices?.total_refund}}</p>
+                    </div>
+                    <div class="no_cancellation" *ngIf="medinahCancellation?.success == false">
+                        <span>{{'No Cancellation Policy Found' | translate}}</span> <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
+                    </div>
+                </span> 
+               </div>
+                <div class="top-section">
+                    <div class="row">
+                        <h2 class="flight-name textright pl-3">
+                            <span class="departure-Section">{{'Medinah' | translate}}</span> 
+                        </h2>
+                        <div class="ml-auto mr-2 " id="toggleTopBtn2">
+                            <div class="arrowPosition">
+                                <div *ngIf="!medinah">
+                                        <button (click)="toggleMedinahUp()"><i class="fa fa-angle-up"></i></button>
+                                </div>
+                                <div *ngIf="medinah">
+                                    <button (click)="toggleMedinahDown()"><i class="fa fa-angle-down"></i></button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="medinah">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div style="display: flex;">
+                                    <span class="hotelName">{{tripMadeenaHotel.trip_hotel.hotel.name}}
+                                        
+                                    </span>
+                                    <div style="padding-left: 10px;">
+                                    <ngb-rating [(rate)]="tripMadeenaHotel.trip_hotel.hotel.user_review" [max]=5>
+                                        <ng-template let-fill="fill" let-index="index">
+                                        <span class="star" [class.filled]="fill === 100" [class.bad]="index < 2">&#9733;</span>
+                                        </ng-template>
+                                    </ngb-rating>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4 departure refund-txt-color textright" >
+                                <span class="status_color">{{'Status' | translate}}:</span> {{tripMadeenaHotel.status}}
+                                <p *ngIf="tripMadeenaHotel.brn">{{'BRN' | translate}}: {{tripMadeenaHotel.brn}}</p>
+                            </div>
+                            <div class="col-md-2">
+                                <div class="departure fare_rule_txt"><button class="policies_bttn"
+                                    data-toggle="modal" [attr.data-target]="'#hotel_policy'+ tripMadeenaHotel.trip_hotel.hotel.id">{{'Policies' | translate}} <i class="fa fa-info-circle" aria-hidden="true"></i></button> </div>
+                            </div>
+                            <div class="modal" id="hotel_policy{{tripMadeenaHotel.trip_hotel.hotel.id}}">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header" style="border-bottom: none;padding-bottom: 0px;">
+                                        <h6 class="modal-title">{{'Policies' | translate}}</h6>
+                                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                        </div>
+                                        <div class="modal-body mb-4">
+                                        
+                                                <div class="container p-3 paymentpage_policies">
+                                                    
+                                                            <p  *ngFor="let policy of tripMadeenaHotel.trip_hotel.hotel.policies" class="pb-1">
+                                                                <i class="fa fa-check" aria-hidden="true"></i>  {{policy.description}}
+                                                            </p> 
+                                                            <div  *ngFor="let x of tripMadeenaHotel.trip_hotel.room_variations">
+                                                                <p *ngFor="let policy of x.room.policies">
+                                                                    <i class="fa fa-check" aria-hidden="true"></i>  {{policy.description}}
+                                                                </p>
+                                                            </div>  
+                                                    
+                                                        <p *ngIf="!tripMadeenaHotel.trip_hotel.hotel.policies[0] && !tripMadeenaHotel.trip_hotel.room_variations[0].room.policies[0]" class="centerText">
+                                                            {{'No Policies Found' | translate}}
+                                                        </p>
+                                                    
+                                                </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-2 customTooltip txtAlgn" >
+                                    <h2 class="htlprz">{{tripMadeenaHotel?.currency}} {{tripMadeenaHotel?.total_price | number:'1.2-2'}}</h2>
+                                  
+                            </div>
+                       
+                            
+                        </div>
+                        
+                        
+                   
+                    <div>
+                        <div class="row col-md-12 pl-0 pr-0 m-0 pt-2 pb-2 content-section" *ngIf="tripMadeenaHotel">
+                            <div class="col-md-3">
+                                <img class="hotelimageriview" src="{{tripMadeenaHotel.trip_hotel.hotel.images[0]?.image_url}}" alt="">
+                            </div>
+                            <div class="col-md-9" >
+                                <div class="row detail_review">
+                                    <div class="col-md-4 pb-1 textright">
+                                        <p><strong>{{'Check In' | translate}} : </strong> {{tripMadeenaHotel.trip_hotel.check_in_time | date: 'short'}}</p>
+                                    </div>
+                                    <div class="col-md-4 pb-1 textright">
+                                        <p><strong>{{'Check Out' | translate}} : </strong> {{tripMadeenaHotel.trip_hotel.check_out_time | date: 'short'}}</p>
+                                    </div>
+                                    <div class="col-md-4 pb-1 textright">
+                                        <p><strong>{{'Phone Number' | translate}} : </strong> {{tripMadeenaHotel.trip_hotel.hotel.phone_number}}</p>
+                                    </div>
+                                    <div class="col-md-4 pb-1 textright">
+                                        <p><strong>{{'Email' | translate}} : </strong> {{tripMadeenaHotel.trip_hotel.hotel.email}}</p>
+                                    </div>
+                                    <div class="col-md-4 pb-1 textright">
+                                        <p><strong>{{'Total Room' | translate}} : </strong> {{tripMadeenaHotel?.trip_hotel.room_variations?.length}}</p>
+                                    </div>
+                                    
+                                    <div class="col-md-12 pb-1 textright">
+                                        <p><strong>{{'Address' | translate}} : </strong>{{tripMadeenaHotel.trip_hotel.hotel.address}} </p>
+                                    </div>
+                                    <div class="col-md-12 pb-1 textright">
+                                        <p>{{tripMadeenaHotel.free_cancellation_time}} </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row col-md-12 pl-0 pr-0 m-0 pt-2 w-100 content-section">
+                            <div class="col-md-12 ">
+                                <ul class="pLeft listStyle">
+                                    <li class="pb-1" *ngFor="let room of tripMadeenaHotel?.trip_hotel.room_variations">
+                                        <div class="algn justify-content-between roomtype">
+                                            <div class="normaltext">{{room.title}}</div>
+                                            <div class="departure refund-txt-color" *ngIf="room.room.is_refundable">
+                                                {{room.room.is_refundable}}
+                                            </div>
+                                            <!-- <div class="departure refund-txt-color" style="color: red;" *ngIf="!room.room.is_refundable">
+                                                Non Refundable
+                                            </div> -->
+                                            <div><strong>{{room.max_guests}}</strong> {{'GUESTS' | translate}}</div>
+                                            <div class="normaltext" style="padding-right: 150px;">{{room.currency}} {{room.room.amount}}</div>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div> 
+                        </div>
+                    </div>
+                    <div class="col-md-12 pt-2 mt-2 pb-2 payment-sucess-policy">
+                        <div class="col-md-12 pl-0 textright">
+                            <h6>{{'Cancellation Policy' | translate}}</h6>
+                        </div>
+                        <div class="col-md-12 pl-0 textright">
+                            <ul class="mb-0">
+                                <li *ngFor="let policy of tripMadeenaHotel.trip_hotel.hotel.policies">
+                                    {{policy.description}}
+                                </li>
+                                <div *ngFor="let x of tripMadeenaHotel.trip_hotel.room_variations">
+                                <li *ngFor="let policy of x.room.policies">
+                                    {{policy.description}}
+                                </li>
+                                <li *ngIf="x.room.cancellation_policy.description">
+                                    {{x.room.cancellation_policy.description}}
+                                </li>
+                                <p *ngIf="tripMadeenaHotel.trip_hotel.hotel.policies?.length == 0 && tripMadeenaHotel.trip_hotel.room_variations[0].room.policies?.length == 0 && !tripMadeenaHotel.trip_hotel.room_variations[0].room.cancellation_policy.description">{{'No Policies Found' | translate}} </p>
+                                </div>
+                            </ul>
+                        </div>
+                    </div>
+            </div>
+        </div> </div>
+
+            <div *ngIf="tripTransport && tripTransport?.trip_transportation?.trip_vehicles && tripTransport.trip_transportation.trip_vehicles?.length > 0">
+            
+
+            <div class="col-md-12 review_detaiols_div outer-payment-div pl-0 pr-0 pb-0" *ngIf="tripTransport && tripTransport?.trip_transportation?.trip_vehicles && tripTransport.trip_transportation.trip_vehicles?.length > 0">
+                <div class="ribbon col-md-12" *ngIf="transportCancellation">
+                    <span class="ribbon3" >
+                        <div class="refund_available" *ngIf="transportCancellation?.success == true">
+                            <p class="status">{{transportCancellation?.cancellation_prices?.cancellation_status}}</p>
+                            <p class="refund_amount">{{'Refund Amount' | translate}}: {{transportCancellation?.cancellation_prices?.total_refund}}</p>
+                        </div>
+                        <div class="no_cancellation" *ngIf="transportCancellation?.success == false">
+                                {{'No Cancellation Policy Found' | translate}}<i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
+                        </div>
+                    </span> 
+                   </div>
+                <div class="top-section pb-4">
+                    <!-- <h2 class="flight-name">
+                        <span class="departure-Section"><strong style="color: gray;">Route : </strong> {{tripTransport.route?.name}} </span>
+                    </h2> -->
+                    <div class="row">
+                        <div class="col-md-4 row pr-0">
+                            <div style="display: flex;" class="pl-3" id="trnspt">
+                                <span class="hotelName">Transport</span>
+                            </div>
+                           
+                            <div class="ml-auto mr-1 " id="toggleTopBtn3">
+                                <div class="arrowPosition">
+                                    <div *ngIf="!trnsprt">
+                                            <button (click)="toggleTransportUp()"><i class="fa fa-angle-up"></i></button>
+                                    </div>
+                                    <div *ngIf="trnsprt">
+                                        <button (click)="toggleTransportDown()"><i class="fa fa-angle-down"></i></button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div style="display: flex;" class="pl-3" id="trnsptNormal">
+                                <span class="hotelName">{{tripTransport?.trip_transportation.company.name}}
+                                 </span>
+                            </div>
+                        </div>
+                        <div class="col-md-4 departure refund-txt-color textright" id="transportBrn">
+                            <span class="status_color">{{'Status' | translate}}:</span> {{tripTransport.status}}
+                            <p *ngIf="tripTransport.brn">{{'BRN' | translate}}: {{tripTransport.brn}}</p>
+                        </div>
+                        <div class="col-md-2" id="transportPolicy">
+                            <div class="departure fare_rule_txt"><button class="policies_bttn"
+                                data-toggle="modal" [attr.data-target]="'#transportPolicy'+ tripTransport.id">{{'Policies' | translate}}  <i class="fa fa-info-circle" aria-hidden="true"></i></button></div>
+                        </div>
+                        <div class="modal" id="transportPolicy{{tripTransport.id}}">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                            
+                                
+                                    <div class="modal-header" style="border-bottom: none;padding-bottom: 0px;">
+                                    <h6 class="modal-title">{{'Policies' | translate}}</h6>
+                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                    </div>
+                                    <div class="modal-body mb-4">
+                                    
+                                            <div class="container p-3 paymentpage_policies">
+                                                    <div *ngFor="let policy of selectedTransport.policies" >
+                                                        <p class="pb-1">
+                                                            <i class="fa fa-check" aria-hidden="true"></i> {{policy.description}}
+                                                        </p>  
+                                                    </div>
+                                                    <p *ngIf="!selectedTransport.policies[0]" class="centerText">
+                                                        {{'No Policies Found' | translate}}
+                                                    </p>
+                                            </div>
+                                    
+                                    </div>
+                            
+                                </div>
+                                </div>
+                        </div>
+                        <div class="col-md-2 customTooltip txtAlgn" id="transportRate">
+                                <h2 class="htlprz">{{tripTransport?.currency}}  {{tripTransport?.total_price | number:'1.2-2'}}</h2>
+                             
+                        </div>
+                       
+                    </div>
+                </div>
+                <div id="transport">
+                <div>
+                    <div >
+                        <div class="row col-md-12 pl-0 pr-0 m-0 pt-2 pb-2 content-section">
+                            <div class="col-md-3" *ngIf="tripTransport.trip_transportation.selected_transportation.vehicle_types[0].image">
+                                <img class="" style="width: 200px;height: 105px;" src="{{tripTransport.trip_transportation.selected_transportation.vehicle_types[0].image}}" alt="">
+                            </div>
+                            <div class="col-md-3" *ngIf="!tripTransport.trip_transportation.selected_transportation.vehicle_types[0].image">
+                                <img class="" style="width: 200px;height: 105px;" src="/assets/images/no_image.jpg" alt="">
+                            </div>
+                            <div class="col-md-6">
+                                <div class="row detail_review">
+                                    <div class="col-md-4 pb-1 textright">
+                                        <p><strong>{{'Category' | translate}} : </strong> {{tripTransport.trip_transportation.categories[0].name}} </p>
+                                    </div>
+                                    <div class="col-md-4 pb-1 textright">
+                                        <p ><strong>{{'Vehicle Type' | translate}} : </strong> {{tripTransport.trip_transportation.vehicle_types[0].name}} </p>   
+                                    </div>
+                                    <div class="col-md-4 pb-1 textright">
+                                        <p><strong>{{'Model' | translate}} : </strong> {{selectedTransport.vehicle_types[0].categories[0].model}}</p>
+                                    </div>
+                                    <div class="col-md-4 pb-1 textright">
+                                        <p><strong>{{'No. of vehicle' | translate}} : </strong> {{tripTransport.trip_transportation.trip_vehicles[0].booked_quantity}}</p>
+                                    </div>
+                                    <div class="col-md-4 pb-1 textright">
+                                        <p><strong>{{'Seats' | translate}} : </strong> {{selectedTransport.vehicle_types[0].categories[0].capacity}}</p>
+                                    </div>
+                                    <div class="col-md-4 pb-1 textright">
+                                        <p><strong>{{'Phone Number' | translate}} : </strong> {{tripTransport.trip_transportation.company.phone_number}}</p>
+                                    </div>
+                                    <div class="col-md-8 pb-1 textright">
+                                        <p><strong>{{'Email' | translate}} : </strong> {{tripTransport.trip_transportation.company.email}}</p>
+                                    </div>
+                                    <div class="col-md-4 pb-1 textright">
+                                        <p><strong>{{'Bag Capacity' | translate}} : </strong> {{tripTransport.trip_transportation.vehicle_types[0].bags_capacity}}</p>
+                                    </div>
+                                    <div class="col-md-12 pb-1 textright">
+                                        <p><strong>{{'Route' | translate}} : </strong> {{tripTransport.trip_transportation.route?.name}}</p>
+                                    </div>
+                                    <div class="col-md-12 pb-1 textright">
+                                        <p><strong>{{'Address' | translate}} : </strong> {{tripTransport.trip_transportation.company.address}}</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3" *ngIf="selectedTransport.vehicle_types[0].categories[0].additional_services[0]">
+                                <p style="color: red;" class="pl-3">{{'Additional Services' | translate}}</p>
+                                <ul style="list-style-type: circle;">
+                                    <li *ngFor="let a of selectedTransport.vehicle_types[0].categories[0].additional_services">{{a.description}}</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-12 pt-2 mt-2 pb-2 payment-sucess-policy">
+                    <div class="col-md-12 pl-0 textright">
+                        <h6>{{'Cancellation Policy' | translate}}</h6>
+                    </div>
+                    <div class="col-md-12 pl-0 textright">
+                        <ul class="mb-0">
+                            <li *ngIf="selectedTransport.cancellation_policy.description">
+                               {{selectedTransport.cancellation_policy.description}}
+                            </li>
+                            <li *ngFor="let policy of selectedTransport.policies">
+                               {{policy.description}}
+                            </li>
+                            <p *ngIf="selectedTransport.policies?.length == 0 && !selectedTransport.cancellation_policy.description">{{'No Policies Found' | translate}} </p>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+            
+            <div class="col-md-12 outer-payment-div pl-0 pr-0 pb-0" *ngIf="tripVisaData">
+                <div class="top-section pb-4">
+                    <span class="hotelName">{{tripVisaData.title}}</span>
+                    <span class="vehicle-price">{{tripVisaData.currency}} {{tripVisaData.total_price | number:'1.2-2'}}</span>
+                </div>
+                <div class="d-flex flex-row-reverse">
+                    <div *ngIf="tripData?.visa_process_status == 'started'"><button (click)="bookVisa()" type="submit" class="bttnprimary">Edit/Check Visa Process</button> </div>
+                    <div *ngIf="tripData?.visa_process_status == 'available'"><button (click)="bookVisa()" type="submit" class="bttnprimary">Start Visa Process</button> </div>
+                </div>
+            </div>
+            <div class="col-md-12">
+                <h3 class="flight-heading">{{'Review your Traveller details' | translate}}</h3>
+            </div>
+            <div class="col-md-12 outer-payment-div">
+                <table id="travellerDetailTable">
+                    <div *ngFor="let traveller of tripTravellers;let i = index">
+                    <tr>
+                      <th>{{'Adult' | translate}} {{i + 1}}</th>
+                      <th>{{'Details' | translate}}</th>
+                    </tr>
+                    <tr>
+                      <td>{{'Name' | translate}}</td>
+                      <td>{{traveller.first_name}} {{traveller.last_name}}</td>
+                    
+                    </tr>
+                    <tr>
+                      <td>{{'Gender' | translate}}</td>
+                      <td>{{traveller.gender}}</td>
+                     
+                    </tr>
+                    <tr>
+                      <td>{{'Date of Birth' | translate}}</td>
+                      <td>{{traveller.dob}}</td>
+                    </tr>
+                    <tr>
+                      <td>{{'Passport No.' | translate}}</td>
+                      <td>{{traveller.passport_no}}</td>
+                    </tr>
+                    <tr>
+                      <td>{{'Passport Expiry' | translate}}</td>
+                      <td>{{traveller.passport_expiry_date}}</td>
+                    </tr>
+                    <tr>
+                      <td>{{'Nationality' | translate}}</td>
+                      <td>{{traveller.nationality}}</td>
+                    </tr>
+                    <tr>
+                      <td>{{'Country of Residence' | translate}}</td>
+                      <td>{{traveller.country_of_residence}}</td>
+                    </tr>
+                    <tr  *ngIf="traveller.contactinfo">
+                      <td>{{'Phone Number' | translate}}</td>
+                      <td>{{traveller.contactinfo?.phone_number}}</td>
+                    </tr>
+                    <tr  *ngIf="traveller.contactinfo">
+                      <td>{{'Email' | translate}}</td>
+                      <td>{{traveller.contactinfo?.email}}</td>
+                    </tr>
+                    <tr  *ngIf="traveller.contactinfo">
+                      <td>{{'Address' | translate}}</td>
+                      <td>{{traveller.contactinfo?.address}}</td>
+                    </tr>
+                </div>
+                  </table>
+            </div>
+            
+         </div>
+</div>
+
+<div [style.display]="cancelationPopup ? 'block' : 'none'" id="cancellationpopup" tabindex="-1" role="dialog"
+aria-labelledby="myModalLabel" aria-hidden="true" class="modal ticket_cancellation_popup">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header" style="border-bottom: none;padding-bottom: 0px;">
+                <h6 class="modal-title pl-3 paddingR15">{{'CONFIRM CANCELLATION' | translate}}</h6>
+                <button type="button" class="close cancelclose" (click)="closecancelPopup();">&times;</button>
+            </div>
+            <div class="modal-body mb-4">
+                    <div class="container p-3 paymentpage_policies">
+                        <table class="table" style="border: 1px solid #dee2e6;">
+                            <thead>
+                              <tr>
+                                <!-- <th scope="col"></th> -->
+                                <th scope="col">Items</th>
+                                <th scope="col">{{'Name' | translate}}</th>
+                                <th scope="col">{{'Status' | translate}}</th>
+                                <th scope="col">{{'Refund Amount' | translate}}</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              <tr *ngIf="tripMakkahHotel" [class.bgcolors]="makkahCancellation?.success == false">
+                                <!-- <th><mat-checkbox [disabled]="!makkahCancellation?.success" (change)="makkahcheck();"></mat-checkbox></th> -->
+                                <td>{{'Makkah Hotel' | translate}}</td>
+                                <td>{{tripMakkahHotel.trip_hotel.hotel.name}}</td>
+                                <td *ngIf="!makkahCancellation?.success" style="color: red;">{{'No Cancellation Policy Found' | translate}}</td>
+                                <td *ngIf="makkahCancellation?.success" style="color: green;">{{makkahCancellation?.cancellation_prices?.cancellation_status}} </td>
+                                <td *ngIf="!makkahCancellation?.success">0</td>
+                                <td *ngIf="makkahCancellation?.success">{{makkahCancellation?.cancellation_prices?.total_refund}}</td>
+                              </tr>
+                              <tr *ngIf="tripMadeenaHotel" [class.bgcolors]="medinahCancellation?.success == false">
+                                <!-- <th><mat-checkbox [disabled]="!medinahCancellation?.success" (change)="medinahcheck();"></mat-checkbox></th> -->
+                                <td>{{'Medina Hotel' | translate}}</td>
+                                <td>{{tripMadeenaHotel.trip_hotel.hotel.name}}</td>
+                                <td *ngIf="!medinahCancellation?.success" style="color: red;">{{'No Cancellation Policy Found' | translate}}</td>
+                                <td *ngIf="medinahCancellation?.success" style="color: green;">{{medinahCancellation?.cancellation_prices?.cancellation_status}} </td>
+                                <td *ngIf="!medinahCancellation?.success">0</td>
+                                <td *ngIf="medinahCancellation?.success">{{medinahCancellation?.cancellation_prices?.total_refund}}</td>
+                              </tr>
+                              <tr *ngIf="tripTransport && tripTransport?.trip_transportation?.trip_vehicles && tripTransport.trip_transportation.trip_vehicles?.length > 0" [class.bgcolors]="transportCancellation?.success == false">
+                                <!-- <th><mat-checkbox [disabled]="!transportCancellation?.success" (change)="transportcheck();"></mat-checkbox></th> -->
+                                <td>{{'Transport' | translate}}</td>
+                                <td>{{tripTransport?.trip_transportation.company.name}}</td>
+                                <td *ngIf="!transportCancellation?.success" style="color: red;">{{'No Cancellation Policy Found' | translate}}</td>
+                                <td *ngIf="transportCancellation?.success" style="color: green;">{{transportCancellation?.cancellation_prices?.cancellation_status}} </td>
+                                <td *ngIf="!transportCancellation?.success">0</td>
+                                <td *ngIf="transportCancellation?.success">{{transportCancellation?.cancellation_prices?.total_refund}}</td>
+                              </tr>
+                            </tbody>
+                          </table>
+                        
+                          
+                        <label class="remarks pt-2 floatright" for="remarks">{{'Remarks' | translate}}</label>
+                        <textarea name="remarks" type="text" id="confirmCancellationInput" placeholder="Please mention the reason for cancellation"></textarea>
+                        <p class="note textright"><i class="fa fa-info-circle pr-2" aria-hidden="true"></i>Please Note</p>
+                        <p class="note_txt textright">Standard Terms and Conditions Apply..</p>
+                    </div>
+                    <div><button (click)="confirmCancellation()" type="submit" class="bttnprimary mr-3 pull-right" data-dismiss="modal">{{'CONFIRM CANCELLATION' | translate}}</button> </div>
+            </div>
+        </div>
+    </div>
+</div> 
+<ngx-spinner id="paymentLoader" bdColor="rgba(51, 51, 51, 0.8)" size="default" type="ball-spin-clockwise"> 
+        <div class="loader_message">
+            <h5>{{'Please Wait...' | translate}}</h5>
+        <div class="lds-roller"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+
+        </div>
+    </ngx-spinner>

@@ -1,0 +1,159 @@
+<div class="container-fluid backgroundimage">
+	<div class="bagroundblure">
+		<div class="extraimg">
+			<img src="/assets/images/lanterns.png" alt="">
+		</div>
+		<div class="row m-0" id="loginDiv">
+			<div class="pt60 col-md-8 col-lg-6 col-xl-4 col-12 pl-0 pr-0" style="margin: auto;">
+				<div class="text-center">
+					<img src="/assets/images/logo.png" class="logoimg" alt="">
+				</div>
+				<h3 class="logtext">LOGIN TO CONTINUE</h3>
+				<div class="relativepos">
+					<div class="topimagepos">
+						<img src="/assets/images/login-box-top-right-bg.png" alt="">
+					</div>
+					<div class="bottomingpos">
+						<img src="/assets/images/login-box-bottom-left-bg.png" alt="">
+					</div>
+					<div class="card">
+						<div class="card-body p60">
+							<form [formGroup]="frmSignup" (submit)="submit()">
+								<div class="input-group form-group">
+									<div class="input-group-prepend">
+										<span class="input-group-text"><img src="/assets/images/username-icon.png" alt=""></span>
+									</div>
+									<input [(ngModel)]="username" type="text" formControlName="username" placeholder="Phone Number" class="form-control" maxlength="15">
+								</div>
+								<div class="input-group form-group">
+									<div class="input-group-prepend">
+										<span class="input-group-text"><img src="/assets/images/password-icon.png" alt=""></span>
+									</div>
+									<input type="password" [(ngModel)]="password" class="form-control" formControlName="password" placeholder="Password">
+								</div>
+								<div class="row align-items-center remember">
+									<div class="col-md-6 col-6 p-0 ">
+										<mat-checkbox [(checked)]="rememberme" (change)="setBoolean()" >Remember me</mat-checkbox>
+									</div>
+									<div class="col-md-6 col-6 p-0 textend mb11">
+										<a data-toggle="modal" data-target="#forgotPasswordPopup" class="frgtpsswrd"href="#">Forgot Password...?</a>
+									</div>
+								</div>
+								<div class="form-group">
+									<input type="submit" value="LOGIN" class="login_btn" >
+								</div>
+								<div class="d-flex justify-content-center links">
+									Don't have an account...?<a class="signupc" (click)="navigatesignup();">Create Now</a>
+								</div>
+							</form>
+						</div>
+					</div>
+				</div>
+				<div class="d-flex justify-content-around mt45" >
+					<div class="smallcenter" style="width: 205px;">
+						<div class="emailicon">
+							<img style="margin-top: 2px;" src="/assets/images/email-icon.png" alt="">
+						</div>
+						<div>
+							<p class="textemailphone">Email Us</p>
+							<p class="textemailphone">info@akbarumrah.com</p>
+						</div>
+					</div>
+					<div style="width: 158px;" class="smallcenter">
+						<div class="emailicon">
+							<img src="/assets/images/call-us-icon.png" alt="">
+						</div>
+						<div>
+							<p class="textemailphone">Call Us</p>
+							<p class="textemailphone">022-4903 7000</p>
+						</div>
+					</div>
+				</div>
+				<div class="hight"></div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="modal" id="forgotPasswordPopup">
+    <div class="modal-dialog">
+    <div class="modal-content">
+
+        <!-- Modal Header -->
+        <div class="modal-header">
+        <h4 class="modal-title">{{'Enter Phone Number' | translate}}</h4>
+        <button id="ibanClose" type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+
+        <!-- Modal body -->
+        <div class="modal-body">
+            <div class="modal-body" style="font-size: 12px;">
+            <div class="col-md-12">
+                <div class="col-md-12 pb-1 pl-0"><strong style="color: red;">*</strong> {{'Phone Number' | translate}}:</div>
+				<div class="form-group" style="margin-bottom: 0px;font-size: 15px ">
+					<select name="" id="" class="countrycode" [ngModelOptions]="{standalone: true}"  [(ngModel)]="countrycode1">
+						<option *ngFor="let item of countries" [value]="item.code">{{item.code}} ({{item.iso_code}})</option>
+					</select>
+					<input id="phnnumber" placeholder="Enter Phone Number"  type="text" [(ngModel)]="phoneNumber" style="padding-left: 105px;color: gray !important;"
+					class="form-control" numberOnly maxlength="15">
+				</div>
+            </div>
+            </div>
+        </div>
+
+        <!-- Modal footer -->
+        <div class="modal-footer" >
+		<button type="button" class="btn btn-danger" (click)="onSendOtpButtonClicked()" [disabled]="!hidebutton()"
+		[class.hidenormalbutton]="!hidebutton()" data-dismiss="modal">{{'Send OTP'|translate}}</button>
+		<button id="openModalButton" [hidden]="true" data-toggle="modal" data-target="#changePasswordPopup">Open Modal</button>
+        </div>    
+    </div>
+    </div>
+</div>
+
+<div class="modal" id="changePasswordPopup">
+    <div class="modal-dialog">
+    <div class="modal-content">
+
+        <!-- Modal Header -->
+        <div class="modal-header">
+        <h4 class="modal-title">{{'Enter Password' | translate}}</h4>
+        <button id="forgotClose" type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+
+        <!-- Modal body -->
+        <div class="modal-body">
+            <div class="modal-body" style="font-size: 12px;">
+				<div class="col-md-12">
+					<div class="col-md-12 pb-1 pl-0"><strong style="color: red;">*</strong> {{'Phone Number' | translate}}:</div>
+					<div class="form-group" style="margin-bottom: 0px;font-size: 15px ">
+						<select name="" id="" class="countrycode" [ngModelOptions]="{standalone: true}"  [(ngModel)]="countrycode2">
+							<option *ngFor="let item of countries" [value]="item.code">{{item.code}} ({{item.iso_code}})</option>
+						</select>
+						<input id="phnnumber" placeholder="Enter Phone Number"  type="text" [(ngModel)]="rePhoneNumber" style="padding-left: 105px;color: gray !important;"
+						class="form-control" numberOnly maxlength="15">
+					</div>
+				</div>
+            <div class="col-md-12 m-0 p-0">
+                <div class="col-md-12 pb-1"><strong style="color: red;">*</strong> {{'OTP' | translate}}:</div>
+                <div class="col-md-12"><input type="text" placeholder="Enter OTP" class="form-control" id="auth_code" [(ngModel)]="otp" ></div>
+			 </div>
+			 <div class="col-md-12 m-0 p-0">
+                <div class="col-md-12 pb-1"><strong style="color: red;">*</strong> {{'Password' | translate}}:</div>
+                <div class="col-md-12"><input type="text" placeholder="Enter Password" class="form-control" id="auth_code" [(ngModel)]="ePassword" ></div>
+             </div><div class="col-md-12 m-0 p-0">
+                <div class="col-md-12 pb-1"><strong style="color: red;">*</strong> {{'Confirm Password' | translate}}:</div>
+                <div class="col-md-12"><input type="text" placeholder="Confirm Password" class="form-control" id="auth_code" [(ngModel)]="cPassword" ></div>
+             </div>
+            </div>
+        </div>
+
+        <!-- Modal footer -->
+        <div class="modal-footer" >
+			<p>OTP will expire in {{timeLeft}}</p> 
+        <button [disabled]="!hideForgotPssBtn()"
+		[class.hidenormalbutton]="!hideForgotPssBtn()" type="button" class="btn btn-danger" (click)="onChangePasswordBtnClicked()" data-dismiss="modal">{{'Submit'|translate}}</button>
+        </div>    
+    </div>
+    </div>
+</div>

@@ -1,0 +1,258 @@
+
+@media only screen and (max-width: 768px) {
+  .mrgntop10{
+    margin-top: 10px;
+  }
+}
+.modalroom {
+  position: fixed;
+  top: 0;
+  left: 0;
+  background: rgba(3, 3, 3, 0.5);
+  z-index: 1050;
+  display: none;
+  width: 100%;
+  height: 100%;
+  overflow: scroll;
+  outline: 0;
+  .firstbttn {
+    border-radius: 4px 0 0 4px;
+    padding: 4px 10px;
+    background-color: white;
+    border: 1px solid gray;
+  }
+  .secondbttn {
+    border-radius: 0 4px 4px 0;
+    padding: 4px 10px;
+    background-color: white;
+    border: 1px solid gray;
+  }
+  .firstbttn:hover,
+  .secondbttn:hover {
+    background-color: #027ce9;
+    color: white;
+  }
+}
+.hotel-popup-selection{
+  overflow: unset;
+}
+.popupwindowforroomselection {
+  overflow: visible;
+  margin-left: 15%;
+  margin: 145px auto;
+  font-weight: bold;
+  line-height: 20px;
+  font-family: "Montserrat", Arial, sans-serif;
+  .size_days{
+    .mat-form-field-flex{
+      width: 100% !important;
+    }
+    #madinaDateSelect{
+      .mat-input-element{
+        pointer-events: none;
+        cursor: none;
+      }
+    }
+    #madinaDateSelect,
+    #makkaDateSelect{
+      .mat-form-field-infix{
+        padding: 8px 0 12px 0;
+      }
+    }
+    .mat-input-element{
+      color: #000000;
+      font-weight: 400;
+      font-size: 13px;
+    }
+  } 
+}
+.popupwindowforroomselection h6 {
+  font-size: 15px;
+  font-weight: 700;
+}
+.popupwindowforroomselection p {
+  margin-top: 10px;
+  font-size: 14;
+  font-weight: 600;
+}
+.popupwindowforroomselection .childage {
+  margin: 0;
+  font-size: 10;
+  font-weight: 500;
+  color: #4a4a4a;
+}
+.popupwindowforroomselection .form-control{
+  padding-left: 17px;
+}
+
+.popupwindowforroomselection .anotherroom {
+  color: #0596d0;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 400;
+  text-decoration: underline;
+}
+.popupwindowforroomselection .anotherroom:hover {
+  color: #0596d0;
+  text-decoration: underline;
+}
+.backgrdimgpopuproom {
+  padding: 20px;
+  overflow: hidden;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  pointer-events: auto;
+  background-color: #fff;
+  background-clip: padding-box;
+  border: 0;
+  border-radius: 0;
+  outline: 0;
+  .borderdoen{
+    border-bottom: 1px solid black;
+    padding: 0 10px;
+  }
+}
+.fli-arrow {
+  background-size: contain;
+  display: inline-block;
+  background-repeat: no-repeat;
+  background-position: 50%;
+  width: 13px;
+  height: 13px;
+  vertical-align: middle;
+  margin-left: 5px;
+}
+.arrow-down-icon {
+  background-image: url(/assets/images/closeBlack.png);
+}
+.hotel_selection_bottom_section{
+  border-radius: 5px;
+  margin-top: 13px;
+  .tab-content{
+    background: none;
+  }
+  #childAgeHotelSelect{
+    .mat-form-field-outline-start,
+    .mat-form-field-outline-gap,
+    .mat-form-field-outline-end{
+      border: 1px solid #1d23e8;
+      background: #fff;
+    }
+    .mat-form-field-outline-start{
+      border-right-style: none;
+    }
+    .mat-form-field-outline-gap{
+      border-top-color: transparent;
+      border-right-style: none;
+      border-left-style: none;
+    }
+    .mat-form-field-outline-end{
+      border-left-style: none;
+    }
+  }
+  
+}
+#makkahRoom{
+  .roomnumber{
+    background-color: #e6e6e6;
+    h2{
+      font-weight: 600;
+      text-transform: uppercase;
+      font-size: 16px;
+      padding: 12px;
+      margin: 0;
+      padding-left: 18px;
+      .fa{
+        font-size: 18px;
+        padding-right: 10px;
+      }
+    }
+  }
+}
+.datetime_picker_popup{
+  border:none !important;
+  border-radius: 0;
+  margin-bottom: 13px;
+  .colenderimg{
+    height: 15px;
+    position: absolute;
+    top: 11px;
+    left: 14px;
+  }
+  #arrivalDate{
+    font-weight: 400;
+    margin-top: 4px;
+    font-size: 12px;
+    color: #000000;
+    height: 40px;
+    border-radius: 4px;
+    display: block;
+    width: 100%;
+    padding: 6px 6px 6px 32px;
+    line-height: 1.42857143;
+    background-color: #fff;
+    background-image: none;
+    border: 1px solid rgb(99, 99, 99);
+    font-weight: bold;
+    -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
+    -webkit-transition: border-color ease-in-out .15s, -webkit-box-shadow ease-in-out .15s;
+    -o-transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+    transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+  }
+}
+.poup_main_container{
+  max-height: calc(100vh - 471px);
+  overflow-y: auto;
+}
+.deleteIcon{
+  cursor: pointer;
+  color: red !important;
+  font-weight: 400;
+  text-decoration: underline !important;
+  font-size: 14px;
+  .fa{
+    padding-right: 10px;
+  }
+}
+.deleteIcon:hover .fa{
+  color: red;
+}
+.countoftraveller{
+  h4{
+    font-size: 16px;
+    margin-top: auto;
+  }
+  .plsormins{
+    width: 110px;
+    margin-left: 20px;
+  }
+}
+.children_age_input{
+  width: 100%;
+    padding: 11px;
+    background-color: white;
+    border: 1px solid #636363;
+    border-radius: 4px;
+    margin-bottom: 5px;
+}
+.serchhead{
+  font-size: 22px;
+  color: #0a0f2c;
+}
+.trashpadding{
+  padding: 12px 18px;
+}
+.adultrowpadding{
+  margin: 20px 3px;
+}
+.counttextbox{
+  height: 31px;
+  font-size: 14px;
+  font-weight: 600;
+}
+.childrowmargin{
+  margin: 5px 3px;
+}

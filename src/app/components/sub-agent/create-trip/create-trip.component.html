@@ -1,0 +1,777 @@
+<div class="container-fluid topofcomponent position-relative pl-0 pr-0" id="subAgencyCreateTrip">
+    <div class="bgbluestepper"></div>
+    <div class="progressbar" *ngIf="showShimmer">
+        <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+    </div>
+    <div class="container">
+        <div>
+            <mat-horizontal-stepper #stepper>
+                <mat-step label="{{'Makkah Hotel' | translate}}" *ngIf="steps.includes('1')" state="apartment">
+                    <div *ngIf="showShimmer"><app-loader></app-loader></div>
+                    <div *ngIf="hotelsList && hotelsList.length > 0">
+                        <div class="headerdiv">
+                            <div class="container d-flex justify-content-between">
+                                <div class="pl4">
+                                    <h3 class="fs22 mb-0">Hotels in Makkah</h3>
+                                    <p class="blue_text">
+                                        <span class="clr52">No of Days In Makkah </span> {{noOfDaysInMakkah}}
+                                        <span class="crossbarsamll phonehide"></span>
+                                        <span class="phonehide"><span class="clr52 ">No of Guest </span>{{travellersCount}}</span>
+                                        <span class="crossbarsamll phonehide "></span>
+                                        <span class="phonehide"><span class="clr52 ">Start </span>{{makkahCheckInDate | date:'MMM-dd'}}</span>
+                                        <span class="phonehide ml-2"><span class="clr52 ">End </span>{{makkahCheckOutDate | date:'MMM-dd'}}</span>
+                                    </p>
+                                </div>
+                                <div class="d-flex my-auto backbutton cursor-pointer" (click)="backToHomePage();">
+                                    <i class="uparrow icns icon_size_20 trnsfer"></i>
+                                    <span class="blue_text fs14 phonehide">Back to Home Page</span>
+                                </div>
+                            </div>
+                        </div>
+                        <app-makka-hotel (notifyGrandparent)="createTripHandle(event)" [hotelsList]="hotelsList"></app-makka-hotel>
+                     </div>
+                </mat-step>
+                <mat-step label="{{'Madeena Hotel' | translate}}" *ngIf="steps.includes('2')" state="apartment">
+                    <div *ngIf="showShimmer"><app-loader></app-loader></div>
+                    <div *ngIf="hotelsList && hotelsList.length > 0">
+                        <div class="headerdiv">
+                            <div class="container d-flex justify-content-between">
+                                <div class="pl4">
+                                    <h3 class="fs22 mb-0">Hotels in Madinah</h3>
+                                    <p class="blue_text">
+                                        <span class="clr52">No of Days In Madinah </span>{{noOfDaysInMadeena}}
+                                        <span class="crossbarsamll phonehide"></span>
+                                        <span class="phonehide"><span class="clr52 ">No of Guest </span>{{travellersCount}}</span>
+                                        <span class="crossbarsamll phonehide "></span>
+                                        <span class="phonehide"><span class="clr52 ">Start </span>{{madeenaCheckInDate | date:'MMM-dd'}}</span>
+                                        <span class="phonehide ml-2"><span class="clr52 ">End </span>{{madeenaCheckOutDate | date:'MMM-dd'}}</span>
+                                    </p>
+                                </div>
+                                <div class="d-flex my-auto backbutton cursor-pointer" (click)="backToHomePage();">
+                                    <i class="uparrow icns icon_size_20 trnsfer"></i>
+                                    <span class="blue_text fs14 phonehide">Back to Home Page</span>
+                                </div>
+                            </div>
+                        </div>
+                        <app-makka-hotel (notifyGrandparent)="createTripHandle(event)" [hotelsList]="hotelsList"></app-makka-hotel>
+                     </div>
+                </mat-step>
+                <mat-step label="{{'Transport' | translate}}" *ngIf="steps.includes('3')" state="directions_bus">
+                    <div class="pr-0 pl-0 pt-1 mt80">
+                        <div class="headerdiv">
+                            <div class="container d-flex justify-content-between">
+                                <div class="pl4">
+                                    <h3 class="fs22 mb-0">Transport</h3>
+                                    <p class="blue_text">
+                                        <span class="phonehide"><span class="clr52 ">No of Guest </span>{{travellersCount}}</span>
+                                        <span class="crossbarsamll phonehide "></span>
+                                        <span class="phonehide "><span class="clr52 ">Start </span>{{transportStartDate | date:'MMM-dd'}}</span>
+                                    </p>
+                                </div>
+                                <div class="d-flex my-auto backbutton cursor-pointer" (click)="backToHomePage();">
+                                    <i class="uparrow icns icon_size_20 trnsfer"></i>
+                                    <span class="blue_text fs14 phonehide">Back to Home Page</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="mt60">
+                                <div class="col-md-12  row m-0 justify-content-between filterstyle p015">
+                                    <div id="routeSection" class="col-md-5 mb-0 pl-0">
+                                        <ng-multiselect-dropdown [placeholder]="'Route' | translate" [data]="routeList"
+                                            [settings]="dropdownSettings" (onSelect)="onRouteSelect($event)"
+                                            (onSelectAll)="onSelectAll($event)" (onDeSelect)="clearTransport($event)">
+                                        </ng-multiselect-dropdown>
+                                    </div>
+                                    <div id="vehicleSection" class="col-md-5 mb-0 pl-0 mt3">
+                                        <ng-multiselect-dropdown [placeholder]="'Vehicle Type'| translate"
+                                            [data]="vehicleTypeList" [(ngModel)]="vehicleTypeItems"
+                                            [settings]="dropdownSettings" (onSelect)="onVehicleSelect($event)"
+                                            (onSelectAll)="onSelectAll($event)" (onDeSelect)="clearTransport($event)">
+                                        </ng-multiselect-dropdown>
+                                    </div>
+                                    <div id="transportSearchSection" class="col-md-2 pr-0 pl-0 mt3 w95">
+                                        <button (click)=transportSearch() [disabled]="!disableBtn"
+                                            class="searchButton searchButtonarabic" type="button">{{'Search' |
+                                            translate}} <i class="fa fa-arrow-right" aria-hidden="true"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="filter-outer-div row ml-0 mr-0 mt-2" *ngIf="filtershow">
+                                    <div class="pt-2 pl-3 pr20">
+                                        <i class="fa fa-filter" aria-hidden="true"></i>
+                                    </div>
+                                    <div id="categorySectionTransport" class="mr-2 mb-0 pl-3 pb-2">
+                                        <ng-multiselect-dropdown [placeholder]="'Category'| translate"
+                                            [data]="dropdownList" [settings]="settings"
+                                            (onSelect)="onCategorySelect($event)"
+                                            (onDeSelect)="onCategoryDeselect($event)"
+                                            (onSelectAll)="onSelectAll($event)"
+                                            (onDeSelectAll)="onCategoryDeSelectAll($event)">
+                                        </ng-multiselect-dropdown>
+
+                                    </div>
+                                    <div id="additionalServiceSectionTransport" class="mr-2 mb-0 pl-3 pb-2"
+                                        *ngIf="loadContent">
+                                        <ng-multiselect-dropdown [placeholder]="'Additional Services'| translate"
+                                            [data]="data" [settings]="settings"
+                                            (onDeSelect)="onadditionalItemDeselect($event)"
+                                            (onSelect)="onadditionalItemSelect($event)"
+                                            (onSelectAll)="onadditionalSelectAll($event)"
+                                            (onDeSelectAll)="onadditionalDeSelectAll($event)">
+                                        </ng-multiselect-dropdown>
+                                    </div>
+                                </div>
+                               <app-transport (notifyGrandparent)="createTripHandle(event)" [transportList]="transportList"></app-transport>
+                            </div>
+                        </div>
+                    </div>
+                </mat-step>
+                <mat-step label="{{'Payment' | translate}}" state="payment">
+                    <form [formGroup]="paymentForm">
+                        <div class="col-md-12 p-0 mt80">
+                            <div class="col-md-12" *ngIf="tripMakkahHotel || tripMadeenaHotel">
+                                <h3 class="flight-heading textright">{{'Review your hotel details'
+                                    | translate}}</h3>
+                            </div>
+                            <app-payment-hotel [tripHotel]="tripMakkahHotel" [city1]="Makkah"></app-payment-hotel>
+                            <app-payment-hotel [tripHotel]="tripMadeenaHotel" [city2]="Medinah"></app-payment-hotel>
+                            <div *ngIf="tripTransport">
+                                <div class="col-md-12">
+                                    <h3 class="flight-heading textright">{{'Review your Transport details' | translate}}
+                                    </h3>
+                                </div>
+                                <div class="col-md-12 review_detaiols_div outer-payment-div pl-0 pr-0"
+                                    id="tripTransport">
+                                    <div class="change_button_availability" id="changeTransport"
+                                        (click)="changeTransport()">
+                                        <button type="button">{{'Not available now. Please change' |
+                                            translate}}</button>
+                                    </div>
+                                    <div class="top-section pb-4 textright">
+                                        <div class="row">
+                                            <div class="col-md-4 row pr-0">
+                                                <div style="display: flex;" class="pl-3" id="trnspt">
+                                                    <span class="hotelName">Transport</span>
+                                                </div>
+                                                <div class="ml-auto mr-1 " id="toggleTopBtn3">
+                                                    <div class="arrowPosition">
+                                                        <div *ngIf="!trnsprt">
+                                                            <button (click)="toggleTransportUp()"><i
+                                                                    class="fa fa-angle-up"></i></button>
+                                                        </div>
+                                                        <div *ngIf="trnsprt">
+                                                            <button (click)="toggleTransportDown()"><i
+                                                                    class="fa fa-angle-down"></i></button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div style="display: flex;" class="pl-3" id="trnsptNormal">
+                                                    <span class="hotelName">{{tripTransport?.company?.name}}</span>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-2 departure refund-txt-color">
+                                            </div>
+                                            <div class="col-md-3" id="transportPolicy">
+                                                <div class="departure fare_rule_txt"><button class="policies_bttn"
+                                                        data-toggle="modal"
+                                                        [attr.data-target]="'#transportPolicy'+ tripTransport.id">{{'Policies'
+                                                        | translate}} <i class="fa fa-info-circle"
+                                                            aria-hidden="true"></i></button></div>
+                                            </div>
+                                            <div class="modal" id="transportPolicy{{tripTransport.id}}">
+                                                <div class="modal-dialog">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header"
+                                                            style="border-bottom: none;padding-bottom: 0px;">
+                                                            <h6 class="modal-title">{{'Policies' | translate}}</h6>
+                                                            <button type="button" class="close m0p0"
+                                                                data-dismiss="modal">&times;</button>
+                                                        </div>
+                                                        <div class="modal-body mb-4">
+                                                            <div class="container p-3 paymentpage_policies">
+                                                                <div *ngFor="let policy of selectedTransport.policies">
+                                                                    <p class="pb-1">
+                                                                        <i class="fa fa-check" aria-hidden="true"></i>
+                                                                        {{policy?.description}}
+                                                                    </p>
+                                                                </div>
+                                                                <div *ngIf=" selectedTransport?.cancellation_policy">
+                                                                    <div class="col-md-12 row m-0 ">
+                                                                        <div class="col-md-12 p-0 m-0">
+                                                                            <h6 class=" pt-2">
+                                                                                {{selectedTransport?.cancellation_policy?.title}}
+                                                                            </h6>
+                                                                        </div>
+                                                                        <div class="pb-2 m-0">
+                                                                            <p>{{selectedTransport?.cancellation_policy?.description}}
+                                                                            </p>
+                                                                        </div>
+                                                                        <div class="col-md-6 pl-0 m-0"
+                                                                            *ngFor="let item1 of selectedTransport?.cancellation_policy.rules;let i = index">
+                                                                            <div class="col-md-12 p-0  pb-1">
+                                                                                <div>
+                                                                                    <li style="font-size: 12px;"
+                                                                                        [innerHTML]="item1?.description">
+                                                                                    </li>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <p *ngIf="!selectedTransport.policies[0]"
+                                                                    class="centerText">
+                                                                    {{'No Policies Found' | translate}}
+                                                                </p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-2 customTooltip txtAlgn" id="transportRate">
+                                                <h2 class="current_price htlprz">
+                                                    {{tripTransport?.trip_vehicles[0]?.currency}}
+                                                    {{tripTransport?.prices_summary?.total_price +
+                                                    tripTransport?.prices_summary?.gds_fee +
+                                                    tripTransport?.prices_summary?.ota_fee | number:'.2-2'}}</h2>
+                                                <span class="customtooltiptext">
+                                                    <div class="container mb-2">
+                                                        <p class="pt-2 fare_summary_heading">{{'Fare Summary' |
+                                                            translate}} </p>
+                                                        <div class="col-md-12 p-0 m-0 row pb-2">
+                                                            <div class="col-md-12 textAlign ">
+                                                                <span>{{'GDS Fee' | translate}} :
+                                                                    {{tripTransport?.prices_summary?.gds_fee}}</span><br>
+                                                                <span>{{'OTA Fee' | translate}} :
+                                                                    {{tripTransport?.prices_summary?.ota_fee}}</span>
+                                                            </div>
+                                                        </div>
+                                                        <p class=" pt-2 pr-5 hotel_price_total">{{'You Pay' |
+                                                            translate}} {{tripTransport?.prices_summary?.total_price}}
+                                                        </p>
+                                                    </div>
+                                                </span>
+                                            </div>
+                                            <div class="col-md-1" id="normalTransportToggleBtn">
+                                                <div class="arrowPosition">
+                                                    <div *ngIf="!makkatransport">
+                                                        <button (click)="makkatransport=!makkatransport"><i
+                                                                class="fa fa-angle-up"></i></button>
+                                                    </div>
+                                                    <div *ngIf="makkatransport">
+                                                        <button (click)="makkatransport=!makkatransport"><i
+                                                                class="fa fa-angle-down"></i></button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div id="transport">
+                                                <div *ngIf="!makkatransport">
+                                                    <div>
+                                                        <div
+                                                            class="row col-md-12 pl-0 pr-0 m-0 pt-2 pb-2 content-section textright">
+                                                            <div class="col-md-3"
+                                                                *ngIf="tripTransport.selected_transportation.vehicle_types[0].image">
+                                                                <img class="" style="width: 200px;height: 105px;"
+                                                                    src="{{tripTransport.selected_transportation.vehicle_types[0].image}}"
+                                                                    alt="">
+                                                            </div>
+                                                            <div class="col-md-3"
+                                                                *ngIf="!tripTransport.selected_transportation.vehicle_types[0].image">
+                                                                <img class="" style="width: 200px;height: 105px;"
+                                                                    src="/assets/images/no_image.jpg" alt="">
+                                                            </div>
+                                                            <div class="col-md-6">
+                                                                <div class="row detail_review">
+                                                                    <div class="col-md-4 pb-3">
+                                                                        <p><strong>{{'Category' | translate}} :
+                                                                            </strong>
+                                                                            {{tripTransport?.categories[0]?.name}} </p>
+                                                                    </div>
+                                                                    <div class="col-md-4 pb-3">
+                                                                        <p><strong>{{'Vehicle Type' | translate}} :
+                                                                            </strong>
+                                                                            {{tripTransport?.vehicle_types[0]?.name}}</p>
+
+                                                                    </div>
+                                                                    <div class="col-md-4 pb-3">
+                                                                        <p><strong>{{'Model' | translate}} : </strong>
+                                                                            {{selectedTransport?.vehicle_types[0]?.categories[0]?.model}}
+                                                                        </p>
+                                                                    </div>
+                                                                    <div class="col-md-4 pb-3">
+                                                                        <p><strong>{{'No. of vehicle' | translate}} :
+                                                                            </strong>
+                                                                            {{tripTransport?.trip_vehicles[0]?.booked_quantity}}
+                                                                        </p>
+                                                                    </div>
+                                                                    <div class="col-md-4 pb-3">
+                                                                        <p><strong>{{'Phone Number' | translate}} :
+                                                                            </strong>
+                                                                            {{tripTransport?.company?.phone_number}}</p>
+                                                                    </div>
+                                                                    <div class="col-md-8 pb-3">
+                                                                        <p><strong>{{'Email' | translate}} : </strong>
+                                                                            {{tripTransport?.company?.email}}</p>
+                                                                    </div>
+                                                                    <div class="col-md-4 pb-3">
+                                                                        <p><strong>{{'Bag Capacity' | translate}} :
+                                                                            </strong>
+                                                                            {{tripTransport?.vehicle_types[0]?.bags_capacity}}
+                                                                        </p>
+                                                                    </div>
+                                                                    <div class="col-md-12 pb-3">
+                                                                        <p><strong>{{'Route' | translate}} : </strong>
+                                                                            {{tripTransport?.route?.name}}</p>
+                                                                    </div>
+                                                                    <div class="col-md-12 pb-3">
+                                                                        <p><strong>{{'Address' | translate}} : </strong>
+                                                                            {{tripTransport?.company?.address}}</p>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-3"
+                                                                *ngIf="selectedTransport.vehicle_types[0].categories[0].additional_services[0]">
+                                                                <p style="color: red;" class="pl-3">{{'Additional
+                                                                    Services' | translate}}</p>
+                                                                <ul style="list-style-type: circle;">
+                                                                    <li
+                                                                        *ngFor="let a of selectedTransport.vehicle_types[0].categories[0].additional_services">
+                                                                        {{a?.description}}</li>
+                                                                </ul>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-12 review_detaiols_div outer-payment-div pl-0 pr-0" *ngIf="tripService">
+                                <div class="change_button_availability" id="changeService">
+                                    <button type="button">{{'Not available now. Please change' | translate}}</button>
+                                </div>
+                                <div class="top-section pb-3 mt-1">
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <div style="display: flex;">
+                                                <span class="hotelName">{{tripService.company.name}}</span>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-2 departure refund-txt-color">
+                                        </div>
+                                        <div class="col-md-3">
+                                            <div class="departure fare_rule_txt"><button class="policies_bttn"
+                                                    data-toggle="modal"
+                                                    [attr.data-target]="'#groundPolicy'+ tripService.id">{{'Policies' |
+                                                    translate}} <i class="fa fa-info-circle"
+                                                        aria-hidden="true"></i></button></div>
+                                        </div>
+                                        <div class="modal" id="groundPolicy{{tripService.id}}">
+                                            <div class="modal-dialog">
+                                                <div class="modal-content">
+                                                    <div class="modal-header"
+                                                        style="border-bottom: none;padding-bottom: 0px;">
+                                                        <h6 class="modal-title">{{'Policies' | translate}}</h6>
+                                                        <button type="button" class="close"
+                                                            data-dismiss="modal">&times;</button>
+                                                    </div>
+                                                    <div class="modal-body mb-4">
+                                                        <div class="container p-3 paymentpage_policies">
+                                                            <div
+                                                                *ngFor="let policy of tripService.selected_service.policies">
+                                                                <p class="pb-1">
+                                                                    <i class="fa fa-check" aria-hidden="true"></i>
+                                                                    {{policy?.description}}
+                                                                </p>
+                                                            </div>
+                                                            <div
+                                                                *ngIf=" tripService?.selected_service?.cancellation_policy">
+                                                                <div class="col-md-12 row m-0 ">
+                                                                    <div class="col-md-12 p-0 m-0">
+                                                                        <h6 class=" pt-2">
+                                                                            {{tripService?.selected_service?.cancellation_policy?.title}}
+                                                                        </h6>
+                                                                    </div>
+                                                                    <div class="pb-2 m-0">
+                                                                        <p>{{tripService?.selected_service?.cancellation_policy?.description}}
+                                                                        </p>
+                                                                    </div>
+                                                                    <div class="col-md-6 pl-0 m-0"
+                                                                        *ngFor="let item1 of tripService?.selected_service?.cancellation_policy?.rules;let i = index">
+                                                                        <div class="col-md-12 p-0  pb-1">
+                                                                            <div>
+                                                                                <li style="font-size: 12px;"
+                                                                                    [innerHTML]="item1?.description">
+                                                                                </li>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <p *ngIf="tripService.selected_service.policies.length == 0"
+                                                                class="centerText">
+                                                                {{'No Policies Found' | translate}}
+                                                            </p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-2 customTooltip" style="text-align: right;">
+                                            <h2 class="htlprz">{{tripService?.currency}}
+                                                {{tripService?.prices_summary?.total_price}}</h2>
+                                            <span class="customtooltiptext">
+                                                <div class="container mb-2">
+                                                    <p class="pt-2 fare_summary_heading">{{'Fare Summary' | translate}}
+                                                    </p>
+                                                    <div class="col-md-12 p-0 m-0 row pb-2">
+                                                        <div class="col-md-12 textAlign ">
+                                                            <span>{{'GDS Fee' | translate}} :
+                                                                {{tripService?.prices_summary?.gds_fee}}</span><br>
+                                                            <span>{{'OTA Fee' | translate}} :
+                                                                {{tripService?.prices_summary?.ota_fee}}</span>
+                                                        </div>
+                                                    </div>
+                                                    <p class=" pt-2 pr-5 hotel_price_total">{{'You Pay' | translate}}
+                                                        {{tripService?.prices_summary?.total_price}}</p>
+                                                </div>
+                                            </span>
+                                        </div>
+                                        <div class="col-md-1">
+                                            <div class="arrowPosition">
+                                                <div *ngIf="!grountService">
+                                                    <button (click)="grountService=!grountService"><i
+                                                            class="fa fa-angle-up"></i></button>
+                                                </div>
+                                                <div *ngIf="grountService">
+                                                    <button (click)="grountService=!grountService"><i
+                                                            class="fa fa-angle-down"></i></button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div *ngIf="!grountService">
+                                    <div class="row col-md-12 pl-0 pr-0 m-0 pt-2 pb-2 content-section">
+                                        <div class="col-md-3" *ngIf="tripService.company.images[0]">
+                                            <div class="groundserviceimg">
+                                                <img style="height: 100px;" src="{{tripService.company.images[0]}}"
+                                                    alt="">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3" *ngIf="!tripService.company.images[0]">
+                                            <img class="" style="width: 200px;height: 105px;"
+                                                src="/assets/images/no_image.jpg" alt="">
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="row detail_review">
+                                                <div class="col-md-4 pb-3">
+                                                    <p><strong>{{'Category' | translate}}Category :
+                                                        </strong>{{tripService?.category?.name}} </p>
+                                                </div>
+                                                <div class="col-md-4 pb-3">
+                                                    <p><strong>{{'Nationality' | translate}} :
+                                                        </strong>{{tripService?.nationality}} </p>
+                                                </div>
+                                                <div class="col-md-4 pb-3">
+                                                    <p><strong>{{'Arrival Date' | translate}} : </strong>{{arrivalDate |
+                                                        date:'shortDate'}} </p>
+                                                </div>
+                                                <div class="col-md-6 pb-3">
+                                                    <p><strong>{{'Phine Number' | translate}} :
+                                                        </strong>{{tripService?.company?.phone_number}} </p>
+                                                </div>
+                                                <div class="col-md-6 pb-3">
+                                                    <p><strong>{{'Email' | translate}} :
+                                                        </strong>{{tripService?.company?.email}} </p>
+                                                </div>
+                                                <div class="col-md-12 pb-3">
+                                                    <p><strong>{{'Address' | translate}} :
+                                                        </strong>{{tripService?.company?.address}} </p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3" *ngIf="tripService.additional_services[0]">
+                                            <p style="color: red;" class="pl-3">{{'Additional Services' | translate}}
+                                            </p>
+                                            <ul>
+                                                <li *ngFor="let service of tripService.additional_services"
+                                                    style="list-style-type: circle;">
+                                                    <span>{{service?.description}}</span>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-12 outer-payment-div pl-0 pr-0" *ngIf="tripVisaData">
+                                <div class="top-section pb-4">
+                                    <span class="hotelName">{{tripVisaData?.title}}</span>
+                                    <span class="vehicle-price">{{tripVisaData?.currency}}
+                                        {{tripVisaData?.total_price}}</span>
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <h3 class="flight-heading textright">{{'Traveller Details' | translate}}</h3>
+                            </div>
+                            <div class="col-md-12 outer-payment-div pl-0 pr-0 pb-0">
+                                <div class="top-section pb-4">
+                                    <span class="traveller-notice">{{'Please make sure you enter the Name as per your
+                                        Government photo id.' | translate}}
+                                    </span>
+                                </div>
+                                <div class="travellers-detail" *ngIf="rooms">
+                                    <mat-accordion>
+                                        <mat-expansion-panel [expanded]="step === 0">
+                                            <mat-expansion-panel-header>
+                                                <mat-panel-title>
+                                                    <div class="roomvice">
+                                                        <h3 class="hotelName">{{'Contact Info' | translate}} </h3>
+                                                    </div>
+                                                </mat-panel-title>
+                                            </mat-expansion-panel-header>
+                                            <div formArrayName="roomAdultsArray">
+                                                <div *ngFor="let x of roomAdultsArray.controls;let adultIndex = index">
+                                                    <div [formGroupName]="adultIndex">
+                                                        <div class="d-flex justify-content-between"></div>
+                                                        <div class="m-0 pl-0 pr-0 content-section">
+                                                            <div class="col-md-12 row ">
+                                                                <div class="col-md-3 pt-2">
+                                                                    <mat-form-field>
+                                                                        <input formControlName="firstName"
+                                                                            id="firstName{{adultIndex}}" matInput
+                                                                            placeholder="{{'First Name'| translate}}">
+                                                                    </mat-form-field>
+                                                                </div>
+                                                                <div class="col-md-3 pt-2">
+                                                                    <mat-form-field>
+                                                                        <input id="lastName{{adultIndex}}" matInput
+                                                                            placeholder="{{'Last Name'| translate}}"
+                                                                            formControlName="lastName">
+                                                                    </mat-form-field>
+                                                                </div>
+                                                                <div class="col-md-3 pt-2">
+                                                                    <mat-form-field>
+                                                                        <mat-select
+                                                                            placeholder="{{'Gender'| translate}}"
+                                                                            value="" id="gender{{adultIndex}}"
+                                                                            formControlName="gender">
+                                                                            <mat-option value="MALE">MALE</mat-option>
+                                                                            <mat-option value="FEMALE">FEMALE
+                                                                            </mat-option>
+                                                                        </mat-select>
+                                                                    </mat-form-field>
+                                                                </div>
+                                                                <div class="col-md-3 pt-2">
+                                                                    <mat-form-field>
+                                                                        <input matInput [matDatepicker]="picker"
+                                                                            placeholder="{{'Date of Birth'| translate}}"
+                                                                            id="dob{{adultIndex}}"
+                                                                            formControlName="dob">
+                                                                        <mat-datepicker-toggle matSuffix [for]="picker">
+                                                                        </mat-datepicker-toggle>
+                                                                        <mat-datepicker #picker>
+                                                                        </mat-datepicker>
+                                                                    </mat-form-field>
+                                                                </div>
+                                                                <div class="col-md-3 pt-2">
+                                                                    <mat-form-field>
+                                                                        <input id="passportNo{{adultIndex}}" matInput
+                                                                            placeholder="{{'Passport Number' | translate}}"
+                                                                            formControlName="passportNo">
+                                                                    </mat-form-field>
+                                                                </div>
+                                                                <div class="col-md-3 pt-2">
+                                                                    <mat-form-field>
+                                                                        <input id="ped{{adultIndex}}" matInput
+                                                                            [matDatepicker]="picker2"
+                                                                            placeholder="{{'Passport expiry date'| translate}}"
+                                                                            formControlName="ped">
+                                                                        <mat-datepicker-toggle matSuffix
+                                                                            [for]="picker2"></mat-datepicker-toggle>
+                                                                        <mat-datepicker #picker2></mat-datepicker>
+                                                                    </mat-form-field>
+                                                                </div>
+                                                                <div class="col-md-3 pt-2">
+                                                                    <mat-form-field>
+                                                                        <mat-select [(value)]="selectedNationality"
+                                                                            placeholder="{{'Nationality'| translate}}"
+                                                                            id="nationality{{adultIndex}}">
+                                                                            <mat-option
+                                                                                *ngFor="let n of nationalityList"
+                                                                                value="{{n.item_id}}">{{n?.item_text}}
+                                                                            </mat-option>
+                                                                        </mat-select>
+                                                                    </mat-form-field>
+                                                                </div>
+                                                                <div class="col-md-3 pt-2">
+                                                                    <mat-form-field>
+                                                                        <mat-select [(value)]="selectedCountry"
+                                                                            placeholder="{{'Country of Residence'| translate}}"
+                                                                            id="cor{{adultIndex}}">
+                                                                            <mat-option *ngFor="let n of countryList"
+                                                                                value="{{n.item_id}}">{{n?.item_text}}
+                                                                            </mat-option>
+                                                                        </mat-select>
+                                                                    </mat-form-field>
+                                                                </div>
+                                                            </div>
+                                                            <div *ngIf="mainTraveller[adultIndex]">
+                                                                <div class="col-md-12 row ">
+                                                                    <div class="col-md-3 pt-2">
+                                                                        <mat-form-field appearance="outline"
+                                                                            id="phoneNumberSelect" style="width: 34%;">
+                                                                            <select matNativeControl
+                                                                                name="phn_country_code"
+                                                                                [(value)]="phoneCode" placeholder=""
+                                                                                id="phn_country_code{{adultIndex}}">
+                                                                                <option *ngFor="let n of phoneCodeList"
+                                                                                    value="{{n.item_id}}">{{n.item_id}}
+                                                                                </option>
+                                                                            </select>
+                                                                        </mat-form-field>
+                                                                        <mat-form-field appearance="outline"
+                                                                            id="phoneNumberSelect" style="width: 66%;">
+
+                                                                            <input matInput id="mobile{{adultIndex}}"
+                                                                                placeholder="{{'Phone Number'| translate}}"
+                                                                                numberOnly
+                                                                                formControlName="phone_number">
+                                                                        </mat-form-field>
+                                                                    </div>
+                                                                    <div class="col-md-3 pt-2">
+                                                                        <mat-form-field>
+                                                                            <input matInput id="email{{adultIndex}}"
+                                                                                placeholder="{{'Email'| translate}}"
+                                                                                formControlName="email">
+
+                                                                        </mat-form-field>
+                                                                    </div>
+                                                                    <div class="col-md-3 pt-2">
+                                                                        <mat-form-field>
+                                                                            <input matInput id="address{{adultIndex}}"
+                                                                                placeholder="{{'Address' | translate}}"
+                                                                                formControlName="address">
+                                                                        </mat-form-field>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </mat-expansion-panel>
+                                    </mat-accordion>
+                                </div>
+                                <div class="d-flex flex-row-reverse mrgin" *ngIf="travelersError">
+                                    <div class="col-md-12" *ngFor="let error of travelersError">
+                                        {{'Error in' | translate}} {{error.traveller.first_name}}
+                                        {{error?.traveller?.last_name}} {{'details Found' | translate}} -
+                                        {{'Message' | translate}}: {{error?.status?.message}}
+                                    </div>
+                                </div>
+                                <div class="d-flex flex-row mrgin mt-2 mb-2 mr-4 ml-4">
+                                    <div *ngIf="reference_no" class="mr-auto mt-2"><span
+                                            style="color: #d33a2f;font-size: 15px;">{{'Booking Reference No' |
+                                            translate}} :{{reference_no}} </span></div>
+                                    <div class="text-align-end"><button type="submit" id="payBtn" class="bttnprimary"
+                                            data-toggle="modal" data-target="#ibanPopup" (click)="startTimer()">{{'PAY'
+                                            | translate}}</button> </div>
+                                </div>
+                                <div class="d-flex flex-row m-2">
+                                    <div class="p-2 ml-auto"></div>
+                                    <div><button (click)="bookTrip()" type="submit" id="continueBooking"
+                                            class="bttnprimary">{{'BOOK & CONTINUE' | translate}}</button> </div>
+                                    <div class="p-2"></div>
+                                </div>
+                                <div style="height: 100px;background:#eaeaea;"></div>
+                            </div>
+                        </div>
+                    </form>
+                </mat-step>
+            </mat-horizontal-stepper>
+        </div>
+    </div>
+</div>
+
+<div [style.display]="additionalServiceCount ? 'block' : 'none'" class="modal" id="additionalServiceCount" tabindex="-1"
+    role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel"></h5>
+                <button type="button" (click)="hidecountpopup();" class="close">
+                    <i class="fa fa-times" aria-hidden="true"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="container">
+                    <div class="row">
+                        <div *ngIf="setDataForAddServiceCountPopUP?.additional_service_code == '1'">
+                            <h6>{{'No of Umrah Guidance Needed' | translate }} :</h6>
+                        </div>
+                        <div *ngIf="setDataForAddServiceCountPopUP?.additional_service_code == '2'">
+                            <h6>{{'No of Wheel Chair Needed' | translate }} :</h6>
+                        </div>
+                        <div *ngIf="setDataForAddServiceCountPopUP?.additional_service_code == '3'">
+                            <h6>{{'No of Wheel Chair with Assistant Needed' | translate }} :</h6>
+                        </div>
+                        <div *ngIf="setDataForAddServiceCountPopUP?.additional_service_code == '4'">
+                            <h6>{{'No of Male Companion Needed' | translate }} :</h6>
+                        </div>
+                        <div *ngIf="setDataForAddServiceCountPopUP?.additional_service_code == '5'">
+                            <h6>{{'No of Female Companion Needed' | translate }} :</h6>
+                        </div>
+                        <div *ngIf="setDataForAddServiceCountPopUP?.additional_service_code == '6'">
+                            <h6>{{'No of Baby Sitter Needed' | translate }} :</h6>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <mat-form-field>
+                            <mat-label>{{'Select' | translate}}</mat-label>
+                            <select matNativeControl [(ngModel)]="addSrvCount" name="service">
+                                <option
+                                    *ngFor="let k of [].constructor(setDataForAddServiceCountPopUP?.quantity) | slice:0:50; let p = index;"
+                                    value="{{p+1}}">{{p+1}}</option>
+                            </select>
+                        </mat-form-field>
+                        <button (click)="saveSelectedAddSrvCount(setDataForAddServiceCountPopUP);"
+                            class="okbutton">{{'Submit'|translate}}</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal" id="ibanPopup">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">{{'IBAN Payment' | translate}}</h4>
+                <button id="ibanClose" type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="modal-body" style="font-size: 12px;">
+                    <div class="col-md-12">
+                        <div class="col-md-12 pb-1"><strong style="color: red;">*</strong> {{'IBAN Accound Number' |
+                            translate}}:</div>
+                        <div class="col-md-12"><input type="text" class="form-control" id="acc_no" [(ngModel)]="accNo">
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="col-md-12 pb-1"><strong style="color: red;">*</strong> {{'Authe Code' | translate}}:
+                        </div>
+                        <div class="col-md-12"><input type="text" class="form-control" id="auth_code"
+                                [(ngModel)]="authCode"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <p>OTP will expire in {{timeLeft}}</p>
+                <button type="button" class="btn btn-danger" (click)="onSubmitButtonClicked()"
+                    data-dismiss="modal">{{'Submit'|translate}}</button>
+            </div>
+        </div>
+    </div>
+</div>

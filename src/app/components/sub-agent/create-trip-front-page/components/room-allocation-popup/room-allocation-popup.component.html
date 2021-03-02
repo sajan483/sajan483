@@ -1,0 +1,140 @@
+<div [style.display]="showRoomAllocationPopup ? 'block' : 'none'" class="modalroom hotel-popup-selection " id="imageModal" tabindex="-1" role="dialog"
+        aria-labelledby="myModalLabel" aria-hidden="true">
+
+        <div class="popupwindowforroomselection container popupmoving">
+            <div class="backgrdimgpopuproom" >
+                <div class="d-flex justify-content-between borderdoen">
+                    <div class="serchhead">
+                        <h5 class="fw600">{{'Search Hotels' | translate}}</h5>
+                    </div>
+                    <div>
+                        <span class="fli-arrow arrow-down-icon cursor-pointer" data-dismiss="modal" (click)="hideRoomAllocationPopup()"></span>
+                    </div>
+                </div>
+                
+                <div class="d-flex flex-column hotel-selection-outer-div">
+                    
+                    
+                    <div class="row col-md-12 mt-2">
+                        <div class="col-md-3 col-12 pl-2 mrrtravlrcunt">
+                            <div class="fw600 text-uppercase">{{'No of Adults' | translate}} : {{countAdult}}</div>
+                        </div>
+                        <div class="col-md-3 col-12 pl-2 mrrtravlrcunt" *ngIf="countChild+countInfant != 0">
+                            <div class="fw600 text-uppercase">{{'No of Children' | translate}} : {{countChild}}</div>
+                        </div>
+                    </div>
+                
+                <div class="hotel_selection_bottom_section" id="roomSelectionHotel">
+                        <div class="p-0 mr-0 pt-0 ml-0 ">
+                            
+                            <div id="makkahRoom">
+                                <div class="datetime_picker_popup" >
+                                
+                                    <div class="col-md-12 pl-0 pr-0">
+                                        <div class="poup_main_container">
+                                            <section *ngFor="let room of userRooms; let i = index;" class="mb20">
+                                                <div class="d-flex flex-column" class="w-100">
+                                                    <div class="roomnumber">
+                                                        <div class="d-flex justify-content-between">
+                                                            <h2><i class="fa fa-bed" aria-hidden="true"></i> {{'Room' | translate}} {{i + 1}}</h2>
+                                                            <div class="trashpadding">
+                                                                <div *ngIf="i==0" >
+                                                                    <span class="glyphicon glyphicon-trash"></span>
+                                                                </div>
+                                                                <div *ngIf="i!=0" >
+                                                                    <a (click)="removeRooms(i)" class="deleteIcon" >
+                                                                        <i class="fa fa-trash"  aria-hidden="true"></i>Remove
+                                                                    </a>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        
+                                                    </div>
+                                                    <div class="row adultrowpadding">
+                                                        <div class="col-md-4 col-12 d-flex countoftraveller">
+                                                            <h4 class="ml10">{{'Adults' | translate}}</h4>
+                                                            <div class="input-group plsormins ml-33">
+                                                                <span class="input-group-btn">
+                                                                    <button type="button" class="firstbttn removeoutline" (click)="minusAdultFromRoom(room.id);"  data-type="minus" >
+                                                                        <i class="fa fa-minus" aria-hidden="true"></i>
+                                                                    </button>
+                                                                </span>
+                                                                <input type="text" name="quant[2]" class="form-control input-number counttextbox" value="{{room.adults}}">
+                                                                <span class="input-group-btn">
+                                                                    <button type="button" class="secondbttn removeoutline" (click)="addAdultToRoom(room.id);" data-type="plus" >
+                                                                        <i class="fa fa-plus" aria-hidden="true"></i>
+                                                                    </button>
+                                                                </span>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-4 col-12 d-flex countoftraveller mrgntop10" *ngIf="countChild+countInfant != 0">
+                                                            <h4 class="ml10">{{'Children' | translate}}</h4>
+                                                            <div class="input-group plsormins">
+                                                                <span class="input-group-btn">
+                                                                    <button type="button" class="firstbttn removeoutline" (click)="removechildages(room.id);"  data-type="minus" >
+                                                                        <i class="fa fa-minus" aria-hidden="true"></i>
+                                                                    </button>
+                                                                </span>
+                                                                <input type="text" name="quant[2]" class="form-control input-number counttextbox" value="{{room.children}}">
+                                                                <span class="input-group-btn">
+                                                                    <button type="button" class="secondbttn removeoutline" (click)="addchildages(room.id);" data-type="plus" >
+                                                                        <i class="fa fa-plus" aria-hidden="true"></i>
+                                                                    </button>
+                                                                </span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    
+                                                    
+                        
+                                                    
+                                                    <div class="row childrowmargin" *ngIf="room.children != 0">
+                                                        <section *ngFor="let k of [].constructor(room.children); let j = index;" class="col-6 col-md-2">
+                                                            <div >
+                                                                
+                                                                    <select  required placeholder="" id="childAge_{{i}}{{j}}"  class="children_age_input" (change)="childAgeChange(i,j)"
+                                                                        name="childage_{{i}}{{j}}">
+                                                                        <option disabled selected>Select Age</option>
+                                                                        <option>1 {{'Years' | translate}}</option>
+                                                                        <option>2 {{'Years' | translate}}</option>
+                                                                        <option>3 {{'Years' | translate}}</option>
+                                                                        <option>4 {{'Years' | translate}}</option>
+                                                                        <option>5 {{'Years' | translate}}</option>
+                                                                        <option>6 {{'Years' | translate}}</option>
+                                                                        <option>7 {{'Years' | translate}}</option>
+                                                                        <option>8 {{'Years' | translate}}</option>
+                                                                        <option>9 {{'Years' | translate}}</option>
+                                                                        <option>10 {{'Years' | translate}}</option>
+                                                                        <option>11 {{'Years' | translate}}</option>
+                                                                    </select>
+                                                            </div>
+                        
+                                                        </section>
+                                                    </div>
+                                                </div>
+                                            
+                                            </section>
+                                        </div>
+                                        <div >
+                                            <div class="mrrtravlrcunt mb-1"><a *ngIf="getCurrentAdultCount()!=countAdult" (click)="addRooms()"
+                                                    class="anotherroom">+ {{'Add Another Room' | translate}}</a></div>
+                                        </div>
+                                        <div class="borderTopBlack">
+                                            <div class="d-flex justify-content-end">
+                                                <button id="roomSelectBttn" class="searchbutton" [disabled]="!enableButton()" [class.hidenormalbutton]="!enableButton()"
+                                                (click)="childAgeValidation()">Search Hotel</button>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                            
+                        </div>
+                </div>
+                    
+                </div>
+            
+            </div>
+        </div>
+    </div>

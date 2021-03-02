@@ -1,0 +1,251 @@
+@media only screen and (max-width: 768px) {
+  .card{
+    margin-top: 100px;
+    margin-bottom: auto;
+    width: 86% !important;
+    margin-left: 7%;
+  }
+  .logoimg{
+    height: 68px !important;
+  }
+  .smallcenter{
+    text-align: center;
+  }  
+  .emailicon{
+    float: none !important;
+    padding-right: 0 !important;
+    margin-bottom: 10px;
+  }
+  .bottomingpos{
+    bottom: -27px !important;
+    left: 1px !important;
+    img{
+      height: 150px !important;
+    }
+  }
+  .backgroundimage{
+    overflow-x: hidden;
+  }
+  .p60{
+    padding: 15px !important;
+  }
+  .extraimg{
+    display: none;
+  }
+  .pt60{
+    padding-top: 10px !important
+  }
+  .logtext{
+    margin-top: 10px !important;
+  }
+  .topimagepos {
+    right: 1px !important;
+    top: -17px !important;
+    img{
+      height: 92px !important;
+    }
+  }
+}
+html,body{
+  background-size: cover;
+  background-repeat: no-repeat;
+  height: 100%;
+  font-family: 'Numans', sans-serif;
+}
+.card{
+  margin-top: 22px;
+  margin-bottom: auto;
+  background-color: white !important;
+  border-radius: unset;
+  box-shadow: 0 0 21px 0 rgb(212 214 254);
+  border-radius: 3px !important;
+}
+.relativepos{
+  position: relative;
+}
+.social_icon span{
+  font-size: 60px;
+  margin-left: 10px;
+  color: #FFC312;
+}
+.social_icon span:hover{
+  color: white;
+  cursor: pointer;
+}  
+  .card-header h3{
+  color: white;
+  }
+  
+  .social_icon{
+  position: absolute;
+  right: 20px;
+  top: -45px;
+  }
+  
+  .input-group-prepend span{
+  width: 50px;
+  background-color: #ffffff;
+  color: black;
+  img{
+    margin: auto;
+  }
+  }
+  
+  input:focus{
+  outline: 0 0 0 0  !important;
+  box-shadow: 0 0 0 0 !important;
+  
+  }
+  
+  .remember{
+  color: #525252;
+  font-size: 13px;
+  margin: 0;
+  }
+  
+  .remember input
+  {
+  margin-right: 5px;
+  }
+  
+  .login_btn{
+    color: white;
+    width: 100%;
+    background-image: linear-gradient(to right, #027be9, #03c0f0);
+    outline: none;
+    border: none;
+    margin-top: 21px;
+    border-radius: 17px;
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 14px;
+    padding: 10px;
+  }
+  
+  
+  .links{
+  color: black;
+  font-weight: 500;
+  font-size: 14px;
+  margin-top: 25px;
+  }
+  
+  .links a{
+  margin-left: 8px;
+  }
+  .textend{
+    text-align: end;
+  }
+  .frgtpsswrd{
+    color: #027ce9;
+    text-decoration: underline;
+  }
+  .frgtpsswrd:hover{
+    color: #027ce9;
+  }
+  .backgroundimage {
+    background: url(/assets/images/main-bg.png) no-repeat 100% center;
+    background-repeat: no-repeat;
+    min-height: 100vh;
+  background-size: 100% 100%;
+  background-attachment: fixed;
+}
+.bagroundblure{
+  margin-left: -15px;
+  margin-right: -15px;
+  min-height: 100vh;
+}
+.signupc{
+  color: #d50901;
+  text-decoration: underline;
+  cursor: pointer;
+}
+.signupc:hover{
+  color: #d50901;
+}
+.pt60{
+  padding-top: 60px;
+}
+.logtext{
+  text-align: center;
+  font-size: 21px;
+  margin-top: 23px;
+  color: #027ee9;
+  font-weight: 500;
+}
+.p60{
+  padding: 60px;
+}
+.topimagepos{
+  position: absolute;
+  right: -38px;
+  top: -35px;
+  img{
+    height: 122px;
+  }
+}
+.bottomingpos{
+  position: absolute;
+    bottom: -41px;
+    left: -28px;
+    img{
+      height: 220px;
+    }
+}
+.emailicon {
+  float: left;
+  padding-right: 15px;
+  img{
+    height: 32px;
+  }
+}
+.textemailphone{
+  font-size: 13px;
+  color: #000;
+  margin-bottom: 0;
+}
+.mt45{
+  margin-top: 45px;
+}
+.extraimg{
+  position: absolute;
+  left: 22%;
+}
+.mb11{
+  margin-bottom: 11px;
+}
+.width500{
+  width: 500px;
+  margin: auto;
+}
+.hight{
+  height: 50px;
+}
+
+#loginDiv{
+  input::placeholder {
+    color: black;
+  }
+}
+
+.logoimg{
+  height: 80px;
+}
+
+.btn{
+  background-image: linear-gradient(to right, #027be9, #03c0f0);
+  border: none;
+}
+.countrycode{
+  top: 32px;
+  font-size: 13px;
+  position: absolute;
+  left: 25px;
+  border: none;
+  background-color: rgb(238, 238, 238);
+}
+
+.hidenormalbutton {
+  background-color: gray;
+  pointer-events: none;
+}

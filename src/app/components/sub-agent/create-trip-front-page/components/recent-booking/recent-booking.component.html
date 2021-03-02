@@ -1,0 +1,124 @@
+<div class="tbl p-2">
+    <div class=" pt-2">
+        <h1 class="tablehead blue_text">Recent Booking</h1>
+
+    </div>
+    <div class="pt-2 pb-3">
+        <table id="customers">
+            <thead>
+                <tr>
+                    <th></th>
+                    <th>No</th>
+                    <th>
+                        Depature Date
+                    </th>
+                    <th>
+                        No of Day(s)
+                    </th>
+                    <th>
+                        Traveller Count
+                    </th>
+                    <th>
+                        Booked By
+                    </th>
+                    <th>
+                        Amount
+                    </th>
+                    <th>
+                        Status
+                    </th>
+                    <th>
+                        Bookings
+                    </th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody *ngFor="let item of recentHistory;let i = index;">
+                <tr>
+                    <td><button class="btn-success" (click)="viewhistory(item.id);">VIEW</button></td>
+                    <td>{{i+1}}</td>
+                    <td>{{item?.custom_trip?.start_date | date:'mediumDate'}}</td>
+                    <td>9</td>
+                    <td>
+                        <div *ngIf="item.custom_trip.adults != 0">{{'Adults' | translate}} : {{item?.custom_trip?.adults}}
+                        </div>
+                        <div *ngIf="item.custom_trip.children != 0">{{'Children' | translate}} :
+                            {{item?.custom_trip?.children}}</div>
+                        <div *ngIf="item.custom_trip.infants != 0">{{'Infants' | translate}} :
+                            {{item?.custom_trip?.infants}}</div>
+                    </td>
+                    <td class="text-capitalize">{{item?.staff_name}}</td>
+                    <td>SAR {{item?.total_amount}}</td>
+                    <td class="text-capitalize">{{item?.status}}</td>
+                    <td>
+                        <div class="d-flex">
+                            <i class="makkahharam icns icon_size_20 pr-2" *ngIf="item.custom_trip.makkah_trip" title="Makkah"></i>
+                            <i class="madeenaicon icns icon_size_25 pr-2" *ngIf="item.custom_trip.madinah_trip" title="Madinah"></i>
+                            <i class="transporticon icns icon_size_25" *ngIf="item.custom_trip.trip_transportation" title="Transport"></i>
+                        </div>
+                    </td>
+                    <td>
+                        <i class="downarrow icns icon_size_20 cursor-pointer" id="arrowdown{{i}}" (click)="viewDetails(i)"></i>
+                        <i class="uparrow icns icon_size_20 cursor-pointer displaynone" id="arrowup{{i}}" (click)="lessDetails(i)"></i>
+                    </td>
+                </tr>
+                <tr id="bookDetails{{i}}" class="displaynone animationdiv">
+                    <td></td>
+                    <td></td>
+                    <td colspan="9">
+                        <div *ngIf="item.custom_trip.makkah_trip">
+                            <strong>MAKKAH </strong>
+                            <span class="middileline"></span>
+                            <span class="text-uppercase">{{item.custom_trip.makkah_trip.name}}</span>
+                            <span class="pl-1">
+                                <ngb-rating [(rate)]="item.custom_trip.makkah_trip.rating"
+                                [readonly]="readonly" [max]=5>
+                                <ng-template let-fill="fill" let-index="index">
+                                    <span class="star" [class.filled]="fill === 100"
+                                        [class.bad]="index < 2">&#9733;</span>
+                                </ng-template>
+                                </ngb-rating>                        
+                            </span>
+                            <span *ngIf="item.custom_trip.makkah_trip.brn">
+                                <span class="middileline"></span>
+                                <span>BRN : {{item.custom_trip.makkah_trip.brn}}</span>
+                                <span class="ml-2"><span (click)="copytext(item.custom_trip.makkah_trip.brn)" class="cursor-pointer list_clr mb-0" title="Copy BRN"><i class="fa fa-files-o" aria-hidden="true"></i></span></span>
+                            </span>
+                        </div>
+                        <div *ngIf="item.custom_trip.madinah_trip">
+                            <strong>Madinah </strong>
+                            <span class="middileline"></span>
+                            <span class="text-uppercase">{{item.custom_trip.madinah_trip.name}}</span>
+                            <span class="pl-1">
+                                <ngb-rating [(rate)]="item.custom_trip.madinah_trip.rating"
+                                [readonly]="readonly" [max]=5>
+                                <ng-template let-fill="fill" let-index="index">
+                                    <span class="star" [class.filled]="fill === 100"
+                                        [class.bad]="index < 2">&#9733;</span>
+                                </ng-template>
+                                </ngb-rating>                        
+                            </span>
+                            <span *ngIf="item.custom_trip.madinah_trip.brn">
+                                <span class="middileline"></span>
+                                <span>BRN : {{item.custom_trip.madinah_trip.brn}}</span>
+                                <span class="ml-2"><span (click)="copytext(item.custom_trip.madinah_trip.brn)" class="cursor-pointer list_clr mb-0" title="Copy BRN"><i class="fa fa-files-o" aria-hidden="true"></i></span></span>
+                            </span>
+                        </div>
+                        <div *ngIf="item.custom_trip.trip_transportation">
+                            <strong>MAKKAH </strong>
+                            <span class="middileline"></span>
+                            <span class="text-uppercase">{{item.custom_trip.trip_transportation.name}}</span>
+                            <span *ngIf="item.custom_trip.trip_transportation.brn">
+                                <span class="middileline"></span>
+                                <span>BRN : {{item.custom_trip.trip_transportation.brn}}</span>
+                                <span class="ml-2"><span (click)="copytext(item.custom_trip.trip_transportation
+                                    .brn)" class="cursor-pointer list_clr mb-0" title="Copy BRN"><i class="fa fa-files-o" aria-hidden="true"></i></span></span>
+                            </span>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+            
+        </table>
+    </div>
+</div>

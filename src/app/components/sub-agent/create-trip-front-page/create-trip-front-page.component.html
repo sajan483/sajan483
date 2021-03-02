@@ -1,0 +1,228 @@
+<div class="topofcomponent">
+    <div class="bg_blue animationdiv">
+        <div class="text-white text-center container p-2 ">
+            <h1 class="mb-0 fs34">{{'UMRAH PACKAGES' | translate}}</h1>
+            <h3 class="fs18">{{'Get a great price on your Umrah Packages.' | translate}}</h3>
+        </div>
+    </div>
+    <div class="d-flex searchfield textform pt-1 container borderbox mt-2 animationdiv">
+        <div id="travellers" class="p-2 ">
+            <div class="subtext floatright">{{'Services' | translate}}</div>
+            <div class="position-relative">
+                <button (click)="showSelectionPopup()" class="travellerButton" #serviceDropDown>
+                    <p *ngIf="!service" class="service_text">{{'Services' | translate}}</p>
+                    <p *ngIf="service" class="service_text">{{ service | translate}}</p>
+                </button>
+                <div class="travellerpopupp popupmoving" *ngIf="showSelectionPopUp" #selectionPopUp>
+                    <div class="travellersouterr selectPop">
+                        <div class="d-flex flex-column w-100">
+                            <div class="pad15">
+                                <mat-radio-group class="exampleradiogroup" [(ngModel)]="service">
+                                    <mat-radio-button value="All" (change)="onServiceItemChange('All')">
+                                        {{'All' | translate}}</mat-radio-button>
+                                    <mat-radio-button value="Makkah Hotel"
+                                        (change)="onServiceItemChange('Makkah Hotel')">{{ 'Makkah Hotel' |
+                                        translate}}</mat-radio-button>
+                                    <mat-radio-button value="Medina Hotel"
+                                        (change)="onServiceItemChange('Medina Hotel')">{{ 'Medina Hotel' |
+                                        translate}}</mat-radio-button>
+                                    <mat-radio-button value="Transport"
+                                        (change)="onServiceItemChange('Transport')">{{ 'Transport' |
+                                        translate}}</mat-radio-button>
+                                </mat-radio-group>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="travellers" class="p-2 bodyofheder">
+            <div class="subtext floatright">{{'Travellers' | translate}}</div>
+            <div>
+                <button (click)="showTravelersPopUp()" class="travellerButton" #menuIconClass>
+                    {{countAdult + countChild + countInfant}} {{'Travellers' | translate}}
+                </button>
+            </div>
+            <div class="travellerpopup popupmoving" *ngIf="displayTabtravel" #menuPopupClass>
+                <div class="travellersouter travellerOuter" >
+                    <div class="d-flex flex-column" class="w-100">
+                        <div class="d-flex justify-content-between travellerslide">
+                            <div class="texttraveller pt-1">{{'Adults' | translate}}</div>
+                            <div class="p-1 ml-2" class="texttravellerd margnR50">
+                                {{countAdult}}
+                            </div>
+                            <div>
+                                <div class="btn-group">
+                                    <a class="firstbttn bttnfrst" (click)="minusAdult();">-</a>
+                                    <a class="secondbttn bttnscnd" (click)="addAdult();">+</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="d-flex justify-content-between travellerslide">
+                            <div class="texttraveller">{{'Children' | translate}}<p>2 - 12 {{'Years' | translate}}</p>
+                            </div>
+                            <div class="p-1 ml-1" class="texttravellerd">
+                                {{countChild}}</div>
+                            <div>
+                                <div class="btn-group">
+                                    <a class="firstbttn bttnfrst" (click)="minusChild();">-</a>
+                                    <a class="secondbttn bttnscnd" (click)="addChild();">+</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="d-flex justify-content-between travellerslide">
+                            <div class="texttraveller textright">{{'Infants' | translate}}<p>0 - 23 {{'months' | translate}}</p>
+                            </div>
+                            <div class="p-1" class="texttravellerd">{{countInfant}}</div>
+                            <div>
+                                <div class="btn-group">
+                                    <a class="firstbttn bttnfrst" (click)="minusInfant();">-</a>
+                                    <a class="secondbttn bttnscnd" (click)="addInfant();">+</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="p-2">
+            <button class="search_bttn" (click)="goButtonClicked()" [disabled]="goButtonEnable">{{'GO' |
+                translate}}</button>
+        </div>
+    </div>
+    <div class="mt-2 maxheightAnimation" id="dateEnterDiv">
+        <div class="bg-white borderbox container" *ngIf="activateMakkaSearch || activateMadeenaSearch || activateTransportSearch">
+            <div *ngIf="activateMakkaSearch" class="position-relative">
+                <div class="algn justify-content-center textform">
+                    <div class="p-2 mt-2">
+                        <div class="d-inline-flex whitebg mt10 redleft borderbox">
+                            <img src="/assets/images/makkah.png" alt="">
+                            <h5>{{'Makkah' | translate}}</h5>
+                        </div>
+                    </div>
+                    <div class="pl-0 pr-2 pt-2 pb-2">
+                        <p class="floatright pLeft">{{'Check In' | translate}}</p>
+                        <div><input [owlDateTimeTrigger]="dt3"
+                                placeholder="{{'Check In' | translate}}" class="owldatepicker border-remove-left mlpr20 hight45 removeoutline"
+                                [owlDateTime]="dt3" [(ngModel)]="makkaCheckInDate" [min]="makkahmin"
+                                (ngModelChange)="dataChangedFromMakkaDates($event)">
+                            <owl-date-time [pickerType]="'calendar'" #dt3></owl-date-time>
+                        </div>
+                        <div *ngIf="activateMakkaPromotion" class="col-md-12 pl20 plpr0 pt-2 pb-2 animationdiv">
+                            <label class="floatright pLeft m-0" for="promotion">{{'Special Code' |
+                                translate}}</label>
+                            <div class="col-md-12 pl-0 pr-0">
+                                <input name="promotion" class="subStyle"
+                                    [(ngModel)]="special_code_makkah" placeholder="{{'Special Code' | translate}}"
+                                    class="border-remove-left subStyle removeoutline">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="pl-0 pr-0 pt-2 pb-2">
+                        <p class="floatright pLeft">{{'Check Out' | translate}}</p>
+                        <div><input #makkaOutDatePicker [owlDateTimeTrigger]="dt4"
+                                placeholder="{{'Check Out' | translate}}" class="hight45 owldatepicker border-remove-right mlpr20 removeoutline"
+                                [owlDateTime]="dt4" [(ngModel)]="makkaCheckOutDate" [min]="madeenmin"
+                                (ngModelChange)="dataChangedFromMakkaOutDates($event)">
+                            <owl-date-time [pickerType]="'calendar'" #dt4></owl-date-time>
+                        </div>
+                        <div *ngIf="activateMakkaPromotion" class="col-md-12 pl-0 pr-0 pt-2 pb-2 animationdiv">
+                            <label class="floatright pLeft m-0" for="promotion">{{'SubPcc' |
+                                translate}}</label>
+                            <div class="col-md-12 plpr0 pl20">
+                                <input name="promotion" class="subStyle"
+                                    [(ngModel)]="subPcc_makkah" placeholder="{{'SubPcc' | translate}}"
+                                    class="border-remove-left subStyle removeoutline">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="daysposition animationdiv" *ngIf="noOfDaysInMakkah">
+                    <h6>{{noOfDaysInMakkah}} Day(s)</h6>
+                </div>
+            </div>
+            <div class="algn justify-content-center textform position-relative" *ngIf="activateMadeenaSearch">
+                <div class="p-2 mt-3">
+                    <div class="d-inline-flex whitebg mt2 borderbox blueleft">
+                        <img src="/assets/images/madeena.png" alt="">
+                        <h5>{{'Medinah' | translate}}</h5>
+                    </div>
+                </div>
+                <div class="pl-0 pr-2 pt-2 pb-2">
+                    <p class="floatright pLeft">{{'Check In' | translate}}</p>
+                    <div><input #madeenaInPicker [owlDateTimeTrigger]="dt1" placeholder="{{'Check In' | translate}}"
+                        class="owldatepicker border-remove-left mlpr20 hight45 removeoutline" [owlDateTime]="dt1"
+                        [(ngModel)]="madeenaCheckInDate" [min]="madeenaMin"
+                        (ngModelChange)="dataChangedFromMadeenaDates('in')">
+                        <owl-date-time [pickerType]="'calendar'" #dt1></owl-date-time>
+                    </div>
+                    <div *ngIf="activateMadeenaPromotion" class="col-md-12 pl20 plpr0 pt-2 pb-2 animationdiv">
+                        <label class="floatright pLeft m-0" for="promotion">{{'Special Code' |
+                            translate}}</label>
+                        <div class="col-md-12 pl-0 pr-0">
+                            <input name="promotion"
+                                [(ngModel)]="special_code_medinah" placeholder="Special Code" 
+                                class="border-remove-left subStyle removeoutline">
+                        </div>
+                    </div>
+                </div>
+                <div class="pl-0 pr-0 pt-2 pb-2">
+                    <p class="floatright pLeft">{{'Check Out' | translate}}</p>
+                    <div><input #madeenaOutPicker [owlDateTimeTrigger]="dt2" placeholder="{{'Check Out' | translate}}"
+                        class="owldatepicker border-remove-right mlpr20 hight45 removeoutline" [owlDateTime]="dt2"
+                        [(ngModel)]="madeenaCheckOutDate" [min]="madeenamax"
+                        (ngModelChange)="dataChangedFromMadeenaDates('out')">
+                        <owl-date-time [pickerType]="'calendar'" #dt2></owl-date-time>
+                    </div>
+                    <div *ngIf="activateMadeenaPromotion" class="col-md-12 pl-0 pr-0 pt-2 pb-2 animationdiv">
+                        <label class="floatright pLeft m-0" for="promotion">{{'SubPcc' | translate}}</label>
+                        <div class="col-md-12 plpr0 pl20">
+                            <input name="promotion"
+                                [(ngModel)]="subPcc_medinah" placeholder="{{'SubPcc' | translate}}"
+                                class="border-remove-left subStyle removeoutline">
+                        </div>
+                    </div>
+                </div>
+                <div class="daysposition animationdiv" *ngIf="noOfDaysInMadeenah">
+                    <h6>{{noOfDaysInMadeenah}} Day(s)</h6>
+                </div>
+            </div>
+            <div class="algn justify-content-center textform" *ngIf="activateTransportSearch">
+                <div class="p-2 mt-2">
+                    <div class="d-inline-flex whitebg mt2 borderbox roseleft">
+                        <img src="/assets/images/transport.png" alt="">
+                        <h5>{{'Transport' | translate}}</h5>
+                    </div>
+                </div>
+                <div class="pl-0 pr-2 pb-2">
+                    <p class="floatright pLeft">{{'Start Date' | translate}}</p>
+                    <div><input [owlDateTimeTrigger]="dt5" placeholder="{{'Start Date' | translate}}"
+                            class="owldatepicker border-remove-left mlpr20 hight45 removeoutline" [owlDateTime]="dt5" [min]="transportmin"
+                            [(ngModel)]="transportStartDate" (ngModelChange)="dataChangedFromTransportDate($event)">
+                        <owl-date-time [pickerType]="'calendar'" #dt5></owl-date-time>
+                    </div>
+                </div>
+                <div class="pr-2 pt-2 pb-2" id="routeListing" class="w250">
+                    <p class="pLeft floatright">{{'Route' | translate}}</p>
+                    <ng-multiselect-dropdown [placeholder]="'Route' | translate" [data]="routeList"
+                        [settings]="routeSettings" (onSelect)="onRouteSelect($event)">
+                    </ng-multiselect-dropdown>
+                </div>
+            </div>
+            <div class="d-flex justify-content-center textform">
+                <div class="p-2 mrBtm" *ngIf="viewsearchbutton">
+                    <button type="submit" data-hover="SEARCH NOW" class="searchbutton " name="search-accommodation"
+                        (click)="searchButtonClicked()" [disabled]="!enableSearchButton">
+                        {{'SEARCH' | translate}}
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="borderbox container tablewidth mt-2 animationdiv">
+        <app-recent-booking [recentHistory]="historyList"></app-recent-booking>
+    </div>
+</div>
+<div  *ngIf="showRoomAllocationPopup">
+    <app-room-allocation-popup [dataFromPopUp]="dataForPopUp"></app-room-allocation-popup>
+</div>

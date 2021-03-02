@@ -1,0 +1,126 @@
+<div class="animationdiv">
+    <div class="mt140 mb-5">
+        <div class="hotel_filter_section filterbox col-md-12 row mrhntopphone ml-0 mr-0 animationdiv">
+            <div class="col-md-3 p-0 ml-0 mr-0 fliter-arrow my-auto">
+                <div class="">
+                    <i class="fa fa-filter pl-2" aria-hidden="true"></i>
+                    {{'Filters' | translate}}
+                </div>
+            </div>
+            <div class="col-md-3 col-8  my-auto ">
+                <span class="pr-2">{{'Haram Distance' | translate}}</span>
+                <span class="fliter-arrow">
+                    <div *ngIf="!isHotelListSortedByHaramDistance">
+                        <button (click)="sortHotelList('asnd',null,'hararamDistance')"><i class="fa fa-angle-down"></i></button>
+                    </div>
+                    <div *ngIf="isHotelListSortedByHaramDistance">
+                        <button (click)="sortHotelList(null,'dsnd','hararamDistance')"><i
+                                class="fa fa-angle-up"></i></button>
+                    </div>
+                </span>
+            </div>
+            <div class="col-md-3  my-auto  col-4">
+                <span class="pr-2">{{'Price' | translate}}</span>
+                <span class="fliter-arrow">
+                    <div *ngIf="!isHotelsSortedByPrice">
+                        <button (click)="sortHotelList('asnd',null,'price')"><i class="fa fa-angle-down"></i></button>
+                    </div>
+                    <div *ngIf="isHotelsSortedByPrice">
+                        <button (click)="sortHotelList(null,'dsnd','price')"><i class="fa fa-angle-up"></i></button>
+                    </div>
+                </span>
+            </div>
+            <div class="col-md-3 text-right pr-0">
+                <input class="haram_filter fs13" type="text" name="search" autocomplete="off"
+                    placeholder="Search By Hotel Name">
+            </div>
+        </div>
+        <div class="padding_hotel1" *ngFor="let item of hotelsList | filterBy: userFilter;let i = index">
+            <div class="uitk-card uitk-grid border_box_shadow">
+                <div class="link-container uitk-grid">
+                    <div class="row w-100 m-0">
+                        <div class="col-md-4 col-12 pr-0 pl-0">
+                            <section class="uitk-cell uitk-card-media">
+                                <div *ngIf="item.has_special_deal" class="hotelRibbon">
+                                    <span class="hotelRibbon3">
+                                        {{'Has special deal' | translate}}
+                                    </span>
+                                </div>
+                                <header class="title">
+                                    <div class="listing-photo-gallery title__media-container">
+                                        <span>
+                                            <section class="uitk-cell uitk-card-media title__media-container">
+                                                <div class="photo-gallery noimghotel" *ngIf="item.image_path">
+                                                    <img src="{{item.image_path}}" alt="">
+                                                </div>
+                                            </section>
+                                        </span>
+                                    </div>
+                                </header>
+                            </section>
+                        </div>
+                        <div class="col-md-8 col-12 pr-0">
+                            <div class="uitk-card-content row">
+                                <div class="result-details-left col-md-8 col-12">
+                                    <div class="d-flex flex-column ">
+                                        <div class="d-inline-flex">
+                                            <div>
+                                                <h3 class="hotel_name" title="{{item?.name}}">{{item?.name | titlecase }}</h3>
+                                            </div>
+                                            <div class="pl-1">
+                                                <ngb-rating [(rate)]="item.rating" [readonly]="readonly" [max]=5>
+                                                    <ng-template let-fill="fill" let-index="index">
+                                                        <span class="star" [class.filled]="fill === 100"
+                                                            [class.bad]="index < 2">&#9733;</span>
+                                                    </ng-template>
+                                                </ngb-rating>
+                                            </div>
+                                        </div>
+                                        <div class="d-inline-flex pb5" *ngIf="item.haram_distance">
+                                            <div class="pr-2"><i class="makkahharam icns icon_size_15"></i></div>
+                                            <div class="fs13 clr52 fw400"><strong class="clr01 fs14 fw500">HARAM</strong> {{item?.haram_distance}} km</div>
+                                        </div>
+                                        <div class="d-inline-flex pb5" *ngIf="item.address">
+                                            <div class="pr-2"><i class="locationicon icns icon_size_15"></i></div>
+                                            <div class="fs12 clr52">{{item?.address}}</div>
+                                        </div>
+                                        <div class="d-inline-flex pb5" >
+                                            <div *ngIf="item.phone" class="d-inline-flex pr-3">
+                                                <div class="pr-2"><i class="Phoneicon icns icon_size_15"></i></div>
+                                                <div class="fs12 clr52">{{item?.phone}}</div>
+                                            </div>
+                                            <div *ngIf="item.email" class="d-inline-flex">
+                                                <div class="pr-2"><i class="mailicon icns icon_size_15"></i></div>
+                                                <div class="fs12 clr52">{{item?.email}}</div>
+                                            </div>
+                                        </div>
+                                        <div *ngIf="item.description">
+                                            <div class="pb5 fs13 clr52 desptn divexpandanimation" id="descrptionLess{{i}}">{{item?.description}}</div>
+                                            <div class="readmorenavigate fs13" id="readMoreBttn{{i}}" (click)="readMore($event,i)">+ Read More</div>
+                                            <div class="readmorenavigate fs13 dsplynone" id="readLessBttn{{i}}" (click)="readLess($event,i)">- Read Less</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="d-flex align-items-end flex-column result-details-right pr-0 col-md-4 col-12">
+                                    <div class="text-center">
+                                        <h3 class="hotel_prise">{{item?.currency_code}} {{item?.amount | number:'.2-2'}}
+                                        </h3>
+                                        <button class="searchbutton pull-right m-0" id="showHotelSelect{{i}}" 
+                                            (click)="showHotelDetailsPopUp(item)">{{'Select Room' | translate}}</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div [style.display]="showDetailsShimmer ? 'block' : 'none'" class="viewHtlShimmer" tabindex="-1" role="dialog"
+    aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="bg_body w-100">
+        <app-loader-hotel-popup></app-loader-hotel-popup>
+    </div>
+</div>
+<app-hotel-details-popup (handleNotif)="childEvent($event)" *ngIf = "showHotelDetails" [hotelInfo]="hotelInfo" [hotelData]="hotelData"></app-hotel-details-popup>

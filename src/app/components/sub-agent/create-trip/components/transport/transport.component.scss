@@ -1,0 +1,42 @@
+.makeFlex.hrtlCenter {
+  align-items: center;
+  -moz-box-align: center;
+  display: flex;
+}
+
+.slideItem {
+  padding: 0px 10px 10px 0;
+  border: none;
+  outline: none;
+  width: 100%;
+  display: inline-block;
+}
+
+.itemCard {
+  border-radius: 6px;
+  box-shadow: 0 1px 6px 0 rgba(0, 0, 0, 0.2);
+  background-color: #ffffff;
+  margin: 5px 10px 5px 2px;
+  padding: 0 15px 15px;
+}
+
+.makeFlex.column {
+  flex-direction: column;
+  -moz-box-orient: vertical;
+  -moz-box-direction: normal;
+}
+
+.cardInnerInfo {
+  height: 1auto;
+}
+
+.slideItem .itemThumb {
+  width: 120px;
+  margin-top: -20px;
+}
+
+.makeFlex.hrtlCenter {
+  align-items: center;
+  -moz-box-align: center;
+  display: flex;
+}

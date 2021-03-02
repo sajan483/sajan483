@@ -1,0 +1,56 @@
+<div class="tbl">
+    <div class="container">
+        <div class="header">
+            <h1>{{'Booking History' | translate}}</h1>
+            
+        </div>
+        <div class="pt-2 pb-3">
+        <table id="customers">
+            <thead>
+               <tr>
+                <th>{{'No' | translate}}</th>
+                <th>
+                    {{'Depature Date' | translate}}
+                </th>
+                <th>
+                    {{'Return Date' | translate}}
+                </th>
+                <th>
+                    {{'Travellers' | translate}}
+                </th>
+                <th>
+                    {{'Booking Date' | translate}}
+                </th>
+                <th>
+                    {{'Status' | translate}}
+                </th>
+                
+               </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let item of history;let i = index;" (click)="viewhistory(item.id);" class="cursor-pointer">
+                    <td>{{(i+(pageNo*pageSize))-(pageSize-1)}}</td>
+                    <td>{{item.custom_trip.start_date | date:'mediumDate'}}</td>
+                    <td>{{item.custom_trip.end_date | date:'mediumDate'}}</td>
+                    <td>
+                        <div *ngIf="item.custom_trip.adults != 0">{{'Adults' | translate}} : {{item.custom_trip.adults}}</div>
+                        <div *ngIf="item.custom_trip.children != 0">{{'Children' | translate}} : {{item.custom_trip.children}}</div>
+                        <div *ngIf="item.custom_trip.infants != 0">{{'Infants' | translate}} : {{item.custom_trip.infants}}</div>
+                    </td>
+                    <td>{{item.booking_date | date:'mediumDate'}}</td>
+                    <td>{{item.status}}</td>
+                
+                </tr>
+            </tbody>
+        </table>
+        </div>
+        <div class="row">
+            <div class="col-lg-8 col-md-10  ml-auto mr-auto">
+                <div class="float-right">
+                    <app-pagination [totalPage]="totalPage" [currentPage]="currentPage" (onPageChange)="paginateHistoryList($event)">
+                    </app-pagination>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
