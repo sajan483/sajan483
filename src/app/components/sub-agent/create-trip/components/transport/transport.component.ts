@@ -192,7 +192,6 @@ export class TransportComponent implements OnInit {
           } else {
             //this.stepper.next();
             this.appStore.stepperIndex += 1;
-            console.log("STEP index",this.appStore.stepperIndex)
             this.onNotify();
           }
         },
