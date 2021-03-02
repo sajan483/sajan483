@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router} from '@angular/router';
-import { listHistory } from '../../../listHistory';
+import { listHistory } from '../../../models/listHistory';
 import { NgxSpinnerService } from "ngx-spinner";
 import { AuthService }from '../../../common/services/auth-services';
 import { TranslateService } from "@ngx-translate/core";
@@ -12,6 +12,7 @@ import { CommonApiService } from 'src/app/common/services/common-api-services';
   styleUrls: ['./booking-history.component.scss'],
   providers: [CommonApiService,AuthService]
 })
+
 export class BookingHistoryComponent implements OnInit {
   activePage:number;
   currentPage:number;

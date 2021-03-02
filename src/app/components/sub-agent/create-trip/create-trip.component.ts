@@ -14,14 +14,14 @@
   import { Transportation } from "../../../models/vehicle_transport"
   import { DatePipe } from "@angular/common";
   import { ToastrService } from "ngx-toastr";
-  import { NotificationService } from "../../../notifications.service";
+  import { NotificationService } from "../../../common/services/notification.service";
   import { HttpClient } from '@angular/common/http';
   import { DoCheck } from "@angular/core";
   import { HelperService } from "src/app/common/services/helper-service";
   import { MakkaHotelComponent } from "./components/makka-hotel/makka-hotel.component";
   import { AuthService } from "src/app/common/services/auth-services";
   import { ApiService } from "./create-trip-api-service";
-  import { CreateTripAdapter } from "src/app/adapters/create-trip-adapter";
+  import { CreateTripAdapter } from "src/app/adapters/sub-agent/create-trip-adapter";
 
   @Component({
     selector: "app-create-trip",

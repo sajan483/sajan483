@@ -3,7 +3,7 @@ import { FormGroup, FormBuilder, Validators, EmailValidator } from '@angular/for
 import { FormControl } from '@angular/forms'
 import { Router, NavigationEnd } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
-import { NotificationService } from '../../../notification.service';
+import { NotificationService } from '../../services/notification.service';
 import Swal from 'sweetalert2';
 import { AppStore } from 'src/app/stores/app.store';
 import {TranslateService} from '@ngx-translate/core';
