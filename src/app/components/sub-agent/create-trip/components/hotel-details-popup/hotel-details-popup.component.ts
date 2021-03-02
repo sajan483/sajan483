@@ -1,4 +1,4 @@
-import {Component,DoCheck,EventEmitter,Input,OnChanges,OnInit,Output,} from "@angular/core";
+import {Component,EventEmitter,Input,OnChanges,OnInit,Output,} from "@angular/core";
 import { TranslateService } from "@ngx-translate/core";
 import { CreateTripAdapter } from "src/app/adapters/sub-agent/create-trip-adapter";
 import { HelperService } from "src/app/common/services/helper-service";
@@ -132,10 +132,18 @@ export class HotelDetailsPopupComponent implements OnInit ,OnChanges{
     this.makkahticked = true;
     this.madeendetailshow = true;
     this.showHotelDetailsShimmer = false
-    this.commonService.saveSelectedHotel(this.createTripAdapter.bookHotelRequest(this.isGrouped,this.selectedRoomGroups,this.hotelData,this.hotelInfo)).subscribe((data) => {
-      this.appStore.customeTripId = data.id;
-      this.onNotify();
-    });
+    if(!this.appStore.customeTripId){
+      this.commonService.saveSelectedHotel(this.createTripAdapter.bookHotelRequest(this.isGrouped,this.selectedRoomGroups,this.hotelData,this.hotelInfo)).subscribe((data) => {
+        this.appStore.customeTripId = data.id;
+        this.onNotify();
+      });
+    }
+    if(this.appStore.customeTripId){
+      this.commonService.updateCustomTrip(this.appStore.customeTripId,this.createTripAdapter.bookHotelRequest(this.isGrouped,this.selectedRoomGroups,this.hotelData,this.hotelInfo)).subscribe((data) => {
+        this.appStore.customeTripId = data.id;
+        this.onNotify();
+      });
+    }
   }
 
   /*

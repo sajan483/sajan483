@@ -136,8 +136,6 @@
     makkahCheckOutDate: any;
     madeenaCheckInDate:any;
     madeenaCheckOutDate:any;
-    city1 : string = "Makkah";
-    city2 : string = "Madinah";
     transportStartDate: any;
     toggleMeridian() {
         this.meridian = !this.meridian;
@@ -782,7 +780,6 @@
   const body={travellers}
     this.common.bookTrip(body,this.appStore.customeTripId).subscribe((data) => {
       this.bookingId = data.id;
-      //this.reference_no = data.reference_no;
       localStorage.setItem("reference_no",data.reference_no)
       this.spinner.show();
       this.common.checkAvailability(data.id).subscribe((response)=> {
@@ -930,7 +927,6 @@
     this.rooms = [] ; 
     this.fetchNessoryApisForTransport();
     this.userDetails = CreateTripComponent.UserObjectData;
-    console.log("userDetails",this.userDetails)
     this.appStore.userDetails = CreateTripComponent.UserObjectData;
     if(typeof(this.userDetails) == 'undefined'){
         this.router.navigate(['/firstpage'])

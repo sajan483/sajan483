@@ -414,6 +414,7 @@ export class PaymentStatusComponent implements OnInit {
     (<HTMLElement>document.getElementById("medinah")).style.display = "none";
     this.medinah = !this.medinah;
   }
+  
   toggleTransportUp(){
     (<HTMLElement>document.getElementById("transport")).style.display = "none";
     (<HTMLElement>document.getElementById("transportRate")).style.display = "none";
