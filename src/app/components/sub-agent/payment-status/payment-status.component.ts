@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router} from '@angular/router';
-import { NotificationService } from "../../../notifications.service";
 import { NgxSpinnerService } from "ngx-spinner";
 import 'rxjs/add/observable/interval';
 import {Observable,of, from, empty } from 'rxjs';
@@ -8,6 +7,7 @@ import Swal from "sweetalert2";
 import {TranslateService} from '@ngx-translate/core';
 import { AppStore } from 'src/app/stores/app.store';
 import { CommonApiService } from 'src/app/common/services/common-api-services';
+import { NotificationService } from 'src/app/common/services/notification.service';
 @Component({
   selector: 'app-payment-status',
   templateUrl: './payment-status.component.html',
