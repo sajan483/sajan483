@@ -41,6 +41,7 @@ import {MatProgressBarModule} from '@angular/material/progress-bar';
 import { LoaderHotelPopupComponent } from './components/loader-hotel-popup/loader-hotel-popup.component';
 import { HotelImagePopupComponent } from './components/hotel-image-popup/hotel-image-popup.component';
 import { CarouselModule } from 'ngx-owl-carousel-o';
+
 @NgModule({
   declarations: [
     CreateTripComponent, 
@@ -105,7 +106,7 @@ import { CarouselModule } from 'ngx-owl-carousel-o';
   ],
 })
 export class CreateTripModule {
-  // constructor(public translateService: TranslateService){
-  //   translateService.setDefaultLang('en'); /* Setting up the Translate Json to English - `en` */
-  // }
+  constructor(public translateService: TranslateService){
+    translateService.setDefaultLang('en'); /* Setting up the Translate Json to English - `en` */
+  }
 }
