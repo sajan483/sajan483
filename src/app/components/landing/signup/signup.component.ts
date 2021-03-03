@@ -4,7 +4,7 @@ import {FormGroup,FormBuilder,Validators} from '@angular/forms';
 import Swal from 'sweetalert2';
 import { NgxSpinnerService } from "ngx-spinner";
 import { Country } from './country';
-import { CommonApiService } from '../../services/common-api-services';
+import { CommonApiService } from '../../../common/services/common-api-services';
 
 @Component({
   selector: 'app-signup',

@@ -1,16 +1,15 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, Validators, EmailValidator } from '@angular/forms'
+import { FormGroup, FormBuilder, Validators } from '@angular/forms'
 import { FormControl } from '@angular/forms'
-import { Router, NavigationEnd } from '@angular/router';
+import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
-import { NotificationService } from '../../services/notification.service';
-import Swal from 'sweetalert2';
+import { NotificationService } from '../../../common/services/notification.service';
+import   Swal from 'sweetalert2';
 import { AppStore } from 'src/app/stores/app.store';
-import {TranslateService} from '@ngx-translate/core';
+import { TranslateService } from '@ngx-translate/core';
 import { Country } from '../signup/country';
-import { error } from 'protractor';
 import { CookieService } from 'ngx-cookie-service';
-import { CommonApiService } from '../../services/common-api-services';
+import { CommonApiService } from '../../../common/services/common-api-services';
 
 @Component({
   selector: 'app-login',
@@ -35,27 +34,31 @@ export class LoginComponent implements OnInit {
   interval;
   timeLeft: number = 0;
   rememberme: boolean = false;
+  username: string;
+  password: string;
+  access: any;
+  token: any = localStorage.getItem('accesstoken');
 
-  constructor(private http: HttpClient, private router: Router,private translate: TranslateService,
-    private appStore: AppStore, private fb: FormBuilder,private notifyService : NotificationService,
-    private common:CommonApiService,
+  constructor(private http: HttpClient,
+    private router: Router,
+    private translate: TranslateService,
+    private appStore: AppStore, 
+    private fb: FormBuilder,
+    private notifyService : NotificationService,
+    private commonApiService:CommonApiService,
     private cookie:CookieService) {
     this.frmSignup = fb.group({
       username: [null, Validators.required],
       password: [null, Validators.required]
     })
   }
-  token: any = localStorage.getItem('accesstoken');
+  
   ngOnInit(): void {
-    this.common.getCountries().subscribe(res =>{
-      console.log(res)
+    this.commonApiService.getCountries().subscribe(res =>{
       this.countries = res;
-      this.checkTokenExists();
     })
+    this.checkTokenExists();
   }
-  username: string;
-  password: string;
-  access: any;
 
   rememberMe(evt){
     if(evt.checked){
@@ -97,7 +100,6 @@ export class LoginComponent implements OnInit {
       this.http.post('https://b2b.betatest.akbarumrah.com/apis/staff/login/', body).subscribe(data => {
         this.access = data.access;
         this.etype = data.staff.employer_type;
-        console.log("logged in")
         localStorage.setItem('accesstoken', data.access);
         if(this.rememberme){
           localStorage.setItem('isTouched','true');
@@ -109,7 +111,6 @@ export class LoginComponent implements OnInit {
         }
         
         localStorage.setItem('empId', data.staff.employer_id);
-        console.log("empid",localStorage.getItem('empId'));
         if (localStorage.getItem('accesstoken') != null) {
           if(this.etype == 'branch'){
             this.notifyService.showSuccess(this.translate.instant('success !!'));
@@ -165,9 +166,8 @@ export class LoginComponent implements OnInit {
   }
 
   onSendOtpButtonClicked(){
-    let data ={ "phone_number":this.countrycode1 + this.phoneNumber,"phn_country_code": this.countrycode1}
-    this.common.getOtp(data).subscribe(res =>{
-      console.log(res)
+    let data = { "phone_number":this.countrycode1 + this.phoneNumber,"phn_country_code": this.countrycode1}
+    this.commonApiService.getOtp(data).subscribe(res =>{
       if(res.status == 'success'){
         this.timeLeft = res.validity_in_minutes * 60;
         document.getElementById("openModalButton").click();
@@ -196,7 +196,7 @@ export class LoginComponent implements OnInit {
               "password": this.ePassword,
               "confirmation_password": this.cPassword
           }
-    this.common.changePassword(data).subscribe(res =>{
+    this.commonApiService.changePassword(data).subscribe(res =>{
       if(res.status == 'success'){
         Swal.fire({
           icon: 'success',
@@ -228,7 +228,6 @@ export class LoginComponent implements OnInit {
   }
 
   hideForgotPssBtn(){
-    console.log("re",this.rePhoneNumber)
     if(this.rePhoneNumber == null || this.rePhoneNumber == ""){
       return false;
     }
