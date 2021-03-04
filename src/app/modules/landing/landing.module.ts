@@ -12,7 +12,7 @@ import { SignupComponent } from 'src/app/components/landing/signup/signup.compon
 import { UploadDocsComponent } from 'src/app/components/landing/upload-docs/upload-docs.component';
 import { TranslateModule, TranslateLoader, TranslateService } from '@ngx-translate/core';
 import { TranslatorFactory } from 'src/app/app.module';
-
+import {generalHelper} from '../../helpers/General/general-helpers'
 
 @NgModule({
   declarations: [
@@ -39,9 +39,9 @@ import { TranslatorFactory } from 'src/app/app.module';
         deps: [HttpClient]
       },
       isolate: true
-    })
-    
-  ]
+    }), 
+  ],
+  providers: [generalHelper]
 })
 
 export class LandingModule { 
