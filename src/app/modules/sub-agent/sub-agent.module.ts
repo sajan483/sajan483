@@ -21,8 +21,6 @@ import { NgImageSliderModule } from 'ng-image-slider';
 import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 import { OwlDateTimeModule, OwlNativeDateTimeModule } from 'ng-pick-datetime';
 import { FilterPipeModule } from 'ngx-filter-pipe';
-import { NgxSpinnerModule } from 'ngx-spinner';
-import { TranslatorFactory } from 'src/app/components/sub-agent/create-trip/create-trip.module';
 import { SubAgentRouteModule } from './sub-agent-routing.module';
 import { CreateTripComponent } from 'src/app/components/sub-agent/create-trip/create-trip.component';
 import { LoaderComponent } from 'src/app/components/sub-agent/create-trip/components/loader/loader.component';
@@ -36,8 +34,10 @@ import { RoomDetailsPopupComponent } from 'src/app/components/sub-agent/create-t
 import { MobxAngularModule } from 'mobx-angular';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 import { CarouselModule } from 'ngx-owl-carousel-o';
-import { CreateTripRoutingModule } from 'src/app/components/sub-agent/create-trip/create-trip-routing.module';
 import { NgxGalleryModule } from 'ngx-gallery';
+import { TranslatorFactory } from 'src/app/app.module';
+import { NgxSpinnerModule } from "ngx-spinner";
+
 
 @NgModule({
   declarations: [
@@ -69,14 +69,14 @@ import { NgxGalleryModule } from 'ngx-gallery';
     CommonModule,
     SubAgentRouteModule,
     NgxGalleryModule,
-    FilterPipeModule,
     HttpClientModule,
+    NgxSpinnerModule,
     HttpModule,
+    FilterPipeModule,
     MyDatePickerModule,
     InfiniteScrollModule,
     NgImageSliderModule,
     MatExpansionModule,
-    NgxSpinnerModule,
     DateRangePickerModule,
     MatStepperModule,
     MatMenuModule,
@@ -86,7 +86,6 @@ import { NgxGalleryModule } from 'ngx-gallery';
     ReactiveFormsModule,
     FormsModule,
     MatSliderModule,
-    CreateTripRoutingModule,
     MobxAngularModule,
     OwlDateTimeModule,
     OwlNativeDateTimeModule,
@@ -121,6 +120,6 @@ import { NgxGalleryModule } from 'ngx-gallery';
 
 export class SubAgentModule {
   constructor(public translateService: TranslateService){
-    translateService.setDefaultLang('en'); /* Setting up the Translate Json to English - `en` */
+    translateService.setDefaultLang('en-US'); /* Setting up the Translate Json to English - `en` */
   }
 }

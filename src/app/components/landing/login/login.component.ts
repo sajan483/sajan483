@@ -116,7 +116,7 @@ export class LoginComponent implements OnInit {
             this.notifyService.showSuccess(this.translate.instant('success !!'));
             this.appStore.currentUser = this.etype;
             localStorage.setItem('currentUser',this.etype);
-            this.router.navigate(["firstpage/"]);
+            this.router.navigate(['subagent/home/']);
           }
           if(this.etype == 'agency'){
             if(data.staff.is_approved == 'False'){

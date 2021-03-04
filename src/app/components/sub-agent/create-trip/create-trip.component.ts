@@ -862,7 +862,7 @@
       this.common.bookingPayment(w).subscribe((response)=> { 
         this.spinner.hide();
         if(response.status == "Success"){
-          this.router.navigate(['/payment/'+this.bookingId+'/success']);
+          this.router.navigate(['subagent/payment/'+this.bookingId+'/success']);
         }
         else{
           this.notifyService.showWarning(response.errors[0])
@@ -929,7 +929,7 @@
     this.userDetails = CreateTripComponent.UserObjectData;
     this.appStore.userDetails = CreateTripComponent.UserObjectData;
     if(typeof(this.userDetails) == 'undefined'){
-        this.router.navigate(['/firstpage'])
+        this.router.navigate(['/home'])
     }
     if(this.userDetails){
       this.totalTravellers = this.userDetails.travallersCount;
@@ -1419,7 +1419,7 @@
    * Method for navigate to home page
    */
   backToHomePage(){
-    this.router.navigate(['/firstpage']);
+    this.router.navigate(['/home']);
   }
 
   searchTransportList(){
