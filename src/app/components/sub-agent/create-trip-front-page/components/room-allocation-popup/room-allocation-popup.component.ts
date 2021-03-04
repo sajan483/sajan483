@@ -149,7 +149,7 @@ export class RoomAllocationPopupComponent implements OnInit {
       (<HTMLButtonElement>document.getElementById("roomSelectBttn")).disabled = true;
     }else{
       (<HTMLButtonElement>document.getElementById("roomSelectBttn")).disabled = false;
-      this.router.navigate(['/createTrip'], { queryParams: { steps: this.dataFromPopUp.steps.join(",")} });
+      this.router.navigate(['subagent/createTrip'], { queryParams: { steps: this.dataFromPopUp.steps.join(",")} });
       this.appStore.showRoomAlPopup = false;
     }
     CreateTripComponent.RoomData = this.userRooms;

@@ -32,7 +32,6 @@ const myPath: Routes = [
     path: "bookings/:id/details",
     component: PaymentStatusComponent,
   },
-   
 ];
 
 @NgModule({

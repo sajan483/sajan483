@@ -10,8 +10,8 @@ import { LandingRouteModule}from './landing-routing.module'
 import { LoginComponent } from 'src/app/components/landing/login/login.component';
 import { SignupComponent } from 'src/app/components/landing/signup/signup.component';
 import { UploadDocsComponent } from 'src/app/components/landing/upload-docs/upload-docs.component';
-import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
-import { TranslatorFactory } from 'src/app/components/sub-agent/create-trip/create-trip.module';
+import { TranslateModule, TranslateLoader, TranslateService } from '@ngx-translate/core';
+import { TranslatorFactory } from 'src/app/app.module';
 
 
 @NgModule({
@@ -43,4 +43,9 @@ import { TranslatorFactory } from 'src/app/components/sub-agent/create-trip/crea
     
   ]
 })
-export class LandingModule { }
+
+export class LandingModule { 
+  constructor(public translateService: TranslateService){
+    translateService.setDefaultLang('en-US'); /* Setting up the Translate Json to English - `en` */
+  }
+}

@@ -1,12 +1,4 @@
-import {
-  Component,
-  OnInit,
-  ViewChild,
-  ElementRef,
-  Renderer2,
-  Input,
-  DoCheck,
-} from "@angular/core";
+import {Component,OnInit,ViewChild,ElementRef,Renderer2,DoCheck,} from "@angular/core";
 import { IDropdownSettings } from "ng-multiselect-dropdown";
 import { Router} from "@angular/router";
 import { TranslateService } from "@ngx-translate/core";
@@ -110,7 +102,6 @@ export class CreateTripFrontPageComponent implements OnInit,DoCheck {
     private renderer2: Renderer2,
     private router: Router,
     private notifyService: NotificationService,
-    private renderer3: Renderer2,
     private helperService:HelperService,
     private authService:AuthService
   ) {
@@ -170,16 +161,8 @@ export class CreateTripFrontPageComponent implements OnInit,DoCheck {
    * this method for listing recent booking
    */
     this.listRecentBooking();
-    this.sample()
-
+  
   }
-
-  sample(){
-    this.commonApiService.sample().subscribe(
-      (data) => {
-        console.log(data);
-      });
-    }
 
   /**
    * This method for checking the availability of the access token
