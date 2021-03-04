@@ -104,4 +104,5 @@ export class SubAgentModule {
   constructor(public translateService: TranslateService){
     translateService.setDefaultLang('en-US'); /* Setting up the Translate Json to English - `en` */
   }
+  
 }
