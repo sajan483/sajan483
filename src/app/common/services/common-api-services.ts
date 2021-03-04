@@ -38,7 +38,11 @@ optionsForForm = {
   constructor(private http: Http, private _httpClient: HttpClient, private router: Router,private https: HttpClient) {
 
   }
-
+  login(data: any) {
+    return this.http
+      .post(BASE_URL + "staff/login/", data, this.options)
+      .map((res) => res.json());
+  }
   getBranchess(accessToken: string) {
     return this.http.get(BASE_URL+'branches/', this.options).map(res => res.json());
   }

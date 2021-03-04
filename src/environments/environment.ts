@@ -4,7 +4,8 @@
 
 export const environment = {
   production: false,
-  slctcntry  : 'India'
+  countryCodeCommen : '91',
+  timeLeft : 0
 };
 
 /*

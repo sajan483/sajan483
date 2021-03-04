@@ -13,6 +13,7 @@ import { CommonApiService } from '../../../common/services/common-api-services';
 import { environment } from '../../../../environments/environment'
 import { generalHelper } from '../../../helpers/General/general-helpers'
 import { loginAdapter } from 'src/app/adapters/Landing/loginAdapter';
+import { loginHelper } from 'src/app/helpers/landing/login-helper'
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -24,33 +25,34 @@ export class LoginComponent implements OnInit {
   public frmSignup: FormGroup;
   etype: any;
   countries: Country;
-  countrycode1: any = '91';
+  countrycode1: any = environment.countryCodeCommen;
   rePhoneNumber: string;
-  countrycode2: any = '91'
+  countrycode2: any = environment.countryCodeCommen;
   otp: string;
-  ePassword; string;
+  ePassword: string;
   cPassword: string;
   phoneNumber: string;
-  invalidPhn: boolean = false;
-  interval;
-  timeLeft: number = 0;
+  interval: any;
+  timeLeft: number = environment.timeLeft;
   rememberme: boolean = false;
   username: string;
   password: string;
   access: any;
-  token: any ;
+  token: any;
   gHelper: generalHelper;
-  loginAdapter:loginAdapter;
+  loginAdapter: loginAdapter;
+  loginHelperClass: loginHelper;
   constructor(private http: HttpClient,
     private router: Router,
     private translate: TranslateService,
     private appStore: AppStore,
     private fb: FormBuilder,
     private notifyService: NotificationService,
-    private commonApiService: CommonApiService,
+    private common: CommonApiService,
     private cookie: CookieService,
     private _gHelper: generalHelper) {
     this.gHelper = _gHelper;
+    this.loginHelperClass = new loginHelper(this.cookie,this.notifyService,this.translate,this.appStore,this.router);
     this.loginAdapter = new loginAdapter();
     this.token = this.gHelper.getAccessTocken();
     this.frmSignup = this.loginAdapter.createLoginGroup();
@@ -64,20 +66,15 @@ export class LoginComponent implements OnInit {
   /**
    * this method is used for get countries list
    */
-  getCountryList(){
-    this.commonApiService.getCountries().subscribe(res => {
+  getCountryList() {
+    this.common.getCountries().subscribe(res => {
       this.countries = res;
     })
   }
 
-  rememberMe(evt) {
-    if (evt.checked) {
-      this.rememberme = true;
-    } else {
-      this.rememberme = false;
-    }
-  }
-
+  /**
+   * this method used for fetch username and password from cookie
+   */
   checkTokenExists() {
     if (localStorage.getItem("accesstoken") != null) {
       if (localStorage.getItem("isTouched") == 'true') {
@@ -86,11 +83,6 @@ export class LoginComponent implements OnInit {
         this.rememberme = true;
       }
     }
-  }
-
-  setDataForCoockies() {
-    this.cookie.set("userName", this.username);
-    this.cookie.set("password", this.password);
   }
 
   setBoolean() {
@@ -103,44 +95,11 @@ export class LoginComponent implements OnInit {
       return;
     } else {
       if (this.rememberme) {
-        this.setDataForCoockies();
+        this.loginHelperClass.setDataForCookies(this.username, this.password);
       }
       const body = { 'username': this.username, 'password': this.password }
-
-      this.http.post('https://b2b.betatest.akbarumrah.com/apis/staff/login/', body).subscribe(data => {
-        this.access = data.access;
-        this.etype = data.staff.employer_type;
-        localStorage.setItem('accesstoken', data.access);
-        if (this.rememberme) {
-          localStorage.setItem('isTouched', 'true');
-        }
-        if (!this.rememberme) {
-          localStorage.setItem('isTouched', null);
-          this.cookie.set("userName", null);
-          this.cookie.set("password", null);
-        }
-
-        localStorage.setItem('empId', data.staff.employer_id);
-        if (localStorage.getItem('accesstoken') != null) {
-          if (this.etype == 'branch') {
-            this.notifyService.showSuccess(this.translate.instant('success !!'));
-            this.appStore.currentUser = this.etype;
-            localStorage.setItem('currentUser',this.etype);
-            this.router.navigate(['subagent/home/']);
-          }
-          if (this.etype == 'agency') {
-            if (data.staff.is_approved == 'False') {
-              this.notifyService.showWarning(this.translate.instant('processing !!'));
-              this.router.navigate(["upload", data.staff.employer_id]);
-            } else {
-              this.notifyService.showSuccess(this.translate.instant('success !!'));
-              this.appStore.currentUser = this.etype;
-              localStorage.setItem('currentUser', this.etype);
-              this.router.navigate(["first/"]);
-            }
-
-          }
-        }
+      this.common.login(body).subscribe(data =>{
+        this.loginHelperClass.loginResponse(data,this.rememverme);
       }, error => {
         Swal.fire({
           icon: 'error',
@@ -148,6 +107,7 @@ export class LoginComponent implements OnInit {
           text: this.translate.instant('Invalid Username or Password'),
         })
       });
+      
     }
   }
 
@@ -177,7 +137,7 @@ export class LoginComponent implements OnInit {
 
   onSendOtpButtonClicked() {
     let data = { "phone_number": this.countrycode1 + this.phoneNumber, "phn_country_code": this.countrycode1 }
-    this.commonApiService.getOtp(data).subscribe(res => {
+    this.common.getOtp(data).subscribe(res => {
       if (res.status == 'success') {
         this.timeLeft = res.validity_in_minutes * 60;
         document.getElementById("openModalButton").click();
@@ -206,7 +166,7 @@ export class LoginComponent implements OnInit {
       "password": this.ePassword,
       "confirmation_password": this.cPassword
     }
-    this.commonApiService.changePassword(data).subscribe(res => {
+    this.common.changePassword(data).subscribe(res => {
       if (res.status == 'success') {
         Swal.fire({
           icon: 'success',
