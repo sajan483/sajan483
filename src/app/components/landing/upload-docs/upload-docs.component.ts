@@ -5,7 +5,7 @@ import{agency_Appruvel_detaills} from './agency_Appruvel_detaills';
 import { HttpClient} from "@angular/common/http";
 import { NgxSpinnerService } from "ngx-spinner";
 import Swal from 'sweetalert2';
-import { Country } from '../signup/country';
+import { Country } from 'src/app/models/airportList';
 import { CommonApiService } from 'src/app/common/services/common-api-services';
 
 @Component({

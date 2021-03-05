@@ -4,12 +4,12 @@
 			<img src="/assets/images/lanterns.png" alt="">
 		</div>
 		<div class="row m-0" id="loginDiv">
-			<div class="pt60 col-md-8 col-lg-6 col-xl-4 col-12 pl-0 pr-0" style="margin: auto;">
+			<div class="padngovrdiv col-md-8 col-lg-6 col-xl-4 col-12 pl-0 pr-0 m-auto">
 				<div class="text-center">
 					<img src="/assets/images/logo.png" class="logoimg" alt="">
 				</div>
 				<h3 class="logtext">LOGIN TO CONTINUE</h3>
-				<div class="relativepos">
+				<div class="position-relative">
 					<div class="topimagepos">
 						<img src="/assets/images/login-box-top-right-bg.png" alt="">
 					</div>
@@ -17,7 +17,7 @@
 						<img src="/assets/images/login-box-bottom-left-bg.png" alt="">
 					</div>
 					<div class="card">
-						<div class="card-body p60">
+						<div class="card-body cardpadding">
 							<form [formGroup]="frmSignup" (submit)="submit()">
 								<div class="input-group form-group">
 									<div class="input-group-prepend">
@@ -50,16 +50,16 @@
 					</div>
 				</div>
 				<div class="d-flex justify-content-around mt45" >
-					<div class="smallcenter" style="width: 205px;">
+					<div class="smallcenter w205">
 						<div class="emailicon">
-							<img style="margin-top: 2px;" src="/assets/images/email-icon.png" alt="">
+							<img class="mb2" src="/assets/images/email-icon.png" alt="">
 						</div>
 						<div>
 							<p class="textemailphone">Email Us</p>
 							<p class="textemailphone">info@akbarumrah.com</p>
 						</div>
 					</div>
-					<div style="width: 158px;" class="smallcenter">
+					<div class="smallcenter w158px">
 						<div class="emailicon">
 							<img src="/assets/images/call-us-icon.png" alt="">
 						</div>
@@ -76,7 +76,7 @@
 </div>
 
 <div class="modal" id="forgotPasswordPopup">
-    <div class="modal-dialog">
+    <div class="modal-dialog popupmoving">
     <div class="modal-content">
 
         <!-- Modal Header -->
@@ -87,15 +87,15 @@
 
         <!-- Modal body -->
         <div class="modal-body">
-            <div class="modal-body" style="font-size: 12px;">
+            <div class="modal-body fs12">
             <div class="col-md-12">
-                <div class="col-md-12 pb-1 pl-0"><strong style="color: red;">*</strong> {{'Phone Number' | translate}}:</div>
-				<div class="form-group" style="margin-bottom: 0px;font-size: 15px ">
+                <div class="col-md-12 pb-1 pl-0"><strong class="text-danger">*</strong> {{'Phone Number' | translate}}:</div>
+				<div class="form-group mb-0 fs15">
 					<select name="" id="" class="countrycode" [ngModelOptions]="{standalone: true}"  [(ngModel)]="countrycode1">
 						<option *ngFor="let item of countries" [value]="item.code">{{item.code}} ({{item.iso_code}})</option>
 					</select>
-					<input id="phnnumber" placeholder="Enter Phone Number"  type="text" [(ngModel)]="phoneNumber" style="padding-left: 105px;color: gray !important;"
-					class="form-control" numberOnly maxlength="15">
+					<input id="phnnumber" placeholder="Enter Phone Number"  type="text" [(ngModel)]="phoneNumber"
+					class="form-control phnenumbertxt" numberOnly maxlength="15">
 				</div>
             </div>
             </div>
@@ -112,7 +112,7 @@
 </div>
 
 <div class="modal" id="changePasswordPopup">
-    <div class="modal-dialog">
+    <div class="modal-dialog popupmoving">
     <div class="modal-content">
 
         <!-- Modal Header -->
@@ -123,26 +123,26 @@
 
         <!-- Modal body -->
         <div class="modal-body">
-            <div class="modal-body" style="font-size: 12px;">
+            <div class="modal-body fs12">
 				<div class="col-md-12">
-					<div class="col-md-12 pb-1 pl-0"><strong style="color: red;">*</strong> {{'Phone Number' | translate}}:</div>
-					<div class="form-group" style="margin-bottom: 0px;font-size: 15px ">
+					<div class="col-md-12 pb-1 pl-0"><strong class="text-danger">*</strong> {{'Phone Number' | translate}}:</div>
+					<div class="form-group mb-0 fs15" >
 						<select name="" id="" class="countrycode" [ngModelOptions]="{standalone: true}"  [(ngModel)]="countrycode2">
 							<option *ngFor="let item of countries" [value]="item.code">{{item.code}} ({{item.iso_code}})</option>
 						</select>
-						<input id="phnnumber" placeholder="Enter Phone Number"  type="text" [(ngModel)]="rePhoneNumber" style="padding-left: 105px;color: gray !important;"
-						class="form-control" numberOnly maxlength="15">
+						<input id="phnnumber" placeholder="Enter Phone Number"  type="text" [(ngModel)]="rePhoneNumber" 
+						class="form-control phnenumbertxt" numberOnly maxlength="15">
 					</div>
 				</div>
             <div class="col-md-12 m-0 p-0">
-                <div class="col-md-12 pb-1"><strong style="color: red;">*</strong> {{'OTP' | translate}}:</div>
+                <div class="col-md-12 pb-1"><strong class="text-danger">*</strong> {{'OTP' | translate}}:</div>
                 <div class="col-md-12"><input type="text" placeholder="Enter OTP" class="form-control" id="auth_code" [(ngModel)]="otp" ></div>
 			 </div>
 			 <div class="col-md-12 m-0 p-0">
-                <div class="col-md-12 pb-1"><strong style="color: red;">*</strong> {{'Password' | translate}}:</div>
+                <div class="col-md-12 pb-1"><strong class="text-danger">*</strong> {{'Password' | translate}}:</div>
                 <div class="col-md-12"><input type="text" placeholder="Enter Password" class="form-control" id="auth_code" [(ngModel)]="ePassword" ></div>
              </div><div class="col-md-12 m-0 p-0">
-                <div class="col-md-12 pb-1"><strong style="color: red;">*</strong> {{'Confirm Password' | translate}}:</div>
+                <div class="col-md-12 pb-1"><strong class="text-danger">*</strong> {{'Confirm Password' | translate}}:</div>
                 <div class="col-md-12"><input type="text" placeholder="Confirm Password" class="form-control" id="auth_code" [(ngModel)]="cPassword" ></div>
              </div>
             </div>

@@ -1,8 +1,8 @@
 
 *{
-    margin: 0;
-    padding:0;
-  }
+  margin: 0;
+  padding:0;
+}
   @media only screen and (max-width: 768px){
    .logtext{
      margin-top: 10px !important;
@@ -15,12 +15,11 @@
    }
    .form-container{
      margin-top: 15px !important;
+     width: 93% !important;
+     padding: 10px !important;
    }
-    .pt30{
+    .padngtopimg{
       padding-top: 10px !important;
-    }
-    .form-container{
-      width: 93% !important;
     }
     .emailicon{
       float: none !important;
@@ -30,10 +29,7 @@
     .extraimg{
       display: none;
     }
-    .form-container{
-      padding: 10px !important;
-    }
-    .pl10{
+    .pdngstate{
       padding-left: 0 !important;
     }
     .areu {
@@ -44,10 +40,11 @@
       text-align: center;
     }
   }
-  .pl10{
+  .pdngstate{
     padding-left: 10px;
   }
   .bg{
+    min-height: 100vh;
     background: url(/assets/images/main-bg.png) no-repeat 100% center;
     background-repeat: no-repeat;
     background-size: 100% 100%;
@@ -69,11 +66,10 @@
       font-size: 13px;
     }
   }
-  .row{
-    display: flex;
-    justify-content: center;
+  input:focus{
+    outline: 0 0 0 0  !important;
+    box-shadow: 0 0 0 0 !important;
   }
-  
   .btnn{
     width: 50%;
     height: 40px;
@@ -84,24 +80,6 @@
     outline: none;
     border: none;
     font-weight: 600;
-  }
-  
-  #username{
-    margin-top: 20px;
-  }
-  
-  #input1{
-    padding-left: 10px;
-  }
-  
-  #input2{
-    padding-left: 10px;
-  }
-  .positionicon{
-    position: absolute;
-    right: 10px;
-    top: 5px;
-    z-index: 99;
   }
   .frgt{
     text-align: end;
@@ -120,12 +98,6 @@
       font-weight: 500;
     }
   }
-  .mt20{
-    margin-top: 20px;
-  }
-  .mt10{
-    margin-top: 10px;
-  }
   .form-control{
     padding-left: 10px;
     font-size: 13px;
@@ -143,7 +115,7 @@
     position: absolute;
     left: 22%;
   }
-  .pt30{
+  .padngtopimg{
     padding-top: 70px;
   }
   .logtext{
@@ -168,9 +140,6 @@
   .smallcenter{
     margin-right: 35px;
   }
-  .mb50{
-    margin-bottom: 80px;
-  }
   .logoimg{
     height: 80px;
   }
@@ -194,7 +163,4 @@
 }
 .mat-radio-button.mat-accent .mat-radio-inner-circle{
   background-color: #027ee9 !important;
-}
-.cursr{
-  cursor: pointer;
 }
