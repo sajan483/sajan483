@@ -1,6 +1,6 @@
-  import { Component,OnInit,ViewChild,ViewEncapsulation,AfterViewChecked,ElementRef,Renderer2} from "@angular/core";
-  import { TranslateService} from '@ngx-translate/core';
-  import { FormBuilder,FormGroup,FormArray,FormControl,Validators,} from "@angular/forms";
+  import {Component,OnInit,ViewChild,ViewEncapsulation,AfterViewChecked,ElementRef,Renderer2,AfterViewInit,} from "@angular/core";
+  import {TranslateService} from '@ngx-translate/core';
+  import {FormBuilder,FormGroup,FormArray,FormControl,Validators,} from "@angular/forms";
   import { MAT_STEPPER_GLOBAL_OPTIONS } from "@angular/cdk/stepper";
   import { Room} from "../../../models/visaTypes";
   import { MatStepper } from "@angular/material/stepper";
@@ -10,7 +10,7 @@
   import { NgxSpinnerService } from "ngx-spinner";
   import { IDropdownSettings } from "ng-multiselect-dropdown";
   import { Hotel } from "../../../models/hotels";
-  import { ImageObject} from "../../../models/custome_trip";
+  import {ImageObject} from "../../../models/custome_trip";
   import { Transportation } from "../../../models/vehicle_transport"
   import { DatePipe } from "@angular/common";
   import { ToastrService } from "ngx-toastr";
