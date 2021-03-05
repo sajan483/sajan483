@@ -7,13 +7,14 @@ import { NotificationService } from '../../../common/services/notification.servi
 import Swal from 'sweetalert2';
 import { AppStore } from 'src/app/stores/app.store';
 import { TranslateService } from '@ngx-translate/core';
-import { Country } from '../signup/country';
+import { Country } from 'src/app/models/airportList';
 import { CookieService } from 'ngx-cookie-service';
 import { CommonApiService } from '../../../common/services/common-api-services';
 import { environment } from '../../../../environments/environment'
 import { generalHelper } from '../../../helpers/General/general-helpers'
 import { loginAdapter } from 'src/app/adapters/Landing/loginAdapter';
 import { loginHelper } from 'src/app/helpers/landing/login-helper'
+import { empty } from 'rxjs';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -85,13 +86,23 @@ export class LoginComponent implements OnInit {
     }
   }
 
+  /**
+   * this methode is used for setting remember me boolean
+   */
   setBoolean() {
     this.rememberme = !this.rememberme;
   }
 
+  /**
+   * this function used for user login 
+   */
   submit = function () {
-    if ((this.username == null) || (this.password == null)) {
-      alert("Fields can not be empty");
+    if (this.username == '' || this.password == '') {
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: 'Fields can not be empty',
+      })
       return;
     } else {
       if (this.rememberme) {
@@ -111,6 +122,9 @@ export class LoginComponent implements OnInit {
     }
   }
 
+  /**
+   * this method is used convert to arabic language
+   */
   ngAfterViewChecked() {
     this.translate.use(this.appStore.langCode);
     if (this.appStore.langCode == "ar-AE") {
@@ -120,21 +134,16 @@ export class LoginComponent implements OnInit {
     }
   }
 
-  validateAllFormFields(formGroup: FormGroup) {
-    Object.keys(formGroup.controls).forEach(field => {
-      const control = formGroup.get(field);
-      if (control instanceof FormControl) {
-        control.markAsTouched({ onlySelf: true });
-      } else if (control instanceof FormGroup) {
-        this.validateAllFormFields(control);
-      }
-    });
-  }
-
+  /**
+   * this method is used for navigate signup page
+   */
   navigatesignup() {
     this.router.navigate(["/signup"]);
   }
 
+  /**
+   * this method used for sent otp to user enter phone number
+   */
   onSendOtpButtonClicked() {
     let data = { "phone_number": this.countrycode1 + this.phoneNumber, "phn_country_code": this.countrycode1 }
     this.common.getOtp(data).subscribe(res => {
@@ -159,6 +168,9 @@ export class LoginComponent implements OnInit {
     })
   }
 
+  /**
+   * this method for add new password
+   */
   onChangePasswordBtnClicked() {
     let data = {
       "phone_number": this.countrycode2 + this.rePhoneNumber,
@@ -190,6 +202,9 @@ export class LoginComponent implements OnInit {
     })
   }
 
+  /**
+   * this method for disable or active sentotp button
+   */
   hidebutton() {
     if (this.phoneNumber == null || this.phoneNumber == "") {
       return false;
@@ -197,6 +212,9 @@ export class LoginComponent implements OnInit {
     return true;
   }
 
+  /**
+   * this method for hide forgot button
+   */
   hideForgotPssBtn() {
     if (this.rePhoneNumber == null || this.rePhoneNumber == "") {
       return false;
@@ -216,6 +234,9 @@ export class LoginComponent implements OnInit {
     return true;
   }
 
+  /**
+   * this method is used set timer for enter otp
+   */
   startTimer() {
     this.interval = setInterval(() => {
       if (this.timeLeft > 0) {

@@ -3,8 +3,10 @@ import { Router } from '@angular/router';
 import {FormGroup,FormBuilder,Validators} from '@angular/forms';
 import Swal from 'sweetalert2';
 import { NgxSpinnerService } from "ngx-spinner";
-import { Country } from './country';
+import { Country } from 'src/app/models/airportList';
 import { CommonApiService } from '../../../common/services/common-api-services';
+import { signupAdapter } from 'src/app/adapters/Landing/signupAdapter';
+import { environment } from '../../../../environments/environment';
 
 @Component({
   selector: 'app-signup',
@@ -21,34 +23,34 @@ export class SignupComponent implements OnInit {
   licensefield: boolean = false;
   bttnshow: boolean = false;
   countries : Country[];
-  slctcntry : any = 'India';
-  countrycode1 : any = '91';
+  slctcntry : any = environment.selectedCountryCommen;
+  countrycode1 : any = environment.countryCodeCommen;
+  signupAdapter : signupAdapter;
 
   constructor(private common: CommonApiService,private router: Router,private formBuilder: FormBuilder
     ,private spinner: NgxSpinnerService) { 
-    this.signupForm = formBuilder.group({
-      cmpnyname: ['', Validators.required],
-      phnnumber: ['', Validators.required],
-      email: ['', [Validators.required, Validators.email]],
-      cmpnyadress: ['', Validators.required],
-      city: ['', Validators.required],
-      state: ['', Validators.required],
-      cname: ['', Validators.required],
-      phnnumberp: ['', Validators.required],
-      password: ['', [Validators.required, Validators.minLength(6)]],
-      cnfrmpasswrd: ['', Validators.required],
-      
-    })
+    this.signupAdapter = new signupAdapter();
+    this.signupForm = this.signupAdapter.createSignupGroup();
   }
 
   get f() { return this.signupForm.controls; }
 
   ngOnInit() {
+    this.coutryList();
+  }
+
+  /**
+   * this method for fetch coutry list
+   */
+  coutryList(){
     this.common.getCountries().subscribe(res =>{
       this.countries = res;
     })
   }
 
+  /**
+   * this method used for signup
+   */
   onSubmit() {
     this.spinner.show();
     this.submitted = true;
@@ -147,7 +149,7 @@ export class SignupComponent implements OnInit {
           "confirmation_password": this.signupForm.value.cnfrmpasswrd
         }
       }
-    this.common.signup(body).subscribe(data => {
+      this.common.signup(body).subscribe(data => {
       this.spinner.hide();
       Swal.fire({
         icon: 'success',
@@ -166,22 +168,36 @@ export class SignupComponent implements OnInit {
         text: 'Contact person phone number already exist',
       })
     });
-    }
-      
-      
+    } 
     }
   }
+
+  /**
+   * this method for navigate login page
+   */
   navigatelogin(){
     this.router.navigate(["/login"])
   }
+
+  /**
+   * this method for activate license agent
+   */
   licenseyes(){
     this.bttnshow = true;
     this.licensefield = true;
   }
+
+  /**
+   * this method for deactivate license agent
+   */
   licenseno(){
     this.licensefield = false;
     this.bttnshow = true;
   }
+
+  /**
+   * this method for select country name
+   */
   changecntry(newObj){
     this.countries.forEach(obj => {
       if(obj.code == newObj){
@@ -190,6 +206,10 @@ export class SignupComponent implements OnInit {
       
     })
   }
+
+  /**
+   * this method for select country code
+   */
   changecntrycode(newObj){
     this.countries.forEach(obj => {
       if(obj.name == newObj){
@@ -198,8 +218,11 @@ export class SignupComponent implements OnInit {
       
     })
   }
-  omit_special_char(event)
-  {   
+
+  /**
+   * this method for block spacial characters
+   */
+  omit_special_char(event){   
    var k;  
    k = event.charCode;  //         k = event.keyCode;  (Both can be used)
    return((k > 64 && k < 91) || (k > 96 && k < 123) || k == 8 || k == 32 || (k >= 48 && k <= 57)); 

@@ -1,11 +1,12 @@
 import { Injectable } from "@angular/core";
 import { DatePipe } from "@angular/common";
+import { CommonApiService } from 'src/app/common/services/common-api-services';
 
 @Injectable()
 
 export class HelperService {
 
-    constructor(public datepipe:DatePipe){}
+    constructor(public datepipe:DatePipe,private common: CommonApiService){}
 
     /*
     * this method for changing date format to "MM/dd/yyyy"
@@ -67,4 +68,12 @@ export class HelperService {
         return d;
     }
 
+    /**
+     * this method for fetch country list
+     */
+    getContryList(){
+        return this.common.getCountries().subscribe(res =>{
+           
+        })
+    }
 }

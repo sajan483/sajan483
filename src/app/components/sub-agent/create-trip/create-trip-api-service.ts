@@ -6,7 +6,7 @@ import "rxjs/add/operator/toPromise";
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Observable, from } from "rxjs";
 import { listAirport } from "../../../models/listAirport";
-import { airportList } from "src/app/models/aiportlist";
+import { airportList } from "src/app/models/airportList";
 
 const BASE_URL = "https://b2b.betatest.akbarumrah.com/apis/";
 const BASE_URL2 = "https://b2ctest.akbarumrah.com/apis/";

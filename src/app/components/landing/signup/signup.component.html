@@ -1,5 +1,5 @@
 <section class="container-fluid bg">
-    <div class="text-center pt30">
+    <div class="text-center padngtopimg">
         <img src="/assets/images/logo.png" class="logoimg" alt="">
     </div>
     <div class="extraimg">
@@ -12,7 +12,7 @@
                 
                 <div class="row">
                     <div class="col-md-6 pl-3 pr-3">
-                        <div class="form-group " style="margin-bottom: 0px;font-size: 15px ">
+                        <div class="form-group mb-0 fs15" >
                             <label id="cmpnynamelbl">Travel Agency Name</label>
                             <input id="cmpnyname" formControlName="cmpnyname" placeholder="Enter Travel Agency Name" type="text" (keypress)="omit_special_char($event)"
                             class="form-control text-capitalize" [ngClass]="{ 'is-invalid': submitted && f.cmpnyname.errors }">
@@ -22,32 +22,20 @@
                         </div>
                     </div>
                     <div class="col-md-6 pl-3 pr-3">
-                        <!-- <div class="form-group col-md-4 pr-2" style="margin-bottom: 0px;font-size: 15px ">
-                            <label id="cntrycodelbl">Contry Code</label>
-                            <select id="cntrycode" placeholder="Contry Code" type="text" formControlName="cntrycode"
-                            class="form-control"[ngClass]="{ 'is-invalid': submitted && f.cntrycode.errors }">
-                                <option value="" disabled selected>Contry Code</option>
-                                <option value="+91">india(+91)</option>
-                                <option value="+002">pakistan(+002)</option>
-                            </select>
-                            <div *ngIf="submitted && f.cntrycode.errors" class="invalid-feedback">
-                                <div *ngIf="f.cntrycode.errors.required">Contry Code is required</div>
-                            </div>
-                        </div> -->
-                        <div class="form-group" style="margin-bottom: 0px;font-size: 15px ">
+                        <div class="form-group mb-0 fs15" >
                             <label id="phnnumberlbl">Phone Number</label>
                             <select name="" id="" class="countrycode" [ngModelOptions]="{standalone: true}"  [(ngModel)]="countrycode1" (change)="changecntry($event.target.value)">
                                 <option *ngFor="let item of countries" [value]="item.code">{{item.code}} ({{item.iso_code}})</option>
                             </select>
-                            <input id="phnnumber" max="10" placeholder="Enter Phone Number"  type="text" maxlength="15" formControlName="phnnumber" style="padding-left: 105px;"
-                            class="form-control"[ngClass]="{ 'is-invalid': submitted && f.phnnumber.errors }" numberOnly>
+                            <input id="phnnumber" max="10" placeholder="Enter Phone Number"  type="text" maxlength="15" formControlName="phnnumber" 
+                            class="form-control pl105"[ngClass]="{ 'is-invalid': submitted && f.phnnumber.errors }" numberOnly>
                             <div *ngIf="submitted && f.phnnumber.errors" class="invalid-feedback">
                                 <div *ngIf="f.phnnumber.errors.required">Phone Number is required</div>
                             </div>
                         </div>
                     </div>
                     <div class="col-md-6 pl-3 pr-3">
-                        <div class="form-group " style="margin-bottom: 0px;font-size: 15px ">
+                        <div class="form-group mb-0 fs15" >
                             <label id="emaillbl">Email</label>
                             <input id="email" placeholder="Enter Email" type="text" formControlName="email" 
                             class="form-control" [ngClass]="{ 'is-invalid': submitted && f.email.errors }">
@@ -58,7 +46,7 @@
                         </div>
                     </div>
                     <div class="col-md-6 pl-3 pr-3">
-                        <div class="form-group " style="margin-bottom: 0px;font-size: 15px ">
+                        <div class="form-group mb-0 fs15" >
                             <label id="cmpnyadresslbl">Address</label>
                             <input id="cmpnyadress" placeholder="Enter Company Address" type="text" formControlName="cmpnyadress"
                             class="form-control"[ngClass]="{ 'is-invalid': submitted && f.cmpnyadress.errors }">
@@ -69,7 +57,7 @@
                     </div>
                     <div class="col-md-6 row pl-3 pr-3">
                         <div class="col-md-6">
-                            <div class="form-group " style="margin-bottom: 0px;font-size: 15px ">
+                            <div class="form-group mb-0 fs15">
                                 <label id="citylbl">City</label>
                                 <input id="city" placeholder="Enter city" type="text" formControlName="city"
                                 class="form-control"[ngClass]="{ 'is-invalid': submitted && f.city.errors }">
@@ -78,8 +66,8 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-6 pl10">
-                            <div class="form-group " style="margin-bottom: 0px;font-size: 15px ">
+                        <div class="col-md-6 pdngstate">
+                            <div class="form-group mb-0 fs15">
                                 <label id="statelbl">State</label>
                                 <input id="state" placeholder="Enter state" type="text" formControlName="state"
                                 class="form-control"[ngClass]="{ 'is-invalid': submitted && f.state.errors }">
@@ -91,20 +79,15 @@
                     </div>
                     
                     <div class="col-md-6 pl-3 pr-3">
-                        <div class="form-group " style="margin-bottom: 0px;font-size: 15px ">
+                        <div class="form-group mb-0 fs15">
                             <label id="contrylbl">Country </label>
-                            <!-- <input id="country" placeholder="Enter Country" type="text" formControlName="country"
-                            class="form-control"[ngClass]="{ 'is-invalid': submitted && f.country.errors }">
-                            <div *ngIf="submitted && f.country.errors" class="invalid-feedback">
-                                <div *ngIf="f.country.errors.required">Country is required</div>
-                            </div> -->
                             <select name="" id="" class="form-control" [ngModelOptions]="{standalone: true}"  [(ngModel)]="slctcntry" (change)="changecntrycode($event.target.value)">
                                 <option *ngFor="let item of countries;let i = index" [value]="item.name">{{item.name}}</option>
                             </select>
                         </div>
                     </div>
                     <div class="col-md-6 pl-3 pr-3">
-                        <div class="form-group " style="margin-bottom: 0px;font-size: 15px ">
+                        <div class="form-group mb-0 fs15">
                             <label id="cnamelbl">Contact Person Name</label>
                             <input id="cname" placeholder="Enter Contact person Name" type="text" formControlName="cname"
                             class="form-control" [ngClass]="{ 'is-invalid': submitted && f.cname.errors }">
@@ -114,25 +97,13 @@
                         </div>
                     </div>
                     <div class="col-md-6 pl-3 pr-3">
-                        <!-- <div class="form-group col-md-4 pr-2" style="margin-bottom: 0px;font-size: 15px ">
-                            <label id="cntrycodeplbl">Contry Code</label>
-                            <select id="cntrycodep" placeholder="Contry Code" type="text" formControlName="cntrycodep"
-                            class="form-control"[ngClass]="{ 'is-invalid': submitted && f.cntrycodep.errors }">
-                                <option value="" disabled selected>Contry Code</option>
-                                <option value="+91">india(+91)</option>
-                                <option value="+002">pakistan(+002)</option>
-                            </select>
-                            <div *ngIf="submitted && f.cntrycodep.errors" class="invalid-feedback">
-                                <div *ngIf="f.cntrycodep.errors.required">Contry Code is required</div>
-                            </div>
-                        </div> -->
-                        <div class="form-group" style="margin-bottom: 0px;font-size: 15px ">
+                        <div class="form-group mb-0 fs15">
                             <label id="phnnumberlbl">Contact Person Number</label>
                             <select name="" id="" class="countrycode" [ngModelOptions]="{standalone: true}"  [(ngModel)]="countrycode1" (change)="changecntry($event.target.value)">
                                 <option *ngFor="let item of countries" [value]="item.code">{{item.code}} ({{item.iso_code}})</option>
                             </select>
-                            <input id="phnnumberp" placeholder="Enter Contact person Number"  type="text" formControlName="phnnumberp" style="padding-left: 105px;"
-                            class="form-control"[ngClass]="{ 'is-invalid': submitted && f.phnnumberp.errors }" numberOnly maxlength="15">
+                            <input id="phnnumberp" placeholder="Enter Contact person Number"  type="text" formControlName="phnnumberp"
+                            class="form-control pl105"[ngClass]="{ 'is-invalid': submitted && f.phnnumberp.errors }" numberOnly maxlength="15">
                             <div *ngIf="submitted && f.phnnumberp.errors" class="invalid-feedback">
                                 <div *ngIf="f.phnnumberp.errors.required">Contact person Number is required</div>
                             </div>
@@ -140,7 +111,7 @@
                     </div>
 
                     <div class="col-md-6 pl-3 pr-3">
-                        <div class="form-group " style="margin-bottom: 0px;font-size: 15px ">
+                        <div class="form-group mb-0 fs15">
                             <label id="passwordlbl">Password</label>
                             <input id="password" placeholder="Enter Password" type="password" formControlName="password"
                             class="form-control" [ngClass]="{ 'is-invalid': submitted && f.password.errors }">
@@ -151,7 +122,7 @@
                         </div>
                     </div>
                     <div class="col-md-6 pl-3 pr-3">
-                        <div class="form-group " style="margin-bottom: 0px;font-size: 15px ">
+                        <div class="form-group mb-0 fs15">
                             <label id="cnfrmpasswrdlbl">Confirm Password</label>
                             <input id="cnfrmpasswrd" placeholder="Confirm Password" type="password" formControlName="cnfrmpasswrd"
                             class="form-control"[ngClass]="{ 'is-invalid': submitted && f.cnfrmpasswrd.errors }">
@@ -167,30 +138,26 @@
                             </div>
                             
                             <div class="form-check-inline pr-3 ">
-                                <label class="form-check-label cursr" for="radio1" (click)="licenseyes()">
+                                <label class="form-check-label cursor-pointer" for="radio1" (click)="licenseyes()">
                                   <input type="radio" class="form-check-input" id="radio1" name="optradio" value="option1" >Yes
                                 </label>
                               </div>
                               <div class="form-check-inline ">
-                                <label class="form-check-label cursr" for="radio2" (click)="licenseno()">
+                                <label class="form-check-label cursor-pointer" for="radio2" (click)="licenseno()">
                                   <input type="radio" class="form-check-input" id="radio2" name="optradio" value="option2">No
                                 </label>
                               </div>
-                            <!-- <mat-radio-group aria-label="Select an option">
-                                <mat-radio-button value="1" class="pr-3" (change)="licenseyes();">Yes</mat-radio-button>
-                                <mat-radio-button value="2" (change)="licenseno();">No</mat-radio-button>
-                            </mat-radio-group>                           -->
                         </div>
                     </div>
                     <div class="col-md-6 pl-3 pr-3" *ngIf="licensefield">
-                        <div class="form-group " style="margin-bottom: 0px;font-size: 15px ">
+                        <div class="form-group mb-0 fs15" >
                             <label id="Licenseilbl" >License number of the Ministry of Hajj and Umrah</label>
                             <input id="license" placeholder="Enter License number" type="text" (keypress)="omit_special_char($event)" 
                             class="form-control text-uppercase" formControlName="license">
                         </div>
                     </div>
                     <div class="col-md-6 pl-3 pr-3" *ngIf="licensefield">
-                        <div class="form-group " style="margin-bottom: 0px;font-size: 15px " >
+                        <div class="form-group mb-0 fs15" >
                             <label id="ibanlbl" >IBAN</label>
                             <input id="iban" formControlName="iban" placeholder="Enter IBAN Number" type="text" 
                             class="form-control text-uppercase" (keypress)="omit_special_char($event)">
@@ -209,17 +176,17 @@
                 </div>
         </form>
     </section>
-    <div class="d-flex justify-content-center mb50 textcentr">
-        <div class="smallcenter" style="width: 205px;">
+    <div class="d-flex justify-content-center mb80 textcentr">
+        <div class="smallcenter w205" >
             <div class="emailicon">
-                <img style="margin-top: 2px;" src="/assets/images/email-icon.png" alt="">
+                <img class="mt2" src="/assets/images/email-icon.png" alt="">
             </div>
             <div>
                 <p class="textemailphone">Email Us</p>
                 <p class="textemailphone">info@akbarumrah.com</p>
             </div>
         </div>
-        <div style="width: 158px;">
+        <div class="w158">
             <div class="emailicon">
                 <img src="/assets/images/call-us-icon.png" alt="">
             </div>

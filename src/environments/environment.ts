@@ -5,7 +5,8 @@
 export const environment = {
   production: false,
   countryCodeCommen : '91',
-  timeLeft : 0
+  timeLeft : 0,
+  selectedCountryCommen : 'India'
 };
 
 /*
