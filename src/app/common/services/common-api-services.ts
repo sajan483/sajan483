@@ -303,7 +303,6 @@ optionsForForm = {
   }
 
   forDataPackageAPI(param,currency,lang,id){
-    console.log("PARAM",param)
     let formData = new FormData();
     param.forEach((item,index) => {
           if(item.title){
@@ -656,8 +655,7 @@ optionsForForm = {
     formData.append('iata_license',body.iataLicence);
     formData.append('mobile',body.mobileNo);
     formData.append('commercial_regno',body.commercialreg);
-    formData.append('request_text',body.reqstText);
-    console.log(formData)
+    formData.append('request_text',body.reqstText)
 
     return this.http
       .post(BASE_URL + "agencies/"+id+"/approval_request/",formData)

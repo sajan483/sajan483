@@ -45,22 +45,18 @@ export class SignupComponent implements OnInit {
 
   ngOnInit() {
     this.common.getCountries().subscribe(res =>{
-      console.log(res)
       this.countries = res;
     })
   }
 
   onSubmit() {
-    console.log("1")
     this.spinner.show();
     this.submitted = true;
     if (this.signupForm.invalid) {
-      console.log("2")
       this.spinner.hide();
       return;
     }
     if(this.licensefield){
-      console.log("3")
       if((<HTMLInputElement>document.getElementById("license")).value == ""){
         Swal.fire({
           icon: 'error',
@@ -82,7 +78,6 @@ export class SignupComponent implements OnInit {
       
     }
     if(this.signupForm.value.password != this.signupForm.value.cnfrmpasswrd){
-      console.log("4")
       this.spinner.hide();
       Swal.fire({
         icon: 'error',
@@ -92,7 +87,6 @@ export class SignupComponent implements OnInit {
       return;
     }
     else{
-      console.log("5")
       if(this.licensefield){
         const body = {
           "name": this.signupForm.value.cmpnyname, 
@@ -113,9 +107,7 @@ export class SignupComponent implements OnInit {
             "confirmation_password": this.signupForm.value.cnfrmpasswrd
           }
         }
-        console.log(body)
       this.common.signup(body).subscribe(data => {
-        console.log(data);
         this.spinner.hide();
         Swal.fire({
           icon: 'success',
@@ -155,9 +147,7 @@ export class SignupComponent implements OnInit {
           "confirmation_password": this.signupForm.value.cnfrmpasswrd
         }
       }
-      console.log(body)
     this.common.signup(body).subscribe(data => {
-      console.log(data);
       this.spinner.hide();
       Swal.fire({
         icon: 'success',
@@ -195,7 +185,6 @@ export class SignupComponent implements OnInit {
   changecntry(newObj){
     this.countries.forEach(obj => {
       if(obj.code == newObj){
-        console.log(obj)
         this.slctcntry = obj.name;
       }
       
@@ -204,7 +193,6 @@ export class SignupComponent implements OnInit {
   changecntrycode(newObj){
     this.countries.forEach(obj => {
       if(obj.name == newObj){
-        console.log(obj)
         this.countrycode1 = obj.code;
       }
       
