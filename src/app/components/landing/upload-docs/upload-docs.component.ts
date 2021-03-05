@@ -33,19 +33,16 @@ export class UploadDocsComponent implements OnInit {
     ,private spinner: NgxSpinnerService) { }
 
   passportfile(event){
-    console.log("1",event)
     this.passportFile = <File>event.target.files[0];
     this.passport = true;
   }
 
   Bankletter(event){
-    console.log("2",event)
     this.bankLetter = <File>event.target.files[0];
     this.bank = true;
   }
 
   Contract(event){
-    console.log("3",event)
     this.contractsign = <File>event.target.files[0];
     this.sign = true;
   }
@@ -83,10 +80,8 @@ export class UploadDocsComponent implements OnInit {
       "commercialreg": (<HTMLInputElement>document.getElementById("commercial_regnoid")).value,
       "reqstText": (<HTMLInputElement>document.getElementById("request_textid")).value
     }
-    console.log(q)
     this.common.otaUpgrade(this.passportFile, this.bankLetter, this.contractsign, q , this.router.snapshot.params.id).subscribe(Response =>{
       this.spinner.hide();
-      console.log(Response)
       Swal.fire({
         icon: 'success',
         title: Response.message,
@@ -105,13 +100,11 @@ export class UploadDocsComponent implements OnInit {
     this.id = this.router.params.subscribe(params => {
       this.id = params['id'];
       this.common.getAgencyApprovedDetails(this.id).subscribe(response =>{
-        console.log(response);
         this.profile = response;
         if(this.profile.is_licence_agent){
           this.isiban = true;
           if(response.approval_requests.length != 0){
               this.isProcess = true;
-              console.log(response.approval_requests.length)
               let dif = response.approval_requests.length
               if(response.approval_requests[(dif-1)].status == 'rejected'){
                 Swal.fire({
