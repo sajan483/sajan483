@@ -184,7 +184,6 @@ export class TransportComponent implements OnInit {
          // this.getTripData();
           if (this.appStore.customeTripBookingId) {
            // this.stepper.next();
-           console.log("STEP index",this.appStore.stepperIndex)
            this.onNotify();
             (<HTMLElement>(
               document.getElementById("changeTransport")

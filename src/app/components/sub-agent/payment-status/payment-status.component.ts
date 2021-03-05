@@ -67,13 +67,10 @@ export class PaymentStatusComponent implements OnInit {
 
   getList(){
     this.common.getPaymentDetails(this.route.snapshot.params.id).subscribe((data) => {
-      console.log(data)
       if(data.message && data.message == "Request is processing" && this.counter < 10){
-        console.log("no data")
         this.dataArray = Observable
     .interval(10*1000)    
     .subscribe(data => {
-        console.log(data);
         this.getList();
         this.counter = this.counter +1;
     });
@@ -98,7 +95,6 @@ export class PaymentStatusComponent implements OnInit {
     if(this.dataArray){
       this.dataArray.unsubscribe();
     }
-    console.log("data present")
     this.tripData = data;
       if(data.trip_flights && data.trip_flights.length > 0){
         this.tripFlight = data.trip_flights[0];
@@ -226,7 +222,6 @@ export class PaymentStatusComponent implements OnInit {
   checkCancellation(){
     this.paymentLoader.show();
     this.common.getCheckCancellation(this.route.snapshot.params.id).subscribe((data) => {
-      console.log(data)
       this.paymentLoader.hide();
       this.canCancel = data.can_cancel_booking;
       this.makkahCancellation = data.makkah_hotel_booking;
@@ -254,7 +249,6 @@ export class PaymentStatusComponent implements OnInit {
         "cancellation_reason": (<HTMLTextAreaElement>document.getElementById("confirmCancellationInput")).value
       }
       this.common.getConfirmCancellation(this.route.snapshot.params.id,body).subscribe((data) => {
-        console.log(data)
       });
       window.location.reload();
       (<HTMLElement>document.getElementById("checkCancellationBtn")).style.display = "none";
@@ -262,7 +256,6 @@ export class PaymentStatusComponent implements OnInit {
   }
 
   sendPayuRequest(payment_create_response){
-    console.log(payment_create_response);
     var form = document.createElement("form");
     form.setAttribute("method", "get");
     form.setAttribute("id", "cashfree-form");
