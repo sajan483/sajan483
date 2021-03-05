@@ -15,10 +15,9 @@ import { CommonApiService } from "src/app/common/services/common-api-services";
   selector: "app-create-trip-front-page",
   templateUrl: "./create-trip-front-page.component.html",
   styleUrls: ["./create-trip-front-page.component.scss"],
-  providers: [CommonApiService,
-              HelperService,
-              AuthService],
+  providers: [CommonApiService,HelperService,AuthService],
 })
+
 export class CreateTripFrontPageComponent implements OnInit,DoCheck {
   historyList : listHistory;
   userRooms: Room[] = [];
@@ -402,8 +401,9 @@ export class CreateTripFrontPageComponent implements OnInit,DoCheck {
       }
     }
     this.enableSearchButtonIfAllSelected();
-    this.madeenaOutPicker.nativeElement.click();
-    
+    if(this.activateMadeenaSearch){
+      this.madeenaOutPicker.nativeElement.click();
+    }
   }
 
   setNoOfMakkaDays(){
@@ -451,7 +451,7 @@ export class CreateTripFrontPageComponent implements OnInit,DoCheck {
       this.appStore.showRoomAlPopup = true;
       this.showRoomAllocationPopup = this.appStore.showRoomAlPopup;
     } else {
-      this.router.navigate(["/createTrip"], {
+      this.router.navigate(["subagent/createTrip"], {
         queryParams: { steps: this.steps.join(",") },
       });
     }
@@ -720,6 +720,10 @@ export class CreateTripFrontPageComponent implements OnInit,DoCheck {
     this.special_Code_medinah = null;
     this.transportStartDate = null;
     this.appStore.stepperIndex = 0;
+    this.appStore.noOfDaysInMadeena = 0;
+    this.appStore.noOfDaysInMakkah = 0;
+    this.noOfDaysInMakkah = 0;
+    this.noOfDaysInMadeenah = 0;
   }
 
   /**

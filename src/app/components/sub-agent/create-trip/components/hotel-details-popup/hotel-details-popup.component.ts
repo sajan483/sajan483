@@ -86,10 +86,13 @@ export class HotelDetailsPopupComponent implements OnInit ,OnChanges{
     this.totalTravellers = this.appStore.adultCount + this.appStore.childCount;
     this.selectedHotel = this.hotelData;
     this.rooms = this.appStore.roomArray;
+    
     /*
      * this method for fetching selected hotel details
      */
-    this.setData()
+    if(typeof(this.hotelData) != 'undefined'){
+      this.setData()
+    }
   }
 
   /*

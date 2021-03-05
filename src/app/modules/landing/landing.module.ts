@@ -31,7 +31,6 @@ import {generalHelper} from '../../helpers/General/general-helpers'
     FormsModule,
     MatSliderModule,
     MatCheckboxModule,
-    CommonModule,
     TranslateModule.forChild({
       loader: {
         provide: TranslateLoader,

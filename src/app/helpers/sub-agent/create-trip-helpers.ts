@@ -11,14 +11,12 @@ export class CreateTripHelper {
      * @param rooms  room details
      */
 
-    setDataForHotelDeatils(data:any,selectedHotelInfo:any,rooms:any[]){
-       var selectedHotel = data;
+    setDataForHotelDeatils(respone:any,selectedHotelInfo:any,rooms:any[]){
+       var selectedHotel = respone;
        var isGrouped:boolean;        
        var selectedRoomGroups = [];
        var container:TripRoom = new TripRoom();
        var totalRoomPrice = 0;
-       selectedHotel= data;
-        let makkaHotelName = selectedHotel.name;
         container.diffDays = this.helperService.noOfDaysBetweenTwoDates(selectedHotel.check_in_time,selectedHotel.check_out_time);
         for (let i = 0; i < selectedHotel.room_groups.length; ++i) {
           for (let j = 0;j < selectedHotel.room_groups[i].rooms.length;++j) {
