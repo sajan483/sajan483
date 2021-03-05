@@ -589,6 +589,10 @@ export class CreateTripFrontPageComponent implements OnInit,DoCheck {
     }
   }
 
+  /**
+   * This method for calculate madeena days
+   * 
+   */
   setNoOfMadeenaDays(){
     if(this.madeenaCheckInDate && this.madeenaCheckOutDate){
       this.noOfDaysInMadeenah=this.helperService.noOfDaysBetweenTwoDates(this.madeenaCheckInDate,this.madeenaCheckOutDate)

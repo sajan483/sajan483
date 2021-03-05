@@ -33,7 +33,6 @@ export class RoomAllocationPopupComponent implements OnInit {
   ngOnInit() {
   this.showRoomAllocationPopup = true;
   this.rooms = this.appStore.roomArray;
-  console.log("dsds",this.dataFromPopUp)
   /**
    * This method for allocating rooms according to trveller count
    */
@@ -201,7 +200,6 @@ export class RoomAllocationPopupComponent implements OnInit {
    * This method for adding adults to room
    */
   addAdultToRoom(id: number) {
-    console.log(id);
     var i = -1;
     var total = 0;
     this.userRooms.forEach((value, index) => {
@@ -210,7 +208,6 @@ export class RoomAllocationPopupComponent implements OnInit {
       }
       total += value.adults;
     });
-    console.log(i);
     if (i != -1 && total < this.countAdult) {
       this.userRooms[i].adults = this.userRooms[i].adults + 1;
     } else {

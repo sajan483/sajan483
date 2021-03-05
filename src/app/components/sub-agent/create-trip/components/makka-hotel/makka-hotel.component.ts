@@ -161,7 +161,6 @@ export class MakkaHotelComponent implements OnInit,DoCheck{
     if(!this.appStore.showHotelDetailsShimmer){
       this.showHotelDetailsShimmer = false;
     }
-    //alert(this.showHotelDetailsShimmer)
 
     if(this.hotelsList.length > 0){
       this.appStore.showShimmer = false;

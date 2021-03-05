@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import{staff_details} from './staff_details';
+import{staff_details} from '../../../models/staff_details';
 import {Router} from '@angular/router';
 import { CommonApiService } from 'src/app/common/services/common-api-services';
 
@@ -20,9 +20,7 @@ export class ProfilePageComponent implements OnInit {
       this.router.navigate(["/login"]);
     }else{
       this.common.getStaffDetails().subscribe(response => {
-        console.log(response);
         this.details = response;
-        
       });
     }
   }

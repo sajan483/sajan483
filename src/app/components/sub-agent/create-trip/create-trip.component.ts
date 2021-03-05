@@ -1004,7 +1004,6 @@
     });
     this.common.getRoutes(this.selectedLanguage).subscribe((data) => {
       this.routeList = data.routes.map(x => ( {item_text: x.name, item_id: x.code } ));
-      console.log(this.routeList)
     });
     this.common.getCategories(this.selectedLanguage).subscribe((data) => {
       this.dropdownList = data.categories.map(x => ( {item_text: x.name, item_id: x.code } ));
@@ -1094,15 +1093,15 @@
   }
 
   public save() {
-    console.log(this.form.value);
+    
   }
 
   public onFilterChange(item: any) {
-    console.log(item);
+    
   }
 
   public onDropDownClose(item: any) {
-    console.log(item);
+    
   }
 
   public onItemSelect(item: any) {
@@ -1129,16 +1128,13 @@
   onCategorySelect(item: any) { 
     this.categoryId = item.item_id;
     this.categoryIds.push(this.categoryId)
-    console.log(this.categoryIds)
         const q = [];
         this.categoryId = item.item_id;
         this.transportListData.forEach((value, index) => {
           this.categoryIds.forEach(id => {
             const a = value.vehicle_types.map(x=>x.categories[0].category_code == id)
-            console.log(a)
             if(a[0]){
               q.push(value)
-              console.log(q)
             }
           });
         });
@@ -1150,16 +1146,13 @@
     if (index > -1) {
       this.categoryIds.splice(index, 1);
     }
-    console.log(this.categoryIds)
         const q = [];
         this.categoryId = item.item_id;
         this.transportListData.forEach((value, index) => {
           this.categoryIds.forEach(id => {
             const a = value.vehicle_types.map(x=>x.categories[0].category_code == id)
-            console.log(a)
             if(a[0]){
               q.push(value)
-              console.log(q)
             }
           });
         });
@@ -1177,18 +1170,13 @@
   onadditionalItemSelect(item: any) {
     this.additionl_serviceId=[];
     let id = item.item_id
-    console.log(id)
     this.additionl_serviceId.push(id);
-    console.log(this.additionl_serviceId)
     const q = [];
     this.transportListData.forEach((value, index) => {
       this.additionl_serviceId.forEach(id => {
-        console.log(value.vehicle_types)
         const a = value.vehicle_types.map(x=>x.categories[0].additional_services.map(c=> c.additional_service_code) == id)
-        console.log(a)
         if(a[0]){
           q.push(value)
-          console.log(q)
         }
       });
     });
@@ -1200,15 +1188,12 @@
     if (index > -1) {
       this.additionl_serviceId.splice(index, 1);
     }
-    console.log(this.additionl_serviceId)
     const q = [];
     this.transportListData.forEach((value, index) => {
       this.additionl_serviceId.forEach(id => {
         const a = value.vehicle_types.map(x=>x.categories[0].additional_services.map(c=> c.additional_service_code) == id)
-        console.log(a)
         if(a[0]){
           q.push(value)
-          console.log(q)
         }
       });
     });
@@ -1220,12 +1205,9 @@
     const q = [];
     this.transportListData.forEach((value, index) => {
       this.additionlserviceId.forEach(id => {
-        console.log(value.vehicle_types)
         const a = value.vehicle_types.map(x=>x.categories[0].additional_services.map(c=> c.additional_service_code) == id)
-        console.log(a)
         if(a[0]){
           q.push(value)
-          console.log(q)
         }
       });
     });
@@ -1237,12 +1219,9 @@
     const q = [];
     this.transportListData.forEach((value, index) => {
       this.additionl_serviceId.forEach(id => {
-        console.log(value.vehicle_types)
         const a = value.vehicle_types.map(x=>x.categories[0].additional_services.map(c=> c.additional_service_code) == id)
-        console.log(a)
         if(a[0]){
           q.push(value)
-          console.log(q)
         }
       });
     });
@@ -1250,7 +1229,6 @@
   }
 
   public onVehicleSelect(item: any) {
-    console.log(item);
     this.vehicleId = item.item_id;
     if(this.vehicleId == 1){
       this.vehicleMax = 4;
@@ -1265,15 +1243,12 @@
   }
 
   public onDeSelect(item: any) {
-    console.log(item);
   }
 
   public onSelectAll(items: any) {
-    console.log(items);
   }
 
   public onDeSelectAll(items: any) {
-    console.log(items);
   }
 
   onNationalityDeselect(item:any){
@@ -1308,7 +1283,6 @@
   setRoomAllocationPopup(){
     (<HTMLElement>document.getElementById("flightArrivalDate")).style.display = "block";
     let totalCount = this.countadult + this.countchild;
-    console.log(totalCount)
     if(totalCount < 5){
       this.vehicleTypeItems = [{item_id: "1", item_text: "Sedan Car"}];
       this.vehicleId =1;
