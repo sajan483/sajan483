@@ -18,7 +18,7 @@ export class CreateTripAdapter {
         delete item.pax_info_str;
       });
     }
-    if (city == "MAKKA") {
+    if (userDetails && city == "MAKKA") {
       var body = {
         check_in_date: this.helperService.dateFormaterMdy(
           userDetails.makkahCheckinDate
@@ -32,7 +32,7 @@ export class CreateTripAdapter {
         location: city,
       };
     }
-    if (city == "MADEENA") {
+    if (userDetails && city == "MADEENA") {
       var body = {
         check_in_date: this.helperService.dateFormaterMdy(
           userDetails.madeenaCheckinDate

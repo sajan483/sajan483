@@ -929,15 +929,15 @@
     this.userDetails = CreateTripComponent.UserObjectData;
     this.appStore.userDetails = CreateTripComponent.UserObjectData;
     if(typeof(this.userDetails) == 'undefined'){
-        this.router.navigate(['/home'])
+        this.router.navigate(['subagent/home'])
     }
     if(this.userDetails){
-      this.totalTravellers = this.userDetails.travallersCount;
-    }
+    this.totalTravellers = this.userDetails.travallersCount;
     this.noOfDaysInMakkah = this.appStore.noOfDaysInMakkah;
     this.makkahCheckInDate = this.userDetails.makkahCheckinDate;
     this.makkahCheckOutDate = this.userDetails.makkahCheckoutDate;
     this.transportStartDate = this.userDetails.transportStartDate;
+    }
     this.travellersCount = this.appStore.totalTravellers;
     this.rooms = CreateTripComponent.RoomData;
     this.appStore.roomArray = CreateTripComponent.RoomData;
