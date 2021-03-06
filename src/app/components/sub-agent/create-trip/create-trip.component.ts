@@ -20,8 +20,8 @@
   import { HelperService } from "src/app/common/services/helper-service";
   import { MakkaHotelComponent } from "./components/makka-hotel/makka-hotel.component";
   import { AuthService } from "src/app/common/services/auth-services";
-  import { ApiService } from "./create-trip-api-service";
   import { CreateTripAdapter } from "src/app/adapters/sub-agent/create-trip-adapter";
+  import { CommonApiService } from "src/app/common/services/common-api-services";
 
   @Component({
     selector: "app-create-trip",
@@ -31,8 +31,9 @@
       {
         provide: MAT_STEPPER_GLOBAL_OPTIONS,
         useValue: { displayDefaultIndicatorType: false },
+
       },
-      ApiService,
+      CommonApiService,
       DatePipe,
       HelperService,
       AuthService
@@ -263,7 +264,7 @@
       private router: Router,
       private formBuilder: FormBuilder,
       private renderer2: Renderer2,
-      private common: ApiService,
+      private common: CommonApiService,
       private spinner: NgxSpinnerService,
       private datepipe: DatePipe,
       private http: HttpClient,

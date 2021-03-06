@@ -7,7 +7,7 @@ import { SelectedHotel } from "src/app/models/selected_hotel";
 import { Room } from "src/app/models/visaTypes";
 import { NotificationService } from "src/app/common/services/notification.service";
 import { AppStore } from "src/app/stores/app.store";
-import { ApiService } from "../../create-trip-api-service";
+import { CommonApiService } from "src/app/common/services/common-api-services";
 
 @Component({
   selector: "app-hotel-details-popup",
@@ -61,7 +61,7 @@ export class HotelDetailsPopupComponent implements OnInit ,OnChanges{
   a: boolean;
    
   constructor(
-    private commonService: ApiService,
+    private commonService: CommonApiService,
     private helperService: HelperService,
     private appStore: AppStore,
     private notifyService: NotificationService,
