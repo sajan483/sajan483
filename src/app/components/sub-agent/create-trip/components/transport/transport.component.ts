@@ -1,15 +1,15 @@
 import { Component, EventEmitter, Input, OnInit, Output } from "@angular/core";
 import { TranslateService } from "@ngx-translate/core";
+import { CommonApiService } from "src/app/common/services/common-api-services";
 import { HelperService } from "src/app/common/services/helper-service";
 import { NotificationService } from "src/app/common/services/notification.service";
 import { AppStore } from "src/app/stores/app.store";
-import { ApiService } from "../../create-trip-api-service";
 
 @Component({
   selector: "app-transport",
   templateUrl: "./transport.component.html",
   styleUrls: ["./transport.component.scss"],
-  providers: [HelperService,ApiService],
+  providers: [HelperService,CommonApiService],
 })
 
 export class TransportComponent implements OnInit {
@@ -20,7 +20,7 @@ export class TransportComponent implements OnInit {
   constructor(
     private healperService: HelperService,
     private notifyService:NotificationService,
-    private commonService:ApiService,
+    private commonService:CommonApiService,
     private translateService: TranslateService,
     private appStore:AppStore) {}
   
@@ -178,18 +178,14 @@ export class TransportComponent implements OnInit {
       this.commonService.bookCustomTrip(x).subscribe(
         (data) => {
           this.appStore.customeTripId = data.id;
-          //this.stepper.next();
           this.appStore.stepperIndex += 1;
           this.onNotify();
-         // this.getTripData();
           if (this.appStore.customeTripBookingId) {
-           // this.stepper.next();
            this.onNotify();
             (<HTMLElement>(
               document.getElementById("changeTransport")
             )).style.display = "none";
           } else {
-            //this.stepper.next();
             this.appStore.stepperIndex += 1;
             this.onNotify();
           }

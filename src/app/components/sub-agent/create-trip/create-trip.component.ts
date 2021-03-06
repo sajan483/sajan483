@@ -20,8 +20,8 @@
   import { HelperService } from "src/app/common/services/helper-service";
   import { MakkaHotelComponent } from "./components/makka-hotel/makka-hotel.component";
   import { AuthService } from "src/app/common/services/auth-services";
-  import { ApiService } from "./create-trip-api-service";
   import { CreateTripAdapter } from "src/app/adapters/sub-agent/create-trip-adapter";
+  import { CommonApiService } from "src/app/common/services/common-api-services";
 
   @Component({
     selector: "app-create-trip",
@@ -31,8 +31,9 @@
       {
         provide: MAT_STEPPER_GLOBAL_OPTIONS,
         useValue: { displayDefaultIndicatorType: false },
+
       },
-      ApiService,
+      CommonApiService,
       DatePipe,
       HelperService,
       AuthService
@@ -263,7 +264,7 @@
       private router: Router,
       private formBuilder: FormBuilder,
       private renderer2: Renderer2,
-      private common: ApiService,
+      private common: CommonApiService,
       private spinner: NgxSpinnerService,
       private datepipe: DatePipe,
       private http: HttpClient,
@@ -1269,45 +1270,12 @@
     }
   }
 
-  public clearTransport(item){
-    this.transportList = [];
-    this.disableBtn = false;
-  }
-
   images = [
     "assets/images/mekka.jpg",
     "assets/images/namaz.jpg",
     "assets/images/mecca_great_mosque_600.png",
   ];
-    
-  setRoomAllocationPopup(){
-    (<HTMLElement>document.getElementById("flightArrivalDate")).style.display = "block";
-    let totalCount = this.countadult + this.countchild;
-    if(totalCount < 5){
-      this.vehicleTypeItems = [{item_id: "1", item_text: "Sedan Car"}];
-      this.vehicleId =1;
-      this.vehicleMax = 4;
-    }
-    else if(totalCount < 7 && totalCount > 5){
-      this.vehicleTypeItems=[{item_id: "2", item_text: "SUV Car"}];
-      this.vehicleId =2;
-      this.vehicleMax = 7;
-    }
-    else if(totalCount > 7){
-      this.vehicleTypeItems = [{item_id: "3", item_text: "Bus"}];
-      this.vehicleId =3;
-      this.vehicleMax = 60;
-    }
-    this.showElement = true;
-      setTimeout(() => {
-        this.showElement = false;
-      }, 5000);
-      this.travelersButton();
-      this.showModalroom = true;
-    
-    this.IsHidden = true;
-  }
-  
+     
   returnToPaymentPage(){
     if(this.steps.includes("1") && this.steps.includes("2") && this.steps.includes("3")){
       this.move(3)
@@ -1346,6 +1314,7 @@
  */
   createTripHandle(event){
     this.move(this.appStore.stepperIndex)
+    console.log("index",this.appStore.stepperIndex)
     this.getTripData()
     if(this.steps.includes("2") && this.appStore.stepperIndex == 1){
       this.hotelSearch("MADEENA");

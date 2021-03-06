@@ -8,7 +8,7 @@ import { HelperService } from "src/app/common/services/helper-service";
 import { CreateTripHelper } from "src/app/helpers/sub-agent/create-trip-helpers";
 import { NotificationService } from "src/app/common/services/notification.service";
 import { AppStore } from "src/app/stores/app.store";
-import { ApiService } from "../../create-trip-api-service";
+import { CommonApiService } from "src/app/common/services/common-api-services";
 
 @Component({
   selector: "app-makka-hotel",
@@ -50,7 +50,7 @@ export class MakkaHotelComponent implements OnInit,DoCheck{
   showDetailsShimmer: boolean;
   
   constructor(
-    private commonService: ApiService,
+    private commonService: CommonApiService,
     private notifyService: NotificationService,
     private translateService: TranslateService,
     private appStore: AppStore,
