@@ -178,18 +178,14 @@ export class TransportComponent implements OnInit {
       this.commonService.bookCustomTrip(x).subscribe(
         (data) => {
           this.appStore.customeTripId = data.id;
-          //this.stepper.next();
           this.appStore.stepperIndex += 1;
           this.onNotify();
-         // this.getTripData();
           if (this.appStore.customeTripBookingId) {
-           // this.stepper.next();
            this.onNotify();
             (<HTMLElement>(
               document.getElementById("changeTransport")
             )).style.display = "none";
           } else {
-            //this.stepper.next();
             this.appStore.stepperIndex += 1;
             this.onNotify();
           }
