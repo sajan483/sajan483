@@ -143,7 +143,7 @@ export class CreateTripFrontPageComponent implements OnInit, DoCheck {
    * 
    */
     this.crTripHelper = new CreateTripHelper(this.helperService);
-    this.checkForAccessToken();
+    this.genHelper.checkForAccessToken();
     this.appStore.adultCount = 1;
     this.appStore.childCount = 0;
     this.appStore.infantCount = 0;
@@ -172,12 +172,7 @@ export class CreateTripFrontPageComponent implements OnInit, DoCheck {
    * This method for checking the availability of the access token
    * 
    */
-  checkForAccessToken() {
-    if (this.genHelper.getAccessTocken() == "") {
-      this.notifyService.showWarning("Please Login")
-      this.router.navigate(['/login']);
-    }
-  }
+  
 
   /**
     * This method for fetching transport routes
