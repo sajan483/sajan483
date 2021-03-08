@@ -53,7 +53,7 @@ export class BookingHistoryComponent implements OnInit {
    * @param id 
    */
   viewhistory(id:any){
-    this.router.navigate(["payment",id,"history"]);
+    this.router.navigate(["/payment",id,"history"]);
   }
 
 }

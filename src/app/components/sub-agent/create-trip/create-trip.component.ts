@@ -529,29 +529,6 @@ import { GeneralHelper } from "src/app/helpers/General/general-helpers";
       }
     });
   }
-    
-  showroomselection() {
-    this.showModalroom = true;
-    let totalCount = this.countadult + this.countchild;
-    if(totalCount < 5){
-      this.vehicleTypeItems = [{item_id: "1", item_text: "Sedan Car"}];
-      this.vehicleId =1;
-      this.vehicleMax = 4;
-      this.appStore.vehicleMax = 4;
-    }
-    else if(totalCount < 7 && totalCount > 5){
-      this.vehicleTypeItems=[{item_id: "2", item_text: "SUV Car"}];
-      this.vehicleId =2;
-      this.vehicleMax = 7;
-      this.appStore.vehicleMax = 7;
-    }
-    else if(totalCount > 7){
-      this.vehicleTypeItems = [{item_id: "3", item_text: "Bus"}];
-      this.vehicleId =3;
-      this.vehicleMax = 60;
-      this.appStore.vehicleMax = 60;
-    }
-  }
   
   madenaVehicleDisplay() {
     this.showMadenaTransportVehicleList = true;
@@ -848,17 +825,15 @@ import { GeneralHelper } from "src/app/helpers/General/general-helpers";
     this.roomAdultsArray.clear();
     this.roomChildrenArray.clear();
     this.rooms = [] ;
-    
     if(this.roomDetails && this.roomDetails.length > 0){
       this.rooms = this.roomDetails;}else{
         var  transportRoom:Room[] = [{adults: 1, children: 0, child_ages: ["0"], seq_no: "0",id:1,pax_info_str:"1"}]
         this.rooms = transportRoom
-      }
-  
-      for (let index = 0; index < 1; index++) {
+    }
+    for (let index = 0; index < 1; index++) {
         this.roomAdultsArray.push(this.addroomAdult(0));
         this.mainTraveller[0] = true;
-      }
+    }
   }
 
   fetchNessoryApisForTransport(){
@@ -1081,7 +1056,7 @@ import { GeneralHelper } from "src/app/helpers/General/general-helpers";
     this.transportList = q.filter(this.helperService.onlyUnique);
   }
 
-  public onVehicleSelect(item: any) {
+  onVehicleSelect(item: any) {
     this.vehicleId = item.item_id;
     if(this.vehicleId == 1){
       this.vehicleMax = 4;
@@ -1095,19 +1070,10 @@ import { GeneralHelper } from "src/app/helpers/General/general-helpers";
     this.disableBtn = true;
   }
 
-  public onDeSelect(item: any) {
-  }
-
-  public onSelectAll(items: any) {
-  }
-
-  public onDeSelectAll(items: any) {
-  }
-
   onNationalityDeselect(item:any){
     this.countryCode = null;
     this.searchServiceButtonActive = false
-  } 
+  }
 
   onCountryDeselect(item:any){
     this.countryCode = null;
@@ -1121,41 +1087,8 @@ import { GeneralHelper } from "src/app/helpers/General/general-helpers";
       this.searchServiceButtonActive = true
     }
   }
-
-  returnToPaymentPage(){
-    if(this.steps.includes("1") && this.steps.includes("2") && this.steps.includes("3")){
-      this.move(3)
-    }else{
-      this.stepper.next();
-    }
-  }
-
-  moveToCorrespondingStage(n:number){
-    var largest = 0;
-    if(this.stageArray.length > 0){
-      this.stageArray = this.stageArray.filter(this.helperService.onlyUnique)
-    }
-    this.stageArray.forEach((element)=>{
-      if (element>largest) {
-        largest = element;
-      }
-    })
-    if(largest > n){
-      this.move(largest);
-    }else{
-      this.move(n)
-    }
-  }
-  
-  public moveToPaymentPage() : void {
-    if(this.steps.includes("1") && this.steps.includes("2") && this.steps.includes("3")){
-      this.move(3)
-    }else{
-      this.stepper.next();
-    }
-  }
-      
-   /*
+    
+  /*
  * this method for call back from hotel-details-popup component
  */
   createTripHandle(event){
@@ -1209,9 +1142,5 @@ import { GeneralHelper } from "src/app/helpers/General/general-helpers";
    */
   backToHomePage(){
     this.router.navigate(['/home']);
-  }
-
-  searchTransportList(){
-    this.showtransportsearch = false;
   }
 }
