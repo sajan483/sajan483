@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import {FormGroup,FormBuilder,Validators} from '@angular/forms';
+import {FormGroup,FormBuilder} from '@angular/forms';
 import Swal from 'sweetalert2';
 import { NgxSpinnerService } from "ngx-spinner";
 import { Country } from 'src/app/models/airportList';

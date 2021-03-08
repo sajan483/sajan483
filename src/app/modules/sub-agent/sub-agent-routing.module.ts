@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { CommonModule } from '@angular/common';
 import { BookingHistoryComponent } from 'src/app/components/sub-agent/booking-history/booking-history.component';
 import { CreateTripFrontPageComponent } from 'src/app/components/sub-agent/create-trip-front-page/create-trip-front-page.component';
 import { PaymentStatusComponent } from 'src/app/components/sub-agent/payment-status/payment-status.component';
@@ -36,7 +35,6 @@ const myPath: Routes = [
 
 @NgModule({
   imports: [RouterModule.forChild(myPath)],
-  exports: [RouterModule,
-  CommonModule]
+  exports: [RouterModule]
 })
 export class SubAgentRouteModule { }
