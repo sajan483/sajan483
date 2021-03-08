@@ -6,8 +6,7 @@ import { NotificationService } from "../../../common/services/notification.servi
 import { CreateTripComponent } from "../create-trip/create-trip.component";
 import { AppStore } from "../../../stores/app.store";
 import { LooseObject, Room, Travellers } from "src/app/models/visaTypes";
-import { listHistory } from "../../../models/listHistory"
-import { AuthService } from "src/app/common/services/auth-services";
+import { listHistory } from "../../../models/listHistory";
 import { HelperService } from "src/app/common/services/helper-service";
 import { CommonApiService } from "src/app/common/services/common-api-services";
 import { GeneralHelper } from "../../../helpers/General/general-helpers";

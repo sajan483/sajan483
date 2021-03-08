@@ -1,5 +1,6 @@
 import { HelperService } from "src/app/common/services/helper-service";
 import { TripRoom } from "src/app/models/custome_trip";
+import Swal from "sweetalert2";
 
 export class CreateTripHelper {
   constructor(private helperService: HelperService) { }
@@ -288,5 +289,13 @@ export class CreateTripHelper {
       itemsShowLimit: 1,
       allowSearchFilter: true,
     };
+  }
+
+  showSweetAlert(text,status,btnText):any {
+    Swal.fire({
+      text:text,
+      icon: status,
+      confirmButtonText:btnText,
+    });
   }
 }

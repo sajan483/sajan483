@@ -6,7 +6,6 @@
   import { MatStepper } from "@angular/material/stepper";
   import { Router, ActivatedRoute } from "@angular/router";
   import { AppStore } from '../../../stores/app.store';
-  import Swal from "sweetalert2";
   import { NgxSpinnerService } from "ngx-spinner";
   import { IDropdownSettings } from "ng-multiselect-dropdown";
   import { Hotel } from "../../../models/hotels";
@@ -22,6 +21,7 @@
   import { AuthService } from "src/app/common/services/auth-services";
   import { CreateTripAdapter } from "src/app/adapters/sub-agent/create-trip-adapter";
   import { CommonApiService } from "src/app/common/services/common-api-services";
+  import { CreateTripHelper } from "src/app/helpers/sub-agent/create-trip-helpers";
 
   @Component({
     selector: "app-create-trip",
@@ -150,6 +150,7 @@
     }
     private createTripAdapter: CreateTripAdapter = new CreateTripAdapter(this.helperService,this.appStore);
     returnDate: any;
+    private createTripHelper: CreateTripHelper = new CreateTripHelper(this.helperService);
     arrivalDate: any;
     returnStart: any;
     returnEnd: any;
@@ -415,7 +416,6 @@
     this.filtershow = true;
     this.vehicleCount = Math.ceil((this.userDetails.travallersCount)/this.vehicleMax);
     const date = this.helperService.dateFormaterMdy(this.userDetails.transportStartDate);
-    this.spinner.show();
     const filrerData ={
       "search_id": this.searchTransportId,
       "lang": this.selectedLanguage,
@@ -430,13 +430,8 @@
       this.searchTransportId = data.search_id;
       this.appStore.transportSearchId = data.search_id;
       this.common.searchTransportList(this.searchTransportId,this.selectedCurrency,this.selectedLanguage).subscribe((response) => {
-        this.spinner.hide();
         if ((response && response.transportations && response.transportations.length == 0) ||  (response && response.transportations && response.transportations.filter(x=>x.vehicle_types.length > 0) == 0)) {
-          Swal.fire({
-            text:this.translateService.instant('Sorry, we could not find transport for this route'),
-            icon: "warning",
-            confirmButtonText: this.translateService.instant('Modify search and try again'),
-          });
+         this.createTripHelper.showSweetAlert(this.translateService.instant('Sorry, we could not find transport for this route'),"warning",this.translateService.instant('Modify search and try again'));
         }else{
           this.transportList = response.transportations.sort((n1,n2) => n1.vehicle_types.map(x=>x.categories[0].fare_summary[2].amount) - n2.vehicle_types.map(x=>x.categories[0].fare_summary[2].amount));
           this.transportListData = response.transportations.sort((n1,n2) => n1.vehicle_types.map(x=>x.categories[0].fare_summary[2].amount) - n2.vehicle_types.map(x=>x.categories[0].fare_summary[2].amount));
@@ -471,6 +466,7 @@
   showMainFilter(){
     this.moreFilterArrow = !this.moreFilterArrow;
   }
+
   showRefundableFilter() {
     this.refundableFilterArrow = !this.refundableFilterArrow;
   }
@@ -508,6 +504,7 @@
       this.countadult = this.countadult - 1;
     }
   }
+
   addchild() {
     this.countchild = this.countchild + 1;
   }
@@ -515,6 +512,7 @@
   travelersB(){
     this.displayTabtravel = !this.displayTabtravel;
   }
+
   travelersButton() {
     this.rooms = [];
       let adultsperroom = 5;
@@ -564,6 +562,7 @@
     showTrasportCount() {
       this.displayVehicleCount = !this.displayVehicleCount;
     }
+
     showPersonCount(){
     this.displayPersonCount = !this.displayPersonCount;
     }
@@ -633,25 +632,31 @@
       this.countchild = this.countchild - 1;
     }
   }
+
   addinfa() {
     this.countinfa = this.countinfa + 1;
   }
+
   addInfant() {
     this.infantCount = this.infantCount + 1;
   }
+
   minusInfant() {
     if (this.infantCount > 0) {
       this.infantCount = this.infantCount - 1;
     }
   }
+
   addAdult() {
     this.adultCount = this.adultCount + 1;
   }
+
   minusAdult() {
     if (this.adultCount > 0) {
       this.adultCount = this.adultCount - 1;
     }
   }
+
   minusChild() {
     if (this.childCount > 0) {
       this.childCount = this.childCount - 1;
@@ -825,11 +830,7 @@
           }
           
           if(response.refetch_trip == true){
-            Swal.fire({
-              text:this.translateService.instant('Price has been changed'),
-              icon: "warning",
-              confirmButtonText: this.translateService.instant('OK'),
-            });
+            this.createTripHelper.showSweetAlert(this.translateService.instant('Price has been changed'),"warning",this.translateService.instant('OK'))
             this.getTripData();
           } 
         });
@@ -870,11 +871,7 @@
         }
       },error=>{
         this.spinner.hide();
-        Swal.fire({
-          icon: 'error',
-          title: this.translateService.instant('Oops...'),
-          text: this.translateService.instant('Account Does Not Exist'),
-        })
+        this.createTripHelper.showSweetAlert(this.translateService.instant('Oops...'),"error",this.translateService.instant('Account Does Not Exist'));
       });
     }else{
       this.notifyService.showWarning(this.translateService.instant("Payment Credentials Missing"))
