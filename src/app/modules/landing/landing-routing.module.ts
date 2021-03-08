@@ -3,7 +3,6 @@ import { Routes, RouterModule } from '@angular/router';
 import { LoginComponent } from 'src/app/components/landing/login/login.component';
 import { SignupComponent } from 'src/app/components/landing/signup/signup.component';
 import { UploadDocsComponent } from 'src/app/components/landing/upload-docs/upload-docs.component';
-import { CommonModule } from '@angular/common';
 
 const myPath: Routes = [
     {
@@ -19,7 +18,6 @@ const myPath: Routes = [
 
 @NgModule({
   imports: [RouterModule.forChild(myPath)],
-  exports: [RouterModule,
-  CommonModule]
+  exports: [RouterModule]
 })
 export class LandingRouteModule { }
