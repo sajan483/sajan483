@@ -123,7 +123,6 @@ export class CreateTripFrontPageComponent implements OnInit, DoCheck {
         this.displayTabtravel = false;
       }
     });
-    //Need to remove
     this.renderer2.listen("window", "click", (e: Event) => {
       if (
         (this.selectionPopUp &&
