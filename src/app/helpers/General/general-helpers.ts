@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 @Injectable({
   providedIn: 'root'
 })
-export class generalHelper {
+export class GeneralHelper {
   constructor() { }
   getAccessTocken(): string {
     if (localStorage && localStorage.getItem('accesstoken')) {
