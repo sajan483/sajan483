@@ -8,6 +8,7 @@ import { Room } from "src/app/models/visaTypes";
 import { NotificationService } from "src/app/common/services/notification.service";
 import { AppStore } from "src/app/stores/app.store";
 import { CommonApiService } from "src/app/common/services/common-api-services";
+import { GeneralHelper } from "src/app/helpers/General/general-helpers";
 
 @Component({
   selector: "app-hotel-details-popup",
@@ -58,14 +59,13 @@ export class HotelDetailsPopupComponent implements OnInit ,OnChanges{
   roomImageGallery: boolean;
   totalTravellers : number;
   noOfImages: number;
-  a: boolean;
    
   constructor(
     private commonService: CommonApiService,
     private helperService: HelperService,
     private appStore: AppStore,
     private notifyService: NotificationService,
-    private translate :TranslateService
+    private translate :TranslateService,
   ) {}
   @Input() hotelInfo : any;
   @Input() hotelData : any;
@@ -82,7 +82,6 @@ export class HotelDetailsPopupComponent implements OnInit ,OnChanges{
   }
 
   ngOnChanges() {
-    this.a = true;
     this.totalTravellers = this.appStore.adultCount + this.appStore.childCount;
     this.selectedHotel = this.hotelData;
     this.rooms = this.appStore.roomArray;
@@ -101,7 +100,6 @@ export class HotelDetailsPopupComponent implements OnInit ,OnChanges{
   setData(){
     const x = this.createTripSupport.setDataForHotelDeatils(this.hotelData,this.hotelInfo,this.rooms);
     if(x && x.roomGroups.length > 0){
-      this.a = false; 
       this.appStore.showHotelDetailsShimmer = false;
       this.showHotelDetailsShimmer = false;
       this.showHotelDetails = true; 

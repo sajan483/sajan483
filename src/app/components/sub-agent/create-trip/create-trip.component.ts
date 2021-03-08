@@ -9,7 +9,7 @@
   import { NgxSpinnerService } from "ngx-spinner";
   import { IDropdownSettings } from "ng-multiselect-dropdown";
   import { Hotel } from "../../../models/hotels";
-  import {ImageObject} from "../../../models/custome_trip";
+  import { ImageObject} from "../../../models/custome_trip";
   import { Transportation } from "../../../models/vehicle_transport"
   import { DatePipe } from "@angular/common";
   import { ToastrService } from "ngx-toastr";
@@ -22,6 +22,7 @@
   import { CreateTripAdapter } from "src/app/adapters/sub-agent/create-trip-adapter";
   import { CommonApiService } from "src/app/common/services/common-api-services";
   import { CreateTripHelper } from "src/app/helpers/sub-agent/create-trip-helpers";
+import { GeneralHelper } from "src/app/helpers/General/general-helpers";
 
   @Component({
     selector: "app-create-trip",
@@ -260,6 +261,7 @@
     interval;
     showShimmer:boolean;
     noOfDaysInMakkah:number;
+    generalHelper : GeneralHelper
 
     constructor(
       private router: Router,
@@ -276,8 +278,9 @@
       private notifyService: NotificationService,
       private route: ActivatedRoute,
       private helperService:HelperService,
-      private authService:AuthService
+      private genHelper: GeneralHelper
     ) {
+      this.generalHelper = this.genHelper;
       this.route.queryParams.subscribe(params => {
          this.steps = ((params.steps || "1,2,3").split(","));
       });
@@ -322,6 +325,9 @@
       });
     }
     
+    @ViewChild("stepper", { static: true })
+    stepper: MatStepper;
+    move(index: number) {this.stepper.selectedIndex = index;}
     @ViewChild(MakkaHotelComponent,{static:false}) child:MakkaHotelComponent;
 
     userFilter: any = { name: '' };
@@ -404,13 +410,7 @@
     this.mdate = null
     this.stageArray = [];
   }
-    
-  @ViewChild("stepper", { static: true })
-  stepper: MatStepper;
-  move(index: number) {
-    this.stepper.selectedIndex = index;
-  }
-  
+     
   transportSearch()
   {
     this.filtershow = true;
@@ -495,77 +495,13 @@
     this.transportList[i].vehicle_types[index].toggle_vehicle = true;
   }
 
-  addadult() {
-    this.countadult = this.countadult + 1;
-  }
-
-  minusadult() {
-    if (this.countadult > 1) {
-      this.countadult = this.countadult - 1;
-    }
-  }
-
-  addchild() {
-    this.countchild = this.countchild + 1;
-  }
-  
-  travelersB(){
-    this.displayTabtravel = !this.displayTabtravel;
-  }
-
-  travelersButton() {
-    this.rooms = [];
-      let adultsperroom = 5;
-      let adults = this.countadult;
-      let children = this.countchild;
-      let nofrooms = Math.ceil(this.countadult / adultsperroom);
-      let childrenperroom = 4;
-      let extrachildrenroom = children % nofrooms;
-      let index = 0;
-      while (nofrooms > 0) {
-        let tempRoom: Room = {
-          id: index,
-          adults: 1,
-          children: 0,
-          child_ages: [],
-          pax_info_str:null,
-          seq_no:""
-        };
-        if (adults > 0) {
-          if (adults < adultsperroom) {
-            tempRoom.adults = adults;
-          } else {
-            tempRoom.adults = adultsperroom;
-          }
-          adults -= adultsperroom;
-        }
-        if (children > 0) {
-          if (children < childrenperroom) {
-            tempRoom.children = children;
-          } else {
-            tempRoom.children = childrenperroom;
-          }
-
-          children -= childrenperroom;
-          if (extrachildrenroom > 0 && extrachildrenroom == nofrooms) {
-            tempRoom.children += 1;
-            extrachildrenroom -= 1;
-            children -= 1;
-          }
-        }
-        index += 1;
-        nofrooms -= 1;
-        this.rooms.push(tempRoom);
-      }
-    }
-
-    showTrasportCount() {
+  showTrasportCount() {
       this.displayVehicleCount = !this.displayVehicleCount;
-    }
+  }
 
-    showPersonCount(){
-    this.displayPersonCount = !this.displayPersonCount;
-    }
+  showPersonCount(){
+  this.displayPersonCount = !this.displayPersonCount;
+  }
 
   addrooms() {
     let tempRoom: Room = {
@@ -595,7 +531,6 @@
   }
     
   showroomselection() {
-    this.gettripDays();
     this.showModalroom = true;
     let totalCount = this.countadult + this.countchild;
     if(totalCount < 5){
@@ -616,63 +551,8 @@
       this.vehicleMax = 60;
       this.appStore.vehicleMax = 60;
     }
-    (<HTMLElement>document.getElementById("flightArrivalDate")).style.display = "none";
   }
   
-  gettripDays(){
-    this.onwerdArivalTime = this.datepipe.transform(this.onwerdArivalTime , "MM/dd/yyyy");
-    this.returnDepartTime = this.datepipe.transform(this.returnDepartTime , "MM/dd/yyyy");
-    this.firstDate = new Date(this.onwerdArivalTime.split("/")[2], this.onwerdArivalTime.split("/")[0]-1, this.onwerdArivalTime.split("/")[1]);
-    this.secondDate = new Date(this.returnDepartTime.split("/")[2], this.returnDepartTime.split("/")[0]-1, this.returnDepartTime.split("/")[1]);
-    this.diffDays = Math.round(Math.abs((this.firstDate - this.secondDate) / (24 * 60 * 60 * 1000)));
-  }
-  
-  minuschild() {
-    if (this.countchild > 0) {
-      this.countchild = this.countchild - 1;
-    }
-  }
-
-  addinfa() {
-    this.countinfa = this.countinfa + 1;
-  }
-
-  addInfant() {
-    this.infantCount = this.infantCount + 1;
-  }
-
-  minusInfant() {
-    if (this.infantCount > 0) {
-      this.infantCount = this.infantCount - 1;
-    }
-  }
-
-  addAdult() {
-    this.adultCount = this.adultCount + 1;
-  }
-
-  minusAdult() {
-    if (this.adultCount > 0) {
-      this.adultCount = this.adultCount - 1;
-    }
-  }
-
-  minusChild() {
-    if (this.childCount > 0) {
-      this.childCount = this.childCount - 1;
-    }
-  }
-
-  addChild() {
-    this.childCount = this.childCount + 1;
-  }
-
-  minusinfa() {
-    if (this.countinfa > 0) {
-      this.countinfa = this.countinfa - 1;
-    }
-  }
-
   madenaVehicleDisplay() {
     this.showMadenaTransportVehicleList = true;
   }
@@ -688,14 +568,6 @@
   toggleButton() {
     this.displayTab = !this.displayTab;
     this.changeButton = !this.changeButton;
-  }
-
-  hideroomselection() {
-    this.showModalroom = false;
-  }
-
-  hideroomselectionPopup() {
-    this.showModalroom = false;
   }
 
   mainTraveller(i){
@@ -917,18 +789,11 @@
   public settings = {};
    
   ngOnInit() {
-    if (!this.authService.isLoggedIn) {
-      this.notifyService.showWarning(this.translateService.instant("Please Login"))
-      this.router.navigate(['/login']);
-    }
+    this.generalHelper.checkForAccessToken();
     if(!this.appStore.showShimmer){this.appStore.showShimmer = true,this.showShimmer = true}
-    this.rooms = [] ; 
-    this.fetchNessoryApisForTransport();
     this.userDetails = CreateTripComponent.UserObjectData;
-    this.appStore.userDetails = CreateTripComponent.UserObjectData;
-    if(typeof(this.userDetails) == 'undefined'){
-        this.router.navigate(['subagent/home'])
-    }
+    this.appStore.userDetails = this.userDetails;
+    if(typeof(this.userDetails) == 'undefined'){this.router.navigate(['subagent/home'])}
     if(this.userDetails){
     this.totalTravellers = this.userDetails.travallersCount;
     this.noOfDaysInMakkah = this.appStore.noOfDaysInMakkah;
@@ -938,9 +803,10 @@
     }
     this.travellersCount = this.appStore.totalTravellers;
     this.rooms = CreateTripComponent.RoomData;
-    this.appStore.roomArray = CreateTripComponent.RoomData;
+    this.appStore.roomArray = this.rooms;
     this.appStore.stepperIndex = 0;
     this.selectedCurrency = "SAR";
+    this.fetchNessoryApisForTransport();
     this.multiSelectDropDownSettings()
     this.setForm();
     this.callCorrespongingSteppers();
@@ -1075,10 +941,6 @@
 
   get f1() { return this.paymentForm.controls; }
 
-  onSubmit(){
-    
-  }
-
   public setForm() {
     this.form = new FormGroup({
       name: new FormControl(this.data, Validators.required),
@@ -1088,10 +950,6 @@
 
   get f() {
     return this.form.controls;
-  }
-
-  public save() {
-    
   }
 
   public onFilterChange(item: any) {
@@ -1106,14 +964,11 @@
     const q = []
     this.transportListData.forEach((value, index) => {
       const a = value.vehicle_types.map(x=>x.categories[0].additional_services.map(a=>a.additional_service_code.includes(item.item_id)))
-    
       a.forEach(y => {
         if(y == [true]){
           q.push(value)
-        
         }
       });
-      
     });
     this.transportList = q;
   }
@@ -1267,12 +1122,6 @@
     }
   }
 
-  images = [
-    "assets/images/mekka.jpg",
-    "assets/images/namaz.jpg",
-    "assets/images/mecca_great_mosque_600.png",
-  ];
-     
   returnToPaymentPage(){
     if(this.steps.includes("1") && this.steps.includes("2") && this.steps.includes("3")){
       this.move(3)
@@ -1321,7 +1170,6 @@
   /*
  * this method for fetching hotel list
  */
-
   hotelSearch(city:string) {
     this.common.pilotHotelSearch( this.createTripAdapter.hotelSearchRequest(city,this.userDetails), this.appStore.langCode).subscribe(
       (data) => {
@@ -1350,6 +1198,7 @@
  * this method for for polling loader status
  */
   ngDoCheck(){
+    this.generalHelper.checkForAccessToken();
     if(!this.appStore.showShimmer) {
       this.showShimmer = false;
     } 
