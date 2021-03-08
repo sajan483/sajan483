@@ -9,6 +9,7 @@ import { CreateTripHelper } from "src/app/helpers/sub-agent/create-trip-helpers"
 import { NotificationService } from "src/app/common/services/notification.service";
 import { AppStore } from "src/app/stores/app.store";
 import { CommonApiService } from "src/app/common/services/common-api-services";
+import { GeneralHelper } from "src/app/helpers/General/general-helpers";
 
 @Component({
   selector: "app-makka-hotel",
@@ -48,6 +49,7 @@ export class MakkaHotelComponent implements OnInit,DoCheck{
   search: string = "";
   hotelData: any;
   showDetailsShimmer: boolean;
+  generalHelper:GeneralHelper;
   
   constructor(
     private commonService: CommonApiService,
@@ -57,7 +59,10 @@ export class MakkaHotelComponent implements OnInit,DoCheck{
     private datepipe: DatePipe,
     private router: Router,
     private helperService: HelperService,
-  ) {}
+    private genHelper:GeneralHelper
+  ) {
+    this.generalHelper = genHelper;
+  }
 
   @Input() hotelsList: any[];
   @Output() notifyGrandparent= new EventEmitter();
@@ -150,6 +155,7 @@ export class MakkaHotelComponent implements OnInit,DoCheck{
    * this method for checking model status
    */
   ngDoCheck(){
+    this.generalHelper.checkForAccessToken();
     if(this.appStore.showHotelDetails) {
       this.showHotelDetails = true;
     } else if(!this.appStore.showHotelDetails) {

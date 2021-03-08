@@ -262,6 +262,7 @@ export class CreateTripHelper {
     }
     return viewbttn;
   }
+
   createPayuRequestForm(payment_create_response): any {
     var form = document.createElement("form");
     form.setAttribute("method", "get");
@@ -279,6 +280,7 @@ export class CreateTripHelper {
     }
     return form;
   }
+
   getRouteSettings(): any {
     return {
       singleSelection: true,
