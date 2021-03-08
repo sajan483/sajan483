@@ -11,7 +11,7 @@ import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { MatStepperModule, MatInputModule, MatButtonModule, MatDatepickerModule, MatNativeDateModule, MatTabsModule, MatFormFieldModule, MatSelectModule, MatRadioModule, MatExpansionModule, MatCheckboxModule, MatProgressBarModule } from '@angular/material';
-import { NgbRatingModule,NgbCarouselModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgbRatingModule, NgbCarouselModule } from '@ng-bootstrap/ng-bootstrap';
 import { TranslateModule, TranslateLoader, TranslateService } from '@ngx-translate/core';
 import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 import { OwlDateTimeModule, OwlNativeDateTimeModule } from 'ng-pick-datetime';
@@ -31,11 +31,12 @@ import { CarouselModule } from 'ngx-owl-carousel-o';
 import { NgxGalleryModule } from 'ngx-gallery';
 import { TranslatorFactory } from 'src/app/app.module';
 import { NgxSpinnerModule } from "ngx-spinner";
+import { GeneralHelper } from 'src/app/helpers/General/general-helpers';
 
 
 
 @NgModule({
-  declarations: [ 
+  declarations: [
     OnlyNumberDirective,
     BookingHistoryComponent,
     CreateTripFrontPageComponent,
@@ -45,7 +46,7 @@ import { NgxSpinnerModule } from "ngx-spinner";
     RoomAllocationPopupComponent,
     RecentBookingComponent,
     LoaderComponent,
-    MakkaHotelComponent ,
+    MakkaHotelComponent,
     HotelDetailsPopupComponent,
     TransportComponent,
     PaymentHotelComponent,
@@ -96,12 +97,12 @@ import { NgxSpinnerModule } from "ngx-spinner";
     TranslateModule,
   ],
   providers: [
-    DatePipe,
+    DatePipe, GeneralHelper
   ],
 })
 
 export class SubAgentModule {
-  constructor(public translateService: TranslateService){
+  constructor(public translateService: TranslateService) {
     translateService.setDefaultLang('en-US'); /* Setting up the Translate Json to English - `en` */
   }
 }

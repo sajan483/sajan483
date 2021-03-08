@@ -1,6 +1,6 @@
-import {Component,OnInit,ViewChild,ElementRef,Renderer2,DoCheck,} from "@angular/core";
+import { Component, OnInit, ViewChild, ElementRef, Renderer2, DoCheck, } from "@angular/core";
 import { IDropdownSettings } from "ng-multiselect-dropdown";
-import { Router} from "@angular/router";
+import { Router } from "@angular/router";
 import { TranslateService } from "@ngx-translate/core";
 import { NotificationService } from "../../../common/services/notification.service";
 import { CreateTripComponent } from "../create-trip/create-trip.component";
@@ -10,16 +10,20 @@ import { listHistory } from "../../../models/listHistory"
 import { AuthService } from "src/app/common/services/auth-services";
 import { HelperService } from "src/app/common/services/helper-service";
 import { CommonApiService } from "src/app/common/services/common-api-services";
+import { GeneralHelper } from "../../../helpers/General/general-helpers";
+import { CreateTripHelper } from '../../../helpers/sub-agent/create-trip-helpers'
+
 
 @Component({
   selector: "app-create-trip-front-page",
   templateUrl: "./create-trip-front-page.component.html",
   styleUrls: ["./create-trip-front-page.component.scss"],
-  providers: [CommonApiService,HelperService,AuthService],
+  providers: [CommonApiService, HelperService],
 })
 
-export class CreateTripFrontPageComponent implements OnInit,DoCheck {
-  historyList : listHistory;
+export class CreateTripFrontPageComponent implements OnInit, DoCheck {
+  crTripHelper: CreateTripHelper;
+  historyList: listHistory;
   userRooms: Room[] = [];
   routeList = [];
   steps = [];
@@ -37,9 +41,9 @@ export class CreateTripFrontPageComponent implements OnInit,DoCheck {
   selectedItems = [];
   dropdownSettings: IDropdownSettings;
   routeSettings: IDropdownSettings = {};
-  countAdult:number = 1;
-  countChild:number = 0;
-  countInfant:number = 0;
+  countAdult: number = 1;
+  countChild: number = 0;
+  countInfant: number = 0;
   displayTabtravel: boolean;
   @ViewChild("menuIconClass", { read: ElementRef, static: false })
   menuIconClass: ElementRef;
@@ -49,12 +53,12 @@ export class CreateTripFrontPageComponent implements OnInit,DoCheck {
   selectionPopUp: ElementRef;
   @ViewChild("serviceDropDown", { read: ElementRef, static: false })
   serviceDropDown: ElementRef;
-  @ViewChild('makkaOutDatePicker', {read: ElementRef,static:false})
-  makkaOutDatePicker:ElementRef;
-  @ViewChild('madeenaInPicker', {read: ElementRef,static:false})
-  madeenaInPicker:ElementRef;
-  @ViewChild('madeenaOutPicker', {read: ElementRef,static:false})
-  madeenaOutPicker:ElementRef;
+  @ViewChild('makkaOutDatePicker', { read: ElementRef, static: false })
+  makkaOutDatePicker: ElementRef;
+  @ViewChild('madeenaInPicker', { read: ElementRef, static: false })
+  madeenaInPicker: ElementRef;
+  @ViewChild('madeenaOutPicker', { read: ElementRef, static: false })
+  madeenaOutPicker: ElementRef;
   enableMakka: boolean;
   enableMadina: boolean;
   enableTransport: boolean;
@@ -94,6 +98,7 @@ export class CreateTripFrontPageComponent implements OnInit,DoCheck {
   dataForPopUp: LooseObject = {};
   noOfDaysInMakkah: number;
   noOfDaysInMadeenah: number;
+  genHelper: GeneralHelper;
   constructor(
     private commonApiService: CommonApiService,
     private appStore: AppStore,
@@ -101,9 +106,10 @@ export class CreateTripFrontPageComponent implements OnInit,DoCheck {
     private renderer2: Renderer2,
     private router: Router,
     private notifyService: NotificationService,
-    private helperService:HelperService,
-    private authService:AuthService
+    private helperService: HelperService,
+    private _genHelper: GeneralHelper
   ) {
+    this.genHelper = _genHelper;
     this.renderer2.listen("window", "click", (e: Event) => {
       if (
         (this.menuPopupClass &&
@@ -117,7 +123,6 @@ export class CreateTripFrontPageComponent implements OnInit,DoCheck {
         this.displayTabtravel = false;
       }
     });
-
     this.renderer2.listen("window", "click", (e: Event) => {
       if (
         (this.selectionPopUp &&
@@ -138,29 +143,30 @@ export class CreateTripFrontPageComponent implements OnInit,DoCheck {
    * This method for checking the availability of the access token
    * 
    */
+    this.crTripHelper = new CreateTripHelper(this.helperService);
     this.checkForAccessToken();
     this.appStore.adultCount = 1;
     this.appStore.childCount = 0;
     this.appStore.infantCount = 0;
     this.appStore.showHotelDetailsShimmer = false;
 
-  /**
-   * This method for transport route multi select settings
-   * 
-   */
+    /**
+     * This method for transport route multi select settings
+     * 
+     */
     this.routeSetting();
 
-  /**
-   * This method for fetching transport routes
-   * 
-   */
+    /**
+     * This method for fetching transport routes
+     * 
+     */
     this.getTransportRoutes();
 
-  /**
-   * this method for listing recent booking
-   */
+    /**
+     * this method for listing recent booking
+     */
     this.listRecentBooking();
-  
+
   }
 
   /**
@@ -168,16 +174,16 @@ export class CreateTripFrontPageComponent implements OnInit,DoCheck {
    * 
    */
   checkForAccessToken() {
-    if (!this.authService.isLoggedIn) {
+    if (this.genHelper.getAccessTocken() == "") {
       this.notifyService.showWarning("Please Login")
       this.router.navigate(['/login']);
     }
   }
 
- /**
-   * This method for fetching transport routes
-   * 
-   */
+  /**
+    * This method for fetching transport routes
+    * 
+    */
   getTransportRoutes() {
     this.commonApiService
       .getRoutes(localStorage.getItem("userLanguage"))
@@ -189,20 +195,12 @@ export class CreateTripFrontPageComponent implements OnInit,DoCheck {
       });
   }
 
- /**
-   * This method for transport route multi select settings
-   * 
-   */
+  /**
+    * This method for transport route multi select settings
+    * 
+    */
   routeSetting() {
-    this.routeSettings = {
-      singleSelection: true,
-      idField: "item_id",
-      textField: "item_text",
-      selectAllText: "Select All",
-      unSelectAllText: "UnSelect All",
-      itemsShowLimit: 1,
-      allowSearchFilter: true,
-    };
+    this.routeSettings = this.crTripHelper.getRouteSettings();
   }
 
   /**
@@ -360,10 +358,10 @@ export class CreateTripFrontPageComponent implements OnInit,DoCheck {
    * 
    */
   dataChangedFromMakkaDates($event) {
-    if(this.makkaCheckOutDate && this.makkaCheckInDate){
-      this.noOfDaysInMakkah=this.helperService.noOfDaysBetweenTwoDates(this.makkaCheckInDate,this.makkaCheckOutDate)
+    if (this.makkaCheckOutDate && this.makkaCheckInDate) {
+      this.noOfDaysInMakkah = this.helperService.noOfDaysBetweenTwoDates(this.makkaCheckInDate, this.makkaCheckOutDate)
     }
-    
+
     this.madeenaMin = this.makkaCheckOutDate;
     this.makkaCheckOutDate = null;
     this.madeenaCheckInDate = null;
@@ -401,14 +399,14 @@ export class CreateTripFrontPageComponent implements OnInit,DoCheck {
       }
     }
     this.enableSearchButtonIfAllSelected();
-    if(this.activateMadeenaSearch){
+    if (this.activateMadeenaSearch) {
       this.madeenaOutPicker.nativeElement.click();
     }
   }
 
-  setNoOfMakkaDays(){
-    if(this.makkaCheckOutDate && this.makkaCheckInDate){
-      this.noOfDaysInMakkah = this.helperService.noOfDaysBetweenTwoDates(this.makkaCheckInDate,this.makkaCheckOutDate)
+  setNoOfMakkaDays() {
+    if (this.makkaCheckOutDate && this.makkaCheckInDate) {
+      this.noOfDaysInMakkah = this.helperService.noOfDaysBetweenTwoDates(this.makkaCheckInDate, this.makkaCheckOutDate)
       this.appStore.noOfDaysInMakkah = this.noOfDaysInMakkah;
     }
   }
@@ -426,10 +424,10 @@ export class CreateTripFrontPageComponent implements OnInit,DoCheck {
     }
   }
 
-   /**
-   * This method for navigate to create trip page
-   * 
-   */
+  /**
+  * This method for navigate to create trip page
+  * 
+  */
   searchButtonClicked() {
     this.setNoOfMadeenaDays();
     this.appStore.showRoomAlPopup = false;
@@ -459,10 +457,10 @@ export class CreateTripFrontPageComponent implements OnInit,DoCheck {
     this.dataForPopUp.user = this.userObject;
   }
 
-   /**
-   * This method for show serch button when route input changes
-   * 
-   */
+  /**
+  * This method for show serch button when route input changes
+  * 
+  */
   onRouteSelect(item: any) {
     this.routetransport = item.item_id;
 
@@ -568,11 +566,11 @@ export class CreateTripFrontPageComponent implements OnInit,DoCheck {
     this.showSelectionPopUp = !this.showSelectionPopUp;
   }
 
-   /**
-   * This method for reset selected values if madeena start date changes
-   * 
-   */
-  dataChangedFromMadeenaDates(position:string) {
+  /**
+  * This method for reset selected values if madeena start date changes
+  * 
+  */
+  dataChangedFromMadeenaDates(position: string) {
     this.setNoOfMadeenaDays()
     this.madeenamax = new Date(
       this.madeenaCheckInDate.getTime() + 1000 * 60 * 60 * 24
@@ -584,7 +582,7 @@ export class CreateTripFrontPageComponent implements OnInit,DoCheck {
       }
     }
     this.activateMadeenaPromotion = true;
-    if(position == "in"){
+    if (position == "in") {
       this.madeenaOutPicker.nativeElement.click();
     }
   }
@@ -593,17 +591,17 @@ export class CreateTripFrontPageComponent implements OnInit,DoCheck {
    * This method for calculate madeena days
    * 
    */
-  setNoOfMadeenaDays(){
-    if(this.madeenaCheckInDate && this.madeenaCheckOutDate){
-      this.noOfDaysInMadeenah=this.helperService.noOfDaysBetweenTwoDates(this.madeenaCheckInDate,this.madeenaCheckOutDate)
+  setNoOfMadeenaDays() {
+    if (this.madeenaCheckInDate && this.madeenaCheckOutDate) {
+      this.noOfDaysInMadeenah = this.helperService.noOfDaysBetweenTwoDates(this.madeenaCheckInDate, this.madeenaCheckOutDate)
       this.appStore.noOfDaysInMadeena = this.noOfDaysInMadeenah;
     }
   }
 
-   /**
-   * This method for enable the search button if all input selected
-   * 
-   */
+  /**
+  * This method for enable the search button if all input selected
+  * 
+  */
   enableSearchButtonIfAllSelected() {
     if (this.activaleAllSearch) {
       if (
@@ -730,20 +728,20 @@ export class CreateTripFrontPageComponent implements OnInit,DoCheck {
    * this method for listing recent booking
    */
 
-   listRecentBooking(){
-    this.commonApiService.getPaginatedhistoryList(1).subscribe((data) =>{
+  listRecentBooking() {
+    this.commonApiService.getPaginatedhistoryList(1).subscribe((data) => {
       this.historyList = data.results;
     })
-   }
+  }
 
-   /**
-   * this method for checking model status
-   */
-   ngDoCheck(){
-      if(this.appStore.showRoomAlPopup) {
-        this.showRoomAllocationPopup = true;
-      } else if(!this.appStore.showRoomAlPopup) {
-        this.showRoomAllocationPopup = false;
-      }
+  /**
+  * this method for checking model status
+  */
+  ngDoCheck() {
+    if (this.appStore.showRoomAlPopup) {
+      this.showRoomAllocationPopup = true;
+    } else if (!this.appStore.showRoomAlPopup) {
+      this.showRoomAllocationPopup = false;
     }
+  }
 }

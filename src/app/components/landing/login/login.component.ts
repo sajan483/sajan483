@@ -11,7 +11,7 @@ import { Country } from 'src/app/models/airportList';
 import { CookieService } from 'ngx-cookie-service';
 import { CommonApiService } from '../../../common/services/common-api-services';
 import { environment } from '../../../../environments/environment'
-import { generalHelper } from '../../../helpers/General/general-helpers'
+import { GeneralHelper } from '../../../helpers/General/general-helpers'
 import { loginAdapter } from 'src/app/adapters/Landing/loginAdapter';
 import { loginHelper } from 'src/app/helpers/landing/login-helper'
 import { empty } from 'rxjs';
@@ -40,7 +40,7 @@ export class LoginComponent implements OnInit {
   password: string;
   access: any;
   token: any;
-  gHelper: generalHelper;
+  gHelper: GeneralHelper;
   loginAdapter: loginAdapter;
   loginHelperClass: loginHelper;
   constructor(private http: HttpClient,
@@ -51,9 +51,9 @@ export class LoginComponent implements OnInit {
     private notifyService: NotificationService,
     private common: CommonApiService,
     private cookie: CookieService,
-    private _gHelper: generalHelper) {
+    private _gHelper: GeneralHelper) {
     this.gHelper = _gHelper;
-    this.loginHelperClass = new loginHelper(this.cookie,this.notifyService,this.translate,this.appStore,this.router);
+    this.loginHelperClass = new loginHelper(this.cookie, this.notifyService, this.translate, this.appStore, this.router);
     this.loginAdapter = new loginAdapter();
     this.token = this.gHelper.getAccessTocken();
     this.frmSignup = this.loginAdapter.createLoginGroup();
@@ -109,8 +109,8 @@ export class LoginComponent implements OnInit {
         this.loginHelperClass.setDataForCookies(this.username, this.password);
       }
       const body = { 'username': this.username, 'password': this.password }
-      this.common.login(body).subscribe(data =>{
-        this.loginHelperClass.loginResponse(data,this.rememverme);
+      this.common.login(body).subscribe(data => {
+        this.loginHelperClass.loginResponse(data, this.rememverme);
       }, error => {
         Swal.fire({
           icon: 'error',
@@ -118,7 +118,7 @@ export class LoginComponent implements OnInit {
           text: this.translate.instant('Invalid Username or Password'),
         })
       });
-      
+
     }
   }
 

@@ -175,6 +175,7 @@ export class TransportComponent implements OnInit {
           vehicle_types: arrayList,
         },
       };
+      
       this.commonService.bookCustomTrip(x).subscribe(
         (data) => {
           this.appStore.customeTripId = data.id;
