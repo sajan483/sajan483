@@ -71,13 +71,13 @@
                                                             <h4 class="ml10">{{'Children' | translate}}</h4>
                                                             <div class="input-group plsormins">
                                                                 <span class="input-group-btn">
-                                                                    <button type="button" class="firstbttn removeoutline" (click)="removechildages(room.id);"  data-type="minus" >
+                                                                    <button type="button" class="firstbttn removeoutline" (click)="removeChildFromRoom(room.id);"  data-type="minus" >
                                                                         <i class="fa fa-minus" aria-hidden="true"></i>
                                                                     </button>
                                                                 </span>
                                                                 <input type="text" name="quant[2]" class="form-control input-number counttextbox" value="{{room.children}}">
                                                                 <span class="input-group-btn">
-                                                                    <button type="button" class="secondbttn removeoutline" (click)="addchildages(room.id);" data-type="plus" >
+                                                                    <button type="button" class="secondbttn removeoutline" (click)="addChildFromRoom(room.id);" data-type="plus" >
                                                                         <i class="fa fa-plus" aria-hidden="true"></i>
                                                                     </button>
                                                                 </span>

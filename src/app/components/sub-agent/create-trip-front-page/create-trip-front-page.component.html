@@ -6,13 +6,13 @@
         </div>
     </div>
     <div class="textform bg_light_gray animationdiv">
-        <div class="d-flex justify-content-center container">
+        <div class="algn justifycenter container">
             <div class="p-2 d-flex">
                 <div class="subtext m-auto">Services</div>
                 <div class="position-relative">
                     <div class="position-relative d-flex justify-content-between w200 bordrservice m-3 p-2 cursor-pointer" (click)="showSelectionPopup()" #serviceDropDown>
-                        <p *ngIf="!service" class="service_text my-auto">{{'Services' | translate}}</p>
-                        <p *ngIf="service" class="service_text my-auto">{{ service | translate}}</p>
+                        <p *ngIf="!service" class="fs14 my-auto">{{'Services' | translate}}</p>
+                        <p *ngIf="service" class="fs14 my-auto">{{ service | translate}}</p>
                         <i class="icns downarrow icon_h28_w15"></i>
                     </div>
                     <div class="travellerpopupp popupmoving" *ngIf="showSelectionPopUp" #selectionPopUp>
@@ -42,7 +42,7 @@
                 <div class="subtext m-auto">{{'Travellers' | translate}}</div>
                 <div class="position-relative">
                     <div class="position-relative d-flex justify-content-between w200 bordrservice m-3 p-2 cursor-pointer" (click)="showTravelersPopUp()" #menuIconClass>
-                        <p class="service_text my-auto">{{countAdult + countChild + countInfant}} {{'Travellers' | translate}}</p>
+                        <p class="fs14 my-auto">{{countAdult + countChild + countInfant}} {{'Travellers' | translate}}</p>
                         <i class="icns downarrow icon_h28_w15"></i>
                     </div>
                     <div class="travellerpopup popupmoving" *ngIf="displayTabtravel" #menuPopupClass>
@@ -138,9 +138,9 @@
                         </div>
                     </div>
                 </div>
-                <!-- <div class="daysposition animationdiv" *ngIf="noOfDaysInMakkah">
+                <div class="daysposition animationdiv" *ngIf="noOfDaysInMakkah">
                     <h6>{{noOfDaysInMakkah}} Day(s)</h6>
-                </div> -->
+                </div>
             </div>
             <div *ngIf="activateMadeenaSearch" class="position-relative mb30">
                 <div class="row m-0">
@@ -184,9 +184,9 @@
                         </div>
                     </div>
                 </div>
-                <!-- <div class="daysposition animationdiv" *ngIf="noOfDaysInMadeenah">
+                <div class="daysposition animationdiv" *ngIf="noOfDaysInMadeenah">
                     <h6>{{noOfDaysInMadeenah}} Day(s)</h6>
-                </div> -->
+                </div>
             </div>
             <div *ngIf="activateTransportSearch" class="position-relative mb30">
                 <div class="row m-0">

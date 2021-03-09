@@ -228,4 +228,32 @@ export class RoomAllocationPopupComponent implements OnInit {
     });
   }
 
+  addChildFromRoom(id: number) {
+    var i = -1;
+    var total = 0;
+    this.userRooms.forEach((value, index) => {
+      if (value.id == id && value.children < 4) {
+        i = index;
+      }
+      total += value.children;
+    });
+    if (i != -1 && total < this.countChild) {
+      this.userRooms[i].children = this.userRooms[i].children + 1;
+    } else {
+      this.notifyService.showWarning(this.translate.instant('maximum number of child reached'));
+    }
+  }
+  removeChildFromRoom(i: number) {
+    this.userRooms.forEach((value, index) => {
+      if (value.id == i) {
+        if (this.userRooms[index].children > 0) {
+          this.userRooms[index].children = value.children - 1;
+          this.userRooms[index].child_ages.splice(i, 1);
+        }
+        if (this.userRooms[index].children == 0) {
+          this.userRooms[index].child_ages = [];
+        }
+      }
+    });
+  }
 }

@@ -23,7 +23,7 @@ export class RecentBookingComponent implements OnInit {
    * this method for navigate details page
    */
   viewhistory(id:any){
-    this.router.navigate(["payment",id,"history"]);
+    this.router.navigate(["subagent/payment",id,"history"]);
   }
 
   /**
@@ -45,23 +45,4 @@ export class RecentBookingComponent implements OnInit {
       this.notifyService.showSuccess("copied BRN");
   }
 
-  /**
-   * this method used for show details
-   * @param i 
-   */
-  viewDetails(i:any){
-    (<HTMLElement>document.getElementById("bookDetails"+i)).style.display = "revert";
-    (<HTMLElement>document.getElementById("arrowdown"+i)).style.display = "none";
-    (<HTMLElement>document.getElementById("arrowup"+i)).style.display = "block";
-  }
-  
-  /**
-   * 
-   * @param i this method used for hide details
-   */
-  lessDetails(i:any){
-    (<HTMLElement>document.getElementById("bookDetails"+i)).style.display = "none";
-    (<HTMLElement>document.getElementById("arrowdown"+i)).style.display = "block";
-    (<HTMLElement>document.getElementById("arrowup"+i)).style.display = "none";
-  }
 }
