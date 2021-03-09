@@ -928,6 +928,9 @@ body{
 .mb20{
   margin-bottom: 20px;
 }
+.mb30{
+  margin-bottom: 30px;
+}
 .mb80{
   margin-bottom: 80px;
 }
@@ -955,6 +958,9 @@ body{
 .mt20{
   margin-top: 20px;
 }
+.mt24{
+  margin-top: 24px;
+}
 .mt10{
   margin-top: 10px;
 }
@@ -964,14 +970,20 @@ body{
 .p8{
   padding: 8px;
 }
+.p30{
+  padding: 30px;
+}
 .pt25{
   padding-top: 25px;
 }
 .pb5{
   padding-bottom: 5px;
 }
+.pl10{
+  padding-left: 10px;
+}
 .pl105{
-  padding-left: 105px;
+  padding-left: 105px !important;
 }
 .borderTopBlack{
   border-top: 1px solid black;
@@ -1061,6 +1073,14 @@ body{
 }
 
 // button
+.blackborderbttn{
+  border: 1px solid;
+  padding: 3px 15px;
+  border-radius: 20px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+}
 .searchbutton{
   cursor: pointer;
   padding: 10px 19px;
@@ -1068,19 +1088,19 @@ body{
   text-decoration: none;
   display: inline-block;
   font-size: 15px;
-  font-weight: bold;
+  font-weight: 500;
   line-height: 1;
-  margin: 11px 25px 0 0;
+  margin: 11px 11px 0 0;
   transition-duration: 0.4s;
-  background-color: #017ce6;
-  color: #ffffff;
-  border-radius: 17px;
+  background-color: #b5cb13;
+  color: #000000;
+  border-radius: 4px;
   border: none;
-  text-transform: uppercase;
+  text-transform: capitalize;
   outline: none !important;
 }
 .searchbutton:disabled{
-  background-color: #474747;
+  background-color: #d3d3d3;
 }
 .searchbutton:active,.bttnactive{
   background-image:     linear-gradient(
