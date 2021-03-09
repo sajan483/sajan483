@@ -1066,7 +1066,9 @@ import { GeneralHelper } from "src/app/helpers/General/general-helpers";
  */
   createTripHandle(event){
     this.move(this.appStore.stepperIndex)
-    console.log("index",this.appStore.stepperIndex)
+    if(this.steps.includes("3") && this.appStore.stepperIndex == 2){
+      this.transportSearch();
+    }
     this.getTripData()
     if(this.steps.includes("2") && this.appStore.stepperIndex == 1){
       this.hotelSearch("MADEENA");
