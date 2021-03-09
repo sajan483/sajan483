@@ -8,7 +8,6 @@ import { Room } from "src/app/models/visaTypes";
 import { NotificationService } from "src/app/common/services/notification.service";
 import { AppStore } from "src/app/stores/app.store";
 import { CommonApiService } from "src/app/common/services/common-api-services";
-import { GeneralHelper } from "src/app/helpers/General/general-helpers";
 
 @Component({
   selector: "app-hotel-details-popup",
@@ -40,7 +39,6 @@ export class HotelDetailsPopupComponent implements OnInit ,OnChanges{
   showhotelDetails: boolean;
   makkahticked: boolean;
   stageArray: any;
-  makkahloader: boolean;
   madeendetailshow: boolean;
   steps: any;
   madeenaloader: boolean;
@@ -129,7 +127,6 @@ export class HotelDetailsPopupComponent implements OnInit ,OnChanges{
     this.showHotelDetails = false;
     this.appStore.stepperIndex += 1;
     this.makkahticked = true;
-    this.makkahloader = false;
     this.makkahticked = true;
     this.madeendetailshow = true;
     this.showHotelDetailsShimmer = false
