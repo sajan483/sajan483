@@ -8,3 +8,12 @@
 .displaynone{
     display: none;
 }
+#recentHistory{
+    .thead-light th{
+        font-weight: bold;
+        font-size: 14px;
+    }
+  }
+  #recentHistory td {
+	font-size: 14px;
+  }

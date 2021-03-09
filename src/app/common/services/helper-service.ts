@@ -67,13 +67,4 @@ export class HelperService {
         d.setDate(d.getDate() + days);
         return d;
     }
-
-    /**
-     * this method for fetch country list
-     */
-    getContryList(){
-        return this.common.getCountries().subscribe(res =>{
-           
-        })
-    }
 }

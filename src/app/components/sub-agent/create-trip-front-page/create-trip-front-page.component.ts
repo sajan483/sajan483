@@ -98,6 +98,7 @@ export class CreateTripFrontPageComponent implements OnInit, DoCheck {
   noOfDaysInMakkah: number;
   noOfDaysInMadeenah: number;
   genHelper: GeneralHelper;
+  vehicleTypeList: any;
   constructor(
     private commonApiService: CommonApiService,
     private appStore: AppStore,
@@ -162,6 +163,12 @@ export class CreateTripFrontPageComponent implements OnInit, DoCheck {
     this.getTransportRoutes();
 
     /**
+     * This method for fetching vehicle type
+     * 
+     */
+    this.getVehicleType();
+
+    /**
      * this method for listing recent booking
      */
     this.listRecentBooking();
@@ -182,11 +189,20 @@ export class CreateTripFrontPageComponent implements OnInit, DoCheck {
     this.commonApiService
       .getRoutes(localStorage.getItem("userLanguage"))
       .subscribe((data) => {
-        this.routeList = data.routes.map((x) => ({
-          item_text: x.name,
-          item_id: x.code,
-        }));
+        this.routeList = data.routes;
       });
+  }
+
+  /**
+    * This method for fetching vehicle type
+    * 
+    */
+  getVehicleType(){
+    this.commonApiService
+    .getVehicles(localStorage.getItem("userLanguage"))
+    .subscribe((data) => {
+      this.vehicleTypeList=data.vehicle_types;
+    });
   }
 
   /**
@@ -456,9 +472,9 @@ export class CreateTripFrontPageComponent implements OnInit, DoCheck {
   * 
   */
   onRouteSelect(item: any) {
-    this.routetransport = item.item_id;
+    this.routetransport = item;
 
-    if (item.item_text != null) {
+    if (item != null) {
       this.routeready = true;
     }
     if (!this.activaleAllSearch) {
@@ -738,4 +754,6 @@ export class CreateTripFrontPageComponent implements OnInit, DoCheck {
       this.showRoomAllocationPopup = false;
     }
   }
+
+  
 }

@@ -12,7 +12,9 @@ import { SignupComponent } from 'src/app/components/landing/signup/signup.compon
 import { UploadDocsComponent } from 'src/app/components/landing/upload-docs/upload-docs.component';
 import { TranslateModule, TranslateLoader, TranslateService } from '@ngx-translate/core';
 import { TranslatorFactory } from 'src/app/app.module';
-import { GeneralHelper } from '../../helpers/General/general-helpers'
+import { GeneralHelper } from '../../helpers/General/general-helpers';
+import { HelperService} from 'src/app/common/services/helper-service';
+import { CommonApiService } from 'src/app/common/services/common-api-services';
 
 @NgModule({
   declarations: [
@@ -40,7 +42,7 @@ import { GeneralHelper } from '../../helpers/General/general-helpers'
       isolate: true
     }),
   ],
-  providers: [GeneralHelper]
+  providers: [GeneralHelper,HelperService,CommonApiService]
 })
 
 export class LandingModule {
