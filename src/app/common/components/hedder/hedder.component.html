@@ -1,6 +1,7 @@
 <nav class="navbar navbar-expand-lg navbar-light positionfixed" *ngIf="router.url !== '/login' && router.url !== '/signup'">
   <div class="collapse navbar-collapse container">
-    <a class="navbar-brand cursor-pointer" ><img class="logohight" src="/assets/images/agent-logo.png" alt=""></a>
+    <a class="navbar-brand cursor-pointer" *ngIf="branchActive"  (click)="navigatepage('subagent/home');"><img class="logohight" src="/assets/images/agent-logo.png" alt=""></a>
+    <a class="navbar-brand cursor-pointer" *ngIf="agencyActive" ><img class="logohight" src="/assets/images/agent-logo.png" alt=""></a>
     <form class="form-inline my-2 my-lg-0">
 
       <div class="dropdown" *ngIf="branchActive">
