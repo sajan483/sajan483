@@ -777,6 +777,9 @@ import { GeneralHelper } from "src/app/helpers/General/general-helpers";
     this.makkahCheckInDate = this.userDetails.makkahCheckinDate;
     this.makkahCheckOutDate = this.userDetails.makkahCheckoutDate;
     this.transportStartDate = this.userDetails.transportStartDate;
+    this.vehicleId = this.userDetails.vehicleType;
+    this.vehicleMax = this.userDetails.vehicleCapacity;
+    this.routeId = this.userDetails.transportRoute;
     }
     this.travellersCount = this.appStore.totalTravellers;
     this.rooms = CreateTripComponent.RoomData;
@@ -800,25 +803,6 @@ import { GeneralHelper } from "src/app/helpers/General/general-helpers";
         itemsShowLimit: 1,
         allowSearchFilter: true,
       };
-
-    this.settings = {
-      singleSelection: false,
-      idField: "item_id",
-      textField: "item_text",
-      enableCheckAll: true,
-      selectAllText: "Select All",
-      unSelectAllText: "Unselect ALL",
-      allowSearchFilter: true,
-      limitSelection: -1,
-      clearSearchFilter: true,
-      maxHeight: 197,
-      itemsShowLimit: 2,
-      searchPlaceholderText: "Search",
-      noDataAvailablePlaceholderText: "No Services",
-      closeDropDownOnSelection: false,
-      showSelectedItemsAtTop: false,
-      defaultOpen: false,
-    };
   }
 
   setdataForUserDetailsAtLastPage(){
@@ -874,6 +858,10 @@ import { GeneralHelper } from "src/app/helpers/General/general-helpers";
     if(!this.steps.includes("1") && this.steps.includes("2")){
       this.madeenaloader = true;
       this.hotelSearch("MADEENA");
+    }
+
+    if(this.steps.includes("3") && !this.steps.includes("2") && !this.steps.includes("1")){
+      this.transportSearch();
     }
   }
 
@@ -953,21 +941,6 @@ import { GeneralHelper } from "src/app/helpers/General/general-helpers";
     this.disableBtn = true;
   }
 
-  onCategorySelect(item: any) { 
-    this.categoryId = item.item_id;
-    this.categoryIds.push(this.categoryId)
-        const q = [];
-        this.categoryId = item.item_id;
-        this.transportListData.forEach((value, index) => {
-          this.categoryIds.forEach(id => {
-            const a = value.vehicle_types.map(x=>x.categories[0].category_code == id)
-            if(a[0]){
-              q.push(value)
-            }
-          });
-        });
-    this.transportList = q.filter(this.helperService.onlyUnique);
-  }
 
   onCategoryDeselect(item: any) { 
     const index = this.categoryIds.indexOf(item.item_id);

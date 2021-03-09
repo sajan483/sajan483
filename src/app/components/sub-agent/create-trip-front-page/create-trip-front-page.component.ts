@@ -75,7 +75,6 @@ export class CreateTripFrontPageComponent implements OnInit, DoCheck {
   routeready: boolean;
   roomaloctionpopup: any;
   userObject: {};
-  routetransport: any;
   countTravalers: number;
   public adultCount: number;
   public childCount: number;
@@ -99,6 +98,9 @@ export class CreateTripFrontPageComponent implements OnInit, DoCheck {
   noOfDaysInMadeenah: number;
   genHelper: GeneralHelper;
   vehicleTypeList: any;
+  routetransport: any;
+  vehicleCode: any;
+  vehicleMaxCapacity: number;
   constructor(
     private commonApiService: CommonApiService,
     private appStore: AppStore,
@@ -453,6 +455,8 @@ export class CreateTripFrontPageComponent implements OnInit, DoCheck {
       subPcc_makkah: this.subPcc_makkah,
       subPcc_medinah: this.subPcc_medinah,
       specialCodeMedinah: this.special_code_medinah,
+      vehicleType:this.vehicleCode,
+      vehicleCapacity:this.vehicleMaxCapacity
     };
     CreateTripComponent.UserObjectData = this.userObject;
     if (this.enableMadina || this.enableMakka || this.activaleAllSearch) {
@@ -473,7 +477,6 @@ export class CreateTripFrontPageComponent implements OnInit, DoCheck {
   */
   onRouteSelect(item: any) {
     this.routetransport = item;
-
     if (item != null) {
       this.routeready = true;
     }
@@ -482,6 +485,18 @@ export class CreateTripFrontPageComponent implements OnInit, DoCheck {
     }
     this.enableSearchButtonIfAllSelected();
   }
+
+  onVehicleSelect(id:any){
+    if(id != null && this.vehicleTypeList && this.vehicleTypeList.length > 0){
+      this.vehicleTypeList.forEach(element => {
+        if(element.id == id){
+          this.vehicleCode = element.code;
+          this.vehicleMaxCapacity = element.max_capacity;
+        }
+      });
+    }
+  }
+  
 
   /**
    * This method for show/hide search button
