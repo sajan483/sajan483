@@ -280,19 +280,7 @@ export class CreateTripHelper {
     }
     return form;
   }
-
-  getRouteSettings(): any {
-    return {
-      singleSelection: true,
-      idField: "item_id",
-      textField: "item_text",
-      selectAllText: "Select All",
-      unSelectAllText: "UnSelect All",
-      itemsShowLimit: 1,
-      allowSearchFilter: true,
-    };
-  }
-
+  
   showSweetAlert(text,status,btnText):any {
     Swal.fire({
       text:text,

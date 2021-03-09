@@ -1,4 +1,4 @@
-  import {Component,OnInit,ViewChild,ViewEncapsulation,AfterViewChecked,ElementRef,Renderer2,AfterViewInit,} from "@angular/core";
+  import {Component,OnInit,ViewChild,ViewEncapsulation,AfterViewChecked,ElementRef,Renderer2} from "@angular/core";
   import {TranslateService} from '@ngx-translate/core';
   import {FormBuilder,FormGroup,FormArray,FormControl,Validators,} from "@angular/forms";
   import { MAT_STEPPER_GLOBAL_OPTIONS } from "@angular/cdk/stepper";
@@ -22,7 +22,7 @@
   import { CreateTripAdapter } from "src/app/adapters/sub-agent/create-trip-adapter";
   import { CommonApiService } from "src/app/common/services/common-api-services";
   import { CreateTripHelper } from "src/app/helpers/sub-agent/create-trip-helpers";
-import { GeneralHelper } from "src/app/helpers/General/general-helpers";
+  import { GeneralHelper } from "src/app/helpers/General/general-helpers";
 
   @Component({
     selector: "app-create-trip",
@@ -389,10 +389,6 @@ import { GeneralHelper } from "src/app/helpers/General/general-helpers";
     this.setDataForAddServiceCountPopUP = item;
     this.setDataForAddServiceCountPopUP.selectedQuantity = this.addSrvCount;
   }
-    
-  hidecountpopup(){
-    this.additionalServiceCount = false;
-  }
 
   clearPreviosDataForFreshSearch(){
     this.userFilter.name = "";
@@ -458,23 +454,7 @@ import { GeneralHelper } from "src/app/helpers/General/general-helpers";
     }
     );
   }
-
-  toggleSection(i,index){
-    this.transportList[i].vehicle_types[index].toggle = true;
-  }
   
-  showMainFilter(){
-    this.moreFilterArrow = !this.moreFilterArrow;
-  }
-
-  showRefundableFilter() {
-    this.refundableFilterArrow = !this.refundableFilterArrow;
-  }
-
-  closeFilterPoup() {
-    this.moreFilterArrow = !this.moreFilterArrow;
-  }
-
   add(i,index) {
       if (this.transportList[i].vehicle_types[index].count < this.transportList[i].vehicle_types[index].categories[0].capacity) {
         this.transportList[i].vehicle_types[index].count = this.transportList[i].vehicle_types[index].count + 1;
@@ -519,28 +499,6 @@ import { GeneralHelper } from "src/app/helpers/General/general-helpers";
   removerooms(i: number) {
     this.rooms.splice(i, 1);
   }
-  
-  minusadultroom(id: number) {
-    this.rooms.forEach((value, index) => {
-      if (value.id == id) {
-        if (this.rooms[index].adults > 1) {
-          this.rooms[index].adults = value.adults - 1;
-        }
-      }
-    });
-  }
-  
-  madenaVehicleDisplay() {
-    this.showMadenaTransportVehicleList = true;
-  }
-
-  hide() {
-    this.showModal = false;
-  }
-
-  setTravellerPopup() {
-    this.showModalroom = true;
-  }
 
   toggleButton() {
     this.displayTab = !this.displayTab;
@@ -554,11 +512,6 @@ import { GeneralHelper } from "src/app/helpers/General/general-helpers";
       }
     });
       this.mainTraveller[i] = true;
-  }
-
-  continuePayment(){
-    this.getTripData()
-    this.move(4);
   }
 
   getTripData(){
@@ -761,9 +714,7 @@ import { GeneralHelper } from "src/app/helpers/General/general-helpers";
   @ViewChild("multiSelect", { static: true }) multiSelect;
   public form: FormGroup;
   public loadContent: boolean = false;
-  public name = "Cricketers";
   public data = [];
-  public settings = {};
    
   ngOnInit() {
     this.generalHelper.checkForAccessToken();
@@ -902,8 +853,6 @@ import { GeneralHelper } from "src/app/helpers/General/general-helpers";
     })
   }
 
-  get f1() { return this.paymentForm.controls; }
-
   public setForm() {
     this.form = new FormGroup({
       name: new FormControl(this.data, Validators.required),
@@ -915,33 +864,11 @@ import { GeneralHelper } from "src/app/helpers/General/general-helpers";
     return this.form.controls;
   }
 
-  public onFilterChange(item: any) {
-    
-  }
-
-  public onDropDownClose(item: any) {
-    
-  }
-
-  public onItemSelect(item: any) {
-    const q = []
-    this.transportListData.forEach((value, index) => {
-      const a = value.vehicle_types.map(x=>x.categories[0].additional_services.map(a=>a.additional_service_code.includes(item.item_id)))
-      a.forEach(y => {
-        if(y == [true]){
-          q.push(value)
-        }
-      });
-    });
-    this.transportList = q;
-  }
-
   public onRouteSelect(item: any) {
     this.routeId = item.item_id;
     this.disableBtn = true;
   }
-
-
+  
   onCategoryDeselect(item: any) { 
     const index = this.categoryIds.indexOf(item.item_id);
     if (index > -1) {
