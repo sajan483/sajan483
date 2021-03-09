@@ -8,8 +8,6 @@
   import { AppStore } from '../../../stores/app.store';
   import { NgxSpinnerService } from "ngx-spinner";
   import { IDropdownSettings } from "ng-multiselect-dropdown";
-  import { Hotel } from "../../../models/hotels";
-  import { ImageObject} from "../../../models/custome_trip";
   import { Transportation } from "../../../models/vehicle_transport"
   import { DatePipe } from "@angular/common";
   import { ToastrService } from "ngx-toastr";
@@ -32,7 +30,6 @@
       {
         provide: MAT_STEPPER_GLOBAL_OPTIONS,
         useValue: { displayDefaultIndicatorType: false },
-
       },
       CommonApiService,
       DatePipe,
@@ -49,30 +46,15 @@
     userDetails :any;
     roomDetails:any;
     additionalServiceCount : boolean =false;
-    filtershowgt : boolean = false;
-    filtershow : boolean = false;
     roomdetails:boolean=false;
-    getdiffDays:any;
-    returnDepartTime:any;
-    onwerdArivalTime:any;
     paymentForm:FormGroup;
-    arivaldate:any;
     step = 0;
     imageshow:number=0;
     time = {hour: 13, minute: 30};
     meridian = true;
     tripData: any;
-    payForm: FormGroup
     selectedTransport: any;
-    hotelPics:string[]=[];
-    hotelPics1:string[]=[];
-    hotelPics2:string[]=[];
-    moreimages:boolean = false;
-    onwrdFlight:boolean = false;
-    rtrnFlight: boolean = false;
-    makkaHtl:boolean = false;
     makkatransport:boolean = false;
-    madnaHtl:boolean = false;
     grountService:boolean = false;
     totalRoomPrice:number = 0;
     selectedTravellersCount: number = 0;
@@ -84,51 +66,25 @@
     tripMadeenaHotel: any;
     tripTransport: any;
     selectedRoomGroups: any[];
-    paymentData: any;
-    multiCheckItemsList: any[];
-    selectedTabIndex: number;
-    showMadeenaHotelDetails: boolean;
     isGrouped: any;
-    isGroupedMakka: any;
-    makkaSelectActivate: boolean;
-    transportSelectActivate: boolean;
     nationality: any;
     noOfDaysInMadeena: number = 0;
-    makkaCheckInTime: any;
-    makkaCheckOutTime: any;
-    madeenaHotelName: any;
-    madeenaCheckOutTime: any;
-    madeenaCheckInTime: any;
-    makkahloader:boolean=true;
     makkahticked:boolean = false;
     madeendetailshow:boolean=false;
     madeenaloader:boolean=false;
-    madeenaticked:boolean=false;
-    isHotelListSortedByHaramDistance: boolean;
-    isHotelsSortedByPrice: boolean;
-    isMadeenaHotelsSortedByPrice: boolean;
-    setDataViewData: any;
     searchTransport: boolean ;
-    adjustmentDate : Date ;
     mdate: any;
     stageArray:number[]=[];
     searchServiceButtonActive: boolean;
     bookingId: any;
     setDataForAddServiceCountPopUP:any = {};
     addSrvCount:number = 0;
-    travelersError: any;
-    checkdatemakkah: any;
-    checkoutdatemakkah: any;
     totalTravellers: any;
-    showPayButton: boolean = false;
-    paymentSuccessPopUp: boolean;
     acc_no: any;
     accNo: any;
     authCode: any;
-    selectedNationalityText: any;
     phoneCode: any;
     reference_no: any;
-    companylistall: any;
     makka: boolean = true;
     medinah: boolean = true;
     trnsprt: boolean = true;
@@ -139,6 +95,7 @@
     madeenaCheckInDate:any;
     madeenaCheckOutDate:any;
     transportStartDate: any;
+    companylistall: any;
     toggleMeridian() {
         this.meridian = !this.meridian;
     }
@@ -152,38 +109,23 @@
     private createTripAdapter: CreateTripAdapter = new CreateTripAdapter(this.helperService,this.appStore);
     returnDate: any;
     private createTripHelper: CreateTripHelper = new CreateTripHelper(this.helperService);
-    arrivalDate: any;
-    returnStart: any;
-    returnEnd: any;
     retDate: any;
-    depStart: any;
-    departureEnd: any;
     routeId: any;
     categoryId: any;
     hotelMakkahFare: any;
     hotelMadeenaFare: any;
     transportFare: any;
-    categoryserviceId: any;
     additionlserviceId: any;
     additionl_serviceId: any;
-    ground_additionl_serviceId: any;
     vehicleId: any;
     vehicleMax: any;
-    vehicleName: any;
     countryCode: any;
     nationalityCode: any;
-    firstDate: any;
-    secondDate: any;
     diffDays: any;
     searchTransportId: any;
-    searchserviceId: any;
     selectedCurrency: any;
     selectedLanguage: any;
-    IsHidden = true;
     dropdownList = [];
-    dropdownserviceList = [];
-    serviceData = [];
-    selectedItems = [];
     dropdownSettings: IDropdownSettings = {};
     vehicleTypeList = [];
     vehicleTypeItems =[];
@@ -191,33 +133,19 @@
     companyList= [];
     countryList = [];
     nationalityList = [];
-    showSkipButtonDiv:boolean = false;
     categoryIds =[];
-    categoryServiceIds = [];
-    imageObjectArray: ImageObject[] = [];
     selectedHotel:any;
     selectedCountry: any;
     selectedNationality: any;
-    myControl = new FormControl();
-    searchBtnEnable: boolean;
-    makkaHotelsList: Hotel[] = [];
-    madinaHotelsList: Hotel[] = [];
-    stepCount: any;
-    returnStep: any;
     transportList: Transportation []=[];
     transportListData: Transportation []=[];
-    stateCtrl = new FormControl();
     toggle = [];
-    toggle2 = [];
     disableBtn:boolean = false;
-    counter: boolean;
     count: number = 1;
     showAddButton: boolean = true;
     showMadenaTransportVehicleList: boolean = false;
     displayTab: boolean;
     changeButton: boolean;
-    showhotelDetails: boolean;
-    showModal: boolean;
     submitted = false;
     vehicleCount: any;
     today = new Date().toJSON().split("T")[0];
@@ -228,30 +156,21 @@
     displayTabtravel: boolean;
     displayVehicleCount: boolean;
     displayPersonCount: boolean;
-    returnArrivalArrow: boolean;
-    returnPriceArrow: boolean;
-    moreFilterArrow: boolean;
-    refundableFilterArrow: boolean;
     @ViewChild("menuIconClass", { read: ElementRef, static: false })
     menuIconClass: ElementRef;
     @ViewChild("menuPopupClass", { read: ElementRef, static: false })
     menuPopupClass: ElementRef;
-    showModalroom: boolean;
     rooms: Room[] = [];
-    selecteddaysmakkah: number;
     phoneCodeList: any;
-    currentRate = 3.5;
     @ViewChild("menuIcon", { read: ElementRef, static: false })
     menuIcon: ElementRef;
     @ViewChild("menuPopup", { read: ElementRef, static: false })
     menuPopup: ElementRef;
-    toairport = false;
     @ViewChild("menuIconTo", { read: ElementRef, static: false })
     menuIconTo: ElementRef;
     @ViewChild("menuPopupTo", { read: ElementRef, static: false })
     menuPopupTo: ElementRef;
     tripId: any;
-    isChecked: boolean;
     travellersCount: number;
     infantCount: number = 0;
     adultCount: number = 1;
@@ -303,7 +222,6 @@
           // Clicked inside plus preventing click on icon
         } else {
           // Clicked outside
-          this.toairport = false;
         }
       });
       this.renderer2.listen("window", "click", (e: Event) => {
@@ -393,15 +311,10 @@
   clearPreviosDataForFreshSearch(){
     this.userFilter.name = "";
     this.noOfDaysInMadeena = 0;
-    this.selecteddaysmakkah = 0;
-    this.arrivalDate = null;
     this.diffDays = 0;
     this.selectedHotel = [];
     this.selectedRoomGroups = [];
-    this.makkaHotelsList = [];
-    this.madinaHotelsList = [];
     this.makkahticked = false;
-    this.madeenaticked = false;
     this.madeendetailshow = false;
     this.mdate = null
     this.stageArray = [];
@@ -409,7 +322,6 @@
      
   transportSearch()
   {
-    this.filtershow = true;
     this.vehicleCount = Math.ceil((this.userDetails.travallersCount)/this.vehicleMax);
     const date = this.helperService.dateFormaterMdy(this.userDetails.transportStartDate);
     const filrerData ={
@@ -802,7 +714,6 @@
 
   callCorrespongingSteppers(){
     if(this.steps.includes("1")){
-      this.makkahloader = true;
       this.hotelSearch("MAKKA");
     }
     
