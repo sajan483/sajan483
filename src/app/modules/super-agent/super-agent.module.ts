@@ -2,8 +2,6 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { SuperAgentRouteModule } from './super-agent-routing.module';
 
-
-
 @NgModule({
   declarations: [],
   imports: [
@@ -11,4 +9,5 @@ import { SuperAgentRouteModule } from './super-agent-routing.module';
     SuperAgentRouteModule
   ]
 })
+
 export class SuperAgentModule { }

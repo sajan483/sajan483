@@ -80,14 +80,14 @@
                                     <div id="routeSection" class="col-md-5 mb-0 pl-0">
                                         <ng-multiselect-dropdown [placeholder]="'Route' | translate" [data]="routeList"
                                             [settings]="dropdownSettings" (onSelect)="onRouteSelect($event)"
-                                            (onSelectAll)="onSelectAll($event)" (onDeSelect)="clearTransport($event)">
+                                            (onSelectAll)="onSelectAll($event)">
                                         </ng-multiselect-dropdown>
                                     </div>
                                     <div id="vehicleSection" class="col-md-5 mb-0 pl-0 mt3">
                                         <ng-multiselect-dropdown [placeholder]="'Vehicle Type'| translate"
                                             [data]="vehicleTypeList" [(ngModel)]="vehicleTypeItems"
                                             [settings]="dropdownSettings" (onSelect)="onVehicleSelect($event)"
-                                            (onSelectAll)="onSelectAll($event)" (onDeSelect)="clearTransport($event)">
+                                            (onSelectAll)="onSelectAll($event)">
                                         </ng-multiselect-dropdown>
                                     </div>
                                     <div id="transportSearchSection" class="col-md-2 pr-0 pl-0 mt3 w95">
@@ -95,31 +95,6 @@
                                             class="searchButton searchButtonarabic" type="button">{{'Search' |
                                             translate}} <i class="fa fa-arrow-right" aria-hidden="true"></i>
                                         </button>
-                                    </div>
-                                </div>
-                                <div class="filter-outer-div row ml-0 mr-0 mt-2" *ngIf="filtershow">
-                                    <div class="pt-2 pl-3 pr20">
-                                        <i class="fa fa-filter" aria-hidden="true"></i>
-                                    </div>
-                                    <div id="categorySectionTransport" class="mr-2 mb-0 pl-3 pb-2">
-                                        <ng-multiselect-dropdown [placeholder]="'Category'| translate"
-                                            [data]="dropdownList" [settings]="settings"
-                                            (onSelect)="onCategorySelect($event)"
-                                            (onDeSelect)="onCategoryDeselect($event)"
-                                            (onSelectAll)="onSelectAll($event)"
-                                            (onDeSelectAll)="onCategoryDeSelectAll($event)">
-                                        </ng-multiselect-dropdown>
-
-                                    </div>
-                                    <div id="additionalServiceSectionTransport" class="mr-2 mb-0 pl-3 pb-2"
-                                        *ngIf="loadContent">
-                                        <ng-multiselect-dropdown [placeholder]="'Additional Services'| translate"
-                                            [data]="data" [settings]="settings"
-                                            (onDeSelect)="onadditionalItemDeselect($event)"
-                                            (onSelect)="onadditionalItemSelect($event)"
-                                            (onSelectAll)="onadditionalSelectAll($event)"
-                                            (onDeSelectAll)="onadditionalDeSelectAll($event)">
-                                        </ng-multiselect-dropdown>
                                     </div>
                                 </div>
                                <app-transport (notifyGrandparent)="createTripHandle(event)" [transportList]="transportList"></app-transport>
