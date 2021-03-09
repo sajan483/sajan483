@@ -153,12 +153,6 @@ export class CreateTripFrontPageComponent implements OnInit, DoCheck {
     this.appStore.showHotelDetailsShimmer = false;
 
     /**
-     * This method for transport route multi select settings
-     * 
-     */
-    this.routeSetting();
-
-    /**
      * This method for fetching transport routes
      * 
      */
@@ -176,14 +170,8 @@ export class CreateTripFrontPageComponent implements OnInit, DoCheck {
     this.listRecentBooking();
 
   }
-
-  /**
-   * This method for checking the availability of the access token
-   * 
-   */
   
-
-  /**
+   /**
     * This method for fetching transport routes
     * 
     */
@@ -205,14 +193,6 @@ export class CreateTripFrontPageComponent implements OnInit, DoCheck {
     .subscribe((data) => {
       this.vehicleTypeList=data.vehicle_types;
     });
-  }
-
-  /**
-    * This method for transport route multi select settings
-    * 
-    */
-  routeSetting() {
-    this.routeSettings = this.crTripHelper.getRouteSettings();
   }
 
   /**
@@ -486,6 +466,10 @@ export class CreateTripFrontPageComponent implements OnInit, DoCheck {
     this.enableSearchButtonIfAllSelected();
   }
 
+  /**
+   * This method for show/hide search button
+   * 
+   */
   onVehicleSelect(id:any){
     if(id != null && this.vehicleTypeList && this.vehicleTypeList.length > 0){
       this.vehicleTypeList.forEach(element => {
@@ -769,6 +753,4 @@ export class CreateTripFrontPageComponent implements OnInit, DoCheck {
       this.showRoomAllocationPopup = false;
     }
   }
-
-  
 }
