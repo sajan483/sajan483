@@ -32,6 +32,8 @@ import { NgxGalleryModule } from 'ngx-gallery';
 import { TranslatorFactory } from 'src/app/app.module';
 import { NgxSpinnerModule } from "ngx-spinner";
 import { GeneralHelper } from 'src/app/helpers/General/general-helpers';
+import { CommonApiService } from 'src/app/common/services/common-api-services';
+import { HelperService } from 'src/app/common/services/helper-service';
 
 
 
@@ -97,7 +99,7 @@ import { GeneralHelper } from 'src/app/helpers/General/general-helpers';
     TranslateModule,
   ],
   providers: [
-    DatePipe, GeneralHelper
+    DatePipe, GeneralHelper,CommonApiService,HelperService
   ],
 })
 

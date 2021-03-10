@@ -12,8 +12,7 @@ import { CommonApiService } from "src/app/common/services/common-api-services";
 @Component({
   selector: "app-hotel-details-popup",
   templateUrl: "./hotel-details-popup.component.html",
-  styleUrls: ["./hotel-details-popup.component.scss"],
-  providers: [HelperService],
+  styleUrls: ["./hotel-details-popup.component.scss"]
 })
 
 export class HotelDetailsPopupComponent implements OnInit ,OnChanges{

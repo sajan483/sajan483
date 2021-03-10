@@ -7,8 +7,7 @@ import { GeneralHelper } from 'src/app/helpers/General/general-helpers';
 @Component({
   selector: 'app-profile-page',
   templateUrl: './profile-page.component.html',
-  styleUrls: ['./profile-page.component.scss'],
-  providers: [CommonApiService]
+  styleUrls: ['./profile-page.component.scss']
 })
 export class ProfilePageComponent implements OnInit {
   details: staff_details;

@@ -16,8 +16,7 @@ import { CreateTripHelper } from '../../../helpers/sub-agent/create-trip-helpers
 @Component({
   selector: "app-create-trip-front-page",
   templateUrl: "./create-trip-front-page.component.html",
-  styleUrls: ["./create-trip-front-page.component.scss"],
-  providers: [CommonApiService, HelperService],
+  styleUrls: ["./create-trip-front-page.component.scss"]
 })
 
 export class CreateTripFrontPageComponent implements OnInit, DoCheck {
