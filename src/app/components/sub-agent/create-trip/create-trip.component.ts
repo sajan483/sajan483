@@ -844,6 +844,17 @@
     } 
   }
 
+   /**
+   * Method to set country code
+   */
+  onCountrySelect(item: any) {
+    this.countryCode = item.item_id;
+    this.selectedCountry = item.item_id;
+    if(this.nationalityCode && this.countryCode){
+        this.searchServiceButtonActive = true
+    }
+  }
+
   /**
    * Method for navigate to home page
    */

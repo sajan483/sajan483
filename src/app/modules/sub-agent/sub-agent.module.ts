@@ -34,6 +34,7 @@ import { NgxSpinnerModule } from "ngx-spinner";
 import { GeneralHelper } from 'src/app/helpers/General/general-helpers';
 import { CommonApiService } from 'src/app/common/services/common-api-services';
 import { HelperService } from 'src/app/common/services/helper-service';
+import { PaymentTransportComponent } from 'src/app/components/sub-agent/create-trip/components/payment-transport/payment-transport.component';
 
 
 
@@ -54,7 +55,8 @@ import { HelperService } from 'src/app/common/services/helper-service';
     PaymentHotelComponent,
     RoomDetailsPopupComponent,
     LoaderHotelPopupComponent,
-    HotelImagePopupComponent
+    HotelImagePopupComponent,
+    PaymentTransportComponent
   ],
 
   imports: [
