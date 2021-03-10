@@ -1,50 +1,53 @@
-import { Component, OnInit ,Input } from '@angular/core';
-import { OwlOptions } from 'ngx-owl-carousel-o';
+import { Component, OnInit, Input } from "@angular/core";
+import { OwlOptions } from "ngx-owl-carousel-o";
 
 @Component({
-  selector: 'app-hotel-image-popup',
-  templateUrl: './hotel-image-popup.component.html',
-  styleUrls: ['./hotel-image-popup.component.scss']
+  selector: "app-hotel-image-popup",
+  templateUrl: "./hotel-image-popup.component.html",
+  styleUrls: ["./hotel-image-popup.component.scss"],
 })
 export class HotelImagePopupComponent implements OnInit {
-  showHotelImages :boolean;
-  hotelRating:any;
-  imageshow : any;
+  showHotelImages: boolean;
+  hotelRating: any;
+  imageshow: any;
 
   customOptions: OwlOptions = {
     loop: true,
-    autoWidth:true, 
+    autoWidth: true,
     mouseDrag: true,
     touchDrag: true,
     pullDrag: false,
     dots: false,
     navSpeed: 700,
-    navText: ['&#8249;', '&#8250;'],
+    navText: ["&#8249;", "&#8250;"],
     responsive: {
       0: {
-        items: 3
+        items: 3,
       },
       400: {
-        items: 4
+        items: 4,
       },
       740: {
-        items: 6
+        items: 6,
       },
       940: {
-        items: 10
-      }
+        items: 10,
+      },
     },
-    nav: true
-  }
+    nav: true,
+  };
 
-  constructor() { }
-  @Input() imagecollection:any;
+  constructor() {}
+  @Input() imagecollection: any;
+
   ngOnInit() {
     this.showHotelImages = true;
     this.hotelRating = 4;
     this.imageshow = 0;
   }
-  closeHtlImgPopup(){
+
+  closeHtlImgPopup() {
     this.showHotelImages = false;
   }
+  
 }
