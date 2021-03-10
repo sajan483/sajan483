@@ -8,8 +8,7 @@ import { AppStore } from "src/app/stores/app.store";
 @Component({
   selector: "app-transport",
   templateUrl: "./transport.component.html",
-  styleUrls: ["./transport.component.scss"],
-  providers: [HelperService,CommonApiService],
+  styleUrls: ["./transport.component.scss"]
 })
 
 export class TransportComponent implements OnInit {

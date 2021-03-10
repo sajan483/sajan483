@@ -15,10 +15,7 @@ import { HelperService } from "src/app/common/services/helper-service";
 @Component({
   selector: 'app-payment-status',
   templateUrl: './payment-status.component.html',
-  styleUrls: ['./payment-status.component.scss'],
-  providers: [
-    HelperService
-  ],
+  styleUrls: ['./payment-status.component.scss']
 })
 
 export class PaymentStatusComponent implements OnInit {
@@ -55,10 +52,16 @@ export class PaymentStatusComponent implements OnInit {
   trnsprt: boolean = true;
   genHelper: GeneralHelper;
   createHelper: CreateTripHelper;
-  constructor(private route: ActivatedRoute, private appStore: AppStore,
-    private paymentLoader: NgxSpinnerService, private translate: TranslateService,
-    private common: CommonApiService, private notifyService: NotificationService,
-    private router: Router, private _gHelper: GeneralHelper, private helperService: HelperService,) {
+
+  constructor(private route: ActivatedRoute,
+    private appStore: AppStore,
+    private paymentLoader: NgxSpinnerService,
+    private translate: TranslateService,
+    private common: CommonApiService, 
+    private notifyService: NotificationService,
+    private router: Router, 
+    private _gHelper: GeneralHelper,
+    private helperService: HelperService,) {
     this.genHelper = _gHelper;
   }
 

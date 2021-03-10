@@ -30,11 +30,7 @@
       {
         provide: MAT_STEPPER_GLOBAL_OPTIONS,
         useValue: { displayDefaultIndicatorType: false },
-      },
-      CommonApiService,
-      DatePipe,
-      HelperService,
-      AuthService
+      }
     ],
     encapsulation: ViewEncapsulation.None,
   })
