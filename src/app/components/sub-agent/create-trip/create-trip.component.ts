@@ -314,23 +314,7 @@
     }
   }
 
-   /**
- * Method to clear previous data
- */  
-  clearPreviosDataForFreshSearch(){
-    this.userFilter.name = "";
-    this.noOfDaysInMadeena = 0;
-    this.diffDays = 0;
-    this.selectedHotel = [];
-    this.selectedRoomGroups = [];
-    this.makkahticked = false;
-    this.madeendetailshow = false;
-    this.mdate = null
-    this.stageArray = [];
-    this.isTransportResponseEmpty = false;
-  }
-
-   /**
+  /**
  * Method to fetch transport list
  */  
   transportSearch()
