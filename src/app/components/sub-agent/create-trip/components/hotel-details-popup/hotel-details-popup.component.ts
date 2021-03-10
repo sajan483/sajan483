@@ -189,6 +189,9 @@ export class HotelDetailsPopupComponent implements OnInit ,OnChanges{
     this.selectedRoomDetails = !this.selectedRoomDetails;
   }
 
+  /*
+   * this method to show all images at room details popup
+   */
   viewAllImagePopup(){
     this.roomImageGallery = !this.roomImageGallery;
   }

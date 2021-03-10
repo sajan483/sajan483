@@ -314,23 +314,7 @@
     }
   }
 
-   /**
- * Method to clear previous data
- */  
-  clearPreviosDataForFreshSearch(){
-    this.userFilter.name = "";
-    this.noOfDaysInMadeena = 0;
-    this.diffDays = 0;
-    this.selectedHotel = [];
-    this.selectedRoomGroups = [];
-    this.makkahticked = false;
-    this.madeendetailshow = false;
-    this.mdate = null
-    this.stageArray = [];
-    this.isTransportResponseEmpty = false;
-  }
-
-   /**
+  /**
  * Method to fetch transport list
  */  
   transportSearch()
@@ -842,6 +826,17 @@
     if(!this.appStore.showShimmer) {
       this.showShimmer = false;
     } 
+  }
+
+   /**
+   * Method to set country code
+   */
+  onCountrySelect(item: any) {
+    this.countryCode = item.item_id;
+    this.selectedCountry = item.item_id;
+    if(this.nationalityCode && this.countryCode){
+        this.searchServiceButtonActive = true
+    }
   }
 
   /**

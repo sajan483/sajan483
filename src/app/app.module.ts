@@ -19,7 +19,7 @@ import { CookieService } from 'ngx-cookie-service';
     AppComponent,
     HedderComponent,
     FooterComponent
-],
+  ],
   imports: [
     BrowserModule,
     HttpModule,
