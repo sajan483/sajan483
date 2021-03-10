@@ -96,6 +96,7 @@
     madeenaCheckOutDate:any;
     transportStartDate: any;
     companylistall: any;
+    isTransportResponseEmpty: boolean = false;
     toggleMeridian() {
         this.meridian = !this.meridian;
     }
@@ -154,8 +155,6 @@
     countchild: number = 0;
     countinfa: number = 0;
     displayTabtravel: boolean;
-    displayVehicleCount: boolean;
-    displayPersonCount: boolean;
     @ViewChild("menuIconClass", { read: ElementRef, static: false })
     menuIconClass: ElementRef;
     @ViewChild("menuPopupClass", { read: ElementRef, static: false })
@@ -182,94 +181,109 @@
     noOfDaysInMakkah:number;
     generalHelper : GeneralHelper
 
-    constructor(
-      private router: Router,
-      private formBuilder: FormBuilder,
-      private renderer2: Renderer2,
-      private common: CommonApiService,
-      private spinner: NgxSpinnerService,
-      private datepipe: DatePipe,
-      private http: HttpClient,
-      private appStore: AppStore,
-      private translateService: TranslateService,
-      private fb: FormBuilder,
-      private toastr: ToastrService,
-      private notifyService: NotificationService,
-      private route: ActivatedRoute,
-      private helperService:HelperService,
-      private genHelper: GeneralHelper
-    ) {
-      this.generalHelper = this.genHelper;
-      this.route.queryParams.subscribe(params => {
-         this.steps = ((params.steps || "1,2,3").split(","));
-      });
-      this.renderer2.listen("window", "click", (e: Event) => {
-        if (
-          (this.menuPopup && this.menuPopup.nativeElement.contains(e.target)) ||
-          (this.menuIcon && this.menuIcon.nativeElement.contains(e.target))
-        ) {
-          // Clicked inside plus preventing click on icon
-        } else {
-          // Clicked outside
-        }
-      });
-      this.renderer2.listen("window", "click", (e: Event) => {
-        if (
-          (this.menuPopupTo &&
-            this.menuPopupTo.nativeElement.contains(e.target)) ||
-          (this.menuIconTo && this.menuIconTo.nativeElement.contains(e.target))
-        ) {
-          // Clicked inside plus preventing click on icon
-        } else {
-          // Clicked outside
-        }
-      });
-      this.renderer2.listen("window", "click", (e: Event) => {
-        if (
-          (this.menuPopupClass &&
-            this.menuPopupClass.nativeElement.contains(e.target)) ||
-          (this.menuIconClass &&
-            this.menuIconClass.nativeElement.contains(e.target))
-        ) {
-          // Clicked inside plus preventing click on icon
-        } else {
-          // Clicked outside
-          this.displayTabtravel = false;
-        }
-      });
-      this.paymentForm = this.formBuilder.group({
-        roomAdultsArray: this.formBuilder.array([]),
-        roomChildrenArray: this.formBuilder.array([])
-      });
-    }
-    
-    @ViewChild("stepper", { static: true })
-    stepper: MatStepper;
-    move(index: number) {this.stepper.selectedIndex = index;}
-    @ViewChild(MakkaHotelComponent,{static:false}) child:MakkaHotelComponent;
+  constructor(
+    private router: Router,
+    private formBuilder: FormBuilder,
+    private renderer2: Renderer2,
+    private common: CommonApiService,
+    private spinner: NgxSpinnerService,
+    private datepipe: DatePipe,
+    private http: HttpClient,
+    private appStore: AppStore,
+    private translateService: TranslateService,
+    private fb: FormBuilder,
+    private toastr: ToastrService,
+    private notifyService: NotificationService,
+    private route: ActivatedRoute,
+    private helperService:HelperService,
+    private genHelper: GeneralHelper
+  ) {
+    this.generalHelper = this.genHelper;
+    this.route.queryParams.subscribe(params => {
+        this.steps = ((params.steps || "1,2,3").split(","));
+    });
+    this.renderer2.listen("window", "click", (e: Event) => {
+      if (
+        (this.menuPopup && this.menuPopup.nativeElement.contains(e.target)) ||
+        (this.menuIcon && this.menuIcon.nativeElement.contains(e.target))
+      ) {
+        // Clicked inside plus preventing click on icon
+      } else {
+        // Clicked outside
+      }
+    });
+    this.renderer2.listen("window", "click", (e: Event) => {
+      if (
+        (this.menuPopupTo &&
+          this.menuPopupTo.nativeElement.contains(e.target)) ||
+        (this.menuIconTo && this.menuIconTo.nativeElement.contains(e.target))
+      ) {
+        // Clicked inside plus preventing click on icon
+      } else {
+        // Clicked outside
+      }
+    });
+    this.renderer2.listen("window", "click", (e: Event) => {
+      if (
+        (this.menuPopupClass &&
+          this.menuPopupClass.nativeElement.contains(e.target)) ||
+        (this.menuIconClass &&
+          this.menuIconClass.nativeElement.contains(e.target))
+      ) {
+        // Clicked inside plus preventing click on icon
+      } else {
+        // Clicked outside
+        this.displayTabtravel = false;
+      }
+    });
+    this.paymentForm = this.formBuilder.group({
+      roomAdultsArray: this.formBuilder.array([]),
+      roomChildrenArray: this.formBuilder.array([])
+    });
+  }
+  
+  @ViewChild("stepper", { static: true })
+  stepper: MatStepper;
+  move(index: number) {this.stepper.selectedIndex = index;}
+  @ViewChild(MakkaHotelComponent,{static:false}) child:MakkaHotelComponent;
 
-    userFilter: any = { name: '' };
+  userFilter: any = { name: '' };
 
-    toggleMakkaUp(){
-      (<HTMLElement>document.getElementById("makka")).style.display = "none";
-      this.makka = !this.makka;
-    }
+  /**
+   * Method to minify makka card at payment review page
+   */  
+  toggleMakkaUp(){
+    (<HTMLElement>document.getElementById("makka")).style.display = "none";
+    this.makka = !this.makka;
+  }
 
-    toggleMakkaDown(){
-      (<HTMLElement>document.getElementById("makka")).style.display = "block";
-      this.makka = !this.makka;
-    }
+  /**
+   * Method to expand makka card at payment review page
+   */  
+  toggleMakkaDown(){
+    (<HTMLElement>document.getElementById("makka")).style.display = "block";
+    this.makka = !this.makka;
+  }
 
-    toggleMedinahDown(){
-      (<HTMLElement>document.getElementById("medinah")).style.display = "block";
-      this.medinah = !this.medinah;
-    }
+  /**
+  * Method to expand medinah card at payment review page
+  */
+  toggleMedinahDown(){
+    (<HTMLElement>document.getElementById("medinah")).style.display = "block";
+    this.medinah = !this.medinah;
+  }
 
+  /**
+  * Method to minify medinah card at payment review page
+  */
   toggleMedinahUp(){
     (<HTMLElement>document.getElementById("medinah")).style.display = "none";
     this.medinah = !this.medinah;
   }
 
+  /**
+  * Method to minify transport card at payment review page
+  */
   toggleTransportUp(){
     (<HTMLElement>document.getElementById("transport")).style.display = "none";
     (<HTMLElement>document.getElementById("transportRate")).style.display = "none";
@@ -278,6 +292,9 @@
     this.trnsprt= !this.trnsprt;
   }
 
+  /**
+  * Method to expand transport card at payment review page
+  */
   toggleTransportDown(){
     (<HTMLElement>document.getElementById("transport")).style.display = "block";
     (<HTMLElement>document.getElementById("transportPolicy")).style.display = "block";
@@ -301,13 +318,9 @@
     }
   }
 
-  saveSelectedAddSrvCount(item){
-    this.additionalServiceCount = false;
-    this.setDataForAddServiceCountPopUP = {};
-    this.setDataForAddServiceCountPopUP = item;
-    this.setDataForAddServiceCountPopUP.selectedQuantity = this.addSrvCount;
-  }
-
+   /**
+ * Method to clear previous data
+ */  
   clearPreviosDataForFreshSearch(){
     this.userFilter.name = "";
     this.noOfDaysInMadeena = 0;
@@ -318,8 +331,12 @@
     this.madeendetailshow = false;
     this.mdate = null
     this.stageArray = [];
+    this.isTransportResponseEmpty = false;
   }
-     
+
+   /**
+ * Method to fetch transport list
+ */  
   transportSearch()
   {
     this.vehicleCount = Math.ceil((this.userDetails.travallersCount)/this.vehicleMax);
@@ -339,6 +356,7 @@
       this.appStore.transportSearchId = data.search_id;
       this.common.searchTransportList(this.searchTransportId,this.selectedCurrency,this.selectedLanguage).subscribe((response) => {
         if ((response && response.transportations && response.transportations.length == 0) ||  (response && response.transportations && response.transportations.filter(x=>x.vehicle_types.length > 0) == 0)) {
+          this.isTransportResponseEmpty = true;
          this.createTripHelper.showSweetAlert(this.translateService.instant('Sorry, we could not find transport for this route'),"warning",this.translateService.instant('Modify search and try again'));
         }else{
           this.transportList = response.transportations.sort((n1,n2) => n1.vehicle_types.map(x=>x.categories[0].fare_summary[2].amount) - n2.vehicle_types.map(x=>x.categories[0].fare_summary[2].amount));
@@ -366,57 +384,10 @@
     }
     );
   }
-  
-  add(i,index) {
-      if (this.transportList[i].vehicle_types[index].count < this.transportList[i].vehicle_types[index].categories[0].capacity) {
-        this.transportList[i].vehicle_types[index].count = this.transportList[i].vehicle_types[index].count + 1;
-        this.transportList[i].totalCount = this.transportList[i].vehicle_types[index].count;
-      } else {
-        this.notifyService.showWarning(this.translateService.instant("maximum number of adult reached"));
-      }
-  }
 
-  minus(i,index) {
-      if (this.transportList[i].vehicle_types[index].count > 1) {
-        this.transportList[i].vehicle_types[index].count = this.transportList[i].vehicle_types[index].count - 1;
-        this.transportList[i].totalCount = this.transportList[i].vehicle_types[index].count;
-      }
-  }
-
-  togglevehicleSection(i,index){
-    this.transportList[i].vehicle_types[index].toggle_vehicle = true;
-  }
-
-  showTrasportCount() {
-      this.displayVehicleCount = !this.displayVehicleCount;
-  }
-
-  showPersonCount(){
-  this.displayPersonCount = !this.displayPersonCount;
-  }
-
-  addrooms() {
-    let tempRoom: Room = {
-      id: this.rooms.length + 1,
-      adults: 1,
-      children: 0,
-      child_ages: [],
-      pax_info_str:null,
-      seq_no:""
-    };
-
-    this.rooms.push(tempRoom);
-  }
-
-  removerooms(i: number) {
-    this.rooms.splice(i, 1);
-  }
-
-  toggleButton() {
-    this.displayTab = !this.displayTab;
-    this.changeButton = !this.changeButton;
-  }
-
+  /**
+ * Method to set main traveller
+ */
   mainTraveller(i){
     this.rooms.forEach(value => {
       for(let j=0;j< value.adults;j++){
@@ -426,6 +397,9 @@
       this.mainTraveller[i] = true;
   }
 
+  /**
+ * Method to fetch saved itinerary
+ */
   getTripData(){
     this.common.getTrip(this.appStore.customeTripId).subscribe((data) => {
       this.tripData = data;
@@ -452,6 +426,9 @@
     });
   }
 
+  /**
+   * Method to book trip and check availability
+   */
   bookTrip(){
     this.submitted = true;
     let travellers = [];
@@ -501,9 +478,7 @@
     this.common.bookTrip(body,this.appStore.customeTripId).subscribe((data) => {
       this.bookingId = data.id;
       localStorage.setItem("reference_no",data.reference_no)
-      this.spinner.show();
       this.common.checkAvailability(data.id).subscribe((response)=> {
-        this.spinner.hide();
           if(response.makkah_trip_hotel){
             if(response.makkah_trip_hotel.success){
               (<HTMLElement>document.getElementById("changemakkaHotel")).style.backgroundColor = "unset";
@@ -534,7 +509,6 @@
               window.scrollTo(0,0);
             } 
           }
-          this.spinner.hide();
           if((response.makkah_trip_hotel && response.makkah_trip_hotel.success == false) || (response.medinah_trip_hotel && response.medinah_trip_hotel.success == false) ||(response.trip_transportation && response.trip_transportation.success == false) || response.refetch_trip == true ){
             (<HTMLInputElement>document.getElementById("payBtn")).style.display = "none";
             (<HTMLInputElement>document.getElementById("continueBooking")).style.display = "block";
@@ -551,7 +525,10 @@
     });
   }
 
-  startTimer() {
+  /**
+   * Method to close payment popup after 30 sec
+   */
+  setTimerForIbanPopup() {
     this.interval = setInterval(() => {
       if(this.timeLeft > 0) {
         this.timeLeft--;
@@ -564,6 +541,9 @@
     },1000)
   }
 
+   /**
+   * Method to navigate payment success page
+   */
   onSubmitButtonClicked(){
      // "account_no": "SA1790941327111000000002" ,
      //"auth_code": "5NMABO6U2RH2ZR5B"
@@ -592,26 +572,33 @@
     }
   }
 
+  /**
+   * Method to navigate makka stepper when check availability fails
+   */
   changemakkaHotel(){
     this.move(0);
-    //this.moveToMakkaTab();
     (<HTMLElement>document.getElementById("changemakkaHotel")).style.backgroundColor = "unset";
     (<HTMLInputElement>document.getElementById("payBtn")).style.display = "none";
     (<HTMLInputElement>document.getElementById("continueBooking")).style.display = "block";
   }
 
+  /**
+   * Method to navigate madina stepper when check availability fails
+   */
   changemadinahHotel(){
     if(this.steps.length > 2){
       this.move(1);
     }else{
       this.move(0);
     }
-    //this.moveToMadeenaTab();
     (<HTMLElement>document.getElementById("changemadinahHotel")).style.backgroundColor = "unset";
     (<HTMLInputElement>document.getElementById("payBtn")).style.display = "none";
     (<HTMLInputElement>document.getElementById("continueBooking")).style.display = "block";
   }
 
+  /**
+   * Method to navigate transport stepper when check availability fails
+   */
   changeTransport(){
     if(this.steps.length > 2){
       this.move(2);
@@ -668,6 +655,9 @@
       };
   }
 
+  /**
+   * Method to set pax info and room allocation at the payment preview page 
+   */
   setdataForUserDetailsAtLastPage(){
     this.roomAdultsArray.clear();
     this.roomChildrenArray.clear();
@@ -683,6 +673,9 @@
     }
   }
 
+  /**
+   * Method to call all the apis for transport search 
+   */
   fetchNessoryApisForTransport(){
     this.selectedLanguage = this.appStore.langCode
     this.common.getVehicles(this.selectedLanguage).subscribe((data) => {
@@ -712,6 +705,9 @@
     });
   }
 
+  /**
+   * Method to call corresponding steppers according to user selection  
+   */
   callCorrespongingSteppers(){
     if(this.steps.includes("1")){
       this.hotelSearch("MAKKA");
@@ -775,98 +771,18 @@
     return this.form.controls;
   }
 
-  public onRouteSelect(item: any) {
+  /**
+   * Method to set route id from drop down
+   * @param item 
+   */
+  onRouteSelect(item: any) {
     this.routeId = item.item_id;
     this.disableBtn = true;
   }
-  
-  onCategoryDeselect(item: any) { 
-    const index = this.categoryIds.indexOf(item.item_id);
-    if (index > -1) {
-      this.categoryIds.splice(index, 1);
-    }
-        const q = [];
-        this.categoryId = item.item_id;
-        this.transportListData.forEach((value, index) => {
-          this.categoryIds.forEach(id => {
-            const a = value.vehicle_types.map(x=>x.categories[0].category_code == id)
-            if(a[0]){
-              q.push(value)
-            }
-          });
-        });
-        this.transportList = q.filter(this.helperService.onlyUnique);
-  }
-  
-  onadditionalDeSelectAll(items: any){
-    this.transportList = this.transportListData;
-  }
-
-  onCategoryDeSelectAll(items: any){
-    this.transportList = this.transportListData;
-  }
-  
-  onadditionalItemSelect(item: any) {
-    this.additionl_serviceId=[];
-    let id = item.item_id
-    this.additionl_serviceId.push(id);
-    const q = [];
-    this.transportListData.forEach((value, index) => {
-      this.additionl_serviceId.forEach(id => {
-        const a = value.vehicle_types.map(x=>x.categories[0].additional_services.map(c=> c.additional_service_code) == id)
-        if(a[0]){
-          q.push(value)
-        }
-      });
-    });
-    this.transportList = q.filter(this.helperService.onlyUnique);
-  }
-
-  onadditionalItemDeselect(item: any) {
-    const index = this.additionl_serviceId.indexOf(item.item_id);
-    if (index > -1) {
-      this.additionl_serviceId.splice(index, 1);
-    }
-    const q = [];
-    this.transportListData.forEach((value, index) => {
-      this.additionl_serviceId.forEach(id => {
-        const a = value.vehicle_types.map(x=>x.categories[0].additional_services.map(c=> c.additional_service_code) == id)
-        if(a[0]){
-          q.push(value)
-        }
-      });
-    });
-    this.transportList = q.filter(this.helperService.onlyUnique);
-  }
     
-  onadditionalsericeSelectAll(items: any) {
-    this.additionlserviceId = items.map(x=>x.item_id);
-    const q = [];
-    this.transportListData.forEach((value, index) => {
-      this.additionlserviceId.forEach(id => {
-        const a = value.vehicle_types.map(x=>x.categories[0].additional_services.map(c=> c.additional_service_code) == id)
-        if(a[0]){
-          q.push(value)
-        }
-      });
-    });
-    this.transportList = q.filter(this.helperService.onlyUnique);
-  }
-
-  onadditionalSelectAll(items: any) {
-    this.additionl_serviceId = items.map(x=>x.item_id);
-    const q = [];
-    this.transportListData.forEach((value, index) => {
-      this.additionl_serviceId.forEach(id => {
-        const a = value.vehicle_types.map(x=>x.categories[0].additional_services.map(c=> c.additional_service_code) == id)
-        if(a[0]){
-          q.push(value)
-        }
-      });
-    });
-    this.transportList = q.filter(this.helperService.onlyUnique);
-  }
-
+  /*
+ * this method for setting vehicle id and vehicle pax capacity
+ */
   onVehicleSelect(item: any) {
     this.vehicleId = item.item_id;
     if(this.vehicleId == 1){
@@ -880,25 +796,7 @@
     }
     this.disableBtn = true;
   }
-
-  onNationalityDeselect(item:any){
-    this.countryCode = null;
-    this.searchServiceButtonActive = false
-  }
-
-  onCountryDeselect(item:any){
-    this.countryCode = null;
-    this.searchServiceButtonActive = false
-  }
-
-  public onCountrySelect(item: any) {
-    this.countryCode = item.item_id;
-    this.selectedCountry = item.item_id;
-    if(this.nationalityCode && this.countryCode){
-      this.searchServiceButtonActive = true
-    }
-  }
-    
+  
   /*
  * this method for call back from hotel-details-popup component
  */
