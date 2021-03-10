@@ -94,7 +94,7 @@
 					<select name="" id="" class="countrycode" [ngModelOptions]="{standalone: true}"  [(ngModel)]="countrycode1">
 						<option *ngFor="let item of countries" [value]="item.code">{{item.code}} ({{item.iso_code}})</option>
 					</select>
-					<input id="phnnumber" placeholder="Enter Phone Number"  type="text" [(ngModel)]="phoneNumber"
+					<input id="phnNumber" placeholder="Enter Phone Number"  type="text" [(ngModel)]="phoneNumber"
 					class="form-control phnenumbertxt" numberOnly maxlength="15">
 				</div>
             </div>
@@ -136,14 +136,14 @@
 				</div>
             <div class="col-md-12 m-0 p-0">
                 <div class="col-md-12 pb-1"><strong class="text-danger">*</strong> {{'OTP' | translate}}:</div>
-                <div class="col-md-12"><input type="text" placeholder="Enter OTP" class="form-control" id="auth_code" [(ngModel)]="otp" ></div>
+                <div class="col-md-12"><input type="text" placeholder="Enter OTP" class="form-control" id="otp" [(ngModel)]="otp" ></div>
 			 </div>
 			 <div class="col-md-12 m-0 p-0">
                 <div class="col-md-12 pb-1"><strong class="text-danger">*</strong> {{'Password' | translate}}:</div>
-                <div class="col-md-12"><input type="text" placeholder="Enter Password" class="form-control" id="auth_code" [(ngModel)]="ePassword" ></div>
+                <div class="col-md-12"><input type="text" placeholder="Enter Password" class="form-control" id="ePassword" [(ngModel)]="ePassword" ></div>
              </div><div class="col-md-12 m-0 p-0">
                 <div class="col-md-12 pb-1"><strong class="text-danger">*</strong> {{'Confirm Password' | translate}}:</div>
-                <div class="col-md-12"><input type="text" placeholder="Confirm Password" class="form-control" id="auth_code" [(ngModel)]="cPassword" ></div>
+                <div class="col-md-12"><input type="text" placeholder="Confirm Password" class="form-control" id="password" [(ngModel)]="cPassword" ></div>
              </div>
             </div>
         </div>
