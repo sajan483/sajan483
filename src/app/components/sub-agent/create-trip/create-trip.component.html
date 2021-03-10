@@ -76,7 +76,7 @@
                         </div>
                         <div>
                             <div class="mt60">
-                                <div class="col-md-12  row m-0 justify-content-between filterstyle p015">
+                                <div class="col-md-12  row m-0 justify-content-between filterstyle p015" *ngIf="isTransportResponseEmpty">
                                     <div id="routeSection" class="col-md-5 mb-0 pl-0">
                                         <ng-multiselect-dropdown [placeholder]="'Route' | translate" [data]="routeList"
                                             [settings]="dropdownSettings" (onSelect)="onRouteSelect($event)"
@@ -651,7 +651,7 @@
                                             style="color: #d33a2f;font-size: 15px;">{{'Booking Reference No' |
                                             translate}} :{{reference_no}} </span></div>
                                     <div class="text-align-end"><button type="submit" id="payBtn" class="bttnprimary"
-                                            data-toggle="modal" data-target="#ibanPopup" (click)="startTimer()">{{'PAY'
+                                            data-toggle="modal" data-target="#ibanPopup" (click)="setTimerForIbanPopup()">{{'PAY'
                                             | translate}}</button> </div>
                                 </div>
                                 <div class="d-flex flex-row m-2">
