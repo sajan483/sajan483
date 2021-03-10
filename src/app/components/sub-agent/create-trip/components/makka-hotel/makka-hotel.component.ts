@@ -183,5 +183,13 @@ export class MakkaHotelComponent implements OnInit,DoCheck{
     (<HTMLElement>document.getElementById("readMoreBttn"+i)).style.display = "inline-block";
     event.target.previousElementSibling.previousElementSibling.style.maxHeight = null;
   }
+  moreFilter(){
+    if((<HTMLElement>document.getElementById("moreFilterDown")).style.maxHeight){
+      (<HTMLElement>document.getElementById("moreFilterDown")).style.maxHeight = null;
+    }else{
+      (<HTMLElement>document.getElementById("moreFilterDown")).style.maxHeight = "416px";
+    }
+    
+  }
   
 }

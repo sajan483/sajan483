@@ -11,6 +11,7 @@ import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { MatStepperModule, MatInputModule, MatButtonModule, MatDatepickerModule, MatNativeDateModule, MatTabsModule, MatFormFieldModule, MatSelectModule, MatRadioModule, MatExpansionModule, MatCheckboxModule, MatProgressBarModule } from '@angular/material';
+import {MatSliderModule} from '@angular/material/slider'; 
 import { NgbRatingModule, NgbCarouselModule } from '@ng-bootstrap/ng-bootstrap';
 import { TranslateModule, TranslateLoader, TranslateService } from '@ngx-translate/core';
 import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
@@ -85,6 +86,7 @@ import { PaymentTransportComponent } from 'src/app/components/sub-agent/create-t
     OwlNativeDateTimeModule,
     MatSelectModule,
     MatDatepickerModule,
+    MatSliderModule,
     MatNativeDateModule,
     CarouselModule,
     NgMultiSelectDropDownModule.forRoot(),
