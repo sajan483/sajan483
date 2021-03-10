@@ -104,7 +104,6 @@ export class MakkaHotelComponent implements OnInit,DoCheck{
     this.showDetailsShimmer=true;
     this.hotelInfo = item;
     this.appStore.showHotelDetails = true;
-    
     this.appStore.showHotelDetailsShimmer = true;
     this.showHotelDetailsShimmer = true;
     this.selectedRoomCount = 0;

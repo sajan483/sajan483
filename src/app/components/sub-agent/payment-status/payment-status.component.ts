@@ -11,14 +11,16 @@ import { NotificationService } from 'src/app/common/services/notification.servic
 import { GeneralHelper } from 'src/app/helpers/General/general-helpers';
 import { CreateTripHelper } from 'src/app/helpers/sub-agent/create-trip-helpers';
 import { HelperService } from "src/app/common/services/helper-service";
+
 @Component({
   selector: 'app-payment-status',
   templateUrl: './payment-status.component.html',
   styleUrls: ['./payment-status.component.scss'],
   providers: [
-    CommonApiService, HelperService
+    HelperService
   ],
 })
+
 export class PaymentStatusComponent implements OnInit {
   tripData: any;
   tripMakkahHotel: any;
@@ -61,11 +63,7 @@ export class PaymentStatusComponent implements OnInit {
   }
 
   ngOnInit() {
-    if (this.genHelper.getAccessTocken() == "") {
-      this.notifyService.showWarning(this.translate.instant("Please Login"))
-      this.router.navigate(['/login']);
-      return;
-    }
+    this.genHelper.checkForAccessToken();
     this.createHelper = new CreateTripHelper(this.helperService);
     this.paymentLoader.show();
     this.status = this.route.snapshot.params.status;
@@ -225,7 +223,7 @@ export class PaymentStatusComponent implements OnInit {
     link.download = "Voucher.pdf";
     link.click();
   }
-  // Need clarification
+  
   checkCancellation() {
     this.paymentLoader.show();
     this.common.getCheckCancellation(this.route.snapshot.params.id).subscribe((data) => {
@@ -247,7 +245,7 @@ export class PaymentStatusComponent implements OnInit {
       }
     });
   }
-  // Need Clarification
+  
   confirmCancellation() {
     if ((<HTMLTextAreaElement>document.getElementById("confirmCancellationInput")).value == "") {
       this.notifyService.showWarning(this.translate.instant("Please mention the reason for cancellation"))
@@ -267,21 +265,26 @@ export class PaymentStatusComponent implements OnInit {
     document.body.appendChild(form);
     form.submit();
   }
+
   closecancelPopup() {
     this.cancelationPopup = false;
   }
+
   makkahcheck() {
     this.makkahchecked = true;
     this.cancelbuttondisable();
   }
+
   medinahcheck() {
     this.medinahchecked = true;
     this.cancelbuttondisable();
   }
+
   transportcheck() {
     this.transportchecked = true;
     this.cancelbuttondisable();
   }
+
   cancelbuttondisable() {
     this.viewbttn = this.createHelper.cancelbuttondisable(this.makkahCancellation, this.medinahCancellation, this.transportCancellation, this.makkahchecked, this.medinahchecked, this.transportchecked)
   }
