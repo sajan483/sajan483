@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnChanges, OnInit, Output,EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-payment-hotel',
@@ -6,12 +6,26 @@ import { Component, Input, OnInit } from '@angular/core';
   styleUrls: ['./payment-hotel.component.scss']
 })
 
-export class PaymentHotelComponent implements OnInit {
+export class PaymentHotelComponent implements OnInit,OnChanges {
   @Input() tripHotel:any; 
-  @Input() city1:any;
-  @Input() city2:any;
+  @Input() city:any;
+  @Output() notifyCreateTrip = new EventEmitter();
+  showMakkah: boolean = false;
+  showMadinah: boolean = false;
   constructor() { }
 
   ngOnInit() {
   }
+
+  ngOnChanges(){
+    if(this.city == "makkah"){this.showMakkah = true}
+    if(this.city == "madinah"){this.showMadinah = true}
+  }
+
+  goToHotelStepper(event){
+    if(event ){
+      this.notifyCreateTrip.emit(event)
+    }
+  }
+
 }

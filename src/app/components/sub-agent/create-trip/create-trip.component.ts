@@ -93,6 +93,8 @@
     transportStartDate: any;
     companylistall: any;
     isTransportResponseEmpty: boolean = false;
+    cityFirst: string = "";
+    citySecond: string = "";
     toggleMeridian() {
         this.meridian = !this.meridian;
     }
@@ -460,34 +462,19 @@
       localStorage.setItem("reference_no",data.reference_no)
       this.common.checkAvailability(data.id).subscribe((response)=> {
           if(response.makkah_trip_hotel){
-            if(response.makkah_trip_hotel.success){
-              (<HTMLElement>document.getElementById("changemakkaHotel")).style.backgroundColor = "unset";
-              (<HTMLElement>document.getElementById("changemakkaHotel")).style.display = "none";
-            }else{
-              (<HTMLElement>document.getElementById("changemakkaHotel")).style.backgroundColor = "#0000005c";
-              (<HTMLElement>document.getElementById("changemakkaHotel")).style.display = "block";
-              window.scrollTo(0,0);
-            } 
+            //if(response.makkah_trip_hotel.success == false){
+              this.cityFirst = "makkah";
+            //}
           }
           if(response.medinah_trip_hotel){
-            if(response.medinah_trip_hotel.success){
-              (<HTMLElement>document.getElementById("changemadinahHotel")).style.backgroundColor = "unset";
-              (<HTMLElement>document.getElementById("changemadinahHotel")).style.display = "none";
-            }else{
-              (<HTMLElement>document.getElementById("changemadinahHotel")).style.backgroundColor = "#0000005c";
-              (<HTMLElement>document.getElementById("changemadinahHotel")).style.display = "block";
-              window.scrollTo(0,0);
+            if(response.medinah_trip_hotel.success == false){
+              this.citySecond = "madinah";
             }
           }
           if(response.trip_transportation){
             if(response.trip_transportation.success){
-              (<HTMLElement>document.getElementById("changeTransport")).style.backgroundColor = "unset";
-              (<HTMLElement>document.getElementById("changeTransport")).style.display = "none";
-            }else{
-              (<HTMLElement>document.getElementById("changeTransport")).style.backgroundColor = "#0000005c";
-              (<HTMLElement>document.getElementById("changeTransport")).style.display = "block";
-              window.scrollTo(0,0);
-            } 
+
+            }
           }
           if((response.makkah_trip_hotel && response.makkah_trip_hotel.success == false) || (response.medinah_trip_hotel && response.medinah_trip_hotel.success == false) ||(response.trip_transportation && response.trip_transportation.success == false) || response.refetch_trip == true ){
             (<HTMLInputElement>document.getElementById("payBtn")).style.display = "none";
@@ -525,7 +512,7 @@
    * Method to navigate payment success page
    */
   onSubmitButtonClicked(){
-     // "account_no": "SA1790941327111000000002" ,
+     //"account_no": "SA1790941327111000000002" ,
      //"auth_code": "5NMABO6U2RH2ZR5B"
     var w = {
        "booking_id": this.bookingId,
@@ -551,44 +538,6 @@
       this.notifyService.showWarning(this.translateService.instant("Payment Credentials Missing"))
     }
   }
-
-  /**
-   * Method to navigate makka stepper when check availability fails
-   */
-  changemakkaHotel(){
-    this.move(0);
-    (<HTMLElement>document.getElementById("changemakkaHotel")).style.backgroundColor = "unset";
-    (<HTMLInputElement>document.getElementById("payBtn")).style.display = "none";
-    (<HTMLInputElement>document.getElementById("continueBooking")).style.display = "block";
-  }
-
-  /**
-   * Method to navigate madina stepper when check availability fails
-   */
-  changemadinahHotel(){
-    if(this.steps.length > 2){
-      this.move(1);
-    }else{
-      this.move(0);
-    }
-    (<HTMLElement>document.getElementById("changemadinahHotel")).style.backgroundColor = "unset";
-    (<HTMLInputElement>document.getElementById("payBtn")).style.display = "none";
-    (<HTMLInputElement>document.getElementById("continueBooking")).style.display = "block";
-  }
-
-  /**
-   * Method to navigate transport stepper when check availability fails
-   */
-  changeTransport(){
-    if(this.steps.length > 2){
-      this.move(2);
-    }else{
-      this.move(0);
-    }
-    (<HTMLElement>document.getElementById("changeTransport")).style.backgroundColor = "unset";
-    (<HTMLInputElement>document.getElementById("payBtn")).style.display = "none";
-    (<HTMLInputElement>document.getElementById("continueBooking")).style.display = "block";
-  }
   
   @ViewChild("multiSelect", { static: true }) multiSelect;
   public form: FormGroup;
@@ -598,6 +547,21 @@
   ngOnInit() {
     this.generalHelper.checkForAccessToken();
     if(!this.appStore.showShimmer){this.appStore.showShimmer = true,this.showShimmer = true}
+    this.setUserDetails()
+    this.travellersCount = this.appStore.totalTravellers;
+    this.rooms = CreateTripComponent.RoomData;
+    this.appStore.roomArray = this.rooms;
+    this.appStore.stepperIndex = 0;
+    this.selectedCurrency = "SAR";
+    if(this.steps.includes("3")){this.fetchNessoryApisForTransport();}
+    this.multiSelectDropDownSettings()
+    this.setForm();
+    this.callCorrespongingSteppers();
+    this.setdataForUserDetailsAtLastPage();
+    this.fetchNessoryApisForPaymentPage();
+  }
+  
+  setUserDetails(){
     this.userDetails = CreateTripComponent.UserObjectData;
     this.appStore.userDetails = this.userDetails;
     if(typeof(this.userDetails) == 'undefined'){this.router.navigate(['subagent/home'])}
@@ -611,16 +575,6 @@
     this.vehicleMax = this.userDetails.vehicleCapacity;
     this.routeId = this.userDetails.transportRoute;
     }
-    this.travellersCount = this.appStore.totalTravellers;
-    this.rooms = CreateTripComponent.RoomData;
-    this.appStore.roomArray = this.rooms;
-    this.appStore.stepperIndex = 0;
-    this.selectedCurrency = "SAR";
-    this.fetchNessoryApisForTransport();
-    this.multiSelectDropDownSettings()
-    this.setForm();
-    this.callCorrespongingSteppers();
-    this.setdataForUserDetailsAtLastPage();
   }
 
   multiSelectDropDownSettings(){
@@ -654,6 +608,21 @@
   }
 
   /**
+   * Method to call all the apis for Payment page 
+   */
+  fetchNessoryApisForPaymentPage(){
+    this.common.getCountry("",this.selectedLanguage).subscribe((data) => {
+      this.nationalityList = data.map(x => ( {item_text: x.name, item_id: x.short_iso_code } ));
+    });
+    this.common.getNationality("",this.selectedLanguage).subscribe((data) => {
+      this.phoneCodeList = data.map(x => ( {item_text: x.name, item_id: x.code } ));
+    });
+    this.common.getCountry("",this.selectedLanguage).subscribe((data) => {
+      this.countryList = data.map(x => ( {item_text: x.name, item_id: x.short_iso_code } ));
+    });
+  }
+
+  /**
    * Method to call all the apis for transport search 
    */
   fetchNessoryApisForTransport(){
@@ -674,24 +643,13 @@
       this.companyList = data.companies.map(x => ( {item_text: x.name, item_id: x.code } ));
       this.companylistall = data.companies;
     });
-    this.common.getCountry("",this.selectedLanguage).subscribe((data) => {
-      this.nationalityList = data.map(x => ( {item_text: x.name, item_id: x.short_iso_code } ));
-    });
-    this.common.getNationality("",this.selectedLanguage).subscribe((data) => {
-      this.phoneCodeList = data.map(x => ( {item_text: x.name, item_id: x.code } ));
-    });
-    this.common.getCountry("",this.selectedLanguage).subscribe((data) => {
-      this.countryList = data.map(x => ( {item_text: x.name, item_id: x.short_iso_code } ));
-    });
   }
 
   /**
    * Method to call corresponding steppers according to user selection  
    */
   callCorrespongingSteppers(){
-    if(this.steps.includes("1")){
-      this.hotelSearch("MAKKA");
-    }
+    if(this.steps.includes("1")){ this.hotelSearch("MAKKA"); }
     
     if(!this.steps.includes("1") && this.steps.includes("2")){
       this.madeenaloader = true;
@@ -765,15 +723,9 @@
  */
   onVehicleSelect(item: any) {
     this.vehicleId = item.item_id;
-    if(this.vehicleId == 1){
-      this.vehicleMax = 4;
-    }
-    if(this.vehicleId == 2){
-      this.vehicleMax = 7;
-    }
-    if(this.vehicleId == 3){
-      this.vehicleMax = 60;
-    }
+    if(this.vehicleId == 1){ this.vehicleMax = 4; }
+    if(this.vehicleId == 2){ this.vehicleMax = 7; }
+    if(this.vehicleId == 3){ this.vehicleMax = 60; }
     this.disableBtn = true;
   }
   
@@ -789,6 +741,14 @@
     if(this.steps.includes("2") && this.appStore.stepperIndex == 1){
       this.hotelSearch("MADEENA");
     }
+  }
+
+  /*
+ * this method to move to payment page after check availability fails
+ */
+  moveToPaymentPage(cityName){
+    if(cityName == 'makkah'){ this.move(0); }
+    if(cityName == "madinah"){ this.move(1);}
   }
 
   /*
@@ -823,9 +783,7 @@
  */
   ngDoCheck(){
     this.generalHelper.checkForAccessToken();
-    if(!this.appStore.showShimmer) {
-      this.showShimmer = false;
-    } 
+    if(!this.appStore.showShimmer) { this.showShimmer = false;} 
   }
 
    /**
