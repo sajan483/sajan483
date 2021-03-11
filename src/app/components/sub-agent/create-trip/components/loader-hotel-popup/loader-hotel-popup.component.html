@@ -51,46 +51,32 @@
             </div>
         </div>
         <div>
-            <div class="hotel-tabs  mt-3 mb-3">
-                <nav id="navTab">
-                    <div class="nav nav-tabs nav-fill" id="nav-tab" role="tablist">
-                        <a class="nav-item nav-link active" id="nav-manage-tab" data-toggle="tab" href="#selectRoom"
-                            role="tab" aria-selected="false">{{'Room Type' | translate}}</a>
-                        <div class="spacer"></div>
-                        <a class="nav-item nav-link" id="nav-package-tab" data-toggle="tab" href="#roomAmenities"
-                            role="tab" aria-selected="false">{{'More Details' | translate}}</a>
-                        <div class="spacer"></div>
-                        <a class="nav-item nav-link" id="nav-package-tab" data-toggle="tab" href="#roomPolicy"
-                            role="tab" aria-selected="false">{{'Policy' | translate}}</a>
-                    </div>
-                </nav>
-                <div class="tab-content p-0 mr-0 ml-0 mb-5">
-                    <div id="selectRoom" class="tab-pane in active">
-                        <div class="p-3">
-                            <div class="w-100 shine lines"></div>
-                            <div class="w-100 shine lines"></div>
-                            <div class="w-100 shine lines"></div>
-                            <div class="w-100 shine lines"></div>
-                        </div>
-                    </div>
-                    <div id="roomAmenities" class="tab-pane fade ">
-                        <div class="p-3">
-                            <div class="w-100 shine lines"></div>
-                            <div class="w-100 shine lines"></div>
-                            <div class="w-100 shine lines"></div>
-                            <div class="w-100 shine lines"></div>
-                        </div>
-                    </div>
-                    <div id="roomPolicy" class="tab-pane fade ">
-                        <div>
-                            <div class="w-100 shine lines"></div>
-                            <div class="w-100 shine lines"></div>
-                            <div class="w-100 shine lines"></div>
-                            <div class="w-100 shine lines"></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            <mat-tab-group>
+                <mat-tab label="Room Type"> 
+                    <div class="borderbox mb80 p20">
+                        <div class="w-100 shine lines"></div>
+                        <div class="w-100 shine lines"></div>
+                        <div class="w-100 shine lines"></div>
+                        <div class="w-100 shine lines"></div>
+                    </div>    
+                </mat-tab>
+                <mat-tab label="More Details">
+                    <div class="borderbox mb80 p20">
+                        <div class="w-100 shine lines"></div>
+                        <div class="w-100 shine lines"></div>
+                        <div class="w-100 shine lines"></div>
+                        <div class="w-100 shine lines"></div>
+                    </div>  
+                </mat-tab>
+                <mat-tab label="Policy">
+                    <div class="borderbox mb80 p20">
+                        <div class="w-100 shine lines"></div>
+                        <div class="w-100 shine lines"></div>
+                        <div class="w-100 shine lines"></div>
+                        <div class="w-100 shine lines"></div>
+                    </div>  
+                </mat-tab>
+            </mat-tab-group>
         </div>
     </div>
 </div>

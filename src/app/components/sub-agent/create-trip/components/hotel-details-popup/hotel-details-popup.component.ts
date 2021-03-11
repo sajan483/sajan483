@@ -195,5 +195,4 @@ export class HotelDetailsPopupComponent implements OnInit ,OnChanges{
   viewAllImagePopup(){
     this.roomImageGallery = !this.roomImageGallery;
   }
-  
 }

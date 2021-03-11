@@ -1,17 +1,18 @@
 <div class="animationdiv">
-    <div class="mt140 mb-5">
-        <div class="hotel_filter_section filterbox col-md-12 row mrhntopphone ml-0 mr-0 animationdiv">
-            <div class="col-md-3 p-0 ml-0 mr-0 fliter-arrow my-auto">
+    <div class="mt140 mb-5 smallmt">
+        <div class="hotel_filter_section filterbox col-md-12 row mrhntopphone mx-auto animationdiv">
+            <div class="col-md-2 pl-0 pr-0 pt-1 ml-0 mr-0 fliter-arrow my-auto">
                 <div class="">
-                    <i class="fa fa-filter pl-2" aria-hidden="true"></i>
-                    {{'Filters' | translate}}
+                    <i class="filtericon icon_size_15 icns filterdiv"></i>
+                    <div class="fs12 fw500 text-uppercase">{{'Filters' | translate}}</div>
                 </div>
             </div>
             <div class="col-md-3 col-8  my-auto ">
-                <span class="pr-2">{{'Haram Distance' | translate}}</span>
+                <span class="pr-2 fs14">{{'Haram Distance' | translate}}</span>
                 <span class="fliter-arrow">
                     <div *ngIf="!isHotelListSortedByHaramDistance">
-                        <button (click)="sortHotelList('asnd',null,'hararamDistance')"><i class="fa fa-angle-down"></i></button>
+                        <button (click)="sortHotelList('asnd',null,'hararamDistance')"><i
+                                class="fa fa-angle-down"></i></button>
                     </div>
                     <div *ngIf="isHotelListSortedByHaramDistance">
                         <button (click)="sortHotelList(null,'dsnd','hararamDistance')"><i
@@ -19,8 +20,8 @@
                     </div>
                 </span>
             </div>
-            <div class="col-md-3  my-auto  col-4">
-                <span class="pr-2">{{'Price' | translate}}</span>
+            <div class="col-md-2  my-auto  col-4">
+                <span class="pr-2 fs14">{{'Price' | translate}}</span>
                 <span class="fliter-arrow">
                     <div *ngIf="!isHotelsSortedByPrice">
                         <button (click)="sortHotelList('asnd',null,'price')"><i class="fa fa-angle-down"></i></button>
@@ -30,9 +31,93 @@
                     </div>
                 </span>
             </div>
+            <div class="col-md-2 my-auto" (click)="moreFilter()">
+                <div class="cursor-pointer">
+                    <span class="pr-2 fs14">More Filters</span>
+                    <span><i class="fa fa-angle-down"></i></span>
+                </div>
+            </div>
             <div class="col-md-3 text-right pr-0">
-                <input class="haram_filter fs13" type="text" name="search" autocomplete="off"
+                <input class="haram_filter fs13 mt5" type="text" name="search" autocomplete="off"
                     placeholder="Search By Hotel Name">
+            </div>
+            <div class="col-md-12 p-0 maxhght0" id="moreFilterDown">
+                <div class="mt8 row ml-0 mr-0 brdr_top_d3">
+                    <div class="col-md-4 mt20">
+                        <h4 class="fs14">STAR RATING</h4>
+                        <div>
+                            <span class="example-list-section">
+                                <ul>
+                                    <li>
+                                        <mat-checkbox>
+                                            <ngb-rating [rate]="5" [readonly]="readonly" [max]=5>
+                                                <ng-template let-fill="fill" let-index="index">
+                                                    <span class="star" [class.filled]="fill === 100"
+                                                        [class.bad]="index < 2">&#9733;</span>
+                                                </ng-template>
+                                            </ngb-rating> (3)
+                                        </mat-checkbox>
+                                    </li>
+                                    <li>
+                                        <mat-checkbox>
+                                            <ngb-rating [rate]="4" [readonly]="readonly" [max]=5>
+                                                <ng-template let-fill="fill" let-index="index">
+                                                    <span class="star" [class.filled]="fill === 100"
+                                                        [class.bad]="index < 2">&#9733;</span>
+                                                </ng-template>
+                                            </ngb-rating> (5)
+                                        </mat-checkbox>
+                                    </li>
+                                    <li>
+                                        <mat-checkbox>
+                                            <ngb-rating [rate]="3" [readonly]="readonly" [max]=5>
+                                                <ng-template let-fill="fill" let-index="index">
+                                                    <span class="star" [class.filled]="fill === 100"
+                                                        [class.bad]="index < 2">&#9733;</span>
+                                                </ng-template>
+                                            </ngb-rating> (4)
+                                        </mat-checkbox>
+                                    </li>
+                                </ul>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="col-md-4 mt20 brdr_left_right_d3">
+                        <div>
+                            <h4 class="fs14">PRICE RANGE</h4>
+                            <span class="pr-2 fs13 clr52">Upto</span>
+                            <span>
+                                <mat-slider thumbLabel [displayWith]="formatLabel" tickInterval="1000" min="300"
+                                    max="10000"></mat-slider>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="col-md-4 mt20">
+                        <div>
+                            <h4 class="fs14">AMENITIES</h4>
+                            <span class="example-list-section">
+                                <ul>
+                                <li>
+                                    <mat-checkbox>
+                                            Free WIFI
+                                    </mat-checkbox>
+                                </li>
+                                <li>
+                                    <mat-checkbox>
+                                        Bathrobe
+                                    </mat-checkbox>
+                                </li>
+                                <li>
+                                    <mat-checkbox>
+                                        Refrigerator
+                                    </mat-checkbox>
+                                </li>
+                                </ul>
+                            </span>
+                        </div>
+                        
+                    </div>
+                </div>
             </div>
         </div>
         <div class="padding_hotel1" *ngFor="let item of hotelsList | filterBy: userFilter;let i = index">
@@ -59,13 +144,14 @@
                                 </header>
                             </section>
                         </div>
-                        <div class="col-md-8 col-12 pr-0">
+                        <div class="col-md-8 col-12 pr-0 pl-0">
                             <div class="uitk-card-content row">
                                 <div class="result-details-left col-md-8 col-12">
                                     <div class="d-flex flex-column ">
                                         <div class="d-inline-flex">
                                             <div>
-                                                <h3 class="hotel_name" title="{{item?.name}}">{{item?.name | titlecase }}</h3>
+                                                <h3 class="hotel_name" title="{{item?.name}}">
+                                                    {{item?.name | titlecase }}</h3>
                                             </div>
                                             <div class="pl-1">
                                                 <ngb-rating [(rate)]="item.rating" [readonly]="readonly" [max]=5>
@@ -78,13 +164,21 @@
                                         </div>
                                         <div class="d-inline-flex pb5" *ngIf="item.haram_distance">
                                             <div class="pr-2"><i class="makkahharam icns icon_size_15"></i></div>
-                                            <div class="fs13 clr52 fw400"><strong class="clr01 fs14 fw500">HARAM</strong> {{item?.haram_distance}} km</div>
+                                            <div class="fs13 clr52 fw400"><strong
+                                                    class="clr01 fs14 fw500">HARAM</strong> {{item?.haram_distance}} km
+                                            </div>
+                                        </div>
+                                        <div class="d-inline-flex pb5" *ngIf="item.nabawi_distance">
+                                            <div class="pr-2"><i class="madeenanabawi icns icon_size_15"></i></div>
+                                            <div class="fs13 clr52 fw400"><strong
+                                                    class="clr01 fs14 fw500">NABAWI</strong> {{item?.nabawi_distance}} km
+                                            </div>
                                         </div>
                                         <div class="d-inline-flex pb5" *ngIf="item.address">
                                             <div class="pr-2"><i class="locationicon icns icon_size_15"></i></div>
                                             <div class="fs12 clr52">{{item?.address}}</div>
                                         </div>
-                                        <div class="d-inline-flex pb5" >
+                                        <!-- <div class="d-inline-flex pb5">
                                             <div *ngIf="item.phone" class="d-inline-flex pr-3">
                                                 <div class="pr-2"><i class="Phoneicon icns icon_size_15"></i></div>
                                                 <div class="fs12 clr52">{{item?.phone}}</div>
@@ -93,19 +187,23 @@
                                                 <div class="pr-2"><i class="mailicon icns icon_size_15"></i></div>
                                                 <div class="fs12 clr52">{{item?.email}}</div>
                                             </div>
-                                        </div>
+                                        </div> -->
                                         <div *ngIf="item.description">
-                                            <div class="pb5 fs13 clr52 desptn divexpandanimation" id="descrptionLess{{i}}">{{item?.description}}</div>
-                                            <div class="readmorenavigate fs13" id="readMoreBttn{{i}}" (click)="readMore($event,i)">+ Read More</div>
-                                            <div class="readmorenavigate fs13 dsplynone" id="readLessBttn{{i}}" (click)="readLess($event,i)">- Read Less</div>
+                                            <div class="pb5 fs13 clr52 desptn divexpandanimation"
+                                                id="descrptionLess{{i}}">{{item?.description}}</div>
+                                            <div class="readmorenavigate fs13" id="readMoreBttn{{i}}"
+                                                (click)="readMore($event,i)">+ Read More</div>
+                                            <div class="readmorenavigate fs13 dsplynone" id="readLessBttn{{i}}"
+                                                (click)="readLess($event,i)">- Read Less</div>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="d-flex align-items-end flex-column result-details-right pr-0 col-md-4 col-12">
+                                <div
+                                    class="d-flex align-items-end flex-column result-details-right pr-0 col-md-4 col-12">
                                     <div class="text-center">
                                         <h3 class="hotel_prise">{{item?.currency_code}} {{item?.amount | number:'.2-2'}}
                                         </h3>
-                                        <button class="searchbutton pull-right m-0" id="showHotelSelect{{i}}" 
+                                        <button class="searchbutton pull-right m-0" id="showHotelSelect{{i}}"
                                             (click)="showHotelDetailsPopUp(item)">{{'Select Room' | translate}}</button>
                                     </div>
                                 </div>
@@ -123,4 +221,5 @@
         <app-loader-hotel-popup></app-loader-hotel-popup>
     </div>
 </div>
-<app-hotel-details-popup (handleNotif)="childEvent($event)" *ngIf = "showHotelDetails" [hotelInfo]="hotelInfo" [hotelData]="hotelData"></app-hotel-details-popup>
+<app-hotel-details-popup (handleNotif)="childEvent($event)" *ngIf="showHotelDetails" [hotelInfo]="hotelInfo"
+    [hotelData]="hotelData"></app-hotel-details-popup>

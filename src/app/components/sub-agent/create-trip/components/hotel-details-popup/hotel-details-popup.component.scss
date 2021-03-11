@@ -201,15 +201,6 @@
   }
 }
 
-.holidayme {
-  font-style: normal;
-  font-weight: 400;
-  font-variant: normal;
-  text-transform: none;
-  line-height: 1;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
 
 #roomPolicy,#roomPolicy2,
 #roomCancellationPolicy2,
@@ -360,6 +351,7 @@ small.nonRefundable {
   grid-auto-rows: minmax(100px, auto);
   height: 340px;
   padding: 10px;
+  width: 100%;
   img{
     height: 100%;
     width: 100%;
@@ -395,3 +387,4 @@ small.nonRefundable {
     overflow: hidden;
     outline: 0;
 }
+

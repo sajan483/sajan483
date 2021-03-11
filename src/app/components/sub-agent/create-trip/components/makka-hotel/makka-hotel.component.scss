@@ -1,37 +1,31 @@
 @media only screen and (max-width: 768px) {
-  .phonedisplay{
-    display: inline-block !important;
-  }
-  .phonehide{
-    display: none !important;
-  }
-  .mat-step-text-label{
-    display: none !important;
-  }
   .hotel_name{
     white-space: normal !important;
   }
   .mrhntopphone{
     margin-top: 190px;
   }
+  .smallmt{
+    margin-top: -30px !important;
+  }
+  .uitk-card-content{
+    margin-left: 0 !important;
+    padding: 0 !important;
+  }
+  .result-details-left{
+    padding-left: 15px !important;
+  }
 }
-.phonedisplay{
-  display: none;
-}
-
-.pl4{
-  padding-left: 4px;
-}
-.backbutton{
-  padding: 4px;
-  border-radius: 15px;
-  border: 1px solid #a2c9f5;
+.filterdiv{
+  display: block;
+  margin-bottom: -4px;
+  margin-left: 13px;
 }
 .filter_section_outer,
 .hotel_filter_section {
   border-radius: 5px;
   background: #fff;
-  padding: 10px;
+  padding: 6px 10px;
 }
 .fliter-arrow {
   div {
@@ -41,9 +35,6 @@
     border: none;
     background: none;
     outline: none;
-    i {
-      color: #d32f2f;
-    }
   }
 }
 .haram_filter {
@@ -100,7 +91,6 @@
 .photo-gallery {
   height: 200px;
   position: relative;
-  width: 300px;
 }
 .photo-gallery img{
   height: 100%;
@@ -121,6 +111,7 @@
   width: 70%;
   float: left;
   padding-right: 10px;
+  padding-left: 5px;
 }
 .hotel_name {
   color: #000;
@@ -180,10 +171,23 @@
     overflow: hidden;
     outline: 0;
 }
-
-
-
-
-
-
-
+.example-list-section{
+  font-size: 13px;
+  color: #525252;
+  font-weight: normal;
+  height: auto;
+  overflow: unset;
+  overflow-y: auto;
+  display: block;
+  ul{
+    padding-left: 0px;
+    li{
+      list-style: none;
+    }
+  }
+}
+.maxhght0{
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.2s ease-out;
+}

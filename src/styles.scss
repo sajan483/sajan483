@@ -895,6 +895,9 @@ body{
 .fs22{
   font-size: 22px;
 }
+.fs24{
+  font-size: 24px;
+}
 .fs13{
   font-size: 13px;
 }
@@ -952,6 +955,9 @@ body{
 .mt80{
   margin-top: 80px;
 }
+.mt8{
+  margin-top: 8px;
+}
 .mt60{
   margin-top: 60px;
 }
@@ -960,6 +966,12 @@ body{
 }
 .mt20{
   margin-top: 20px;
+}
+.mt5{
+  margin-top: 5px;
+}
+.mt15{
+  margin-top: 15px;
 }
 .mt24{
   margin-top: 24px;
@@ -972,6 +984,9 @@ body{
 }
 .p8{
   padding: 8px;
+}
+.p20{
+  padding: 20px;
 }
 .p30{
   padding: 30px;
@@ -994,8 +1009,15 @@ body{
 .removeoutline:focus{
   outline: none;
 }
+.brdr_top_d3{
+  border-top: 1px solid #d3d3d3;
+}
 .brdr_bottom{
   border-bottom: 1px solid #f3f3f3;
+}
+.brdr_left_right_d3{
+  border-left: 1px solid #d3d3d3;
+  border-right: 1px solid #d3d3d3;
 }
 .allimagesgallery{
   position: absolute;
