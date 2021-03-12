@@ -467,9 +467,9 @@
             //}
           }
           if(response.medinah_trip_hotel){
-            if(response.medinah_trip_hotel.success == false){
+            //if(response.medinah_trip_hotel.success == false){
               this.citySecond = "madinah";
-            }
+           // }
           }
           if(response.trip_transportation){
             if(response.trip_transportation.success){
@@ -748,7 +748,8 @@
  */
   moveToPaymentPage(cityName){
     if(cityName == 'makkah'){ this.move(0); }
-    if(cityName == "madinah"){ this.move(1);}
+    if(cityName == "madinah" && this.steps.includes("2") && !this.steps.includes("1"))
+    { this.move(0);}else{this.move(3)}
   }
 
   /*
