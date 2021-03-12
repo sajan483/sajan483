@@ -103,6 +103,15 @@
 .greentickicon{
     background: url("/assets/images/green-tick-small.png") no-repeat center center;
 }
+.staricon{
+    background: url("/assets/images/iconstar.png") no-repeat center center;
+}
+.seatsicon{
+    background: url("/assets/images/iconseat.png") no-repeat center center;
+}
+.icontransport{
+    background: url("/assets/images/iconbus.png") no-repeat center center;
+}
 .icon_size_20{
     height: 20px;
     width: 20px;
@@ -141,5 +150,9 @@
 }
 .icon_h28_w15{
     height: 28px;
+    width: 15px;
+}
+.icon_h18_w15{
+    height: 18px;
     width: 15px;
 }
