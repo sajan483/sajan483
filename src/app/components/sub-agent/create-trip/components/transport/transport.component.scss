@@ -1,42 +1,23 @@
-.makeFlex.hrtlCenter {
-  align-items: center;
-  -moz-box-align: center;
-  display: flex;
+ .transportcard{
+  margin: 10px;
 }
-
-.slideItem {
-  padding: 0px 10px 10px 0;
-  border: none;
-  outline: none;
+.transportimage{
+  height: 200px;
   width: 100%;
-  display: inline-block;
+  img{
+    padding: 10px;
+    height: 100%;
+    width: 100%;
+  }
 }
-
-.itemCard {
-  border-radius: 6px;
-  box-shadow: 0 1px 6px 0 rgba(0, 0, 0, 0.2);
-  background-color: #ffffff;
-  margin: 5px 10px 5px 2px;
-  padding: 0 15px 15px;
+.pdngdetailbox{
+  padding: 15px 10px;
 }
-
-.makeFlex.column {
-  flex-direction: column;
-  -moz-box-orient: vertical;
-  -moz-box-direction: normal;
+.dgride{
+  display: grid;
 }
-
-.cardInnerInfo {
-  height: 1auto;
-}
-
-.slideItem .itemThumb {
-  width: 120px;
-  margin-top: -20px;
-}
-
-.makeFlex.hrtlCenter {
-  align-items: center;
-  -moz-box-align: center;
+.bookdiv{
+  padding: 30px 30px 10px 0;
   display: flex;
+  justify-content: flex-end;
 }

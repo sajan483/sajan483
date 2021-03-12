@@ -1,486 +1,72 @@
-<div class="row m-0">
-    <div class="col-md-12 pt-4" *ngFor="let item of transportList;let i = index">
-       <div class="slideItem" *ngIf="item.vehicle_types.length > 0">
-          <div class="makeFlex column itemCard soCardHeight pb-2">
-             <div class="makeFlex cardInnerInfo">
-                <div
-                   class="itemThumb makeFlex column hrtlCenter appendRight20 mb-0">
-                   <div class="itemImgWrap makeRelative" *ngIf="!item.image">
-                      <img src="/assets/images/no_image.jpg">
-                   </div>
-                   <div class="itemImgWrap makeRelative" *ngIf="item.image">
-                      <img src="{{item.image}}">
-                   </div>
-                </div>
-                <div class="itemDesc latoBlack">
-                   <div class="col-md-12 pr-0 m-0 pl-0"
-                      style="display: inline-block;">
-                      <div class="pull-left mb-3">
-                         <p class="blackText font18 lineHeight22 mb-1"
-                            *ngFor="let code of companyList"
-                            style="font-weight: 500;">
-                            <span *ngIf="code.item_id == item.company_code">
-                            {{code?.item_text}}
-                            </span>
-                         </p>
-                         <span class="redBdr appendBottom10"></span>
-                      </div>
-                   </div>
-                </div>
-             </div>
-             <div class="col-md-12 pl-0 pr-0"
-                *ngFor="let vehicle of item.vehicle_types; let index = index">
-                <div
-                   class="row col-md-12 pr-0 m-0 pl-2 pt-2 pb-2 mt-2 transport-card-container">
-                   <div class="col-md-4 pl-0 cover-img-vehicle"
-                      *ngIf="!vehicle.image">
-                      <img src="/assets/images/no_image.jpg">
-                   </div>
-                   <div class="col-md-4 pl-0 cover-img-vehicle"
-                      *ngIf="vehicle.image">
-                      <img src="{{vehicle.image}}">
-                   </div>
-                   <div
-                      class="row col-md-8 pl-2 pr-2 pb-3 pt-2  mr-0 ml-0 textright">
-                      <div class="col-md-4 pl-0 ">
-                         <div class="row mt-2 pl-2">
-                            <p class="trnprt-value-text font16 bold"
-                               *ngIf="vehicle.vehicle_type_code[0] == '1'">
-                               {{'Sedan Car' | translate }}
-                            </p>
-                            <p class="trnprt-value-text font16 bold"
-                               *ngIf="vehicle.vehicle_type_code[0] == '2'">
-                               {{'SUV Car' | translate}}
-                            </p>
-                            <p class="trnprt-value-text font16 bold"
-                               *ngIf="vehicle.vehicle_type_code[0] == '3'">
-                               {{'Bus' | translate}}
-                            </p>
-                         </div>
-                         <div class="row mt-2 pl-1 categoryStar">
-                            <span *ngFor="let a of dropdownList"><span
-                               class="trnprt-value-text vip"
-                               *ngIf="vehicle.categories[0].category_code == a.item_id"><i
-                               class="fa fa-star"
-                               aria-hidden="true"></i>
-                            {{a?.item_text}}</span></span>
-                         </div>
-                         <div class="row mt-1 pl-1">
-                            <i class="fas fa-couch trnprt-icon"></i>
-                            <p class="trnprt-value-text">
-                               {{vehicle?.categories[0]?.capacity}} {{'Seater' |
-                               translate}}(s)
-                            </p>
-                         </div>
-                         <div class="row mt-1 pl-1">
-                            <i class="fa fa-car car-icon"
-                               aria-hidden="true"></i>
-                            <p class="trnprt-value-text">{{'Booked Vehicle' |
-                               translate}} ({{vehicle?.vehicleCapacityCount}})
-                            </p>
-                         </div>
-                         <div class="row mt-1 pl-1 hidden">
-                            <i id="bag-icon"
-                               class="fas fa-suitcase-rolling trnprt-icon"></i>
-                            <p class="trnprt-value-text">4
-                               {{'Bag(s)' | translate}}
-                            </p>
-                         </div>
-                         <div class="modal" id="moreInfoPopup{{i}}{{index}}">
-                            <div class="modal-dialog">
-                               <div class="modal-content w85">
-                                  <div class="modal-header">
-                                     <h4 class="modal-title">{{'More Info' |
-                                        translate}}
-                                     </h4>
-                                     <button type="button" class="close m0p0"
-                                        data-dismiss="modal">&times;</button>
-                                  </div>
-                                  <div class="modal-body mb-4 p0">
-                                     <nav id="navTab">
-                                        <div class="nav nav-tabs nav-fill"
-                                           id="nav-tab" role="tablist">
-                                           <a class="nav-item nav-link active"
-                                              id="nav-manage-tab"
-                                              data-toggle="tab"
-                                              href="#Companyinfo{{i}}{{index}}"
-                                              role="tab"
-                                              aria-selected="false">{{'Company
-                                           Info' | translate}}</a>
-                                           <div class="spacer"></div>
-                                           <a class="nav-item nav-link"
-                                              id="nav-manage-tab"
-                                              data-toggle="tab"
-                                              href="#termsandcondition_{{i}}{{index}}"
-                                              role="tab"
-                                              aria-selected="false">{{'Terms
-                                           & Condition' |
-                                           translate}}</a>
-                                           <div class="spacer"></div>
-                                           <a class="nav-item nav-link"
-                                              id="nav-package-tab"
-                                              data-toggle="tab"
-                                              href="#cancellationTab_{{i}}{{index}}"
-                                              role="tab"
-                                              aria-selected="false">{{'Cancellation
-                                           Policy' | translate}}</a>
-                                           <div class="spacer"></div>
-                                           <a class="nav-item nav-link"
-                                              id="nav-package-tab"
-                                              data-toggle="tab"
-                                              href="#policyTab_{{i}}{{index}}"
-                                              role="tab"
-                                              aria-selected="false">{{'Policy'
-                                           | translate}}</a>
-                                        </div>
-                                     </nav>
-                                     <div class="tab-content p-0 mr-0 ml-0 ">
-                                        <div id="Companyinfo{{i}}{{index}}"
-                                           class="tab-pane in active">
-                                           <div class="container p-3">
-                                              <div
-                                                 *ngFor="let company of companylistall">
-                                                 <div
-                                                    *ngIf="company.code == item.company_code">
-                                                    <table
-                                                       class="table table-striped textright">
-                                                       <tbody>
-                                                          <tr>
-                                                             <td>{{'Name'
-                                                                |
-                                                                translate}}
-                                                             </td>
-                                                             <td>:
-                                                             </td>
-                                                             <td>{{company?.name}}
-                                                             </td>
-                                                          </tr>
-                                                          <tr>
-                                                             <td>{{'Description'
-                                                                |
-                                                                translate}}
-                                                             </td>
-                                                             <td>:
-                                                             </td>
-                                                             <td>{{company?.description}}
-                                                             </td>
-                                                          </tr>
-                                                          <tr>
-                                                             <td>{{'Address'
-                                                                |
-                                                                translate}}
-                                                             </td>
-                                                             <td>:
-                                                             </td>
-                                                             <td>{{company?.address}}
-                                                             </td>
-                                                          </tr>
-                                                          <tr>
-                                                             <td>{{'Phone
-                                                                Number'
-                                                                |
-                                                                translate
-                                                                }}
-                                                             </td>
-                                                             <td>:
-                                                             </td>
-                                                             <td>{{company?.phone_number}}
-                                                             </td>
-                                                          </tr>
-                                                          <tr>
-                                                             <td>{{'Email'
-                                                                |
-                                                                translate}}
-                                                             </td>
-                                                             <td>:
-                                                             </td>
-                                                             <td>{{company?.email}}
-                                                             </td>
-                                                          </tr>
-                                                          <tr>
-                                                             <td>{{'City'
-                                                                |
-                                                                translate}}
-                                                             </td>
-                                                             <td>:
-                                                             </td>
-                                                             <td>{{company?.city}}
-                                                             </td>
-                                                          </tr>
-                                                       </tbody>
-                                                    </table>
-                                                 </div>
-                                              </div>
-                                           </div>
-                                        </div>
-                                        <div id="termsandcondition_{{i}}{{index}}"
-                                           class="tab-pane fade mt-2 container p-3">
-                                           <div class="container">
-                                              <p
-                                                 *ngIf="vehicle.terms_and_conditions">
-                                                 {{vehicle?.terms_and_conditions}}
-                                              </p>
-                                              <p
-                                                 *ngIf="item.terms_and_conditions">
-                                                 {{item?.terms_and_conditions}}
-                                              </p>
-                                              <p
-                                                 *ngIf="item.terms_and_conditions &&  vehicle.terms_and_conditions">
-                                                 {{'No Terms and
-                                                 Condition Found' |
-                                                 translate}}
-                                              </p>
-                                           </div>
-                                        </div>
-                                        <div class="container p-3 "
-                                           id="cancellationTab_{{i}}{{index}}"
-                                           class="tab-pane fade mt-2">
-                                           <div class="container">
-                                              <div
-                                                 *ngIf=" item?.cancellation_policy">
-                                                 <div
-                                                    class="col-md-12 row m-0 ">
-                                                    <div
-                                                       class="col-md-12 p-0 m-0 row">
-                                                       <h6
-                                                          class=" pt-2">
-                                                          {{item?.cancellation_policy?.title}}
-                                                       </h6>
-                                                       <p *ngIf="!item?.cancellation_policy?.is_refundable"
-                                                          style="color: #d33a2f;padding-left: 10px;padding-top: 10px;">
-                                                          {{'Non
-                                                          Refundable'
-                                                          |
-                                                          translate}}
-                                                       </p>
-                                                    </div>
-                                                    <div
-                                                       class="pb-2 m-0">
-                                                       <p>{{item?.cancellation_policy?.description}}
-                                                       </p>
-                                                    </div>
-                                                    <div class="col-md-12 pl-0 m-0"
-                                                       *ngFor="let item1 of item.cancellation_policy.rules;let i = index">
-                                                       <div
-                                                          class="col-md-12 p-0  pb-1">
-                                                          <div>
-                                                             <li style="font-size: 12px;"
-                                                                [innerHTML]="item1?.description">
-                                                             </li>
-                                                          </div>
-                                                       </div>
-                                                    </div>
-                                                 </div>
-                                              </div>
-                                              <p
-                                                 *ngIf="!item.cancellation_policy.description">
-                                                 {{'No Cancellation
-                                                 Policy Found' |
-                                                 translate}}
-                                              </p>
-                                           </div>
-                                        </div>
-                                        <div class="container p-3 "
-                                           id="policyTab_{{i}}{{index}}"
-                                           class="tab-pane fade mt-2">
-                                           <div class="container">
-                                              <div *ngFor="let policy of item.policies"
-                                                 class="col-md-6 cancellationBox textright">
-                                                 <h6>
-                                                    {{policy?.name}}
-                                                 </h6>
-                                                 <ul
-                                                    style="list-style-type: circle;">
-                                                    <li
-                                                       *ngIf="policy.policy_type">
-                                                       {{'Policy Type'
-                                                       | translate}} :
-                                                       {{policy?.policy_type}}
-                                                    </li>
-                                                    <li
-                                                       *ngIf="policy.description">
-                                                       {{'Description'
-                                                       | translate}} :
-                                                       {{policy?.description}}
-                                                    </li>
-                                                    <li
-                                                       *ngIf="policy.policy_charge_value">
-                                                       {{'Policy harge'
-                                                       | translate}} :
-                                                       {{policy?.policy_charge_value}}
-                                                       {{policy?.policy_charge_type}}
-                                                    </li>
-                                                    <li
-                                                       *ngIf="policy.policy_name">
-                                                       {{'Policy Name'
-                                                       | translate}} :
-                                                       {{policy?.policy_name}}
-                                                    </li>
-                                                 </ul>
-                                              </div>
-                                              <p
-                                                 *ngIf="item.policies.length == 0">
-                                                 {{'No Policies Found' |
-                                                 translate}}
-                                              </p>
-                                           </div>
-                                        </div>
-                                     </div>
-                                  </div>
-                               </div>
-                            </div>
-                         </div>
-                      </div>
-                      <div class="col-md-3 second-row-txt">
-                         <p class="black-small-text">{{'Pax Count' | translate}}:
-                            {{vehicle?.vehiclePaxCount}}
-                         </p>
-                         <p class="black-small-text mt-1">{{'Model' |
-                            translate}}: {{vehicle?.categories[0]?.model}}
-                         </p>
-                         <p class="black-small-text mt-1 hidden">Complete Ac ,
-                            Push back seates etc
-                         </p>
-                      </div>
-                      <div class="col-md-5">
-                         <div class="row d-flex justify-content-end">
-                            <p id="trnsprt-price" class="customTooltip">
-                               {{vehicle?.categories[0]?.fare_summary[2]?.currency}}
-                               {{(vehicle?.categories[0]?.fare_summary[2]?.amount
-                               + vehicle?.transport_amount) | number:'1.2-2'}}
-                               <span class="customtooltiptext">
-                            <div class="container mb-2">
-                            <p
-                               class="pt-2 fare_summary_heading  textright">
-                            {{'Fare Summary' | translate}} </p>
-                            <div>
-                            <div>
-                            <div
-                               class="col-md-12 p-0 m-0 row pb-2 ">
-                            <div class="col-md-12 textAlign textright"
-                               *ngFor="let price of vehicle.categories[0].fare_summary">
-                            <span>{{price?.name}} :
-                            </span><span>{{price?.currency}}
-                            {{price?.amount |
-                            number:'.2-2'}}</span>
-                            </div>
-                            </div>
-                            </div>
-                            </div>
-                            </div>
-                            </span>
-                            </p>
-                         </div>
-                         <div class="row d-flex justify-content-end">
-                            <p style="font-size: 10px;color:#113554;">({{'Per
-                               Vehicle' | translate}})
-                            </p>
-                         </div>
-                         <div class="col-md-12 pl-0 pr-0 mt-3 ">
-                            <div
-                               class="row d-flex justify-content-end pr-0 mt-3">
-                               <div class="pull-right"
-                                  *ngIf="vehicle.categories[0].out_of_stock">
-                                  <button class="book-tansport-bttn"
-                                     style="background-color: darkgray;"
-                                     type="button">{{'BOOK' |
-                                  translate}}</button>
-                                  <p
-                                     style="font-size: 17px;color: red;font-weight: bold;padding-top: 5px;">
-                                     {{'Out Of Stock' | translate}}
-                                  </p>
-                               </div>
-                               <div class="pull-right"
-                                  *ngIf="!vehicle.categories[0].out_of_stock">
-                                  <button class="book-tansport-bttn"
-                                     (click)="bookTransport(item.company_code,item.vehicle_types[index])"
-                                     type="button">{{'BOOK' |
-                                  translate}}</button>
-                               </div>
-                            </div>
-                         </div>
-                      </div>
-                      <div class="col-md-12 row m-0 second-row-txt pl-1">
-                         <div class="col-md-12 pl-0"
-                            *ngIf="vehicle.categories[0].additional_services.length > 0">
-                            <p class="black-small-text additional-service-text">
-                               {{'Additional Services' | translate}}
-                            </p>
-                         </div>
-                         <section
-                            class="col-md-4 pl-0 example-section additional_service_section"
-                            *ngFor="let service of vehicle.categories[0].additional_services;let serviceIndex=index">
-                            <span>
-                               <mat-checkbox
-                                  value="{{service.fare_summary[2].amount}}"
-                                  (change)="addServiceAmout(i,service.fare_summary[2].amount,$event,index,service)"
-                                  class="example-margin serviceSelect"><span
-                                  *ngFor="let a of data"><span
-                                  *ngIf="service.additional_service_code == a.item_id">{{a?.item_text}}</span></span>
-                                  - {{service?.fare_summary[2]?.currency}}
-                                  {{service?.fare_summary[2]?.amount}}
-                               </mat-checkbox>
-                            </span>
-                            <span class="mt-1 ml-1" data-toggle="modal"
-                               [attr.data-target]="'#additionalServicePopup'+i+index+serviceIndex">
-                            <img class="info_img"
-                               src="/assets/images/ic_info.svg" alt="">
-                            </span>
-                            <div class="modal"
-                               id="additionalServicePopup{{i}}{{index}}{{serviceIndex}}">
-                               <div class="modal-dialog">
-                                  <div class="modal-content">
-                                     <div class="modal-header">
-                                        <h4 class="modal-title"><span
-                                           *ngFor="let a of data"><span
-                                           *ngIf="service.additional_service_code == a.item_id">{{a?.item_text}}</span></span>
-                                        </h4>
-                                        <button type="button" class="close"
-                                           data-dismiss="modal">&times;</button>
-                                     </div>
-                                     <div class="modal-body mb-4">
-                                        <p> {{service?.description}}</p>
-                                        <p
-                                           class="mt-3 mb-2 font16 additional-service-text">
-                                           {{'Price' | translate}}
-                                        </p>
-                                        <p *ngFor="let price of service.fare_summary"
-                                           class="additional-service-text">
-                                           {{price?.name}} :
-                                           {{price?.currency}}
-                                           {{price?.amount | number:'.2-2'}}
-                                        </p>
-                                     </div>
-                                  </div>
-                               </div>
-                            </div>
-                         </section>
-                         <div class="col-md-12 row m-0 pl-0 pr-0">
-                            <div
-                               class="row d-flex justify-content-start mt-3 tandctext col-md-6 col-6 ml-0 pl-0 pr-0">
-                               <p class="darkGreyText font10 more-info-bttn"
-                                  style="cursor: default;"> {{'T&C Apply' |
-                                  translate}}
-                               </p>
-                            </div>
-                            <div
-                               class="row d-flex justify-content-end mt-3 tandctext col-md-6 col-6 ml-0 pl-0 pr-0">
-                               <p class="darkGreyText font10 more-info-bttn"
-                                  data-toggle="modal"
-                                  [attr.data-target]="'#moreInfoPopup'+ i + index">
-                                  {{'More Info' | translate}}
-                               </p>
-                            </div>
-                         </div>
-                      </div>
-                   </div>
-                </div>
-             </div>
-             <div class="makeFlex hrtlCenter mt-2">
-                <span class="darkGreyText font10 tcApplyText appendRight20"> {{'T&C
-                Apply' | translate}} </span>
-             </div>
-          </div>
-       </div>
-    </div>
- </div> 
+<div class="w-100">
+   <div *ngFor="let item of transportList;let i = index">
+      <div class="transportcard" *ngFor="let vehicle of item.vehicle_types; let index = index">
+         <div class="border_box_shadow bg-white">
+            <div class="row m-0">
+               <div class="col-md-3 p-0">
+                  <div class="transportimage" *ngIf="!vehicle.image">
+                     <img src="/assets/images/no_image.jpg">
+                  </div>
+                  <div class="transportimage" *ngIf="vehicle.image">
+                     <img src="{{vehicle.image}}">
+                  </div>
+               </div>
+               <div class="col-md-6 pdngdetailbox">
+                  <div class="fs18 fw600 text-capitalize">company name {{item?.company_name}}</div>
+                  <div class="fs14 fw600 text-capitalize mt10">bus {{vehicle?.vehicle_type_name[0]}}</div>
+                  <div class="row ml-0 mr-0 fs14 clr52 fw400">
+                     <div class="col-md-6 p-0 dgride">
+                        <div class="d-inline-flex mt10">
+                           <i class="staricon icon_h18_w15 icns"></i>
+                           <div class="Premium_blue fs13 fw600 ml-2">Premium {{vehicle?.categories[0]?.category_name}}</div>
+                        </div>
+                        <div class="d-inline-flex mt10">
+                           <i class="seatsicon icon_h18_w15 icns"></i>
+                           <div class="ml-2">{{vehicle?.categories[0]?.capacity}} Seater(s)</div>
+                        </div>
+                        <div class="d-inline-flex mt10">
+                           <i class="icontransport icon_h18_w15 icns"></i>
+                           <div class="ml-2">Booked Vehicle ({{vehicle?.vehicleCapacityCount}})</div>
+                        </div>
+                     </div>
+                     <div class="col-md-6 p-0">
+                        <div class="mt10">Pax Count: {{paxCount}}</div>
+                        <div class="mt10">Available Vehicle: {{vehicle?.categories[0]?.available_quantity}}</div>
+                        <div class="mt10">Model: {{vehicle?.categories[0]?.model}}</div>
+                     </div>
+                  </div>
+               </div>
+               <div class="col-md-3 bookdiv">
+                  <div class="text-center">
+                     <div class="customTooltip fs21 fw600">
+                        {{vehicle?.categories[0]?.fare_summary[2]?.currency}} {{(vehicle?.categories[0]?.fare_summary[2]?.amount + vehicle?.transport_amount) | number:'1.2-2'}}
+                        <span class="customtooltiptext">
+                           <div class="container mb-2">
+                              <p class="pt-2 fare_summary_heading  textright">
+                                 {{'Fare Summary' | translate}} </p>
+                              <div>
+                                 <div>
+                                    <div class="col-md-12 p-0 m-0 row pb-2 ">
+                                       <div class="col-md-12 textAlign textright" *ngFor="let price of vehicle.categories[0].fare_summary">
+                                          <span>{{price?.name}} :
+                                          </span><span>{{price?.currency}}
+                                             {{price?.amount | number:'.2-2'}}</span>
+                                       </div>
+                                    </div>
+                                 </div>
+                              </div>
+                           </div>
+                        </span>
+                     </div>
+                     <div class="fs13 fw400 clr52">({{'Per Vehicle' | translate}})</div>
+                     <div>
+                        <button class="searchbutton mr-0" [disabled]="vehicle.categories[0].out_of_stock" (click)="bookTransport(item.company_code,item.vehicle_types[index])">Book</button>
+                        <p class="red_text fs13 fw500" *ngIf="vehicle.categories[0].out_of_stock">Out Of Stock</p>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+   </div>
+</div>

@@ -15,6 +15,7 @@ export class TransportComponent implements OnInit {
   @Input() transportList: any[];
   @Output() notifyGrandparent = new EventEmitter();
   vehicleName: string;
+  paxCount:number;
 
   constructor(
     private healperService: HelperService,
@@ -27,7 +28,9 @@ export class TransportComponent implements OnInit {
     this.notifyGrandparent.emit("notify parent");
   }
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.paxCount = this.appStore.vehicleMax;
+  }
 
   /**
    * This method is for booking vehicles
