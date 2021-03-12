@@ -16,7 +16,6 @@
   import { DoCheck } from "@angular/core";
   import { HelperService } from "src/app/common/services/helper-service";
   import { MakkaHotelComponent } from "./components/makka-hotel/makka-hotel.component";
-  import { AuthService } from "src/app/common/services/auth-services";
   import { CreateTripAdapter } from "src/app/adapters/sub-agent/create-trip-adapter";
   import { CommonApiService } from "src/app/common/services/common-api-services";
   import { CreateTripHelper } from "src/app/helpers/sub-agent/create-trip-helpers";
@@ -95,6 +94,7 @@
     isTransportResponseEmpty: boolean = false;
     cityFirst: string = "";
     citySecond: string = "";
+    transportFailed: string = "";
     toggleMeridian() {
         this.meridian = !this.meridian;
     }
@@ -383,6 +383,7 @@
  * Method to fetch saved itinerary
  */
   getTripData(){
+    this.setPaymentPageAfterItineraryModified();
     this.common.getTrip(this.appStore.customeTripId).subscribe((data) => {
       this.tripData = data;
       if(this.tripData){
@@ -406,6 +407,14 @@
       }
     }
     });
+  }
+
+  setPaymentPageAfterItineraryModified(){
+    this.cityFirst = "";
+    this.citySecond = "";
+    this.transportFailed = "";
+    (<HTMLInputElement>document.getElementById("payBtn")).style.display = "none";
+    (<HTMLInputElement>document.getElementById("continueBooking")).style.display = "block";
   }
 
   /**
@@ -461,20 +470,26 @@
       this.bookingId = data.id;
       localStorage.setItem("reference_no",data.reference_no)
       this.common.checkAvailability(data.id).subscribe((response)=> {
+          this.appStore.isAvailabilityFails = false;
           if(response.makkah_trip_hotel){
-            //if(response.makkah_trip_hotel.success == false){
+            this.cityFirst = "";
+            if(response.makkah_trip_hotel.success == false){
               this.cityFirst = "makkah";
-            //}
+              this.appStore.isAvailabilityFails = true;
+            }
           }
           if(response.medinah_trip_hotel){
-            //if(response.medinah_trip_hotel.success == false){
+            this.citySecond = "";
+            if(response.medinah_trip_hotel.success == false){
               this.citySecond = "madinah";
-           // }
+              this.appStore.isAvailabilityFails = true;
+            }
           }
           if(response.trip_transportation){
-            if(response.trip_transportation.success){
-
-            }
+            //if(response.trip_transportation.success = false){
+              this.transportFailed = "transportFailed";
+              this.appStore.isAvailabilityFails = true;
+            //}
           }
           if((response.makkah_trip_hotel && response.makkah_trip_hotel.success == false) || (response.medinah_trip_hotel && response.medinah_trip_hotel.success == false) ||(response.trip_transportation && response.trip_transportation.success == false) || response.refetch_trip == true ){
             (<HTMLInputElement>document.getElementById("payBtn")).style.display = "none";
@@ -734,6 +749,7 @@
  */
   createTripHandle(event){
     this.move(this.appStore.stepperIndex)
+    console.log(this.appStore.stepperIndex)
     if(this.steps.includes("3") && this.appStore.stepperIndex == 2){
       this.transportSearch();
     }
@@ -749,7 +765,24 @@
   moveToCorrespondingPage(cityName){
     if(cityName == 'makkah'){ this.move(0); }
     if(cityName == "madinah" && this.steps.includes("2") && !this.steps.includes("1"))
-    { this.move(0);}else{this.move(3)}
+    { this.move(0);}else{this.move(1)}
+  }
+
+  moveToTransportPage(){
+    if( this.steps.includes("3") && !this.steps.includes("1"))
+    { this.move(0)} else {this.move(2) }
+  }
+
+  /*
+ * this method to move to payment page after itinerary re selected
+ */
+  moveToPaymentPage(){
+    this.getTripData();
+    if(this.appStore.customeTripId && this.steps.length > 2){
+      this.move(3)
+    }else{
+      this.move(1)
+    }
   }
 
   /*

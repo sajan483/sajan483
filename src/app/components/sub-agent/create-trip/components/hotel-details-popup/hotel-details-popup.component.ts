@@ -64,15 +64,25 @@ export class HotelDetailsPopupComponent implements OnInit ,OnChanges{
     private notifyService: NotificationService,
     private translate :TranslateService,
   ) {}
+
   @Input() hotelInfo : any;
   @Input() hotelData : any;
   @Output() handleNotif = new EventEmitter();
+  @Output() changeItinerary = new EventEmitter();
 
   /*
    * this method for notify parent component
    */
   onNotify() {
     this.handleNotif.emit("notify parent");
+  }
+
+  /*
+   * this method for notify parent component
+   */
+  onNotifyCreteTripForItineraryChange() {
+    alert("details")
+    this.changeItinerary.emit("notify parent");
   }
 
   ngOnInit() {
@@ -123,22 +133,27 @@ export class HotelDetailsPopupComponent implements OnInit ,OnChanges{
    * this method for booking hotel
    */
   bookHotel() {
+    console.log("dfdfdg",this.appStore.isAvailabilityFails)
     this.showHotelDetails = false;
-    this.appStore.stepperIndex += 1;
     this.makkahticked = true;
     this.makkahticked = true;
     this.madeendetailshow = true;
-    this.showHotelDetailsShimmer = false
+    this.showHotelDetailsShimmer = false;
+    if(!this.appStore.isAvailabilityFails){
+      this.appStore.stepperIndex += 1;
+      console.log("index",this.appStore.stepperIndex)
+    }
     if(!this.appStore.customeTripId){
       this.commonService.saveSelectedHotel(this.createTripAdapter.bookHotelRequest(this.isGrouped,this.selectedRoomGroups,this.hotelData,this.hotelInfo)).subscribe((data) => {
         this.appStore.customeTripId = data.id;
+        console.log("first")
         this.onNotify();
       });
     }
-    if(this.appStore.customeTripId){
+    if(this.appStore.customeTripId ){
       this.commonService.updateCustomTrip(this.appStore.customeTripId,this.createTripAdapter.bookHotelRequest(this.isGrouped,this.selectedRoomGroups,this.hotelData,this.hotelInfo)).subscribe((data) => {
-        this.appStore.customeTripId = data.id;
-        this.onNotify();
+        this.onNotifyCreteTripForItineraryChange();
+        console.log("update")
       });
     }
   }

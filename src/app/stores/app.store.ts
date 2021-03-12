@@ -29,5 +29,6 @@ export class AppStore {
   @observable showHotelDetailsShimmer: boolean;
   @observable noOfDaysInMakkah:number;
   @observable noOfDaysInMadeena:number;
+  @observable isAvailabilityFails:boolean;
   constructor() { }
 }

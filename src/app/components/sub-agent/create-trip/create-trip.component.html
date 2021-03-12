@@ -28,7 +28,7 @@
                                 </div>
                             </div>
                         </div>
-                        <app-makka-hotel (notifyGrandparent)="createTripHandle(event)" [hotelsList]="hotelsList"></app-makka-hotel>
+                        <app-makka-hotel (notifyGrandparent)="createTripHandle(event)" (notifyCreateTripForChange)="moveToPaymentPage()" [hotelsList]="hotelsList"></app-makka-hotel>
                      </div>
                 </mat-step>
                 <mat-step label="{{'Madeena Hotel' | translate}}" *ngIf="steps.includes('2')" state="apartment">
@@ -53,7 +53,7 @@
                                 </div>
                             </div>
                         </div>
-                        <app-makka-hotel (notifyGrandparent)="createTripHandle(event)" [hotelsList]="hotelsList"></app-makka-hotel>
+                        <app-makka-hotel (notifyGrandparent)="createTripHandle(event)" (notifyCreateTripForChange)="moveToPaymentPage()" [hotelsList]="hotelsList"></app-makka-hotel>
                      </div>
                 </mat-step>
                 <mat-step label="{{'Transport' | translate}}" *ngIf="steps.includes('3')" state="directions_bus">
@@ -109,7 +109,7 @@
                                 <h3 class="flight-heading textright">{{'Review your hotel details'
                                     | translate}}</h3>
                             </div>
-                            <app-payment-hotel [tripHotel]="tripMakkahHotel" (notifyCreateTrip)="moveToCorrespondingPage($event)" [city]="cityFirst"></app-payment-hotel>
+                            <app-payment-hotel [tripHotel]="tripMakkahHotel" (notifyCreateTrip)="moveToCorrespondingPage($event)"  [city]="cityFirst"></app-payment-hotel>
                             <app-payment-hotel [tripHotel]="tripMadeenaHotel" (notifyCreateTrip)="moveToCorrespondingPage($event)" [city]="citySecond"></app-payment-hotel>
                             <div *ngIf="tripTransport">
                                 <div class="col-md-12">
@@ -118,11 +118,6 @@
                                 </div>
                                 <div class="col-md-12 review_detaiols_div outer-payment-div pl-0 pr-0"
                                     id="tripTransport">
-                                    <div class="change_button_availability" id="changeTransport"
-                                        (click)="changeTransport()">
-                                        <button type="button">{{'Not available now. Please change' |
-                                            translate}}</button>
-                                    </div>
                                     <div class="top-section pb-4 textright">
                                         <div class="row">
                                             <div class="col-md-4 row pr-0">
@@ -241,7 +236,7 @@
                                             </div>
                                             <div id="transport">
                                                 <div *ngIf="!makkatransport">
-                                                  <app-payment-transport [tripTransport]="tripTransport"></app-payment-transport>  
+                                                  <app-payment-transport (notifyCreatetrip) = "moveToTransportPage()" [transportFailed]="transportFailed" [tripTransport]="tripTransport"></app-payment-transport>  
                                                 </div>
                                             </div>
                                         </div>

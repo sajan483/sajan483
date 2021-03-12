@@ -144,15 +144,14 @@ export class TransportComponent implements OnInit {
       };
       this.commonService.updateCustomTrip(this.appStore.customeTripId, x).subscribe(
         (data) => {
-          //this.getTripData();
           if (this.appStore.customeTripBookingId) {
-            this.appStore.stepperIndex += 1;
+            this.setStepperIndex();
             this.onNotify();
             (<HTMLElement>(
               document.getElementById("changeTransport")
             )).style.display = "none";
           } else {
-            this.appStore.stepperIndex += 1;
+            this.setStepperIndex();
             this.onNotify();
           }
         },
@@ -181,7 +180,7 @@ export class TransportComponent implements OnInit {
       this.commonService.bookCustomTrip(x).subscribe(
         (data) => {
           this.appStore.customeTripId = data.id;
-          this.appStore.stepperIndex += 1;
+          this.setStepperIndex();
           this.onNotify();
           if (this.appStore.customeTripBookingId) {
            this.onNotify();
@@ -189,7 +188,7 @@ export class TransportComponent implements OnInit {
               document.getElementById("changeTransport")
             )).style.display = "none";
           } else {
-            this.appStore.stepperIndex += 1;
+            this.setStepperIndex();
             this.onNotify();
           }
         },
@@ -201,4 +200,11 @@ export class TransportComponent implements OnInit {
       );
     }
   }
+
+  setStepperIndex(){
+    if(!this.appStore.isAvailabilityFails){
+      this.appStore.stepperIndex +=1 ;
+    }
+  }
+  
 }

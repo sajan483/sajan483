@@ -730,6 +730,9 @@ export class CreateTripFrontPageComponent implements OnInit, DoCheck {
     this.appStore.noOfDaysInMakkah = 0;
     this.noOfDaysInMakkah = 0;
     this.noOfDaysInMadeenah = 0;
+    this.appStore.customeTripId = null;
+    this.appStore.customeTripBookingId = null;
+    this.appStore.isAvailabilityFails = false;
   }
 
   /**
