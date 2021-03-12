@@ -109,8 +109,8 @@
                                 <h3 class="flight-heading textright">{{'Review your hotel details'
                                     | translate}}</h3>
                             </div>
-                            <app-payment-hotel [tripHotel]="tripMakkahHotel" (notifyCreateTrip)="moveToPaymentPage($event)" [city]="cityFirst"></app-payment-hotel>
-                            <app-payment-hotel [tripHotel]="tripMadeenaHotel" (notifyCreateTrip)="moveToPaymentPage($event)" [city]="citySecond"></app-payment-hotel>
+                            <app-payment-hotel [tripHotel]="tripMakkahHotel" (notifyCreateTrip)="moveToCorrespondingPage($event)" [city]="cityFirst"></app-payment-hotel>
+                            <app-payment-hotel [tripHotel]="tripMadeenaHotel" (notifyCreateTrip)="moveToCorrespondingPage($event)" [city]="citySecond"></app-payment-hotel>
                             <div *ngIf="tripTransport">
                                 <div class="col-md-12">
                                     <h3 class="flight-heading textright">{{'Review your Transport details' | translate}}

@@ -744,9 +744,9 @@
   }
 
   /*
- * this method to move to payment page after check availability fails
+ * this method to move to corresponding page after check availability fails
  */
-  moveToPaymentPage(cityName){
+  moveToCorrespondingPage(cityName){
     if(cityName == 'makkah'){ this.move(0); }
     if(cityName == "madinah" && this.steps.includes("2") && !this.steps.includes("1"))
     { this.move(0);}else{this.move(3)}
