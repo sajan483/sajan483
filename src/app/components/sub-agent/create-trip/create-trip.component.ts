@@ -840,6 +840,6 @@
    * Method for navigate to home page
    */
   backToHomePage(){
-    this.router.navigate(['/home']);
+    this.router.navigate(['subagent/home']);
   }
 }

@@ -132,7 +132,6 @@ export class HotelDetailsPopupComponent implements OnInit ,OnChanges{
    * this method for booking hotel
    */
   bookHotel() {
-    console.log("dfdfdg",this.appStore.isAvailabilityFails)
     this.showHotelDetails = false;
     this.makkahticked = true;
     this.makkahticked = true;
@@ -140,12 +139,10 @@ export class HotelDetailsPopupComponent implements OnInit ,OnChanges{
     this.showHotelDetailsShimmer = false;
     if(!this.appStore.isAvailabilityFails){
       this.appStore.stepperIndex += 1;
-      console.log("index",this.appStore.stepperIndex)
     }
     if(!this.appStore.customeTripId){
       this.commonService.saveSelectedHotel(this.createTripAdapter.bookHotelRequest(this.isGrouped,this.selectedRoomGroups,this.hotelData,this.hotelInfo)).subscribe((data) => {
         this.appStore.customeTripId = data.id;
-        console.log("first")
         this.onNotify();
       });
     }
@@ -156,7 +153,6 @@ export class HotelDetailsPopupComponent implements OnInit ,OnChanges{
         }else{
           this.onNotify();
         }
-        console.log("update")
       });
     }
   }
