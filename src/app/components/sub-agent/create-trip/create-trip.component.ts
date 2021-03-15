@@ -242,7 +242,8 @@
   
   @ViewChild("stepper", { static: true })
   stepper: MatStepper;
-  move(index: number) {this.stepper.selectedIndex = index;}
+  move(index: number) {
+    this.stepper.selectedIndex = index;}
   @ViewChild(MakkaHotelComponent,{static:false}) child:MakkaHotelComponent;
 
   userFilter: any = { name: '' };
@@ -768,9 +769,12 @@
  * this method to move to corresponding page after check availability fails
  */
   moveToCorrespondingPage(cityName){
-    if(cityName == 'makkah'){ this.move(0); }
+    if(cityName == 'makkah'){
+      this.move(0)}
     if(cityName == "madinah" && this.steps.includes("2") && !this.steps.includes("1"))
-    { this.move(0);}else{this.move(1)}
+    { this.move(0);}
+    if(cityName == "madinah" && this.steps.includes("2") && this.steps.includes("1"))
+    {this.move(1)}
   }
 
   moveToTransportPage(){
@@ -841,5 +845,16 @@
    */
   backToHomePage(){
     this.router.navigate(['subagent/home']);
+    this.clearAppStore();
   }
+
+  /**
+   * Method for clearing appstore
+   */
+  clearAppStore(){
+    this.appStore.customeTripId = null;
+    this.appStore.customeTripBookingId = null;
+    this.appStore.isAvailabilityFails = false;
+  }
+
 }
