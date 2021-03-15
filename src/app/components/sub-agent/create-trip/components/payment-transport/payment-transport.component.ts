@@ -19,6 +19,8 @@ export class PaymentTransportComponent implements OnInit,OnChanges {
   ngOnChanges(){
     if(this.transportFailed != ""){
       this.showTransportNotAvailable = true;
+    }else{
+      this.showTransportNotAvailable = false;
     }
   }
 

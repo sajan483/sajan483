@@ -470,6 +470,21 @@
       this.bookingId = data.id;
       localStorage.setItem("reference_no",data.reference_no)
       this.common.checkAvailability(data.id).subscribe((response)=> {
+        response = {
+          "refetch_trip": false,
+          "medinah_trip_hotel": {
+            "success": true,
+            "message": "available"
+          },
+          "makkah_trip_hotel": {
+            "success": true,
+            "message": "available"
+          },
+          "trip_transportation": {
+            "success": false,
+            "message": "available"
+          }
+        }
           this.appStore.isAvailabilityFails = false;
           if(response.makkah_trip_hotel){
             this.cityFirst = "";

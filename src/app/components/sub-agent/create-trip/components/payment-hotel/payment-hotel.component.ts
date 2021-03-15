@@ -18,8 +18,8 @@ export class PaymentHotelComponent implements OnInit,OnChanges {
   }
 
   ngOnChanges(){
-    if(this.city == "makkah"){this.showMakkah = true}
-    if(this.city == "madinah"){this.showMadinah = true}
+    if(this.city == "makkah"){this.showMakkah = true} else{this.showMakkah = false}
+    if(this.city == "madinah"){this.showMadinah = true} else {this.showMadinah = false}
   }
 
   goToHotelStepper(event){
