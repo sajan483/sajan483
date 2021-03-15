@@ -497,12 +497,10 @@
            (response.trip_transportation && response.trip_transportation.success == false) ||
             response.refetch_trip == true )
           {
-            alert("false");
             (<HTMLInputElement>document.getElementById("payBtn")).style.display = "none";
             (<HTMLInputElement>document.getElementById("continueBooking")).style.display = "block";
           }
           else{
-            alert("ok");
             (<HTMLInputElement>document.getElementById("payBtn")).style.display = "block";
             (<HTMLInputElement>document.getElementById("continueBooking")).style.display = "none";
           }
@@ -757,7 +755,6 @@
  */
   createTripHandle(event){
     this.move(this.appStore.stepperIndex)
-    console.log(this.appStore.stepperIndex)
     if(this.steps.includes("3") && this.appStore.stepperIndex == 2){
       this.transportSearch();
     }

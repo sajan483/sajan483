@@ -73,7 +73,6 @@ export class MakkaHotelComponent implements OnInit,DoCheck{
   }
 
   childEventForChangeItinerary(event){
-    alert("hotel");
     this.notifyCreateTripForChange.emit('event')
   }
 
