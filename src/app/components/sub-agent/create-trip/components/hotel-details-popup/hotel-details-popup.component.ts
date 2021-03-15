@@ -152,7 +152,11 @@ export class HotelDetailsPopupComponent implements OnInit ,OnChanges{
     }
     if(this.appStore.customeTripId ){
       this.commonService.updateCustomTrip(this.appStore.customeTripId,this.createTripAdapter.bookHotelRequest(this.isGrouped,this.selectedRoomGroups,this.hotelData,this.hotelInfo)).subscribe((data) => {
-        this.onNotifyCreteTripForItineraryChange();
+        if(this.appStore.isAvailabilityFails){
+          this.onNotifyCreteTripForItineraryChange();
+        }else{
+          this.onNotify();
+        }
         console.log("update")
       });
     }

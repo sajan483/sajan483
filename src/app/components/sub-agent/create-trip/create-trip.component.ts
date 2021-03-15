@@ -486,15 +486,23 @@
             }
           }
           if(response.trip_transportation){
-            //if(response.trip_transportation.success = false){
+            this.transportFailed = "";
+            if(response.trip_transportation.success == false){
               this.transportFailed = "transportFailed";
               this.appStore.isAvailabilityFails = true;
-            //}
+            }
           }
-          if((response.makkah_trip_hotel && response.makkah_trip_hotel.success == false) || (response.medinah_trip_hotel && response.medinah_trip_hotel.success == false) ||(response.trip_transportation && response.trip_transportation.success == false) || response.refetch_trip == true ){
+          if((response.makkah_trip_hotel && response.makkah_trip_hotel.success == false) ||
+            (response.medinah_trip_hotel && response.medinah_trip_hotel.success == false) ||
+           (response.trip_transportation && response.trip_transportation.success == false) ||
+            response.refetch_trip == true )
+          {
+            alert("false");
             (<HTMLInputElement>document.getElementById("payBtn")).style.display = "none";
             (<HTMLInputElement>document.getElementById("continueBooking")).style.display = "block";
-          }else{
+          }
+          else{
+            alert("ok");
             (<HTMLInputElement>document.getElementById("payBtn")).style.display = "block";
             (<HTMLInputElement>document.getElementById("continueBooking")).style.display = "none";
           }
