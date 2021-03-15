@@ -81,7 +81,6 @@ export class HotelDetailsPopupComponent implements OnInit ,OnChanges{
    * this method for notify parent component
    */
   onNotifyCreteTripForItineraryChange() {
-    alert("details")
     this.changeItinerary.emit("notify parent");
   }
 
