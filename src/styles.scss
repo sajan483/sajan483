@@ -470,6 +470,9 @@
   .mr11 {
     margin-right: 11px !important;
   }
+  .mr15{
+    margin-right: 15px;
+  }
   .pr0 {
     padding-right: 0 !important;
   }
@@ -792,6 +795,10 @@ body{
   display: flex;
   justify-content: space-between;
 }
+.flexaround{
+  display: flex;
+  justify-content: space-around;
+}
 .flexcenter{
   display: flex;
   justify-content: center;
@@ -949,6 +956,9 @@ body{
 .mt45{
   margin-top: 45px;
 }
+.mb10{
+  margin-bottom: 10px;
+}
 .mb11{
   margin-bottom: 11px;
 }
@@ -987,6 +997,9 @@ body{
 }
 .p8{
   padding: 8px;
+}
+.p10{
+  padding: 10px;
 }
 .p20{
   padding: 20px;

@@ -1,4 +1,5 @@
 import { Component, Input, OnChanges, OnInit, Output,EventEmitter } from '@angular/core';
+import {AppStore} from 'src/app/stores/app.store'
 
 @Component({
   selector: 'app-payment-hotel',
@@ -12,9 +13,11 @@ export class PaymentHotelComponent implements OnInit,OnChanges {
   @Output() notifyCreateTrip = new EventEmitter();
   showMakkah: boolean = false;
   showMadinah: boolean = false;
-  constructor() { }
+  travelCount : number;
+  constructor(private appStore : AppStore) { }
 
   ngOnInit() {
+    this.travelCount = this.appStore.totalTravellers;
   }
 
   ngOnChanges(){

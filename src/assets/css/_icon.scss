@@ -112,6 +112,15 @@
 .icontransport{
     background: url("/assets/images/iconbus.png") no-repeat center center;
 }
+.transportblueicon{
+    background: url("/assets/images/bus.png") no-repeat center center;
+}
+.hotelblueicon{
+    background: url("/assets/images/hotel.png") no-repeat center center;
+}
+.sadicon{
+    background: url("/assets/images/sad-smiley-icon.png") no-repeat center center;
+}
 .icon_size_20{
     height: 20px;
     width: 20px;
@@ -155,4 +164,8 @@
 .icon_h18_w15{
     height: 18px;
     width: 15px;
+}
+.icon_h18_w11{
+    height: 18px;
+    width: 11px;
 }
