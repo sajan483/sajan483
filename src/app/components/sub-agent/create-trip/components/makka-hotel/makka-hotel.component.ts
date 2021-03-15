@@ -66,9 +66,15 @@ export class MakkaHotelComponent implements OnInit,DoCheck{
 
   @Input() hotelsList: any[];
   @Output() notifyGrandparent= new EventEmitter();
+  @Output() notifyCreateTripForChange = new EventEmitter();
 
   childEvent(event) {
     this.notifyGrandparent.emit('event')
+  }
+
+  childEventForChangeItinerary(event){
+    alert("hotel");
+    this.notifyCreateTripForChange.emit('event')
   }
 
   ngOnInit() {

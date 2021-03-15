@@ -16,7 +16,6 @@
   import { DoCheck } from "@angular/core";
   import { HelperService } from "src/app/common/services/helper-service";
   import { MakkaHotelComponent } from "./components/makka-hotel/makka-hotel.component";
-  import { AuthService } from "src/app/common/services/auth-services";
   import { CreateTripAdapter } from "src/app/adapters/sub-agent/create-trip-adapter";
   import { CommonApiService } from "src/app/common/services/common-api-services";
   import { CreateTripHelper } from "src/app/helpers/sub-agent/create-trip-helpers";
@@ -93,6 +92,9 @@
     transportStartDate: any;
     companylistall: any;
     isTransportResponseEmpty: boolean = false;
+    cityFirst: string = "";
+    citySecond: string = "";
+    transportFailed: string = "";
     toggleMeridian() {
         this.meridian = !this.meridian;
     }
@@ -381,6 +383,7 @@
  * Method to fetch saved itinerary
  */
   getTripData(){
+    this.setPaymentPageAfterItineraryModified();
     this.common.getTrip(this.appStore.customeTripId).subscribe((data) => {
       this.tripData = data;
       if(this.tripData){
@@ -404,6 +407,14 @@
       }
     }
     });
+  }
+
+  setPaymentPageAfterItineraryModified(){
+    this.cityFirst = "";
+    this.citySecond = "";
+    this.transportFailed = "";
+    (<HTMLInputElement>document.getElementById("payBtn")).style.display = "none";
+    (<HTMLInputElement>document.getElementById("continueBooking")).style.display = "block";
   }
 
   /**
@@ -459,40 +470,39 @@
       this.bookingId = data.id;
       localStorage.setItem("reference_no",data.reference_no)
       this.common.checkAvailability(data.id).subscribe((response)=> {
+          this.appStore.isAvailabilityFails = false;
           if(response.makkah_trip_hotel){
-            if(response.makkah_trip_hotel.success){
-              (<HTMLElement>document.getElementById("changemakkaHotel")).style.backgroundColor = "unset";
-              (<HTMLElement>document.getElementById("changemakkaHotel")).style.display = "none";
-            }else{
-              (<HTMLElement>document.getElementById("changemakkaHotel")).style.backgroundColor = "#0000005c";
-              (<HTMLElement>document.getElementById("changemakkaHotel")).style.display = "block";
-              window.scrollTo(0,0);
-            } 
+            this.cityFirst = "";
+            if(response.makkah_trip_hotel.success == false){
+              this.cityFirst = "makkah";
+              this.appStore.isAvailabilityFails = true;
+            }
           }
           if(response.medinah_trip_hotel){
-            if(response.medinah_trip_hotel.success){
-              (<HTMLElement>document.getElementById("changemadinahHotel")).style.backgroundColor = "unset";
-              (<HTMLElement>document.getElementById("changemadinahHotel")).style.display = "none";
-            }else{
-              (<HTMLElement>document.getElementById("changemadinahHotel")).style.backgroundColor = "#0000005c";
-              (<HTMLElement>document.getElementById("changemadinahHotel")).style.display = "block";
-              window.scrollTo(0,0);
+            this.citySecond = "";
+            if(response.medinah_trip_hotel.success == false){
+              this.citySecond = "madinah";
+              this.appStore.isAvailabilityFails = true;
             }
           }
           if(response.trip_transportation){
-            if(response.trip_transportation.success){
-              (<HTMLElement>document.getElementById("changeTransport")).style.backgroundColor = "unset";
-              (<HTMLElement>document.getElementById("changeTransport")).style.display = "none";
-            }else{
-              (<HTMLElement>document.getElementById("changeTransport")).style.backgroundColor = "#0000005c";
-              (<HTMLElement>document.getElementById("changeTransport")).style.display = "block";
-              window.scrollTo(0,0);
-            } 
+            this.transportFailed = "";
+            if(response.trip_transportation.success == false){
+              this.transportFailed = "transportFailed";
+              this.appStore.isAvailabilityFails = true;
+            }
           }
-          if((response.makkah_trip_hotel && response.makkah_trip_hotel.success == false) || (response.medinah_trip_hotel && response.medinah_trip_hotel.success == false) ||(response.trip_transportation && response.trip_transportation.success == false) || response.refetch_trip == true ){
+          if((response.makkah_trip_hotel && response.makkah_trip_hotel.success == false) ||
+            (response.medinah_trip_hotel && response.medinah_trip_hotel.success == false) ||
+           (response.trip_transportation && response.trip_transportation.success == false) ||
+            response.refetch_trip == true )
+          {
+            alert("false");
             (<HTMLInputElement>document.getElementById("payBtn")).style.display = "none";
             (<HTMLInputElement>document.getElementById("continueBooking")).style.display = "block";
-          }else{
+          }
+          else{
+            alert("ok");
             (<HTMLInputElement>document.getElementById("payBtn")).style.display = "block";
             (<HTMLInputElement>document.getElementById("continueBooking")).style.display = "none";
           }
@@ -525,7 +535,7 @@
    * Method to navigate payment success page
    */
   onSubmitButtonClicked(){
-     // "account_no": "SA1790941327111000000002" ,
+     //"account_no": "SA1790941327111000000002" ,
      //"auth_code": "5NMABO6U2RH2ZR5B"
     var w = {
        "booking_id": this.bookingId,
@@ -551,44 +561,6 @@
       this.notifyService.showWarning(this.translateService.instant("Payment Credentials Missing"))
     }
   }
-
-  /**
-   * Method to navigate makka stepper when check availability fails
-   */
-  changemakkaHotel(){
-    this.move(0);
-    (<HTMLElement>document.getElementById("changemakkaHotel")).style.backgroundColor = "unset";
-    (<HTMLInputElement>document.getElementById("payBtn")).style.display = "none";
-    (<HTMLInputElement>document.getElementById("continueBooking")).style.display = "block";
-  }
-
-  /**
-   * Method to navigate madina stepper when check availability fails
-   */
-  changemadinahHotel(){
-    if(this.steps.length > 2){
-      this.move(1);
-    }else{
-      this.move(0);
-    }
-    (<HTMLElement>document.getElementById("changemadinahHotel")).style.backgroundColor = "unset";
-    (<HTMLInputElement>document.getElementById("payBtn")).style.display = "none";
-    (<HTMLInputElement>document.getElementById("continueBooking")).style.display = "block";
-  }
-
-  /**
-   * Method to navigate transport stepper when check availability fails
-   */
-  changeTransport(){
-    if(this.steps.length > 2){
-      this.move(2);
-    }else{
-      this.move(0);
-    }
-    (<HTMLElement>document.getElementById("changeTransport")).style.backgroundColor = "unset";
-    (<HTMLInputElement>document.getElementById("payBtn")).style.display = "none";
-    (<HTMLInputElement>document.getElementById("continueBooking")).style.display = "block";
-  }
   
   @ViewChild("multiSelect", { static: true }) multiSelect;
   public form: FormGroup;
@@ -598,6 +570,21 @@
   ngOnInit() {
     this.generalHelper.checkForAccessToken();
     if(!this.appStore.showShimmer){this.appStore.showShimmer = true,this.showShimmer = true}
+    this.setUserDetails()
+    this.travellersCount = this.appStore.totalTravellers;
+    this.rooms = CreateTripComponent.RoomData;
+    this.appStore.roomArray = this.rooms;
+    this.appStore.stepperIndex = 0;
+    this.selectedCurrency = "SAR";
+    if(this.steps.includes("3")){this.fetchNessoryApisForTransport();}
+    this.multiSelectDropDownSettings()
+    this.setForm();
+    this.callCorrespongingSteppers();
+    this.setdataForUserDetailsAtLastPage();
+    this.fetchNessoryApisForPaymentPage();
+  }
+  
+  setUserDetails(){
     this.userDetails = CreateTripComponent.UserObjectData;
     this.appStore.userDetails = this.userDetails;
     if(typeof(this.userDetails) == 'undefined'){this.router.navigate(['subagent/home'])}
@@ -611,16 +598,6 @@
     this.vehicleMax = this.userDetails.vehicleCapacity;
     this.routeId = this.userDetails.transportRoute;
     }
-    this.travellersCount = this.appStore.totalTravellers;
-    this.rooms = CreateTripComponent.RoomData;
-    this.appStore.roomArray = this.rooms;
-    this.appStore.stepperIndex = 0;
-    this.selectedCurrency = "SAR";
-    this.fetchNessoryApisForTransport();
-    this.multiSelectDropDownSettings()
-    this.setForm();
-    this.callCorrespongingSteppers();
-    this.setdataForUserDetailsAtLastPage();
   }
 
   multiSelectDropDownSettings(){
@@ -654,6 +631,21 @@
   }
 
   /**
+   * Method to call all the apis for Payment page 
+   */
+  fetchNessoryApisForPaymentPage(){
+    this.common.getCountry("",this.selectedLanguage).subscribe((data) => {
+      this.nationalityList = data.map(x => ( {item_text: x.name, item_id: x.short_iso_code } ));
+    });
+    this.common.getNationality("",this.selectedLanguage).subscribe((data) => {
+      this.phoneCodeList = data.map(x => ( {item_text: x.name, item_id: x.code } ));
+    });
+    this.common.getCountry("",this.selectedLanguage).subscribe((data) => {
+      this.countryList = data.map(x => ( {item_text: x.name, item_id: x.short_iso_code } ));
+    });
+  }
+
+  /**
    * Method to call all the apis for transport search 
    */
   fetchNessoryApisForTransport(){
@@ -674,24 +666,13 @@
       this.companyList = data.companies.map(x => ( {item_text: x.name, item_id: x.code } ));
       this.companylistall = data.companies;
     });
-    this.common.getCountry("",this.selectedLanguage).subscribe((data) => {
-      this.nationalityList = data.map(x => ( {item_text: x.name, item_id: x.short_iso_code } ));
-    });
-    this.common.getNationality("",this.selectedLanguage).subscribe((data) => {
-      this.phoneCodeList = data.map(x => ( {item_text: x.name, item_id: x.code } ));
-    });
-    this.common.getCountry("",this.selectedLanguage).subscribe((data) => {
-      this.countryList = data.map(x => ( {item_text: x.name, item_id: x.short_iso_code } ));
-    });
   }
 
   /**
    * Method to call corresponding steppers according to user selection  
    */
   callCorrespongingSteppers(){
-    if(this.steps.includes("1")){
-      this.hotelSearch("MAKKA");
-    }
+    if(this.steps.includes("1")){ this.hotelSearch("MAKKA"); }
     
     if(!this.steps.includes("1") && this.steps.includes("2")){
       this.madeenaloader = true;
@@ -765,15 +746,9 @@
  */
   onVehicleSelect(item: any) {
     this.vehicleId = item.item_id;
-    if(this.vehicleId == 1){
-      this.vehicleMax = 4;
-    }
-    if(this.vehicleId == 2){
-      this.vehicleMax = 7;
-    }
-    if(this.vehicleId == 3){
-      this.vehicleMax = 60;
-    }
+    if(this.vehicleId == 1){ this.vehicleMax = 4; }
+    if(this.vehicleId == 2){ this.vehicleMax = 7; }
+    if(this.vehicleId == 3){ this.vehicleMax = 60; }
     this.disableBtn = true;
   }
   
@@ -782,12 +757,39 @@
  */
   createTripHandle(event){
     this.move(this.appStore.stepperIndex)
+    console.log(this.appStore.stepperIndex)
     if(this.steps.includes("3") && this.appStore.stepperIndex == 2){
       this.transportSearch();
     }
     this.getTripData()
     if(this.steps.includes("2") && this.appStore.stepperIndex == 1){
       this.hotelSearch("MADEENA");
+    }
+  }
+
+  /*
+ * this method to move to corresponding page after check availability fails
+ */
+  moveToCorrespondingPage(cityName){
+    if(cityName == 'makkah'){ this.move(0); }
+    if(cityName == "madinah" && this.steps.includes("2") && !this.steps.includes("1"))
+    { this.move(0);}else{this.move(1)}
+  }
+
+  moveToTransportPage(){
+    if( this.steps.includes("3") && !this.steps.includes("1"))
+    { this.move(0)} else {this.move(2) }
+  }
+
+  /*
+ * this method to move to payment page after itinerary re selected
+ */
+  moveToPaymentPage(){
+    this.getTripData();
+    if(this.appStore.customeTripId && this.steps.length > 2){
+      this.move(3)
+    }else{
+      this.move(1)
     }
   }
 
@@ -823,9 +825,7 @@
  */
   ngDoCheck(){
     this.generalHelper.checkForAccessToken();
-    if(!this.appStore.showShimmer) {
-      this.showShimmer = false;
-    } 
+    if(!this.appStore.showShimmer) { this.showShimmer = false;} 
   }
 
    /**

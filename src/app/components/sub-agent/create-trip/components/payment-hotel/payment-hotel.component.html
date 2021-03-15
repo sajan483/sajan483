@@ -1,5 +1,8 @@
 <div class="col-md-12 review_detaiols_div outer-payment-div pl-0 pr-0" id="tripMakkahHotel" *ngIf="tripHotel">
-    <div class="change_button_availability" id="changemakkaHotel" (click)="changemakkaHotel()">
+    <div *ngIf= "showMakkah" class="change_button_availability" (click)="goToHotelStepper('makkah')">
+        <button type="button">{{'Not available now. Please change' | translate}}</button>
+    </div>
+    <div *ngIf= "showMadinah"  class="change_button_availability" (click)="goToHotelStepper('madinah')">
         <button type="button">{{'Not available now. Please change' | translate}}</button>
     </div>
     <div class="top-section  textright">
@@ -22,7 +25,7 @@
             <div class="row">
                 <div class="col-md-4">
                     <div style="display: flex;">
-                        <span class="hotelName">{{tripHotel?.hotel?.name}}</span>
+                        <span class="hotelName">{{tripHotel?.hotel?.name | titlecase}}</span>
                         <div style="padding-left: 10px;">
                             <ngb-rating [(rate)]="tripMakkahHotelrating" [readonly]="readonly" [max]=5>
                                 <ng-template let-fill="fill" let-index="index">
