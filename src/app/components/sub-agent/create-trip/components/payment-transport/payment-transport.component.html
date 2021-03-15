@@ -1,72 +1,88 @@
-<div>
-    <div class="change_button_availability" *ngIf="showTransportNotAvailable" (click)="changeTransport()">
-    <button type="button">{{'Not available now. Please change' | translate}}</button>
-    </div>
-    <div class="row col-md-12 pl-0 pr-0 m-0 pt-2 pb-2 content-section textright">
-        <div class="col-md-3" *ngIf="tripTransport.selected_transportation.vehicle_types[0].image">
-            <img class="vehImgWidth" src="{{tripTransport.selected_transportation.vehicle_types[0].image}}" alt="">
-        </div>
-        <div class="col-md-3" *ngIf="!tripTransport.selected_transportation.vehicle_types[0].image">
-            <img class="vehImgWidth" src="/assets/images/no_image.jpg" alt="">
-        </div>
-        <div class="col-md-6">
-            <div class="row detail_review">
-                <div class="col-md-4 pb-3">
-                    <p><strong>{{'Category' | translate}} :
-                        </strong>
-                        {{tripTransport?.categories[0]?.name}} </p>
-                </div>
-                <div class="col-md-4 pb-3">
-                    <p><strong>{{'Vehicle Type' | translate}} :
-                        </strong>
-                        {{tripTransport?.selected_transportation?.vehicle_types[0]?.name}}</p>
-
-                </div>
-                <div class="col-md-4 pb-3">
-                    <p><strong>{{'Model' | translate}} : </strong>
-                        {{tripTransport?.selected_transportation?.vehicle_types[0]?.categories[0]?.model}}
-                    </p>
-                </div>
-                <div class="col-md-4 pb-3">
-                    <p><strong>{{'No. of vehicle' | translate}} :
-                        </strong>
-                        {{tripTransport?.trip_vehicles[0]?.booked_quantity}}
-                    </p>
-                </div>
-                <div class="col-md-4 pb-3">
-                    <p><strong>{{'Phone Number' | translate}} :
-                        </strong>
-                        {{tripTransport?.company?.phone_number}}</p>
-                </div>
-                <div class="col-md-8 pb-3">
-                    <p><strong>{{'Email' | translate}} : </strong>
-                        {{tripTransport?.company?.email}}</p>
-                </div>
-                <div class="col-md-4 pb-3">
-                    <p><strong>{{'Bag Capacity' | translate}} :
-                        </strong>
-                        {{tripTransport?.vehicle_types[0]?.bags_capacity}}
-                    </p>
-                </div>
-                <div class="col-md-12 pb-3">
-                    <p><strong>{{'Route' | translate}} : </strong>
-                        {{tripTransport?.route?.name}}</p>
-                </div>
-                <div class="col-md-12 pb-3">
-                    <p><strong>{{'Address' | translate}} : </strong>
-                        {{tripTransport?.company?.address}}</p>
-                </div>
+<div class="border_box_shadow bgclrwhite mb-3" [class.bgclrred]="showTransportNotAvailable" *ngIf="tripTransport">
+    <div class="row m-0 p10">
+        <div class="col-md-12 p-0 brdrbottom mb10" *ngIf="showTransportNotAvailable">
+            <div class="d-inline-flex">
+                <div><i class="sadicon icns icon_size_25"></i></div>
+                <div class="sadred fs14 fw600 oopstext">Ooops !!! Some Error Occured, Please select another hotel.</div>
+                <div class="textunderline list_clr cursor-pointer pl-3" (click)="changeTransport()">Modify</div>
             </div>
         </div>
-        <div class="col-md-3"
-            *ngIf="tripTransport.selected_transportation?.vehicle_types[0].categories[0].additional_services[0]">
-            <p class="redColour" class="pl-3">{{'Additional
-                Services' | translate}}</p>
-            <ul class="listStyle">
-                <li
-                    *ngFor="let a of tripTransport.selected_transportation.vehicle_types[0].categories[0].additional_services">
-                    {{a?.description}}</li>
-            </ul>
+        <div class="col-md-2 col-12 pl-0 pr-0 my-auto">
+            <i class="transportblueicon icns icon_size_30 imgposition"></i>
+            <div class="Premium_blue fs14 fw600">
+                <p>VEHICLE</p>
+                <p class="text-uppercase">{{tripTransport?.vehicle_types[0]?.name}}</p>
+            </div>
+        </div>
+        <div class="col-md-9 col-12 brdrR brdrL my-auto">
+            <div class="float-left">
+                <p class="fw600 fs16">{{tripTransport?.company?.name}}</p>
+                <div class="linebyline clr52 fs13">
+                    <strong class="fw600">Route :</strong>
+                    <span>{{tripTransport?.route?.name}}</span>
+                    <span class="textunderline list_clr cursor-pointer pl-3" (click)="changeTransport()">Modify</span>
+                    <span class="textunderline list_clr cursor-pointer pl-3">Policy</span>
+                    
+                </div>
+            </div>
+            <div class="float-right fs16 fw500 pt-2 customTooltip">
+                {{tripTransport?.trip_vehicles[0]?.currency}} {{tripTransport?.prices_summary?.total_price + tripTransport?.prices_summary?.gds_fee + tripTransport?.prices_summary?.ota_fee | number:'.2-2'}}
+                <span class="customtooltiptext">
+                    <div class="container mb-2">
+                        <p class="pt-2 fare_summary_heading">{{'Fare Summary' |
+                            translate}} </p>
+                        <div class="col-md-12 p-0 m-0 row pb-2">
+                            <div class="col-md-12 textAlign ">
+                                <span>{{'GDS Fee' | translate}} :
+                                    {{tripTransport?.prices_summary?.gds_fee}}</span><br>
+                                <span>{{'OTA Fee' | translate}} :
+                                    {{tripTransport?.prices_summary?.ota_fee}}</span>
+                            </div>
+                        </div>
+                        <p class=" pt-2 pr-5 hotel_price_total">{{'You Pay' |
+                            translate}} {{tripTransport?.prices_summary?.total_price}}
+                        </p>
+                    </div>
+                </span>
+            </div>
+        </div>
+        <div class="col-md-1 pl-0 pr-2 pt-1 m-auto text-center" (click)="transporttoggle = !transporttoggle">
+            <i *ngIf="!transporttoggle" class="downarrow icon_size_20 icns cursor-pointer"></i>
+            <i *ngIf="transporttoggle" class="uparrow icon_size_20 icns cursor-pointer"></i>
+        </div>
+        <div class="col-md-12 p-0 row ml-0 mr-0 mt-2 borderpading brdrtop" *ngIf="transporttoggle">
+            <div class="col-md-12 transportbodypdng row m-0">
+                <div class="col-md-4 p-0 mb-2">
+                    <p class="clr52 fs14"><i class="fa fa-circle pr-2 font9imp" aria-hidden="true"></i>{{tripTransport?.selected_transportation?.vehicle_types[0]?.categories[0]?.capacity}} seater(s)</p>
+                </div>
+                <div class="col-md-4 p-0 mb-2">
+                    <p class="clr52 fs14"><i class="fa fa-circle pr-2 font9imp" aria-hidden="true"></i>Pax Count : {{tripTransport?.trip_vehicles[0]?.pax_per_vehicle}}</p>
+                </div>
+                <div class="col-md-4 p-0 mb-2">
+                    <p class="clr52 fs14"><i class="fa fa-circle pr-2 font9imp" aria-hidden="true"></i>Model: {{tripTransport?.selected_transportation?.vehicle_types[0]?.categories[0]?.model}}</p>
+                </div>
+                <div class="col-md-4 p-0 mb-2">
+                    <p class="clr52 fs14"><i class="fa fa-circle pr-2 font9imp" aria-hidden="true"></i>Booked Vehicle ({{tripTransport?.trip_vehicles[0]?.booked_quantity}})</p>
+                </div>
+                <div class="col-md-4 p-0 mb-2">
+                    <p class="clr52 fs14"><i class="fa fa-circle pr-2 font9imp" aria-hidden="true"></i>Available Vehicle: {{tripTransport?.selected_transportation?.vehicle_types[0]?.categories[0]?.available_quantity}}</p>
+                </div>
+                <div class="col-md-4 p-0 mb-2">
+                    <p class="clr52 fs14"><i class="fa fa-circle pr-2 font9imp" aria-hidden="true"></i>Bag Capacity : {{tripTransport?.vehicle_types[0]?.bags_capacity}}</p>
+                </div>
+            </div>
+            <div class="col-md-12 transportbodypdng row ml-0 mr-0 mt-2 p20 brdrtop" >
+                <div class="col-md-4 p-0">
+                    <p class="fs13"><i class="fa fa-map-marker textlight pr-1 font16imp" aria-hidden="true"></i> ADDRESS</p>
+                    <p class="pl-3 fs12 clr52">{{tripTransport?.company?.address}}</p>
+                </div>
+                <div class="col-md-4">
+                    <p class="clr52 fs14"><i class="fa fa-envelope textlight pr-1 font16imp" aria-hidden="true"></i> {{tripTransport?.company?.email}}</p>
+                </div>
+                <div class="col-md-4">
+                    <p class="clr52 fs14"><i class="fa fa-phone textlight pr-1 font16imp" aria-hidden="true"></i> {{tripTransport?.company?.phone_number}}</p>
+                </div>
+            </div>
         </div>
     </div>
 </div>

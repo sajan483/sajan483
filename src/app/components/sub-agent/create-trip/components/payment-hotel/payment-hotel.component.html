@@ -1,221 +1,193 @@
-<div class="col-md-12 review_detaiols_div outer-payment-div pl-0 pr-0" id="tripMakkahHotel" *ngIf="tripHotel">
-    <div *ngIf= "showMakkah" class="change_button_availability" (click)="goToHotelStepper('makkah')">
-        <button type="button">{{'Not available now. Please change' | translate}}</button>
-    </div>
-    <div *ngIf= "showMadinah"  class="change_button_availability" (click)="goToHotelStepper('madinah')">
-        <button type="button">{{'Not available now. Please change' | translate}}</button>
-    </div>
-    <div class="top-section  textright">
-        <div class="row">
-            <h2 class="flight-name pl-3">
-                <span class="departure-Section">{{city}}</span>
-            </h2>
-            <div class="ml-auto mr-2 " id="toggleTopBtn1">
-                <div class="arrowPosition">
-                    <div *ngIf="!makka">
-                        <button (click)="toggleMakkaUp()"><i class="fa fa-angle-up"></i></button>
-                    </div>
-                    <div *ngIf="makka">
-                        <button (click)="toggleMakkaDown()"><i class="fa fa-angle-down"></i></button>
-                    </div>
-                </div>
+<div class="border_box_shadow bgclrwhite mb-3" [class.bgclrred]="showMakkah || showMadinah" *ngIf="tripHotel">
+    <div class="row m-0 p10">
+        <div class="col-md-12 p-0 brdrbottom mb10" *ngIf= "showMakkah">
+            <div class="d-inline-flex">
+                <div><i class="sadicon icns icon_size_25"></i></div>
+                <div class="sadred fs14 fw600 oopstext">Ooops !!! Some Error Occured, Please select another hotel.</div>
+                <div class="textunderline list_clr cursor-pointer pl-3" (click)="goToHotelStepper('makkah')">Modify</div>
             </div>
         </div>
-        <div id="makka">
-            <div class="row">
-                <div class="col-md-4">
-                    <div style="display: flex;">
-                        <span class="hotelName">{{tripHotel?.hotel?.name | titlecase}}</span>
-                        <div style="padding-left: 10px;">
-                            <ngb-rating [(rate)]="tripMakkahHotelrating" [readonly]="readonly" [max]=5>
-                                <ng-template let-fill="fill" let-index="index">
-                                    <span class="star" [class.filled]="fill === 100"
-                                        [class.bad]="index < 2">&#9733;</span>
-                                </ng-template>
-                            </ngb-rating>
-                        </div>
+        <div class="col-md-12 p-0 brdrbottom mb10" *ngIf= "showMadinah">
+            <div class="d-inline-flex">
+                <div><i class="sadicon icns icon_size_25"></i></div>
+                <div class="sadred fs14 fw600 oopstext">Ooops !!! Some Error Occured, Please select another hotel.</div>
+                <div class="textunderline list_clr cursor-pointer pl-3" (click)="goToHotelStepper('madinah')">Modify</div>
+            </div>
+        </div>
+        <div class="col-md-2 col-12 pl-0 pr-0 my-auto">
+            <i class="hotelblueicon icns icon_size_30 imgposition"></i>
+            <div class="Premium_blue fs14 fw600 ">
+                <div class="text-uppercase">{{tripHotel?.location}}</div>
+                <div>{{tripHotel?.check_in_time | date: 'shortDate'}}</div>
+            </div>
+        </div>
+        <div class="col-md-9 col-12 brdrR brdrL my-auto">
+            <div class="float-left">
+                <div class="d-inline-flex">
+                    <div class="fw600 fs16">{{tripHotel?.hotel?.name | titlecase}}</div>
+                    <div class="pl10">
+                        <ngb-rating [(rate)]="tripHotel.hotel.user_review" [readonly]="readonly" [max]=5>
+                            <ng-template let-fill="fill" let-index="index">
+                                <span class="star" [class.filled]="fill === 100"
+                                    [class.bad]="index < 2">&#9733;</span>
+                            </ng-template>
+                        </ngb-rating>
                     </div>
                 </div>
-                <div class="col-md-2 departure refund-txt-color">
-                </div>
-                <div class="col-md-3">
-                    <div class="departure fare_rule_txt"><button class="policies_bttn" data-toggle="modal"
-                            [attr.data-target]="'#hotelPolicy'+ tripHotel.hotel.id">{{'Policies'
-                            | translate}} <i class="fa fa-info-circle" aria-hidden="true"></i></button></div>
-                </div>
-                <div class="modal" id="hotelPolicy{{tripHotel.hotel.id}}">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                            <div class="modal-header" style="border-bottom: none;padding-bottom: 0px;">
-                                <button type="button" class="close" data-dismiss="modal">&times;</button>
-                            </div>
-                            <div class="modal-body mb-4">
-                                <div
-                                    *ngIf="tripHotel?.room_variations[0]?.room?.cancellation_policy?.rules.length < 1  && !tripHotel?.cancellation_policy?.description">
-                                    {{'No Policies Found' | translate}}
+                <div class="linebyline clr52 fs13">
+                    No of days on Makkah
+                    <span class="Premium_blue fw600">{{tripHotel?.num_of_days}}</span>
+                    <span class="crossline"></span>
+                    <span>No of Guest</span>
+                    <span class="Premium_blue fw600">{{travelCount}}</span>
+                    <span class="crossline"></span>
+                    <span>Rooms</span>
+                    <span class="Premium_blue fw600">{{tripHotel?.room_variations?.length}}</span>
+                    <span class="textunderline list_clr cursor-pointer pl-3" (click)="goToHotelStepper()">Modify</span>
+                    <span class="textunderline list_clr cursor-pointer pl-3" data-toggle="modal" [attr.data-target]="'#hotelPolicy'+ tripHotel.hotel.id">Policy</span>
+                    <div class="modal" id="hotelPolicy{{tripHotel.hotel.id}}">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header" style="border-bottom: none;padding-bottom: 0px;">
+                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
                                 </div>
-                                <div *ngIf="tripHotel?.hotel?.policies?.length > 0">
-                                    <h6 class="mt-1 ml-3" style="margin-left: 10px;">
-                                        {{'Policies' | translate}}</h6>
-                                    <div class="col-md-12 row m-0 mb-1">
-                                        <div class="col-md-12 pl-0 m-0"
-                                            *ngFor="let item of tripHotel.hotel.policies">
-                                            <div class="col-md-12 p-0   mb-1">
-                                                <h6>{{item?.policy_type}}</h6>
-                                                <div>
-                                                    <li style="font-size: 12px;" [innerHTML]="item?.name"></li>
-                                                </div>
-                                                <p> {{item?.description}}</p>
-                                            </div>
-                                        </div>
+                                <div class="modal-body mb-4">
+                                    <div
+                                        *ngIf="tripHotel?.room_variations[0]?.room?.cancellation_policy?.rules.length < 1  && !tripHotel?.cancellation_policy?.description">
+                                        {{'No Policies Found' | translate}}
                                     </div>
-                                </div>
-                                <div *ngFor="let item of tripHotel?.room_variations">
-                                    <div class="col-md-12 row m-0 ">
-                                        <div class="col-md-12 p-0 m-0 row">
-                                            <h6 class=" pt-2">
-                                                {{item?.room?.cancellation_policy?.title}}
-                                            </h6>
-                                            <p *ngIf="!tripHotel?.room_variations[0]?.room?.cancellation_policy?.is_refundable"
-                                                style="color: #d33a2f;padding-left: 10px;padding-top: 10px;">
-                                                {{'Non Refundable' | translate}} </p>
-                                        </div>
-                                        <div class="pb-2 m-0">
-                                            <p>{{item?.room?.cancellation_policy?.description}}
-                                            </p>
-                                        </div>
-                                        <div class="col-md-12 pl-0 m-0"
-                                            *ngFor="let item1 of item.room?.cancellation_policy?.rules;let i = index">
-                                            <div class="col-md-12 p-0  pb-1">
-                                                <div>
-                                                    <li style="font-size: 12px;" [innerHTML]="item1?.description">
-                                                    </li>
+                                    <div *ngIf="tripHotel?.hotel?.policies?.length > 0">
+                                        <h6 class="mt-1 ml-3" style="margin-left: 10px;">
+                                            {{'Policies' | translate}}</h6>
+                                        <div class="col-md-12 row m-0 mb-1">
+                                            <div class="col-md-12 pl-0 m-0"
+                                                *ngFor="let item of tripHotel.hotel.policies">
+                                                <div class="col-md-12 p-0   mb-1">
+                                                    <h6>{{item?.policy_type}}</h6>
+                                                    <div>
+                                                        <li style="font-size: 12px;" [innerHTML]="item?.name"></li>
+                                                    </div>
+                                                    <p> {{item?.description}}</p>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-                                <div *ngIf="tripHotel?.cancellation_policy">
-                                    <div class="col-md-12 row m-0 ">
-                                        <div class="col-md-12 p-0 m-0 row">
-                                            <h6 class=" pt-2">
-                                                {{tripHotel?.cancellation_policy?.title}}
-                                            </h6>
+                                    <div *ngFor="let item of tripHotel?.room_variations">
+                                        <div class="col-md-12 row m-0 ">
+                                            <div class="col-md-12 p-0 m-0 row">
+                                                <h6 class=" pt-2">
+                                                    {{item?.room?.cancellation_policy?.title}}
+                                                </h6>
+                                                <p *ngIf="!tripHotel?.room_variations[0]?.room?.cancellation_policy?.is_refundable"
+                                                    style="color: #d33a2f;padding-left: 10px;padding-top: 10px;">
+                                                    {{'Non Refundable' | translate}} </p>
+                                            </div>
+                                            <div class="pb-2 m-0">
+                                                <p>{{item?.room?.cancellation_policy?.description}}
+                                                </p>
+                                            </div>
+                                            <div class="col-md-12 pl-0 m-0"
+                                                *ngFor="let item1 of item.room?.cancellation_policy?.rules;let i = index">
+                                                <div class="col-md-12 p-0  pb-1">
+                                                    <div>
+                                                        <li style="font-size: 12px;" [innerHTML]="item1?.description">
+                                                        </li>
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </div>
-                                        <div class="pb-2 m-0">
-                                            <p>{{tripHotel?.cancellation_policy?.description}}
-                                            </p>
-                                        </div>
-                                        <div class="col-md-12 pl-0 m-0"
-                                            *ngFor="let item1 of tripHotel?.cancellation_policy?.rules;">
-                                            <div class="col-md-12 p-0  pb-1">
-                                                <div>
-                                                    <li style="font-size: 12px;" [innerHTML]="item1?.description">
-                                                    </li>
+                                    </div>
+                                    <div *ngIf="tripHotel?.cancellation_policy">
+                                        <div class="col-md-12 row m-0 ">
+                                            <div class="col-md-12 p-0 m-0 row">
+                                                <h6 class=" pt-2">
+                                                    {{tripHotel?.cancellation_policy?.title}}
+                                                </h6>
+                                            </div>
+                                            <div class="pb-2 m-0">
+                                                <p>{{tripHotel?.cancellation_policy?.description}}
+                                                </p>
+                                            </div>
+                                            <div class="col-md-12 pl-0 m-0"
+                                                *ngFor="let item1 of tripHotel?.cancellation_policy?.rules;">
+                                                <div class="col-md-12 p-0  pb-1">
+                                                    <div>
+                                                        <li style="font-size: 12px;" [innerHTML]="item1?.description">
+                                                        </li>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-2 customTooltip txtAlgn">
-                    <h2 class="current_price htlprz">
-                        {{tripHotel?.room_variations[0]?.currency}}
-                        {{tripHotel?.prices_summary?.total_price +
-                        tripHotel?.prices_summary?.gds_fee +
-                        tripHotel?.prices_summary?.ota_fee | number:'.2-2'}}</h2>
-                    <span class="customtooltiptext">
-                        <div class="container mb-2">
-                            <p class="pt-2 fare_summary_heading"> {{'Fare Summary' |
-                                translate}}</p>
-                            <div class="col-md-12 p-0 m-0 row pb-2">
-                                <div class="col-md-12 textAlign ">
-                                    <span>{{'GDS Fee' | translate}} :
-                                        {{tripHotel?.prices_summary?.gds_fee}}</span><br>
-                                    <span>{{'OTA Fee' | translate}} :
-                                        {{tripHotel?.prices_summary?.ota_fee}}</span>
-                                </div>
-                            </div>
-                            <p class=" pt-2 pr-5 hotel_price_total">{{'You Pay' |
-                                translate}} {{tripHotel?.prices_summary?.total_price}}
-                            </p>
-                        </div>
-                    </span>
-                </div>
-                <div class="col-md-1" id="normalMakkaToggleBtn">
-                    <div class="arrowPosition">
-                        <div *ngIf="!makkaHtl">
-                            <button (click)="makkaHtl=!makkaHtl"><i class="fa fa-angle-up"></i></button>
-                        </div>
-                        <div *ngIf="makkaHtl">
-                            <button (click)="makkaHtl=!makkaHtl"><i class="fa fa-angle-down"></i></button>
                         </div>
                     </div>
                 </div>
             </div>
-            <div *ngIf="!makkaHtl">
-                <div class="row col-md-12 pl-0 pr-0 m-0 pt-2 pb-2 content-section textright" *ngIf="tripHotel">
-                    <div class="col-md-3">
-                        <img class="hotelimageriview" src="{{tripHotel?.hotel?.images[0]?.image_url}}" alt="">
-                    </div>
-                    <div class="col-md-9">
-                        <div class="row detail_review">
-                            <div class="col-md-4 pb-3">
-                                <p><strong>{{'Check In' | translate}} : </strong>
-                                    {{tripHotel?.check_in_time | date: 'short'}}</p>
+            <div class="float-right fs16 fw500 pt-2 customTooltip">
+                {{tripHotel?.room_variations[0]?.currency}} {{tripHotel?.prices_summary?.total_price + tripHotel?.prices_summary?.gds_fee + tripHotel?.prices_summary?.ota_fee | number:'.2-2'}}
+                <span class="customtooltiptext">
+                    <div class="container mb-2">
+                        <p class="pt-2 fare_summary_heading"> {{'Fare Summary' |
+                            translate}}</p>
+                        <div class="col-md-12 p-0 m-0 row pb-2">
+                            <div class="col-md-12 textAlign ">
+                                <span>{{'GDS Fee' | translate}} :
+                                    {{tripHotel?.prices_summary?.gds_fee}}</span><br>
+                                <span>{{'OTA Fee' | translate}} :
+                                    {{tripHotel?.prices_summary?.ota_fee}}</span>
                             </div>
-                            <div class="col-md-4 pb-3">
-                                <p><strong>{{'Check Out' | translate}} : </strong>
-                                    {{tripHotel?.check_out_time | date: 'short'}}</p>
-                            </div>
-                            <div class="col-md-4 pb-3">
-                                <p><strong>{{'Phone Number' | translate}} : </strong>
-                                    {{tripHotel?.hotel?.phone_number}}</p>
-                            </div>
-                            <div class="col-md-4 pb-3">
-                                <p><strong>{{'Email' | translate}} : </strong>
-                                    {{tripHotel?.hotel?.email}}</p>
-                            </div>
-                            <div class="col-md-4 pb-3">
-                                <p><strong>{{'Total Room' | translate}} : </strong>
-                                    {{tripHotel?.room_variations.length}}</p>
-                            </div>
-                            <div class="col-md-4 pb-3">
-                                <p><strong>{{'Haram Distance' | translate}} : </strong>
-                                    {{tripHotel?.hotel?.distance}} KM</p>
-                            </div>
-                            <div class="col-md-12 pb-3">
-                                <p><strong>{{'Address' | translate}} :
-                                    </strong>{{tripHotel?.hotel?.address}} </p>
-                            </div>
-                            <div class="col-md-12 pb-3">
-                                <p>{{tripHotel?.free_cancellation_time}} </p>
-                            </div>
-
                         </div>
+                        <p class=" pt-2 pr-5 hotel_price_total">{{'You Pay' |
+                            translate}} {{tripHotel?.prices_summary?.total_price}}
+                        </p>
+                    </div>
+                </span>
+            </div>
+        </div>
+        <div class="col-md-1 pl-0 pr-2 pt-1 m-auto text-center" (click)="makkahotel = !makkahotel">
+            <i *ngIf="!makkahotel" class="downarrow icon_size_20 icns cursor-pointer"></i>
+            <i *ngIf="makkahotel" class="uparrow icon_size_20 icns cursor-pointer"></i>
+        </div>
+        <div class="row col-md-12 p-0 ml-0 mr-0 mt-2 p20 brdrtop" *ngIf="makkahotel">
+            <div class="col-md-6 p-0">
+                <div class="flexaround mrgndetails">
+                    <div>
+                        <div class="d-flex">
+                            <i class="calendaricon icon_h18_w15 icns"></i>
+                            <p class="pl-2 pr-2 fs13 fw500">CHECK-IN</p>
+                            <i class="icon_h18_w11 icns downarrow"></i>
+                        </div>
+                        <p class="fw600 fs21">{{tripHotel?.check_in_time | date: 'mediumDate'}}</p>
+                        <p class="clr52 fs12">{{tripHotel?.check_in_time | date: 'EEEE'}}</p>
+                    </div>
+                    <div class="text-center mt-2">
+                        <i class="nighticon icon_size_20 icns"></i>
+                        <p class="textgrey font14">4 Nights</p>
+                    </div>
+                    <div class="text-left">
+                        <div class="d-flex">
+                            <i class="calendaricon icon_h18_w15 icns"></i>
+                            <p class="pl-2 pr-2 fs13 fw500">CHECK-OUT</p>
+                            <i class="icon_h18_w11 icns downarrow"></i>
+                        </div>
+                        <p class="fw600 fs21">{{tripHotel?.check_out_time | date: 'mediumDate'}}</p>
+                        <p class="clr52 fs12">{{tripHotel?.check_out_time | date: 'EEEE'}}</p>
                     </div>
                 </div>
-                <div class="row col-md-12 pl-0 pr-0 m-0 pt-2 w-100 content-section">
-                    <div class="col-md-12 ">
-                        <ul class="pLeft listStyle">
-                            <li class="pb-1" *ngFor="let room of tripHotel?.room_variations">
-                                <div class=" algn justify-content-between roomtype">
-                                    <div class="normaltext">{{room?.title}}</div>
-                                    <div class="departure refund-txt-color" *ngIf="room.room.is_refundable">
-                                        {{room?.room?.is_refundable}}
-                                    </div>
-
-                                    <div><strong>{{room?.max_guests}}</strong> {{'GUESTS' |
-                                        translate}}</div>
-                                    <div class="normaltext" style="padding-right: 150px;">
-                                        {{room?.currency}} {{room?.room?.amount}}</div>
-                                </div>
-                            </li>
-                        </ul>
-                    </div>
+            </div>
+            <div class="col-md-6 p-0">
+                <div class="d-flex justify-content-center">
+                    <img class="mapheight mrgndetails" src="/assets/images/map.jpeg" alt="">
+                </div>
+            </div>
+            <div class="col-md-12 p-0 row m-0">
+                <div class="col-md-12 row m-0 p-2 brdrtop" *ngFor="let room of tripHotel?.room_variations">
+                    <div class="col-md-4 col-6 clr52 fs14 fw600">{{room?.title}}</div>
+                    <div class="col-md-4 col-6 fs14 clr52 fw500"><strong class="pr-1 fw600">{{room?.max_guests}}</strong>Guests</div>
+                    <div class="col-md-2 col-6 fs12">{{room?.room?.is_refundable}}</div>
+                    <div class="col-md-2 col-6 text-right fs14">{{room?.currency}} {{room?.room?.amount}}</div>
                 </div>
             </div>
         </div>

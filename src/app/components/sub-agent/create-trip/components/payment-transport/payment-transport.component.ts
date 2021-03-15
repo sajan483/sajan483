@@ -14,6 +14,7 @@ export class PaymentTransportComponent implements OnInit,OnChanges {
   constructor() { }
 
   ngOnInit() {
+    console.log(this.tripTransport)
   }
 
   ngOnChanges(){
