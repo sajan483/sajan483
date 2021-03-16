@@ -13,12 +13,16 @@ import { TranslateModule, TranslateLoader, TranslateService } from '@ngx-transla
 import { TranslateHttpLoader} from '@ngx-translate/http-loader';
 export function TranslatorFactory(httpClient: HttpClient) { return new TranslateHttpLoader(httpClient, './assets/i18n/', '.json'); }
 import { CookieService } from 'ngx-cookie-service';
+import { SliderComponent } from './common/components/slider/slider.component';
+import { PaginationComponent } from './common/components/pagination/pagination.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HedderComponent,
-    FooterComponent
+    FooterComponent,
+    SliderComponent,
+    PaginationComponent
   ],
   imports: [
     BrowserModule,

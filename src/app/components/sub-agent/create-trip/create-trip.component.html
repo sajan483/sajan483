@@ -28,7 +28,7 @@
                                 </div>
                             </div>
                         </div>
-                        <app-makka-hotel (notifyGrandparent)="createTripHandle(event)" (notifyCreateTripForChange)="moveToPaymentPage()" [hotelsList]="hotelsList"></app-makka-hotel>
+                        <app-makka-hotel (notifyGrandparent)="createTripHandle($event)" (notifyCreateTripForChange)="moveToPaymentPage()" [hotelsList]="hotelsList"></app-makka-hotel>
                      </div>
                 </mat-step>
                 <mat-step label="{{'Madeena Hotel' | translate}}" *ngIf="steps.includes('2')" state="apartment">
@@ -53,7 +53,7 @@
                                 </div>
                             </div>
                         </div>
-                        <app-makka-hotel (notifyGrandparent)="createTripHandle(event)" (notifyCreateTripForChange)="moveToPaymentPage()" [hotelsList]="hotelsList"></app-makka-hotel>
+                        <app-makka-hotel (notifyGrandparent)="createTripHandle($event)" (notifyCreateTripForChange)="moveToPaymentPage()" [hotelsList]="hotelsList"></app-makka-hotel>
                      </div>
                 </mat-step>
                 <mat-step label="{{'Transport' | translate}}" *ngIf="steps.includes('3')" state="directions_bus">
@@ -80,14 +80,14 @@
                                     <div id="routeSection" class="col-md-5 mb-0 pl-0">
                                         <ng-multiselect-dropdown [placeholder]="'Route' | translate" [data]="routeList"
                                             [settings]="dropdownSettings" (onSelect)="onRouteSelect($event)"
-                                            (onSelectAll)="onSelectAll($event)">
+                                            >
                                         </ng-multiselect-dropdown>
                                     </div>
                                     <div id="vehicleSection" class="col-md-5 mb-0 pl-0 mt3">
                                         <ng-multiselect-dropdown [placeholder]="'Vehicle Type'| translate"
                                             [data]="vehicleTypeList" [(ngModel)]="vehicleTypeItems"
                                             [settings]="dropdownSettings" (onSelect)="onVehicleSelect($event)"
-                                            (onSelectAll)="onSelectAll($event)">
+                                            >
                                         </ng-multiselect-dropdown>
                                     </div>
                                     <div id="transportSearchSection" class="col-md-2 pr-0 pl-0 mt3 w95">
@@ -97,7 +97,7 @@
                                         </button>
                                     </div>
                                 </div>
-                               <app-transport (notifyGrandparent)="createTripHandle(event)" [transportList]="transportList"></app-transport>
+                               <app-transport (notifyGrandparent)="createTripHandle($event)" [transportList]="transportList"></app-transport>
                             </div>
                         </div>
                     </div>
@@ -272,13 +272,13 @@
                                         </mat-expansion-panel>
                                     </mat-accordion>
                                 </div>
-                                <div class="d-flex flex-row-reverse mrgin" *ngIf="travelersError">
+                                <!-- <div class="d-flex flex-row-reverse mrgin" *ngIf="travelersError">
                                     <div class="col-md-12" *ngFor="let error of travelersError">
                                         {{'Error in' | translate}} {{error.traveller.first_name}}
                                         {{error?.traveller?.last_name}} {{'details Found' | translate}} -
                                         {{'Message' | translate}}: {{error?.status?.message}}
                                     </div>
-                                </div>
+                                </div> -->
                                 <div class="d-flex flex-row mrgin mt-2 mb-2 mr-4 ml-4">
                                     <div *ngIf="reference_no" class="mr-auto mt-2"><span
                                             style="color: #d33a2f;font-size: 15px;">{{'Booking Reference No' |
@@ -309,7 +309,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="exampleModalLabel"></h5>
-                <button type="button" (click)="hidecountpopup();" class="close">
+                <button type="button" class="close">
                     <i class="fa fa-times" aria-hidden="true"></i>
                 </button>
             </div>
@@ -344,7 +344,7 @@
                                     value="{{p+1}}">{{p+1}}</option>
                             </select>
                         </mat-form-field>
-                        <button (click)="saveSelectedAddSrvCount(setDataForAddServiceCountPopUP);"
+                        <button 
                             class="okbutton">{{'Submit'|translate}}</button>
                     </div>
                 </div>

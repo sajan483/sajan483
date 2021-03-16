@@ -37,6 +37,8 @@ export class MakkaHotelComponent implements OnInit,DoCheck{
   hotelPics1: any[];
   hotelPics2: any[];
   moreimages: boolean;
+  readonly=true;
+  formatLabel:any;
   imageshow: number;
   isGroupedMakka: boolean;
   showHotelDetails: boolean;
