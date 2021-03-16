@@ -11,7 +11,7 @@ export class PaymentTransportComponent implements OnInit,OnChanges {
   @Input() transportFailed : any;
   @Output() notifyCreatetrip = new EventEmitter();
   showTransportNotAvailable: boolean = false;
-  transporttoggle:boolean;
+  transporttoggle : boolean = false;
   constructor() { }
 
   ngOnInit() {

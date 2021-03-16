@@ -1,8 +1,15 @@
 <div class="container-fluid pl-0 pr-0" id="top" >
-    <div class="top_section" *ngIf="status == 'success'" >
-        <img class="tick_img" src="/assets/images/check_mark.svg" alt="">
-        <h5 class="payment_sucess_heading" style="color: #fff;">{{'Payment Successful' | translate}}</h5>
-        <p class="secondary_heading">{{'Book on' | translate}} {{tripData?.booking_date | date: 'mediumDate'}}</p>
+    <div class="top_section"  *ngIf="status == 'success'">
+        <div class="container">
+            <div class="d-inline-flex">
+                <div>
+                    <img class="tick_img" src="/assets/images/confirmation-tick.png" alt="">
+                </div>
+                <div>
+                    <h1 class="text-uppercase fs28 fw500 text-white">Thank You..!! </h1>
+                </div>
+            </div>
+        </div>
     </div>
     <div class="top_section"  *ngIf="status == 'failure'" >
         <img class="tick_img" src="/assets/images/close.svg" style="height: 50px;padding-bottom: 4px;" alt="">

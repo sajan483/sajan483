@@ -124,16 +124,6 @@ text-align: right;
 #toggleTopBtn3{display:none;}
 #trnspt{display: none;}
 
-
-#top {
-    padding-top: 5%;
-    background: #e1e7ee;
-    background-repeat: no-repeat;
-    background-image: linear-gradient(to bottom, #051322, #15457c);
-    background-size: 100% 262px;
-    min-height: 100vh;
-    padding-bottom: 46px;  
-  }
   .payment_sucess_heading{
     color: #fff;
   }
@@ -141,8 +131,7 @@ text-align: right;
     padding-bottom: 20px;
   }
   .top_section{
-    text-align: center;
-    padding: 58px 0 0px 0;
+    background-color: #1d851d;
   }
   .secondary_heading{
     font-size: 14px;
@@ -196,16 +185,7 @@ $primaryWhite: #ffffff;
 	color: $font_color;
 }
 #top {
-  padding-top: 80px;
-  padding-bottom: 80px;
-  background: #e1e7ee;
-  background-repeat: no-repeat;
-  background-image: linear-gradient(to bottom, #051322, #15457c);
-  background-size: 100% 448px;
-  min-height: 100vh;
-  font-size: $font_size_noral;
-	font-family: $font_style;
-	color: $font_color;
+  margin-top: 60px;
   .mat-horizontal-content-container {
     padding: 0;
     overflow: unset;

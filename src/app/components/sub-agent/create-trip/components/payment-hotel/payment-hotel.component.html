@@ -147,10 +147,10 @@
             </div>
         </div>
         <div class="col-md-1 pl-0 pr-2 pt-1 m-auto text-center" (click)="makkahotel = !makkahotel">
-            <i *ngIf="!makkahotel" class="downarrow icon_size_20 icns cursor-pointer"></i>
-            <i *ngIf="makkahotel" class="uparrow icon_size_20 icns cursor-pointer"></i>
+            <i *ngIf="makkahotel" class="downarrow icon_size_20 icns cursor-pointer"></i>
+            <i *ngIf="!makkahotel" class="uparrow icon_size_20 icns cursor-pointer"></i>
         </div>
-        <div class="row col-md-12 p-0 ml-0 mr-0 mt-2 p20 brdrtop" *ngIf="makkahotel">
+        <div class="row col-md-12 p-0 ml-0 mr-0 mt-2 p20 brdrtop" *ngIf="!makkahotel">
             <div class="col-md-6 p-0">
                 <div class="flexaround mrgndetails">
                     <div>
