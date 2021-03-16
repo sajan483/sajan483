@@ -207,7 +207,7 @@
       ) {
         // Clicked inside plus preventing click on icon
       } else {
-        // Clicked outside
+        // Clicked  outside
       }
     });
     this.renderer2.listen("window", "click", (e: Event) => {
