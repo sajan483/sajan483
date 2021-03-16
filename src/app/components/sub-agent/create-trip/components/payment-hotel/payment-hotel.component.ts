@@ -15,7 +15,6 @@ export class PaymentHotelComponent implements OnInit,OnChanges {
   showMadinah: boolean = false;
   makkahotel : boolean = false;
   travelCount : number;
-  makkahotel:boolean;
   readonly = true;
   constructor(private appStore : AppStore) { }
 
