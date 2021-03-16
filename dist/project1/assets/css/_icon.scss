@@ -7,6 +7,9 @@
 .makkahharam{
     background: url("/assets/images/haram.png") no-repeat center center;
 }
+.madeenanabawi{
+    background: url("/assets/images/nabwa.png") no-repeat center center;
+}
 .rightarrow{
     background: url("/assets/images/main-menu-right-arrow.png") no-repeat center center;
 }
@@ -52,6 +55,9 @@
 .madeenaicon{
     background: url("/assets/images/madeena.png") no-repeat center center;
 }
+.makkahicon{
+    background: url("/assets/images/makkah.png") no-repeat center center;
+}
 .locationicon{
     background: url("/assets/images/locationicon.png") no-repeat center center;
 }
@@ -61,7 +67,7 @@
 .mailicon{
     background: url("/assets/images/mailicon2.png") no-repeat center center;
 }
-.colendericon{
+.calendaricon{
     background: url("/assets/images/calendar-icon.png") no-repeat center center;
 }
 .nighticon{
@@ -70,9 +76,58 @@
 .galleryplusicon{
     background: url("/assets/images/gallary-plus.png") no-repeat center center;
 }
+.infoicon{
+    background: url("/assets/images/brn-info-icon.png") no-repeat center center;
+}
+.copyicon{
+    background: url("/assets/images/copy-icon.png") no-repeat center center;
+}
+.transportationicon{
+    background: url("/assets/images/transport-icon.png") no-repeat center center;
+}
+.viewicon{
+    background: url("/assets/images/view-icon.png") no-repeat center center;
+}
+.filtericon{
+    background: url("/assets/images/filter.png") no-repeat center center;
+}
+.bedicon{
+    background: url("/assets/images/bed_hotel.png") no-repeat center center;
+}
+.hotelbedicon{
+    background: url("/assets/images/hotel-bed.png") no-repeat center center;
+}
+.selectedgreentickicon{
+    background: url("/assets/images/selected-green-tick.png") no-repeat center center;
+}
+.greentickicon{
+    background: url("/assets/images/green-tick-small.png") no-repeat center center;
+}
+.staricon{
+    background: url("/assets/images/iconstar.png") no-repeat center center;
+}
+.seatsicon{
+    background: url("/assets/images/iconseat.png") no-repeat center center;
+}
+.icontransport{
+    background: url("/assets/images/iconbus.png") no-repeat center center;
+}
+.transportblueicon{
+    background: url("/assets/images/bus.png") no-repeat center center;
+}
+.hotelblueicon{
+    background: url("/assets/images/hotel.png") no-repeat center center;
+}
+.sadicon{
+    background: url("/assets/images/sad-smiley-icon.png") no-repeat center center;
+}
 .icon_size_20{
     height: 20px;
     width: 20px;
+}
+.icon_size_w17h23{
+    height: 23px;
+    width: 17px;
 }
 .icon_size_60{
     height: 60px;
@@ -97,4 +152,20 @@
 .icon_h16_w12{
     height: 16px;
     width: 12px;
+}
+.icon_size_35{
+    height: 35px;
+    width: 35px;
+}
+.icon_h28_w15{
+    height: 28px;
+    width: 15px;
+}
+.icon_h18_w15{
+    height: 18px;
+    width: 15px;
+}
+.icon_h18_w11{
+    height: 18px;
+    width: 11px;
 }

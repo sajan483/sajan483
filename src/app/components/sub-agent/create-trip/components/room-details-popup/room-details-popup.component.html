@@ -18,7 +18,7 @@
                                 <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
                             </ol>
                             <ngb-carousel #carousel [interval]="1000">
-                                <ng-template ngbSlide *ngFor="let img of selectedHotel?.meta_data?.images; index as i">
+                                <ng-template ngbSlide *ngFor="let img of setViewData.images; index as i">
                                     <a href="" target="_blank" rel="nofollow noopener noreferrer">
                                         <div class="picsum-img-wrapper">
                                             <img [src]="img.image_url" alt="My image {{i + 1}} description">
@@ -40,7 +40,7 @@
                     </div>
                     <div *ngIf="setViewData" class="textright pr10">
                         <div class="col-12">
-                            <h4>{{selectedHotel?.currency}} {{setViewData?.amount}}</h4>
+                            <h4>SAR {{setViewData?.amount}}</h4>
                         </div>
                         <h6 style="padding-top: 10px; padding-left: 15px;">{{'Includes' | translate}}</h6>
                         <div class="col-12 row" *ngIf="setViewData?.features &&  setViewData.features?.length">
@@ -56,11 +56,11 @@
                     <p *ngFor="let extension of setViewData?.extensions" class="textright pr10">
                         {{extension?.value}}
                     </p>
-                    <div *ngFor="let group of selectedHotel?.room_groups">
+                    <!-- <div *ngFor="let group of selectedHotel?.room_groups">
                         <p class="col-md-12 textright pr10" *ngFor="let extension of group.extensions">
                             {{extension?.value}}
                         </p>
-                    </div>
+                    </div> -->
                     <div *ngIf="setViewData?.cancellation_policy">
                         <div class="col-md-12 row m-0 textright pr10">
                             <div class="col-md-12 p-0 m-0 row">

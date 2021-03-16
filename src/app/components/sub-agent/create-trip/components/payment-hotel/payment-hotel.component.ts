@@ -14,6 +14,8 @@ export class PaymentHotelComponent implements OnInit,OnChanges {
   showMakkah: boolean = false;
   showMadinah: boolean = false;
   travelCount : number;
+  makkahotel:boolean;
+  readonly = true;
   constructor(private appStore : AppStore) { }
 
   ngOnInit() {

@@ -13,6 +13,7 @@ import { NotificationService } from 'src/app/common/services/notification.servic
 export class RecentBookingComponent implements OnInit {
   @Input() recentHistory:any;
   ratingMakkah=1;
+  readonly = true;
 
   constructor(private translate: TranslateService,private router:Router,private appStore: AppStore,private notifyService : NotificationService) { }
 

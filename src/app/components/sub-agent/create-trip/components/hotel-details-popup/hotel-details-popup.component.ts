@@ -18,6 +18,7 @@ import { CommonApiService } from "src/app/common/services/common-api-services";
 export class HotelDetailsPopupComponent implements OnInit ,OnChanges{
   selectedCurrency: any;
   selectedLanguage: any;
+  readonly = true;
   selectedHotel: any;
   selectedRoomGroups: any[];
   makkaHotelName: any;

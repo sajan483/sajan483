@@ -43,7 +43,7 @@
                     <span class="crossline"></span>
                     <span>Rooms</span>
                     <span class="Premium_blue fw600">{{tripHotel?.room_variations?.length}}</span>
-                    <span class="textunderline list_clr cursor-pointer pl-3" (click)="goToHotelStepper()">Modify</span>
+                    <span class="textunderline list_clr cursor-pointer pl-3" (click)="goToHotelStepper('null')">Modify</span>
                     <span class="textunderline list_clr cursor-pointer pl-3" data-toggle="modal" [attr.data-target]="'#hotelPolicy'+ tripHotel.hotel.id">Policy</span>
                     <div class="modal" id="hotelPolicy{{tripHotel.hotel.id}}">
                         <div class="modal-dialog">
