@@ -121,24 +121,16 @@
                             </div>
                             
                             <div class="col-md-12">
-                                <h3 class="fs16 fw600 Premium_blue">{{'Traveller Details' | translate}}</h3>
-                            </div>
-                            <div class="col-md-12 outer-payment-div pl-0 pr-0 pb-0">
-                                <div class="top-section pb-4">
-                                    <span class="traveller-notice">{{'Please make sure you enter the Name as per your
-                                        Government photo id.' | translate}}
-                                    </span>
+                                <div class="d-flex justify-content-between">
+                                    <h3 class="fs16 fw600 Premium_blue">{{'Traveller Details' | translate}}</h3>
+                                    <span class="fs12 darkyellow">{{'Please make sure you enter the Name as per your Government photo id.' | translate}}</span>
                                 </div>
+                            </div>
+                            <div class="col-md-12 pl-0 pr-0 pb-0">
+                                
                                 <div class="travellers-detail" *ngIf="rooms">
                                     <mat-accordion>
                                         <mat-expansion-panel [expanded]="step === 0">
-                                            <mat-expansion-panel-header>
-                                                <mat-panel-title>
-                                                    <div class="roomvice">
-                                                        <h3 class="hotelName">{{'Contact Info' | translate}} </h3>
-                                                    </div>
-                                                </mat-panel-title>
-                                            </mat-expansion-panel-header>
                                             <div formArrayName="roomAdultsArray">
                                                 <div *ngFor="let x of roomAdultsArray.controls;let adultIndex = index">
                                                     <div [formGroupName]="adultIndex">
@@ -146,25 +138,22 @@
                                                         <div class="m-0 pl-0 pr-0 content-section">
                                                             <div class="col-md-12 row ">
                                                                 <div class="col-md-3 pt-2">
-                                                                    <mat-form-field>
-                                                                        <input formControlName="firstName"
-                                                                            id="firstName{{adultIndex}}" matInput
-                                                                            placeholder="{{'First Name'| translate}}">
+                                                                    <label class="mb-0 fs14 clrlabel">First Name</label>
+                                                                    <mat-form-field appearance="outline">
+                                                                        <input formControlName="firstName" id="firstName{{adultIndex}}" matInput placeholder="Enter First Name">
                                                                     </mat-form-field>
                                                                 </div>
                                                                 <div class="col-md-3 pt-2">
-                                                                    <mat-form-field>
-                                                                        <input id="lastName{{adultIndex}}" matInput
-                                                                            placeholder="{{'Last Name'| translate}}"
-                                                                            formControlName="lastName">
+                                                                    <label class="mb-0 fs14 clrlabel">Last Name</label>
+                                                                    <mat-form-field appearance="outline">
+                                                                        <input id="lastName{{adultIndex}}" matInput placeholder="Enter Last Name" formControlName="lastName">
                                                                     </mat-form-field>
                                                                 </div>
                                                                 <div class="col-md-3 pt-2">
-                                                                    <mat-form-field>
-                                                                        <mat-select
-                                                                            placeholder="{{'Gender'| translate}}"
-                                                                            value="" id="gender{{adultIndex}}"
-                                                                            formControlName="gender">
+                                                                    <label class="mb-0 fs14 clrlabel">Gender</label>
+                                                                    <mat-form-field appearance="outline">
+                                                                        <mat-label>Gender</mat-label>
+                                                                        <mat-select placeholder="Gender" value="" id="gender{{adultIndex}}" formControlName="gender">
                                                                             <mat-option value="MALE">MALE</mat-option>
                                                                             <mat-option value="FEMALE">FEMALE
                                                                             </mat-option>
@@ -172,10 +161,9 @@
                                                                     </mat-form-field>
                                                                 </div>
                                                                 <div class="col-md-3 pt-2">
-                                                                    <mat-form-field>
-                                                                        <input matInput [matDatepicker]="picker"
-                                                                            placeholder="{{'Date of Birth'| translate}}"
-                                                                            id="dob{{adultIndex}}"
+                                                                    <label class="mb-0 fs14 clrlabel">Date of Birth</label>
+                                                                    <mat-form-field appearance="outline" class="w88">
+                                                                        <input matInput [matDatepicker]="picker" placeholder="MM/DD/YYYY" id="dob{{adultIndex}}"
                                                                             formControlName="dob">
                                                                         <mat-datepicker-toggle matSuffix [for]="picker">
                                                                         </mat-datepicker-toggle>
@@ -184,42 +172,36 @@
                                                                     </mat-form-field>
                                                                 </div>
                                                                 <div class="col-md-3 pt-2">
-                                                                    <mat-form-field>
-                                                                        <input id="passportNo{{adultIndex}}" matInput
-                                                                            placeholder="{{'Passport Number' | translate}}"
+                                                                    <label class="mb-0 fs14 clrlabel">Passport Number</label>
+                                                                    <mat-form-field appearance="outline">
+                                                                        <input id="passportNo{{adultIndex}}" matInput placeholder="Enter Passport Number"
                                                                             formControlName="passportNo">
                                                                     </mat-form-field>
                                                                 </div>
                                                                 <div class="col-md-3 pt-2">
-                                                                    <mat-form-field>
-                                                                        <input id="ped{{adultIndex}}" matInput
-                                                                            [matDatepicker]="picker2"
-                                                                            placeholder="{{'Passport expiry date'| translate}}"
-                                                                            formControlName="ped">
-                                                                        <mat-datepicker-toggle matSuffix
-                                                                            [for]="picker2"></mat-datepicker-toggle>
+                                                                    <label class="mb-0 fs14 clrlabel">Passport Expiry Date</label>
+                                                                    <mat-form-field appearance="outline" class="w88">
+                                                                        <input id="ped{{adultIndex}}" matInput [matDatepicker]="picker2"
+                                                                            placeholder="MM/DD/YYYY" formControlName="ped">
+                                                                        <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
                                                                         <mat-datepicker #picker2></mat-datepicker>
                                                                     </mat-form-field>
                                                                 </div>
                                                                 <div class="col-md-3 pt-2">
-                                                                    <mat-form-field>
-                                                                        <mat-select [(value)]="selectedNationality"
-                                                                            placeholder="{{'Nationality'| translate}}"
+                                                                    <label class="mb-0 fs14 clrlabel">Nationality</label>
+                                                                    <mat-form-field appearance="outline">
+                                                                        <mat-select [(value)]="selectedNationality" placeholder="Select Nationality"
                                                                             id="nationality{{adultIndex}}">
-                                                                            <mat-option
-                                                                                *ngFor="let n of nationalityList"
-                                                                                value="{{n.item_id}}">{{n?.item_text}}
+                                                                            <mat-option *ngFor="let n of nationalityList" value="{{n.item_id}}">{{n?.item_text}}
                                                                             </mat-option>
                                                                         </mat-select>
                                                                     </mat-form-field>
                                                                 </div>
                                                                 <div class="col-md-3 pt-2">
-                                                                    <mat-form-field>
-                                                                        <mat-select [(value)]="selectedCountry"
-                                                                            placeholder="{{'Country of Residence'| translate}}"
-                                                                            id="cor{{adultIndex}}">
-                                                                            <mat-option *ngFor="let n of countryList"
-                                                                                value="{{n.item_id}}">{{n?.item_text}}
+                                                                    <label class="mb-0 fs14 clrlabel">Country of Residence</label>
+                                                                    <mat-form-field appearance="outline">
+                                                                        <mat-select [(value)]="selectedCountry" placeholder="Select Country of Residence" id="cor{{adultIndex}}">
+                                                                            <mat-option *ngFor="let n of countryList" value="{{n.item_id}}">{{n?.item_text}}
                                                                             </mat-option>
                                                                         </mat-select>
                                                                     </mat-form-field>
@@ -228,38 +210,30 @@
                                                             <div *ngIf="mainTraveller[adultIndex]">
                                                                 <div class="col-md-12 row ">
                                                                     <div class="col-md-3 pt-2">
-                                                                        <mat-form-field appearance="outline"
-                                                                            id="phoneNumberSelect" style="width: 34%;">
-                                                                            <select matNativeControl
-                                                                                name="phn_country_code"
-                                                                                [(value)]="phoneCode" placeholder=""
+                                                                        <label class="mb-0 fs14 clrlabel w-100">Phone Number</label>
+                                                                        <mat-form-field appearance="outline"  class="w34">
+                                                                            <select matNativeControl name="phn_country_code" [(value)]="phoneCode" placeholder="Country Code"
                                                                                 id="phn_country_code{{adultIndex}}">
-                                                                                <option *ngFor="let n of phoneCodeList"
-                                                                                    value="{{n.item_id}}">{{n.item_id}}
+                                                                                <option *ngFor="let n of phoneCodeList" value="{{n.item_id}}">{{n.item_id}}
                                                                                 </option>
                                                                             </select>
                                                                         </mat-form-field>
-                                                                        <mat-form-field appearance="outline"
-                                                                            id="phoneNumberSelect" style="width: 66%;">
-
-                                                                            <input matInput id="mobile{{adultIndex}}"
-                                                                                placeholder="{{'Phone Number'| translate}}"
-                                                                                numberOnly
+                                                                        <mat-form-field appearance="outline" class="w66">
+                                                                            <input matInput id="mobile{{adultIndex}}" placeholder="Enter Phone Number" numberOnly
                                                                                 formControlName="phone_number">
                                                                         </mat-form-field>
                                                                     </div>
                                                                     <div class="col-md-3 pt-2">
-                                                                        <mat-form-field>
-                                                                            <input matInput id="email{{adultIndex}}"
-                                                                                placeholder="{{'Email'| translate}}"
-                                                                                formControlName="email">
-
+                                                                        <label class="mb-0 fs14 clrlabel">Email</label>
+                                                                        <mat-form-field appearance="outline">
+                                                                            <input matInput id="email{{adultIndex}}" placeholder="Enter Email" formControlName="email">
+                                                            
                                                                         </mat-form-field>
                                                                     </div>
                                                                     <div class="col-md-3 pt-2">
-                                                                        <mat-form-field>
-                                                                            <input matInput id="address{{adultIndex}}"
-                                                                                placeholder="{{'Address' | translate}}"
+                                                                        <label class="mb-0 fs14 clrlabel">Address</label>
+                                                                        <mat-form-field appearance="outline">
+                                                                            <input matInput id="address{{adultIndex}}" placeholder="Enter Address"
                                                                                 formControlName="address">
                                                                         </mat-form-field>
                                                                     </div>
@@ -280,17 +254,16 @@
                                     </div>
                                 </div> -->
                                 <div class="d-flex flex-row mrgin mt-2 mb-2 mr-4 ml-4">
-                                    <div *ngIf="reference_no" class="mr-auto mt-2"><span
-                                            style="color: #d33a2f;font-size: 15px;">{{'Booking Reference No' |
-                                            translate}} :{{reference_no}} </span></div>
-                                    <div class="text-align-end"><button type="submit" id="payBtn" class="bttnprimary"
-                                            data-toggle="modal" data-target="#ibanPopup" (click)="setTimerForIbanPopup()">{{'PAY'
-                                            | translate}}</button> </div>
+                                    <div *ngIf="reference_no" class="mr-auto mt-2">
+                                        <span style="color: #d33a2f;font-size: 15px;">{{'Booking Reference No' | translate}} :{{reference_no}} </span>
+                                    </div>
+                                    <div class="text-align-end"><button type="submit" id="payBtn" class="searchbutton" data-toggle="modal"
+                                            data-target="#ibanPopup" (click)="setTimerForIbanPopup()">{{'PAY' | translate}}</button> </div>
                                 </div>
                                 <div class="d-flex flex-row m-2">
                                     <div class="p-2 ml-auto"></div>
                                     <div><button (click)="bookTrip()" type="submit" id="continueBooking"
-                                            class="bttnprimary">{{'BOOK & CONTINUE' | translate}}</button> </div>
+                                            class="searchbutton">{{'BOOK & CONTINUE' | translate}}</button> </div>
                                     <div class="p-2"></div>
                                 </div>
                                 <div style="height: 100px;background:#eaeaea;"></div>

@@ -47,10 +47,10 @@
             </div>
         </div>
         <div class="col-md-1 pl-0 pr-2 pt-1 m-auto text-center" (click)="transporttoggle = !transporttoggle">
-            <i *ngIf="!transporttoggle" class="downarrow icon_size_20 icns cursor-pointer"></i>
-            <i *ngIf="transporttoggle" class="uparrow icon_size_20 icns cursor-pointer"></i>
+            <i *ngIf="transporttoggle" class="downarrow icon_size_20 icns cursor-pointer"></i>
+            <i *ngIf="!transporttoggle" class="uparrow icon_size_20 icns cursor-pointer"></i>
         </div>
-        <div class="col-md-12 p-0 row ml-0 mr-0 mt-2 borderpading brdrtop" *ngIf="transporttoggle">
+        <div class="col-md-12 p-0 row ml-0 mr-0 mt-2 borderpading brdrtop" *ngIf="!transporttoggle">
             <div class="col-md-12 transportbodypdng row m-0">
                 <div class="col-md-4 p-0 mb-2">
                     <p class="clr52 fs14"><i class="fa fa-circle pr-2 font9imp" aria-hidden="true"></i>{{tripTransport?.selected_transportation?.vehicle_types[0]?.categories[0]?.capacity}} seater(s)</p>

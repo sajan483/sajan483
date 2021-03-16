@@ -13,6 +13,7 @@ export class PaymentHotelComponent implements OnInit,OnChanges {
   @Output() notifyCreateTrip = new EventEmitter();
   showMakkah: boolean = false;
   showMadinah: boolean = false;
+  makkahotel : boolean = false;
   travelCount : number;
   makkahotel:boolean;
   readonly = true;
@@ -32,5 +33,4 @@ export class PaymentHotelComponent implements OnInit,OnChanges {
       this.notifyCreateTrip.emit(event)
     }
   }
-
 }
