@@ -1,4 +1,4 @@
-import { Component, DoCheck, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { AppStore } from 'src/app/stores/app.store';
 
 @Component({
@@ -7,29 +7,10 @@ import { AppStore } from 'src/app/stores/app.store';
   styleUrls: ['./create-trip.component.scss'],
   providers: []
 })
-export class CreateTripComponent implements OnInit, DoCheck {
+export class CreateTripComponent implements OnInit {
 
-  showShimmer:boolean
-  selector:string = 'flight'
+  constructor() { }
 
-  constructor(private appStore: AppStore) { }
-
-  ngOnInit() {
-    if(!this.appStore.showShimmer){
-      this.appStore.showShimmer = true,this.showShimmer = true
-    }
-    document.getElementById(this.selector).style.backgroundColor="#f3ac3c";
-  }
-
-  ngDoCheck(){
-    if(!this.appStore.showShimmer) {
-      this.showShimmer = false;
-    } 
-  }
-
-  stepContent(component){
-    this.selector=component
-    document.getElementById(component).style.backgroundColor="#f3ac3c";
-  }
+  ngOnInit() {}
 
 }

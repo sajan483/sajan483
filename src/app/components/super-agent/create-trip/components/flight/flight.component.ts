@@ -4,15 +4,13 @@ import { CommonApiService } from 'src/app/common/services/common-api-services';
 import { map, startWith } from "rxjs/operators";
 import { Observable } from 'rxjs';
 import { listAirport } from 'src/app/models/listAirport';
-import { Router } from '@angular/router';
 import { airlineList } from 'src/app/models/airlineList';
-import { FlightCardComponent } from './flight-card/flight-card.component';
 
 @Component({
   selector: 'app-flight',
   templateUrl: './flight.component.html',
   styleUrls: ['./flight.component.scss'],
-  providers:[CommonApiService,FlightCardComponent]
+  providers:[CommonApiService]
 })
 export class FlightComponent implements OnInit {
 
