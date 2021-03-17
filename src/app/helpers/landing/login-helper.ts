@@ -48,7 +48,7 @@ export class loginHelper{
               this.notifyService.showSuccess(this.translate.instant('success !!'));
               this.appStore.currentUser = etype;
               localStorage.setItem('currentUser', etype);
-              this.router.navigate(["first/"]);
+              this.router.navigate(["superagent/createTrip"]);
             }
 
           }

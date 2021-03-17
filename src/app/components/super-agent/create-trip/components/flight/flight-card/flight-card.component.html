@@ -1,0 +1,86 @@
+<div class="flight-list-outer">
+    <div class="row">
+        <div class="col-md-6">
+            <p class="flight-head">ONWARD <span> [{{fromLocation.city}} to {{destLocation.city}}]</span></p>
+            <div class="divider"></div>
+            <ng-container *ngFor="let item of departureFlights; let i = index">
+                <mat-card id="{{'depCard'+i}}" class="flight-card">
+                    <div class="fc-top">
+                        <div class="top-left">
+                            <input class="flight-radio" type="radio" id="male" name="deprtureflight" (click)="setDepFlight(item,i)">
+                            <p class="radio-label">{{item.AirlineName.split('|')[0]}}<span>| {{item.Provider}}-{{item.FlightNo}}</span></p>
+                        </div>
+                        <div class="top-right">
+                            <p class="fare-label">Current Fare</p>
+                            <p class="fare">₹{{item.NetFare}}</p>
+                        </div>
+                    </div>
+                    <div class="fc-middle">
+                        <img class="fc-img" src="https://imgak.mmtcdn.com/flights/assets/media/dt/common/icons/{{item.MAC}}.png">
+                        <div class="depart">
+                            <p class="black-18">{{item.DepartureTime | date:'shortTime'}}</p>
+                            <p class="grey-12">{{item.FromName.split('|')[0]}}</p>
+                            <p class="black-12">{{item.DepartureTime | date:'shortDate'}}</p>
+                        </div>
+                        <div class="flag">
+                            <div class="flag-border"></div>
+                            <p class="black-12 text-center">{{item.Duration}}</p>
+                            <img src="/assets/images/india.ico">
+                            <p class="grey-12 text-center">{{item.Stops}} Stop</p>
+                        </div>
+                        <div class="arrive">
+                            <p class="black-18">{{item.ArrivalTime | date:'shortTime'}}</p>
+                            <p class="grey-12">{{item.ToName.split('|')[0]}}</p>
+                            <p class="black-12">{{item.ArrivalTime | date:'shortDate'}}</p>
+                        </div>
+                    </div>
+                    <div class="fc-bottom">
+                        <p class="green">R</p>
+                        <p class="f-detail">+ Flight Details</p>
+                    </div>
+                </mat-card>
+            </ng-container>
+        </div>
+        <div class="col-md-6">
+            <p class="flight-head">RETURN <span> [{{destLocation.city}} to {{fromLocation.city}}]</span></p>
+            <div class="divider"></div>
+            <ng-container *ngFor="let item of returnFlights; let i = index">
+                <mat-card id="{{'arrCard'+i}}" class="flight-card">
+                    <div class="fc-top">
+                        <div class="top-left">
+                            <input class="flight-radio" type="radio" id="male" name="returnflight" (click)="setArrFlight(item,i)">
+                            <p class="radio-label">{{item.AirlineName.split('|')[0]}}<span>| {{item.Provider}}-{{item.FlightNo}}</span></p>
+                        </div>
+                        <div class="top-right">
+                            <p class="fare-label">Current Fare</p>
+                            <p class="fare">₹{{item.NetFare}}</p>
+                        </div>
+                    </div>
+                    <div class="fc-middle">
+                        <img class="fc-img" src="https://imgak.mmtcdn.com/flights/assets/media/dt/common/icons/{{item.MAC}}.png">
+                        <div class="depart">
+                            <p class="black-18">{{item.DepartureTime | date:'shortTime'}}</p>
+                            <p class="grey-12">{{item.FromName.split('|')[0]}}</p>
+                            <p class="black-12">{{item.DepartureTime | date:'shortDate'}}</p>
+                        </div>
+                        <div class="flag">
+                            <div class="flag-border"></div>
+                            <p class="black-12 text-center">{{item.Duration}}</p>
+                            <img src="/assets/images/india.ico">
+                            <p class="grey-12 text-center">{{item.Stops}} Stop</p>
+                        </div>
+                        <div class="arrive">
+                            <p class="black-18">{{item.ArrivalTime | date:'shortTime'}}</p>
+                            <p class="grey-12">{{item.ToName.split('|')[0]}}</p>
+                            <p class="black-12">{{item.ArrivalTime | date:'shortDate'}}</p>
+                        </div>
+                    </div>
+                    <div class="fc-bottom">
+                        <p class="green">R</p>
+                        <p class="f-detail">+ Flight Details</p>
+                    </div>
+                </mat-card>
+            </ng-container>
+        </div>
+    </div>
+</div>
