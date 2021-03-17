@@ -3957,21 +3957,6 @@ input[type="radio"]:checked:after {
     height: 100%;
   }
 }
-// #spinnerOuterDiv{
-//   .la-ball-spin-clockwise {
-//     display: none;
-//   }
-//   .loader_message{
-//     padding: 36px 72px;
-//     background-color: #ffffff;
-//     border-radius: 6px;
-//     text-align: center;
-//     p{
-//       margin-bottom: 8px;
-//       font-size: 14px;
-//     }
-//   }
-// }
 .sort_by_txt{
   font-weight: bold;
   font-style: normal;
@@ -5000,19 +4985,6 @@ input[type="radio"]:checked:after {
 .hotel-popup-selection{
   overflow: unset;
 }
-// .effect-1 ~ .focus-border{
-//   position: absolute; 
-//   bottom: 0; 
-//   left: 0; 
-//   width: 0; 
-//   height: 2px; 
-//   background-color: #3399FF; 
-//   transition: 0.4s;
-// }
-// .effect-1:focus ~ .focus-border{
-//   width: 100%; 
-//   transition: 0.4s;
-// }
 .hotel-tabs{
   .nav-item {
     background: #eaeaed;
@@ -5770,30 +5742,7 @@ aside.roomPriceWrap {
  }
  
 }
-// .transport-card-container{
-//   position: relative;
-//   -webkit-transition: all 200ms ease-in;
-//   -webkit-transform: scale(1); 
-//   -ms-transition: all 200ms ease-in;
-//   -ms-transform: scale(1); 
-//   -moz-transition: all 200ms ease-in;
-//   -moz-transform: scale(1);
-//   transition: all 200ms ease-in;
-//   transform: scale(1);   
 
-// }
-// .transport-card-container:hover{
-//   box-shadow: 0 1px 6px 0 rgba(0, 0, 0, 0.2);
-//   z-index: 2;
-//   -webkit-transition: all 200ms ease-in;
-//   -webkit-transform: scale(1.02);
-//   -ms-transition: all 200ms ease-in;
-//   -ms-transform: scale(1.02);   
-//   -moz-transition: all 200ms ease-in;
-//   -moz-transform: scale(1.02);
-//   transition: all 200ms ease-in;
-//   transform: scale(1.02);
-// }
 .booking_count_section{
   color: rgb(3, 3, 3);
   text-align: right;
@@ -5914,16 +5863,6 @@ aside.roomPriceWrap {
   // animation: spin 2s linear infinite;
 }
 
-/* Safari */
-// @-webkit-keyframes spin {
-//   0% { -webkit-transform: rotate(0deg); }
-//   100% { -webkit-transform: rotate(360deg); }
-// }
-
-// @keyframes spin {
-//   0% { transform: rotate(0deg); }
-//   100% { transform: rotate(360deg); }
-// }
 .hotelround{
   position: relative;
   width: 64px;
@@ -6477,13 +6416,14 @@ aside.roomPriceWrap {
   }
 }
 .itinerarybutton{
-  width: 100px;
+  width: 120px;
   margin-left: 10px;
   border: 1px solid white;
   border-radius: 3px;
   background-color: white;
   padding: 6px 0px;
   text-transform: uppercase;
+  font-size: 12px;
 }
 .itinerarybutton:hover{
   background-color: rgb(255, 203, 203);
