@@ -1,0 +1,147 @@
+.outer {
+    position: relative;
+    .lite-pattern-bg {
+        background: url(/assets/images/flight-bg.jpg);
+        .main-head {
+            font-family: 'Lato', sans-serif;
+            font-size: 22px;
+            font-weight: bold;
+            text-align: center;
+            padding: 20px 0;
+        }
+        .search-section {
+            border-top: 1px solid #c4c4c4;
+            padding: 20px 0;
+            .hint {
+                font-family: 'Lato', sans-serif;
+                font-size: 12px;
+                font-weight: bold;
+                color: #555;
+                margin: 0;
+                mat-icon {
+                    margin: -3px 0 0 0;
+                    font-size: 24px;
+                }
+            }
+            .airport-code {
+                font-family: 'Lato', sans-serif;
+                font-size: 22px;
+                font-weight: bold;
+                color: #000;
+                margin: 0;
+            }
+            .text-input {
+                width: 100%;
+                background: transparent;
+                border: none;
+                cursor: pointer;
+                border: none;
+                outline: none;
+                font-family: 'Lato', sans-serif;
+                font-size: 22px;
+                font-weight: bold;
+                color: #000;
+                margin: 0;
+                text-transform: uppercase;
+            }
+            .airport-name {
+                font-family: 'Lato', sans-serif;
+                font-size: 13px;
+                font-weight: bold;
+                color: #555;
+                margin: 0;
+            }
+            .br-right {
+                border-right: 1px solid #c4c4c4;
+            }
+            .ht {
+                height: 70px;
+            }
+            .date-input {
+                width: 100%;
+                background: transparent;
+                border: none;
+                cursor: pointer;
+                border: none;
+                outline: none;
+                font-size: 18px !important;
+                font-weight: bold;
+                font-family: 'Lato', sans-serif;
+                color: #000;
+            }
+            .airline-input {
+                width: 100%;
+                background: transparent;
+                border: none;
+                cursor: pointer;
+                border: none;
+                outline: none;
+                font-size: 18px !important;
+                font-weight: bold;
+                font-family: 'Lato', sans-serif;
+                color: #000;
+                margin: 0;
+            }
+            .cr-point {
+                cursor: pointer;
+            }
+            .btn-outer {
+                button {
+                    background: #b5cb13 !important;
+                    color: #000;
+                    width: 130px;
+                    height: 45px;
+                    font-weight: normal;
+                    float: right;
+                    margin-top: 10px;
+                }
+            }
+        }
+    }
+    .footer {
+        width: 100% !important;
+        margin: 0;
+        position: absolute !important;
+        background: #fff;
+        top: calc(100%-200px) !important;
+    }
+}
+
+.no-pm {
+    padding: 0;
+    margin: 0;
+}
+
+::ng-deep {
+    .mat-autocomplete-panel {
+        position: absolute !important;
+        width: 500px !important;
+        height: 500px !important;
+    }
+    .mat-option {
+        height: 60px !important;
+        line-height: normal !important;
+    }
+    .auto-wrap {
+        .city {
+            font-size: 16px !important;
+            color: #000 !important;
+            margin: 0 0 5px 0 !important;
+        }
+        .name {
+            font-size: 14px !important;
+            color: #333 !important;
+            margin: 0px !important;
+        }
+        .iata {
+            font-size: 12px !important;
+            color: #fff !important;
+            background: #555;
+            border-radius: 5px;
+            padding: 4px 3px;
+            margin: 8px 0 0 0px !important;
+            line-height: auto !important;
+            text-align: center;
+        }
+    }
+}
