@@ -242,8 +242,7 @@
   
   @ViewChild("stepper", { static: true })
   stepper: MatStepper;
-  move(index: number) {
-    this.stepper.selectedIndex = index;}
+  move(index: number) {this.stepper.selectedIndex = index;}
   @ViewChild(MakkaHotelComponent,{static:false}) child:MakkaHotelComponent;
 
   userFilter: any = { name: '' };
