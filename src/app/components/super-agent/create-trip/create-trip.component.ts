@@ -46,6 +46,7 @@ export class CreateTripComponent implements OnInit {
     name:"SpiceJet",
     code:"SG"
   };
+  searchData
 
   @ViewChild('pickerReturn' , {read: undefined, static: false}) pickerReturn: MatDatepicker<Date>;
   @ViewChild('pickerMedOut' , {read: undefined, static: false}) pickerMedOut: MatDatepicker<Date>;
@@ -180,4 +181,11 @@ export class CreateTripComponent implements OnInit {
   setAirline(data){
     this.airlineDetails.code = data.code
   }
+
+  submitData(){
+  this.searchData = {
+    
+  }
+  }
+
 }

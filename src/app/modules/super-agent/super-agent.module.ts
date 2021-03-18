@@ -3,16 +3,17 @@ import { CommonModule } from '@angular/common';
 import { SuperAgentRouteModule } from './super-agent-routing.module';
 import { CreateTripComponent } from 'src/app/components/super-agent/create-trip/create-trip.component';
 import { MatAutocompleteModule, MatButtonModule, MatCardModule, MatDatepickerModule, MatFormFieldModule, MatIconModule, MatInputModule, MatNativeDateModule, MatProgressBarModule, MatStepperModule } from '@angular/material';
-import { FlightComponent } from 'src/app/components/super-agent/create-trip/components/flight/flight.component';
-import { HotelComponent } from 'src/app/components/super-agent/create-trip/components/hotel/hotel.component';
-import { OtherInfoComponent } from 'src/app/components/super-agent/create-trip/components/other-info/other-info.component';
-import { OtherServiceComponent } from 'src/app/components/super-agent/create-trip/components/other-service/other-service.component';
-import { PaymentComponent } from 'src/app/components/super-agent/create-trip/components/payment/payment.component';
-import { PreviewComponent } from 'src/app/components/super-agent/create-trip/components/preview/preview.component';
-import { TransportComponent } from 'src/app/components/super-agent/create-trip/components/transport/transport.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { FlightCardComponent } from 'src/app/components/super-agent/create-trip/components/flight/flight-card/flight-card.component';
-import { FlightFooterComponent } from 'src/app/components/super-agent/create-trip/components/flight/flight-footer/flight-footer.component';
+import { FlightComponent } from 'src/app/components/super-agent/create-trip/stepper/flight/flight.component';
+import { HotelComponent } from 'src/app/components/super-agent/create-trip/stepper/hotel/hotel.component';
+import { OtherInfoComponent } from 'src/app/components/super-agent/create-trip/stepper/other-info/other-info.component';
+import { OtherServiceComponent } from 'src/app/components/super-agent/create-trip/stepper/other-service/other-service.component';
+import { PaymentComponent } from 'src/app/components/super-agent/create-trip/stepper/payment/payment.component';
+import { PreviewComponent } from 'src/app/components/super-agent/create-trip/stepper/preview/preview.component';
+import { TransportComponent } from 'src/app/components/super-agent/create-trip/stepper/transport/transport.component';
+import { FlightCardComponent } from 'src/app/components/super-agent/create-trip/stepper/flight/flight-card/flight-card.component';
+import { FlightFooterComponent } from 'src/app/components/super-agent/create-trip/stepper/flight/flight-footer/flight-footer.component';
+import { StepperComponent } from 'src/app/components/super-agent/create-trip/stepper/stepper.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { FlightFooterComponent } from 'src/app/components/super-agent/create-tri
     PreviewComponent,
     TransportComponent,
     FlightCardComponent,
-    FlightFooterComponent
+    FlightFooterComponent,
+    StepperComponent
   ],
   imports: [
     CommonModule,
