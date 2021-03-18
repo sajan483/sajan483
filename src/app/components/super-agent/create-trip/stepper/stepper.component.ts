@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { AppStore } from 'src/app/stores/app.store';
 
 @Component({
   selector: 'app-stepper',

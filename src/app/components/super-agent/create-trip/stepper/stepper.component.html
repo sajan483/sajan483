@@ -9,11 +9,17 @@
                     </div>
                     <p>FLIGHT</p>
                 </div>
-                <div class="step-element col-md" (click)="stepContent('hotel')">
+                <div class="step-element col-md" (click)="stepContent('hotelMakkah')">
                     <div class="ico">
-                        <mat-icon id="hotel">apartment</mat-icon>
+                        <mat-icon id="hotelMakkah">apartment</mat-icon>
                     </div>
-                    <p>HOTEL</p>
+                    <p>MAKKAH HOTEL</p>
+                </div>
+                <div class="step-element col-md" (click)="stepContent('hotelMadinah')">
+                    <div class="ico">
+                        <mat-icon id="hotelMadinah">apartment</mat-icon>
+                    </div>
+                    <p>MEDINAH HOTEL</p>
                 </div>
                 <div class="step-element col-md" (click)="stepContent('transport')">
                     <div class="ico">
@@ -52,8 +58,11 @@
         <div class="animated fadeInLeft" *ngIf=" selector == 'flight' ">
             <app-flight></app-flight>
         </div>
-        <div class="animated fadeInLeft" *ngIf=" selector == 'hotel' ">
-            <app-hotel></app-hotel>
+        <div class="animated fadeInLeft" *ngIf=" selector == 'hotelMakkah' ">
+            <app-makkah-hotel></app-makkah-hotel>>
+        </div>
+        <div class="animated fadeInLeft" *ngIf=" selector == 'hotelMadinah' ">
+            <app-medinah-hotel></app-medinah-hotel>>
         </div>
         <div class="animated fadeInLeft" *ngIf=" selector == 'otherInfo' ">
             <app-other-info></app-other-info>

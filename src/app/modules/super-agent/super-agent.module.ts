@@ -1,11 +1,10 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule, DatePipe } from '@angular/common';
 import { SuperAgentRouteModule } from './super-agent-routing.module';
 import { CreateTripComponent } from 'src/app/components/super-agent/create-trip/create-trip.component';
 import { MatAutocompleteModule, MatButtonModule, MatCardModule, MatDatepickerModule, MatFormFieldModule, MatIconModule, MatInputModule, MatNativeDateModule, MatProgressBarModule, MatStepperModule } from '@angular/material';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FlightComponent } from 'src/app/components/super-agent/create-trip/stepper/flight/flight.component';
-import { HotelComponent } from 'src/app/components/super-agent/create-trip/stepper/hotel/hotel.component';
 import { OtherInfoComponent } from 'src/app/components/super-agent/create-trip/stepper/other-info/other-info.component';
 import { OtherServiceComponent } from 'src/app/components/super-agent/create-trip/stepper/other-service/other-service.component';
 import { PaymentComponent } from 'src/app/components/super-agent/create-trip/stepper/payment/payment.component';
@@ -14,12 +13,17 @@ import { TransportComponent } from 'src/app/components/super-agent/create-trip/s
 import { FlightCardComponent } from 'src/app/components/super-agent/create-trip/stepper/flight/flight-card/flight-card.component';
 import { FlightFooterComponent } from 'src/app/components/super-agent/create-trip/stepper/flight/flight-footer/flight-footer.component';
 import { StepperComponent } from 'src/app/components/super-agent/create-trip/stepper/stepper.component';
+import { MedinahHotelComponent } from 'src/app/components/super-agent/create-trip/stepper/medinah-hotel/medinah-hotel.component';
+import { MakkahHotelComponent } from 'src/app/components/super-agent/create-trip/stepper/makkah-hotel/makkah-hotel.component';
+import { GeneralHelper } from 'src/app/helpers/General/general-helpers';
+import { CommonApiService } from 'src/app/Services/common-api-services';
+import { HelperService } from 'src/app/common/services/helper-service';
+import { SuperAgentApiService } from 'src/app/Services/super-agent-api-services';
 
 @NgModule({
   declarations: [
     CreateTripComponent,
     FlightComponent,
-    HotelComponent,
     OtherInfoComponent,
     OtherServiceComponent,
     PaymentComponent,
@@ -27,7 +31,9 @@ import { StepperComponent } from 'src/app/components/super-agent/create-trip/ste
     TransportComponent,
     FlightCardComponent,
     FlightFooterComponent,
-    StepperComponent
+    StepperComponent,
+    MedinahHotelComponent,
+    MakkahHotelComponent
   ],
   imports: [
     CommonModule,
@@ -45,7 +51,10 @@ import { StepperComponent } from 'src/app/components/super-agent/create-trip/ste
     MatCardModule,
     MatFormFieldModule,
     MatInputModule
-  ]
+  ],
+  providers: [
+    DatePipe, GeneralHelper,CommonApiService,HelperService,SuperAgentApiService
+  ],
 })
 
 export class SuperAgentModule { }
