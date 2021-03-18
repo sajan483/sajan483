@@ -18,6 +18,7 @@ import { CommonApiService } from 'src/app/Services/common-api-services';
 import { HelperService } from 'src/app/common/services/helper-service';
 import { SuperAgentApiService } from 'src/app/Services/super-agent-api-services';
 import { HotelComponent } from 'src/app/components/super-agent/create-trip/stepper/hotel/hotel.component';
+import { OwlDateTimeModule, OwlNativeDateTimeModule } from 'ng-pick-datetime';
 
 @NgModule({
   declarations: [
@@ -48,7 +49,10 @@ import { HotelComponent } from 'src/app/components/super-agent/create-trip/stepp
     MatAutocompleteModule,
     MatCardModule,
     MatFormFieldModule,
-    MatInputModule
+    MatInputModule,
+    MatInputModule,
+    OwlDateTimeModule,
+    OwlNativeDateTimeModule
   ],
   providers: [
     DatePipe, GeneralHelper,CommonApiService,HelperService,SuperAgentApiService

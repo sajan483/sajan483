@@ -1,1 +1,98 @@
-<p>other-service works!</p>
+<div>
+    <div class="w-100 bgf2 ptpb25">
+        <div class="container d-flex justify-content-between">
+            <div class="fs22 lh22 fw600 text-black">Other Serivice Details</div>
+            <div class="d-inline-flex cursor-pointer">
+                <i class="blue_back_arrow icns icon_size_15"></i>
+                <div class="blue_back_clr lh15 fs15 ml-2">Back</div>
+            </div>
+        </div>
+    </div>
+    <div class="container mt-3">
+        <form [formGroup]="myForm" (ngSubmit)="onSubmit()">
+            <div class="boxborder">
+                <div formArrayName="arr" *ngFor="let a of myForm.get('arr').controls; let i = index">
+                    <div [formGroupName]="i">
+                        <div class="w-100 bgf2 p20 brdr_btm_d3 d-flex justify-content-between">
+                            <div class="fw600 fs16">Service {{i+1}}</div>
+                            <div class="fs16 fw400 cursor-pointer" (click)="removeItem(i)" *ngIf="i > 0"><i class="fa fa-times-circle-o" aria-hidden="true"></i> Remove</div>
+                        </div>
+                        <div class="row m-0 p30">
+                            <div class="col-md-4 mb30">
+                                <label class="fs14 fw400 lh14 pl-1">Category :</label>
+                                <select class="owldatebrdr w-100 form-control" formControlName="category" [ngClass]="{ 'is-invalid': submitted && f.category.errors }">
+                                    <option value="" disabled selected hidden>Select Category</option>
+                                </select>
+                            </div>
+                            <div class="col-md-4 mb30">
+                                <label class="fs14 fw400 lh14 pl-1">Name :</label>
+                                <input type="text" class="owldatebrdr w-100 form-control" placeholder="Enter Name"
+                                    formControlName="name" [ngClass]="{ 'is-invalid': submitted && f.name.errors }">
+                            </div>
+                            <div class="col-md-4 mb30">
+                                <label class="fs14 fw400 lh14 pl-1">Description :</label>
+                                <input type="text" class="owldatebrdr w-100 form-control form-control" placeholder="Enter Description"
+                                    formControlName="description" [ngClass]="{ 'is-invalid': submitted && f.description.errors }">
+                            </div>
+                            <div class="col-md-4">
+                                <label class="fs14 fw400 lh14 pl-1">Price :</label>
+                                <div class="input-group w-100">
+                                    <div class="input-group-prepend w20">
+                                        <span class="input-group-text priceicon" id="basic-addon1">&#8377;</span>
+                                    </div>
+                                    <input type="text" class="owldatebrdr w80 form-control" numberOnly formControlName="price"
+                                    [ngClass]="{ 'is-invalid': submitted && f.price.errors }">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="d-flex justify-content-end p30">
+                    <div class="addAnotherBttn cursor-pointer" (click)="addItem()"><i class="fa fa-plus-circle" aria-hidden="true"></i>
+                        Add Another</div>
+                </div>
+                <div>
+                    <div class="w-100 bgf2 p20 fs16 fw600 brdr_btm_d3">
+                        Visa Services Offered
+                    </div>
+                    <div class="row m-0 p30">
+                        <div class="col-md-4 mb30">
+                            <label class="fs14 fw400 lh14 pl-1">Visa Service :</label>
+                            <input type="text" class="owldatebrdr w-100 form-control" placeholder="Enter Description"
+                                formControlName="visaservice" [ngClass]="{ 'is-invalid': submitted && f.visaservice.errors }">
+                        </div>
+                        <div class="col-md-4">
+                            <label class="fs14 fw400 lh14 pl-1">Rate For Adult :</label>
+                            <div class="input-group w-100">
+                                <div class="input-group-prepend w20">
+                                    <span class="input-group-text priceicon" id="basic-addon1">&#8377;</span>
+                                </div>
+                                <input type="text" class="owldatebrdr w80 form-control" numberOnly formControlName="adultpricevisa"
+                                [ngClass]="{ 'is-invalid': submitted && f.adultpricevisa.errors }">
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <label class="fs14 fw400 lh14 pl-1">Rate For Kid :</label>
+                            <div class="input-group w-100">
+                                <div class="input-group-prepend w20">
+                                    <span class="input-group-text priceicon" id="basic-addon1">&#8377;</span>
+                                </div>
+                                <input type="text" class="owldatebrdr w80 form-control" numberOnly formControlName="childpricevisa"
+                                [ngClass]="{ 'is-invalid': submitted && f.childpricevisa.errors }">
+                            </div>
+                        </div>
+                        <div class="col-md-4 mb30">
+                            <label class="fs14 fw400 lh14 pl-1">Country :</label>
+                            <select class="owldatebrdr w-100 form-control" formControlName="country" [ngClass]="{ 'is-invalid': submitted && f.country.errors }">
+                                <option value="" disabled selected hidden>Select Country</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="d-flex justify-content-center mt-3">
+                <button class="searchbutton">Continue</button>
+            </div>
+        </form>
+    </div>
+</div>

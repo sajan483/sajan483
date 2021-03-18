@@ -917,6 +917,15 @@ body{
 .fs12{
   font-size: 12px;
 }
+.lh15{
+  line-height: 15px;
+}
+.lh22{
+  line-height: 22px;
+}
+.lh14{
+  line-height: 14px;
+}
 .borderbox{
   border: 1px solid #d6d6d6;
   border-radius: 4px;
@@ -947,6 +956,12 @@ body{
 .w88{
   width: 88%;
 }
+.w20{
+  width: 20%;
+}
+.w80{
+  width: 80%;
+}
 .w34{
   width: 34%;
 }
@@ -961,6 +976,9 @@ body{
 }
 .mb80{
   margin-bottom: 80px;
+}
+.mb25{
+  margin-bottom: 25px;
 }
 .mb2{
   margin-bottom: 2px;
@@ -1031,6 +1049,9 @@ body{
 .pl105{
   padding-left: 105px !important;
 }
+.ptpb25{
+  padding: 25px 0;
+}
 .borderTopBlack{
   border-top: 1px solid black;
 }
@@ -1039,6 +1060,9 @@ body{
 }
 .brdr_top_d3{
   border-top: 1px solid #d3d3d3;
+}
+.brdr_btm_d3{
+  border-bottom: 1px solid #d3d3d3;
 }
 .brdr_bottom{
   border-bottom: 1px solid #f3f3f3;
@@ -1057,7 +1081,12 @@ body{
   text-align: center;
   padding-top: 25px;
 }
-
+.boxborder{
+  border: 1px solid rgba(156,170,179,.28);
+  box-shadow: 0 0 9px 0 rgba(0,0,0,.1);
+  border-radius: 4px;
+  background-color: white;
+}
 .border_box_shadow{
   border: 1px solid rgba(156,170,179,.28);
   box-shadow: 0 0 9px 0 rgba(0,0,0,.1);
@@ -1126,6 +1155,14 @@ body{
 }
 
 // button
+.addAnotherBttn{
+  background-color: #fbcd2d;
+  border: none;
+  border-radius: 2px;
+  font-size: 16px;
+  padding: 3px 10px;
+  font-weight: 400;
+}
 .blackborderbttn{
   border: 1px solid;
   padding: 3px 15px;
@@ -1223,4 +1260,31 @@ animation:slidebg 7s linear infinite;
     padding: 6px !important;
     top: 17px !important;
   }
+}
+
+//
+.owldateiconpostion{
+  position: absolute;
+  right: 8px;
+  top: 6px;
+}
+.owldatebrdr{
+  border: 1px solid #ced4da;
+  border-radius: 4px;
+  min-height: 35px;
+  padding-left: 12px;
+  background-color: white;
+}
+.owldatebrdr:focus{
+  color: #495057;
+  background-color: #fff;
+  border-color: #80bdff;
+  outline: 0;
+  box-shadow: 0 0 0 0.1rem rgba(0,123,255,.25);
+}
+.priceicon{
+  width: 100%;
+  padding-left: 35%;
+  background-color: white;
+  height: 35px;
 }
