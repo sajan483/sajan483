@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule, DatePipe } from '@angular/common';
 import { SuperAgentRouteModule } from './super-agent-routing.module';
 import { CreateTripComponent } from 'src/app/components/super-agent/create-trip/create-trip.component';
 import { MatAutocompleteModule, MatButtonModule, MatCardModule, MatDatepickerModule, MatFormFieldModule, MatIconModule, MatInputModule, MatNativeDateModule, MatProgressBarModule, MatStepperModule } from '@angular/material';
@@ -13,8 +13,12 @@ import { TransportComponent } from 'src/app/components/super-agent/create-trip/s
 import { FlightCardComponent } from 'src/app/components/super-agent/create-trip/stepper/flight/flight-card/flight-card.component';
 import { FlightFooterComponent } from 'src/app/components/super-agent/create-trip/stepper/flight/flight-footer/flight-footer.component';
 import { StepperComponent } from 'src/app/components/super-agent/create-trip/stepper/stepper.component';
-import { MakkaHotelComponent } from 'src/app/components/sub-agent/create-trip/components/makka-hotel/makka-hotel.component';
 import { MedinahHotelComponent } from 'src/app/components/super-agent/create-trip/stepper/medinah-hotel/medinah-hotel.component';
+import { MakkahHotelComponent } from 'src/app/components/super-agent/create-trip/stepper/makkah-hotel/makkah-hotel.component';
+import { GeneralHelper } from 'src/app/helpers/General/general-helpers';
+import { CommonApiService } from 'src/app/Services/common-api-services';
+import { HelperService } from 'src/app/common/services/helper-service';
+import { SuperAgentApiService } from 'src/app/Services/super-agent-api-services';
 
 @NgModule({
   declarations: [
@@ -28,9 +32,8 @@ import { MedinahHotelComponent } from 'src/app/components/super-agent/create-tri
     FlightCardComponent,
     FlightFooterComponent,
     StepperComponent,
-    MakkaHotelComponent,
-    MedinahHotelComponent
-
+    MedinahHotelComponent,
+    MakkahHotelComponent
   ],
   imports: [
     CommonModule,
@@ -48,7 +51,10 @@ import { MedinahHotelComponent } from 'src/app/components/super-agent/create-tri
     MatCardModule,
     MatFormFieldModule,
     MatInputModule
-  ]
+  ],
+  providers: [
+    DatePipe, GeneralHelper,CommonApiService,HelperService,SuperAgentApiService
+  ],
 })
 
 export class SuperAgentModule { }

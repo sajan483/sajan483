@@ -6,7 +6,7 @@ import { listAirport } from 'src/app/models/listAirport';
 import { airlineList } from 'src/app/models/airlineList';
 import { MatDatepicker } from '@angular/material';
 import { CommonApiService } from 'src/app/Services/common-api-services';
-import { SubAgentApiService } from 'src/app/Services/sub-agent-api-services';
+import { SuperAgentApiService } from 'src/app/Services/super-agent-api-services';
 
 @Component({
   selector: 'app-create-trip',
@@ -56,7 +56,7 @@ export class CreateTripComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
-    private commonService: SubAgentApiService) { }
+    private commonService: SuperAgentApiService) { }
 
   ngOnInit() {
     this.searchForm = this.fb.group({

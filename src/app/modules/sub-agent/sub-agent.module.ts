@@ -103,9 +103,7 @@ import { SubAgentApiService } from 'src/app/Services/sub-agent-api-services';
   exports: [
     TranslateModule,
   ],
-  providers: [
-    DatePipe, GeneralHelper,CommonApiService,HelperService,SubAgentApiService
-  ],
+  
 })
 
 export class SubAgentModule {
