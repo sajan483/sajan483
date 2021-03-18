@@ -7,7 +7,7 @@ import { SelectedHotel } from "src/app/models/selected_hotel";
 import { Room } from "src/app/models/visaTypes";
 import { NotificationService } from "src/app/common/services/notification.service";
 import { AppStore } from "src/app/stores/app.store";
-import { CommonApiService } from "src/app/common/services/common-api-services";
+import { SubAgentApiService } from "src/app/Services/sub-agent-api-services";
 
 @Component({
   selector: "app-hotel-details-popup",
@@ -59,7 +59,7 @@ export class HotelDetailsPopupComponent implements OnInit ,OnChanges{
   noOfImages: number;
    
   constructor(
-    private commonService: CommonApiService,
+    private commonService: SubAgentApiService,
     private helperService: HelperService,
     private appStore: AppStore,
     private notifyService: NotificationService,

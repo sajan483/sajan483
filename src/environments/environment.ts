@@ -6,7 +6,9 @@ export const environment = {
   production: false,
   countryCodeCommen : '91',
   timeLeft : 0,
-  selectedCountryCommen : 'India'
+  selectedCountryCommen : 'India',
+  baseUrl:'https://b2b.betatest.akbarumrah.com/apis/',
+  baseUrl2:'https://b2ctest.akbarumrah.com/apis/'
 };
 
 /*

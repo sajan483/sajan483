@@ -1,11 +1,12 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { CommonApiService } from 'src/app/common/services/common-api-services';
 import { map, startWith } from "rxjs/operators";
 import { Observable } from 'rxjs';
 import { listAirport } from 'src/app/models/listAirport';
 import { airlineList } from 'src/app/models/airlineList';
 import { MatDatepicker } from '@angular/material';
+import { CommonApiService } from 'src/app/Services/common-api-services';
+import { SubAgentApiService } from 'src/app/Services/sub-agent-api-services';
 
 @Component({
   selector: 'app-create-trip',
@@ -55,7 +56,7 @@ export class CreateTripComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
-    private commonService: CommonApiService) { }
+    private commonService: SubAgentApiService) { }
 
   ngOnInit() {
     this.searchForm = this.fb.group({

@@ -14,7 +14,10 @@ import { TranslateModule, TranslateLoader, TranslateService } from '@ngx-transla
 import { TranslatorFactory } from 'src/app/app.module';
 import { GeneralHelper } from '../../helpers/General/general-helpers';
 import { HelperService} from 'src/app/common/services/helper-service';
-import { CommonApiService } from 'src/app/common/services/common-api-services';
+import { CommonApiService } from 'src/app/Services/common-api-services';
+import { CookieService } from 'ngx-cookie-service';
+import { LandingApiService } from 'src/app/Services/landing-api-services';
+
 
 @NgModule({
   declarations: [
@@ -42,7 +45,7 @@ import { CommonApiService } from 'src/app/common/services/common-api-services';
       isolate: true
     }),
   ],
-  providers: [GeneralHelper,HelperService,CommonApiService]
+  providers: [GeneralHelper,HelperService,CommonApiService,CookieService,LandingApiService]
 })
 
 export class LandingModule {

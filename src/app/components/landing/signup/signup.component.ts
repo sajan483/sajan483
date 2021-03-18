@@ -4,15 +4,15 @@ import {FormGroup,FormBuilder} from '@angular/forms';
 import Swal from 'sweetalert2';
 import { NgxSpinnerService } from "ngx-spinner";
 import { Country } from 'src/app/models/airportList';
-import { CommonApiService } from '../../../common/services/common-api-services';
 import { signupAdapter } from 'src/app/adapters/Landing/signupAdapter';
 import { environment } from '../../../../environments/environment';
+import { LandingApiService } from 'src/app/Services/landing-api-services';
+import { CommonApiService } from 'src/app/Services/common-api-services';
 
 @Component({
   selector: 'app-signup',
   templateUrl: './signup.component.html',
-  styleUrls: ['./signup.component.scss'],
-  providers:[CommonApiService]
+  styleUrls: ['./signup.component.scss']
 })
 
 export class SignupComponent implements OnInit {
@@ -26,9 +26,12 @@ export class SignupComponent implements OnInit {
   slctcntry : any = environment.selectedCountryCommen;
   countrycode1 : any = environment.countryCodeCommen;
   signupAdapter : signupAdapter;
+  commonApiService : CommonApiService;
 
-  constructor(private common: CommonApiService,private router: Router,private formBuilder: FormBuilder
-    ,private spinner: NgxSpinnerService) { 
+  constructor(private common: LandingApiService,
+    private router: Router,private formBuilder: FormBuilder
+    ,private spinner: NgxSpinnerService,
+    private _commonApiService:CommonApiService) { 
     this.signupAdapter = new signupAdapter();
     this.signupForm = this.signupAdapter.createSignupGroup();
   }
@@ -43,7 +46,7 @@ export class SignupComponent implements OnInit {
    * this method for fetch coutry list
    */
   coutryList(){
-    this.common.getCountries().subscribe(res =>{
+    this.commonApiService.getCountries().subscribe(res =>{
       this.countries = res;
     })
   }

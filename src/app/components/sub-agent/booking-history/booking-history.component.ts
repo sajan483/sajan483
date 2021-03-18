@@ -4,13 +4,14 @@ import { listHistory } from '../../../models/listHistory';
 import { NgxSpinnerService } from "ngx-spinner";
 import { AuthService }from '../../../common/services/auth-services';
 import { TranslateService } from "@ngx-translate/core";
-import { CommonApiService } from 'src/app/common/services/common-api-services';
+import { SubAgentApiService } from 'src/app/Services/sub-agent-api-services';
+
 
 @Component({
   selector: 'app-booking-history',
   templateUrl: './booking-history.component.html',
   styleUrls: ['./booking-history.component.scss'],
-  providers: [CommonApiService,AuthService]
+  providers: [SubAgentApiService,AuthService]
 })
 
 export class BookingHistoryComponent implements OnInit {
@@ -20,7 +21,7 @@ export class BookingHistoryComponent implements OnInit {
   pageNo:number;
   pageSize:number;
   history: listHistory;
-  constructor(private paymentLoader: NgxSpinnerService,private common:CommonApiService,private router:Router,private translate: TranslateService,
+  constructor(private paymentLoader: NgxSpinnerService,private common:SubAgentApiService,private router:Router,private translate: TranslateService,
     private authLogin:AuthService) { }
 
   /**

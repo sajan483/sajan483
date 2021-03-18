@@ -3,13 +3,14 @@ import { Router } from "@angular/router";
 import { AppStore } from "src/app/stores/app.store";
 import { TranslateService } from "@ngx-translate/core";
 import { CookieService } from "ngx-cookie-service";
-import { CommonApiService } from "../../services/common-api-services";
+import { LandingApiService } from "src/app/Services/landing-api-services";
+import { CommonApiService } from "src/app/Services/common-api-services";
+
 
 @Component({
   selector: "app-hedder",
   templateUrl: "./hedder.component.html",
-  styleUrls: ["./hedder.component.scss"],
-  providers: [CommonApiService, CookieService],
+  styleUrls: ["./hedder.component.scss"]
 })
 
 export class HedderComponent implements OnInit, DoCheck {
@@ -21,17 +22,22 @@ export class HedderComponent implements OnInit, DoCheck {
   activeArabic: boolean = false;
   showNavBar: boolean = false;
   empid: string;
+  commonApiService:CommonApiService;
+
 
   constructor(
     public router: Router,
     private appStore: AppStore,
     private translate: TranslateService,
-    private common: CommonApiService,
-    private cookie: CookieService
-  ) {}
+    private common: LandingApiService,
+    private cookie: CookieService,
+    private _commonSpiService:CommonApiService
+  ) {
+    this.commonApiService = this._commonSpiService
+  }
 
   ngOnInit() {
-    this.common.getLanguages().subscribe((data) => {
+    this.commonApiService.getLanguages().subscribe((data) => {
       this.languageList = data.results;
       var first = localStorage.getItem("userLanguage")
         ? localStorage.getItem("userLanguage")

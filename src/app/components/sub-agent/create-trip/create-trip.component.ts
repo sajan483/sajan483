@@ -1,6 +1,6 @@
-  import {Component,OnInit,ViewChild,ViewEncapsulation,AfterViewChecked,ElementRef,Renderer2} from "@angular/core";
-  import {TranslateService} from '@ngx-translate/core';
-  import {FormBuilder,FormGroup,FormArray,FormControl,Validators,} from "@angular/forms";
+  import { Component,OnInit,ViewChild,ViewEncapsulation,AfterViewChecked,ElementRef,Renderer2} from "@angular/core";
+  import { TranslateService} from '@ngx-translate/core';
+  import { FormBuilder,FormGroup,FormArray,FormControl,Validators,} from "@angular/forms";
   import { MAT_STEPPER_GLOBAL_OPTIONS } from "@angular/cdk/stepper";
   import { Room} from "../../../models/visaTypes";
   import { MatStepper } from "@angular/material/stepper";
@@ -17,9 +17,10 @@
   import { HelperService } from "src/app/common/services/helper-service";
   import { MakkaHotelComponent } from "./components/makka-hotel/makka-hotel.component";
   import { CreateTripAdapter } from "src/app/adapters/sub-agent/create-trip-adapter";
-  import { CommonApiService } from "src/app/common/services/common-api-services";
   import { CreateTripHelper } from "src/app/helpers/sub-agent/create-trip-helpers";
   import { GeneralHelper } from "src/app/helpers/General/general-helpers";
+  import { SubAgentApiService } from "src/app/Services/sub-agent-api-services";
+  import { CommonApiService } from "src/app/Services/common-api-services";
 
   @Component({
     selector: "app-create-trip",
@@ -178,12 +179,13 @@
     showShimmer:boolean;
     noOfDaysInMakkah:number;
     generalHelper : GeneralHelper
+    commonApiService : CommonApiService
 
   constructor(
     private router: Router,
     private formBuilder: FormBuilder,
     private renderer2: Renderer2,
-    private common: CommonApiService,
+    private common: SubAgentApiService,
     private spinner: NgxSpinnerService,
     private datepipe: DatePipe,
     private http: HttpClient,
@@ -194,9 +196,11 @@
     private notifyService: NotificationService,
     private route: ActivatedRoute,
     private helperService:HelperService,
-    private genHelper: GeneralHelper
+    private genHelper: GeneralHelper,
+    private _commonApiService : CommonApiService
   ) {
-    this.generalHelper = this.genHelper;
+    this.generalHelper = genHelper;
+    this.commonApiService = _commonApiService;
     this.route.queryParams.subscribe(params => {
         this.steps = ((params.steps || "1,2,3").split(","));
     });
@@ -632,13 +636,13 @@
    * Method to call all the apis for Payment page 
    */
   fetchNessoryApisForPaymentPage(){
-    this.common.getCountry("",this.selectedLanguage).subscribe((data) => {
+    this.commonApiService.getCountry("",this.selectedLanguage).subscribe((data) => {
       this.nationalityList = data.map(x => ( {item_text: x.name, item_id: x.short_iso_code } ));
     });
-    this.common.getNationality("",this.selectedLanguage).subscribe((data) => {
+    this.commonApiService.getNationality("",this.selectedLanguage).subscribe((data) => {
       this.phoneCodeList = data.map(x => ( {item_text: x.name, item_id: x.code } ));
     });
-    this.common.getCountry("",this.selectedLanguage).subscribe((data) => {
+    this.commonApiService.getCountry("",this.selectedLanguage).subscribe((data) => {
       this.countryList = data.map(x => ( {item_text: x.name, item_id: x.short_iso_code } ));
     });
   }
@@ -648,10 +652,10 @@
    */
   fetchNessoryApisForTransport(){
     this.selectedLanguage = this.appStore.langCode
-    this.common.getVehicles(this.selectedLanguage).subscribe((data) => {
+    this.commonApiService.getVehicles(this.selectedLanguage).subscribe((data) => {
       this.vehicleTypeList = data.vehicle_types.map(x => ( {item_text: x.name, item_id: x.code} ));
     });
-    this.common.getRoutes(this.selectedLanguage).subscribe((data) => {
+    this.commonApiService.getRoutes(this.selectedLanguage).subscribe((data) => {
       this.routeList = data.routes.map(x => ( {item_text: x.name, item_id: x.code } ));
     });
     this.common.getCategories(this.selectedLanguage).subscribe((data) => {
