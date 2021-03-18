@@ -1,0 +1,159 @@
+<div class="outer">
+    <div class="container">
+        <mat-card [formGroup]="searchForm" class="ptb">
+            <p class="row-head pt20">SELECT TRAVELLERS DETAILS</p>
+            <div class="row travellers-section">
+                <div class="col-md-4 npd">
+                    <mat-form-field appearance="outline" class="field-style">
+                        <mat-label>Adults</mat-label>
+                        <input matInput placeholder="Placeholder" formControlName="adult">
+                        <mat-hint>Above 12years</mat-hint>
+                    </mat-form-field>
+                </div>
+                <div class="col-md-4 npd">
+                    <mat-form-field appearance="outline" class="field-style">
+                        <mat-label>Children</mat-label>
+                        <input matInput placeholder="Placeholder" formControlName="children">
+                        <mat-hint>2 - 12years</mat-hint>
+                    </mat-form-field>
+                </div>
+                <div class="col-md-4 npd">
+                    <mat-form-field appearance="outline" class="field-style">
+                        <mat-label>Infants</mat-label>
+                        <input matInput placeholder="Placeholder" formControlName="infant">
+                        <mat-hint>0 - 23 months</mat-hint>
+                    </mat-form-field>
+                </div>
+            </div>
+            <p class="row-head">SELECT FLIGHT DETAILS</p>
+            <div class="row flight-section">
+                <div class="col-md-3 br-right">
+                    <p class="hint">SELECT SOURCE</p>
+                    <input class="text-input" type="text" matInput [formControl]="source" [matAutocomplete]="fromList">
+                    <mat-autocomplete #fromList="matAutocomplete">
+                        <mat-option *ngFor="let option of airportListFilteredSrc | async" [value]="option.iata" (click)="setFromLocation(option)">
+                            <div class="auto-wrap row">
+                                <div class="col-md-10">
+                                    <p class="city"> {{option.city}}</p>
+                                    <p class="name">{{option.name}}</p>
+                                </div>
+                                <div class="col-md-2">
+                                    <p class="iata">{{option.iata}}</p>
+                                </div>
+                            </div>
+                        </mat-option>
+                    </mat-autocomplete>
+                    <p class="airport-name">{{fromLocation.city}}</p>
+                </div>
+                <div class="col-md-3 br-right">
+                    <p class="hint">SELECT DESTINATION</p>
+                    <input class="text-input" type="text" matInput [formControl]="destination" [matAutocomplete]="destList">
+                    <mat-autocomplete #destList="matAutocomplete">
+                        <mat-option *ngFor="let option of airportListFilteredDest | async" [value]="option.iata" (click)="setDestLocation(option)">
+                            <div class="auto-wrap row">
+                                <div class="col-md-10">
+                                    <p class="city"> {{option.city}}</p>
+                                    <p class="name">{{option.name}}</p>
+                                </div>
+                                <div class="col-md-2">
+                                    <p class="iata">{{option.iata}}</p>
+                                </div>
+                            </div>
+                        </mat-option>
+                    </mat-autocomplete>
+                    <p class="airport-name">{{destLocation.city}}</p>
+                </div>
+                <div class="col-md-2 br-right ht d-flex align-items-center cr-point" (click)="pickerDepart.open()">
+                    <div>
+                        <p class="hint align-middle">
+                            DEPARTURE
+                            <mat-icon class="align-middle">keyboard_arrow_down</mat-icon>
+                        </p>
+                        <input class="date-input" [min]="today" matInput [matDatepicker]="pickerDepart" (dateChange)="setReturnMinDate()" formControlName="departDate">
+                        <mat-datepicker #pickerDepart></mat-datepicker>
+                    </div>
+                </div>
+                <div class="col-md-2 br-right ht d-flex align-items-center cr-point" (click)="pickerReturn.open()">
+                    <div>
+                        <p class="hint align-middle">
+                            RETURN
+                            <mat-icon class="align-middle">keyboard_arrow_down</mat-icon>
+                        </p>
+                        <input class="date-input" [min]="returnMin" matInput [matDatepicker]="pickerReturn" (dateChange)="setMedinahInMinDate()" formControlName="returnDate">
+                        <mat-datepicker #pickerReturn>
+                        </mat-datepicker>
+                    </div>
+                </div>
+                <div class="col-md-2 ht d-flex align-items-center cr-point">
+                    <div>
+                        <p class="hint align-middle">
+                            SELECT AIRLINE
+                            <mat-icon class="align-middle">keyboard_arrow_down</mat-icon>
+                        </p>
+                        <input class="airline-input" type="text" matInput [formControl]="airline" [matAutocomplete]="airlines">
+                        <mat-autocomplete #airlines="matAutocomplete">
+                            <mat-option *ngFor="let option of airlinesFiltered | async" [value]="option.name" (click)="setAirline(option)">
+                                {{option.name}}
+                            </mat-option>
+                        </mat-autocomplete>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <p class="row-head">SELECT MEDINAH DETAILS</p>
+                    <div class="row medinah-section">
+                        <div class="col-md-6 br-right ht d-flex align-items-center cr-point" (click)="pickerMedIn.open()">
+                            <div>
+                                <p class="hint align-middle">
+                                    CHECK-IN
+                                    <mat-icon class="align-middle">keyboard_arrow_down</mat-icon>
+                                </p>
+                                <input class="date-input" [min]="medinahInMin" matInput [matDatepicker]="pickerMedIn" (dateChange)="setMedinahOutMinDate()" formControlName="medIn" placeholder="{{today}}">
+                                <mat-datepicker #pickerMedIn></mat-datepicker>
+                            </div>
+                        </div>
+                        <div class="col-md-6 ht d-flex align-items-center cr-point" (click)="pickerMedOut.open()">
+                            <div>
+                                <p class="hint align-middle">
+                                    CHECK-OUT
+                                    <mat-icon class="align-middle">keyboard_arrow_down</mat-icon>
+                                </p>
+                                <input class="date-input" [min]="medinahOutMin" matInput [matDatepicker]="pickerMedOut" (dateChange)="setMekkahInMinDate()" formControlName="medOut" placeholder="{{today}}">
+                                <mat-datepicker #pickerMedOut></mat-datepicker>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <p class="row-head">SELECT MEKKAH DETAILS</p>
+                    <div class="row medinah-section">
+                        <div class="col-md-6 br-right ht d-flex align-items-center cr-point" (click)="pickerMekIn.open()">
+                            <div>
+                                <p class="hint align-middle">
+                                    CHECK-IN
+                                    <mat-icon class="align-middle">keyboard_arrow_down</mat-icon>
+                                </p>
+                                <input class="date-input" [min]="mekkahInMin" matInput [matDatepicker]="pickerMekIn" (dateChange)="setMekkahOutMinDate()" formControlName="mekIn" placeholder="{{today}}">
+                                <mat-datepicker #pickerMekIn></mat-datepicker>
+                            </div>
+                        </div>
+                        <div class="col-md-6 ht d-flex align-items-center cr-point" (click)="pickerMekOut.open()">
+                            <div>
+                                <p class="hint align-middle">
+                                    CHECK-OUT
+                                    <mat-icon class="align-middle">keyboard_arrow_down</mat-icon>
+                                </p>
+                                <input class="date-input" [min]="mekkahOutMin" matInput [matDatepicker]="pickerMekOut" formControlName="mekOut" placeholder="{{today}}">
+                                <mat-datepicker #pickerMekOut></mat-datepicker>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="btn-outer">
+                <button [disabled]="!submit" mat-raised-button>GO</button>
+            </div>
+        </mat-card>
+    </div>
+</div>
