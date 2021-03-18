@@ -9,7 +9,18 @@
             text-align: center;
             padding: 20px 0;
         }
+        .modify-box {
+            button {
+                background: #b5cb13 !important;
+                color: #000;
+                font-weight: normal;
+                float: right;
+                margin-top: 10px;
+            }
+        }
         .search-section {
+            display: none;
+            visibility: hidden;
             border-top: 1px solid #c4c4c4;
             padding: 20px 0;
             .hint {
@@ -94,6 +105,11 @@
                     font-weight: normal;
                     float: right;
                     margin-top: 10px;
+                }
+                button:disabled {
+                    background: #555 !important;
+                    color: #fff !important;
+                    cursor: not-allowed;
                 }
             }
         }

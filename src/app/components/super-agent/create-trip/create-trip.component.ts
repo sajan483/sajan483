@@ -5,18 +5,20 @@ import { Observable } from 'rxjs';
 import { listAirport } from 'src/app/models/listAirport';
 import { airlineList } from 'src/app/models/airlineList';
 import { MatDatepicker } from '@angular/material';
-import { CommonApiService } from 'src/app/Services/common-api-services';
 import { SuperAgentApiService } from 'src/app/Services/super-agent-api-services';
+import { Router } from '@angular/router';
+import { StepperComponent } from './stepper/stepper.component';
 
 @Component({
   selector: 'app-create-trip',
   templateUrl: './create-trip.component.html',
   styleUrls: ['./create-trip.component.scss'],
-  providers:[CommonApiService]
+  providers:[]
 })
 export class CreateTripComponent implements OnInit {
 
   today = new Date().toJSON().split("T")[0];
+  todayStamp = new Date();
   searchForm: FormGroup;
   returnMin=new Date();
   medinahInMin:Date;
@@ -36,16 +38,16 @@ export class CreateTripComponent implements OnInit {
   returnFlights=[];
   flightListingFlag:boolean=false;
   fromLocation:any = {
-    iata:"BLR",
-    city:"Bangalore"
+    iata:"DXB",
+    city:"Dubai"
   };
   destLocation:any = {
     iata:"JED",
     city:"Jeddah"
   };
   airlineDetails:any = {
-    name:"SpiceJet",
-    code:"SG"
+    name:"Etihad",
+    code:"EY"
   };
   searchData
 
@@ -56,7 +58,8 @@ export class CreateTripComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
-    private commonService: SuperAgentApiService) { }
+    private commonService: SuperAgentApiService,
+    private router: Router) { }
 
   ngOnInit() {
     this.searchForm = this.fb.group({
@@ -73,8 +76,8 @@ export class CreateTripComponent implements OnInit {
     this.source.setValue(this.fromLocation.iata)
     this.destination.setValue(this.destLocation.iata)
     this.airline.setValue(this.airlineDetails.name)
-    this.searchForm.controls.departDate.setValue(this.today);
-    this.searchForm.controls.returnDate.setValue(this.today);
+    this.searchForm.controls.departDate.setValue(this.todayStamp);
+    this.searchForm.controls.returnDate.setValue(this.todayStamp);
     this.getAirportListSrc()
     this.getAirportListDest()
     this.getAirlineList()
@@ -184,9 +187,30 @@ export class CreateTripComponent implements OnInit {
   }
 
   submitData(){
-  this.searchData = {
-    
+    this.searchData = {
+      travellersData : {
+        adult: this.form.adult.value,
+        childret:this.form.children.value,
+        infant:this.form.infant.value 
+      },
+      flightData:{
+        source:this.source.value,
+        destination:this.destination.value,
+        departureDate:this.form.departDate.value.toJSON().split("T")[0],
+        returnDate:this.form.returnDate.value.toJSON().split("T")[0],
+        airline:this.airline.value
+      },
+      mekkahData:{
+        checkIn:this.form.mekIn.value.toJSON().split("T")[0],
+        checkOut:this.form.mekOut.value.toJSON().split("T")[0]
+      },
+      medinaData:{
+        checkIn:this.form.medIn.value.toJSON().split("T")[0],
+        checkOut:this.form.medOut.value.toJSON().split("T")[0]
+      }
+    };
+    console.log(this.searchData);
+    StepperComponent.searchData = this.searchData
+    this.router.navigateByUrl('superagent/stepper');
   }
-  }
-
 }

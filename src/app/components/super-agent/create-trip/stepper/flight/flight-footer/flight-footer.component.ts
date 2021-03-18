@@ -5,23 +5,22 @@ import { FlightCardComponent } from '../flight-card/flight-card.component';
   selector: 'app-flight-footer',
   templateUrl: './flight-footer.component.html',
   styleUrls: ['./flight-footer.component.scss'],
-  providers:[FlightCardComponent]
+  providers:[]
 })
 export class FlightFooterComponent implements OnInit {
 
-  constructor(private flightCard : FlightCardComponent) { }
+  constructor() { }
 
   ngOnInit() { 
+    console.log(FlightCardComponent.data);
   }
 
   get depFlight(){
-    console.log(this.flightCard.data);
-    return this.flightCard.data.departure
+    return FlightCardComponent.data.departure
   }
 
   get retFlight(){
-    console.log(this.flightCard.data);
-    return this.flightCard.data.return
+    return FlightCardComponent.data.return
   }
 
 }

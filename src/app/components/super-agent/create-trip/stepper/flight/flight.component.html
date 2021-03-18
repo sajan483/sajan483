@@ -2,7 +2,10 @@
     <div class="lite-pattern-bg">
         <div class="container">
             <h4 class="main-head">CHOOSE YOUR FLIGHT</h4>
-            <div class="search-section" [formGroup]="searchForm">
+            <div class="modify-box" id="modify-box">
+                <button mat-raised-button (click)="modifySearch()">Modify Search</button>
+            </div>
+            <div id="search-section" class="search-section" [formGroup]="searchForm">
                 <div class="row no-pm">
                     <div class="col-md-4 no-pm">
                         <div class="row no-pm">

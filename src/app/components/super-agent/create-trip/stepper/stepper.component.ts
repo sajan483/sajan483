@@ -9,7 +9,8 @@ import { Component, OnInit } from '@angular/core';
 export class StepperComponent implements OnInit {
 
   showShimmer:boolean
-  selector:string = 'flight'
+  selector:string = 'flight';
+  static searchData:any;
 
   constructor() { }
 
