@@ -33,9 +33,10 @@ import { NgxGalleryModule } from 'ngx-gallery';
 import { TranslatorFactory } from 'src/app/app.module';
 import { NgxSpinnerModule } from "ngx-spinner";
 import { GeneralHelper } from 'src/app/helpers/General/general-helpers';
-import { CommonApiService } from 'src/app/common/services/common-api-services';
 import { HelperService } from 'src/app/common/services/helper-service';
 import { PaymentTransportComponent } from 'src/app/components/sub-agent/create-trip/components/payment-transport/payment-transport.component';
+import { CommonApiService } from 'src/app/Services/common-api-services';
+import { SubAgentApiService } from 'src/app/Services/sub-agent-api-services';
 
 
 
@@ -103,7 +104,7 @@ import { PaymentTransportComponent } from 'src/app/components/sub-agent/create-t
     TranslateModule,
   ],
   providers: [
-    DatePipe, GeneralHelper,CommonApiService,HelperService
+    DatePipe, GeneralHelper,CommonApiService,HelperService,SubAgentApiService
   ],
 })
 

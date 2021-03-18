@@ -15,6 +15,8 @@ export function TranslatorFactory(httpClient: HttpClient) { return new Translate
 import { CookieService } from 'ngx-cookie-service';
 import { SliderComponent } from './common/components/slider/slider.component';
 import { PaginationComponent } from './common/components/pagination/pagination.component';
+import { LandingApiService } from './Services/landing-api-services';
+import { CommonApiService } from './Services/common-api-services';
 
 @NgModule({
   declarations: [
@@ -42,7 +44,7 @@ import { PaginationComponent } from './common/components/pagination/pagination.c
       isolate: false
     }),
   ],
-  providers: [DatePipe,CookieService],
+  providers: [DatePipe,CookieService,LandingApiService,CommonApiService],
   bootstrap: [AppComponent]
 })
 

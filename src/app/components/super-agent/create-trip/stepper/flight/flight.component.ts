@@ -1,16 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { CommonApiService } from 'src/app/common/services/common-api-services';
 import { map, startWith } from "rxjs/operators";
 import { Observable } from 'rxjs';
 import { listAirport } from 'src/app/models/listAirport';
 import { airlineList } from 'src/app/models/airlineList';
+import { SuperAgentApiService } from 'src/app/Services/super-agent-api-services';
 
 @Component({
   selector: 'app-flight',
   templateUrl: './flight.component.html',
-  styleUrls: ['./flight.component.scss'],
-  providers:[CommonApiService]
+  styleUrls: ['./flight.component.scss']
 })
 export class FlightComponent implements OnInit {
 
@@ -44,7 +43,7 @@ export class FlightComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
-    private commonService: CommonApiService) { }
+    private commonService: SuperAgentApiService) { }
 
   ngOnInit() {
     this.searchForm = this.fb.group({

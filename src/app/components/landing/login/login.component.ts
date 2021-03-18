@@ -9,17 +9,17 @@ import { AppStore } from 'src/app/stores/app.store';
 import { TranslateService } from '@ngx-translate/core';
 import { Country } from 'src/app/models/airportList';
 import { CookieService } from 'ngx-cookie-service';
-import { CommonApiService } from '../../../common/services/common-api-services';
 import { environment } from '../../../../environments/environment'
 import { GeneralHelper } from '../../../helpers/General/general-helpers'
 import { loginAdapter } from 'src/app/adapters/Landing/loginAdapter';
 import { loginHelper } from 'src/app/helpers/landing/login-helper'
 import { empty } from 'rxjs';
+import { LandingApiService } from 'src/app/Services/landing-api-services';
+import { CommonApiService } from 'src/app/Services/common-api-services';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss'],
-  providers: [CommonApiService]
 })
 
 export class LoginComponent implements OnInit {
@@ -43,16 +43,19 @@ export class LoginComponent implements OnInit {
   gHelper: GeneralHelper;
   loginAdapter: loginAdapter;
   loginHelperClass: loginHelper;
+  commonApiService:CommonApiService;
   constructor(private http: HttpClient,
     private router: Router,
     private translate: TranslateService,
     private appStore: AppStore,
     private fb: FormBuilder,
     private notifyService: NotificationService,
-    private common: CommonApiService,
+    private common: LandingApiService,
     private cookie: CookieService,
+    private _commonApiService:CommonApiService,
     private _gHelper: GeneralHelper) {
     this.gHelper = _gHelper;
+    this.commonApiService = this._commonApiService;
     this.loginHelperClass = new loginHelper(this.cookie, this.notifyService, this.translate, this.appStore, this.router);
     this.loginAdapter = new loginAdapter();
     this.token = this.gHelper.getAccessTocken();
@@ -68,7 +71,7 @@ export class LoginComponent implements OnInit {
    * this method is used for get countries list
    */
   getCountryList() {
-    this.common.getCountries().subscribe(res => {
+    this.commonApiService.getCountries().subscribe(res => {
       this.countries = res;
     })
   }

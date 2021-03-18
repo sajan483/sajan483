@@ -8,8 +8,8 @@ import { HelperService } from "src/app/common/services/helper-service";
 import { CreateTripHelper } from "src/app/helpers/sub-agent/create-trip-helpers";
 import { NotificationService } from "src/app/common/services/notification.service";
 import { AppStore } from "src/app/stores/app.store";
-import { CommonApiService } from "src/app/common/services/common-api-services";
 import { GeneralHelper } from "src/app/helpers/General/general-helpers";
+import { SubAgentApiService } from "src/app/Services/sub-agent-api-services";
 
 @Component({
   selector: "app-makka-hotel",
@@ -54,7 +54,7 @@ export class MakkaHotelComponent implements OnInit,DoCheck{
   generalHelper:GeneralHelper;
   
   constructor(
-    private commonService: CommonApiService,
+    private commonService: SubAgentApiService,
     private notifyService: NotificationService,
     private translateService: TranslateService,
     private appStore: AppStore,

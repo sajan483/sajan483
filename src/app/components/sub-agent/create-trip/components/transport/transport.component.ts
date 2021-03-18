@@ -1,8 +1,8 @@
 import { Component, EventEmitter, Input, OnInit, Output } from "@angular/core";
 import { TranslateService } from "@ngx-translate/core";
-import { CommonApiService } from "src/app/common/services/common-api-services";
 import { HelperService } from "src/app/common/services/helper-service";
 import { NotificationService } from "src/app/common/services/notification.service";
+import { SubAgentApiService } from "src/app/Services/sub-agent-api-services";
 import { AppStore } from "src/app/stores/app.store";
 
 @Component({
@@ -16,13 +16,20 @@ export class TransportComponent implements OnInit {
   @Output() notifyGrandparent = new EventEmitter();
   vehicleName: string;
   paxCount:number;
+  healperService:HelperService;
+  notifyService:NotificationService;
+  commonService:SubAgentApiService;
 
   constructor(
-    private healperService: HelperService,
-    private notifyService:NotificationService,
-    private commonService:CommonApiService,
+    private _healperService: HelperService,
+    private _notifyService:NotificationService,
+    private _commonService:SubAgentApiService,
     private translateService: TranslateService,
-    private appStore:AppStore) {}
+    private appStore:AppStore) {
+      this.healperService = _healperService;
+      this.notifyService = _notifyService;
+      this.commonService = _commonService;
+    }
   
   onNotify() {
     this.notifyGrandparent.emit("notify parent");

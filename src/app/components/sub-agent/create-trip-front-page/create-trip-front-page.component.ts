@@ -8,9 +8,10 @@ import { AppStore } from "../../../stores/app.store";
 import { LooseObject, Room, Travellers } from "src/app/models/visaTypes";
 import { listHistory } from "../../../models/listHistory";
 import { HelperService } from "src/app/common/services/helper-service";
-import { CommonApiService } from "src/app/common/services/common-api-services";
 import { GeneralHelper } from "../../../helpers/General/general-helpers";
 import { CreateTripHelper } from '../../../helpers/sub-agent/create-trip-helpers'
+import { SubAgentApiService } from "src/app/Services/sub-agent-api-services";
+import { CommonApiService } from "src/app/Services/common-api-services";
 
 
 @Component({
@@ -102,6 +103,7 @@ export class CreateTripFrontPageComponent implements OnInit, DoCheck {
   vehicleMaxCapacity: number;
   constructor(
     private commonApiService: CommonApiService,
+    private subAgentApiService:SubAgentApiService,
     private appStore: AppStore,
     private translate: TranslateService,
     private renderer2: Renderer2,
@@ -740,7 +742,7 @@ export class CreateTripFrontPageComponent implements OnInit, DoCheck {
    */
 
   listRecentBooking() {
-    this.commonApiService.getPaginatedhistoryList(1).subscribe((data) => {
+    this.subAgentApiService.getPaginatedhistoryList(1).subscribe((data) => {
       this.historyList = data.results;
     })
   }

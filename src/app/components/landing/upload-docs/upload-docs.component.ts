@@ -6,13 +6,14 @@ import { HttpClient} from "@angular/common/http";
 import { NgxSpinnerService } from "ngx-spinner";
 import Swal from 'sweetalert2';
 import { Country } from 'src/app/models/airportList';
-import { CommonApiService } from 'src/app/common/services/common-api-services';
+import { LandingApiService } from 'src/app/Services/landing-api-services';
+import { CommonApiService } from 'src/app/Services/common-api-services';
+
 
 @Component({
   selector: 'app-upload-docs',
   templateUrl: './upload-docs.component.html',
   styleUrls: ['./upload-docs.component.scss'],
-  providers:[CommonApiService]
 })
 export class UploadDocsComponent implements OnInit {
   id: any;
@@ -29,8 +30,10 @@ export class UploadDocsComponent implements OnInit {
   countrycode : any = '91';
   
   
-  constructor(private router:ActivatedRoute,private rout:Router,private common: CommonApiService,private http: HttpClient
-    ,private spinner: NgxSpinnerService) { }
+  constructor(private router:ActivatedRoute,private rout:Router,
+    private common: LandingApiService,private http: HttpClient,
+    private commonApiService:CommonApiService,
+    private spinner: NgxSpinnerService) { }
 
   passportfile(event){
     this.passportFile = <File>event.target.files[0];
@@ -128,7 +131,7 @@ export class UploadDocsComponent implements OnInit {
       })
     })
     
-    this.common.getCountries().subscribe(res => {
+    this.commonApiService.getCountries().subscribe(res => {
       this.country = res;
     })
   }

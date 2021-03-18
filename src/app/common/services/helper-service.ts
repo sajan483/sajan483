@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core";
-import { DatePipe } from "@angular/common";
-import { CommonApiService } from 'src/app/common/services/common-api-services';
+import { DatePipe } from "@angular/common"
+import { CommonApiService } from "src/app/Services/common-api-services";
 
 @Injectable()
 

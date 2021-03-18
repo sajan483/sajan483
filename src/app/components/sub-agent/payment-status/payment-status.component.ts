@@ -6,11 +6,11 @@ import { Observable } from 'rxjs';
 import Swal from "sweetalert2";
 import { TranslateService } from '@ngx-translate/core';
 import { AppStore } from 'src/app/stores/app.store';
-import { CommonApiService } from 'src/app/common/services/common-api-services';
 import { NotificationService } from 'src/app/common/services/notification.service';
 import { GeneralHelper } from 'src/app/helpers/General/general-helpers';
 import { CreateTripHelper } from 'src/app/helpers/sub-agent/create-trip-helpers';
 import { HelperService } from "src/app/common/services/helper-service";
+import { SubAgentApiService } from 'src/app/Services/sub-agent-api-services';
 
 @Component({
   selector: 'app-payment-status',
@@ -57,7 +57,7 @@ export class PaymentStatusComponent implements OnInit {
     private appStore: AppStore,
     private paymentLoader: NgxSpinnerService,
     private translate: TranslateService,
-    private common: CommonApiService, 
+    private common: SubAgentApiService, 
     private notifyService: NotificationService,
     private router: Router, 
     private _gHelper: GeneralHelper,
