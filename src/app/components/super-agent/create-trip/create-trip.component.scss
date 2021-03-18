@@ -158,6 +158,11 @@
             float: right;
             margin-top: 10px;
         }
+        button:disabled {
+            background: #555 !important;
+            color: #fff !important;
+            cursor: not-allowed;
+        }
     }
 }
 

@@ -152,7 +152,7 @@
                 </div>
             </div>
             <div class="btn-outer">
-                <button [disabled]="!submit" mat-raised-button>GO</button>
+                <button [disabled]="!submit" (click)="submitData()" mat-raised-button>GO</button>
             </div>
         </mat-card>
     </div>
