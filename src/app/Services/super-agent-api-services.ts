@@ -66,4 +66,10 @@ export class SuperAgentApiService {
           this.httpOptions
         );
     }
+
+  agencyHotelSearch(data: any, lang: any) {
+    return this.http
+      .post(this.BASE_URL + "packages/hotels/search/?lang=" + lang, data, this.options)
+      .map((res) => res.json());
+  }
 }

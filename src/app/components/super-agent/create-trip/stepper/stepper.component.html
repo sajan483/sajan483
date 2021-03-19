@@ -59,7 +59,7 @@
             <app-flight></app-flight>
         </div>
         <div class="animated fadeInLeft" *ngIf=" selector == 'hotel' && hotelFlag == 'hotelMakkah'">
-            <app-hotel></app-hotel>
+            <app-hotel [hotelsList]="hotelsList"></app-hotel>
         </div>
         <div class="animated fadeInLeft" *ngIf=" selector == 'hotel' && hotelFlag == 'hotelMedinah'">
             <app-hotel></app-hotel>

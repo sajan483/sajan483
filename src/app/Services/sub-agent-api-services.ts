@@ -283,6 +283,4 @@ export class SubAgentApiService {
       this.httpOptions
     );
   }
-
- 
 }
