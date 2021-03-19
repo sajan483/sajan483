@@ -24,9 +24,7 @@ import { CommonApiService } from './Services/common-api-services';
     HedderComponent,
     FooterComponent,
     SliderComponent,
-    PaginationComponent
-    
-   
+    PaginationComponent 
   ],
   imports: [
     BrowserModule,
