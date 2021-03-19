@@ -1,1 +1,62 @@
-<p>payment works!</p>
+<div>
+    <div class="w-100 bgf2 ptpb25">
+        <div class="container d-flex justify-content-between">
+            <div class="fs22 lh22 fw600 text-black">Payment Details</div>
+            <div class="d-inline-flex cursor-pointer">
+                <i class="blue_back_arrow icns icon_size_15"></i>
+                <div class="blue_back_clr lh15 fs15 ml-2">Back</div>
+            </div>
+        </div>
+    </div>
+    <div class="container mt-3">
+        <form [formGroup]="advancepayment" (ngSubmit)="onSubmit()">
+            <div class="boxborder p30">
+                <div class="row m-0">
+                    <div class="col-md-4 mb30">
+                        <label class="fs14 fw400 lh14 pl-1">Trip Cost Per Adult :</label>
+                        <div class="input-group w-100">
+                            <div class="input-group-prepend w20">
+                              <span class="input-group-text priceicon" id="basic-addon1">&#8377;</span>
+                            </div>
+                            <input type="text" class="owldatebrdr w80 form-control" numberOnly formControlName="adultcost" [ngClass]="{ 'is-invalid': submitted && f.adultcost.errors }">
+                        </div>
+                        <p class="fs13 clr86">Suggested Amount :  1234</p>
+                    </div>
+                    <div class="col-md-4 mb30">
+                        <label class="fs14 fw400 lh14 pl-1">Trip Cost Per Kids (With Bed) :</label>
+                        <div class="input-group w-100">
+                            <div class="input-group-prepend w20">
+                              <span class="input-group-text priceicon" id="basic-addon1">&#8377;</span>
+                            </div>
+                            <input type="text" class="owldatebrdr w80 form-control" numberOnly formControlName="bedkidcost" [ngClass]="{ 'is-invalid': submitted && f.bedkidcost.errors }">
+                        </div>
+                        <p class="fs13 clr86">Suggested Amount :  1234</p>
+                    </div>
+                    <div class="col-md-4 mb30">
+                        <label class="fs14 fw400 lh14 pl-1">Trip Cost Per Kids (Without Bed) :</label>
+                        <div class="input-group w-100">
+                            <div class="input-group-prepend w20">
+                              <span class="input-group-text priceicon" id="basic-addon1">&#8377;</span>
+                            </div>
+                            <input type="text" class="owldatebrdr w80 form-control" numberOnly formControlName="kidcost" [ngClass]="{ 'is-invalid': submitted && f.kidcost.errors }">
+                        </div>
+                        <p class="fs13 clr86">Suggested Amount :  1234</p>
+                    </div>
+                    <div class="col-md-4">
+                        <label class="fs14 fw400 lh14 pl-1">Advance Payable :</label>
+                        <div class="input-group w-100">
+                            <div class="input-group-prepend w20">
+                              <span class="input-group-text priceicon" id="basic-addon1">&#8377;</span>
+                            </div>
+                            <input type="text" class="owldatebrdr w80 form-control" numberOnly formControlName="advance" [ngClass]="{ 'is-invalid': submitted && f.advance.errors }">
+                        </div>
+                        <p class="fs13 clr86">Suggested Amount :  1234</p>
+                    </div>
+                </div>
+            </div>
+            <div class="d-flex justify-content-center mt-3">
+                <button type="submit" class="searchbutton">Continue</button>
+            </div>
+        </form>
+    </div>
+</div>
