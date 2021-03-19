@@ -10,7 +10,7 @@ import { FlightComponent } from '../flight.component';
 
 export class FlightCardComponent implements OnInit {
 
-  data = {
+  static data = {
     departure: '',
     return: ''
   }
@@ -36,12 +36,12 @@ export class FlightCardComponent implements OnInit {
   }
 
   setDepFlight(item, i){
-    this.data.departure=item
+    FlightCardComponent.data.departure=item
     document.getElementById('depCard'+i).style.background="#ddedfd";
   }
   
   setArrFlight(item, i){
-    this.data.return=item
+    FlightCardComponent.data.return=item
     document.getElementById('arrCard'+i).style.background="#ddedfd";
   }
 

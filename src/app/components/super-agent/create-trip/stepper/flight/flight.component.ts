@@ -4,6 +4,7 @@ import { map, startWith } from "rxjs/operators";
 import { Observable } from 'rxjs';
 import { listAirport } from 'src/app/models/listAirport';
 import { airlineList } from 'src/app/models/airlineList';
+import { StepperComponent } from '../stepper.component';
 import { SuperAgentApiService } from 'src/app/Services/super-agent-api-services';
 
 @Component({
@@ -29,35 +30,31 @@ export class FlightComponent implements OnInit {
   returnFlights=[];
   flightListingFlag:boolean=false;
   fromLocation:any = {
-    iata:"BLR",
-    city:"Bangalore"
+    iata:"DXB",
+    city:"Dubai"
   };
   destLocation:any = {
     iata:"JED",
     city:"Jeddah"
   };
   airlineDetails:any = {
-    name:"SpiceJet",
-    code:"SG"
+    name:"Etihad",
+    code:"EY"
   };
+  searchData;
 
   constructor(
     private fb: FormBuilder,
     private commonService: SuperAgentApiService) { }
 
   ngOnInit() {
+    this.searchData= StepperComponent.searchData.flightData
+    console.log(this.searchData)
     this.searchForm = this.fb.group({
 			departDate: ['', Validators.required],
 			returnDate: ['', Validators.required],
     });
-    this.source.setValue(this.fromLocation.iata)
-    this.destination.setValue(this.destLocation.iata)
-    this.airline.setValue(this.airlineDetails.name)
-    this.searchForm.controls.departDate.setValue(this.today);
-    this.searchForm.controls.returnDate.setValue(this.today);
-    this.getAirportListSrc()
-    this.getAirportListDest()
-    this.getAirlineList()
+    this.listFlights()
   }
 
   get form() { return this.searchForm.controls; }
@@ -69,6 +66,21 @@ export class FlightComponent implements OnInit {
     else{
       return false
     }
+  }
+
+  modifySearch(){
+    this.source.setValue(this.searchData.source)
+    this.destination.setValue(this.searchData.destination)
+    this.airline.setValue(this.searchData.airline)
+    this.searchForm.controls.departDate.setValue(this.searchData.departureDate);
+    this.searchForm.controls.returnDate.setValue(this.searchData.returnDate);
+    this.getAirportListSrc()
+    this.getAirportListDest()
+    this.getAirlineList()
+    document.getElementById('search-section').style.display="block";
+    document.getElementById('search-section').style.visibility="visible";
+    document.getElementById('modify-box').style.display="none";
+    document.getElementById('modify-box').style.visibility="hidden";
   }
 
   setReturnMinDate(){
@@ -162,4 +174,22 @@ export class FlightComponent implements OnInit {
       })
     }
   }
+
+  listFlights(){
+      var body = {
+        boarding_airport:this.searchData.source,
+        destination_airport:this.searchData.destination,
+        airlines:this.searchData.airline,
+        onward_date: this.searchData.departureDate,
+        return_date: this.searchData.returnDate,
+      };
+      this.commonService.searchFlights(body).subscribe((data) => {
+        if(data.flights[0].length > 0 && data.flights[1].length > 0){
+          this.flightListingFlag = true
+          this.departureFlights = data.flights[0];
+          this.returnFlights = data.flights[1];
+        }
+      })
+    }
+
 }
