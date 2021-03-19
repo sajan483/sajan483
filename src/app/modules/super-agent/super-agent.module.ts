@@ -13,12 +13,11 @@ import { TransportComponent } from 'src/app/components/super-agent/create-trip/s
 import { FlightCardComponent } from 'src/app/components/super-agent/create-trip/stepper/flight/flight-card/flight-card.component';
 import { FlightFooterComponent } from 'src/app/components/super-agent/create-trip/stepper/flight/flight-footer/flight-footer.component';
 import { StepperComponent } from 'src/app/components/super-agent/create-trip/stepper/stepper.component';
-import { MedinahHotelComponent } from 'src/app/components/super-agent/create-trip/stepper/medinah-hotel/medinah-hotel.component';
-import { MakkahHotelComponent } from 'src/app/components/super-agent/create-trip/stepper/makkah-hotel/makkah-hotel.component';
 import { GeneralHelper } from 'src/app/helpers/General/general-helpers';
 import { CommonApiService } from 'src/app/Services/common-api-services';
 import { HelperService } from 'src/app/common/services/helper-service';
 import { SuperAgentApiService } from 'src/app/Services/super-agent-api-services';
+import { HotelComponent } from 'src/app/components/super-agent/create-trip/stepper/hotel/hotel.component';
 
 @NgModule({
   declarations: [
@@ -32,8 +31,7 @@ import { SuperAgentApiService } from 'src/app/Services/super-agent-api-services'
     FlightCardComponent,
     FlightFooterComponent,
     StepperComponent,
-    MedinahHotelComponent,
-    MakkahHotelComponent
+    HotelComponent
   ],
   imports: [
     CommonModule,
