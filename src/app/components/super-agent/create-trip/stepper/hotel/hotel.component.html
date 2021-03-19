@@ -1,4 +1,30 @@
 <div class="animationdiv container">
+    <div class="modify-box" id="modify-box">
+        <button mat-raised-button (click)="modifyHotelSearch()">Modify Search</button>
+    </div>
+    <div class="row bgBlue">
+        <div class="p-2 ">
+            <div class="row">
+                <p style="padding-left: 150px;padding-top: 13px;padding-right: 10px;font-size: 14px;">
+                    Start Date
+                </p>
+                <input class="date-input matInput" matInput [matDatepicker]="pickerStart">
+                <mat-datepicker #pickerStart></mat-datepicker>
+            </div>
+        </div>
+        <div class="p-2">
+            <div class="row">
+                <p class="" style="padding-left: 150px;padding-top: 13px;padding-right: 10px;font-size: 14px;">
+                    End Date
+                </p>
+                <input class=" matInput"  matInput [matDatepicker]="pickerEnd">
+                <mat-datepicker #pickerEnd>
+                </mat-datepicker>
+            </div>
+        </div>
+        <button class="ml-auto m-2 " style="background-color: #b5cb13;" mat-raised-button>Search</button>
+
+    </div>
         <div class="padding_hotel1" *ngFor="let item of hotelsList ;let i = index">
             <div class="uitk-card uitk-grid border_box_shadow">
                 <div class="link-container uitk-grid">
