@@ -11,7 +11,7 @@ import { AppStore } from "src/app/stores/app.store";
   providers: [],
 })
 export class StepperComponent implements OnInit {
-  //private stepperAdapter: StepperAdapter = new StepperAdapter(null,this.appStore);
+  private stepperAdapter: StepperAdapter = new StepperAdapter(null,this.appStore);
   showShimmer: boolean;
   selector: string = "flight";
   static searchData: any;
@@ -33,7 +33,7 @@ export class StepperComponent implements OnInit {
   ngOnInit() {
     document.getElementById(this.selector).style.backgroundColor = "#f3ac3c";
     this.dataFromSearchPage = StepperComponent.searchData;
-    this.hotelSearch("MAKKAH");
+    this.hotelSearch("MAKKA",this.dataFromSearchPage);
   }
 
   stepContent(component, flag) {
@@ -50,25 +50,16 @@ export class StepperComponent implements OnInit {
   /*
    * this method for fetching hotel list
    */
-  hotelSearch(city: string) {
-    var body = {
-      // check_in_date: this.helperService.dateFormaterMdy(
-      //   this.dataFromSearchPage.mekkahData.checkIn
-      // ),
-      // check_out_date: this.helperService.dateFormaterMdy(
-      //   this.dataFromSearchPage.mekkahData.checkOut
-      // ),
-      check_in_date:"03/23/2021",
-      check_out_date:"03/25/2021",
-      location: "MAKKA",
-    };
+  hotelSearch(city: string,dataFromSearchPage) {
     this.superAgentApiService
-      .agencyHotelSearch(body, this.appStore.langCode)
+      .agencyHotelSearch(this.stepperAdapter.hotelSearchRequest(city,dataFromSearchPage,null),'en-US')
       .subscribe((data) => {
         if (data) {
           this.hotelsList = data;
+          this.hotelsList.city = city;
           console.log("gfgfgf",this.hotelsList)
         }
       });
+      //this.hotelSearch("MADEENA",this.dataFromSearchPage);
   }
 }

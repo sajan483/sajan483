@@ -192,7 +192,9 @@
     transition: max-height 0.2s ease-out;
   }
   .bgBlue{
-    background: #d0caca;
+    //background: #d0caca;
+    border: 1px solid rgba(156, 170, 179, 0.28);
+    box-shadow: 0 0 9px 0 rgba(0, 0, 0, 0.1);
   }
   .matInput{
     padding-left: 10px;
@@ -201,7 +203,12 @@
       border-top: none;
       border-left: none;
       height: 40px;
-      padding-top: 19px;
       margin-top: 5px;
   
+  }
+  .searchInput{
+    padding-left: 150px;
+    padding-top: 13px;
+    padding-right: 10px;
+    font-size: 14px;
   }

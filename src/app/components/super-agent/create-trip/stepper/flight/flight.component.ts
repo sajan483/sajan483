@@ -49,7 +49,6 @@ export class FlightComponent implements OnInit {
 
   ngOnInit() {
     this.searchData= StepperComponent.searchData.flightData
-    console.log(this.searchData)
     this.searchForm = this.fb.group({
 			departDate: ['', Validators.required],
 			returnDate: ['', Validators.required],
