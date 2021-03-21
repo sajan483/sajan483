@@ -1,100 +1,98 @@
 <div class="animationdiv container">
-    <div class="modify-box" id="modify-box">
-        <button mat-raised-button (click)="modifyHotelSearch()">Modify Search</button>
+    <div class="modify-box" id="modify-box m-2" *ngIf="showHtlModifyBtn">
+        <button class="searchbutton ml-2" (click)="showHtlModifyBtn = !showHtlModifyBtn">Modify Search</button>
     </div>
-    <div class="row bgBlue">
-        <div class="p-2 ">
+    <div class="row bgBlue mt-2 ml-2 mr-2" *ngIf="!showHtlModifyBtn" [formGroup]="hotelSearchForm">
+        <div class="p-2 " (click)="pickerStart.open()">
             <div class="row">
-                <p style="padding-left: 150px;padding-top: 13px;padding-right: 10px;font-size: 14px;">
+                <p class="searchInput">
                     Start Date
                 </p>
-                <input class="date-input matInput" matInput [matDatepicker]="pickerStart">
+                <input class="date-input matInput" formControlName="hotelCheckInDate" matInput [matDatepicker]="pickerStart"
+                (dateChange)="setHotelCheckOutDateRange()">
                 <mat-datepicker #pickerStart></mat-datepicker>
             </div>
         </div>
-        <div class="p-2">
+        <div class="p-2 ml-4" (click)="pickerEnd.open()">
             <div class="row">
-                <p class="" style="padding-left: 150px;padding-top: 13px;padding-right: 10px;font-size: 14px;">
+                <p class="searchInput">
                     End Date
                 </p>
-                <input class=" matInput"  matInput [matDatepicker]="pickerEnd">
+                <input class=" matInput" matInput formControlName="hotelCheckOutDate" [matDatepicker]="pickerEnd">
                 <mat-datepicker #pickerEnd>
                 </mat-datepicker>
             </div>
         </div>
-        <button class="ml-auto m-2 " style="background-color: #b5cb13;" mat-raised-button>Search</button>
-
+        <button class="ml-auto m-2 searchbutton" [disabled]="!modifyHotelSearchActive" (click)="modifyHotelSearch(hotelsList.city)">Search</button>
     </div>
-        <div class="padding_hotel1" *ngFor="let item of hotelsList ;let i = index">
-            <div class="uitk-card uitk-grid border_box_shadow">
-                <div class="link-container uitk-grid">
-                    <div class="row w-100 m-0">
-                        <div class="col-md-4 col-12 pr-0 pl-0">
-                            <section class="uitk-cell uitk-card-media">
-                                <div *ngIf="item.has_special_deal" class="hotelRibbon">
-                                    <span class="hotelRibbon3">
-                                        {{'Has special deal'}}
+    <div class="padding_hotel1" *ngFor="let item of hotelsList ;let i = index">
+        <div class="uitk-card uitk-grid border_box_shadow">
+            <div class="link-container uitk-grid">
+                <div class="row w-100 m-0">
+                    <div class="col-md-4 col-12 pr-0 pl-0">
+                        <section class="uitk-cell uitk-card-media">
+                            <div *ngIf="item.has_special_deal" class="hotelRibbon">
+                                <span class="hotelRibbon3">
+                                    {{'Has special deal'}}
+                                </span>
+                            </div>
+                            <header class="title">
+                                <div class="listing-photo-gallery title__media-container">
+                                    <span>
+                                        <section class="uitk-cell uitk-card-media title__media-container">
+                                            <div class="photo-gallery noimghotel" *ngIf="item.image_path">
+                                                <img src="{{item.image_path}}" alt="">
+                                            </div>
+                                        </section>
                                     </span>
                                 </div>
-                                <header class="title">
-                                    <div class="listing-photo-gallery title__media-container">
-                                        <span>
-                                            <section class="uitk-cell uitk-card-media title__media-container">
-                                                <div class="photo-gallery noimghotel" *ngIf="item.image_path">
-                                                    <img src="{{item.image_path}}" alt="">
-                                                </div>
-                                            </section>
-                                        </span>
+                            </header>
+                        </section>
+                    </div>
+                    <div class="col-md-8 col-12 pr-0 pl-0">
+                        <div class="uitk-card-content row">
+                            <div class="result-details-left col-md-8 col-12">
+                                <div class="d-flex flex-column ">
+                                    <div class="d-inline-flex">
+                                        <div>
+                                            <h3 class="hotel_name" title="{{item?.name}}">
+                                                {{item?.name | titlecase }}</h3>
+                                        </div>
+                                        <div class="pl-1">
+                                        </div>
                                     </div>
-                                </header>
-                            </section>
-                        </div>
-                        <div class="col-md-8 col-12 pr-0 pl-0">
-                            <div class="uitk-card-content row">
-                                <div class="result-details-left col-md-8 col-12">
-                                    <div class="d-flex flex-column ">
-                                        <div class="d-inline-flex">
-                                            <div>
-                                                <h3 class="hotel_name" title="{{item?.name}}">
-                                                    {{item?.name | titlecase }}</h3>
-                                            </div>
-                                            <div class="pl-1">
-                                            </div>
+                                    <div class="d-inline-flex pb5" *ngIf="item.haram_distance">
+                                        <div class="pr-2"><i class="makkahharam icns icon_size_15"></i></div>
+                                        <div class="fs13 clr52 fw400"><strong class="clr01 fs14 fw500">HARAM</strong>
+                                            {{item?.haram_distance}} km
                                         </div>
-                                        <div class="d-inline-flex pb5" *ngIf="item.haram_distance">
-                                            <div class="pr-2"><i class="makkahharam icns icon_size_15"></i></div>
-                                            <div class="fs13 clr52 fw400"><strong
-                                                    class="clr01 fs14 fw500">HARAM</strong> {{item?.haram_distance}} km
-                                            </div>
+                                    </div>
+                                    <div class="d-inline-flex pb5" *ngIf="item.nabawi_distance">
+                                        <div class="pr-2"><i class="madeenanabawi icns icon_size_15"></i></div>
+                                        <div class="fs13 clr52 fw400"><strong class="clr01 fs14 fw500">NABAWI</strong>
+                                            {{item?.nabawi_distance}} km
                                         </div>
-                                        <div class="d-inline-flex pb5" *ngIf="item.nabawi_distance">
-                                            <div class="pr-2"><i class="madeenanabawi icns icon_size_15"></i></div>
-                                            <div class="fs13 clr52 fw400"><strong
-                                                    class="clr01 fs14 fw500">NABAWI</strong> {{item?.nabawi_distance}} km
-                                            </div>
-                                        </div>
-                                        <div class="d-inline-flex pb5" *ngIf="item.address">
-                                            <div class="pr-2"><i class="locationicon icns icon_size_15"></i></div>
-                                            <div class="fs12 clr52">{{item?.address}}</div>
-                                        </div>
-                                        <div *ngIf="item.description">
-                                            <div class="pb5 fs13 clr52 desptn divexpandanimation"
-                                                id="descrptionLess{{i}}">{{item?.description}}</div>
-                                            <div class="readmorenavigate fs13" id="readMoreBttn{{i}}"
-                                                (click)="readMore($event,i)">+ Read More</div>
-                                            <div class="readmorenavigate fs13 dsplynone" id="readLessBttn{{i}}"
-                                                (click)="readLess($event,i)">- Read Less</div>
-                                        </div>
+                                    </div>
+                                    <div class="d-inline-flex pb5" *ngIf="item.address">
+                                        <div class="pr-2"><i class="locationicon icns icon_size_15"></i></div>
+                                        <div class="fs12 clr52">{{item?.address}}</div>
+                                    </div>
+                                    <div *ngIf="item.description">
+                                        <div class="pb5 fs13 clr52 desptn divexpandanimation" id="descrptionLess{{i}}">
+                                            {{item?.description}}</div>
+                                        <div class="readmorenavigate fs13" id="readMoreBttn{{i}}"
+                                            (click)="readMore($event,i)">+ Read More</div>
+                                        <div class="readmorenavigate fs13 dsplynone" id="readLessBttn{{i}}"
+                                            (click)="readLess($event,i)">- Read Less</div>
                                     </div>
                                 </div>
-                                <div
-                                    class="d-flex align-items-end flex-column result-details-right pr-0 col-md-4 col-12">
-                                    <div class="text-center">
-                                        <h3 class="hotel_prise">{{item?.currency_code}} {{item?.amount | number:'.2-2'}}
-                                        </h3>
-                                        <button class="searchbutton pull-right m-0" id="showHotelSelect{{i}}"
-                                            (click)="showHotelDetailsPopUp(item)">{{'Select Room' }}</button>
-                                    </div>
+                            </div>
+                            <div class="d-flex align-items-end flex-column result-details-right pr-0 col-md-4 col-12">
+                                <div class="text-center">
+                                    <h3 class="hotel_prise">{{item?.currency_code}} {{item?.amount | number:'.2-2'}}
+                                    </h3>
+                                    <button class="searchbutton pull-right m-0" id="showHotelSelect{{i}}"
+                                        (click)="showHotelDetailsPopUp(item)">{{'Select Room' }}</button>
                                 </div>
                             </div>
                         </div>
@@ -103,3 +101,4 @@
             </div>
         </div>
     </div>
+</div>
