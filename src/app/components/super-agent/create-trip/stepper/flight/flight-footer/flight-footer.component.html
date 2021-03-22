@@ -1,68 +1,70 @@
 <div class="outer">
     <div class="container">
         <div class="row">
-            <div class="col-md-5 flight-card">
+            <div class="col-md-5 flight-card" *ngIf="footerData.depFlight.From">
                 <div class="fc-top">
                     <div class="top-left">
-                        <p class="radio-label">{{depFlight.AirlineName.split('|')[0]}}<span>| {{depFlight.Provider}}-{{depFlight.FlightNo}}</span></p>
+                        <p class="radio-label">{{footerData.depFlight.AirlineName.split('|')[0]}}<span>| {{footerData.depFlight.Provider}}-{{footerData.depFlight.FlightNo}}</span></p>
                     </div>
                     <div class="top-right">
                         <p class="fare-label">Current Fare</p>
-                        <p class="fare">₹{{depFlight.NetFare}}</p>
+                        <p class="fare">₹{{footerData.depFlight.NetFare}}</p>
                     </div>
                 </div>
                 <div class="fc-middle">
-                    <img class="fc-img" src="https://imgak.mmtcdn.com/flights/assets/media/dt/common/icons/{{depFlight.MAC}}.png">
+                    <img class="fc-img" src="https://imgak.mmtcdn.com/flights/assets/media/dt/common/icons/{{footerData.depFlight.MAC}}.png">
                     <div class="depart">
-                        <p class="black-18">{{depFlight.DepartureTime | date:'shortTime'}}</p>
-                        <p class="grey-12">{{depFlight.FromName.split('|')[0]}}</p>
-                        <p class="black-12">{{depFlight.DepartureTime | date:'shortDate'}}</p>
+                        <p class="black-18">{{footerData.depFlight.DepartureTime | date:'shortTime'}}</p>
+                        <p class="grey-12">{{footerData.depFlight.FromName.split('|')[0]}}</p>
+                        <p class="black-12">{{footerData.depFlight.DepartureTime | date:'shortDate'}}</p>
                     </div>
                     <div class="flag">
                         <div class="flag-border"></div>
-                        <p class="black-12 text-center">{{depFlight.Duration}}</p>
+                        <p class="black-12 text-center">{{footerData.depFlight.Duration}}</p>
                         <img src="/assets/images/india.ico">
-                        <p class="grey-12 text-center">{{depFlight.Stops}} Stop</p>
+                        <p class="grey-12 text-center">{{footerData.depFlight.Stops}} Stop</p>
                     </div>
                     <div class="arrive">
-                        <p class="black-18">{{depFlight.ArrivalTime | date:'shortTime'}}</p>
-                        <p class="grey-12">{{depFlight.ToName.split('|')[0]}}</p>
-                        <p class="black-12">{{depFlight.ArrivalTime | date:'shortDate'}}</p>
+                        <p class="black-18">{{footerData.depFlight.ArrivalTime | date:'shortTime'}}</p>
+                        <p class="grey-12">{{footerData.depFlight.ToName.split('|')[0]}}</p>
+                        <p class="black-12">{{footerData.depFlight.ArrivalTime | date:'shortDate'}}</p>
                     </div>
                 </div>
             </div>
-            <div class="col-md-5 flight-card" *ngIf="depFlight.length">
+            <div class="col-md-5 flight-card" *ngIf="footerData.retFlight.From">
                 <div class="fc-top">
                     <div class="top-left">
-                        <p class="radio-label">{{retFlight.AirlineName.split('|')[0]}}<span>| {{retFlight.Provider}}-{{retFlight.FlightNo}}</span></p>
+                        <p class="radio-label">{{footerData.retFlight.AirlineName.split('|')[0]}}<span>| {{footerData.retFlight.Provider}}-{{footerData.retFlight.FlightNo}}</span></p>
                     </div>
                     <div class="top-right">
                         <p class="fare-label">Current Fare</p>
-                        <p class="fare">₹{{retFlight.NetFare}}</p>
+                        <p class="fare">₹{{footerData.retFlight.NetFare}}</p>
                     </div>
                 </div>
                 <div class="fc-middle">
-                    <img class="fc-img" src="https://imgak.mmtcdn.com/flights/assets/media/dt/common/icons/{{retFlight.MAC}}.png">
+                    <img class="fc-img" src="https://imgak.mmtcdn.com/flights/assets/media/dt/common/icons/{{footerData.retFlight.MAC}}.png">
                     <div class="depart">
-                        <p class="black-18">{{retFlight.DepartureTime | date:'shortTime'}}</p>
-                        <p class="grey-12">{{retFlight.FromName.split('|')[0]}}</p>
-                        <p class="black-12">{{retFlight.DepartureTime | date:'shortDate'}}</p>
+                        <p class="black-18">{{footerData.retFlight.DepartureTime | date:'shortTime'}}</p>
+                        <p class="grey-12">{{footerData.retFlight.FromName.split('|')[0]}}</p>
+                        <p class="black-12">{{footerData.retFlight.DepartureTime | date:'shortDate'}}</p>
                     </div>
                     <div class="flag">
                         <div class="flag-border"></div>
-                        <p class="black-12 text-center">{{retFlight.Duration}}</p>
+                        <p class="black-12 text-center">{{footerData.retFlight.Duration}}</p>
                         <img src="/assets/images/india.ico">
-                        <p class="grey-12 text-center">{{retFlight.Stops}} Stop</p>
+                        <p class="grey-12 text-center">{{footerData.retFlight.Stops}} Stop</p>
                     </div>
                     <div class="arrive">
-                        <p class="black-18">{{retFlight.ArrivalTime | date:'shortTime'}}</p>
-                        <p class="grey-12">{{retFlight.ToName.split('|')[0]}}</p>
-                        <p class="black-12">{{retFlight.ArrivalTime | date:'shortDate'}}</p>
+                        <p class="black-18">{{footerData.retFlight.ArrivalTime | date:'shortTime'}}</p>
+                        <p class="grey-12">{{footerData.retFlight.ToName.split('|')[0]}}</p>
+                        <p class="black-12">{{footerData.retFlight.ArrivalTime | date:'shortDate'}}</p>
                     </div>
                 </div>
             </div>
-            <div class="col-md-2">
-
+            <div class="col-md-2 btn-outer">
+                <p class="fare-total" *ngIf="footerData.depFlight.From && footerData.retFlight.From">Current Fare</p>
+                <p class="total-fare" *ngIf="footerData.depFlight.From && footerData.retFlight.From">₹{{footerData.depFlight.NetFare + footerData.retFlight.NetFare}}</p>
+                <button [disabled]="" mat-raised-button (click)="navigateHotel('hotel','hotelMakkah')">Continue</button>
             </div>
         </div>
     </div>

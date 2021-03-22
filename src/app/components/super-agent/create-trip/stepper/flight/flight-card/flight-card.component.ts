@@ -1,5 +1,5 @@
-import { Component, OnInit, Output } from '@angular/core';
-import { EventEmitter } from 'events';
+import { Component, Input, OnInit, Output } from '@angular/core';
+import { EventEmitter } from '@angular/core';
 import { FlightComponent } from '../flight.component';
 
 @Component({
@@ -10,39 +10,36 @@ import { FlightComponent } from '../flight.component';
 
 export class FlightCardComponent implements OnInit {
 
-  static data = {
-    departure: '',
-    return: ''
-  }
+
 
   constructor(private flight:FlightComponent) { }
 
+  @Output() footerFlagEmitter = new EventEmitter();
+  @Output() footerDataEmitter = new EventEmitter();
+  @Input() searchResult:any;
+  footerFlag:string='false';
+  footerData={
+    depFlight:'',
+    retFlight:''
+  }
+
+
   ngOnInit() {}
 
-  get departureFlights(){
-   return this.flight.departureFlights
-  }
-
-  get returnFlights(){
-    return this.flight.returnFlights
-  }
-
-  get fromLocation(){
-    return this.flight.fromLocation
-  }
-
-  get destLocation(){
-    return this.flight.destLocation
-  }
-
   setDepFlight(item, i){
-    FlightCardComponent.data.departure=item
+    this.footerFlag='true'
     document.getElementById('depCard'+i).style.background="#ddedfd";
+    this.footerFlagEmitter.emit(this.footerFlag);
+    this.footerData.depFlight = item;
+    this.footerDataEmitter.emit(this.footerData);
   }
   
   setArrFlight(item, i){
-    FlightCardComponent.data.return=item
+    this.footerFlag='true'
     document.getElementById('arrCard'+i).style.background="#ddedfd";
+    this.footerFlagEmitter.emit(this.footerFlag);
+    this.footerData.retFlight = item;
+    this.footerDataEmitter.emit(this.footerData);
   }
 
 }

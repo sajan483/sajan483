@@ -6,6 +6,7 @@ import { listAirport } from 'src/app/models/listAirport';
 import { airlineList } from 'src/app/models/airlineList';
 import { StepperComponent } from '../stepper.component';
 import { SuperAgentApiService } from 'src/app/Services/super-agent-api-services';
+import { EventEmitter } from 'events';
 
 @Component({
   selector: 'app-flight',
@@ -26,8 +27,6 @@ export class FlightComponent implements OnInit {
   source = new FormControl();
   destination = new FormControl();
   airline = new FormControl();
-  departureFlights=[];
-  returnFlights=[];
   flightListingFlag:boolean=false;
   fromLocation:any = {
     iata:"DXB",
@@ -42,6 +41,20 @@ export class FlightComponent implements OnInit {
     code:"EY"
   };
   searchData;
+  searchResult={
+    destLocation:{
+      iata:'',
+      city:''
+    },
+    fromLocation:{
+      iata:'',
+      city:''
+    },
+    departureFlights:'',
+    returnFlights:''
+  };
+  footerFlag:string='false';
+  footerData
 
   constructor(
     private fb: FormBuilder,
@@ -54,6 +67,8 @@ export class FlightComponent implements OnInit {
 			departDate: ['', Validators.required],
 			returnDate: ['', Validators.required],
     });
+    this.searchResult.destLocation=this.destLocation
+    this.searchResult.fromLocation=this.fromLocation
     this.listFlights()
   }
 
@@ -66,6 +81,16 @@ export class FlightComponent implements OnInit {
     else{
       return false
     }
+  }
+
+  getfooterFlag(event){
+    this.footerFlag = event
+    console.log(this.footerFlag)
+  }
+
+  getfooterData(event){
+    this.footerData=event
+    console.log(this.footerData)
   }
 
   modifySearch(){
@@ -145,10 +170,12 @@ export class FlightComponent implements OnInit {
 
   setFromLocation(data){
     this.fromLocation.city = data.city
+    this.searchResult.fromLocation.city = data.city
   }
 
   setDestLocation(data){
     this.destLocation.city = data.city
+    this.searchResult.destLocation.city = data.city
   }
 
   setAirline(data){
@@ -167,9 +194,9 @@ export class FlightComponent implements OnInit {
       };
       this.commonService.searchFlights(body).subscribe((data) => {
         if(data.flights[0].length > 0 && data.flights[1].length > 0){
-          this.flightListingFlag = true
-          this.departureFlights = data.flights[0];
-          this.returnFlights = data.flights[1];
+          this.searchResult.departureFlights = data.flights[0];
+          this.searchResult.returnFlights = data.flights[1];
+          this.flightListingFlag = true;
         }
       })
     }
@@ -185,9 +212,10 @@ export class FlightComponent implements OnInit {
       };
       this.commonService.searchFlights(body).subscribe((data) => {
         if(data.flights[0].length > 0 && data.flights[1].length > 0){
+          console.log(data.flights[0]);
+          this.searchResult.departureFlights = data.flights[0];
+          this.searchResult.returnFlights = data.flights[1];
           this.flightListingFlag = true
-          this.departureFlights = data.flights[0];
-          this.returnFlights = data.flights[1];
         }
       })
     }

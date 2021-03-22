@@ -1,7 +1,9 @@
 .outer {
-    position: relative;
     .lite-pattern-bg {
         background: url(/assets/images/flight-bg.jpg);
+        height: calc(100vh - 180px);
+        overflow-y: scroll;
+        padding-bottom: 170px;
         .main-head {
             font-family: 'Lato', sans-serif;
             font-size: 22px;
@@ -10,11 +12,11 @@
             padding: 20px 0;
         }
         .modify-box {
+            width: 100%;
             button {
                 background: #b5cb13 !important;
                 color: #000;
                 font-weight: normal;
-                float: right;
                 margin-top: 10px;
             }
         }
@@ -114,13 +116,14 @@
             }
         }
     }
-    .footer {
-        width: 100% !important;
-        margin: 0;
-        position: absolute !important;
-        background: #fff;
-        top: calc(100%-200px) !important;
-    }
+}
+
+.footer {
+    width: 100% !important;
+    position: absolute !important;
+    background: #fff !important;
+    bottom: 40px;
+    box-shadow: 0 1px 6px 0 rgba(32 33 36 / 28%);
 }
 
 .no-pm {
