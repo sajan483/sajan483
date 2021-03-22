@@ -1,13 +1,18 @@
 import { CompileStylesheetMetadata } from "@angular/compiler";
-import { FormGroup } from "@angular/forms";
 import { HelperService } from "src/app/common/services/helper-service";
 import { AppStore } from "src/app/stores/app.store";
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 export class StepperAdapter {
+  fb : FormBuilder;
+  helperService: HelperService;
+
   constructor(
-    private helperService: HelperService,
+    private _helperService: HelperService,
     private appStore: AppStore
-  ) {}
+  ) {
+    this.helperService = _helperService;
+  }
 
   /**
    * method for creating hotel search request
@@ -39,5 +44,48 @@ export class StepperAdapter {
     //   };
     //   return body;
     // }
+  }
+
+  /**
+   * this method for validating form group
+   */
+  transportBookingForm() :FormGroup{
+    this.fb = new FormBuilder();
+    return this.fb.group({
+      depdate: ['', Validators.required],
+      cabservice: ['', Validators.required],
+      cabtype: ['', Validators.required],
+      route: ['', Validators.required],
+      numberofDays: ['', Validators.required],
+      personpervehicle: ['', Validators.required],
+      amoundperperson: ['', Validators.required],
+    })
+  }
+
+  /**
+   * this methode for booking transport request
+   * @param transportSelection 
+   * @param currency 
+   * @param ddate travel date
+   */
+  transportBookingBody(transportSelection,currency,ddate){
+    var data ={
+      trip_transportation: {
+        trip_vehicles: [
+        {
+          currency: currency,
+          vehicle_type: transportSelection.cabtype,
+          category_code: transportSelection.cabservice,
+          pax_per_vehicle: transportSelection.personpervehicle,
+          price_per_pax: transportSelection.amoundperperson,
+        }
+        ],
+        route:transportSelection.route,
+        travel_date:ddate,
+        company_code: transportSelection.cabservice,
+        num_of_days: transportSelection.numberofDays,
+        },
+    }
+    return data;
   }
 }

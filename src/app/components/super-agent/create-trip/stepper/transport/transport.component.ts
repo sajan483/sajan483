@@ -3,6 +3,8 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { CommonApiService } from 'src/app/Services/common-api-services';
 import { SuperAgentApiService } from 'src/app/Services/super-agent-api-services';
 import { DatePipe } from '@angular/common';
+import { StepperAdapter } from 'src/app/adapters/super-agent/stepper-adapter'
+import { Body } from '@angular/http/src/body';
 
 @Component({
   selector: 'app-transport',
@@ -20,29 +22,23 @@ export class TransportComponent implements OnInit {
   packageId:number=7023;
   currency='SAR';
   languge = 'en_US';
+  StepperAdapter : StepperAdapter;
 
   constructor(private formBuilder: FormBuilder,private _commonApiService:CommonApiService,public datepipe: DatePipe,
     private _SuperAgentService:SuperAgentApiService) {
     this.commonApiService = this._commonApiService;
     this.SuperAgentApiService=this._SuperAgentService;
+    this.StepperAdapter = new StepperAdapter(null,null);
    }
 
   ngOnInit() {
-    this.validation();
+    this.transportSelection = this.StepperAdapter.transportBookingForm();
     this.callListApi();
   }
-  validation(){
-    this.transportSelection = this.formBuilder.group({
-      depdate: ['', Validators.required],
-      cabservice: ['', Validators.required],
-      cabtype: ['', Validators.required],
-      route: ['', Validators.required],
-      numberofDays: ['', Validators.required],
-      personpervehicle: ['', Validators.required],
-      amoundperperson: ['', Validators.required],
-    })
-  }
 
+  /**
+   * calling company api,vehicle types api and route api
+   */
   callListApi(){
     this.commonApiService.getCompanies(this.languge).subscribe((data) => {
       this.companyList = data.companies.map(x => ( {item_text: x.name, item_id: x.code } ));
@@ -66,26 +62,13 @@ export class TransportComponent implements OnInit {
     this.saveTransport();
   }
 
+  /**
+   * this method for update transport to create trip
+   */
   saveTransport(){
-    let data ={
-      "trip_transportation": {
-        "trip_vehicles": [
-        {
-          "currency": this.currency,
-          "vehicle_type": this.transportSelection.value.cabtype,
-          "category_code": this.transportSelection.value.cabservice,
-          "pax_per_vehicle": this.transportSelection.value.personpervehicle,
-          "price_per_pax": this.transportSelection.value.amoundperperson,
-        }
-        ],
-        "route":this.transportSelection.value.route,
-        "travel_date":this.datepipe.transform(this.transportSelection.value.depdate, "yyyy-MM-dd"),
-        "company_code": this.transportSelection.value.cabservice,
-        "num_of_days": this.transportSelection.value.numberofDays,
-        },
-    }
-    this.SuperAgentApiService.updatePackageAPI(data,this.currency,this.languge,this.packageId).subscribe((data)=>{
-      
+    var ddate = this.datepipe.transform(this.transportSelection.value.depdate, "yyyy-MM-dd");
+    let Body = this.StepperAdapter.transportBookingBody(this.transportSelection.value,this.currency,ddate);
+    this.SuperAgentApiService.updatePackageAPI(Body,this.currency,this.languge,this.packageId).subscribe((data)=>{
     })
   }
 }
