@@ -245,12 +245,6 @@ export class SubAgentApiService {
       .map((res) => res.json());
   }
 
-  getCompanies(lang) {
-    return this.http
-      .get(this.BASE_URL + "ground_transports/companies/?lang=" + lang , this.options)
-      .map((res) => res.json());
-  }
-
 
   pilotHotelSearch(data: any, lang: any) {
     return this.http

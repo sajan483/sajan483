@@ -664,7 +664,7 @@
     this.common.getAdditionalServices(this.selectedLanguage).subscribe((data) => {
       this.data = data.additional_services.map(x => ( {item_text: x.name, item_id: x.code } ));
     });
-    this.common.getCompanies(this.selectedLanguage).subscribe((data) => {
+    this.commonApiService.getCompanies(this.selectedLanguage).subscribe((data) => {
       this.companyList = data.companies.map(x => ( {item_text: x.name, item_id: x.code } ));
       this.companylistall = data.companies;
     });

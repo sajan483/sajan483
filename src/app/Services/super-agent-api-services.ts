@@ -70,6 +70,23 @@ export class SuperAgentApiService {
   agencyHotelSearch(data: any, lang: any) {
     return this.http
       .post(this.BASE_URL + "packages/hotels/search/?lang=" + lang, data, this.options)
+  }
+
+  updatePackageAPI(data,currency,lang,id){
+    return this.http
+      .put(this.BASE_URL + "packages/"+id+"/?currency=" + currency + "&lang=" + lang, data, this.options)
+      .map((res) => res.json());
+  }
+
+  getPackageCategories(lang){
+    return this.http
+      .get(this.BASE_URL + "packages/categories/?lang=" + lang , this.options)
+      .map((res) => res.json());
+  }
+
+  getVisaType(){
+    return this.http
+      .get(this.BASE_URL + "visa_types/", this.options)
       .map((res) => res.json());
   }
 }

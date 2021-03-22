@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { SuperAgentApiService } from 'src/app/Services/super-agent-api-services';
 
 @Component({
   selector: 'app-payment',
@@ -9,8 +10,14 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 export class PaymentComponent implements OnInit {
   advancepayment : FormGroup;
   submitted = false;
+  packageId:number=7023;
+  currency='SAR';
+  languge = 'en_US';
+  SuperAgentApiService:SuperAgentApiService;
 
-  constructor(private formBuilder: FormBuilder) { }
+  constructor(private formBuilder: FormBuilder,private _SuperAgentService:SuperAgentApiService) { 
+    this.SuperAgentApiService=this._SuperAgentService;
+  }
 
   ngOnInit() {
     this.validation();
@@ -18,10 +25,10 @@ export class PaymentComponent implements OnInit {
 
   validation(){
     this.advancepayment = this.formBuilder.group({
-      adultcost: ['', Validators.required],
-      bedkidcost: ['', Validators.required],
-      kidcost: ['', Validators.required],
-      advance: ['', Validators.required],
+      adult_price: ['', Validators.required],
+      child_with_bed_price: ['', Validators.required],
+      child_without_bed_price: ['', Validators.required],
+      advance_pct: ['', Validators.required],
     })
   }
 
@@ -34,5 +41,9 @@ export class PaymentComponent implements OnInit {
     if (this.advancepayment.invalid) {
         return;
     }
+
+    this.SuperAgentApiService.updatePackageAPI(this.advancepayment.value,this.currency,this.languge,this.packageId).subscribe((data)=>{
+      
+    })
   }
 }

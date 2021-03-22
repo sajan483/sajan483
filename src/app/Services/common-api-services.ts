@@ -78,4 +78,9 @@ export class CommonApiService {
       .get(this.BASE_URL + "ground_transports/vehicle_types/?lang=" + lang , this.options)
       .map((res) => res.json());
   }
+  getCompanies(lang) {
+    return this.http
+      .get(this.BASE_URL + "ground_transports/companies/?lang=" + lang , this.options)
+      .map((res) => res.json());
+  }
 }
