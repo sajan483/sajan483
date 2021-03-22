@@ -1,9 +1,9 @@
 <div class="flight-list-outer">
     <div class="row">
         <div class="col-md-6">
-            <p class="flight-head">ONWARD <span> [{{fromLocation.city}} to {{destLocation.city}}]</span></p>
+            <p class="flight-head">ONWARD <span> [{{searchResult.fromLocation.city}} to {{searchResult.destLocation.city}}]</span></p>
             <div class="divider"></div>
-            <ng-container *ngFor="let item of departureFlights; let i = index">
+            <ng-container *ngFor="let item of searchResult.departureFlights; let i = index">
                 <mat-card id="{{'depCard'+i}}" class="flight-card">
                     <div class="fc-top">
                         <div class="top-left">
@@ -19,7 +19,7 @@
                         <img class="fc-img" src="https://imgak.mmtcdn.com/flights/assets/media/dt/common/icons/{{item.MAC}}.png">
                         <div class="depart">
                             <p class="black-18">{{item.DepartureTime | date:'shortTime'}}</p>
-                            <p class="grey-12">{{item.FromName.split('|')[0]}}</p>
+                            <p class="grey-12 split">{{item.FromName.split('|')[0]}}</p>
                             <p class="black-12">{{item.DepartureTime | date:'shortDate'}}</p>
                         </div>
                         <div class="flag">
@@ -30,7 +30,7 @@
                         </div>
                         <div class="arrive">
                             <p class="black-18">{{item.ArrivalTime | date:'shortTime'}}</p>
-                            <p class="grey-12">{{item.ToName.split('|')[0]}}</p>
+                            <p class="grey-12 split">{{item.ToName.split('|')[0]}}</p>
                             <p class="black-12">{{item.ArrivalTime | date:'shortDate'}}</p>
                         </div>
                     </div>
@@ -42,9 +42,9 @@
             </ng-container>
         </div>
         <div class="col-md-6">
-            <p class="flight-head">RETURN <span> [{{destLocation.city}} to {{fromLocation.city}}]</span></p>
+            <p class="flight-head">RETURN <span> [{{searchResult.destLocation.city}} to {{searchResult.fromLocation.city}}]</span></p>
             <div class="divider"></div>
-            <ng-container *ngFor="let item of returnFlights; let i = index">
+            <ng-container *ngFor="let item of searchResult.returnFlights; let i = index">
                 <mat-card id="{{'arrCard'+i}}" class="flight-card">
                     <div class="fc-top">
                         <div class="top-left">
@@ -60,7 +60,7 @@
                         <img class="fc-img" src="https://imgak.mmtcdn.com/flights/assets/media/dt/common/icons/{{item.MAC}}.png">
                         <div class="depart">
                             <p class="black-18">{{item.DepartureTime | date:'shortTime'}}</p>
-                            <p class="grey-12">{{item.FromName.split('|')[0]}}</p>
+                            <p class="grey-12 split">{{item.FromName.split('|')[0]}}</p>
                             <p class="black-12">{{item.DepartureTime | date:'shortDate'}}</p>
                         </div>
                         <div class="flag">
@@ -71,7 +71,7 @@
                         </div>
                         <div class="arrive">
                             <p class="black-18">{{item.ArrivalTime | date:'shortTime'}}</p>
-                            <p class="grey-12">{{item.ToName.split('|')[0]}}</p>
+                            <p class="grey-12 split">{{item.ToName.split('|')[0]}}</p>
                             <p class="black-12">{{item.ArrivalTime | date:'shortDate'}}</p>
                         </div>
                     </div>

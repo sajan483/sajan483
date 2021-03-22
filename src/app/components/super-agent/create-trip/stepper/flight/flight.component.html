@@ -95,12 +95,12 @@
                     </div>
                 </div>
             </div>
-            <div *ngIf="flightListingFlag">
-                <app-flight-card></app-flight-card>
+            <div class="flight-card" *ngIf="flightListingFlag">
+                <app-flight-card [searchResult]="searchResult" (footerFlagEmitter)="getfooterFlag($event)" (footerDataEmitter)="getfooterData($event)"></app-flight-card>
             </div>
         </div>
-    </div>
-    <div class="footer">
-        <app-flight-footer></app-flight-footer>
+        <div class="footer" *ngIf="footerFlag=='true'">
+            <app-flight-footer [footerData]="footerData"></app-flight-footer>
+        </div>
     </div>
 </div>

@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { StepperComponent } from '../../stepper.component';
 import { FlightCardComponent } from '../flight-card/flight-card.component';
 
 @Component({
@@ -9,18 +10,15 @@ import { FlightCardComponent } from '../flight-card/flight-card.component';
 })
 export class FlightFooterComponent implements OnInit {
 
-  constructor() { }
+  @Input() footerData:any;
+
+  constructor(private stepper: StepperComponent) { }
 
   ngOnInit() { 
-    console.log(FlightCardComponent.data);
   }
 
-  get depFlight(){
-    return FlightCardComponent.data.departure
-  }
-
-  get retFlight(){
-    return FlightCardComponent.data.return
+  navigateHotel(component,hotelFlag){
+    this.stepper.stepContent(component,hotelFlag)
   }
 
 }

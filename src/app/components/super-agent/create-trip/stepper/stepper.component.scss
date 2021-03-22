@@ -1,5 +1,6 @@
 .outer {
     padding: 60px 0;
+    padding-bottom: 0;
     .full-bg-blue {
         background: #0e295a;
         height: 120px;
@@ -14,7 +15,7 @@
             .divider {
                 position: absolute;
                 width: 85%;
-                top: 22%;
+                top: 18%;
                 left: 7%;
                 border-top: 1px solid #717c95;
             }
@@ -42,6 +43,7 @@
                     text-align: center;
                     color: white;
                     font-size: 14px;
+                    height: 42px;
                 }
             }
         }
