@@ -89,4 +89,10 @@ export class SuperAgentApiService {
       .get(this.BASE_URL + "visa_types/", this.options)
       .map((res) => res.json());
   }
+
+  getPackageDetails(id){
+    return this.http
+      .get(this.BASE_URL + "packages/"+id+"/", this.options)
+      .map((res) => res.json());
+  }
 }

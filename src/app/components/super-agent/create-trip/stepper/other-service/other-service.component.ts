@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Validators, FormBuilder, FormGroup, FormArray } from '@angular/forms';
 import { SuperAgentApiService } from 'src/app/Services/super-agent-api-services';
 import { CommonApiService } from 'src/app/Services/common-api-services';
+import { StepperAdapter } from 'src/app/adapters/super-agent/stepper-adapter';
 import { Body } from '@angular/http/src/body';
 
 @Component({
@@ -21,40 +22,26 @@ export class OtherServiceComponent implements OnInit {
   serviceCategoryList: any;
   countryList: any;
   visaService: any;
+  StepperAdapter : StepperAdapter;
 
   constructor(private fb: FormBuilder,private _SuperAgentService:SuperAgentApiService,private _commonApiService:CommonApiService) { 
     this.SuperAgentApiService=this._SuperAgentService;
     this.commonApiService = this._commonApiService;
+    this.StepperAdapter = new StepperAdapter(null,null);
   }
 
   ngOnInit() {
-    this.serviceForm();
     this.apiCalles();
+    this.myForm = this.StepperAdapter.otherServiceBookingForm();
   }
-  serviceForm(){
-    this.myForm = this.fb.group({
-      arr: this.fb.array([this.createItem()]),
-      visaservice: ['',Validators.required],
-      adultpricevisa: ['',Validators.required],
-      childpricevisa: ['',Validators.required],
-      country: ['',Validators.required],
-    })
-  }
-  createItem() {
-    return this.fb.group({
-      category: ['',Validators.required],
-      name: ['',Validators.required],
-      description: ['',Validators.required],
-      price: ['',Validators.required]
-    })
-  }
+  
   removeItem(i){
     this.arr.removeAt(i);
   }
 
   addItem() {
     this.arr = this.myForm.get('arr') as FormArray;
-    this.arr.push(this.createItem());
+    this.arr.push(this.StepperAdapter.createItem());
   }
 
   get f() { return this.myForm.controls; }
@@ -63,7 +50,7 @@ export class OtherServiceComponent implements OnInit {
     this.submitted = true;
 
     // stop here if form is invalid
-    if (this.myForm.invalid && this.arr.invalid) {
+    if (this.myForm.invalid) {
         return;
     }
     this.addOtherService();
@@ -82,16 +69,9 @@ export class OtherServiceComponent implements OnInit {
   }
 
   addOtherService(){
-    let Body ={
-      "other_services":this.arr.value,
-      "trip_visa": {
-        'title': this.myForm.value.visaservice, 
-        'price': this.myForm.value.adultpricevisa, 
-        'country': this.myForm.value.country, 
-        'currency': this.currency,
-      }
-    }
-    this.SuperAgentApiService.updatePackageAPI(Body,this.currency,this.languge,this.packageId).subscribe((data)=>{
+    var body = this.StepperAdapter.otherServiceBookingBody(this.arr.value,this.myForm.value,this.currency);
+    console.log(body)
+    this.SuperAgentApiService.updatePackageAPI(body,this.currency,this.languge,this.packageId).subscribe((data)=>{
       
     })
   }

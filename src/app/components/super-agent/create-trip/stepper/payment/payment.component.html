@@ -20,7 +20,7 @@
                             </div>
                             <input type="text" class="owldatebrdr w80 form-control" numberOnly formControlName="adult_price" [ngClass]="{ 'is-invalid': submitted && f.adult_price.errors }">
                         </div>
-                        <p class="fs13 clr86">Suggested Amount :  1234</p>
+                        <p class="fs13 clr86">Suggested Amount :  {{suggestedAmound.adult_price}}</p>
                     </div>
                     <div class="col-md-4 mb30">
                         <label class="fs14 fw400 lh14 pl-1">Trip Cost Per Kids (With Bed) :</label>
@@ -30,7 +30,7 @@
                             </div>
                             <input type="text" class="owldatebrdr w80 form-control" numberOnly formControlName="child_with_bed_price" [ngClass]="{ 'is-invalid': submitted && f.child_with_bed_price.errors }">
                         </div>
-                        <p class="fs13 clr86">Suggested Amount :  1234</p>
+                        <p class="fs13 clr86">Suggested Amount :  {{suggestedAmound.child_with_bed_price}}</p>
                     </div>
                     <div class="col-md-4 mb30">
                         <label class="fs14 fw400 lh14 pl-1">Trip Cost Per Kids (Without Bed) :</label>
@@ -40,7 +40,7 @@
                             </div>
                             <input type="text" class="owldatebrdr w80 form-control" numberOnly formControlName="child_without_bed_price" [ngClass]="{ 'is-invalid': submitted && f.child_without_bed_price.errors }">
                         </div>
-                        <p class="fs13 clr86">Suggested Amount :  1234</p>
+                        <p class="fs13 clr86">Suggested Amount :  {{suggestedAmound.child_without_bed_price}}</p>
                     </div>
                     <div class="col-md-4">
                         <label class="fs14 fw400 lh14 pl-1">Advance Payable :</label>
@@ -50,7 +50,7 @@
                             </div>
                             <input type="text" class="owldatebrdr w80 form-control" numberOnly formControlName="advance_pct" [ngClass]="{ 'is-invalid': submitted && f.advance_pct.errors }">
                         </div>
-                        <p class="fs13 clr86">Suggested Amount :  1234</p>
+                        <p class="fs13 clr86">Suggested Amount :  {{suggestedAmound.advance_pct}}</p>
                     </div>
                 </div>
             </div>

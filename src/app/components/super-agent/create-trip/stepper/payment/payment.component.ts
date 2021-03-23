@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { SuperAgentApiService } from 'src/app/Services/super-agent-api-services';
+import { StepperAdapter } from 'src/app/adapters/super-agent/stepper-adapter';
 
 @Component({
   selector: 'app-payment',
@@ -14,26 +15,33 @@ export class PaymentComponent implements OnInit {
   currency='SAR';
   languge = 'en_US';
   SuperAgentApiService:SuperAgentApiService;
+  StepperAdapter : StepperAdapter;
+  suggestedAmound: any;
 
   constructor(private formBuilder: FormBuilder,private _SuperAgentService:SuperAgentApiService) { 
     this.SuperAgentApiService=this._SuperAgentService;
+    this.StepperAdapter = new StepperAdapter(null,null);
   }
 
   ngOnInit() {
-    this.validation();
+    this.callSuggestedAmount();
+    this.advancepayment = this.StepperAdapter.paymentUpdateForm();
   }
 
-  validation(){
-    this.advancepayment = this.formBuilder.group({
-      adult_price: ['', Validators.required],
-      child_with_bed_price: ['', Validators.required],
-      child_without_bed_price: ['', Validators.required],
-      advance_pct: ['', Validators.required],
+  /**
+   * this method for call suggested amounts
+   */
+  callSuggestedAmount(){
+    this.SuperAgentApiService.getPackageDetails(this.packageId).subscribe((data)=>{
+      this.suggestedAmound = data;
     })
   }
 
   get f(){return this.advancepayment.controls}
 
+  /**
+   * this method for update price values
+   */
   onSubmit() {
     this.submitted = true;
 

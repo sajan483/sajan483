@@ -47,7 +47,7 @@ export class StepperAdapter {
   }
 
   /**
-   * this method for validating form group
+   * this method for validating transport form group
    */
   transportBookingForm() :FormGroup{
     this.fb = new FormBuilder();
@@ -68,7 +68,7 @@ export class StepperAdapter {
    * @param currency 
    * @param ddate travel date
    */
-  transportBookingBody(transportSelection,currency,ddate){
+  transportBookingBody(transportSelection,currency){
     var data ={
       trip_transportation: {
         trip_vehicles: [
@@ -81,11 +81,77 @@ export class StepperAdapter {
         }
         ],
         route:transportSelection.route,
-        travel_date:ddate,
+        travel_date:this.helperService.dateFormaterYMd(transportSelection.depdate),
         company_code: transportSelection.cabservice,
         num_of_days: transportSelection.numberofDays,
         },
     }
     return data;
+  }
+
+  /**
+   * this method for validating other service form group
+   */
+  otherServiceBookingForm() :FormGroup{
+    this.fb = new FormBuilder();
+    return this.fb.group({
+      arr: this.fb.array([this.createItem()]),
+      visaservice: ['',Validators.required],
+      adultpricevisa: ['',Validators.required],
+      childpricevisa: ['',Validators.required],
+      country: ['',Validators.required],
+    })
+  }
+  /**
+   * this method for validating other service form array
+   */
+  createItem() {
+    return this.fb.group({
+      category: ['',Validators.required],
+      name: ['',Validators.required],
+      description: ['',Validators.required],
+      price: ['',Validators.required],
+    })
+  }
+  /**
+   * other service booking body
+   */
+  otherServiceBookingBody(arrayvalue,myForm,currency){
+    var other : any[]=[];
+    arrayvalue.forEach(element => {
+      const y = {
+        'currency': currency,
+        'price': element.price,
+        'additional_service':{
+          'name' : element.name,
+          'description': element.description,
+          'category': element.category
+        },
+      }
+      other.push(y)
+    });
+    var body ={
+      "other_services":other,
+      "trip_visa": {
+        'title': myForm.visaservice, 
+        'price': myForm.adultpricevisa, 
+        'country': myForm.country, 
+        'currency': currency,
+      }
+    }
+    return body; 
+  }
+
+  /**
+   * payment update form
+   */
+  paymentUpdateForm():FormGroup{
+    this.fb = new FormBuilder();
+    return this.fb.group({
+      adult_price: ['', Validators.required],
+      child_with_bed_price: ['', Validators.required],
+      child_without_bed_price: ['', Validators.required],
+      advance_pct: ['', Validators.required],
+    })
   }
 }

@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { CommonApiService } from 'src/app/Services/common-api-services';
 import { SuperAgentApiService } from 'src/app/Services/super-agent-api-services';
-import { DatePipe } from '@angular/common';
-import { StepperAdapter } from 'src/app/adapters/super-agent/stepper-adapter'
+import { StepperAdapter } from 'src/app/adapters/super-agent/stepper-adapter';
+import { HelperService } from "src/app/common/services/helper-service";
 import { Body } from '@angular/http/src/body';
 
 @Component({
@@ -24,16 +24,16 @@ export class TransportComponent implements OnInit {
   languge = 'en_US';
   StepperAdapter : StepperAdapter;
 
-  constructor(private formBuilder: FormBuilder,private _commonApiService:CommonApiService,public datepipe: DatePipe,
-    private _SuperAgentService:SuperAgentApiService) {
+  constructor(private formBuilder: FormBuilder,private _commonApiService:CommonApiService,
+    private _SuperAgentService:SuperAgentApiService,private helperService:HelperService) {
     this.commonApiService = this._commonApiService;
     this.SuperAgentApiService=this._SuperAgentService;
-    this.StepperAdapter = new StepperAdapter(null,null);
+    this.StepperAdapter = new StepperAdapter(this.helperService,null);
    }
 
   ngOnInit() {
-    this.transportSelection = this.StepperAdapter.transportBookingForm();
     this.callListApi();
+    this.transportSelection = this.StepperAdapter.transportBookingForm();
   }
 
   /**
@@ -66,9 +66,9 @@ export class TransportComponent implements OnInit {
    * this method for update transport to create trip
    */
   saveTransport(){
-    var ddate = this.datepipe.transform(this.transportSelection.value.depdate, "yyyy-MM-dd");
-    let Body = this.StepperAdapter.transportBookingBody(this.transportSelection.value,this.currency,ddate);
-    this.SuperAgentApiService.updatePackageAPI(Body,this.currency,this.languge,this.packageId).subscribe((data)=>{
+    let body = this.StepperAdapter.transportBookingBody(this.transportSelection.value,this.currency);
+    console.log(body)
+    this.SuperAgentApiService.updatePackageAPI(body,this.currency,this.languge,this.packageId).subscribe((data)=>{
     })
   }
 }
