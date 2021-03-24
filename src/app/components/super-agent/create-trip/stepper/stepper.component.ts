@@ -1,6 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { StepperAdapter } from "src/app/adapters/super-agent/stepper-adapter";
 import { HelperService } from "src/app/common/services/helper-service";
+import { HotelsList } from "src/app/models/custome_trip";
 import { SuperAgentApiService } from "src/app/Services/super-agent-api-services";
 import { AppStore } from "src/app/stores/app.store";
 
@@ -17,7 +18,8 @@ export class StepperComponent implements OnInit {
   static searchData: any;
   hotelFlag;
   superAgentApiService: SuperAgentApiService;
-  hotelsList: any;
+  hotelsList: HotelsList = {response:[],city:undefined} ;
+  //hotelsList:any[]=[];
   helperService: HelperService;
   dataFromSearchPage: any;
 
@@ -51,15 +53,156 @@ export class StepperComponent implements OnInit {
    * this method for fetching hotel list
    */
   hotelSearch(city: string,dataFromSearchPage) {
-    this.superAgentApiService
-      .agencyHotelSearch(this.stepperAdapter.hotelSearchRequest(city,dataFromSearchPage,null),'en-US')
-      .subscribe((data) => {
-        if (data) {
-          this.hotelsList = data;
-          this.hotelsList.city = city;
-          console.log("gfgfgf",this.hotelsList)
-        }
-      });
+    // this.superAgentApiService
+    //   .agencyHotelSearch(this.stepperAdapter.hotelSearchRequest(city,dataFromSearchPage,null),'en-US')
+    //   .subscribe((data) => {
+    //     this.hotelsList.response = data;
+         this.hotelsList.city = city;
+    //     console.log(this.hotelsList)
+    //   });
       //this.hotelSearch("MADEENA",this.dataFromSearchPage);
+      this.hotelsList.response = [
+        {
+          "name": "amourihot",
+          "description": null,
+          "address": "مخطط الاميرعبدالله الفيصل",
+          "status": "Available",
+          "amount": 943,
+          "amount_type": "Total",
+          "currency_code": "SAR",
+          "image_path": "https:None",
+          "banner_image_path": "https:None",
+          "rating": 1,
+          "latitude": 1,
+          "longitude": 1,
+          "state": "Makkah",
+          "country": "Saudi Arabia",
+          "zip_code": null,
+          "phone": null,
+          "email": null,
+          "fax": null,
+          "city": "Makkah",
+          "umrah_hotel_code": "4810883388",
+          "providers": [
+            {
+              "provider": "hudxconnect",
+              "vendor": "hudxconnect",
+              "hotel_code": "15_en-US",
+              "amount": 943,
+              "currencyCode": "SAR"
+            }
+          ],
+          "haram_distance": null,
+          "has_special_deal": false,
+          "promotion_name": null,
+          "amenities": []
+        },
+        {
+          "name": "amourihot",
+          "description": null,
+          "address": "مخطط الاميرعبدالله الفيصل",
+          "status": "Available",
+          "amount": 943,
+          "amount_type": "Total",
+          "currency_code": "SAR",
+          "image_path": "https:None",
+          "banner_image_path": "https:None",
+          "rating": 1,
+          "latitude": 1,
+          "longitude": 1,
+          "state": "Makkah",
+          "country": "Saudi Arabia",
+          "zip_code": null,
+          "phone": null,
+          "email": null,
+          "fax": null,
+          "city": "Makkah",
+          "umrah_hotel_code": "4810883388",
+          "providers": [
+            {
+              "provider": "hudxconnect",
+              "vendor": "hudxconnect",
+              "hotel_code": "15_en-US",
+              "amount": 943,
+              "currencyCode": "SAR"
+            }
+          ],
+          "haram_distance": null,
+          "has_special_deal": false,
+          "promotion_name": null,
+          "amenities": []
+        },
+        {
+          "name": "amourihot",
+          "description": null,
+          "address": "مخطط الاميرعبدالله الفيصل",
+          "status": "Available",
+          "amount": 943,
+          "amount_type": "Total",
+          "currency_code": "SAR",
+          "image_path": "https:None",
+          "banner_image_path": "https:None",
+          "rating": 1,
+          "latitude": 1,
+          "longitude": 1,
+          "state": "Makkah",
+          "country": "Saudi Arabia",
+          "zip_code": null,
+          "phone": null,
+          "email": null,
+          "fax": null,
+          "city": "Makkah",
+          "umrah_hotel_code": "4810883388",
+          "providers": [
+            {
+              "provider": "hudxconnect",
+              "vendor": "hudxconnect",
+              "hotel_code": "15_en-US",
+              "amount": 943,
+              "currencyCode": "SAR"
+            }
+          ],
+          "haram_distance": null,
+          "has_special_deal": false,
+          "promotion_name": null,
+          "amenities": []
+        },
+        {
+          "name": "amourihot",
+          "description": null,
+          "address": "مخطط الاميرعبدالله الفيصل",
+          "status": "Available",
+          "amount": 943,
+          "amount_type": "Total",
+          "currency_code": "SAR",
+          "image_path": "https:None",
+          "banner_image_path": "https:None",
+          "rating": 1,
+          "latitude": 1,
+          "longitude": 1,
+          "state": "Makkah",
+          "country": "Saudi Arabia",
+          "zip_code": null,
+          "phone": null,
+          "email": null,
+          "fax": null,
+          "city": "Makkah",
+          "umrah_hotel_code": "4810883388",
+          "providers": [
+            {
+              "provider": "hudxconnect",
+              "vendor": "hudxconnect",
+              "hotel_code": "15_en-US",
+              "amount": 943,
+              "currencyCode": "SAR"
+            }
+          ],
+          "haram_distance": null,
+          "has_special_deal": false,
+          "promotion_name": null,
+          "amenities": []
+        }
+     ]
   }
+
 }
