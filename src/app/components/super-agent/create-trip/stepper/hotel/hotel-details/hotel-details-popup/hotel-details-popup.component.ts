@@ -65,10 +65,17 @@ export class HotelDetailsPopupComponent implements OnInit,OnChanges {
    }
   }
 
-  saveSelectedHotel(){
+  saveSelectedHotel(city){
+    if(city == 'MAKKA'){
       this.stepper.stepContent('hotel','hotelMedinah');
       this.superAgentApiService.updatePackageAPI(this.stepperAdapter.saveHotelRequest(this.selectedHotel,null,null),'SAR','en-US',null).subscribe((res) => {
     });
+    }
+    if(city == 'MADEENA'){
+      this.stepper.stepContent('transport',null);
+      this.superAgentApiService.updatePackageAPI(this.stepperAdapter.saveHotelRequest(this.selectedHotel,null,null),'SAR','en-US',null).subscribe((res) => {
+    });
+    }
   }
 
 }

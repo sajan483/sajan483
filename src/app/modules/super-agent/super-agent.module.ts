@@ -21,7 +21,7 @@ import { HotelComponent } from 'src/app/components/super-agent/create-trip/stepp
 import { OwlDateTimeModule, OwlNativeDateTimeModule } from 'ng-pick-datetime';
 import {MatRadioModule} from '@angular/material/radio'; 
 import { HotelDetailsPopupComponent } from 'src/app/components/super-agent/create-trip/stepper/hotel/hotel-details/hotel-details-popup/hotel-details-popup.component';
-
+import { TagInputModule } from 'ngx-chips';
 @NgModule({
   declarations: [
     CreateTripComponent,
@@ -39,6 +39,7 @@ import { HotelDetailsPopupComponent } from 'src/app/components/super-agent/creat
   ],
   imports: [
     CommonModule,
+    TagInputModule,
     SuperAgentRouteModule,
     MatStepperModule,
     MatIconModule,

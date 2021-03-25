@@ -92,7 +92,7 @@
                                     <h3 class="hotel_prise">{{item?.currency_code}} {{item?.amount | number:'.2-2'}}
                                     </h3>
                                     <button class="searchbutton pull-right m-0" id="showHotelSelect{{i}}"
-                                        (click)="showHotelDetailsPopUp(item)">{{'Select Room' }}</button>
+                                        (click)="showHotelDetailsPopUp(item,hotelsList.city)">{{'Select Room' }}</button>
                                 </div>
                             </div>
                         </div>
