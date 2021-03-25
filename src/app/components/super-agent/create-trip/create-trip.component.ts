@@ -53,7 +53,7 @@ export class CreateTripComponent implements OnInit {
 
   @ViewChild('pickerReturn' , {read: undefined, static: false}) pickerReturn: MatDatepicker<Date>;
   @ViewChild('pickerMedOut' , {read: undefined, static: false}) pickerMedOut: MatDatepicker<Date>;
-  @ViewChild('pickerMekIn' , {read: undefined, static: false}) pickerMekIn: MatDatepicker<Date>;
+  @ViewChild('pickerMedIn' , {read: undefined, static: false}) pickerMedIn: MatDatepicker<Date>;
   @ViewChild('pickerMekOut' , {read: undefined, static: false}) pickerMekOut: MatDatepicker<Date>;
 
   constructor(
@@ -99,24 +99,25 @@ export class CreateTripComponent implements OnInit {
    this.pickerReturn.open()
   }
 
+  setMekkahInMinDate(){
+    this.mekkahInMin=this.form.departDate.value
+   }
+
+  setMekkahOutMinDate(){
+    this.mekkahOutMin=this.form.mekIn.value
+    this.pickerMekOut.open()
+  }
+
   setMedinahInMinDate(){
-   this.medinahInMin=this.form.departDate.value
+   this.medinahInMin=this.form.mekOut.value
+   this.pickerMedIn.open()
   }
 
   setMedinahOutMinDate(){
     this.medinahOutMin=this.form.medIn.value
     this.pickerMedOut.open()
    }
-
-   setMekkahInMinDate(){
-    this.mekkahInMin=this.form.medOut.value
-    this.pickerMekIn.open()
-   }
- 
-   setMekkahOutMinDate(){
-    this.mekkahOutMin=this.form.mekIn.value
-    this.pickerMekOut.open()
-  }
+   
 
   getAirportListSrc(){
     this.airportListFilteredSrc = this.source.valueChanges.pipe(
@@ -184,6 +185,7 @@ export class CreateTripComponent implements OnInit {
 
   setAirline(data){
     this.airlineDetails.code = data.code
+    this.airlineDetails.name = data.name
   }
 
   submitData(){
@@ -198,7 +200,7 @@ export class CreateTripComponent implements OnInit {
         destination:this.destination.value,
         departureDate:this.form.departDate.value.toJSON().split("T")[0],
         returnDate:this.form.returnDate.value.toJSON().split("T")[0],
-        airline:this.airline.value
+        airline:this.airlineDetails.code
       },
       mekkahData:{
         checkIn:this.form.mekIn.value.toJSON().split("T")[0],

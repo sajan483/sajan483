@@ -42,4 +42,20 @@ export class FlightCardComponent implements OnInit {
     this.footerDataEmitter.emit(this.footerData);
   }
 
+  toggleDetails(item, event) {
+    var element = event.target;
+    element.classList.toggle("active");
+    if(item.isActive) {
+      item.isActive = false;
+    } else {
+      item.isActive = true;
+    }      
+    var panel = element.nextElementSibling;
+    if (panel.style.maxHeight) {
+      panel.style.maxHeight = null;
+    } else {
+      panel.style.maxHeight = panel.scrollHeight + "px";
+    }
+}
+
 }

@@ -10,6 +10,7 @@
             font-weight: bold;
             text-align: center;
             padding: 20px 0;
+            text-transform: uppercase;
         }
         .modify-box {
             width: 100%;
@@ -116,6 +117,153 @@
             }
         }
     }
+    .brbottom {
+        margin: 0;
+        text-align: left !important;
+    }
+    .fare-box {
+        border-right: 1px solid #c4c4c4;
+        padding: 0 20px;
+         ::ng-deep {
+            .mat-form-field-wrapper {
+                padding: 0 !important;
+            }
+        }
+    }
+    .pt10 {
+        padding: 20px 0px;
+        border-bottom: 1px solid #c4c4c4;
+        border-top: 1px solid #c4c4c4;
+    }
+    .btn-outer {
+        button {
+            background: #b5cb13 !important;
+            color: #000;
+            width: 130px;
+            height: 45px;
+            font-weight: normal;
+            float: right;
+            margin-top: 10px;
+        }
+        button:disabled {
+            background: #555 !important;
+            color: #fff !important;
+            cursor: not-allowed;
+        }
+    }
+    .fw {
+        width: 100%;
+    }
+    .blue-head {
+        font-family: 'Lato', sans-serif;
+        font-size: 16px;
+        font-weight: bold;
+        color: #1b416c;
+        text-align: left;
+        margin: 20px 0px;
+    }
+    .card-head {
+        display: flex;
+        padding-bottom: 15px;
+        border-bottom: 1px solid #c4c4c4;
+        img {
+            width: 35px;
+            height: 35px;
+        }
+        .on-box {
+            padding: 0 15px;
+            border-right: 1px solid #c4c4c4;
+            .on-txt {
+                font-family: 'Lato', sans-serif;
+                font-size: 14px;
+                font-weight: bold;
+                color: #1b416c;
+                margin: 0;
+            }
+        }
+        .route {
+            font-family: 'Lato', sans-serif;
+            font-size: 16px;
+            font-weight: bold;
+            color: #000;
+            text-align: left;
+            margin: 10px 0px 10px 20px;
+            span {
+                color: #1b416c;
+                font-size: 14px;
+            }
+        }
+    }
+    .second-section {
+        padding: 20px 15px;
+        .inner-div {
+            display: flex;
+            justify-content: space-between;
+            .img-box {
+                display: flex;
+                img {
+                    width: 40px;
+                    height: 40px;
+                    margin-right: 15px;
+                }
+            }
+        }
+        .black-sm {
+            font-family: 'Lato', sans-serif;
+            font-size: 15px;
+            font-weight: bold;
+            color: #000;
+            margin: 0;
+            margin-bottom: 3px;
+        }
+        .black-big {
+            font-family: 'Lato', sans-serif;
+            font-size: 22px;
+            font-weight: bold;
+            color: #000;
+            margin: 0;
+            margin-bottom: 3px;
+        }
+        .tar {
+            text-align: right;
+        }
+        .grey-sm {
+            font-family: 'Lato', sans-serif;
+            font-size: 12px;
+            font-weight: normal;
+            color: #525252;
+            margin: 0;
+            margin-bottom: 5px;
+        }
+        .center-box {
+            padding-top: 30px;
+            .duration {
+                margin: 0;
+                font-size: 14px;
+                font-weight: bold;
+                font-family: 'Lato', sans-serif;
+                color: #525252;
+                text-align: center;
+            }
+            .flight-box {
+                display: inline-flex;
+                justify-content: center;
+                width: 100%;
+                .border-box {
+                    margin-top: 12px;
+                    width: 40%;
+                    border-top: 1px dotted #000;
+                }
+                mat-icon {
+                    transform: rotate(90deg);
+                }
+            }
+        }
+    }
+}
+
+.pt0 {
+    padding-top: 0 !important;
 }
 
 .footer {
@@ -123,6 +271,7 @@
     position: absolute !important;
     background: #fff !important;
     bottom: 40px;
+    z-index: 99;
     box-shadow: 0 1px 6px 0 rgba(32 33 36 / 28%);
 }
 

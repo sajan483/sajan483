@@ -1,6 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { StepperComponent } from '../../stepper.component';
-import { FlightCardComponent } from '../flight-card/flight-card.component';
+import { FlightComponent } from '../flight.component';
 
 @Component({
   selector: 'app-flight-footer',
@@ -12,13 +11,15 @@ export class FlightFooterComponent implements OnInit {
 
   @Input() footerData:any;
 
-  constructor(private stepper: StepperComponent) { }
+  constructor(private flight:FlightComponent) { }
 
   ngOnInit() { 
   }
 
-  navigateHotel(component,hotelFlag){
-    this.stepper.stepContent(component,hotelFlag)
+  navigateFareSelection(){
+    if(this.footerData.retFlight.From && this.footerData.depFlight.From){
+      this.flight.navigateFareSelection()
+    }
   }
 
 }
