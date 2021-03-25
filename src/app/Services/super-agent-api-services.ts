@@ -95,4 +95,39 @@ export class SuperAgentApiService {
       .get(this.BASE_URL + "packages/"+id+"/", this.options)
       .map((res) => res.json());
   }
+
+  uploadTripImage(data,currency,lang,id){
+    console.log(data);
+    
+    let formData = new FormData();
+    data.map(x=>x.file).forEach((item,index) => {
+      formData.append(`[${index}][file]`, item);
+    })
+    return this.http
+      .put(this.BASE_URL + "packages/"+id+"/?currency=" + currency + "&lang=" + lang, formData, this.options)
+      .map((res) => res.json());
+  }
+
+  forItinerarySetAPI(param,currency,lang,id){
+    console.log("PARAM",param)
+    let formData = new FormData();
+    param.forEach((item,index) => {
+          if(item.title){
+            formData.append(`[itinerary_set][${index}][title]`, item.title);
+          }
+          if(item.from_date){
+            formData.append(`[itinerary_set][${index}][from_date]`, item.from_date);
+          }
+          if(item.details){
+            formData.append(`[itinerary_set][${index}][details]`, item.details);
+          }
+          if(item.attachments){
+            item.attachments.map(x=>x.file).forEach((photo,i) => {
+            formData.append(`[itinerary_set][${index}][attachments][${i}][file]`, photo);
+            });
+          }       
+        });
+    return this.http
+      .put(this.BASE_URL + "packages/"+id+"/?currency=" + currency + "&lang=" + lang,formData,this.optionsForForm);
+  }
 }

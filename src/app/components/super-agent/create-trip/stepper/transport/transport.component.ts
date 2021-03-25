@@ -67,7 +67,6 @@ export class TransportComponent implements OnInit {
    */
   saveTransport(){
     let body = this.StepperAdapter.transportBookingBody(this.transportSelection.value,this.currency);
-    console.log(body)
     this.SuperAgentApiService.updatePackageAPI(body,this.currency,this.languge,this.packageId).subscribe((data)=>{
     })
   }
