@@ -119,8 +119,8 @@
                                                 rate of the room</span>
                                         </div>
                                         <hr class="pb-0">
-                                        <div class="row" *ngFor="let room of selectedRoomGroups;let i = index ">
-                                            <div class="col-md-8 bg1 ">
+                                        <div class="row" style="border-bottom:1px solid #c7bbbb;" *ngFor="let room of selectedRoomGroups;let i = index ">
+                                            <div class="col-md-8 bg1" style="border-bottom:1px solid #c7bbbb;" >
                                                 <div class="row">
                                                     <p class="pl-4" style="font-size: 16px;">{{room.name}}</p>
                                                 </div>
@@ -171,7 +171,7 @@
                                                                 <span class="input-group-text brdr-rt"
                                                                     id="basic-addon1">&#8377;</span>
                                                             </div>
-                                                            <input type="text" class="txt" placeholder="200"
+                                                            <input type="text" id="adultPrice" class="txt" placeholder="200"
                                                                 aria-label="200" aria-describedby="basic-addon1">
                                                         </div>
                                                     </div>
@@ -182,22 +182,22 @@
                                                                 <span class="input-group-text brdr-rt br-rad"
                                                                     id="basic-addon1">&#8377;</span>
                                                             </div>
-                                                            <input type="text" class="br-rad txt" placeholder="200"
+                                                            <input type="text"id="childPrice" class="br-rad txt" placeholder="200"
                                                                 aria-label="200" aria-describedby="basic-addon1">
                                                         </div>
                                                     </div>
                                                     <div class="row ml-4 br-rad mt-4"
                                                         style="background-color: #b5cb13;">
-                                                        <input class="chkBx" type="checkbox">
+                                                        <input class="chkBx" type="checkbox" (change)="selectHotelRoom(e,room,i)">
                                                         <span class="pad6">Select Room</span>
                                                     </div>
                                                 </div>
                                             </div>
-                                            <hr class="pb-0" style="background-color: black;">
-                                            <p class="pl-4" style="color: #327de1;">+ More Details</p>
+                                            <div class="p-2">
+                                                <a class="roomview pl-4  pb-2 pt-2" (click)="showRoomDetailsPopUp(room)">+ More Details</a>
+                                            </div>
                                         </div>
-
-                                    </div>
+                                     </div>
                                 </div>
                             </section>
                         </div>
@@ -239,4 +239,7 @@
             </div>
         </div>
     </div>
+</div>
+<div *ngIf="selectedRoomDetails">
+    <app-roomdetails-popup [setViewData]="selectedRoomInfo"></app-roomdetails-popup>
 </div>

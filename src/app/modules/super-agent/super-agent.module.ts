@@ -24,6 +24,9 @@ import { HotelDetailsPopupComponent } from 'src/app/components/super-agent/creat
 import { TagInputModule } from 'ngx-chips';
 import { FlightDetailsComponent } from 'src/app/components/super-agent/create-trip/stepper/flight/flight-details/flight-details.component';
 import { HotelDetailsImageComponent } from 'src/app/components/super-agent/create-trip/stepper/hotel/hotel-details-image/hotel-details-image.component';
+import { NgbCarouselModule } from '@ng-bootstrap/ng-bootstrap';
+import { RoomdetailsPopupComponent } from 'src/app/components/super-agent/create-trip/stepper/hotel/roomdetails-popup/roomdetails-popup.component';
+
 
 @NgModule({
   declarations: [
@@ -40,7 +43,9 @@ import { HotelDetailsImageComponent } from 'src/app/components/super-agent/creat
     HotelComponent,
     HotelDetailsPopupComponent,
     FlightDetailsComponent,
-    HotelDetailsImageComponent
+    HotelDetailsImageComponent,
+    RoomdetailsPopupComponent
+    
   ],
   imports: [
     CommonModule,
@@ -63,7 +68,9 @@ import { HotelDetailsImageComponent } from 'src/app/components/super-agent/creat
     OwlDateTimeModule,
     OwlNativeDateTimeModule,
     MatRadioModule,
-    MatTabsModule
+    MatTabsModule,
+    NgbCarouselModule
+    
   ],
   providers: [
     DatePipe, GeneralHelper,CommonApiService,HelperService,SuperAgentApiService

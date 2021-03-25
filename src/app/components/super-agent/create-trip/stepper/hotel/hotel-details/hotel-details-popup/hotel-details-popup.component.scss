@@ -662,7 +662,7 @@ aside.roomPriceWrap {
   border-width: thin;
 }
 .brdr-rt {
-  border-right: 1px solid #b4b4b4;
+  border-right: 1px solid #c7bbbb;
 }
 .txt {
   width: 70%;
@@ -692,4 +692,8 @@ border-radius: 5px;
 }
 .pad6{
   padding: 6px;
+}
+.border{
+  border-bottom: 1px solid black;
+  border-top: 1px solid black;
 }

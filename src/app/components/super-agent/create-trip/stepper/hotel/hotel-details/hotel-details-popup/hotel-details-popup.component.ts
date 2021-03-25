@@ -21,6 +21,10 @@ export class HotelDetailsPopupComponent implements OnInit,OnChanges {
   imageshow: number;
 
   @Input() popupData :any;
+  selectedRoomInfo: any;
+  selectedRoomDetails: boolean;
+  roomVariation: any[];
+  medinahRoomVariation: any;
 
   constructor(private stepper: StepperComponent,
     private superAgentApiService:SuperAgentApiService) { }
@@ -68,13 +72,46 @@ export class HotelDetailsPopupComponent implements OnInit,OnChanges {
   saveSelectedHotel(city){
     if(city == 'MAKKA'){
       this.stepper.stepContent('hotel','hotelMedinah');
-      this.superAgentApiService.updatePackageAPI(this.stepperAdapter.saveHotelRequest(this.selectedHotel,null,null),'SAR','en-US',null).subscribe((res) => {
+      this.superAgentApiService.updatePackageAPI(this.stepperAdapter.saveHotelRequest(this.selectedHotel,this.roomVariation,null),'SAR','en-US',null).subscribe((res) => {
     });
     }
     if(city == 'MADEENA'){
       this.stepper.stepContent('transport',null);
-      this.superAgentApiService.updatePackageAPI(this.stepperAdapter.saveHotelRequest(this.selectedHotel,null,null),'SAR','en-US',null).subscribe((res) => {
+      this.superAgentApiService.updatePackageAPI(this.stepperAdapter.saveHotelRequest(this.selectedHotel,this.roomVariation,null),'SAR','en-US',null).subscribe((res) => {
     });
+    }
+  }
+
+  showRoomDetailsPopUp(room){
+    this.selectedRoomInfo = room;
+    this.selectedRoomDetails = !this.selectedRoomDetails;
+  }
+
+  selectHotelRoom(e, room, i){
+    console.log(e)
+    console.log(room)
+    let q =  {
+      "currency": "INR",
+      "available_rooms": room.available_count,
+      "total_rooms": room.max_rooms,
+      "title": room.name,
+      "adult_price": (<HTMLInputElement>document.getElementById("adultPrice"+ room.room_id+""+ i)).value,
+      "child_price": (<HTMLInputElement>document.getElementById("childPrice"+ room.room_id+""+ i)).value,
+      "per_room_price": room.amount,
+      "custom_pax_info": room.pax_info_str,
+      "description": room.description,
+      "room_id": room.room_id,
+      "room_group_obj": room.room_group_obj
+    }
+    if(e.target.checked){
+      this.roomVariation.push(q)
+     // this.madeenaRoomCount ++;
+    }else{
+     // this.madeenaRoomCount --;
+      // get index of object with id:37
+      var removeIndex = this.roomVariation.map(function(item) { return item.room_id; }).indexOf(room.room_id);
+      // remove object
+      this.roomVariation.splice(removeIndex, 1);
     }
   }
 
