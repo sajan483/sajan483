@@ -1,10 +1,10 @@
 import { CompileStylesheetMetadata } from "@angular/compiler";
 import { HelperService } from "src/app/common/services/helper-service";
 import { AppStore } from "src/app/stores/app.store";
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators } from "@angular/forms";
 
 export class StepperAdapter {
-  fb : FormBuilder;
+  fb: FormBuilder;
   helperService: HelperService;
 
   constructor(
@@ -18,74 +18,91 @@ export class StepperAdapter {
    * method for creating hotel search request
    */
   hotelSearchRequest(city: any,dataFromSearchPage: any,hotelSearchForm: FormGroup) {
-    //if (dataFromSearchPage) {
+   // if (dataFromSearchPage) {
+      if(city == 'MAKKA'){
+        var body = {
+          // check_in_date: this.helperService.dateFormaterMdy(
+          //   dataFromSearchPage.mekkahData.checkIn
+          // ),
+          // check_out_date: this.helperService.dateFormaterMdy(
+          //   dataFromSearchPage.mekkahData.checkOut
+          // ),
+          check_in_date: "03/26/2021",
+          check_out_date: "03/30/2021",
+          location: city,
+        };
+        return body;
+      }
+
+      if(city == 'MADEENA'){
+        var body = {
+          // check_in_date: this.helperService.dateFormaterMdy(
+          //   dataFromSearchPage.mekkahData.checkIn
+          // ),
+          // check_out_date: this.helperService.dateFormaterMdy(
+          //   dataFromSearchPage.mekkahData.checkOut
+          // ),
+          check_in_date: "03/26/2021",
+          check_out_date: "03/30/2021",
+          location: city,
+        };
+        return body;
+      }
+  //}
+    if(hotelSearchForm) {
       var body = {
-      //   check_in_date: this.helperService.dateFormaterMdy(
-      //     dataFromSearchPage.mekkahData.checkIn
-      //   ),
-      //   check_out_date: this.helperService.dateFormaterMdy(
-      //     dataFromSearchPage.mekkahData.checkOut
-      //   ),
-        check_in_date:"03/23/2021",
-        check_out_date:"03/25/2021",
+        check_in_date: this.helperService.dateFormaterMdy(
+          hotelSearchForm.get("hotelCheckInDate").value
+        ),
+        check_out_date: this.helperService.dateFormaterMdy(
+          hotelSearchForm.get("hotelCheckOutDate").value
+        ),
         location: city,
       };
       return body;
-    //}
-    // if(hotelSearchForm) {
-    //   var body = {
-    //     check_in_date: this.helperService.dateFormaterMdy(
-    //       hotelSearchForm.get("hotelCheckInDate").value
-    //     ),
-    //     check_out_date: this.helperService.dateFormaterMdy(
-    //       hotelSearchForm.get("hotelCheckOutDate").value
-    //     ),
-    //     location: city,
-    //   };
-    //   return body;
-    // }
+    }
   }
 
   /**
    * this method for validating transport form group
    */
-  transportBookingForm() :FormGroup{
+  transportBookingForm(): FormGroup {
     this.fb = new FormBuilder();
     return this.fb.group({
-      depdate: ['', Validators.required],
-      cabservice: ['', Validators.required],
-      cabtype: ['', Validators.required],
-      route: ['', Validators.required],
-      numberofDays: ['', Validators.required],
-      personpervehicle: ['', Validators.required],
-      amoundperperson: ['', Validators.required],
-    })
+      depdate: ["", Validators.required],
+      cabservice: ["", Validators.required],
+      cabtype: ["", Validators.required],
+      route: ["", Validators.required],
+      numberofDays: ["", Validators.required],
+      personpervehicle: ["", Validators.required],
+      amoundperperson: ["", Validators.required],
+    });
   }
 
   /**
    * this methode for booking transport request
-   * @param transportSelection 
-   * @param currency 
+   * @param transportSelection
+   * @param currency
    * @param ddate travel date
    */
   transportBookingBody(transportSelection,currency){
     var data ={
       trip_transportation: {
         trip_vehicles: [
-        {
-          currency: currency,
-          vehicle_type: transportSelection.cabtype,
-          category_code: transportSelection.cabservice,
-          pax_per_vehicle: transportSelection.personpervehicle,
-          price_per_pax: transportSelection.amoundperperson,
-        }
+          {
+            currency: currency,
+            vehicle_type: transportSelection.cabtype,
+            category_code: transportSelection.cabservice,
+            pax_per_vehicle: transportSelection.personpervehicle,
+            price_per_pax: transportSelection.amoundperperson,
+          },
         ],
         route:transportSelection.route,
         travel_date:this.helperService.dateFormaterYMd(transportSelection.depdate),
         company_code: transportSelection.cabservice,
         num_of_days: transportSelection.numberofDays,
-        },
-    }
+      },
+    };
     return data;
   }
 
@@ -203,5 +220,35 @@ export class StepperAdapter {
       param.push(body);
     }
     return param;
+  }
+
+  saveHotelRequest(selectedHotel,makkahRoomVariation,city) {
+    let body = {
+      makkah_trip_hotel: {
+        hotel: {
+          name: selectedHotel.name,
+          address: selectedHotel.meta_data.address,
+          longitute: selectedHotel.meta_data.longitude,
+          latitude: selectedHotel.meta_data.latitude,
+          phone_number: selectedHotel.meta_data.phone,
+          email: selectedHotel.meta_data.email,
+          state: selectedHotel.meta_data.state,
+          city: selectedHotel.meta_data.city,
+          user_review: selectedHotel.meta_data.rating,
+          provider: selectedHotel.provider,
+          vendor: selectedHotel.vendor,
+          code: selectedHotel.code,
+          umrah_code: selectedHotel.umrah_hotel_code,
+          images: selectedHotel.meta_data.images,
+          amenities: selectedHotel.meta_data.amenities,
+          policies: selectedHotel.policies,
+        },
+        room_variations: makkahRoomVariation,
+        check_in_time: selectedHotel.check_in_time,
+        check_out_time: selectedHotel.check_out_time,
+        other_data: selectedHotel.other_data,
+      },
+    };
+    return body;
   }
 }

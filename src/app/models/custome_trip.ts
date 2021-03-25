@@ -71,6 +71,10 @@
         alt: any;
         title: any;
       }
+    export class HotelsList{
+        response : any[];
+        city : string;
+    }
 
     export class CustomeTrip {
         title: string;

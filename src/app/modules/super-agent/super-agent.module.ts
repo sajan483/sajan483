@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule, DatePipe } from '@angular/common';
 import { SuperAgentRouteModule } from './super-agent-routing.module';
 import { CreateTripComponent } from 'src/app/components/super-agent/create-trip/create-trip.component';
-import { MatAutocompleteModule, MatButtonModule, MatCardModule, MatDatepickerModule, MatExpansionModule, MatFormFieldModule, MatIconModule, MatInputModule, MatNativeDateModule, MatProgressBarModule, MatStepperModule } from '@angular/material';
+import { MatAutocompleteModule, MatButtonModule, MatCardModule, MatDatepickerModule, MatExpansionModule, MatFormFieldModule, MatIconModule, MatInputModule, MatNativeDateModule, MatProgressBarModule, MatStepperModule, MatTabsModule } from '@angular/material';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FlightComponent } from 'src/app/components/super-agent/create-trip/stepper/flight/flight.component';
 import { OtherInfoComponent } from 'src/app/components/super-agent/create-trip/stepper/other-info/other-info.component';
@@ -20,7 +20,8 @@ import { SuperAgentApiService } from 'src/app/Services/super-agent-api-services'
 import { HotelComponent } from 'src/app/components/super-agent/create-trip/stepper/hotel/hotel.component';
 import { OwlDateTimeModule, OwlNativeDateTimeModule } from 'ng-pick-datetime';
 import {MatRadioModule} from '@angular/material/radio'; 
-
+import { HotelDetailsPopupComponent } from 'src/app/components/super-agent/create-trip/stepper/hotel/hotel-details/hotel-details-popup/hotel-details-popup.component';
+import { TagInputModule } from 'ngx-chips';
 @NgModule({
   declarations: [
     CreateTripComponent,
@@ -33,10 +34,12 @@ import {MatRadioModule} from '@angular/material/radio';
     FlightCardComponent,
     FlightFooterComponent,
     StepperComponent,
-    HotelComponent
+    HotelComponent,
+    HotelDetailsPopupComponent 
   ],
   imports: [
     CommonModule,
+    TagInputModule,
     SuperAgentRouteModule,
     MatStepperModule,
     MatIconModule,
@@ -54,7 +57,8 @@ import {MatRadioModule} from '@angular/material/radio';
     MatInputModule,
     OwlDateTimeModule,
     OwlNativeDateTimeModule,
-    MatRadioModule
+    MatRadioModule,
+    MatTabsModule
   ],
   providers: [
     DatePipe, GeneralHelper,CommonApiService,HelperService,SuperAgentApiService

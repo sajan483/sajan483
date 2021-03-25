@@ -41,7 +41,7 @@
     "ng-multiselect-dropdown": "^0.2.10",
     "ng-pick-datetime": "^7.0.0",
     "ngx-bootstrap": "^2.0.5",
-    "ngx-chips": "^1.9.1",
+    "ngx-chips": "^1.9.8",
     "ngx-cookie-service": "^11.0.2",
     "ngx-filter-pipe": "^2.1.2",
     "ngx-gallery": "^5.10.0",
