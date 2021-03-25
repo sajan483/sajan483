@@ -22,6 +22,9 @@ import { OwlDateTimeModule, OwlNativeDateTimeModule } from 'ng-pick-datetime';
 import {MatRadioModule} from '@angular/material/radio'; 
 import { HotelDetailsPopupComponent } from 'src/app/components/super-agent/create-trip/stepper/hotel/hotel-details/hotel-details-popup/hotel-details-popup.component';
 import { TagInputModule } from 'ngx-chips';
+import { FlightDetailsComponent } from 'src/app/components/super-agent/create-trip/stepper/flight/flight-details/flight-details.component';
+import { HotelDetailsImageComponent } from 'src/app/components/super-agent/create-trip/stepper/hotel/hotel-details-image/hotel-details-image.component';
+
 @NgModule({
   declarations: [
     CreateTripComponent,
@@ -35,7 +38,9 @@ import { TagInputModule } from 'ngx-chips';
     FlightFooterComponent,
     StepperComponent,
     HotelComponent,
-    HotelDetailsPopupComponent 
+    HotelDetailsPopupComponent,
+    FlightDetailsComponent,
+    HotelDetailsImageComponent
   ],
   imports: [
     CommonModule,

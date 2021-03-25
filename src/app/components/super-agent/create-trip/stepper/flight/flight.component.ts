@@ -17,6 +17,7 @@ export class FlightComponent implements OnInit {
 
   today = new Date();
   searchForm: FormGroup;
+  fareForm: FormGroup;
   returnMin:Date;
   airportListFilteredSrc:Observable<listAirport[]>;
   airportListFilteredDest:Observable<listAirport[]>;
@@ -54,11 +55,12 @@ export class FlightComponent implements OnInit {
     returnFlights:''
   };
   footerFlag:string='false';
-  footerData
+  footerData;
+  fareSelection:boolean=false
 
   constructor(
     private fb: FormBuilder,
-    private commonService: SuperAgentApiService) { }
+    private commonService: SuperAgentApiService, private stepper: StepperComponent) { }
 
   ngOnInit() {
     this.searchData= StepperComponent.searchData.flightData
@@ -66,12 +68,18 @@ export class FlightComponent implements OnInit {
 			departDate: ['', Validators.required],
 			returnDate: ['', Validators.required],
     });
+    this.fareForm = this.fb.group({
+			adult: ['', Validators.required],
+			child: ['', Validators.required],
+			infant: ['', Validators.required]
+    });
     this.searchResult.destLocation=this.destLocation
     this.searchResult.fromLocation=this.fromLocation
     this.listFlights()
   }
 
   get form() { return this.searchForm.controls; }
+  get fare() { return this.fareForm.controls}
 
   get submit() {
     if(this.source.value != null && this.source.value != '' && this.destination.value != null && this.destination.value != '' && this.airline.value != null && this.airline.value != '' && this.searchForm.valid){
@@ -179,6 +187,7 @@ export class FlightComponent implements OnInit {
 
   setAirline(data){
     this.airlineDetails.code = data.code
+    this.airlineDetails.name = data.name
   }
 
   searchFlights(){
@@ -202,21 +211,29 @@ export class FlightComponent implements OnInit {
   }
 
   listFlights(){
-      var body = {
-        boarding_airport:this.searchData.source,
-        destination_airport:this.searchData.destination,
-        airlines:this.searchData.airline,
-        onward_date: this.searchData.departureDate,
-        return_date: this.searchData.returnDate,
-      };
-      this.commonService.searchFlights(body).subscribe((data) => {
-        if(data.flights[0].length > 0 && data.flights[1].length > 0){
-          console.log(data.flights[0]);
-          this.searchResult.departureFlights = data.flights[0];
-          this.searchResult.returnFlights = data.flights[1];
-          this.flightListingFlag = true
-        }
-      })
-    }
+    var body = {
+      boarding_airport:this.searchData.source,
+      destination_airport:this.searchData.destination,
+      airlines:this.searchData.airline,
+      onward_date: this.searchData.departureDate,
+      return_date: this.searchData.returnDate,
+    };
+    this.commonService.searchFlights(body).subscribe((data) => {
+      if(data.flights[0].length > 0 && data.flights[1].length > 0){
+        console.log(data.flights[0]);
+        this.searchResult.departureFlights = data.flights[0];
+        this.searchResult.returnFlights = data.flights[1];
+        this.flightListingFlag = true
+      }
+    })
+  }
+
+  navigateFareSelection(){
+    this.fareSelection = true
+  }
+
+  navigateHotel(component, id){
+    this.stepper.stepContent(component,id)
+  }
 
 }

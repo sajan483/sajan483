@@ -1,8 +1,8 @@
 <div class="outer">
     <div class="lite-pattern-bg">
-        <div class="container">
+        <div class="container" *ngIf="!fareSelection">
             <h4 class="main-head">CHOOSE YOUR FLIGHT</h4>
-            <div class="modify-box" id="modify-box">
+            <div class="modify-box" id="modify-box" *ngIf="flightListingFlag">
                 <button mat-raised-button (click)="modifySearch()">Modify Search</button>
             </div>
             <div id="search-section" class="search-section" [formGroup]="searchForm">
@@ -99,7 +99,128 @@
                 <app-flight-card [searchResult]="searchResult" (footerFlagEmitter)="getfooterFlag($event)" (footerDataEmitter)="getfooterData($event)"></app-flight-card>
             </div>
         </div>
-        <div class="footer" *ngIf="footerFlag=='true'">
+
+        <div class="container" *ngIf="fareSelection">
+            <h4 class="main-head brbottom">Enter your rate of the flight</h4>
+            <div class="row pt10" [formGroup]="fareForm">
+                <div class="col-md-3 fare-box">
+                    <mat-form-field appearance="outline" class="fw">
+                        <mat-label>Adult</mat-label>
+                        <input matInput placeholder="₹" formControlName="adult">
+                    </mat-form-field>
+                </div>
+                <div class="col-md-3 fare-box">
+                    <mat-form-field appearance="outline" class="fw">
+                        <mat-label>Child</mat-label>
+                        <input matInput placeholder="₹" formControlName="child">
+                    </mat-form-field>
+                </div>
+                <div class="col-md-3 fare-box">
+                    <mat-form-field appearance="outline" class="fw">
+                        <mat-label>Infant</mat-label>
+                        <input matInput placeholder="₹" formControlName="infant">
+                    </mat-form-field>
+                </div>
+                <div class="col-md-3 btn-outer">
+                    <button [disabled]="submit" mat-raised-button (click)="navigateHotel('hotel','hotelMakkah')">Continue</button>
+                </div>
+            </div>
+            <h4 class="blue-head">Review Flight Details</h4>
+            <mat-card class="mb20">
+                <div class="card-head">
+                    <img src="/assets/images/onward-flight-icon.png">
+                    <div class="on-box">
+                        <p class="on-txt">ONWARD</p>
+                        <p class="on-txt">{{footerData.depFlight.DepartureTime | date:'shortDate'}}</p>
+                    </div>
+                    <p class="route">
+                        {{footerData.depFlight.FromName.split('|')[1]}} to {{footerData.depFlight.ToName.split('|')[1]}} &nbsp;&nbsp;
+                        <span>{{footerData.depFlight.Stops}} stops &nbsp;|&nbsp; {{footerData.depFlight.Duration}} &nbsp;</span>
+                    </p>
+                </div>
+                <div class="second-section row">
+                    <div class="col-md-5 inner-div">
+                        <div class="img-box">
+                            <img src="https://imgak.mmtcdn.com/flights/assets/media/dt/common/icons/{{footerData.depFlight.MAC}}.png">
+                            <div>
+                                <p class="black-sm">{{footerData.depFlight.AirlineName.split('|')[1]}} <span class="grey-sm"> | {{footerData.depFlight.MAC}}-{{footerData.depFlight.FlightNo}}</span></p>
+                                <p class="grey-sm">Aircraft</p>
+                                <p class="grey-sm">{{footerData.depFlight.AirCraft}}</p>
+                            </div>
+                        </div>
+                        <div>
+                            <p class="black-big tar">{{footerData.depFlight.DepartureTime | date:'HH:mm'}}</p>
+                            <p class="grey-sm tar"> {{footerData.depFlight.FromName.split('|')[1]}} [ {{footerData.depFlight.From}} ]</p>
+                            <p class="grey-sm tar">{{footerData.depFlight.FromName.split('|')[0]}}</p>
+                            <p class="black-sm tar">{{footerData.depFlight.DepartureTime | date:'shortDate'}}</p>
+                        </div>
+                    </div>
+                    <div class="col-md-7 row">
+                        <div class="col-md-6 center-box">
+                            <p class="duration">{{footerData.depFlight.Duration}}</p>
+                            <div class="flight-box">
+                                <div class="border-box"></div>
+                                <mat-icon>flight</mat-icon>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <p class="black-big">{{footerData.depFlight.ArrivalTime | date:'HH:mm'}}</p>
+                            <p class="grey-sm">{{footerData.depFlight.ToName.split('|')[1]}} [ {{footerData.depFlight.To}} ]</p>
+                            <p class="grey-sm">{{footerData.depFlight.ToName.split('|')[0]}}</p>
+                            <p class="black-sm">{{footerData.depFlight.ArrivalTime | date:'shortDate'}}</p>
+                        </div>
+                    </div>
+                </div>
+            </mat-card>
+            <mat-card class="mb20">
+                <div class="card-head">
+                    <img src="/assets/images/onward-flight-icon.png">
+                    <div class="on-box">
+                        <p class="on-txt">RETURN</p>
+                        <p class="on-txt">{{footerData.retFlight.DepartureTime | date:'shortDate'}}</p>
+                    </div>
+                    <p class="route">
+                        {{footerData.retFlight.FromName.split('|')[1]}} to {{footerData.retFlight.ToName.split('|')[1]}} &nbsp;&nbsp;
+                        <span>{{footerData.retFlight.Stops}} stops &nbsp;|&nbsp; {{footerData.retFlight.Duration}} &nbsp;</span>
+                    </p>
+                </div>
+                <div class="second-section row">
+                    <div class="col-md-5 inner-div">
+                        <div class="img-box">
+                            <img src="https://imgak.mmtcdn.com/flights/assets/media/dt/common/icons/{{footerData.retFlight.MAC}}.png">
+                            <div>
+                                <p class="black-sm">{{footerData.retFlight.AirlineName.split('|')[1]}} <span class="grey-sm"> | {{footerData.retFlight.MAC}}-{{footerData.retFlight.FlightNo}}</span></p>
+                                <p class="grey-sm">Aircraft</p>
+                                <p class="grey-sm">{{footerData.retFlight.AirCraft}}</p>
+                            </div>
+                        </div>
+                        <div>
+                            <p class="black-big tar">{{footerData.retFlight.DepartureTime | date:'HH:mm'}}</p>
+                            <p class="grey-sm tar"> {{footerData.retFlight.FromName.split('|')[1]}} [ {{footerData.retFlight.From}} ]</p>
+                            <p class="grey-sm tar">{{footerData.retFlight.FromName.split('|')[0]}}</p>
+                            <p class="black-sm tar">{{footerData.retFlight.DepartureTime | date:'shortDate'}}</p>
+                        </div>
+                    </div>
+                    <div class="col-md-7 row">
+                        <div class="col-md-6 center-box">
+                            <p class="duration">{{footerData.retFlight.Duration}}</p>
+                            <div class="flight-box">
+                                <div class="border-box"></div>
+                                <mat-icon>flight</mat-icon>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <p class="black-big">{{footerData.retFlight.ArrivalTime | date:'HH:mm'}}</p>
+                            <p class="grey-sm">{{footerData.retFlight.ToName.split('|')[1]}} [ {{footerData.retFlight.To}} ]</p>
+                            <p class="grey-sm">{{footerData.retFlight.ToName.split('|')[0]}}</p>
+                            <p class="black-sm">{{footerData.retFlight.ArrivalTime | date:'shortDate'}}</p>
+                        </div>
+                    </div>
+                </div>
+            </mat-card>
+        </div>
+
+        <div class="footer" *ngIf="footerFlag=='true' && !fareSelection">
             <app-flight-footer [footerData]="footerData"></app-flight-footer>
         </div>
     </div>

@@ -8,7 +8,7 @@
                     <div class="fc-top">
                         <div class="top-left">
                             <input class="flight-radio" type="radio" id="male" name="deprtureflight" (click)="setDepFlight(item,i)">
-                            <p class="radio-label">{{item.AirlineName.split('|')[0]}}<span>| {{item.Provider}}-{{item.FlightNo}}</span></p>
+                            <p class="radio-label">{{item.AirlineName.split('|')[1]}}<span>| {{item.MAC}}-{{item.FlightNo}}</span><span *ngIf="item.MAC != item.OAC">(Operated By : {{item.AirlineName.split('|')[0]}})</span></p>
                         </div>
                         <div class="top-right">
                             <p class="fare-label">Current Fare</p>
@@ -18,25 +18,28 @@
                     <div class="fc-middle">
                         <img class="fc-img" src="https://imgak.mmtcdn.com/flights/assets/media/dt/common/icons/{{item.MAC}}.png">
                         <div class="depart">
-                            <p class="black-18">{{item.DepartureTime | date:'shortTime'}}</p>
+                            <p class="black-18">{{item.DepartureTime | date:'HH:mm'}}</p>
                             <p class="grey-12 split">{{item.FromName.split('|')[0]}}</p>
                             <p class="black-12">{{item.DepartureTime | date:'shortDate'}}</p>
                         </div>
                         <div class="flag">
                             <div class="flag-border"></div>
                             <p class="black-12 text-center">{{item.Duration}}</p>
-                            <img src="/assets/images/india.ico">
+                            <div class="stop-box" *ngIf="item.Stops > 0"></div>
                             <p class="grey-12 text-center">{{item.Stops}} Stop</p>
                         </div>
                         <div class="arrive">
-                            <p class="black-18">{{item.ArrivalTime | date:'shortTime'}}</p>
+                            <p class="black-18">{{item.ArrivalTime | date:'HH:mm'}}</p>
                             <p class="grey-12 split">{{item.ToName.split('|')[0]}}</p>
                             <p class="black-12">{{item.ArrivalTime | date:'shortDate'}}</p>
                         </div>
                     </div>
-                    <div class="fc-bottom">
+                    <div class="fc-bottom" (click)="toggleDetails(item, $event, i)">
                         <p class="green">R</p>
                         <p class="f-detail">+ Flight Details</p>
+                    </div>
+                    <div class="expansion">
+                        <app-flight-details></app-flight-details>
                     </div>
                 </mat-card>
             </ng-container>
@@ -49,7 +52,7 @@
                     <div class="fc-top">
                         <div class="top-left">
                             <input class="flight-radio" type="radio" id="male" name="returnflight" (click)="setArrFlight(item,i)">
-                            <p class="radio-label">{{item.AirlineName.split('|')[0]}}<span>| {{item.Provider}}-{{item.FlightNo}}</span></p>
+                            <p class="radio-label">{{item.AirlineName.split('|')[1]}}<span>| {{item.MAC}}-{{item.FlightNo}}</span></p>
                         </div>
                         <div class="top-right">
                             <p class="fare-label">Current Fare</p>
@@ -59,25 +62,28 @@
                     <div class="fc-middle">
                         <img class="fc-img" src="https://imgak.mmtcdn.com/flights/assets/media/dt/common/icons/{{item.MAC}}.png">
                         <div class="depart">
-                            <p class="black-18">{{item.DepartureTime | date:'shortTime'}}</p>
+                            <p class="black-18">{{item.DepartureTime | date:'HH:mm'}}</p>
                             <p class="grey-12 split">{{item.FromName.split('|')[0]}}</p>
                             <p class="black-12">{{item.DepartureTime | date:'shortDate'}}</p>
                         </div>
                         <div class="flag">
                             <div class="flag-border"></div>
                             <p class="black-12 text-center">{{item.Duration}}</p>
-                            <img src="/assets/images/india.ico">
+                            <div class="stop-box" *ngIf="item.Stops > 0"></div>
                             <p class="grey-12 text-center">{{item.Stops}} Stop</p>
                         </div>
                         <div class="arrive">
-                            <p class="black-18">{{item.ArrivalTime | date:'shortTime'}}</p>
+                            <p class="black-18">{{item.ArrivalTime | date:'HH:mm'}}</p>
                             <p class="grey-12 split">{{item.ToName.split('|')[0]}}</p>
                             <p class="black-12">{{item.ArrivalTime | date:'shortDate'}}</p>
                         </div>
                     </div>
-                    <div class="fc-bottom">
+                    <div class="fc-bottom" (click)="toggleDetails(item, $event, i)">
                         <p class="green">R</p>
                         <p class="f-detail">+ Flight Details</p>
+                    </div>
+                    <div class="expansion">
+                        <app-flight-details></app-flight-details>
                     </div>
                 </mat-card>
             </ng-container>

@@ -131,9 +131,23 @@ export class SuperAgentApiService {
     return this.http
       .put(this.BASE_URL + "packages/"+id+"/?currency=" + currency + "&lang=" + lang,formData,this.optionsForForm);
   }
+
   getPackageHotelInfo(data,currency,lang) {
     return this.http
       .post(this.BASE_URL + "packages/hotels/details/?currency=" + currency + "&lang=" + lang, data, this.options)
       .map((res) => res.json());
   }
+  
+  searchSSRFlights(data: any) {
+    return this.http
+      .post(this.BASE_URL + "flights/flight_ssr/", data, this.options)
+      .map((res) => res.json());
+  }
+
+  getFareRules(data: any) {
+    return this.http
+      .post(this.BASE_URL + "b2capis/flights/fare_rules/", data, this.options)
+      .map((res) => res.json());
+  }
+
 }
