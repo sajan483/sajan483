@@ -6,14 +6,14 @@ import { Room } from '../models/visaTypes';
   providedIn: 'root'
 })
 export class AppStore {
-  @observable currencyCode: string;
+  @observable currencyCode: string = 'SAR';
   @observable adultCount: number;
   @observable childCount: number;
   @observable infantCount : number;
   @observable totalTravellers : number;
   @observable stepperIndex : number;
   @observable currentUser : string;
-  @observable langCode: string;
+  @observable langCode: string = 'en_US';
   @observable stepsArray:string[];
   @observable roomArray:Room[];
   @observable userDetails:any;

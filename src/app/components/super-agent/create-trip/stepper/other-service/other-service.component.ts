@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { Validators, FormBuilder, FormGroup, FormArray } from '@angular/forms';
+import { FormGroup, FormArray } from '@angular/forms';
 import { SuperAgentApiService } from 'src/app/Services/super-agent-api-services';
 import { CommonApiService } from 'src/app/Services/common-api-services';
 import { StepperAdapter } from 'src/app/adapters/super-agent/stepper-adapter';
-import { Body } from '@angular/http/src/body';
 
 @Component({
   selector: 'app-other-service',
@@ -24,7 +23,7 @@ export class OtherServiceComponent implements OnInit {
   visaService: any;
   StepperAdapter : StepperAdapter;
 
-  constructor(private fb: FormBuilder,private _SuperAgentService:SuperAgentApiService,private _commonApiService:CommonApiService) { 
+  constructor(private _SuperAgentService:SuperAgentApiService,private _commonApiService:CommonApiService) { 
     this.SuperAgentApiService=this._SuperAgentService;
     this.commonApiService = this._commonApiService;
     this.StepperAdapter = new StepperAdapter(null,null);
@@ -50,7 +49,7 @@ export class OtherServiceComponent implements OnInit {
     this.submitted = true;
 
     // stop here if form is invalid
-    if (this.myForm.invalid) {
+    if (this.myForm.invalid && this.myForm.get('arr').invalid) {
         return;
     }
     this.addOtherService();
@@ -64,13 +63,12 @@ export class OtherServiceComponent implements OnInit {
       this.countryList = data.map(x => ( {item_text:x.name}));
     })
     this.SuperAgentApiService.getVisaType().subscribe((data)=>{
-      this.visaService = data.results.map(x => ( {item_text:x.title}))
+      this.visaService = data.results.map(x => ( {item_text:x.title, item_id:x.id}))
     })
   }
 
   addOtherService(){
-    var body = this.StepperAdapter.otherServiceBookingBody(this.arr.value,this.myForm.value,this.currency);
-    console.log(body)
+    var body = this.StepperAdapter.otherServiceBookingBody(this.f.arr.value,this.myForm.value,this.currency);
     this.SuperAgentApiService.updatePackageAPI(body,this.currency,this.languge,this.packageId).subscribe((data)=>{
       
     })

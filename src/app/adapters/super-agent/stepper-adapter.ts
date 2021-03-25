@@ -105,7 +105,7 @@ export class StepperAdapter {
   /**
    * this method for validating other service form array
    */
-  createItem() {
+  createItem():FormGroup {
     return this.fb.group({
       category: ['',Validators.required],
       name: ['',Validators.required],
@@ -125,7 +125,7 @@ export class StepperAdapter {
         'additional_service':{
           'name' : element.name,
           'description': element.description,
-          'category': element.category
+          'category_id': element.category
         },
       }
       other.push(y)
@@ -133,10 +133,11 @@ export class StepperAdapter {
     var body ={
       "other_services":other,
       "trip_visa": {
-        'title': myForm.visaservice, 
+        'visa_type': myForm.visaservice, 
         'price': myForm.adultpricevisa, 
         'country': myForm.country, 
         'currency': currency,
+        'title':'visa'
       }
     }
     return body; 
@@ -148,10 +149,59 @@ export class StepperAdapter {
   paymentUpdateForm():FormGroup{
     this.fb = new FormBuilder();
     return this.fb.group({
-      adult_price: ['', Validators.required],
-      child_with_bed_price: ['', Validators.required],
-      child_without_bed_price: ['', Validators.required],
-      advance_pct: ['', Validators.required],
+      'adult_price': ['', Validators.required],
+      'child_with_bed_price': ['', Validators.required],
+      'child_without_bed_price': ['', Validators.required],
+      'advance_pct': ['', Validators.required],
     })
+  }
+
+  /**
+   * this method for other service form
+   */
+  otherInfoForm():FormGroup{
+    this.fb = new FormBuilder();
+    return this.fb.group({
+      'title': ['', Validators.required],
+      'overview': ['', Validators.required],
+      'exclusion': ['', Validators.required],
+      'inclusion': ['', Validators.required],
+      'polices': ['', Validators.required],
+      'itinerary':this.fb.array([this.itinerySet()])
+    })
+  }
+  itinerySet():FormGroup{
+    return this.fb.group({
+      'days': ['', Validators.required],
+      'itinerary_title': ['', Validators.required],
+      'depdate': ['', Validators.required],
+      'itinerary_overview': ['', Validators.required],
+      'urlList': this.fb.array([])
+    })
+  }
+  otherInfoBody(item){
+    var body;
+    body ={
+      'title': item.title, 
+      'instructions': item.overview, 
+      'exclusions': item.exclusion, 
+      'inclusions': item.inclusion,
+      'terms':item.polices
+    }
+    return body;
+  }
+  itineraryBody(item,array){
+    let param =[]
+    for(let i = 0; i < item.length ; i++){
+      let body ={
+        'title': item[i].itinerary_title,
+        'noOfDays': item[i].days,
+        'from_date': this.helperService.dateFormaterYMd(item[i].depdate),
+        'details': item[i].itinerary_overview,
+        'attachments': array.filter(x=>x.itinerary_id == i)
+      }
+      param.push(body);
+    }
+    return param;
   }
 }
