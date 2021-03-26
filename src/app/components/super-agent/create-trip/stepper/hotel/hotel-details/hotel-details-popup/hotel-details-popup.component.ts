@@ -38,6 +38,7 @@ export class HotelDetailsPopupComponent implements OnInit,OnChanges {
   }
 
   setPopUp(){
+    if(typeof(this.popupData) != 'undefined'){
     this.selectedHotel = [];
     this.selectedRoomGroups = [];
     this.selectedHotel = this.popupData;
@@ -67,6 +68,7 @@ export class HotelDetailsPopupComponent implements OnInit,OnChanges {
       this.moreimages = true;
     }
    }
+  }
   }
 
   saveSelectedHotel(city){
