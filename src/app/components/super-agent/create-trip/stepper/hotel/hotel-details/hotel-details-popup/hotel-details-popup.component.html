@@ -26,7 +26,7 @@
                                 {{'Has special deal' }}
                             </span>
                         </div>
-                        <div class="hotel_photo_gallery cursor-pointer" (click)="viewAllImagePopup()">
+                        <div class="hotel_photo_gallery cursor-pointer">
                             <div class="firstimg" *ngIf="hotelPics[0]">
                                 <img [src]='hotelPics[0]' alt="">
                             </div>
@@ -60,7 +60,7 @@
                                 </div>
                                 <div class="text-center mt-2">
                                     <i class="icon_size_20 icns nighticon"></i>
-                                    <h5 class="clr52 fs14">{{noOfDays}} {{'Night(s)' }}</h5>
+                                    <h5 class="clr52 fs14">{{noOfDays}} Night(s) </h5>
                                 </div>
                                 <div>
                                     <div class="d-inline-flex">

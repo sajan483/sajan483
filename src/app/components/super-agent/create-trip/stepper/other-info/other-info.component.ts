@@ -84,6 +84,10 @@ export class OtherInfoComponent implements OnInit {
 
   get f() { return this.otherPackageForm.controls }
 
+  getControls() {
+    return (this.otherPackageForm.get('itinerary') as FormArray).controls;
+  }
+
 
   onSubmit(){
     
@@ -116,4 +120,11 @@ export class OtherInfoComponent implements OnInit {
 
     })
   }
+
+  getValidity(i){
+    return (<FormArray>this.f.itinerary).controls[i].invalid;
+  }
+
 }
+
+//f.itinerary.controls[i].controls.depdate.errors

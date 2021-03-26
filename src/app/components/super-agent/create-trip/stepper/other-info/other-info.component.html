@@ -32,7 +32,7 @@
                             <div class="w-100 row m-0">
                                 <div class="col-md-3 p-0 mr-3 position-relative" *ngFor='let url of urls ;let i = index;'>
                                     <img [src]="url" class="hero-image-size w-100" alt="">
-                                    <div class="closeimgicon" (click)="deleteTripImg()"><i class="fa fa-times-circle" aria-hidden="true"></i></div>
+                                    <div class="closeimgicon" (click)="deleteTripImg(i)"><i class="fa fa-times-circle" aria-hidden="true"></i></div>
                                 </div>
                                 <div class="add-image-box col-md-2" *ngIf="imageAddButton">
                                     <input type='file' (change)="addTripImages($event)" multiple>
@@ -46,7 +46,7 @@
                         <div class="fw600 fs16">Add Itinerary</div>
                         <div class="cursor-pointer"><i class="blue_back_arrow rotate-90 icns icon_size_20"></i></div>
                     </div>
-                    <div formArrayName="itinerary" *ngFor="let a of otherPackageForm.get('itinerary').controls; let i = index">
+                    <div formArrayName="itinerary" *ngFor="let a of getControls(); let i = index">
                         <div [formGroupName]="i">
                             <div class="row m-0 p30 brdr_top_d3">
                                 <div class="col-md-12 text-right" *ngIf="i>0">
@@ -55,7 +55,7 @@
                                 <div class="col-md-4 mb30">
                                     <label class="fs14 fw400 lh14 pl-1">Day/Days :</label>
                                     <select class="owldatebrdr w-100 form-control" formControlName="days" 
-                                    [ngClass]="{ 'is-invalid': submitted && f.itinerary.controls[i].controls.days.errors }">
+                                    [ngClass]="{ 'is-invalid': submitted && getValidity(i) }">
                                         <option value="" disabled selected hidden>Select Dasy/Days</option>
                                         <option value="1">1 day</option>
                                         <option value="2">2 day</option>
@@ -66,13 +66,13 @@
                                 <div class="col-md-4 mb30">
                                     <label class="fs14 fw400 lh14 pl-1">Title :</label>
                                     <input type="text" class="owldatebrdr w-100 form-control" placeholder="Enter Title"
-                                            formControlName="itinerary_title" [ngClass]="{ 'is-invalid': submitted && f.itinerary.controls[i].controls.itinerary_title.errors }">
+                                            formControlName="itinerary_title" [ngClass]="{ 'is-invalid': submitted && getValidity(i) }">
                                 </div>
                                 <div class="col-md-4 mb30">
                                     <label class="fs14 fw400 lh14 pl-1">From Date :</label>
                                     <div class="position-relative" [owlDateTimeTrigger]="dt5">
                                         <input [owlDateTime]="dt5"  placeholder="Depature Date" 
-                                        class="owldatebrdr w-100 form-control" formControlName="depdate" [ngClass]="{ 'is-invalid': submitted && f.itinerary.controls[i].controls.depdate.errors }">
+                                        class="owldatebrdr w-100 form-control" formControlName="depdate" [ngClass]="{ 'is-invalid': submitted && getValidity(i) }">
                                         <i class="icns calendaricon icon_size_20 cursor-pointer owldateiconpostion"></i>
                                         <owl-date-time #dt5 [pickerType]="'calendar'"></owl-date-time>
                                     </div>
@@ -80,13 +80,13 @@
                                 <div class="col-md-12 mb30">
                                     <label class="fs14 fw400 lh14 pl-1">Add Overview :</label>
                                     <textarea name="" id="" class="owldatebrdr w-100 form-control" rows="3" formControlName="itinerary_overview"
-                                    [ngClass]="{ 'is-invalid': submitted && f.itinerary.controls[i].controls.itinerary_overview.errors }"></textarea>
+                                    [ngClass]="{ 'is-invalid': submitted && getValidity(i) }"></textarea>
                                 </div>
                                 <div class="col-md-12">
                                     <div class="w-100 row m-0">
                                         <div class="col-md-3 p-0 mr-3 position-relative" *ngFor='let url of a.urlList ;let j = index;'>
                                             <img [src]="url.url" class="hero-image-size w-100" alt="">
-                                            <div class="closeimgicon" (click)="deleteImageForItenerary(i,a)"><i class="fa fa-times-circle" aria-hidden="true"></i></div>
+                                            <div class="closeimgicon"><i class="fa fa-times-circle" aria-hidden="true"></i></div>
                                         </div>
                                         <div class="add-image-box col-md-2">
                                             <input type='file' (change)="onSelectDescriptionFile($event,a,i)" multiple>

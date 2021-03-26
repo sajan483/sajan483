@@ -25,7 +25,13 @@ export class HotelDetailsPopupComponent implements OnInit,OnChanges {
   selectedRoomDetails: boolean;
   roomVariation: any = [];
   medinahRoomVariation: any;
+
+  //tobedefined
   hotelRoomCount: number = 0;
+  totalTravellers:number = 1;
+  selectedRoomCount:number = 1;
+  noOfDays : number = 1;
+  noOfImages:number = 1;
 
   constructor(private stepper: StepperComponent,
     private superAgentApiService:SuperAgentApiService) { }
