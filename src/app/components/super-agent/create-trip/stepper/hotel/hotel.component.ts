@@ -65,7 +65,8 @@ export class HotelComponent implements OnInit {
     this.superAgentApiService.agencyHotelSearch(this.stepperAdapter.hotelSearchRequest(city,null,this.hotelSearchForm),'en-US')
     .subscribe(response =>{
       if(response){
-        this.hotelsList = response;
+        this.hotelsList.response = response;
+        this.hotelsList.city = city;
       }
     });
   }

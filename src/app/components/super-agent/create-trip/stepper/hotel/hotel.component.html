@@ -23,7 +23,7 @@
                 </mat-datepicker>
             </div>
         </div>
-        <button class="ml-auto m-2 searchbutton" [disabled]="!modifyHotelSearchActive" (click)="modifyHotelSear(hotelsList.city)">Search</button>
+        <button class="ml-auto m-2 searchbutton" [disabled]="!modifyHotelSearchActive" (click)="modifyHotelSearch(hotelsList.city)">Search</button>
     </div>
     <div class="padding_hotel1" *ngFor="let item of hotelsList.response;let i = index">
         <div class="uitk-card uitk-grid border_box_shadow">
