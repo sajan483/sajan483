@@ -45,6 +45,14 @@ export class OtherServiceComponent implements OnInit {
 
   get f() { return this.myForm.controls; }
 
+  getValidity(i){
+    return (<FormArray>this.f.arr).controls[i].invalid;
+  }
+
+  getControls() {
+    return (this.myForm.get('arr') as FormArray).controls;
+  }
+
   onSubmit() {
     this.submitted = true;
 
@@ -74,3 +82,5 @@ export class OtherServiceComponent implements OnInit {
     })
   }
 }
+
+//f.arr.controls[i].controls.price.errors

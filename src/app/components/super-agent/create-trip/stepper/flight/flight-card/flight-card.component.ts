@@ -42,7 +42,7 @@ export class FlightCardComponent implements OnInit {
     this.footerDataEmitter.emit(this.footerData);
   }
 
-  toggleDetails(item, event) {
+  toggleDetails(item, event, e) {
     var element = event.target;
     element.classList.toggle("active");
     if(item.isActive) {
