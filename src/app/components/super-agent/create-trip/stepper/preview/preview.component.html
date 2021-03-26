@@ -1,1 +1,267 @@
-<p>preview works!</p>
+<div>
+    <div class="w-100 bgf2 ptpb25">
+        <div class="container d-flex justify-content-between">
+            <div class="fs22 lh22 fw600 text-black">Preview & Create</div>
+            <div class="d-inline-flex cursor-pointer">
+                <i class="blue_back_arrow icns icon_size_15"></i>
+                <div class="blue_back_clr lh15 fs15 ml-2">Back</div>
+            </div>
+        </div>
+    </div>
+    <div class="container mt-3 mb-5">
+        <div class="boxborder">
+            <div>
+                <div class="w-100 bgf2 p20 brdr_btm_d3 d-flex justify-content-between">
+                    <div class="fw600 fs16">Departure Flight</div>
+                    <div class="cursor-pointer"><i class="blue_back_arrow rotate-90 icns icon_size_20"></i></div>
+                </div>
+                <div class="row m-0 p30">
+                    <div class="col-md-3">
+                        <div class="d-inline-flex">
+                            <div class="flightlogo m10 ml-0">
+                                <img src="https://imgak.mmtcdn.com/flights/assets/media/dt/common/icons/{{onwardFlight.mac}}.png" alt="">
+                            </div>
+                            <div>
+                                <div class="fs15">{{onwardFlight.airline_name.split('|')[1]}} <span class="fs12 clr52">{{onwardFlight.mac}}-{{onwardFlight.flight_no}}</span></div>
+                                <div class="fs12 clr52">Aircraft</div>
+                                <div class="fs12 clr52 text-uppercase">{{onwardFlight.aircraft}}</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="d-inline-flex">
+                            <div class="text-right">
+                                <div class="fs22 fw600">11:55</div>
+                                <div class="fs12 clr52">New Delhi [{{onwardFlight.boarding_airport}}]</div>
+                                <div class="fs12 clr52">Airprt name</div>
+                                <div class="fw600 fs14">februvary 5,2021</div>
+                            </div>
+                            <div class="text-center widthcenter">
+                                <div class="fs14 fw600">{{onwardFlight.duration_minutes}}</div>
+                                <div class="position-relative">
+                                    <hr class="dashedline mt-2 mb-2">
+                                    <i class="flight_duration_icon icns icon_size_15 positioniconduration"></i>
+                                </div>
+                                <div class="d-flex justify-content-center">
+                                    <div class="returnR fs14 bg_green" *ngIf="onwardFlight.refundable == 'R'">R</div>
+                                    <div class="returnR fs14 bg_red" *ngIf="onwardFlight.refundable != 'R'">N</div>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="fs22 fw600">11:55</div>
+                                <div class="fs12 clr52">New Delhi [Del]</div>
+                                <div class="fs12 clr52">Airprt name</div>
+                                <div class="fw600 fs14">februvary 5,2021</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3 d-flex justify-content-end">
+                        <div>
+                            <div class="fs14 clr52">No. of Adults : xx (&#8377;800 Per Adult)</div>
+                            <div class="fs14 clr52">No. of Child : xx (&#8377;800 Per Child)</div>
+                            <div class="fs14 clr52">No. of Infant : xx (&#8377;800 Per Infant)</div>
+                            <div class="fs15 fw500 mt-2">Total ticket fare - &#8377;25847</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div>
+                <div class="w-100 bgf2 p20 brdr_btm_d3 d-flex justify-content-between">
+                    <div class="fw600 fs16">Hotel in Makkah</div>
+                    <div class="cursor-pointer"><i class="blue_back_arrow rotate-90 icns icon_size_20"></i></div>
+                </div>
+                <div class="row m-0 p30">
+                    <div class="col-md-6">
+                        <div>
+                            <div class="fs16 fw600">hotel name
+                                <span class="pl-1">
+                                    <!-- <ngb-rating [(rate)]="selectedHotel.meta_data.rating" [readonly]="readonly" [max]=5>
+                                        <ng-template let-fill="fill" let-index="index">
+                                            <span class="star" [class.filled]="fill === 100" [class.bad]="index < 2">&#9733;</span>
+                                        </ng-template>
+                                    </ngb-rating> -->
+                                </span>
+                            </div>
+                            <div class="fs14">No of days in Makkah <span class="clr_blue_18">04</span></div>
+                        </div>
+                        <div class="mt-3">
+                            <div class="d-inline-flex">
+                                <div>
+                                    <div class="d-inline-flex">
+                                        <i class="calendaricon icon_h16_w12 icns"></i>
+                                        <div class="fs13 fw400 pl-1 pr-1 lh15">CHECK-IN</div>
+                                        <i class="downarrow icon_h16_w12 icns"></i>
+                                    </div>
+                                    <h6 class="fs21 fw600 mb-0">Feb 25.2012</h6>
+                                    <p class="fs12 clr52">thursday</p>
+                                </div>
+                                <div class="text-center mt-2 w170px">
+                                    <i class="icon_size_20 icns nighticon"></i>
+                                    <h5 class="clr52 fs14">5 Night(s)</h5>
+                                </div>
+                                <div>
+                                    <div class="d-inline-flex">
+                                        <i class="calendaricon icon_h16_w12 icns"></i>
+                                        <div class="fs13 fw400 pl-1 pr-1 lh15">CHECK-OUT</div>
+                                        <i class="downarrow icon_h16_w12 icns"></i>
+                                    </div>
+                                    <h6 class="fs21 fw600 mb-0">Feb 25.2012</h6>
+                                    <p class="fs12 clr52">tuesday</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <table class="table w-100">
+                            <tbody>
+                                <tr>
+                                  <th>Room Type</th>
+                                  <th>Per Adult</th>
+                                  <th>Per Child</th>
+                                </tr>
+                                <tr>
+                                  <td>Standerd</td>
+                                  <td>&#8377;800</td>
+                                  <td>&#8377;800</td>
+                                </tr>
+                                <tr>
+                                    <td colspan="3" class="fw600 text-right">Total hotel fare - &#8377;4758</td>
+                                  </tr>
+                              </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <div>
+                <div class="w-100 bgf2 p20 brdr_btm_d3 d-flex justify-content-between">
+                    <div class="fw600 fs16">Transport</div>
+                    <div class="cursor-pointer"><i class="blue_back_arrow rotate-90 icns icon_size_20"></i></div>
+                </div>
+                <div class="row m-0 p30">
+                    <div class="col-md-3">
+                        <div class="fs13 text-uppercase">{{transport.trip_vehicles[0].vehicle_type.name}}</div>
+                        <div class="fs21 fw600">{{transport.travel_date}}</div>
+                    </div>
+                    <div class="col-md-5">
+                        <div class="fs16 fw600">Saudi Public Transport Company</div>
+                        <div class="clr52 fs13">Route : Jeddah - Makkah - Madinah - Madinah Airport</div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="clr52 fs14">No.of days - {{transport.num_of_days}}  <span class="brdrright"></span>  Person Per Vehicle - {{transport.trip_vehicles[0].pax_per_vehicle}}</div>
+                        <div class="clr52 fs14">Price Per Person : &#8377;{{transport.trip_vehicles[0].price_per_pax}}</div>
+                    </div>
+                </div>
+            </div>
+
+            <div>
+                <div class="w-100 bgf2 p20 brdr_btm_d3 d-flex justify-content-between">
+                    <div class="fw600 fs16">Other Services</div>
+                    <div class="cursor-pointer"><i class="blue_back_arrow rotate-90 icns icon_size_20"></i></div>
+                </div>
+                <div>
+                    <div class="row m-0 p30 pb-0 brdr_btm_d3">
+                        <div class="col-md-4 brdrght mb-3" *ngFor="let item of otherService">
+                            <div class="fs16 fw600">Service  1</div>
+                            <div class="clr52 fs13 mt-2">
+                                <div>Category : {{item.additional_service.category.name}}</div>
+                                <div>Name :  {{item.additional_service.name}}</div>
+                                <div>{{item.additional_service.description}}</div>
+                                <div class="fs21 fw500 mt-2">&#8377;{{item.price}}</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="p30 pt-2 ml15">
+                        <div class="col-md-12">
+                            <div class="fs16 fw600">Visa Service</div>
+                            <div class="fs14 clr52 mt-2">{{visa.title}}</div>
+                            <div class="fs14">
+                                <div>Rate for adult - &#8377; {{visa.price}}</div>
+                                <div>Rate for adult - &#8377; 500</div>
+                            </div>
+                        <div class="fs14 clr52">{{visa.country}}</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div>
+                <div class="w-100 bgf2 p20 brdr_btm_d3 d-flex justify-content-between">
+                    <div class="fw600 fs16">Other Services</div>
+                    <div class="cursor-pointer"><i class="blue_back_arrow rotate-90 icns icon_size_20"></i></div>
+                </div>
+                <div class="m-0 row p30 brdr_btm_d3">
+                    <div class="col-md-12">
+                        <div class="fs16 fw600">{{response.title}}</div>
+                        <div class="mt-2 fs14 clr52">{{response.instructions}}</div>
+                        <div class="mainimage mt-2">
+                            <img src="/assets/images/imagemakkah.jpg" class="itineraryimg" alt="">
+                        </div>
+                    </div>
+                    <div id="timeLine" class="mt-3 col-md-12">
+                        <div>
+                          <h1 class="fs16 fw600">Itinerary</h1>
+                          <ul class="sessions">
+                            <li *ngFor="let item of itinerary">
+                              <div class="time">Day {{item.num_of_days}} : {{item.title}} - {{item.from_date}}</div>
+                              <div class="clr52 fs14 mt-2">{{item.details}}</div>
+                              <div class="row m-0">
+                                <div class="col-md-3 mt-2" *ngFor="let img of item.attachments">
+                                    <img [src]="img.file" class="itineraryimg" alt="">
+                                </div>
+                              </div>
+                            </li>
+                          </ul>
+                        </div>
+                      </div> 
+                </div>
+                <div class="m-0 row p30 brdr_btm_d3">
+                    <div class="col-md-6 brdrght">
+                        <div class="fs16 fw600">Inclusions</div>
+                        <div class="fs14 clr52 mt-2">{{response.inclusions}}</div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="fs16 fw600">Exclusions</div>
+                        <div class="fs14 clr52 mt-2">{{response.exclusions}}</div>
+                    </div>
+                </div>
+                <div class="m-0 row p30 brdr_btm_d3">
+                    <div class="col-md-12">
+                        <div class="fs16 fw600">Policies</div>
+                        <div class="fs14 clr52 mt-2">{{response.terms}}</div>
+                    </div>
+                </div>
+            </div>
+
+            <div>
+                <div class="w-100 bgf2 p20 brdr_btm_d3 d-flex justify-content-between">
+                    <div class="fw600 fs16">Payment & Advance</div>
+                    <div class="cursor-pointer"><i class="blue_back_arrow rotate-90 icns icon_size_20"></i></div>
+                </div>
+                <div class="row m-0 p30">
+                    <div class="col-md-3">
+                        <div class="fs14 fw600">Final package price for Adults</div>
+                        <div class="fs21 fw500 mt-2">&#8377; {{response.adult_price}}</div>
+                        <div class="clr52 fs14">GST excluded</div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="fs14 fw600">Final package price for Kids </div>
+                        <div class="fs21 fw500 mt-2">&#8377; {{response.child_with_bed_price}} <span class="clr52 fs14">(with bed)</span></div>
+                        <div class="clr52 fs14">GST excluded</div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="fs14 fw600">Final package price for Kids </div>
+                        <div class="fs21 fw500 mt-2">&#8377; {{response.child_without_bed_price}} <span class="clr52 fs14">(without bed)</span></div>
+                        <div class="clr52 fs14">GST excluded</div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="fs14 fw600">Booking Advance payable</div>
+                        <div class="fs21 fw500 mt-2">&#8377; {{response.advance_pct}}</div>
+                        <div class="clr52 fs14">GST excluded</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

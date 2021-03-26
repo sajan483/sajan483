@@ -66,9 +66,8 @@ export class StepperAdapter {
 
   /**
    * this methode for booking transport request
-   * @param transportSelection
-   * @param currency
-   * @param ddate travel date
+   * @param transportSelection 
+   * @param currency 
    */
   transportBookingBody(transportSelection,currency){
     var data ={
@@ -159,7 +158,7 @@ export class StepperAdapter {
   }
 
   /**
-   * this method for other service form
+   * this method for other service form group
    */
   otherInfoForm():FormGroup{
     this.fb = new FormBuilder();
@@ -172,6 +171,9 @@ export class StepperAdapter {
       'itinerary':this.fb.array([this.itinerySet()])
     })
   }
+  /**
+   * this method for other itinerary form array
+   */
   itinerySet():FormGroup{
     return this.fb.group({
       'days': ['', Validators.required],
@@ -181,6 +183,10 @@ export class StepperAdapter {
       'urlList': this.fb.array([])
     })
   }
+  /**
+   * other info body
+   * @param item form value
+   */
   otherInfoBody(item){
     var body;
     body ={
@@ -192,6 +198,11 @@ export class StepperAdapter {
     }
     return body;
   }
+  /**
+   * itinerary body
+   * @param item 
+   * @param array itinerary images
+   */
   itineraryBody(item,array){
     let param =[]
     for(let i = 0; i < item.length ; i++){

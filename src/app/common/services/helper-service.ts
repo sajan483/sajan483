@@ -67,4 +67,12 @@ export class HelperService {
         d.setDate(d.getDate() + days);
         return d;
     }
+
+    /**
+     * convert timeStamp to date
+     */
+    timeStampToDateConversion(s){
+        let d = new Date(s*1000) 
+        return this.dateFormaterMdy(d)
+    }
 }
