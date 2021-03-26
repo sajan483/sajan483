@@ -22,8 +22,8 @@
 }
 
 body {
-    background-image: url(./assets/images/-bg.jpg);
-    background-size: 3px;
+    background-image: url(./assets/images/-bg.jpg) !important;
+    background-size: 3px !important;
 }
 
 @mixin styleEditedStepIcon($index) {
@@ -37,7 +37,7 @@ body {
 @mixin styleUnEditedStepIcon($index) {
     .mat-horizontal-stepper-header:nth-child(#{$index}) {
         .mat-step-icon:not(.mat-step-icon-selected) {
-            height: 3px;
+            height: 4px;
             background-color: #e8e8e8;
         }
     }

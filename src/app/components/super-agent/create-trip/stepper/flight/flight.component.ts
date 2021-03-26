@@ -90,6 +90,15 @@ export class FlightComponent implements OnInit {
     }
   }
 
+  get continue(){
+    if(this.fareForm.valid){
+      return false
+    }
+    else{
+      return true
+    }
+  }
+
   getfooterFlag(event){
     this.footerFlag = event
   }

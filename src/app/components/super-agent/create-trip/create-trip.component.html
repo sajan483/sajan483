@@ -110,7 +110,7 @@
                                     CHECK-IN
                                     <mat-icon class="align-middle">keyboard_arrow_down</mat-icon>
                                 </p>
-                                <input class="date-input" [min]="mekkahInMin" matInput [matDatepicker]="pickerMekIn" (dateChange)="setMekkahOutMinDate()" formControlName="mekIn" placeholder="{{today}}">
+                                <input class="date-input" [min]="mekkahInMin" matInput [matDatepicker]="pickerMekIn" (dateChange)="setMekkahOutMinDate()" formControlName="mekIn">
                                 <mat-datepicker #pickerMekIn></mat-datepicker>
                             </div>
                         </div>
@@ -120,7 +120,7 @@
                                     CHECK-OUT
                                     <mat-icon class="align-middle">keyboard_arrow_down</mat-icon>
                                 </p>
-                                <input class="date-input" [min]="mekkahOutMin" matInput [matDatepicker]="pickerMekOut" (dateChange)="setMedinahInMinDate()" formControlName="mekOut" placeholder="{{today}}">
+                                <input class="date-input" [min]="mekkahOutMin" matInput [matDatepicker]="pickerMekOut" (dateChange)="setMedinahInMinDate()" formControlName="mekOut">
                                 <mat-datepicker #pickerMekOut></mat-datepicker>
                             </div>
                         </div>
@@ -135,7 +135,7 @@
                                     CHECK-IN
                                     <mat-icon class="align-middle">keyboard_arrow_down</mat-icon>
                                 </p>
-                                <input class="date-input" [min]="medinahInMin" matInput [matDatepicker]="pickerMedIn" (dateChange)="setMedinahOutMinDate()" formControlName="medIn" placeholder="{{today}}">
+                                <input class="date-input" [min]="medinahInMin" matInput [matDatepicker]="pickerMedIn" (dateChange)="setMedinahOutMinDate()" formControlName="medIn">
                                 <mat-datepicker #pickerMedIn></mat-datepicker>
                             </div>
                         </div>
@@ -145,7 +145,7 @@
                                     CHECK-OUT
                                     <mat-icon class="align-middle">keyboard_arrow_down</mat-icon>
                                 </p>
-                                <input class="date-input" [min]="medinahOutMin" matInput [matDatepicker]="pickerMedOut" (dateChange)="setMekkahInMinDate()" formControlName="medOut" placeholder="{{today}}">
+                                <input class="date-input" [min]="medinahOutMin" matInput [matDatepicker]="pickerMedOut" (dateChange)="setMekkahInMinDate()" formControlName="medOut">
                                 <mat-datepicker #pickerMedOut></mat-datepicker>
                             </div>
                         </div>
