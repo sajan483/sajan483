@@ -211,7 +211,6 @@ export class CreateTripComponent implements OnInit {
         checkOut:this.form.medOut.value.toJSON().split("T")[0]
       }
     };
-    console.log(this.searchData);
     StepperComponent.searchData = this.searchData
     this.router.navigateByUrl('superagent/stepper');
   }

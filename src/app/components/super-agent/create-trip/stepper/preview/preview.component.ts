@@ -16,7 +16,6 @@ export class PreviewComponent implements OnInit {
 
   ngOnInit() {
     this.SuperAgentApiService.getPackageDetails(this.packageId).subscribe((data)=>{
-      console.log(data);
     })
   }
 
