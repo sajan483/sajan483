@@ -35,7 +35,11 @@ export class StepperComponent implements OnInit {
   ngOnInit() {
     document.getElementById(this.selector).style.backgroundColor = "#f3ac3c";
     this.dataFromSearchPage = StepperComponent.searchData;
-    this.hotelSearch("MAKKA",this.dataFromSearchPage);
+    if(typeof(this.dataFromSearchPage) != 'undefined'){
+      this.hotelSearch("MAKKA",this.dataFromSearchPage);
+      this.hotelSearch("MADEENA",this.dataFromSearchPage);
+    }
+    
   }
 
   stepContent(component, flag) {

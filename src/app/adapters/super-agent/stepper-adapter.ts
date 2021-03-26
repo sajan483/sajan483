@@ -18,45 +18,37 @@ export class StepperAdapter {
    * method for creating hotel search request
    */
   hotelSearchRequest(city: any,dataFromSearchPage: any,hotelSearchForm: FormGroup) {
-   // if (dataFromSearchPage) {
+    if (dataFromSearchPage) {
+      console.log("asasas",dataFromSearchPage.mekkahData.checkIn)
       if(city == 'MAKKA'){
         var body = {
-          // check_in_date: this.helperService.dateFormaterMdy(
-          //   dataFromSearchPage.mekkahData.checkIn
-          // ),
-          // check_out_date: this.helperService.dateFormaterMdy(
-          //   dataFromSearchPage.mekkahData.checkOut
-          // ),
-          check_in_date: "03/26/2021",
-          check_out_date: "03/30/2021",
+          check_in_date:
+           dataFromSearchPage.mekkahData.checkIn,
+          check_out_date:dataFromSearchPage.mekkahData.checkOut,
+          // check_in_date: "03/26/2021",
+          // check_out_date: "03/30/2021",
           location: city,
         };
         return body;
       }
 
       if(city == 'MADEENA'){
+        console.log('fghjk',dataFromSearchPage.mekkahData.checkIn);
         var body = {
-          // check_in_date: this.helperService.dateFormaterMdy(
-          //   dataFromSearchPage.mekkahData.checkIn
-          // ),
-          // check_out_date: this.helperService.dateFormaterMdy(
-          //   dataFromSearchPage.mekkahData.checkOut
-          // ),
-          check_in_date: "03/26/2021",
-          check_out_date: "03/30/2021",
+          check_in_date: dataFromSearchPage.mekkahData.checkIn,
+          check_out_date: dataFromSearchPage.mekkahData.checkOut
+          ,
+          // check_in_date: "03/26/2021",
+          // check_out_date: "03/30/2021",
           location: city,
         };
         return body;
       }
-  //}
+  }
     if(hotelSearchForm) {
       var body = {
-        check_in_date: this.helperService.dateFormaterMdy(
-          hotelSearchForm.get("hotelCheckInDate").value
-        ),
-        check_out_date: this.helperService.dateFormaterMdy(
-          hotelSearchForm.get("hotelCheckOutDate").value
-        ),
+        check_in_date: hotelSearchForm.get("hotelCheckInDate").value,
+        check_out_date:hotelSearchForm.get("hotelCheckOutDate").value,
         location: city,
       };
       return body;
