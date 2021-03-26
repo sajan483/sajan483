@@ -19,7 +19,6 @@ export class StepperComponent implements OnInit {
   hotelFlag;
   superAgentApiService: SuperAgentApiService;
   hotelsList: HotelsList = {response:[],city:undefined} ;
-  //hotelsList:any[]=[];
   helperService: HelperService;
   dataFromSearchPage: any;
 

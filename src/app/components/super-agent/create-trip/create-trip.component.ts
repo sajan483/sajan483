@@ -62,7 +62,6 @@ export class CreateTripComponent implements OnInit {
     private router: Router) { }
 
   ngOnInit() {
-    console.log(this.today);
     this.searchForm = this.fb.group({
       adult:[1, Validators.required],
       children:[0],
