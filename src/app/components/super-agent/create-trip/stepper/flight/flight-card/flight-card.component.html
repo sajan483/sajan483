@@ -35,7 +35,8 @@
                         </div>
                     </div>
                     <div class="fc-bottom" (click)="toggleDetails(item, $event, i)">
-                        <p class="green">R</p>
+                        <p class="green" *ngIf="item.Refundable == 'R'">R</p>
+                        <p class="red" *ngIf="item.Refundable != 'R'">N</p>
                         <p class="f-detail">+ Flight Details</p>
                     </div>
                     <div class="expansion">
@@ -52,7 +53,7 @@
                     <div class="fc-top">
                         <div class="top-left">
                             <input class="flight-radio" type="radio" id="male" name="returnflight" (click)="setArrFlight(item,i)">
-                            <p class="radio-label">{{item.AirlineName.split('|')[1]}}<span>| {{item.MAC}}-{{item.FlightNo}}</span></p>
+                            <p class="radio-label">{{item.AirlineName.split('|')[1]}}<span>| {{item.MAC}}-{{item.FlightNo}}</span><span *ngIf="item.MAC != item.OAC">(Operated By : {{item.AirlineName.split('|')[0]}})</span></p>
                         </div>
                         <div class="top-right">
                             <p class="fare-label">Current Fare</p>
@@ -79,7 +80,8 @@
                         </div>
                     </div>
                     <div class="fc-bottom" (click)="toggleDetails(item, $event, i)">
-                        <p class="green">R</p>
+                        <p class="green" *ngIf="item.Refundable == 'R'">R</p>
+                        <p class="red" *ngIf="item.Refundable != 'R'">N</p>
                         <p class="f-detail">+ Flight Details</p>
                     </div>
                     <div class="expansion">

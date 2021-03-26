@@ -46,8 +46,8 @@ export class CreateTripComponent implements OnInit {
     city:"Jeddah"
   };
   airlineDetails:any = {
-    name:"Etihad",
-    code:"EY"
+    name:"Emirates",
+    code:"EK"
   };
   searchData
 
@@ -62,6 +62,7 @@ export class CreateTripComponent implements OnInit {
     private router: Router) { }
 
   ngOnInit() {
+    console.log(this.today);
     this.searchForm = this.fb.group({
       adult:[1, Validators.required],
       children:[0],
@@ -78,6 +79,10 @@ export class CreateTripComponent implements OnInit {
     this.airline.setValue(this.airlineDetails.name)
     this.searchForm.controls.departDate.setValue(this.todayStamp);
     this.searchForm.controls.returnDate.setValue(this.todayStamp);
+    this.searchForm.controls.medIn.setValue(this.todayStamp);
+    this.searchForm.controls.medOut.setValue(this.todayStamp);
+    this.searchForm.controls.mekIn.setValue(this.todayStamp);
+    this.searchForm.controls.mekOut.setValue(this.todayStamp);
     this.getAirportListSrc()
     this.getAirportListDest()
     this.getAirlineList()

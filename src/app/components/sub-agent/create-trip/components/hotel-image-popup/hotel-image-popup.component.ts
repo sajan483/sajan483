@@ -16,7 +16,7 @@ export class HotelImagePopupComponent implements OnInit {
     autoWidth: true,
     mouseDrag: true,
     touchDrag: true,
-    pullDrag: false,
+    pullDrag: true,
     dots: false,
     navSpeed: 700,
     navText: ["&#8249;", "&#8250;"],
