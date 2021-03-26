@@ -1,99 +1,99 @@
 <nav class="navbar navbar-expand-lg navbar-light positionfixed" *ngIf="router.url !== '/login' && router.url !== '/signup'">
-  <div class="collapse navbar-collapse container">
-    <a class="navbar-brand cursor-pointer" *ngIf="branchActive"  (click)="navigatepage('subagent/home');"><img class="logohight" src="/assets/images/agent-logo.png" alt=""></a>
-    <a class="navbar-brand cursor-pointer" *ngIf="agencyActive" ><img class="logohight" src="/assets/images/agent-logo.png" alt=""></a>
-    <form class="form-inline my-2 my-lg-0">
+    <div class="collapse navbar-collapse container">
+        <a class="navbar-brand cursor-pointer" *ngIf="branchActive" (click)="navigatepage('subagent/home');"><img class="logohight" src="/assets/images/agent-logo.png" alt=""></a>
+        <a class="navbar-brand cursor-pointer" *ngIf="agencyActive"><img class="logohight" src="/assets/images/agent-logo.png" alt=""></a>
+        <form class="form-inline my-2 my-lg-0">
 
-      <div class="dropdown" *ngIf="branchActive">
-        <div class="d-flex cursor-pointer hidemobile">
-          <div class="pr-2">
-            <p class="mb-0 wlcmtext">Welcome <i class="fa fa-caret-down" aria-hidden="true"></i></p>
-            <p class="mb-0 f15">Branch Name Here</p>
-          </div>
-          <i class="userpic icns icon_size_40"></i>
-        </div>
-        <div class="dinsplaymobile hidesystem mr-3">
-          <i class="fa fa-bars" aria-hidden="true"></i>
-        </div>
-        <div class="dropdown-content animationdivfast">
-          <a (click)="navigatepage('subagent/home');">
-            <div class="d-flex padngover mt-2">
-              <i class="icns createpackages icon_size_25"></i>
-              <p class="f15 my-auto pl15" [class.clrred]="router.url === 'subagent/home'">Create Package</p>
+            <div class="dropdown" *ngIf="branchActive">
+                <div class="d-flex cursor-pointer hidemobile">
+                    <div class="pr-2">
+                        <p class="mb-0 wlcmtext">Welcome <i class="fa fa-caret-down" aria-hidden="true"></i></p>
+                        <p class="mb-0 f15">Branch Name Here</p>
+                    </div>
+                    <i class="userpic icns icon_size_40"></i>
+                </div>
+                <div class="dinsplaymobile hidesystem mr-3">
+                    <i class="fa fa-bars" aria-hidden="true"></i>
+                </div>
+                <div class="dropdown-content animationdivfast">
+                    <a (click)="navigatepage('subagent/home');">
+                        <div class="d-flex padngover mt-2">
+                            <i class="icns createpackages icon_size_25"></i>
+                            <p class="f15 my-auto pl15" [class.clrred]="router.url === 'subagent/home'">Create Package</p>
+                        </div>
+                    </a>
+                    <a (click)="navigatepage('subagent/history');">
+                        <div class="d-flex padngover">
+                            <i class="icns historyicon icon_size_20"></i>
+                            <p class="f15 my-auto pl20" [class.clrred]="router.url === 'subagent/history'">history</p>
+                        </div>
+                    </a>
+                    <a (click)="navigatepage('subagent/profilepage');">
+                        <div class="d-flex padngover">
+                            <i class="icns myprofile icon_size_20"></i>
+                            <p class="f15 my-auto pl20" [class.clrred]="router.url === 'subagent/profilepage'">My Profile</p>
+                        </div>
+                    </a>
+                    <a class="bgred" (click)="logout();">
+                        <div class="d-flex padngover">
+                            <i class="icns logouticon icon_size_20"></i>
+                            <p class="f15 my-auto pl20">Logout</p>
+                        </div>
+                    </a>
+                </div>
             </div>
-          </a>
-          <a (click)="navigatepage('subagent/history');">
-            <div class="d-flex padngover">
-              <i class="icns historyicon icon_size_20"></i>
-              <p class="f15 my-auto pl20" [class.clrred]="router.url === 'subagent/history'" >History</p>
-            </div>
-          </a>
-          <a (click)="navigatepage('subagent/profilepage');">
-            <div class="d-flex padngover">
-              <i class="icns myprofile icon_size_20"></i>
-              <p class="f15 my-auto pl20" [class.clrred]="router.url === 'subagent/profilepage'">My Profile</p>
-            </div>
-          </a>
-          <a class="bgred" (click)="logout();">
-            <div class="d-flex padngover">
-              <i class="icns logouticon icon_size_20"></i>
-              <p class="f15 my-auto pl20">Logout</p>
-            </div>
-          </a>
-        </div>
-      </div>
 
-      <div class="dropdown" *ngIf="agencyActive">
-        <div class="d-flex cursor-pointer hidemobile">
-          <div class="pr-2">
-            <p class="mb-0 wlcmtext">Welcome <i class="fa fa-caret-down" aria-hidden="true"></i></p>
-            <p class="mb-0 f15">Agency Name Here</p>
-          </div>
-          <i class="userpic icns icon_size_40"></i>
-        </div>
-        <div class="dinsplaymobile hidesystem mr-3">
-          <i class="fa fa-bars" aria-hidden="true"></i>
-        </div>
-        <div class="dropdown-content animationdivfast">
-          <a class="" (click)="navigatepage('/trip');">
-            <div class="d-flex padngover mt-2">
-              <i class="icns createpackages icon_size_25"></i>
-              <p class="f15 my-auto pl15" [class.clrred]="router.url === '/trip'">Create New Package</p>
+            <div class="dropdown" *ngIf="agencyActive">
+                <div class="d-flex cursor-pointer hidemobile">
+                    <div class="pr-2">
+                        <p class="mb-0 wlcmtext">welcome <i class="fa fa-caret-down" aria-hidden="true"></i></p>
+                        <p class="mb-0 f15">Agency Name Here</p>
+                    </div>
+                    <i class="userpic icns icon_size_40"></i>
+                </div>
+                <div class="dinsplaymobile hidesystem mr-3">
+                    <i class="fa fa-bars" aria-hidden="true"></i>
+                </div>
+                <div class="dropdown-content animationdivfast">
+                    <a class="" (click)="navigatepage('superagent/createTrip');">
+                        <div class="d-flex padngover mt-2">
+                            <i class="icns createpackages icon_size_25"></i>
+                            <p class="f15 my-auto pl15" [class.clrred]="router.url === '/trip'">Create New Package</p>
+                        </div>
+                    </a>
+                    <a (click)="navigatepage('/branches');">
+                        <div class="d-flex padngover">
+                            <i class="icns menubranches icon_size_20"></i>
+                            <p class="f15 my-auto pl20" [class.clrred]="router.url === '/branches'">Branches</p>
+                        </div>
+                    </a>
+                    <a (click)="navigatepage('/liststaff');">
+                        <div class="d-flex padngover">
+                            <i class="icns staffmanagment icon_size_20"></i>
+                            <p class="f15 my-auto pl20" [class.clrred]="router.url === '/liststaff'">Staff Mangement</p>
+                        </div>
+                    </a>
+                    <a (click)="navigatepage('/bank_details');">
+                        <div class="d-flex padngover">
+                            <i class="icns accountdetailsicon icon_size_20"></i>
+                            <p class="f15 my-auto pl20" [class.clrred]="router.url === '/bank_details'">Account Details</p>
+                        </div>
+                    </a>
+                    <a (click)="navigateagencyprofile();">
+                        <div class="d-flex padngover">
+                            <i class="icns myprofile icon_size_20"></i>
+                            <p class="f15 my-auto pl20" [class.clrred]="router.url === '/Agency_profile/1'">My Profile</p>
+                        </div>
+                    </a>
+                    <a class="bgred" (click)="logout();">
+                        <div class="d-flex padngover">
+                            <i class="icns logouticon icon_size_20"></i>
+                            <p class="f15 my-auto pl20">Logout</p>
+                        </div>
+                    </a>
+                </div>
             </div>
-          </a>
-          <a (click)="navigatepage('/branches');">
-            <div class="d-flex padngover">
-              <i class="icns menubranches icon_size_20"></i>
-              <p class="f15 my-auto pl20" [class.clrred]="router.url === '/branches'">Branches</p>
-            </div>
-          </a>
-          <a (click)="navigatepage('/liststaff');">
-            <div class="d-flex padngover">
-              <i class="icns staffmanagment icon_size_20"></i>
-              <p class="f15 my-auto pl20" [class.clrred]="router.url === '/liststaff'">Staff Mangement</p>
-            </div>
-          </a>
-          <a (click)="navigatepage('/bank_details');">
-            <div class="d-flex padngover">
-              <i class="icns accountdetailsicon icon_size_20"></i>
-              <p class="f15 my-auto pl20" [class.clrred]="router.url === '/bank_details'">Account Details</p>
-            </div>
-          </a>
-          <a (click)="navigateagencyprofile();">
-            <div class="d-flex padngover">
-              <i class="icns myprofile icon_size_20"></i>
-              <p class="f15 my-auto pl20" [class.clrred]="router.url === '/Agency_profile/1'">My Profile</p>
-            </div>
-          </a>
-          <a class="bgred" (click)="logout();">
-            <div class="d-flex padngover">
-              <i class="icns logouticon icon_size_20"></i>
-              <p class="f15 my-auto pl20">Logout</p>
-            </div>
-          </a>
-        </div>
-      </div>
 
-    </form>
-  </div>
+        </form>
+    </div>
 </nav>
