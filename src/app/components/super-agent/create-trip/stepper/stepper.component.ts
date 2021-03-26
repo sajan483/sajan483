@@ -61,7 +61,6 @@ export class StepperComponent implements OnInit {
        .subscribe((data) => {
          this.hotelsList.response = data;
          this.hotelsList.city = city;
-         console.log(this.hotelsList)
     });
   }
 

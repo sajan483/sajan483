@@ -98,7 +98,6 @@ export class SuperAgentApiService {
   }
 
   uploadTripImage(data,currency,lang,id){
-    console.log(data);
     
     let formData = new FormData();
     data.map(x=>x.file).forEach((item,index) => {
@@ -110,7 +109,6 @@ export class SuperAgentApiService {
   }
 
   forItinerarySetAPI(param,currency,lang,id){
-    console.log("PARAM",param)
     let formData = new FormData();
     param.forEach((item,index) => {
           if(item.title){

@@ -92,12 +92,10 @@ export class FlightComponent implements OnInit {
 
   getfooterFlag(event){
     this.footerFlag = event
-    console.log(this.footerFlag)
   }
 
   getfooterData(event){
     this.footerData=event
-    console.log(this.footerData)
   }
 
   modifySearch(){
@@ -220,7 +218,6 @@ export class FlightComponent implements OnInit {
     };
     this.commonService.searchFlights(body).subscribe((data) => {
       if(data.flights[0].length > 0 && data.flights[1].length > 0){
-        console.log(data.flights[0]);
         this.searchResult.departureFlights = data.flights[0];
         this.searchResult.returnFlights = data.flights[1];
         this.flightListingFlag = true

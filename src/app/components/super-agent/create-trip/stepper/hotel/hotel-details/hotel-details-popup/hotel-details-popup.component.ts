@@ -88,8 +88,6 @@ export class HotelDetailsPopupComponent implements OnInit,OnChanges {
   }
 
   selectHotelRoom(e, room, i){
-    console.log(e)
-    console.log(room)
     let q =  {
       "currency": "INR",
       "available_rooms": room.available_count,
@@ -113,6 +111,10 @@ export class HotelDetailsPopupComponent implements OnInit,OnChanges {
       // remove object
       this.roomVariation.splice(removeIndex, 1);
     }
+  }
+
+  hideHotelDetailsPopup(){
+    this.showHotelDetails = false;
   }
 
 }

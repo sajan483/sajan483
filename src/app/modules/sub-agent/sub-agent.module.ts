@@ -103,6 +103,7 @@ import { SubAgentApiService } from 'src/app/Services/sub-agent-api-services';
   exports: [
     TranslateModule,
   ],
+  providers:[SubAgentApiService,HelperService]
   
 })
 

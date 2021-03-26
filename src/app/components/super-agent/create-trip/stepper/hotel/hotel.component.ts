@@ -94,7 +94,6 @@ export class HotelComponent implements OnInit {
       .subscribe((data) => {
         this.popupData = data;
         this.popupData.city = city
-        console.log("popupdata",this.popupData)
       },(error)=>{
       this.notifyService.showWarning("No details availabe");
       });
