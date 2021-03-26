@@ -23,8 +23,9 @@ export class HotelDetailsPopupComponent implements OnInit,OnChanges {
   @Input() popupData :any;
   selectedRoomInfo: any;
   selectedRoomDetails: boolean;
-  roomVariation: any[];
+  roomVariation: any = [];
   medinahRoomVariation: any;
+  hotelRoomCount: number = 0;
 
   constructor(private stepper: StepperComponent,
     private superAgentApiService:SuperAgentApiService) { }
@@ -105,12 +106,10 @@ export class HotelDetailsPopupComponent implements OnInit,OnChanges {
     }
     if(e.target.checked){
       this.roomVariation.push(q)
-     // this.madeenaRoomCount ++;
+      this.hotelRoomCount ++;
     }else{
-     // this.madeenaRoomCount --;
-      // get index of object with id:37
+       this.hotelRoomCount --;
       var removeIndex = this.roomVariation.map(function(item) { return item.room_id; }).indexOf(room.room_id);
-      // remove object
       this.roomVariation.splice(removeIndex, 1);
     }
   }
@@ -119,4 +118,10 @@ export class HotelDetailsPopupComponent implements OnInit,OnChanges {
     this.showHotelDetails = false;
   }
 
-}
+  disableHotelSaveBtn(){
+    if(this.hotelRoomCount < 1){
+       return false;
+      }
+     return true;
+    }
+  }
