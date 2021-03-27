@@ -27,6 +27,7 @@ import { NgbCarouselModule } from '@ng-bootstrap/ng-bootstrap';
 import { RoomdetailsPopupComponent } from 'src/app/components/super-agent/create-trip/stepper/hotel/roomdetails-popup/roomdetails-popup.component';
 import { CarouselModule } from 'ngx-owl-carousel-o';
 import { HotelImagePopupComponent } from 'src/app/components/super-agent/create-trip/stepper/hotel/hotel-details/hotel-image-popup/hotel-image-popup.component';
+import { NgbRatingModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
@@ -69,7 +70,8 @@ import { HotelImagePopupComponent } from 'src/app/components/super-agent/create-
     MatRadioModule,
     MatTabsModule,
     NgbCarouselModule,
-    CarouselModule
+    CarouselModule,
+    NgbRatingModule
   ],
   providers: [
     DatePipe, GeneralHelper,CommonApiService,HelperService,SuperAgentApiService
