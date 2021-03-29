@@ -17,7 +17,6 @@ import { SliderComponent } from './common/components/slider/slider.component';
 import { PaginationComponent } from './common/components/pagination/pagination.component';
 import { LandingApiService } from './Services/landing-api-services';
 import { CommonApiService } from './Services/common-api-services';
-import { TestComponent } from './test/test.component';
 
 
 @NgModule({
@@ -26,9 +25,7 @@ import { TestComponent } from './test/test.component';
     HedderComponent,
     FooterComponent,
     SliderComponent,
-    PaginationComponent,
-    TestComponent
-    
+    PaginationComponent
   ],
   imports: [
     BrowserModule,
