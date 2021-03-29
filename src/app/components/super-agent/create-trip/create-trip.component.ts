@@ -77,14 +77,20 @@ export class CreateTripComponent implements OnInit {
     this.destination.setValue(this.destLocation.iata)
     this.airline.setValue(this.airlineDetails.name)
     this.searchForm.controls.departDate.setValue(this.todayStamp);
-    this.searchForm.controls.returnDate.setValue(this.todayStamp);
-    this.searchForm.controls.medIn.setValue(this.todayStamp);
-    this.searchForm.controls.medOut.setValue(this.todayStamp);
+    this.searchForm.controls.returnDate.setValue(this.incrementDate(this.searchForm.controls.departDate.value,14));
     this.searchForm.controls.mekIn.setValue(this.todayStamp);
-    this.searchForm.controls.mekOut.setValue(this.todayStamp);
+    this.searchForm.controls.mekOut.setValue(this.incrementDate(this.searchForm.controls.mekIn.value,2));
+    this.searchForm.controls.medIn.setValue(this.searchForm.controls.mekOut.value);
+    this.searchForm.controls.medOut.setValue(this.incrementDate(this.searchForm.controls.medIn.value,2));
     this.getAirportListSrc()
     this.getAirportListDest()
     this.getAirlineList()
+  }
+
+  incrementDate(date,days) {
+    var d = new Date(date);
+    d.setDate(d.getDate() + days);
+    return d;
   }
 
   get form() { return this.searchForm.controls; }
@@ -108,7 +114,7 @@ export class CreateTripComponent implements OnInit {
    }
 
   setMekkahOutMinDate(){
-    this.mekkahOutMin=this.form.mekIn.value
+    this.mekkahOutMin=this.incrementDate(this.form.mekIn.value,1)
     this.pickerMekOut.open()
   }
 
@@ -118,7 +124,7 @@ export class CreateTripComponent implements OnInit {
   }
 
   setMedinahOutMinDate(){
-    this.medinahOutMin=this.form.medIn.value
+    this.medinahOutMin=this.incrementDate(this.form.medIn.value,1)
     this.pickerMedOut.open()
    }
    
