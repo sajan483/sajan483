@@ -148,4 +148,10 @@ export class SuperAgentApiService {
       .map((res) => res.json());
   }
 
+  createPackage(data,currency,lang) {
+    return this.http
+      .post(this.BASE_URL + "packages/?currency=" + currency + "&lang=" + lang, data, this.options)
+      .map((res) => res.json());
+  }
+
 }

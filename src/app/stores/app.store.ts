@@ -30,5 +30,8 @@ export class AppStore {
   @observable noOfDaysInMakkah:number;
   @observable noOfDaysInMadeena:number;
   @observable isAvailabilityFails:boolean;
+  @observable tui:any;
+  @observable packageId:number;
+
   constructor() { }
 }
