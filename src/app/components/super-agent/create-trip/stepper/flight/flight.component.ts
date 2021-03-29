@@ -7,6 +7,7 @@ import { airlineList } from 'src/app/models/airlineList';
 import { StepperComponent } from '../stepper.component';
 import { SuperAgentApiService } from 'src/app/Services/super-agent-api-services';
 import { EventEmitter } from 'events';
+import { AppStore } from 'src/app/stores/app.store';
 
 @Component({
   selector: 'app-flight',
@@ -60,7 +61,7 @@ export class FlightComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
-    private commonService: SuperAgentApiService, private stepper: StepperComponent) { }
+    private commonService: SuperAgentApiService, private stepper: StepperComponent, private appStore: AppStore) { }
 
   ngOnInit() {
     this.searchData= StepperComponent.searchData.flightData
@@ -70,8 +71,8 @@ export class FlightComponent implements OnInit {
     });
     this.fareForm = this.fb.group({
 			adult: ['', Validators.required],
-			child: ['', Validators.required],
-			infant: ['', Validators.required]
+			child: [0],
+			infant: [0]
     });
     this.searchResult.destLocation=this.destLocation
     this.searchResult.fromLocation=this.fromLocation
@@ -184,11 +185,13 @@ export class FlightComponent implements OnInit {
 
   setFromLocation(data){
     this.fromLocation.city = data.city
+    this.fromLocation.iata = data.iata
     this.searchResult.fromLocation.city = data.city
   }
 
   setDestLocation(data){
     this.destLocation.city = data.city
+    this.destLocation.iata = data.iata
     this.searchResult.destLocation.city = data.city
   }
 
@@ -230,6 +233,7 @@ export class FlightComponent implements OnInit {
         this.searchResult.departureFlights = data.flights[0];
         this.searchResult.returnFlights = data.flights[1];
         this.flightListingFlag = true
+        this.appStore.tui = data.tui
       }
     })
   }
@@ -240,6 +244,91 @@ export class FlightComponent implements OnInit {
 
   navigateHotel(component, id){
     this.stepper.stepContent(component,id)
+    this.saveFlight()
+  }
+
+  saveFlight(){
+    let data = {
+      "start_date": this.searchData.departureDate,
+      "end_date": this.searchData.returnDate,
+      "arr_date_time_stamp": Math.floor(new Date(this.searchData.returnDate).getTime()/1000),
+      "arr_airport_code": this.destLocation.iata,
+      "title": "",
+        "trip_flights": [
+        {
+          "adult_price": this.fareForm.controls.adult.value,
+          "infant_price": this.fareForm.controls.infant.value,
+          "onward_flight": {
+            "flight_id": this.footerData.depFlight.id,
+            "flight_type": "ONWARD",
+            "boarding_airport": this.footerData.depFlight.From,
+            "destination_airport": this.footerData.depFlight.To,
+            "departure_at_timestamp": Math.floor(new Date(this.footerData.depFlight.DepartureTime).getTime()/1000),
+            "arrival_at_timestamp": Math.floor(new Date(this.footerData.depFlight.ArrivalTime).getTime()/1000),
+            "flight_no": this.footerData.depFlight.FlightNo,
+            "instructions": this.footerData.depFlight.Notice,
+            "fare_class": this.footerData.depFlight.FareClass,
+            "stops": this.footerData.depFlight.Stops,
+            "seats": this.footerData.depFlight.Seats,
+            "index": this.footerData.depFlight.Index,
+            "provider": this.footerData.depFlight.Provider,
+            "vac": this.footerData.depFlight.VAC,
+            "mac": this.footerData.depFlight.MAC,
+            "oac": this.footerData.depFlight.OAC,
+            "gross_fare": this.footerData.depFlight.GrossFare,
+            "total_commission": this.footerData.depFlight.TotalCommission,
+            "airline_name": this.footerData.depFlight.AirlineName,
+            "aircraft": this.footerData.depFlight.AirCraft,
+            "fbc": this.footerData.depFlight.FBC,
+            "netfare": this.footerData.depFlight.NetFare,
+            "refundable": this.footerData.depFlight.Refundable,
+            "alliances": this.footerData.depFlight.Alliances,
+            "rbd": this.footerData.depFlight.RBD,
+            "cabin": this.footerData.depFlight.Cabin,
+            "promo": this.footerData.depFlight.Promo,
+            "connections": this.footerData.depFlight.Connections,
+            "search_tui":  this.appStore.tui
+          },
+          "return_flight": {
+            "flight_id":this.footerData.retFlight.id,
+            "flight_type": "RETURN",
+            "boarding_airport": this.footerData.retFlight.From,
+            "destination_airport": this.footerData.retFlight.To,
+            "departure_at_timestamp": Math.floor(new Date(this.footerData.retFlight.DepartureTime).getTime()/1000),
+            "arrival_at_timestamp": Math.floor(new Date(this.footerData.retFlight.DepartureTime).getTime()/1000),
+            "flight_no": this.footerData.retFlight.FlightNo,
+            "instructions": this.footerData.retFlight.Notice,
+            "fare_class": this.footerData.retFlight.FareClass,
+            "stops": this.footerData.retFlight.Stops,
+            "seats": this.footerData.retFlight.Seats,
+            "index": this.footerData.retFlight.Index,
+            "provider": this.footerData.retFlight.Provider,
+            "vac": this.footerData.retFlight.VAC,
+            "mac": this.footerData.retFlight.MAC,
+            "oac": this.footerData.retFlight.OAC,
+            "gross_fare": this.footerData.retFlight.GrossFare,
+            "total_commission": this.footerData.retFlight.TotalCommission,
+            "airline_name": this.footerData.retFlight.AirlineName,
+            "aircraft": this.footerData.retFlight.AirCraft,
+            "fbc": this.footerData.retFlight.FBC,
+            "netfare": this.footerData.retFlight.NetFare,
+            "refundable": this.footerData.retFlight.Refundable,
+            "alliances": this.footerData.retFlight.Alliances,
+            "rbd": this.footerData.retFlight.RBD,
+            "cabin": this.footerData.retFlight.Cabin,
+            "promo": this.footerData.retFlight.Promo,
+            "connections": this.footerData.retFlight.Connections,
+            "search_tui":  this.appStore.tui
+          },
+          "trip_type": "round_trip",
+        }
+      ]
+    }
+    var currency = this.appStore.currencyCode
+    var lang = this.appStore.langCode
+    this.commonService.createPackage(data,currency,lang).subscribe((data) => {
+      this.appStore.packageId = data.id     
+    })
   }
 
 }

@@ -1,6 +1,7 @@
 import { Component, Input, OnChanges, OnInit } from '@angular/core';
 import { StepperAdapter } from 'src/app/adapters/super-agent/stepper-adapter';
 import { SuperAgentApiService } from 'src/app/Services/super-agent-api-services';
+import { AppStore } from 'src/app/stores/app.store';
 import { StepperComponent } from '../../../stepper.component';
 
 @Component({
@@ -34,7 +35,7 @@ export class HotelDetailsPopupComponent implements OnInit,OnChanges {
   noOfImages:number = 1;
 
   constructor(private stepper: StepperComponent,
-    private superAgentApiService:SuperAgentApiService) { }
+    private superAgentApiService:SuperAgentApiService, private appStore : AppStore) { }
 
   ngOnInit() {
     
@@ -81,12 +82,12 @@ export class HotelDetailsPopupComponent implements OnInit,OnChanges {
   saveSelectedHotel(city){
     if(city == 'MAKKA'){
       this.stepper.stepContent('hotel','hotelMedinah');
-      this.superAgentApiService.updatePackageAPI(this.stepperAdapter.saveHotelRequest(this.selectedHotel,this.roomVariation,null),'SAR','en-US',null).subscribe((res) => {
+      this.superAgentApiService.updatePackageAPI(this.stepperAdapter.saveHotelRequest(this.selectedHotel,this.roomVariation,city),'SAR','en-US',this.appStore.packageId).subscribe((res) => {
     });
     }
     if(city == 'MADEENA'){
       this.stepper.stepContent('transport',null);
-      this.superAgentApiService.updatePackageAPI(this.stepperAdapter.saveHotelRequest(this.selectedHotel,this.roomVariation,null),'SAR','en-US',null).subscribe((res) => {
+      this.superAgentApiService.updatePackageAPI(this.stepperAdapter.saveHotelRequest(this.selectedHotel,this.roomVariation,city),'SAR','en-US',this.appStore.packageId).subscribe((res) => {
     });
     }
   }
