@@ -217,7 +217,11 @@ export class StepperAdapter {
     }
     return param;
   }
-
+  /**For hotel save request
+   * @param selectedHotel hotel details
+   * @param makkahRoomVariation selected room
+   * @param city city makkah or medinah
+   */
   saveHotelRequest(selectedHotel,makkahRoomVariation,city) {
     let body = {
       makkah_trip_hotel: {
@@ -246,5 +250,36 @@ export class StepperAdapter {
       },
     };
     return body;
+  }
+
+  /**
+   * For selected hotel request
+   * @param item selected room info
+   * @param city makkah or medinah
+   */
+  selectedHotelRequest(item,city){
+    if(city == 'MAKKA'){
+      var body = {
+        checkin_date :this.appStore.dataFromFrontPage.mekkahData.checkIn,
+        checkout_date :this.appStore.dataFromFrontPage.mekkahData.checkOut,
+        location : city,
+        providers:item.providers,
+        hotel_name: item.name,
+        umrah_hotel_code:item.umrah_hotel_code,
+      }
+      return body;
+    }
+
+    if(city == 'MADEENA'){
+      var body = {
+        checkin_date :this.appStore.dataFromFrontPage.medinaData.checkIn,
+        checkout_date :this.appStore.dataFromFrontPage.medinaData.checkOut,
+        location : city,
+        providers:item.providers,
+        hotel_name: item.name,
+        umrah_hotel_code:item.umrah_hotel_code,
+      }
+      return body;
+    }
   }
 }

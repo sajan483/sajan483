@@ -8,6 +8,7 @@ import { MatDatepicker } from '@angular/material';
 import { SuperAgentApiService } from 'src/app/Services/super-agent-api-services';
 import { Router } from '@angular/router';
 import { StepperComponent } from './stepper/stepper.component';
+import { AppStore } from 'src/app/stores/app.store';
 
 @Component({
   selector: 'app-create-trip',
@@ -59,7 +60,8 @@ export class CreateTripComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private commonService: SuperAgentApiService,
-    private router: Router) { }
+    private router: Router,
+    private appStore:AppStore) { }
 
   ngOnInit() {
     this.searchForm = this.fb.group({
@@ -221,7 +223,8 @@ export class CreateTripComponent implements OnInit {
         checkOut:this.form.medOut.value.toJSON().split("T")[0]
       }
     };
-    StepperComponent.searchData = this.searchData
+    StepperComponent.searchData = this.searchData;
+    this.appStore.dataFromFrontPage  = this.searchData;
     this.router.navigateByUrl('superagent/stepper');
   }
 }
