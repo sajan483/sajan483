@@ -1,12 +1,8 @@
 import { NgModule } from "@angular/core";
 import { Routes, RouterModule } from "@angular/router";
-import { TestComponent } from './test/test.component';
 
 const myPath: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
-  {
-    path: "test",component: TestComponent
-   },
   {
     path: "",
     loadChildren: () =>
