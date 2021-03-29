@@ -43,14 +43,13 @@
                         <p class="fs13 clr86">Suggested Amount :  {{suggestedAmound.child_without_bed_price}}</p>
                     </div>
                     <div class="col-md-4">
-                        <label class="fs14 fw400 lh14 pl-1">Advance Payable :</label>
+                        <label class="fs14 fw400 lh14 pl-1">Advance Payable (%):</label>
                         <div class="input-group w-100">
+                            <input type="text" class="owldatebrdr w80 form-control" (onChange)="lesthan($event)" numberOnly formControlName="advance_pct" [ngClass]="{ 'is-invalid': submitted && f.advance_pct.errors }">
                             <div class="input-group-prepend w20">
-                              <span class="input-group-text priceicon" id="basic-addon1">&#8377;</span>
+                                <span class="input-group-text priceicon" id="basic-addon1">%</span>
                             </div>
-                            <input type="text" class="owldatebrdr w80 form-control" numberOnly formControlName="advance_pct" [ngClass]="{ 'is-invalid': submitted && f.advance_pct.errors }">
                         </div>
-                        <p class="fs13 clr86">Suggested Amount :  {{suggestedAmound.advance_pct}}</p>
                     </div>
                 </div>
             </div>

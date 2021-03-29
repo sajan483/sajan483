@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { SuperAgentApiService } from 'src/app/Services/super-agent-api-services';
 import { StepperAdapter } from 'src/app/adapters/super-agent/stepper-adapter';
+import { AppStore } from 'src/app/stores/app.store'
 
 @Component({
   selector: 'app-payment',
@@ -12,13 +13,12 @@ export class PaymentComponent implements OnInit {
   advancepayment : FormGroup;
   submitted = false;
   packageId:number=7023;
-  currency='SAR';
-  languge = 'en_US';
   SuperAgentApiService:SuperAgentApiService;
   StepperAdapter : StepperAdapter;
   suggestedAmound: any;
 
-  constructor(private formBuilder: FormBuilder,private _SuperAgentService:SuperAgentApiService) { 
+  constructor(private formBuilder: FormBuilder,private _SuperAgentService:SuperAgentApiService,
+    private appStore:AppStore) { 
     this.SuperAgentApiService=this._SuperAgentService;
     this.StepperAdapter = new StepperAdapter(null,null);
   }
@@ -50,8 +50,16 @@ export class PaymentComponent implements OnInit {
         return;
     }
 
-    this.SuperAgentApiService.updatePackageAPI(this.advancepayment.value,this.currency,this.languge,this.packageId).subscribe((data)=>{
+    /**
+     * payment detail update package api
+     */
+    this.SuperAgentApiService.updatePackageAPI(this.advancepayment.value,this.appStore.currencyCode,this.appStore.langCode,this.packageId).subscribe((data)=>{
       
     })
+  }
+
+  lesthan(event){
+    console.log(event);
+    
   }
 }

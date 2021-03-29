@@ -86,7 +86,7 @@
                                     <div class="w-100 row m-0">
                                         <div class="col-md-3 p-0 mr-3 position-relative" *ngFor='let url of a.urlList ;let j = index;'>
                                             <img [src]="url.url" class="hero-image-size w-100" alt="">
-                                            <div class="closeimgicon"><i class="fa fa-times-circle" aria-hidden="true"></i></div>
+                                            <div class="closeimgicon" (click)="deleteImageForItenerary(i,a)"><i class="fa fa-times-circle" aria-hidden="true"></i></div>
                                         </div>
                                         <div class="add-image-box col-md-2">
                                             <input type='file' (change)="onSelectDescriptionFile($event,a,i)" multiple>
