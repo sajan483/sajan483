@@ -82,7 +82,6 @@ export class HotelComponent implements OnInit {
   }
 
   fetchSelectedHotelInfo(item,city) {
-    var currency :any = "";
     this.superAgentApiService
       .getPackageHotelInfo(this.stepperAdapter.selectedHotelRequest(item,city),'SAR','en-US')
       .subscribe((data) => {
@@ -90,6 +89,7 @@ export class HotelComponent implements OnInit {
         this.popupData.city = city
       },(error)=>{
       this.notifyService.showWarning("No details availabe");
+      this.showHotelDetails = false;
       });
     }
     

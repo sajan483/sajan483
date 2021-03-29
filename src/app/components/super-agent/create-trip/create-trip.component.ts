@@ -13,8 +13,7 @@ import { AppStore } from 'src/app/stores/app.store';
 @Component({
   selector: 'app-create-trip',
   templateUrl: './create-trip.component.html',
-  styleUrls: ['./create-trip.component.scss'],
-  providers:[]
+  styleUrls: ['./create-trip.component.scss']
 })
 export class CreateTripComponent implements OnInit {
 
