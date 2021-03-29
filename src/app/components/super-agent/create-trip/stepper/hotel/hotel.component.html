@@ -1,30 +1,26 @@
 <div class="animationdiv container">
-    <div class="modify-box" id="modify-box m-2" *ngIf="showHtlModifyBtn">
+    <!-- <div class="modify-box" id="modify-box m-2" *ngIf="showHtlModifyBtn">
         <button class="searchbutton ml-2" (click)="showHtlModifyBtn = !showHtlModifyBtn">Modify Search</button>
     </div>
     <div class="row bgBlue mt-2 ml-2 mr-2" *ngIf="!showHtlModifyBtn" [formGroup]="hotelSearchForm">
-        <div class="p-2 " (click)="pickerStart.open()">
-            <div class="row">
-                <p class="searchInput">
+        <div class="p-2 d-flex col-md-5" (click)="pickerStart.open()">
+                <h6 class="date-label">
                     Start Date
-                </p>
-                <input class="date-input matInput" formControlName="hotelCheckInDate" matInput [matDatepicker]="pickerStart"
+                </h6>
+                <input class="date-input matinput" formControlName="hotelCheckInDate" matInput [matDatepicker]="pickerStart"
                 (dateChange)="setHotelCheckOutDateRange()">
                 <mat-datepicker #pickerStart></mat-datepicker>
-            </div>
         </div>
-        <div class="p-2 ml-4" (click)="pickerEnd.open()">
-            <div class="row">
-                <p class="searchInput">
+        <div class="p-2 ml-4 d-flex col-md-5" (click)="pickerEnd.open()">
+                <h6 class="date-label">
                     End Date
-                </p>
-                <input class=" matInput" matInput formControlName="hotelCheckOutDate" [matDatepicker]="pickerEnd">
+                </h6>
+                <input class=" matinput" matInput formControlName="hotelCheckOutDate" [matDatepicker]="pickerEnd">
                 <mat-datepicker #pickerEnd>
                 </mat-datepicker>
-            </div>
         </div>
         <button class="ml-auto m-2 searchbutton" [disabled]="!modifyHotelSearchActive" (click)="modifyHotelSearch(hotelsList.city)">Search</button>
-    </div>
+    </div> -->
     <div class="padding_hotel1" *ngFor="let item of hotelsList.response;let i = index">
         <div class="uitk-card uitk-grid border_box_shadow">
             <div class="link-container uitk-grid">

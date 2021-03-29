@@ -1,5 +1,6 @@
 import { Component, Input, OnChanges, OnInit } from '@angular/core';
 import { StepperAdapter } from 'src/app/adapters/super-agent/stepper-adapter';
+import { HelperService } from 'src/app/common/services/helper-service';
 import { SuperAgentApiService } from 'src/app/Services/super-agent-api-services';
 import { AppStore } from 'src/app/stores/app.store';
 import { StepperComponent } from '../../../stepper.component';
@@ -26,23 +27,23 @@ export class HotelDetailsPopupComponent implements OnInit,OnChanges {
   selectedRoomDetails: boolean;
   roomVariation: any = [];
   medinahRoomVariation: any;
-
-  //tobedefined
-  hotelRoomCount: number = 0;
-  totalTravellers:number = 1;
+  hotelRoomCount: number;
+  totalTravellers:number;
   selectedRoomCount:number = 1;
   noOfDays : number = 1;
   noOfImages:number = 1;
 
   constructor(private stepper: StepperComponent,
-    private superAgentApiService:SuperAgentApiService, private appStore : AppStore) { }
+    private superAgentApiService:SuperAgentApiService, private appStore : AppStore,
+    private helperService : HelperService) { }
 
   ngOnInit() {
     
   }
 
   ngOnChanges(){
-    this.setPopUp()
+    this.setPopUp();
+    this.showHotelDetails = true;
   }
 
   setPopUp(){

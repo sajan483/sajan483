@@ -4,6 +4,7 @@ import { MatDatepicker } from '@angular/material';
 import { StepperAdapter } from 'src/app/adapters/super-agent/stepper-adapter';
 import { NotificationService } from 'src/app/common/services/notification.service';
 import { SuperAgentApiService } from 'src/app/Services/super-agent-api-services';
+import { AppStore } from 'src/app/stores/app.store';
 
 @Component({
   selector: 'app-hotel',
@@ -34,9 +35,9 @@ export class HotelComponent implements OnInit {
   popupData: any;
 
   constructor(private fb:FormBuilder,private _superAgentApiService:SuperAgentApiService,
-    private notifyService:NotificationService) {
+    private notifyService:NotificationService,private appStore:AppStore) {
     this.formBuilder = fb;
-    this.superAgentApiService = _superAgentApiService;
+    this.superAgentApiService = _superAgentApiService; 
    }
 
   ngOnInit() {
@@ -81,22 +82,14 @@ export class HotelComponent implements OnInit {
   }
 
   fetchSelectedHotelInfo(item,city) {
-    var currency :any = "";
-    var body = {
-      checkin_date : '03/26/2021',
-      checkout_date :'03/30/2021' ,
-      location : city,
-      providers:item.providers,
-      hotel_name: item.name,
-      umrah_hotel_code:item.umrah_hotel_code,
-    }
     this.superAgentApiService
-      .getPackageHotelInfo(body,'SAR','en-US')
+      .getPackageHotelInfo(this.stepperAdapter.selectedHotelRequest(item,city),'SAR','en-US')
       .subscribe((data) => {
         this.popupData = data;
         this.popupData.city = city
       },(error)=>{
       this.notifyService.showWarning("No details availabe");
+      this.showHotelDetails = false;
       });
     }
     

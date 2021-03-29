@@ -2,10 +2,12 @@ import { CompileStylesheetMetadata } from "@angular/compiler";
 import { HelperService } from "src/app/common/services/helper-service";
 import { AppStore } from "src/app/stores/app.store";
 import { FormGroup, FormBuilder, Validators } from "@angular/forms";
+import { StepperComponent } from "src/app/components/super-agent/create-trip/stepper/stepper.component";
 
 export class StepperAdapter {
   fb: FormBuilder;
   helperService: HelperService;
+    
 
   constructor(
     private _helperService: HelperService,
@@ -217,7 +219,11 @@ export class StepperAdapter {
     }
     return param;
   }
-
+  /**For hotel save request
+   * @param selectedHotel hotel details
+   * @param makkahRoomVariation selected room
+   * @param city city makkah or medinah
+   */
   saveHotelRequest(selectedHotel,makkahRoomVariation,city) {
     let body = {
       makkah_trip_hotel: {
@@ -246,5 +252,36 @@ export class StepperAdapter {
       },
     };
     return body;
+  }
+
+  /**
+   * For selected hotel request
+   * @param item selected room info
+   * @param city makkah or medinah
+   */
+  selectedHotelRequest(item,city){
+    if(city == 'MAKKA'){
+      var bodyMk = {
+        checkin_date :StepperComponent.searchData.mekkahData.checkIn,
+        checkout_date :StepperComponent.searchData.mekkahData.checkOut,
+        location : city,
+        providers:item.providers,
+        hotel_name: item.name,
+        umrah_hotel_code:item.umrah_hotel_code,
+      }
+      return bodyMk;
+    }
+
+    if(city == 'MADEENA'){
+     var bodyMd = {
+        checkin_date :StepperComponent.searchData.medinaData.checkIn,
+        checkout_date :StepperComponent.searchData.medinaData.checkOut,
+        location : city,
+        providers:item.providers,
+        hotel_name: item.name,
+        umrah_hotel_code:item.umrah_hotel_code,
+      }
+      return bodyMd;
+    }
   }
 }

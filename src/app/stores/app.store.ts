@@ -32,6 +32,6 @@ export class AppStore {
   @observable isAvailabilityFails:boolean;
   @observable tui:any;
   @observable packageId:number;
-
+  @observable dataFromFrontPage:any;
   constructor() { }
 }
