@@ -4,7 +4,7 @@ import { CommonApiService } from 'src/app/Services/common-api-services';
 import { SuperAgentApiService } from 'src/app/Services/super-agent-api-services';
 import { StepperAdapter } from 'src/app/adapters/super-agent/stepper-adapter';
 import { HelperService } from "src/app/common/services/helper-service";
-import { Body } from '@angular/http/src/body';
+import { AppStore } from 'src/app/stores/app.store';
 
 @Component({
   selector: 'app-transport',
@@ -20,12 +20,10 @@ export class TransportComponent implements OnInit {
   vehicleTypeList:any;
   routeList:any;
   packageId:number=7023;
-  currency='SAR';
-  languge = 'en_US';
   StepperAdapter : StepperAdapter;
 
   constructor(private formBuilder: FormBuilder,private _commonApiService:CommonApiService,
-    private _SuperAgentService:SuperAgentApiService,private helperService:HelperService) {
+    private _SuperAgentService:SuperAgentApiService,private helperService:HelperService,private appStore:AppStore) {
     this.commonApiService = this._commonApiService;
     this.SuperAgentApiService=this._SuperAgentService;
     this.StepperAdapter = new StepperAdapter(this.helperService,null);
@@ -40,19 +38,22 @@ export class TransportComponent implements OnInit {
    * calling company api,vehicle types api and route api
    */
   callListApi(){
-    this.commonApiService.getCompanies(this.languge).subscribe((data) => {
+    this.commonApiService.getCompanies(this.appStore.langCode).subscribe((data) => {
       this.companyList = data.companies.map(x => ( {item_text: x.name, item_id: x.code } ));
     });
-    this.commonApiService.getVehicles(this.languge).subscribe((data)=>{
+    this.commonApiService.getVehicles(this.appStore.langCode).subscribe((data)=>{
       this.vehicleTypeList = data.vehicle_types.map(x => ( {item_text: x.name, item_id: x.code} ));
     })
-    this.commonApiService.getRoutes(this.languge).subscribe((data)=>{
+    this.commonApiService.getRoutes(this.appStore.langCode).subscribe((data)=>{
       this.routeList = data.routes.map(x => ( {item_text: x.name, item_id: x.code } ));
     })
   }
 
   get f(){return this.transportSelection.controls}
 
+  /**
+   * this method for submit transportSelection form group
+   */
   onSubmit() {
     this.submitted = true;
     // stop here if form is invalid
@@ -66,8 +67,8 @@ export class TransportComponent implements OnInit {
    * this method for update transport to create trip
    */
   saveTransport(){
-    let body = this.StepperAdapter.transportBookingBody(this.transportSelection.value,this.currency);
-    this.SuperAgentApiService.updatePackageAPI(body,this.currency,this.languge,this.packageId).subscribe((data)=>{
+    let body = this.StepperAdapter.transportBookingBody(this.transportSelection.value,this.appStore.langCode);
+    this.SuperAgentApiService.updatePackageAPI(body,this.appStore.currencyCode,this.appStore.langCode,this.packageId).subscribe((data)=>{
     })
   }
 }

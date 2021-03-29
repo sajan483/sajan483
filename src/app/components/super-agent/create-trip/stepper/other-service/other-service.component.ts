@@ -3,6 +3,7 @@ import { FormGroup, FormArray } from '@angular/forms';
 import { SuperAgentApiService } from 'src/app/Services/super-agent-api-services';
 import { CommonApiService } from 'src/app/Services/common-api-services';
 import { StepperAdapter } from 'src/app/adapters/super-agent/stepper-adapter';
+import { AppStore } from 'src/app/stores/app.store';
 
 @Component({
   selector: 'app-other-service',
@@ -15,15 +16,14 @@ export class OtherServiceComponent implements OnInit {
   submitted = false;
   SuperAgentApiService:SuperAgentApiService;
   commonApiService : CommonApiService;
-  languge = 'en_US';
-  currency='SAR';
   packageId:number=7023;
   serviceCategoryList: any;
   countryList: any;
   visaService: any;
   StepperAdapter : StepperAdapter;
 
-  constructor(private _SuperAgentService:SuperAgentApiService,private _commonApiService:CommonApiService) { 
+  constructor(private _SuperAgentService:SuperAgentApiService,private _commonApiService:CommonApiService,
+    private appStore:AppStore) { 
     this.SuperAgentApiService=this._SuperAgentService;
     this.commonApiService = this._commonApiService;
     this.StepperAdapter = new StepperAdapter(null,null);
@@ -34,10 +34,16 @@ export class OtherServiceComponent implements OnInit {
     this.myForm = this.StepperAdapter.otherServiceBookingForm();
   }
   
+  /**
+   * service array remove
+   */
   removeItem(i){
     this.arr.removeAt(i);
   }
 
+  /**
+   * add new service array
+   */
   addItem() {
     this.arr = this.myForm.get('arr') as FormArray;
     this.arr.push(this.StepperAdapter.createItem());
@@ -45,14 +51,23 @@ export class OtherServiceComponent implements OnInit {
 
   get f() { return this.myForm.controls; }
 
+  /**
+   * check field is empty
+   */
   getValidity(i){
     return (<FormArray>this.f.arr).controls[i].invalid;
   }
 
+  /**
+   * get form array Controls
+   */
   getControls() {
     return (this.myForm.get('arr') as FormArray).controls;
   }
 
+  /**
+   * submit myform group
+   */
   onSubmit() {
     this.submitted = true;
 
@@ -63,8 +78,11 @@ export class OtherServiceComponent implements OnInit {
     this.addOtherService();
   }
 
+  /**
+   * api calls for categories list,country list & visa type list
+   */
   apiCalles(){
-    this.SuperAgentApiService.getPackageCategories(this.languge).subscribe((data)=>{
+    this.SuperAgentApiService.getPackageCategories(this.appStore.langCode).subscribe((data)=>{
       this.serviceCategoryList = data.categories.map(x => ( {item_text: x.name, item_id: x.id } ));
     })
     this.commonApiService.getCountries().subscribe((data)=>{
@@ -75,9 +93,12 @@ export class OtherServiceComponent implements OnInit {
     })
   }
 
+  /**
+   * update other service in package api
+   */
   addOtherService(){
-    var body = this.StepperAdapter.otherServiceBookingBody(this.f.arr.value,this.myForm.value,this.currency);
-    this.SuperAgentApiService.updatePackageAPI(body,this.currency,this.languge,this.packageId).subscribe((data)=>{
+    var body = this.StepperAdapter.otherServiceBookingBody(this.f.arr.value,this.myForm.value,this.appStore.currencyCode);
+    this.SuperAgentApiService.updatePackageAPI(body,this.appStore.currencyCode,this.appStore.langCode,this.packageId).subscribe((data)=>{
       
     })
   }

@@ -105,3 +105,55 @@ tbody{
     
     }
 }
+.position_dot{
+    position: absolute;
+    top: -11px;
+    width: 100%;
+}
+.connectionflight {
+    position: relative;
+    display: inline-block;
+}
+.redround{
+    width: 10px;
+    border-radius: 50%;
+    height: 10px;
+    background-color: red;
+    cursor: pointer;
+}
+.connectionflight .connectionflighttext {
+    visibility: hidden;
+    width: auto;
+    min-width: 268px;
+    max-width: 380px;
+    background: #fff5f7;
+    color: black;
+    box-shadow: 0 3px 9px 0 rgba(0, 0, 0, .4);
+    z-index: 999999;
+    border-radius: 6px;
+    padding: 5px;
+    position: absolute;
+    bottom: 18px;
+    left: -71px;
+    text-align: left;
+    margin-left: -60px;
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+  
+.connectionflight .connectionflighttext::after {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    margin-left: -5px;
+    border-width: 7px;
+    border-style: solid;
+    border-color: rgb(254, 235, 240) transparent transparent transparent;
+}
+  
+.connectionflight:hover .connectionflighttext {
+    visibility: visible;
+    opacity: 1;
+}
+  

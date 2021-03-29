@@ -19,39 +19,57 @@
                     <div class="col-md-3">
                         <div class="d-inline-flex">
                             <div class="flightlogo m10 ml-0">
-                                <img src="https://imgak.mmtcdn.com/flights/assets/media/dt/common/icons/{{onwardFlight.mac}}.png" alt="">
+                                <img src="https://imgak.mmtcdn.com/flights/assets/media/dt/common/icons/{{onwardFlight?.mac}}.png" alt="">
                             </div>
                             <div>
-                                <div class="fs15">{{onwardFlight.airline_name.split('|')[1]}} <span class="fs12 clr52">{{onwardFlight.mac}}-{{onwardFlight.flight_no}}</span></div>
+                                <div class="fs15">{{onwardFlight?.airline_name.split('|')[1]}} <span class="fs12 clr52">{{onwardFlight?.mac}}-{{onwardFlight?.flight_no}}</span></div>
                                 <div class="fs12 clr52">Aircraft</div>
-                                <div class="fs12 clr52 text-uppercase">{{onwardFlight.aircraft}}</div>
+                                <div class="fs12 clr52 text-uppercase">{{onwardFlight?.aircraft}}</div>
                             </div>
                         </div>
                     </div>
                     <div class="col-md-6">
                         <div class="d-inline-flex">
                             <div class="text-right">
-                                <div class="fs22 fw600">11:55</div>
-                                <div class="fs12 clr52">New Delhi [{{onwardFlight.boarding_airport}}]</div>
-                                <div class="fs12 clr52">Airprt name</div>
-                                <div class="fw600 fs14">februvary 5,2021</div>
+                                <div class="fs22 fw600">{{onwardFlight?.departure_at | date:'HH:mm'}}</div>
+                                <div class="fs12 clr52">{{onwardFlight?.boarding_airport?.city}} [{{onwardFlight?.boarding_airport?.iata}}]</div>
+                                <div class="fs12 clr52">{{onwardFlight?.boarding_airport?.name}}</div>
+                                <div class="fw600 fs14">{{onwardFlight?.departure_at | date:'longDate'}}</div>
                             </div>
                             <div class="text-center widthcenter">
-                                <div class="fs14 fw600">{{onwardFlight.duration_minutes}}</div>
+                                <div class="fs14 fw600">{{onwardFlight?.duration_minutes}}</div>
                                 <div class="position-relative">
                                     <hr class="dashedline mt-2 mb-2">
+                                    <div class="position_dot" *ngIf="onwardFlight?.stops > 0">
+                                        <span class="connectionflight" *ngFor="let item of onwardFlight.connections">
+                                            <div class="redround"></div>
+                                            <span class="connectionflighttext">
+                                                <div class="d-inline-flex">
+                                                    <div class="flightlogo m10 ml-0">
+                                                        <img src="https://imgak.mmtcdn.com/flights/assets/media/dt/common/icons/{{item.MAC.split('|')[0]}}.png" alt="">
+                                                    </div>
+                                                    <div>
+                                                        <div class="fs15">{{item?.mac?.split('|')[1]}}</div>
+                                                        <div class="fs12 clr52">{{item?.ArrAirportName.split('|')[0]}}</div>
+                                                        <div class="fs12 clr52">{{item?.ArrAirportName.split('|')[1]}}</div>
+                                                        <div class="fs12 clr52">Duration : <strong>{{item?.Duration}}</strong></div>
+                                                    </div>
+                                                </div>
+                                            </span>
+                                        </span>
+                                    </div>
                                     <i class="flight_duration_icon icns icon_size_15 positioniconduration"></i>
                                 </div>
-                                <div class="d-flex justify-content-center">
-                                    <div class="returnR fs14 bg_green" *ngIf="onwardFlight.refundable == 'R'">R</div>
-                                    <div class="returnR fs14 bg_red" *ngIf="onwardFlight.refundable != 'R'">N</div>
+                                <div class="d-flex justify-content-center pt-2">
+                                    <div class="returnR fs14 bg_green" *ngIf="onwardFlight?.refundable == 'R'">R</div>
+                                    <div class="returnR fs14 bg_red" *ngIf="onwardFlight?.refundable != 'R'">N</div>
                                 </div>
                             </div>
                             <div>
-                                <div class="fs22 fw600">11:55</div>
-                                <div class="fs12 clr52">New Delhi [Del]</div>
-                                <div class="fs12 clr52">Airprt name</div>
-                                <div class="fw600 fs14">februvary 5,2021</div>
+                                <div class="fs22 fw600">{{onwardFlight?.arrival_at | date:'HH:mm'}}</div>
+                                <div class="fs12 clr52">{{onwardFlight?.destination_airport?.city}} [{{onwardFlight?.destination_airport?.iata}}]</div>
+                                <div class="fs12 clr52">{{onwardFlight?.destination_airport?.name}}</div>
+                                <div class="fw600 fs14">{{onwardFlight?.arrival_at | date:'longDate'}}</div>
                             </div>
                         </div>
                     </div>
@@ -61,6 +79,72 @@
                             <div class="fs14 clr52">No. of Child : xx (&#8377;800 Per Child)</div>
                             <div class="fs14 clr52">No. of Infant : xx (&#8377;800 Per Infant)</div>
                             <div class="fs15 fw500 mt-2">Total ticket fare - &#8377;25847</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div>
+                <div class="w-100 bgf2 p20 brdr_btm_d3 d-flex justify-content-between">
+                    <div class="fw600 fs16">Return Flight</div>
+                    <div class="cursor-pointer"><i class="blue_back_arrow rotate-90 icns icon_size_20"></i></div>
+                </div>
+                <div class="row m-0 p30">
+                    <div class="col-md-3">
+                        <div class="d-inline-flex">
+                            <div class="flightlogo m10 ml-0">
+                                <img src="https://imgak.mmtcdn.com/flights/assets/media/dt/common/icons/{{returnFlight?.mac}}.png" alt="">
+                            </div>
+                            <div>
+                                <div class="fs15">{{returnFlight?.airline_name.split('|')[1]}} <span class="fs12 clr52">{{returnFlight?.mac}}-{{returnFlight?.flight_no}}</span></div>
+                                <div class="fs12 clr52">Aircraft</div>
+                                <div class="fs12 clr52 text-uppercase">{{returnFlight?.aircraft}}</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="d-inline-flex">
+                            <div class="text-right">
+                                <div class="fs22 fw600">{{returnFlight?.departure_at | date:'HH:mm'}}</div>
+                                <div class="fs12 clr52">{{returnFlight?.boarding_airport?.city}} [{{returnFlight?.boarding_airport?.iata}}]</div>
+                                <div class="fs12 clr52">{{returnFlight?.boarding_airport?.name}}</div>
+                                <div class="fw600 fs14">{{returnFlight?.departure_at | date:'longDate'}}</div>
+                            </div>
+                            <div class="text-center widthcenter">
+                                <div class="fs14 fw600">{{returnFlight?.duration_minutes}}</div>
+                                <div class="position-relative">
+                                    <hr class="dashedline mt-2 mb-2">
+                                    <div class="position_dot" *ngIf="returnFlight?.stops > 0">
+                                        <span class="connectionflight" *ngFor="let item of returnFlight.connections">
+                                            <div class="redround"></div>
+                                            <span class="connectionflighttext">
+                                                <div class="d-inline-flex">
+                                                    <div class="flightlogo m10 ml-0">
+                                                        <img src="https://imgak.mmtcdn.com/flights/assets/media/dt/common/icons/{{item.MAC.split('|')[0]}}.png" alt="">
+                                                    </div>
+                                                    <div>
+                                                        <div class="fs15">{{item?.mac?.split('|')[1]}}</div>
+                                                        <div class="fs12 clr52">{{item?.ArrAirportName.split('|')[0]}}</div>
+                                                        <div class="fs12 clr52">{{item?.ArrAirportName.split('|')[1]}}</div>
+                                                        <div class="fs12 clr52">Duration : <strong>{{item?.Duration}}</strong></div>
+                                                    </div>
+                                                </div>
+                                            </span>
+                                        </span>
+                                    </div>
+                                    <i class="flight_duration_icon icns icon_size_15 positioniconduration"></i>
+                                </div>
+                                <div class="d-flex justify-content-center pt-2">
+                                    <div class="returnR fs14 bg_green" *ngIf="returnFlight?.refundable == 'R'">R</div>
+                                    <div class="returnR fs14 bg_red" *ngIf="returnFlight?.refundable != 'R'">N</div>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="fs22 fw600">{{returnFlight?.arrival_at | date:'HH:mm'}}</div>
+                                <div class="fs12 clr52">{{returnFlight?.destination_airport?.city}} [{{returnFlight?.destination_airport?.iata}}]</div>
+                                <div class="fs12 clr52">{{returnFlight?.destination_airport?.name}}</div>
+                                <div class="fw600 fs14">{{returnFlight?.arrival_at | date:'longDate'}}</div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -141,16 +225,16 @@
                 </div>
                 <div class="row m-0 p30">
                     <div class="col-md-3">
-                        <div class="fs13 text-uppercase">{{transport.trip_vehicles[0].vehicle_type.name}}</div>
-                        <div class="fs21 fw600">{{transport.travel_date}}</div>
+                        <div class="fs13 text-uppercase">{{transport?.trip_vehicles[0]?.vehicle_type?.name}}</div>
+                        <div class="fs21 fw600">{{transport?.travel_date | date:'mediumDate'}}</div>
                     </div>
                     <div class="col-md-5">
-                        <div class="fs16 fw600">Saudi Public Transport Company</div>
-                        <div class="clr52 fs13">Route : Jeddah - Makkah - Madinah - Madinah Airport</div>
+                        <div class="fs16 fw600">{{companyName}}</div>
+                        <div class="clr52 fs13">Route : {{routeName}}</div>
                     </div>
                     <div class="col-md-4">
-                        <div class="clr52 fs14">No.of days - {{transport.num_of_days}}  <span class="brdrright"></span>  Person Per Vehicle - {{transport.trip_vehicles[0].pax_per_vehicle}}</div>
-                        <div class="clr52 fs14">Price Per Person : &#8377;{{transport.trip_vehicles[0].price_per_pax}}</div>
+                        <div class="clr52 fs14">No.of days - {{transport?.num_of_days}}  <span class="brdrright"></span>  Person Per Vehicle - {{transport?.trip_vehicles[0]?.pax_per_vehicle}}</div>
+                        <div class="clr52 fs14">Price Per Person : &#8377;{{transport?.trip_vehicles[0]?.price_per_pax}}</div>
                     </div>
                 </div>
             </div>
@@ -207,7 +291,7 @@
                               <div class="time">Day {{item.num_of_days}} : {{item.title}} - {{item.from_date}}</div>
                               <div class="clr52 fs14 mt-2">{{item.details}}</div>
                               <div class="row m-0">
-                                <div class="col-md-3 mt-2" *ngFor="let img of item.attachments">
+                                <div class="col-md-3 pl-0 mt-2" *ngFor="let img of item.attachments">
                                     <img [src]="img.file" class="itineraryimg" alt="">
                                 </div>
                               </div>
@@ -257,7 +341,7 @@
                     </div>
                     <div class="col-md-3">
                         <div class="fs14 fw600">Booking Advance payable</div>
-                        <div class="fs21 fw500 mt-2">&#8377; {{response.advance_pct}}</div>
+                        <div class="fs21 fw500 mt-2">{{response.advance_pct}} %</div>
                         <div class="clr52 fs14">GST excluded</div>
                     </div>
                 </div>

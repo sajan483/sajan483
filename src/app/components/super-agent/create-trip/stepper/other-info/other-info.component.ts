@@ -34,15 +34,24 @@ export class OtherInfoComponent implements OnInit {
     this.otherPackageForm = this.StepperAdapter.otherInfoForm();
   }
 
+  /**
+   * add itinerary array
+   */
   addItinerary(){
     this.itinerary = this.otherPackageForm.get('itinerary') as FormArray;
     this.itinerary.push(this.StepperAdapter.itinerySet());
   }
 
+  /**
+   * remove itinerary array
+   */
   removeItenerary(i){
     this.itinerary.removeAt(i);
   }
 
+  /**
+   * add hero image
+   */
   addTripImages(event) {
     if (event.target.files && event.target.files[0]) {
         const filesAmount = event.target.files.length;
@@ -57,12 +66,27 @@ export class OtherInfoComponent implements OnInit {
         }
     }
   }
+
+  /**
+   * remove hero image
+   */
   deleteTripImg(i:number){
     const index = this.urls.indexOf(i);
     this.urls.splice(index,1);
     this.imageAddButton = true;
   }
 
+  /**
+   * delete itinerary image
+   */
+  deleteImageForItenerary(i,trns){
+    trns.urlList.splice(i,1)
+    trns.attachmentFile.splice(i,1)
+    this.array.slice(i,1)
+  }
+  /**
+   * add itinerary image
+   */
   onSelectDescriptionFile(event,item,index) {
     item.urlList = []
     item.urlFile = []
@@ -84,13 +108,17 @@ export class OtherInfoComponent implements OnInit {
 
   get f() { return this.otherPackageForm.controls }
 
+  /**
+   * get otherPackageForm controls
+   */
   getControls() {
     return (this.otherPackageForm.get('itinerary') as FormArray).controls;
   }
 
-
+  /**
+   * submit otherPackageForm form
+   */
   onSubmit(){
-    
     this.submitted = true;
     
     // stop here if form is invalid
