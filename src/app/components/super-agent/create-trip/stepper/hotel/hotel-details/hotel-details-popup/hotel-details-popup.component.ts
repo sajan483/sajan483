@@ -64,10 +64,10 @@ export class HotelDetailsPopupComponent implements OnInit,OnChanges {
     });
 
     this.selectedRoomGroups.forEach((element,i)=>{
-      if( element.pax_info[i].type == 'ADT'){
+      if(element.pax_info[i] && element.pax_info[i].type && element.pax_info[i].type == 'ADT'){
           element.adult_number = element.pax_info[i].quantity
       }
-      if( element.pax_info[i].type == 'CHD'){
+      if( element.pax_info[i] && element.pax_info[i].type && element.pax_info[i].type == 'CHD'){
           element.child_number = element.pax_info[i].quantity
     }
 })
