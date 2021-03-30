@@ -12,6 +12,7 @@ import { StepperComponent } from '../../../stepper.component';
 })
 
 export class HotelDetailsPopupComponent implements OnInit,OnChanges {
+  loader:boolean=true;
   private stepperAdapter: StepperAdapter = new StepperAdapter(null,null);
   showHotelDetails:boolean = true;
   selectedHotel: any;
@@ -88,6 +89,9 @@ export class HotelDetailsPopupComponent implements OnInit,OnChanges {
       this.moreimages = true;
     }
    }
+  }
+  else{
+    this.loader=false
   }
   }
 
