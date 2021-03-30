@@ -75,7 +75,7 @@
                             </div>
                             <div class="p-2 roomsGuests mt-2">
                                 <label>{{'ROOMS & GUESTS' }}</label>
-                                <h6 class="date">{{selectedRoomCount}}
+                                <h6 class="date">{{hotelRoomCount}}
                                     <span class="fs16 clr52 fw500">{{'Room' }} </span> {{totalTravellers}}
                                     <span class="fs16 clr52 fw500">{{'Guest' }} </span>
                                 </h6>
@@ -131,30 +131,7 @@
                                                     </span>
                                                 </div>
                                                 <div class="">
-                                                    <!-- <strong> <span class="pl-0 room_type_sec">{{room.name}}</span> </strong> -->
-                                                    <!-- <tag-input id= "" [(ngModel)]="room.nameArray"
-                                                    [editable]="true"
-                                                    [identifyBy]="'id'"
-                                                    [displayBy]="'name'">
-                                                </tag-input> -->
-                                                    <!-- <input type="text" class="roomnamefield">
-                                                    <p class="people_count_in_room floatnone"> -->
-                                                    <!-- <p class="pl-1 people_count_in_room floatnone" *ngIf="room.child_number > 0">& {{room.child_number}} {{'Child(s)' }}</p> -->
-
-                                                    <!-- <div *ngFor="let item of room.board_types">
-
-                                                        <span class="pl-0 room_type_sec">{{item.type}}</span> 
-
-                                                   </div> -->
                                                     <span>{{room?.deal_description}}</span>
-                                                    <!-- <div class="row col-md-12 p-0 m-0">
-                                                                    <div class="pr-1 m-0" *ngFor="let feature of room.features;let v = index;">
-                                                                        <div *ngIf="v < 10">
-                                                                            <p style="color:#ea6708 ;">{{feature.name}},</p>
-                                                                        </div>
-                                                                    
-                                                                    </div>
-                                                                </div> -->
                                                     <span id="features">
                                                         <tag-input [(ngModel)]="room.features" [editable]="true"
                                                             [identifyBy]="'id'" [displayBy]="'name'">
@@ -171,7 +148,7 @@
                                                                 <span class="input-group-text brdr-rt"
                                                                     id="basic-addon1">&#8377;</span>
                                                             </div>
-                                                            <input type="text" id="adultPrice{{room.room_id}}{{i}}" class="txt" placeholder="200"
+                                                            <input type="text" id="adultPrice{{room.room_id}}{{i}}" class="txt" placeholder="20000"
                                                                 aria-label="200" aria-describedby="basic-addon1">
                                                         </div>
                                                     </div>
@@ -182,7 +159,7 @@
                                                                 <span class="input-group-text brdr-rt br-rad"
                                                                     id="basic-addon1">&#8377;</span>
                                                             </div>
-                                                            <input type="text"id="childPrice{{room.room_id}}{{i}}" class="br-rad txt" placeholder="200"
+                                                            <input type="text"id="childPrice{{room.room_id}}{{i}}" class="br-rad txt" placeholder="20000"
                                                                 aria-label="200" aria-describedby="basic-addon1">
                                                         </div>
                                                     </div>
