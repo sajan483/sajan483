@@ -30,7 +30,7 @@ export class HotelDetailsPopupComponent implements OnInit,OnChanges {
   hotelRoomCount: number = 0;
   totalTravellers:number;
   selectedRoomCount:number = 1;
-  noOfDays : number = 1;
+  noOfDays : number;
   noOfImages:number = 1;
 
   constructor(private stepper: StepperComponent,
@@ -51,6 +51,8 @@ export class HotelDetailsPopupComponent implements OnInit,OnChanges {
     this.selectedHotel = [];
     this.selectedRoomGroups = [];
     this.selectedHotel = this.popupData;
+    this.totalTravellers = this.appStore.totalTravellers;
+    this.noOfDays = this.helperService.noOfDaysBetweenTwoDates(this.selectedHotel.check_in_time,this.selectedHotel.check_out_time)
     this.selectedHotel.room_groups.forEach(element => {
       element.rooms.forEach(room => {
         this.selectedRoomGroups.push(room)
