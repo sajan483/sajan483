@@ -2,10 +2,32 @@
     <div class="lite-pattern-bg">
         <div class="container" *ngIf="!fareSelection">
             <h4 class="main-head">CHOOSE YOUR FLIGHT</h4>
-            <div class="modify-box" id="modify-box" *ngIf="flightListingFlag">
+
+            <!-- loader -->
+            <div class="animationdiv mt70" *ngIf="loader">
+                <div class="row">
+                    <div class="col-md-6 loader-card" *ngFor="let item of freeArray">
+                        <mat-card class="loader-card mb20">
+                            <div class="boxshinehsm shine"></div>
+                            <div class="d-flex jcsb mb10">
+                                <div class="boxshinesm shine"></div>
+                                <div class="boxshinesm shine"></div>
+                            </div>
+                            <div class="d-flex jcsb mb10">
+                                <div class="boxshinesm shine"></div>
+                                <div class="boxshinesm shine"></div>
+                            </div>
+                            <div class="boxshinehsm shine"></div>
+                        </mat-card>
+                    </div>
+                </div>
+            </div>
+
+            <!-- search-bar -->
+            <div class="modify-box" *ngIf="flightListingFlag && modifyButton">
                 <button mat-raised-button (click)="modifySearch()">Modify Search</button>
             </div>
-            <div id="search-section" class="search-section" [formGroup]="searchForm">
+            <div id="search-section" class="search-section" [formGroup]="searchForm" *ngIf="!modifyButton">
                 <div class="row no-pm">
                     <div class="col-md-4 no-pm">
                         <div class="row no-pm">
@@ -95,11 +117,23 @@
                     </div>
                 </div>
             </div>
+
+            <!-- no-flight-banner -->
+            <div class="no-data" *ngIf="!available">
+                <h6>
+                    <mat-icon>airplanemode_inactive</mat-icon>
+                </h6>
+                <p>Sorry, No Flights Available</p>
+            </div>
+
+            <!-- flight-listing -->
             <div class="flight-card" *ngIf="flightListingFlag">
                 <app-flight-card [searchResult]="searchResult" (footerFlagEmitter)="getfooterFlag($event)" (footerDataEmitter)="getfooterData($event)"></app-flight-card>
             </div>
+
         </div>
 
+        <!-- fare-selection-part -->
         <div class="container" *ngIf="fareSelection">
             <h4 class="main-head brbottom">Enter your rate of the flight</h4>
             <div class="row pt10" [formGroup]="fareForm">
@@ -220,8 +254,10 @@
             </mat-card>
         </div>
 
+        <!-- footer -->
         <div class="footer" *ngIf="footerFlag=='true' && !fareSelection">
             <app-flight-footer [footerData]="footerData"></app-flight-footer>
         </div>
+
     </div>
 </div>

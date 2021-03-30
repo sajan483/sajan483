@@ -16,6 +16,10 @@ import { AppStore } from 'src/app/stores/app.store';
 })
 export class FlightComponent implements OnInit {
 
+  freeArray = ["1","2","3","4","","","","","","","",""];
+  loader:boolean=true;
+  available:boolean=true;
+  modifyButton:boolean=true;
   today = new Date();
   searchForm: FormGroup;
   fareForm: FormGroup;
@@ -39,8 +43,8 @@ export class FlightComponent implements OnInit {
     city:"Jeddah"
   };
   airlineDetails:any = {
-    name:"Etihad",
-    code:"EY"
+    name:"Emirates",
+    code:"EK"
   };
   searchData;
   searchResult={
@@ -117,10 +121,7 @@ export class FlightComponent implements OnInit {
     this.getAirportListSrc()
     this.getAirportListDest()
     this.getAirlineList()
-    document.getElementById('search-section').style.display="block";
-    document.getElementById('search-section').style.visibility="visible";
-    document.getElementById('modify-box').style.display="none";
-    document.getElementById('modify-box').style.visibility="hidden";
+    this.modifyButton=false;
   }
 
   setReturnMinDate(){
@@ -201,20 +202,42 @@ export class FlightComponent implements OnInit {
   }
 
   searchFlights(){
+    this.footerFlag='false'
     if(this.submit){
+      this.loader=true
+      this.flightListingFlag=false
+      let ddate
+      let rdate
+
+      if(this.searchForm.controls.departDate.value == this.searchData.departureDate){
+        ddate = this.searchData.departureDate
+      } else{
+        ddate = this.searchForm.controls.departDate.value.toJSON().split("T")[0]
+      }
+      if(this.searchForm.controls.returnDate.value == this.searchData.returnDate){
+        rdate = this.searchData.returnDate
+      } else {
+        rdate = this.searchForm.controls.returnDate.value.toJSON().split("T")[0]
+      }
       var body
       body = {
         boarding_airport:this.source.value,
         destination_airport:this.destination.value,
         airlines:this.airlineDetails.code,
-        onward_date: this.searchForm.controls.departDate.value.toJSON().split("T")[0],
-        return_date: this.searchForm.controls.returnDate.value.toJSON().split("T")[0],
+        onward_date: ddate,
+        return_date: rdate,
       };
       this.commonService.searchFlights(body).subscribe((data) => {
         if(data.flights[0].length > 0 && data.flights[1].length > 0){
           this.searchResult.departureFlights = data.flights[0];
           this.searchResult.returnFlights = data.flights[1];
+          this.available=true
+          this.loader=false;
           this.flightListingFlag = true;
+        }
+        else {
+          this.loader=false;
+          this.available=false;
         }
       })
     }
@@ -232,8 +255,14 @@ export class FlightComponent implements OnInit {
       if(data.flights[0].length > 0 && data.flights[1].length > 0){
         this.searchResult.departureFlights = data.flights[0];
         this.searchResult.returnFlights = data.flights[1];
-        this.flightListingFlag = true
-        this.appStore.tui = data.tui
+        this.loader=false;
+        this.flightListingFlag = true;
+        this.available=true;
+        this.appStore.tui = data.tui;
+      }
+      else{
+        this.loader=false;
+        this.available=false;
       }
     })
   }
@@ -287,7 +316,8 @@ export class FlightComponent implements OnInit {
             "cabin": this.footerData.depFlight.Cabin,
             "promo": this.footerData.depFlight.Promo,
             "connections": this.footerData.depFlight.Connections,
-            "search_tui":  this.appStore.tui
+            "search_tui":  this.appStore.tui,
+            "duration_minutes":this.footerData.depFlight.Duration
           },
           "return_flight": {
             "flight_id":this.footerData.retFlight.id,
@@ -318,7 +348,8 @@ export class FlightComponent implements OnInit {
             "cabin": this.footerData.retFlight.Cabin,
             "promo": this.footerData.retFlight.Promo,
             "connections": this.footerData.retFlight.Connections,
-            "search_tui":  this.appStore.tui
+            "search_tui":  this.appStore.tui,
+            "duration_minutes":this.footerData.retFlight.Duration
           },
           "trip_type": "round_trip",
         }
