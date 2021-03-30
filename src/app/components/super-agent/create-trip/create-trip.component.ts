@@ -200,6 +200,7 @@ export class CreateTripComponent implements OnInit {
   }
 
   submitData(){
+    this.appStore.totalTravellers = this.form.adult.value+this.form.children.value+this.form.infant.value;
     this.searchData = {
       travellersData : {
         adult: this.form.adult.value,
