@@ -5,6 +5,7 @@ import { SuperAgentApiService } from 'src/app/Services/super-agent-api-services'
 import { StepperAdapter } from 'src/app/adapters/super-agent/stepper-adapter';
 import { HelperService } from "src/app/common/services/helper-service";
 import { AppStore } from 'src/app/stores/app.store';
+import { StepperComponent } from '../stepper.component';
 
 @Component({
   selector: 'app-transport',
@@ -22,7 +23,7 @@ export class TransportComponent implements OnInit {
   packageId:number=7023;
   StepperAdapter : StepperAdapter;
 
-  constructor(private formBuilder: FormBuilder,private _commonApiService:CommonApiService,
+  constructor(private formBuilder: FormBuilder,private _commonApiService:CommonApiService,private stepper:StepperComponent,
     private _SuperAgentService:SuperAgentApiService,private helperService:HelperService,private appStore:AppStore) {
     this.commonApiService = this._commonApiService;
     this.SuperAgentApiService=this._SuperAgentService;
@@ -67,6 +68,7 @@ export class TransportComponent implements OnInit {
    * this method for update transport to create trip
    */
   saveTransport(){
+    this.stepper.stepContent('otherServices','')
     let body = this.StepperAdapter.transportBookingBody(this.transportSelection.value,this.appStore.langCode);
     this.SuperAgentApiService.updatePackageAPI(body,this.appStore.currencyCode,this.appStore.langCode,this.packageId).subscribe((data)=>{
     })

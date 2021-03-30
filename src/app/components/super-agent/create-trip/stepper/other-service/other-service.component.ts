@@ -4,6 +4,7 @@ import { SuperAgentApiService } from 'src/app/Services/super-agent-api-services'
 import { CommonApiService } from 'src/app/Services/common-api-services';
 import { StepperAdapter } from 'src/app/adapters/super-agent/stepper-adapter';
 import { AppStore } from 'src/app/stores/app.store';
+import { StepperComponent } from '../stepper.component';
 
 @Component({
   selector: 'app-other-service',
@@ -23,7 +24,7 @@ export class OtherServiceComponent implements OnInit {
   StepperAdapter : StepperAdapter;
 
   constructor(private _SuperAgentService:SuperAgentApiService,private _commonApiService:CommonApiService,
-    private appStore:AppStore) { 
+    private appStore:AppStore,private stepper:StepperComponent) { 
     this.SuperAgentApiService=this._SuperAgentService;
     this.commonApiService = this._commonApiService;
     this.StepperAdapter = new StepperAdapter(null,null);
@@ -97,6 +98,7 @@ export class OtherServiceComponent implements OnInit {
    * update other service in package api
    */
   addOtherService(){
+    this.stepper.stepContent('payment','');
     var body = this.StepperAdapter.otherServiceBookingBody(this.f.arr.value,this.myForm.value,this.appStore.currencyCode);
     this.SuperAgentApiService.updatePackageAPI(body,this.appStore.currencyCode,this.appStore.langCode,this.packageId).subscribe((data)=>{
       

@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { SuperAgentApiService } from 'src/app/Services/super-agent-api-services';
 import { StepperAdapter } from 'src/app/adapters/super-agent/stepper-adapter';
 import { AppStore } from 'src/app/stores/app.store'
+import { StepperComponent } from '../stepper.component';
 
 @Component({
   selector: 'app-payment',
@@ -18,7 +19,7 @@ export class PaymentComponent implements OnInit {
   suggestedAmound: any;
 
   constructor(private formBuilder: FormBuilder,private _SuperAgentService:SuperAgentApiService,
-    private appStore:AppStore) { 
+    private appStore:AppStore,private stepper:StepperComponent) { 
     this.SuperAgentApiService=this._SuperAgentService;
     this.StepperAdapter = new StepperAdapter(null,null);
   }
@@ -49,17 +50,12 @@ export class PaymentComponent implements OnInit {
     if (this.advancepayment.invalid) {
         return;
     }
-
+    this.stepper.stepContent('otherInfo','');
     /**
      * payment detail update package api
      */
     this.SuperAgentApiService.updatePackageAPI(this.advancepayment.value,this.appStore.currencyCode,this.appStore.langCode,this.packageId).subscribe((data)=>{
       
     })
-  }
-
-  lesthan(event){
-    console.log(event);
-    
   }
 }

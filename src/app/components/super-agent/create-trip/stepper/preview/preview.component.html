@@ -158,16 +158,16 @@
                 <div class="row m-0 p30">
                     <div class="col-md-6">
                         <div>
-                            <div class="fs16 fw600">hotel name
-                                <span class="pl-1">
-                                    <!-- <ngb-rating [(rate)]="selectedHotel.meta_data.rating" [readonly]="readonly" [max]=5>
+                            <div class="fs16 fw600">{{makkahHotel?.hotel?.name}}
+                                <span class="pl-1" *ngIf="makkahHotel.hotel.user_review">
+                                    <ngb-rating [(rate)]="makkahHotel.hotel.user_review" [readonly]="readonly" [max]=5>
                                         <ng-template let-fill="fill" let-index="index">
                                             <span class="star" [class.filled]="fill === 100" [class.bad]="index < 2">&#9733;</span>
                                         </ng-template>
-                                    </ngb-rating> -->
+                                    </ngb-rating>
                                 </span>
                             </div>
-                            <div class="fs14">No of days in Makkah <span class="clr_blue_18">04</span></div>
+                            <div class="fs14">No of days in Makkah <span class="clr_blue_18 pl-1">{{makkahHotel?.num_of_days | number : '2.0-0'}}</span></div>
                         </div>
                         <div class="mt-3">
                             <div class="d-inline-flex">
@@ -177,12 +177,12 @@
                                         <div class="fs13 fw400 pl-1 pr-1 lh15">CHECK-IN</div>
                                         <i class="downarrow icon_h16_w12 icns"></i>
                                     </div>
-                                    <h6 class="fs21 fw600 mb-0">Feb 25.2012</h6>
-                                    <p class="fs12 clr52">thursday</p>
+                                    <h6 class="fs21 fw600 mb-0">{{makkahHotel?.check_in_time | date:'mediumDate'}}</h6>
+                                    <p class="fs12 clr52">{{makkahHotel?.check_in_time | date:'EEEE'}}</p>
                                 </div>
                                 <div class="text-center mt-2 w170px">
                                     <i class="icon_size_20 icns nighticon"></i>
-                                    <h5 class="clr52 fs14">5 Night(s)</h5>
+                                    <h5 class="clr52 fs14">{{makkahHotel?.num_of_days}} Night(s)</h5>
                                 </div>
                                 <div>
                                     <div class="d-inline-flex">
@@ -190,8 +190,8 @@
                                         <div class="fs13 fw400 pl-1 pr-1 lh15">CHECK-OUT</div>
                                         <i class="downarrow icon_h16_w12 icns"></i>
                                     </div>
-                                    <h6 class="fs21 fw600 mb-0">Feb 25.2012</h6>
-                                    <p class="fs12 clr52">tuesday</p>
+                                    <h6 class="fs21 fw600 mb-0">{{makkahHotel?.check_out_time | date:'mediumDate'}}</h6>
+                                    <p class="fs12 clr52">{{makkahHotel?.check_out_time | date:'EEEE'}}</p>
                                 </div>
                             </div>
                         </div>
@@ -204,14 +204,76 @@
                                   <th>Per Adult</th>
                                   <th>Per Child</th>
                                 </tr>
-                                <tr>
-                                  <td>Standerd</td>
-                                  <td>&#8377;800</td>
-                                  <td>&#8377;800</td>
+                                <tr *ngFor="let item of makkahHotel.room_variations">
+                                  <td>{{item?.title}}</td>
+                                  <td>&#8377;{{item?.adult_price}}</td>
+                                  <td>&#8377;{{item?.child_price}}</td>
                                 </tr>
+                              </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <div>
+                <div class="w-100 bgf2 p20 brdr_btm_d3 d-flex justify-content-between">
+                    <div class="fw600 fs16">Hotel in Medina</div>
+                    <div class="cursor-pointer"><i class="blue_back_arrow rotate-90 icns icon_size_20"></i></div>
+                </div>
+                <div class="row m-0 p30">
+                    <div class="col-md-6">
+                        <div>
+                            <div class="fs16 fw600">{{madeenaHotel?.hotel?.name}}
+                                <span class="pl-1" *ngIf="madeenaHotel.hotel.user_review">
+                                    <ngb-rating [(rate)]="madeenaHotel.hotel.user_review" [readonly]="readonly" [max]=5>
+                                        <ng-template let-fill="fill" let-index="index">
+                                            <span class="star" [class.filled]="fill === 100" [class.bad]="index < 2">&#9733;</span>
+                                        </ng-template>
+                                    </ngb-rating>
+                                </span>
+                            </div>
+                            <div class="fs14">No of days in Makkah <span class="clr_blue_18 pl-1">{{madeenaHotel?.num_of_days | number : '2.0-0'}}</span></div>
+                        </div>
+                        <div class="mt-3">
+                            <div class="d-inline-flex">
+                                <div>
+                                    <div class="d-inline-flex">
+                                        <i class="calendaricon icon_h16_w12 icns"></i>
+                                        <div class="fs13 fw400 pl-1 pr-1 lh15">CHECK-IN</div>
+                                        <i class="downarrow icon_h16_w12 icns"></i>
+                                    </div>
+                                    <h6 class="fs21 fw600 mb-0">{{madeenaHotel?.check_in_time | date:'mediumDate'}}</h6>
+                                    <p class="fs12 clr52">{{madeenaHotel?.check_in_time | date:'EEEE'}}</p>
+                                </div>
+                                <div class="text-center mt-2 w170px">
+                                    <i class="icon_size_20 icns nighticon"></i>
+                                    <h5 class="clr52 fs14">{{madeenaHotel?.num_of_days}} Night(s)</h5>
+                                </div>
+                                <div>
+                                    <div class="d-inline-flex">
+                                        <i class="calendaricon icon_h16_w12 icns"></i>
+                                        <div class="fs13 fw400 pl-1 pr-1 lh15">CHECK-OUT</div>
+                                        <i class="downarrow icon_h16_w12 icns"></i>
+                                    </div>
+                                    <h6 class="fs21 fw600 mb-0">{{madeenaHotel?.check_out_time | date:'mediumDate'}}</h6>
+                                    <p class="fs12 clr52">{{madeenaHotel?.check_out_time | date:'EEEE'}}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <table class="table w-100">
+                            <tbody>
                                 <tr>
-                                    <td colspan="3" class="fw600 text-right">Total hotel fare - &#8377;4758</td>
-                                  </tr>
+                                  <th>Room Type</th>
+                                  <th>Per Adult</th>
+                                  <th>Per Child</th>
+                                </tr>
+                                <tr *ngFor="let item of madeenaHotel.room_variations">
+                                  <td>{{item?.title}}</td>
+                                  <td>&#8377;{{item?.adult_price}}</td>
+                                  <td>&#8377;{{item?.child_price}}</td>
+                                </tr>
                               </tbody>
                         </table>
                     </div>
@@ -229,7 +291,7 @@
                         <div class="fs21 fw600">{{transport?.travel_date | date:'mediumDate'}}</div>
                     </div>
                     <div class="col-md-5">
-                        <div class="fs16 fw600">{{companyName}}</div>
+                        <div class="fs16 fw600 overflowdot" title="{{companyName}}">{{companyName}}</div>
                         <div class="clr52 fs13">Route : {{routeName}}</div>
                     </div>
                     <div class="col-md-4">
@@ -246,25 +308,25 @@
                 </div>
                 <div>
                     <div class="row m-0 p30 pb-0 brdr_btm_d3">
-                        <div class="col-md-4 brdrght mb-3" *ngFor="let item of otherService">
-                            <div class="fs16 fw600">Service  1</div>
+                        <div class="col-md-4 brdrght mb-3" *ngFor="let item of otherService;let i=index;">
+                            <div class="fs16 fw600">Service  {{i+1}}</div>
                             <div class="clr52 fs13 mt-2">
-                                <div>Category : {{item.additional_service.category.name}}</div>
-                                <div>Name :  {{item.additional_service.name}}</div>
-                                <div>{{item.additional_service.description}}</div>
-                                <div class="fs21 fw500 mt-2">&#8377;{{item.price}}</div>
+                                <div>Category : {{item?.additional_service?.category?.name}}</div>
+                                <div>Name :  {{item?.additional_service?.name}}</div>
+                                <div>{{item?.additional_service?.description}}</div>
+                                <div class="fs21 fw500 mt-2">&#8377;{{item?.price}}</div>
                             </div>
                         </div>
                     </div>
                     <div class="p30 pt-2 ml15">
                         <div class="col-md-12">
                             <div class="fs16 fw600">Visa Service</div>
-                            <div class="fs14 clr52 mt-2">{{visa.title}}</div>
+                            <div class="fs14 clr52 mt-2">{{visa?.title}}</div>
                             <div class="fs14">
-                                <div>Rate for adult - &#8377; {{visa.price}}</div>
-                                <div>Rate for adult - &#8377; 500</div>
+                                <div>Rate for Adult - &#8377; {{visa?.price}}</div>
+                                <div>Rate for Child - &#8377; 500</div>
                             </div>
-                        <div class="fs14 clr52">{{visa.country}}</div>
+                        <div class="fs14 clr52">{{visa?.country}}</div>
                         </div>
                     </div>
                 </div>
@@ -272,13 +334,13 @@
 
             <div>
                 <div class="w-100 bgf2 p20 brdr_btm_d3 d-flex justify-content-between">
-                    <div class="fw600 fs16">Other Services</div>
+                    <div class="fw600 fs16">Other Info</div>
                     <div class="cursor-pointer"><i class="blue_back_arrow rotate-90 icns icon_size_20"></i></div>
                 </div>
                 <div class="m-0 row p30 brdr_btm_d3">
                     <div class="col-md-12">
-                        <div class="fs16 fw600">{{response.title}}</div>
-                        <div class="mt-2 fs14 clr52">{{response.instructions}}</div>
+                        <div class="fs16 fw600">{{response?.title}}</div>
+                        <div class="mt-2 fs14 clr52">{{response?.instructions}}</div>
                         <div class="mainimage mt-2">
                             <img src="/assets/images/imagemakkah.jpg" class="itineraryimg" alt="">
                         </div>
@@ -287,33 +349,50 @@
                         <div>
                           <h1 class="fs16 fw600">Itinerary</h1>
                           <ul class="sessions">
-                            <li *ngFor="let item of itinerary">
-                              <div class="time">Day {{item.num_of_days}} : {{item.title}} - {{item.from_date}}</div>
-                              <div class="clr52 fs14 mt-2">{{item.details}}</div>
-                              <div class="row m-0">
-                                <div class="col-md-3 pl-0 mt-2" *ngFor="let img of item.attachments">
-                                    <img [src]="img.file" class="itineraryimg" alt="">
-                                </div>
-                              </div>
-                            </li>
+                            <span *ngFor="let item of itinerary;let i=index;">
+                                <li *ngIf="i<2">
+                                    <div class="time">Day {{item?.num_of_days}} : {{item?.title}} - {{item?.from_date | date:'longDate'}}</div>
+                                    <div class="clr52 fs14 mt-2">{{item?.details}}</div>
+                                    <div class="row m-0">
+                                      <div class="col-md-3 pl-0 mt-2" *ngFor="let img of item.attachments">
+                                          <img [src]="img.file" class="itineraryimg" alt="">
+                                      </div>
+                                    </div>
+                                </li>
+                            </span>
+                            <div class="itenaryfull">
+                                <span *ngFor="let item of itinerary;let i=index;">
+                                    <li *ngIf="i>1">
+                                        <div class="time">Day {{item?.num_of_days}} : {{item?.title}} - {{item?.from_date | date:'longDate'}}</div>
+                                        <div class="clr52 fs14 mt-2">{{item?.details}}</div>
+                                        <div class="row m-0">
+                                          <div class="col-md-3 pl-0 mt-2" *ngFor="let img of item.attachments">
+                                              <img [src]="img.file" class="itineraryimg" alt="">
+                                          </div>
+                                        </div>
+                                    </li>
+                                </span>
+                            </div>
+                            <button class="addAnotherBttn mt-3" (click)="expandItenary($event)" *ngIf="itinerary.length > 2"><i class="fa fa-plus-circle" aria-hidden="true"></i> View Full Itinerary</button>
                           </ul>
+                          
                         </div>
-                      </div> 
+                    </div> 
                 </div>
                 <div class="m-0 row p30 brdr_btm_d3">
                     <div class="col-md-6 brdrght">
                         <div class="fs16 fw600">Inclusions</div>
-                        <div class="fs14 clr52 mt-2">{{response.inclusions}}</div>
+                        <div class="fs14 clr52 mt-2">{{response?.inclusions}}</div>
                     </div>
                     <div class="col-md-6">
                         <div class="fs16 fw600">Exclusions</div>
-                        <div class="fs14 clr52 mt-2">{{response.exclusions}}</div>
+                        <div class="fs14 clr52 mt-2">{{response?.exclusions}}</div>
                     </div>
                 </div>
                 <div class="m-0 row p30 brdr_btm_d3">
                     <div class="col-md-12">
                         <div class="fs16 fw600">Policies</div>
-                        <div class="fs14 clr52 mt-2">{{response.terms}}</div>
+                        <div class="fs14 clr52 mt-2">{{response?.terms}}</div>
                     </div>
                 </div>
             </div>
@@ -326,26 +405,29 @@
                 <div class="row m-0 p30">
                     <div class="col-md-3">
                         <div class="fs14 fw600">Final package price for Adults</div>
-                        <div class="fs21 fw500 mt-2">&#8377; {{response.adult_price}}</div>
+                        <div class="fs21 fw500 mt-2">&#8377; {{response?.adult_price}}</div>
                         <div class="clr52 fs14">GST excluded</div>
                     </div>
                     <div class="col-md-3">
                         <div class="fs14 fw600">Final package price for Kids </div>
-                        <div class="fs21 fw500 mt-2">&#8377; {{response.child_with_bed_price}} <span class="clr52 fs14">(with bed)</span></div>
+                        <div class="fs21 fw500 mt-2">&#8377; {{response?.child_with_bed_price}} <span class="clr52 fs14">(with bed)</span></div>
                         <div class="clr52 fs14">GST excluded</div>
                     </div>
                     <div class="col-md-3">
                         <div class="fs14 fw600">Final package price for Kids </div>
-                        <div class="fs21 fw500 mt-2">&#8377; {{response.child_without_bed_price}} <span class="clr52 fs14">(without bed)</span></div>
+                        <div class="fs21 fw500 mt-2">&#8377; {{response?.child_without_bed_price}} <span class="clr52 fs14">(without bed)</span></div>
                         <div class="clr52 fs14">GST excluded</div>
                     </div>
                     <div class="col-md-3">
                         <div class="fs14 fw600">Booking Advance payable</div>
-                        <div class="fs21 fw500 mt-2">{{response.advance_pct}} %</div>
+                        <div class="fs21 fw500 mt-2">{{response?.advance_pct}} %</div>
                         <div class="clr52 fs14">GST excluded</div>
                     </div>
                 </div>
             </div>
+        </div>
+        <div class="d-flex justify-content-center mt-3">
+            <button class="searchbutton" class="publishTrip()">Publish</button>
         </div>
     </div>
 </div>
