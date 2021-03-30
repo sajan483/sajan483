@@ -12,20 +12,23 @@ import { AppStore } from 'src/app/stores/app.store';
 export class PreviewComponent implements OnInit {
   SuperAgentApiService:SuperAgentApiService;
   CommonApiService:CommonApiService;
-  packageId:number=7023;
+  packageId:number=5496;
   onwardFlight: any;
   returnFlight: any;
   visa: any;
   transport: any;
   otherService: any;
   response: any;
-  itinerary: any;
+  itinerary: any[];
   companyList: any[];
   routeList: any;
   campanyCode: number;
   routeCode: number;
   companyName: any;
   routeName: any;
+  makkahHotel: any;
+  madeenaHotel: any;
+  readonly = true;
 
   constructor(private _SuperAgentService:SuperAgentApiService,private _commonService:CommonApiService,private appStore:AppStore) { 
     this.SuperAgentApiService=this._SuperAgentService;
@@ -58,15 +61,28 @@ export class PreviewComponent implements OnInit {
       this.response = data;
       this.onwardFlight = this.response.trip_flights[0].onward_flight;
       this.returnFlight = this.response.trip_flights[0].return_flight;
+      this.makkahHotel = this.response.makkah_trip_hotel;
       this.visa = this.response.trip_visa;
       this.transport = this.response.trip_transportation;
       this.otherService = this.response.other_services;
       this.itinerary = this.response.itinerary_set;
       this.campanyCode = this.transport.company_code;
       this.routeCode = this.transport.route;
+      this.madeenaHotel = this.response.medinah_trip_hotel;
       this.callApis();
     })
     
   }
 
+  expandItenary(event){
+    var panel = event.target.previousElementSibling;
+    if (panel.style.maxHeight) {
+      panel.style.maxHeight = null;
+    } else {
+      panel.style.maxHeight = panel.scrollHeight + "px";
+    }
+  }
+  publishTrip(){
+
+  }
 }

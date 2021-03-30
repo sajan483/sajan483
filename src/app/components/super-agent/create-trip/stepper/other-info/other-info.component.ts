@@ -5,6 +5,7 @@ import { CommonApiService } from 'src/app/Services/common-api-services';
 import { StepperAdapter } from 'src/app/adapters/super-agent/stepper-adapter';
 import { AppStore } from 'src/app/stores/app.store';
 import { HelperService } from "src/app/common/services/helper-service";
+import { StepperComponent } from '../stepper.component';
 
 @Component({
   selector: 'app-other-info',
@@ -25,7 +26,8 @@ export class OtherInfoComponent implements OnInit {
   array: any[] = [];
   imageAddButton:boolean=true;
 
-  constructor(private _SuperAgentService:SuperAgentApiService,private appStore:AppStore,private helperService:HelperService) {
+  constructor(private _SuperAgentService:SuperAgentApiService,private appStore:AppStore,private helperService:HelperService,
+    private stepper:StepperComponent) {
     this.SuperAgentApiService=this._SuperAgentService;
     this.StepperAdapter = new StepperAdapter(this.helperService,null);
    }
@@ -145,8 +147,9 @@ export class OtherInfoComponent implements OnInit {
   updateItenary(){
     var body=this.StepperAdapter.itineraryBody(this.f.itinerary.value,this.array);
     this.SuperAgentApiService.forItinerarySetAPI(body,this.appStore.currencyCode,this.appStore.langCode,this.packageId).subscribe((data)=>{
-
+      
     })
+    this.stepper.stepContent('preview','');
   }
 
   getValidity(i){

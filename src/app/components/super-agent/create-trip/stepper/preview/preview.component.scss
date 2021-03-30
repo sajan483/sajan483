@@ -156,4 +156,13 @@ tbody{
     visibility: visible;
     opacity: 1;
 }
-  
+.itenaryfull{
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.2s ease-out;
+}
+.overflowdot{
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
