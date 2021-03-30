@@ -21,8 +21,6 @@
             }
         }
         .search-section {
-            display: none;
-            visibility: hidden;
             border-top: 1px solid #c4c4c4;
             padding: 20px 0;
             .hint {
@@ -310,5 +308,28 @@
             line-height: auto !important;
             text-align: center;
         }
+    }
+}
+
+.no-data {
+    padding-top: 30px;
+    h6 {
+        text-align: center;
+    }
+    mat-icon {
+        text-align: center;
+        font-weight: bold;
+        color: #525252;
+        width: 70px;
+        height: 70px;
+        font-size: 70px;
+    }
+    p {
+        font-size: 25px;
+        color: #525252;
+        text-transform: uppercase;
+        text-align: center;
+        font-family: 'Lato', sans-serif;
+        margin-top: 15px;
     }
 }

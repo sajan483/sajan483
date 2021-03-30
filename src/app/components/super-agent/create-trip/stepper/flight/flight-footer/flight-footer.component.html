@@ -1,7 +1,7 @@
 <div class="outer">
     <div class="container">
         <div class="row">
-            <div class="col-md-5 flight-card" *ngIf="footerData.depFlight.From">
+            <div class="col-md flight-card" *ngIf="footerData.depFlight.From">
                 <div class="fc-top">
                     <div class="top-left">
                         <!-- <p class="radio-label">{{depFlight.AirlineName.split('|')[0]}}<span>| {{depFlight.Provider}}-{{depFlight.FlightNo}}</span></p> -->
@@ -30,7 +30,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-5 flight-card" *ngIf="footerData.retFlight.From">
+            <div class="col-md flight-card" *ngIf="footerData.retFlight.From">
                 <div class="fc-top">
                     <div class="top-left">
                         <!-- <p class="radio-label">{{footerData.retFlight.AirlineName.split('|')[0]}}<span>| {{footerData.retFlight.MAC}}-{{footerData.retFlight.FlightNo}}</span></p> -->
@@ -62,7 +62,7 @@
             <div class="col-md-2 btn-outer">
                 <p class="fare-total" *ngIf="footerData.depFlight.From && footerData.retFlight.From">Current Fare</p>
                 <p class="total-fare" *ngIf="footerData.depFlight.From && footerData.retFlight.From">₹{{footerData.depFlight.NetFare + footerData.retFlight.NetFare}}</p>
-                <button [disabled]="" mat-raised-button (click)="navigateFareSelection()">Continue</button>
+                <button [disabled]="" mat-raised-button (click)="navigateFareSelection()" *ngIf="footerData.depFlight.From && footerData.retFlight.From">Continue</button>
             </div>
         </div>
     </div>
