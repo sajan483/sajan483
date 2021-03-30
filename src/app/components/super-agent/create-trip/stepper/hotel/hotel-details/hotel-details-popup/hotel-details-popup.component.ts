@@ -25,7 +25,7 @@ export class HotelDetailsPopupComponent implements OnInit,OnChanges {
   @Input() popupData :any;
   selectedRoomInfo: any;
   selectedRoomDetails: boolean;
-  roomVariation: any = [];
+  roomVariation: any[] = [];
   medinahRoomVariation: any;
   hotelRoomCount: number;
   totalTravellers:number;
@@ -127,7 +127,14 @@ export class HotelDetailsPopupComponent implements OnInit,OnChanges {
   }
 
   disableHotelSaveBtn(){
-    if(this.hotelRoomCount < 1){
+    var p:any[] = [] ;
+    for(let i = 0;i < this.roomVariation.length;i++){
+      if(this.roomVariation[i].adult_price > 0 
+        && this.roomVariation[i].child_price >0){
+          p.push("1")
+      }
+    }
+    if(this.hotelRoomCount > 0 && p.length > 0){
        return false;
       }
      return true;
