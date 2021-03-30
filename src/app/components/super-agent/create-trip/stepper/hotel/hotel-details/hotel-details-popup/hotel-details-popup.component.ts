@@ -25,9 +25,9 @@ export class HotelDetailsPopupComponent implements OnInit,OnChanges {
   @Input() popupData :any;
   selectedRoomInfo: any;
   selectedRoomDetails: boolean;
-  roomVariation: any = [];
+  roomVariation: any[] = [];
   medinahRoomVariation: any;
-  hotelRoomCount: number;
+  hotelRoomCount: number = 0;
   totalTravellers:number;
   selectedRoomCount:number = 1;
   noOfDays : number = 1;
@@ -62,6 +62,15 @@ export class HotelDetailsPopupComponent implements OnInit,OnChanges {
       arr.push(element.name);
       element.nameArray = arr;
     });
+
+    this.selectedRoomGroups.forEach((element,i)=>{
+      if( element.pax_info[i].type == 'ADT'){
+          element.adult_number = element.pax_info[i].quantity
+      }
+      if( element.pax_info[i].type == 'CHD'){
+          element.child_number = element.pax_info[i].quantity
+    }
+})
   this.hotelPics = [];
   this.hotelPics1 = [];
   this.hotelPics2 = [];
@@ -127,9 +136,16 @@ export class HotelDetailsPopupComponent implements OnInit,OnChanges {
   }
 
   disableHotelSaveBtn(){
-    if(this.hotelRoomCount < 1){
-       return false;
+    var p:any[] = [] ;
+    if(this.roomVariation.length > 0){
+      for(let i = 0;i < this.roomVariation.length;i++){
+        if(this.roomVariation[i].adult_price == ""
+          && this.roomVariation[i].child_price == ""){
+            p.push("0")
+          }
+        }
       }
-     return true;
+    if(this.hotelRoomCount > 0 && p.length < 1){return true;}
+    return false;
     }
   }
