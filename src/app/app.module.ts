@@ -17,10 +17,12 @@ import { SliderComponent } from './common/components/slider/slider.component';
 import { PaginationComponent } from './common/components/pagination/pagination.component';
 import { LandingApiService } from './Services/landing-api-services';
 import { CommonApiService } from './Services/common-api-services';
+import { OnlyNumberDirective } from './models/onlynumber.directive';
 
 
 @NgModule({
   declarations: [
+    OnlyNumberDirective,
     AppComponent,
     HedderComponent,
     FooterComponent,
