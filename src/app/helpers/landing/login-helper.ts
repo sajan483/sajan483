@@ -37,6 +37,8 @@ export class loginHelper{
           if (etype == 'branch') {
             this.notifyService.showSuccess(this.translate.instant('success !!'));
             this.appStore.currentUser = etype;
+            this.appStore.userType = data.staff.employer_name;
+            console.log("dsd",this.appStore.userType)
             localStorage.setItem('currentUser', etype);
             this.router.navigate(['subagent/home/']);
           }
@@ -47,6 +49,7 @@ export class loginHelper{
             } else {
               this.notifyService.showSuccess(this.translate.instant('success !!'));
               this.appStore.currentUser = etype;
+              this.appStore.userType = data.staff.name;
               localStorage.setItem('currentUser', etype);
               this.router.navigate(["superagent/createTrip"]);
             }

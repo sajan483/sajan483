@@ -33,5 +33,6 @@ export class AppStore {
   @observable tui:any;
   @observable packageId:number;
   @observable dataFromFrontPage:any;
+  @observable userType:any;
   constructor() { }
 }
