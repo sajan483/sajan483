@@ -110,7 +110,7 @@
                                 {{'Has special deal' }}
                             </span>
                         </div>
-                        <div class="hotel_photo_gallery cursor-pointer">
+                        <div class="hotel_photo_gallery cursor-pointer" (click)="openImgPopup()">
                             <div class="firstimg" *ngIf="hotelPics[0]">
                                 <img [src]='hotelPics[0]' alt="">
                             </div>
@@ -229,7 +229,7 @@
                                                             <div class="input-group-prepend bg-white brdr-rt">
                                                                 <span class="input-group-text brdr-rt" id="basic-addon1">&#8377;</span>
                                                             </div>
-                                                            <input type="text" id="adultPrice{{room.room_id}}{{i}}" class="txt" placeholder="20000" aria-label="200" aria-describedby="basic-addon1">
+                                                            <input type="text" id="adultPrice{{room.room_id}}{{i}}" class="txt" placeholder="20000" aria-label="200" aria-describedby="basic-addon1" numberOnly>
                                                         </div>
                                                     </div>
                                                     <div class="col-md-4 ml-4 mt-4">
@@ -238,7 +238,7 @@
                                                             <div class="input-group-prepend bg-white brdr-rt">
                                                                 <span class="input-group-text brdr-rt br-rad" id="basic-addon1">&#8377;</span>
                                                             </div>
-                                                            <input type="text" id="childPrice{{room.room_id}}{{i}}" class="br-rad txt" placeholder="20000" aria-label="200" aria-describedby="basic-addon1">
+                                                            <input type="text" id="childPrice{{room.room_id}}{{i}}" class="br-rad txt" placeholder="20000" aria-label="200" aria-describedby="basic-addon1" numberOnly>
                                                         </div>
                                                     </div>
                                                     <div class="row ml-4 br-rad mt-4 bgLgrn">
@@ -295,4 +295,7 @@
 </div>
 <div *ngIf="selectedRoomDetails">
     <app-roomdetails-popup [setViewData]="selectedRoomInfo"></app-roomdetails-popup>
+</div>
+<div *ngIf="viewImagePopup">
+    <app-hotel-image-popup [hotelPics]="hotelPics"></app-hotel-image-popup>
 </div>

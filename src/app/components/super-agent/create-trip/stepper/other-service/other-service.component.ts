@@ -17,7 +17,6 @@ export class OtherServiceComponent implements OnInit {
   submitted = false;
   SuperAgentApiService:SuperAgentApiService;
   commonApiService : CommonApiService;
-  packageId:number=7023;
   serviceCategoryList: any;
   countryList: any;
   visaService: any;
@@ -100,7 +99,7 @@ export class OtherServiceComponent implements OnInit {
   addOtherService(){
     this.stepper.stepContent('payment','');
     var body = this.StepperAdapter.otherServiceBookingBody(this.f.arr.value,this.myForm.value,this.appStore.currencyCode);
-    this.SuperAgentApiService.updatePackageAPI(body,this.appStore.currencyCode,this.appStore.langCode,this.packageId).subscribe((data)=>{
+    this.SuperAgentApiService.updatePackageAPI(body,this.appStore.currencyCode,this.appStore.langCode,this.appStore.packageId).subscribe((data)=>{
       
     })
   }

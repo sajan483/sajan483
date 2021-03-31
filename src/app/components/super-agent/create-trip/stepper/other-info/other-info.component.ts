@@ -22,7 +22,6 @@ export class OtherInfoComponent implements OnInit {
   tripImg = [];
   itineraryUrlList = [];
   itineraryFiles = [];
-  packageId = 7023;
   array: any[] = [];
   imageAddButton:boolean=true;
 
@@ -34,6 +33,7 @@ export class OtherInfoComponent implements OnInit {
 
   ngOnInit() {
     this.otherPackageForm = this.StepperAdapter.otherInfoForm();
+    console.log(this.appStore.packageId);
   }
 
   /**
@@ -134,19 +134,19 @@ export class OtherInfoComponent implements OnInit {
   }
 
   postTripImg(){
-    this.SuperAgentApiService.uploadTripImage(this.tripImg,this.appStore.currencyCode,this.appStore.langCode,this.packageId).subscribe((data)=>{
+    this.SuperAgentApiService.uploadTripImage(this.tripImg,this.appStore.currencyCode,this.appStore.langCode,this.appStore.packageId).subscribe((data)=>{
     })
   }
 
   upadteOtherInfo(){
     var body= this.StepperAdapter.otherInfoBody(this.otherPackageForm.value);
-    this.SuperAgentApiService.updatePackageAPI(body,this.appStore.currencyCode,this.appStore.langCode,this.packageId).subscribe((data)=>{
+    this.SuperAgentApiService.updatePackageAPI(body,this.appStore.currencyCode,this.appStore.langCode,this.appStore.packageId).subscribe((data)=>{
     })
   }
 
   updateItenary(){
     var body=this.StepperAdapter.itineraryBody(this.f.itinerary.value,this.array);
-    this.SuperAgentApiService.forItinerarySetAPI(body,this.appStore.currencyCode,this.appStore.langCode,this.packageId).subscribe((data)=>{
+    this.SuperAgentApiService.forItinerarySetAPI(body,this.appStore.currencyCode,this.appStore.langCode,this.appStore.packageId).subscribe((data)=>{
       
     })
     this.stepper.stepContent('preview','');

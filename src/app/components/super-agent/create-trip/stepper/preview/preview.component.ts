@@ -12,7 +12,6 @@ import { AppStore } from 'src/app/stores/app.store';
 export class PreviewComponent implements OnInit {
   SuperAgentApiService:SuperAgentApiService;
   CommonApiService:CommonApiService;
-  packageId:number=5496;
   onwardFlight: any;
   returnFlight: any;
   visa: any;
@@ -57,7 +56,7 @@ export class PreviewComponent implements OnInit {
     });
   }
   packageDetails(){
-    this.SuperAgentApiService.getPackageDetails(this.packageId).subscribe((data)=>{
+    this.SuperAgentApiService.getPackageDetails(this.appStore.packageId).subscribe((data)=>{
       this.response = data;
       this.onwardFlight = this.response.trip_flights[0].onward_flight;
       this.returnFlight = this.response.trip_flights[0].return_flight;

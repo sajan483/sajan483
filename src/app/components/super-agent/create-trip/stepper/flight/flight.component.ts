@@ -317,7 +317,7 @@ export class FlightComponent implements OnInit {
             "promo": this.footerData.depFlight.Promo,
             "connections": this.footerData.depFlight.Connections,
             "search_tui":  this.appStore.tui,
-            "duration_minutes":this.footerData.depFlight.Duration
+            "duration":this.footerData.depFlight.Duration
           },
           "return_flight": {
             "flight_id":this.footerData.retFlight.id,
@@ -349,7 +349,7 @@ export class FlightComponent implements OnInit {
             "promo": this.footerData.retFlight.Promo,
             "connections": this.footerData.retFlight.Connections,
             "search_tui":  this.appStore.tui,
-            "duration_minutes":this.footerData.retFlight.Duration
+            "duration":this.footerData.retFlight.Duration
           },
           "trip_type": "round_trip",
         }

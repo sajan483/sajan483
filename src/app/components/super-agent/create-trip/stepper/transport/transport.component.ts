@@ -20,7 +20,6 @@ export class TransportComponent implements OnInit {
   companyList:any;
   vehicleTypeList:any;
   routeList:any;
-  packageId:number=7023;
   StepperAdapter : StepperAdapter;
 
   constructor(private formBuilder: FormBuilder,private _commonApiService:CommonApiService,private stepper:StepperComponent,
@@ -70,7 +69,7 @@ export class TransportComponent implements OnInit {
   saveTransport(){
     this.stepper.stepContent('otherServices','')
     let body = this.StepperAdapter.transportBookingBody(this.transportSelection.value,this.appStore.langCode);
-    this.SuperAgentApiService.updatePackageAPI(body,this.appStore.currencyCode,this.appStore.langCode,this.packageId).subscribe((data)=>{
+    this.SuperAgentApiService.updatePackageAPI(body,this.appStore.currencyCode,this.appStore.langCode,this.appStore.packageId).subscribe((data)=>{
     })
   }
 }

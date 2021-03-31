@@ -13,7 +13,6 @@ import { StepperComponent } from '../stepper.component';
 export class PaymentComponent implements OnInit {
   advancepayment : FormGroup;
   submitted = false;
-  packageId:number=7023;
   SuperAgentApiService:SuperAgentApiService;
   StepperAdapter : StepperAdapter;
   suggestedAmound: any;
@@ -33,7 +32,7 @@ export class PaymentComponent implements OnInit {
    * this method for call suggested amounts
    */
   callSuggestedAmount(){
-    this.SuperAgentApiService.getPackageDetails(this.packageId).subscribe((data)=>{
+    this.SuperAgentApiService.getPackageDetails(this.appStore.packageId).subscribe((data)=>{
       this.suggestedAmound = data;
     })
   }
@@ -54,7 +53,7 @@ export class PaymentComponent implements OnInit {
     /**
      * payment detail update package api
      */
-    this.SuperAgentApiService.updatePackageAPI(this.advancepayment.value,this.appStore.currencyCode,this.appStore.langCode,this.packageId).subscribe((data)=>{
+    this.SuperAgentApiService.updatePackageAPI(this.advancepayment.value,this.appStore.currencyCode,this.appStore.langCode,this.appStore.packageId).subscribe((data)=>{
       
     })
   }

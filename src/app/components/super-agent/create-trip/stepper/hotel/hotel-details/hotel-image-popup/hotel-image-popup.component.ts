@@ -38,20 +38,7 @@ export class HotelImagePopupComponent implements OnInit {
   };
 
   constructor() {}
-  imagecollection=[
-    'https://cf.bstatic.com/images/hotel/max500/460/46047550.jpg',
-    'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR3rmWcGKxi-YvcS-OZqacyLW9uhsLrf53WzwyxCWzjbJE7UOYQxUjTyiDiiFzWd5N4uq4&usqp=CAU',
-    'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRBt4CquiQcAy7gkRiYEkI_vcwKeaFK0nDRpQ&usqp=CAU',
-    'https://cf.bstatic.com/xdata/images/hotel/270x200/252216587.jpg?k=b51babb01a84901762994170f5d70af2f25b9751b5290a54232a410a32050da2&o=',
-    'https://cf.bstatic.com/images/hotel/max500/460/46047550.jpg',
-    'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR3rmWcGKxi-YvcS-OZqacyLW9uhsLrf53WzwyxCWzjbJE7UOYQxUjTyiDiiFzWd5N4uq4&usqp=CAU',
-    'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRBt4CquiQcAy7gkRiYEkI_vcwKeaFK0nDRpQ&usqp=CAU',
-    'https://cf.bstatic.com/xdata/images/hotel/270x200/252216587.jpg?k=b51babb01a84901762994170f5d70af2f25b9751b5290a54232a410a32050da2&o=',
-    'https://cf.bstatic.com/images/hotel/max500/460/46047550.jpg',
-    'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR3rmWcGKxi-YvcS-OZqacyLW9uhsLrf53WzwyxCWzjbJE7UOYQxUjTyiDiiFzWd5N4uq4&usqp=CAU',
-    'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRBt4CquiQcAy7gkRiYEkI_vcwKeaFK0nDRpQ&usqp=CAU',
-    'https://cf.bstatic.com/xdata/images/hotel/270x200/252216587.jpg?k=b51babb01a84901762994170f5d70af2f25b9751b5290a54232a410a32050da2&o='
-  ];
+  @Input()hotelPics;
 
   ngOnInit() {
     this.showHotelImages = true;
