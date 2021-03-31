@@ -28,7 +28,7 @@ import { RoomdetailsPopupComponent } from 'src/app/components/super-agent/create
 import { CarouselModule } from 'ngx-owl-carousel-o';
 import { HotelImagePopupComponent } from 'src/app/components/super-agent/create-trip/stepper/hotel/hotel-details/hotel-image-popup/hotel-image-popup.component';
 import { NgbRatingModule } from '@ng-bootstrap/ng-bootstrap';
-import { OnlyNumberDirective } from 'src/app/models/onlynumber.directive';
+
 
 @NgModule({
   declarations: [
@@ -46,8 +46,7 @@ import { OnlyNumberDirective } from 'src/app/models/onlynumber.directive';
     HotelDetailsPopupComponent,
     FlightDetailsComponent,
     RoomdetailsPopupComponent,
-    HotelImagePopupComponent,
-    OnlyNumberDirective
+    HotelImagePopupComponent
   ],
   imports: [
     CommonModule,

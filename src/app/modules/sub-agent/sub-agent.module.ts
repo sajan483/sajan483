@@ -1,12 +1,11 @@
 import { NgModule } from '@angular/core';
-import { CommonModule, DatePipe } from '@angular/common';
+import { CommonModule} from '@angular/common';
 import { BookingHistoryComponent } from 'src/app/components/sub-agent/booking-history/booking-history.component';
 import { RecentBookingComponent } from 'src/app/components/sub-agent/create-trip-front-page/components/recent-booking/recent-booking.component';
 import { RoomAllocationPopupComponent } from 'src/app/components/sub-agent/create-trip-front-page/components/room-allocation-popup/room-allocation-popup.component';
 import { CreateTripFrontPageComponent } from 'src/app/components/sub-agent/create-trip-front-page/create-trip-front-page.component';
 import { PaymentStatusComponent } from 'src/app/components/sub-agent/payment-status/payment-status.component';
 import { ProfilePageComponent } from 'src/app/components/sub-agent/profile-page/profile-page.component';
-import { OnlyNumberDirective } from 'src/app/models/onlynumber.directive';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
@@ -32,17 +31,14 @@ import { CarouselModule } from 'ngx-owl-carousel-o';
 import { NgxGalleryModule } from 'ngx-gallery';
 import { TranslatorFactory } from 'src/app/app.module';
 import { NgxSpinnerModule } from "ngx-spinner";
-import { GeneralHelper } from 'src/app/helpers/General/general-helpers';
 import { HelperService } from 'src/app/common/services/helper-service';
 import { PaymentTransportComponent } from 'src/app/components/sub-agent/create-trip/components/payment-transport/payment-transport.component';
-import { CommonApiService } from 'src/app/Services/common-api-services';
 import { SubAgentApiService } from 'src/app/Services/sub-agent-api-services';
 
 
 
 @NgModule({
   declarations: [
-    OnlyNumberDirective,
     BookingHistoryComponent,
     CreateTripFrontPageComponent,
     CreateTripComponent,

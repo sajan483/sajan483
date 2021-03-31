@@ -1,4 +1,3 @@
-import { CompileStylesheetMetadata } from "@angular/compiler";
 import { HelperService } from "src/app/common/services/helper-service";
 import { AppStore } from "src/app/stores/app.store";
 import { FormGroup, FormBuilder, Validators } from "@angular/forms";
@@ -7,13 +6,15 @@ import { StepperComponent } from "src/app/components/super-agent/create-trip/ste
 export class StepperAdapter {
   fb: FormBuilder;
   helperService: HelperService;
+  appStore:AppStore;
     
 
   constructor(
     private _helperService: HelperService,
-    private appStore: AppStore
+    private _appStore: AppStore
   ) {
     this.helperService = _helperService;
+    this.appStore = _appStore;
   }
 
   /**
