@@ -12,6 +12,8 @@ import { StepperComponent } from '../../../stepper.component';
 })
 
 export class HotelDetailsPopupComponent implements OnInit,OnChanges {
+  viewImagePopup:boolean=false;
+  loader:boolean=true;
   private stepperAdapter: StepperAdapter = new StepperAdapter(null,null);
   showHotelDetails:boolean = true;
   selectedHotel: any;
@@ -89,6 +91,9 @@ export class HotelDetailsPopupComponent implements OnInit,OnChanges {
     }
    }
   }
+  else{
+    this.loader=false
+  }
   }
 
   saveSelectedHotel(city){
@@ -149,5 +154,9 @@ export class HotelDetailsPopupComponent implements OnInit,OnChanges {
       }
     if(this.hotelRoomCount > 0 && p.length < 1){return true;}
     return false;
+    }
+
+    openImgPopup(){
+      this.viewImagePopup=true
     }
   }

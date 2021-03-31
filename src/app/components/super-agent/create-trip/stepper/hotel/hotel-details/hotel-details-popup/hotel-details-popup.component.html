@@ -1,7 +1,91 @@
-<div [style.display]="showHotelDetails ? 'block' : 'none'" class="viewHtl" tabindex="-1" role="dialog"
-    aria-labelledby="myModalLabel" aria-hidden="true">
+<div [style.display]="showHotelDetails ? 'block' : 'none'" class="viewHtl" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog" *ngIf="selectedHotel">
         <div class="boxradus_hotel pt-0">
+
+            <!-- loader -->
+            <div class="animationdiv minhight100" *ngIf="loader">
+                <div class="bg-white p-2">
+                    <div class="container d-flex justify-content-between">
+                        <div class="lines shine m-1 width40 wdth100"></div>
+                        <div class="lines shine m-1 width40 wdth100"></div>
+                    </div>
+                </div>
+                <div class="container">
+                    <div class="filterbox row ml-0 mr-0 mt-3 bg-white">
+                        <div class="col-md-7 pl-0 pr-0">
+                            <div class="hotel_photo_gallery">
+                                <div class="firstimg ">
+                                    <div class="shine w-100 h-100"></div>
+                                </div>
+                                <div class="secongimg">
+                                    <div class="shine w-100 h-100"></div>
+                                </div>
+                                <div class="thirdimg">
+                                    <div class="shine w-100 h-100"></div>
+                                </div>
+                                <div class="forthimg">
+                                    <div class="shine w-100 h-100"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-5">
+                            <div class="d-flex justify-content-between mt-3">
+                                <div class="w-25">
+                                    <div class="w-100 shine lines"></div>
+                                    <div class="w-100 shine lines"></div>
+                                    <div class="w-100 shine lines"></div>
+                                </div>
+                                <div class="text-center w-25 mt-2">
+                                    <i class="icon_size_20 icns nighticon"></i>
+                                    <div class="w-100 shine lines"></div>
+                                </div>
+                                <div class="w-25">
+                                    <div class="w-100 shine lines"></div>
+                                    <div class="w-100 shine lines"></div>
+                                    <div class="w-100 shine lines"></div>
+                                </div>
+                            </div>
+                            <div class="mt-3 w-75">
+                                <div class="w-100 shine lines"></div>
+                            </div>
+                            <div class="mt-3 w-50">
+                                <div class="w-100 shine lines"></div>
+                                <div class="w-100 shine lines"></div>
+                                <div class="w-100 shine lines"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <mat-tab-group>
+                            <mat-tab label="Room Type">
+                                <div class="borderbox mb80 p20">
+                                    <div class="w-100 shine lines"></div>
+                                    <div class="w-100 shine lines"></div>
+                                    <div class="w-100 shine lines"></div>
+                                    <div class="w-100 shine lines"></div>
+                                </div>
+                            </mat-tab>
+                            <mat-tab label="More Details">
+                                <div class="borderbox mb80 p20">
+                                    <div class="w-100 shine lines"></div>
+                                    <div class="w-100 shine lines"></div>
+                                    <div class="w-100 shine lines"></div>
+                                    <div class="w-100 shine lines"></div>
+                                </div>
+                            </mat-tab>
+                            <mat-tab label="Policy">
+                                <div class="borderbox mb80 p20">
+                                    <div class="w-100 shine lines"></div>
+                                    <div class="w-100 shine lines"></div>
+                                    <div class="w-100 shine lines"></div>
+                                    <div class="w-100 shine lines"></div>
+                                </div>
+                            </mat-tab>
+                        </mat-tab-group>
+                    </div>
+                </div>
+            </div>
+
             <div class="bg-white p8">
                 <div class="container d-flex justify-content-between">
                     <div *ngIf="selectedHotel.meta_data">
@@ -26,7 +110,7 @@
                                 {{'Has special deal' }}
                             </span>
                         </div>
-                        <div class="hotel_photo_gallery cursor-pointer">
+                        <div class="hotel_photo_gallery cursor-pointer" (click)="openImgPopup()">
                             <div class="firstimg" *ngIf="hotelPics[0]">
                                 <img [src]='hotelPics[0]' alt="">
                             </div>
@@ -114,19 +198,17 @@
                                 <div class="roomInfoWrap">
                                     <div class="col-md-12 bg-white">
                                         <div class="row">
-                                            <span class="txt-font pl-4 pt-4">Room Type</span> <span
-                                                class="ml-auto txt-font  pt-4" style="margin-right: 100px;">Enter your
+                                            <span class="txt-font pl-4 pt-4">Room Type</span> <span class="ml-auto txt-font  pt-4" style="margin-right: 100px;">Enter your
                                                 rate of the room</span>
                                         </div>
                                         <hr class="pb-0">
                                         <div class="row mb-2 btmBrdr" *ngFor="let room of selectedRoomGroups;let i = index ">
-                                            <div class="col-md-8 bg1 btmBrdr" >
+                                            <div class="col-md-8 bg1 btmBrdr">
                                                 <div class="row">
                                                     <p class="pl-4" style="font-size: 16px;">{{room.name}}</p>
                                                 </div>
                                                 <div class="row pl-4">
-                                                    <i class="hotelbedicon icns icon_size_20"></i><span class="pl-1"
-                                                        style="font-size: 14;font-family: lato-Regular;">
+                                                    <i class="hotelbedicon icns icon_size_20"></i><span class="pl-1" style="font-size: 14;font-family: lato-Regular;">
                                                         <p>1 {{'Room for'}} {{room?.adult_number}} {{'Adult(s)'}}</p>
                                                     </span>
                                                 </div>
@@ -145,22 +227,18 @@
                                                         <p class="mb-0 txt-font">Adult</p>
                                                         <div class="row br-rad brdr">
                                                             <div class="input-group-prepend bg-white brdr-rt">
-                                                                <span class="input-group-text brdr-rt"
-                                                                    id="basic-addon1">&#8377;</span>
+                                                                <span class="input-group-text brdr-rt" id="basic-addon1">&#8377;</span>
                                                             </div>
-                                                            <input type="text" id="adultPrice{{room.room_id}}{{i}}" class="txt" placeholder="20000"
-                                                                aria-label="200" aria-describedby="basic-addon1">
+                                                            <input type="text" id="adultPrice{{room.room_id}}{{i}}" class="txt" placeholder="20000" aria-label="200" aria-describedby="basic-addon1" numberOnly>
                                                         </div>
                                                     </div>
                                                     <div class="col-md-4 ml-4 mt-4">
                                                         <p class="mb-0 txt-font">Child</p>
                                                         <div class="row brdr br-rad">
                                                             <div class="input-group-prepend bg-white brdr-rt">
-                                                                <span class="input-group-text brdr-rt br-rad"
-                                                                    id="basic-addon1">&#8377;</span>
+                                                                <span class="input-group-text brdr-rt br-rad" id="basic-addon1">&#8377;</span>
                                                             </div>
-                                                            <input type="text"id="childPrice{{room.room_id}}{{i}}" class="br-rad txt" placeholder="20000"
-                                                                aria-label="200" aria-describedby="basic-addon1">
+                                                            <input type="text" id="childPrice{{room.room_id}}{{i}}" class="br-rad txt" placeholder="20000" aria-label="200" aria-describedby="basic-addon1" numberOnly>
                                                         </div>
                                                     </div>
                                                     <div class="row ml-4 br-rad mt-4 bgLgrn">
@@ -173,12 +251,12 @@
                                                 <a class="roomview pl-4  pb-2 pt-2" (click)="showRoomDetailsPopUp(room)">+ More Details</a>
                                             </div>
                                         </div>
-                                     </div>
+                                    </div>
                                 </div>
                             </section>
                         </div>
                         <div class="col-md-12 d-flex justify-content-center " style="margin-bottom: 150px;">
-                            <button class=" btn"  [disabled]="!disableHotelSaveBtn()"[class.hidenormalbutton]="!disableHotelSaveBtn()" (click)="saveSelectedHotel(selectedHotel.city)">continue</button>
+                            <button class=" btn" [disabled]="!disableHotelSaveBtn()" [class.hidenormalbutton]="!disableHotelSaveBtn()" (click)="saveSelectedHotel(selectedHotel.city)">continue</button>
                         </div>
 
                     </mat-tab>
@@ -205,8 +283,7 @@
                             <div class="inner-policy_div textright" *ngFor="let policy of selectedHotel?.policies">
                                 <p>{{policy?.description}}</p>
                             </div>
-                            <div class="noDataPresent"
-                                *ngIf="selectedHotel?.policies && selectedHotel?.policies.length == 0">
+                            <div class="noDataPresent" *ngIf="selectedHotel?.policies && selectedHotel?.policies.length == 0">
                                 {{'No Policies Found' }}
                             </div>
                         </div>
@@ -218,4 +295,7 @@
 </div>
 <div *ngIf="selectedRoomDetails">
     <app-roomdetails-popup [setViewData]="selectedRoomInfo"></app-roomdetails-popup>
+</div>
+<div *ngIf="viewImagePopup">
+    <app-hotel-image-popup [hotelPics]="hotelPics"></app-hotel-image-popup>
 </div>
