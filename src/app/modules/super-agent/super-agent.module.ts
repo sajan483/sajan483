@@ -28,6 +28,7 @@ import { RoomdetailsPopupComponent } from 'src/app/components/super-agent/create
 import { CarouselModule } from 'ngx-owl-carousel-o';
 import { HotelImagePopupComponent } from 'src/app/components/super-agent/create-trip/stepper/hotel/hotel-image-popup/hotel-image-popup.component';
 import { NgbRatingModule } from '@ng-bootstrap/ng-bootstrap';
+import { HotelLoaderComponent } from 'src/app/components/super-agent/create-trip/stepper/hotel/hotel-loader/hotel-loader.component';
 
 
 @NgModule({
@@ -46,7 +47,8 @@ import { NgbRatingModule } from '@ng-bootstrap/ng-bootstrap';
     HotelDetailsPopupComponent,
     FlightDetailsComponent,
     RoomdetailsPopupComponent,
-    HotelImagePopupComponent
+    HotelImagePopupComponent,
+    HotelLoaderComponent
   ],
   imports: [
     CommonModule,

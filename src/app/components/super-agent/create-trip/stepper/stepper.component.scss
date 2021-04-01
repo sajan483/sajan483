@@ -2,7 +2,7 @@
     padding: 60px 0;
     padding-bottom: 0;
     .full-bg-blue {
-        background:#800b0b;
+        background: #A30000;
         height: 120px;
         width: 100%;
         margin-top: 0px;
@@ -17,7 +17,7 @@
                 width: 85%;
                 top: 18%;
                 left: 7%;
-                border-top: 1px solid #717c95;
+                border-top: 1px solid #fff;
             }
             .step-element {
                 display: flex;
@@ -29,12 +29,12 @@
                     margin: 0 auto;
                     mat-icon {
                         color: white;
-                        background: #a3a3a3;
-                        width: 33px;
-                        height: 33px;
-                        font-size: 24px;
+                        background: #a7a7a7;
+                        width: 38px;
+                        height: 37px;
+                        font-size: 22px;
                         text-align: center;
-                        padding-top: 4px;
+                        padding-top: 7px;
                         border-radius: 50%;
                     }
                 }

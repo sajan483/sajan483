@@ -3,6 +3,7 @@ import { from } from 'rxjs';
 import { SuperAgentApiService } from 'src/app/Services/super-agent-api-services';
 import { CommonApiService } from 'src/app/Services/common-api-services';
 import { AppStore } from 'src/app/stores/app.store';
+import { StepperComponent } from '../stepper.component';
 
 @Component({
   selector: 'app-preview',
@@ -29,7 +30,7 @@ export class PreviewComponent implements OnInit {
   madeenaHotel: any;
   readonly = true;
 
-  constructor(private _SuperAgentService:SuperAgentApiService,private _commonService:CommonApiService,private appStore:AppStore) { 
+  constructor(private _SuperAgentService:SuperAgentApiService,private _commonService:CommonApiService,private appStore:AppStore, private stepper :StepperComponent) { 
     this.SuperAgentApiService=this._SuperAgentService;
     this.CommonApiService = this._commonService;
   }
@@ -83,5 +84,9 @@ export class PreviewComponent implements OnInit {
   }
   publishTrip(){
 
+  }
+
+  back(){
+    this.stepper.stepContent('otherInfo','')
   }
 }

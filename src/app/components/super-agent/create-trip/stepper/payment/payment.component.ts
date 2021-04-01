@@ -57,4 +57,9 @@ export class PaymentComponent implements OnInit {
       
     })
   }
+
+  back(){
+    this.stepper.stepContent('otherServices','')
+  }
+
 }

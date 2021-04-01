@@ -2,7 +2,7 @@
     <div class="w-100 bgf2 ptpb25">
         <div class="container d-flex justify-content-between">
             <div class="fs22 lh22 fw600 text-black">Other Package Information</div>
-            <div class="d-inline-flex cursor-pointer">
+            <div class="d-inline-flex cursor-pointer" (click)="back()">
                 <i class="blue_back_arrow icns icon_size_15"></i>
                 <div class="blue_back_clr lh15 fs15 ml-2">Back</div>
             </div>
@@ -19,13 +19,11 @@
                     <div class="row m-0 p30">
                         <div class="col-md-6 mb30">
                             <label class="fs14 fw400 lh14 pl-1">Add Title :</label>
-                            <input type="text" class="owldatebrdr w-100 form-control" placeholder="Title"
-                                    formControlName="title" [ngClass]="{ 'is-invalid': submitted && f.title.errors }">
+                            <input type="text" class="owldatebrdr w-100 form-control" placeholder="Title" formControlName="title" [ngClass]="{ 'is-invalid': submitted && f.title.errors }">
                         </div>
                         <div class="col-md-12 mb30">
                             <label class="fs14 fw400 lh14 pl-1">Add Overview :</label>
-                            <textarea name="" id="" class="owldatebrdr w-100 form-control" rows="3" formControlName="overview"
-                            [ngClass]="{ 'is-invalid': submitted && f.overview.errors }"></textarea>
+                            <textarea name="" id="" class="owldatebrdr w-100 form-control" rows="3" formControlName="overview" [ngClass]="{ 'is-invalid': submitted && f.overview.errors }"></textarea>
                         </div>
                         <div class="col-md-12 mb30">
                             <label class="fs14 fw400 lh14 pl-1">Add Marketing Image :</label>
@@ -54,8 +52,7 @@
                                 </div>
                                 <div class="col-md-4 mb30">
                                     <label class="fs14 fw400 lh14 pl-1">Day/Days :</label>
-                                    <select class="owldatebrdr w-100 form-control" formControlName="days" 
-                                    [ngClass]="{ 'is-invalid': submitted && getValidity(i) }">
+                                    <select class="owldatebrdr w-100 form-control" formControlName="days" [ngClass]="{ 'is-invalid': submitted && getValidity(i) }">
                                         <option value="" disabled selected hidden>Select Dasy/Days</option>
                                         <option value="1">1 day</option>
                                         <option value="2">2 day</option>
@@ -65,22 +62,19 @@
                                 </div>
                                 <div class="col-md-4 mb30">
                                     <label class="fs14 fw400 lh14 pl-1">Title :</label>
-                                    <input type="text" class="owldatebrdr w-100 form-control" placeholder="Enter Title"
-                                            formControlName="itinerary_title" [ngClass]="{ 'is-invalid': submitted && getValidity(i) }">
+                                    <input type="text" class="owldatebrdr w-100 form-control" placeholder="Enter Title" formControlName="itinerary_title" [ngClass]="{ 'is-invalid': submitted && getValidity(i) }">
                                 </div>
                                 <div class="col-md-4 mb30">
                                     <label class="fs14 fw400 lh14 pl-1">From Date :</label>
                                     <div class="position-relative" [owlDateTimeTrigger]="dt5">
-                                        <input [owlDateTime]="dt5"  placeholder="Depature Date" 
-                                        class="owldatebrdr w-100 form-control" formControlName="depdate" [ngClass]="{ 'is-invalid': submitted && getValidity(i) }">
+                                        <input [owlDateTime]="dt5" placeholder="Depature Date" class="owldatebrdr w-100 form-control" formControlName="depdate" [ngClass]="{ 'is-invalid': submitted && getValidity(i) }">
                                         <i class="icns calendaricon icon_size_20 cursor-pointer owldateiconpostion"></i>
                                         <owl-date-time #dt5 [pickerType]="'calendar'"></owl-date-time>
                                     </div>
                                 </div>
                                 <div class="col-md-12 mb30">
                                     <label class="fs14 fw400 lh14 pl-1">Add Overview :</label>
-                                    <textarea name="" id="" class="owldatebrdr w-100 form-control" rows="3" formControlName="itinerary_overview"
-                                    [ngClass]="{ 'is-invalid': submitted && getValidity(i) }"></textarea>
+                                    <textarea name="" id="" class="owldatebrdr w-100 form-control" rows="3" formControlName="itinerary_overview" [ngClass]="{ 'is-invalid': submitted && getValidity(i) }"></textarea>
                                 </div>
                                 <div class="col-md-12">
                                     <div class="w-100 row m-0">
@@ -98,8 +92,7 @@
                     </div>
                 </div>
                 <div class="d-flex justify-content-end p30 pt-0">
-                    <div class="addAnotherBttn cursor-pointer" (click)="addItinerary()"><i class="fa fa-plus-circle" aria-hidden="true"></i>
-                        Add Another</div>
+                    <div class="addAnotherBttn cursor-pointer" (click)="addItinerary()"><i class="fa fa-plus-circle" aria-hidden="true"></i> Add Another</div>
                 </div>
                 <div>
                     <div class="w-100 bgf2 p20 d-flex justify-content-between brdr_btm_d3">
@@ -109,13 +102,11 @@
                     <div class="row m-0 p30">
                         <div class="col-md-12 mb30">
                             <label class="fs14 fw400 lh14 pl-1">Exclusions :</label>
-                            <textarea name="" id="" class="owldatebrdr w-100 form-control" rows="3" formControlName="exclusion"
-                            [ngClass]="{ 'is-invalid': submitted && f.exclusion.errors }"></textarea>
+                            <textarea name="" id="" class="owldatebrdr w-100 form-control" rows="3" formControlName="exclusion" [ngClass]="{ 'is-invalid': submitted && f.exclusion.errors }"></textarea>
                         </div>
                         <div class="col-md-12 mb30">
                             <label class="fs14 fw400 lh14 pl-1">Inclusion :</label>
-                            <textarea name="" id="" class="owldatebrdr w-100 form-control" rows="3" formControlName="inclusion"
-                            [ngClass]="{ 'is-invalid': submitted && f.inclusion.errors }"></textarea>
+                            <textarea name="" id="" class="owldatebrdr w-100 form-control" rows="3" formControlName="inclusion" [ngClass]="{ 'is-invalid': submitted && f.inclusion.errors }"></textarea>
                         </div>
                     </div>
                 </div>
@@ -127,8 +118,7 @@
                     <div class="row m-0 p30">
                         <div class="col-md-12 mb30">
                             <label class="fs14 fw400 lh14 pl-1">Polices :</label>
-                            <textarea name="" id="" class="owldatebrdr w-100 form-control" rows="3" formControlName="polices"
-                            [ngClass]="{ 'is-invalid': submitted && f.polices.errors }"></textarea>
+                            <textarea name="" id="" class="owldatebrdr w-100 form-control" rows="3" formControlName="polices" [ngClass]="{ 'is-invalid': submitted && f.polices.errors }"></textarea>
                         </div>
                     </div>
                 </div>

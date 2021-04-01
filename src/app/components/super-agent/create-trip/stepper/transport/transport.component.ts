@@ -72,4 +72,9 @@ export class TransportComponent implements OnInit {
     this.SuperAgentApiService.updatePackageAPI(body,this.appStore.currencyCode,this.appStore.langCode,this.appStore.packageId).subscribe((data)=>{
     })
   }
+
+  back(){
+    this.stepper.stepContent('hotel','hotelMedinah')
+  }
+
 }
