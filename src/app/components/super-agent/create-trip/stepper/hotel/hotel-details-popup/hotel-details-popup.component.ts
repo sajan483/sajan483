@@ -1,9 +1,9 @@
-import { Component, Input, OnChanges, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, OnInit, Output } from '@angular/core';
 import { StepperAdapter } from 'src/app/adapters/super-agent/stepper-adapter';
 import { HelperService } from 'src/app/common/services/helper-service';
 import { SuperAgentApiService } from 'src/app/Services/super-agent-api-services';
 import { AppStore } from 'src/app/stores/app.store';
-import { StepperComponent } from '../../../stepper.component';
+import { StepperComponent } from '../../stepper.component';
 
 @Component({
   selector: 'app-hotel-details-popup',
@@ -15,7 +15,8 @@ export class HotelDetailsPopupComponent implements OnInit,OnChanges {
   viewImagePopup:boolean=false;
   loader:boolean=true;
   private stepperAdapter: StepperAdapter = new StepperAdapter(null,null);
-  showHotelDetails:boolean = true;
+  showHotelDetails:string = 'true';
+  @Output() showHotelDetailsEmitter = new EventEmitter();
   selectedHotel: any;
   selectedRoomGroups: any[];
   hotelPics: any[];
@@ -26,7 +27,7 @@ export class HotelDetailsPopupComponent implements OnInit,OnChanges {
 
   @Input() popupData :any;
   selectedRoomInfo: any;
-  selectedRoomDetails: boolean;
+  selectedRoomDetails: boolean = false;
   roomVariation: any[] = [];
   medinahRoomVariation: any;
   hotelRoomCount: number = 0;
@@ -45,7 +46,6 @@ export class HotelDetailsPopupComponent implements OnInit,OnChanges {
 
   ngOnChanges(){
     this.setPopUp();
-    this.showHotelDetails = true;
   }
 
   setPopUp(){
@@ -90,6 +90,7 @@ export class HotelDetailsPopupComponent implements OnInit,OnChanges {
       this.moreimages = true;
     }
    }
+   this.loader=false
   }
   else{
     this.loader=false
@@ -139,7 +140,8 @@ export class HotelDetailsPopupComponent implements OnInit,OnChanges {
   }
 
   hideHotelDetailsPopup(){
-    this.showHotelDetails = false;
+    this.showHotelDetails = 'false';
+    this.showHotelDetailsEmitter.emit(this.showHotelDetails);
   }
 
   disableHotelSaveBtn(){
@@ -158,5 +160,10 @@ export class HotelDetailsPopupComponent implements OnInit,OnChanges {
 
     openImgPopup(){
       this.viewImagePopup=true
+    }
+
+    getImgPopupFlag(event){
+      if(event == 'hide')
+      this.viewImagePopup=false
     }
   }

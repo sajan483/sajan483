@@ -20,13 +20,13 @@ import { SuperAgentApiService } from 'src/app/Services/super-agent-api-services'
 import { HotelComponent } from 'src/app/components/super-agent/create-trip/stepper/hotel/hotel.component';
 import { OwlDateTimeModule, OwlNativeDateTimeModule } from 'ng-pick-datetime';
 import {MatRadioModule} from '@angular/material/radio'; 
-import { HotelDetailsPopupComponent } from 'src/app/components/super-agent/create-trip/stepper/hotel/hotel-details/hotel-details-popup/hotel-details-popup.component';
+import { HotelDetailsPopupComponent } from 'src/app/components/super-agent/create-trip/stepper/hotel/hotel-details-popup/hotel-details-popup.component';
 import { TagInputModule } from 'ngx-chips';
 import { FlightDetailsComponent } from 'src/app/components/super-agent/create-trip/stepper/flight/flight-details/flight-details.component';
 import { NgbCarouselModule } from '@ng-bootstrap/ng-bootstrap';
 import { RoomdetailsPopupComponent } from 'src/app/components/super-agent/create-trip/stepper/hotel/roomdetails-popup/roomdetails-popup.component';
 import { CarouselModule } from 'ngx-owl-carousel-o';
-import { HotelImagePopupComponent } from 'src/app/components/super-agent/create-trip/stepper/hotel/hotel-details/hotel-image-popup/hotel-image-popup.component';
+import { HotelImagePopupComponent } from 'src/app/components/super-agent/create-trip/stepper/hotel/hotel-image-popup/hotel-image-popup.component';
 import { NgbRatingModule } from '@ng-bootstrap/ng-bootstrap';
 
 

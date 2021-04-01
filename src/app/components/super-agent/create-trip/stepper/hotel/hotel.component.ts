@@ -18,7 +18,7 @@ export class HotelComponent implements OnInit {
   @Input() hotelsList : any;
   formBuilder:FormBuilder;
   superAgentApiService : SuperAgentApiService;
-  showHotelDetails:boolean = false;
+  showHotelDetails:string = 'false';
   
 
   @ViewChild('pickerEnd' , {read: undefined, static: false}) pickerEnd: MatDatepicker<Date>;
@@ -77,7 +77,7 @@ export class HotelComponent implements OnInit {
   }
 
   showHotelDetailsPopUp(item,city){
-    this.showHotelDetails = true;
+    this.showHotelDetails = 'true';
     this.fetchSelectedHotelInfo(item,city)
   }
 
@@ -89,7 +89,7 @@ export class HotelComponent implements OnInit {
         this.popupData.city = city
       },(error)=>{
       this.notifyService.showWarning("No details availabe");
-      this.showHotelDetails = false;
+      this.showHotelDetails = 'false';
       });
     }
     
@@ -101,6 +101,10 @@ export class HotelComponent implements OnInit {
   }
   makkahCheckOutDate(makkahCheckOutDate: any) {
     throw new Error('Method not implemented.');
+  }
+
+  getPopupFlag(event){
+    this.showHotelDetails = event
   }
 
 }
