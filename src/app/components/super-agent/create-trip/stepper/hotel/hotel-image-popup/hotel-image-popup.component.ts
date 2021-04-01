@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from "@angular/core";
+import { Component, OnInit, Input, Output, EventEmitter } from "@angular/core";
 import { OwlOptions } from "ngx-owl-carousel-o";
 
 @Component({
@@ -10,6 +10,7 @@ export class HotelImagePopupComponent implements OnInit {
   showHotelImages: boolean;
   hotelRating: any;
   imageshow: any;
+  @Output() showHotelImgEmitter = new EventEmitter();
 
   customOptions: OwlOptions = {
     loop: true,
@@ -48,6 +49,7 @@ export class HotelImagePopupComponent implements OnInit {
 
   closeHtlImgPopup() {
     this.showHotelImages = false;
+    this.showHotelImgEmitter.emit('hide');
   }
   
 }
