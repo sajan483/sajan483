@@ -65,9 +65,7 @@ export class PreviewComponent implements OnInit {
     this.superAgentApiService.getPackageDetails(7052).subscribe((data)=>{
       this.response = data;
       this.onwardFlight = this.response.trip_flights[0].onward_flight;
-      console.log("package",this.onwardFlight)
       this.returnFlight = this.response.trip_flights[0].return_flight;
-      console.log("package",this.returnFlight)
       this.makkahHotel = this.response.makkah_trip_hotel;
       this.visa = this.response.trip_visa;
       this.transport = this.response.trip_transportation;
