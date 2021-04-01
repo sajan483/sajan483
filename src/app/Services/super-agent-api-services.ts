@@ -154,4 +154,7 @@ export class SuperAgentApiService {
       .map((res) => res.json());
   }
 
+  publishPackage(data: any,id:number) {
+    return this.http.put(this.BASE_URL +  "packages/"+id+"/", data, this.options).map(res => res.json());
+  }
 }

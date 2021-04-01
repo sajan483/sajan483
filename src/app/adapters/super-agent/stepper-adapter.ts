@@ -226,33 +226,64 @@ export class StepperAdapter {
    * @param city city makkah or medinah
    */
   saveHotelRequest(selectedHotel,makkahRoomVariation,city) {
-    let body = {
-      makkah_trip_hotel: {
-        hotel: {
-          name: selectedHotel.name,
-          address: selectedHotel.meta_data.address,
-          longitute: selectedHotel.meta_data.longitude,
-          latitude: selectedHotel.meta_data.latitude,
-          phone_number: selectedHotel.meta_data.phone,
-          email: selectedHotel.meta_data.email,
-          state: selectedHotel.meta_data.state,
-          city: selectedHotel.meta_data.city,
-          user_review: selectedHotel.meta_data.rating,
-          provider: selectedHotel.provider,
-          vendor: selectedHotel.vendor,
-          code: selectedHotel.code,
-          umrah_code: selectedHotel.umrah_hotel_code,
-          images: selectedHotel.meta_data.images,
-          amenities: selectedHotel.meta_data.amenities,
-          policies: selectedHotel.policies,
+    if(city == 'MAKKA'){
+      let body = {
+        makkah_trip_hotel: {
+          hotel: {
+            name: selectedHotel.name,
+            address: selectedHotel.meta_data.address,
+            longitute: selectedHotel.meta_data.longitude,
+            latitude: selectedHotel.meta_data.latitude,
+            phone_number: selectedHotel.meta_data.phone,
+            email: selectedHotel.meta_data.email,
+            state: selectedHotel.meta_data.state,
+            city: selectedHotel.meta_data.city,
+            user_review: selectedHotel.meta_data.rating,
+            provider: selectedHotel.provider,
+            vendor: selectedHotel.vendor,
+            code: selectedHotel.code,
+            umrah_code: selectedHotel.umrah_hotel_code,
+            images: selectedHotel.meta_data.images,
+            amenities: selectedHotel.meta_data.amenities,
+            policies: selectedHotel.policies,
+          },
+          room_variations: makkahRoomVariation,
+          check_in_time: selectedHotel.check_in_time,
+          check_out_time: selectedHotel.check_out_time,
+          other_data: selectedHotel.other_data,
         },
-        room_variations: makkahRoomVariation,
-        check_in_time: selectedHotel.check_in_time,
-        check_out_time: selectedHotel.check_out_time,
-        other_data: selectedHotel.other_data,
-      },
-    };
-    return body;
+      };
+      return body;
+    }
+    if(city == 'MADEENA'){
+      let body = {
+        medinah_trip_hotel: {
+          hotel: {
+            name: selectedHotel.name,
+            address: selectedHotel.meta_data.address,
+            longitute: selectedHotel.meta_data.longitude,
+            latitude: selectedHotel.meta_data.latitude,
+            phone_number: selectedHotel.meta_data.phone,
+            email: selectedHotel.meta_data.email,
+            state: selectedHotel.meta_data.state,
+            city: selectedHotel.meta_data.city,
+            user_review: selectedHotel.meta_data.rating,
+            provider: selectedHotel.provider,
+            vendor: selectedHotel.vendor,
+            code: selectedHotel.code,
+            umrah_code: selectedHotel.umrah_hotel_code,
+            images: selectedHotel.meta_data.images,
+            amenities: selectedHotel.meta_data.amenities,
+            policies: selectedHotel.policies,
+          },
+          room_variations: makkahRoomVariation,
+          check_in_time: selectedHotel.check_in_time,
+          check_out_time: selectedHotel.check_out_time,
+          other_data: selectedHotel.other_data,
+        },
+      };
+      return body;
+    }
   }
 
   /**

@@ -34,5 +34,11 @@ export class AppStore {
   @observable packageId:number;
   @observable dataFromFrontPage:any;
   @observable userType:any;
+  @observable departureDate:any;
+  @observable arrivalDate:any;
+  @observable makkahCheckInDate:any;
+  @observable makkahCheckOutDate:any;
+  @observable medinahCheckInDate:any;
+  @observable medinahCheckOutDate:any;
   constructor() { }
 }
