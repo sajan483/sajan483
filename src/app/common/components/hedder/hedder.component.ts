@@ -23,6 +23,8 @@ export class HedderComponent implements OnInit, DoCheck {
   showNavBar: boolean = false;
   empid: string;
   commonApiService:CommonApiService;
+  
+  userType:any;
 
 
   constructor(
@@ -38,6 +40,8 @@ export class HedderComponent implements OnInit, DoCheck {
 
   ngOnInit() {
     this.commonApiService.getLanguages().subscribe((data) => {
+      this.userType = this.appStore.userType;
+      console.log("user",this.userType)
       this.languageList = data.results;
       var first = localStorage.getItem("userLanguage")
         ? localStorage.getItem("userLanguage")
@@ -53,6 +57,7 @@ export class HedderComponent implements OnInit, DoCheck {
       this.translate.use(this.appStore.langCode);
     });
   }
+  
 
   logout() {
     localStorage.clear();
@@ -92,9 +97,11 @@ export class HedderComponent implements OnInit, DoCheck {
   ngDoCheck() {
     if (localStorage.getItem("currentUser") == "agency") {
       this.agencyActive = true;
+      this.userType = this.appStore.userType;
     }
     if (localStorage.getItem("currentUser") == "branch") {
       this.branchActive = true;
+      this.userType = this.appStore.userType;
     }
   }
 

@@ -3,12 +3,12 @@
         <a class="navbar-brand cursor-pointer" *ngIf="branchActive" (click)="navigatepage('subagent/home');"><img class="logohight" src="/assets/images/agent-logo.png" alt=""></a>
         <a class="navbar-brand cursor-pointer" *ngIf="agencyActive"><img class="logohight" src="/assets/images/agent-logo.png" alt=""></a>
         <form class="form-inline my-2 my-lg-0">
-
-            <div class="dropdown" *ngIf="branchActive">
+                <div class="dropdown" *ngIf="branchActive">
                 <div class="d-flex cursor-pointer hidemobile">
                     <div class="pr-2">
                         <p class="mb-0 wlcmtext">Welcome <i class="fa fa-caret-down" aria-hidden="true"></i></p>
-                        <p class="mb-0 f15">Branch Name Here</p>
+                        <p class="mb-0 f15">Approved Umrah Operator </p>
+                         <!-- <p class="mb-0 f15">{{userType }}</p> -->
                     </div>
                     <i class="userpic icns icon_size_40"></i>
                 </div>
@@ -47,7 +47,7 @@
                 <div class="d-flex cursor-pointer hidemobile">
                     <div class="pr-2">
                         <p class="mb-0 wlcmtext">Welcome <i class="fa fa-caret-down" aria-hidden="true"></i></p>
-                        <p class="mb-0 f15">Agency Name Here</p>
+                        <p class="mb-0 f15" style="color: brown;">Super Agent</p>
                     </div>
                     <i class="userpic icns icon_size_40"></i>
                 </div>
