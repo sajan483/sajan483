@@ -12,8 +12,8 @@ export const environment = {
   // baseUrl:'http://192.168.70.74:8000/',
   //baseUrl:'http://192.168.10.79:8000/',
   //baseUrl2:'http://192.168.10.79:8000/'
-  baseUrl:'http://192.168.70.69:8000/',
-  baseUrl2:'http://192.168.70.69:8000/'
+  baseUrl:'http://192.168.70.68:8000/',
+  baseUrl2:'http://192.168.70.68:8000/'
 };
 
 /*
