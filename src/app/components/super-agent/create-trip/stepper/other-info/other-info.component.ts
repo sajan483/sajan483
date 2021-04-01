@@ -156,6 +156,10 @@ export class OtherInfoComponent implements OnInit {
     return (<FormArray>this.f.itinerary).controls[i].invalid;
   }
 
+  back(){
+    this.stepper.stepContent('payment','')
+  }
+
 }
 
 //f.itinerary.controls[i].controls.depdate.errors

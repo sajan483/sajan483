@@ -100,9 +100,13 @@ export class OtherServiceComponent implements OnInit {
     this.stepper.stepContent('payment','');
     var body = this.StepperAdapter.otherServiceBookingBody(this.f.arr.value,this.myForm.value,this.appStore.currencyCode);
     this.SuperAgentApiService.updatePackageAPI(body,this.appStore.currencyCode,this.appStore.langCode,this.appStore.packageId).subscribe((data)=>{
-      
     })
   }
+
+  back(){
+    this.stepper.stepContent('transport','')
+  }
+
 }
 
 //f.arr.controls[i].controls.price.errors

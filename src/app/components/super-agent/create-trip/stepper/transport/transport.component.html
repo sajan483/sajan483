@@ -2,7 +2,7 @@
     <div class="w-100 bgf2 ptpb25">
         <div class="container d-flex justify-content-between">
             <div class="fs22 lh22 fw600 text-black">Transport Details</div>
-            <div class="d-inline-flex cursor-pointer">
+            <div class="d-inline-flex cursor-pointer" (click)="back()">
                 <i class="blue_back_arrow icns icon_size_15"></i>
                 <div class="blue_back_clr lh15 fs15 ml-2">Back</div>
             </div>
@@ -15,29 +15,28 @@
                     <div class="col-md-4 mb30">
                         <label class="fs14 fw400 lh14 pl-1">Start Date :</label>
                         <div class="position-relative" [owlDateTimeTrigger]="dt1">
-                            <input [owlDateTime]="dt1"  placeholder="Depature Date" 
-                            class="owldatebrdr w-100 form-control" formControlName="depdate" [ngClass]="{ 'is-invalid': submitted && f.depdate.errors }">
+                            <input [owlDateTime]="dt1" placeholder="Depature Date" class="owldatebrdr w-100 form-control" formControlName="depdate" [ngClass]="{ 'is-invalid': submitted && f.depdate.errors }">
                             <i class="icns calendaricon icon_size_20 cursor-pointer owldateiconpostion"></i>
                             <owl-date-time #dt1 [pickerType]="'calendar'"></owl-date-time>
                         </div>
                     </div>
                     <div class="col-md-4 mb30">
                         <label class="fs14 fw400 lh14 pl-1">Select Cab Service :</label>
-                        <select  class="owldatebrdr w-100 form-control" formControlName="cabservice" [ngClass]="{ 'is-invalid': submitted && f.cabservice.errors }">
+                        <select class="owldatebrdr w-100 form-control" formControlName="cabservice" [ngClass]="{ 'is-invalid': submitted && f.cabservice.errors }">
                             <option value="" disabled selected hidden>Select Cab Service Provider</option>
                             <option *ngFor="let item of companyList" [value]="item.item_id">{{item.item_text}}</option>
                         </select>
                     </div>
                     <div class="col-md-4 mb30">
                         <label class="fs14 fw400 lh14 pl-1">Select Cab Type :</label>
-                        <select  class="owldatebrdr w-100 form-control" formControlName="cabtype" [ngClass]="{ 'is-invalid': submitted && f.cabtype.errors }">
+                        <select class="owldatebrdr w-100 form-control" formControlName="cabtype" [ngClass]="{ 'is-invalid': submitted && f.cabtype.errors }">
                             <option value="" disabled selected hidden>Select Cab Type</option>
                             <option *ngFor="let item of vehicleTypeList" [value]="item.item_id">{{item.item_text}}</option>
                         </select>
                     </div>
                     <div class="col-md-4 mb30">
                         <label class="fs14 fw400 lh14 pl-1">Start Route :</label>
-                        <select  class="owldatebrdr w-100 form-control" formControlName="route" [ngClass]="{ 'is-invalid': submitted && f.route.errors }">
+                        <select class="owldatebrdr w-100 form-control" formControlName="route" [ngClass]="{ 'is-invalid': submitted && f.route.errors }">
                             <option value="" disabled selected hidden>Route</option>
                             <option *ngFor="let item of routeList" [value]="item.item_id">{{item.item_text}}</option>
                         </select>
@@ -54,7 +53,7 @@
                         <label class="fs14 fw400 lh14 pl-1">Price Per Person :</label>
                         <div class="input-group w-100">
                             <div class="input-group-prepend w20">
-                              <span class="input-group-text priceicon" id="basic-addon1">&#8377;</span>
+                                <span class="input-group-text priceicon" id="basic-addon1">&#8377;</span>
                             </div>
                             <input type="text" class="owldatebrdr w80 form-control" numberOnly formControlName="amoundperperson" [ngClass]="{ 'is-invalid': submitted && f.amoundperperson.errors }">
                         </div>

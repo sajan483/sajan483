@@ -9,15 +9,15 @@
                     </div>
                     <p>FLIGHT</p>
                 </div>
-                <div class="step-element col-md"  (click)="stepContent('hotel','hotelMakkah')">
+                <div class="step-element col-md" (click)="stepContent('hotel','hotelMakkah')">
                     <div class="ico">
-                        <mat-icon id="hotelMakkah" >apartment</mat-icon>
+                        <mat-icon id="hotelMakkah">apartment</mat-icon>
                     </div>
                     <p>MAKKAH HOTEL</p>
                 </div>
                 <div class="step-element col-md" (click)="stepContent('hotel','hotelMedinah')">
                     <div class="ico">
-                        <mat-icon id="hotelMedinah"  >apartment</mat-icon>
+                        <mat-icon id="hotelMedinah">apartment</mat-icon>
                     </div>
                     <p>MEDINAH HOTEL</p>
                 </div>
@@ -59,11 +59,12 @@
             <app-flight></app-flight>
         </div>
         <div class="animated fadeInLeft" *ngIf=" selector == 'hotel' && hotelFlag == 'hotelMakkah'">
-            
-            <app-hotel *ngIf="hotelsList.city == 'MAKKA'"  [hotelsList]="hotelsList"></app-hotel>
+            <app-hotel-loader *ngIf="!hotelsList.city"></app-hotel-loader>
+            <app-hotel *ngIf="hotelsList.city == 'MAKKA'" [hotelsList]="hotelsList"></app-hotel>
         </div>
         <div class="animated fadeInLeft" *ngIf=" selector == 'hotel' && hotelFlag == 'hotelMedinah'">
-            <app-hotel *ngIf="hotelsList.city == 'MADEENA'"  [hotelsList]="hotelsList"></app-hotel>
+            <app-hotel-loader *ngIf="!hotelsList.city"></app-hotel-loader>
+            <app-hotel *ngIf="hotelsList.city == 'MADEENA'" [hotelsList]="hotelsList"></app-hotel>
         </div>
         <div class="animated fadeInLeft" *ngIf=" selector == 'otherInfo' ">
             <app-other-info></app-other-info>

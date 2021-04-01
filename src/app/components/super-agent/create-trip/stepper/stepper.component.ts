@@ -53,6 +53,9 @@ export class StepperComponent implements OnInit {
     if(component == 'hotel' && flag == 'hotelMedinah'){
       this.hotelSearch("MADEENA",this.dataFromSearchPage);
     }
+    else{
+      this.hotelSearch("MAKKA",this.dataFromSearchPage);
+    }
   }
 
   /*

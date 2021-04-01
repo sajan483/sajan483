@@ -5,6 +5,7 @@ import { StepperAdapter } from 'src/app/adapters/super-agent/stepper-adapter';
 import { NotificationService } from 'src/app/common/services/notification.service';
 import { SuperAgentApiService } from 'src/app/Services/super-agent-api-services';
 import { AppStore } from 'src/app/stores/app.store';
+import { StepperComponent } from '../stepper.component';
 
 @Component({
   selector: 'app-hotel',
@@ -35,7 +36,7 @@ export class HotelComponent implements OnInit {
   popupData: any;
 
   constructor(private fb:FormBuilder,private _superAgentApiService:SuperAgentApiService,
-    private notifyService:NotificationService,private appStore:AppStore) {
+    private notifyService:NotificationService,private appStore:AppStore, private stepper:StepperComponent) {
     this.formBuilder = fb;
     this.superAgentApiService = _superAgentApiService; 
    }
@@ -105,6 +106,15 @@ export class HotelComponent implements OnInit {
 
   getPopupFlag(event){
     this.showHotelDetails = event
+  }
+
+  back(){
+    if(this.hotelsList.city == 'MAKKA'){
+    this.stepper.stepContent('flight','')
+    }
+    else{
+      this.stepper.stepContent('hotel','hotelMakkah')   
+    }
   }
 
 }
