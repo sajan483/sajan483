@@ -62,7 +62,7 @@ export class PreviewComponent implements OnInit {
   }
 
   packageDetails(){
-    this.superAgentApiService.getPackageDetails(7052).subscribe((data)=>{
+    this.superAgentApiService.getPackageDetails(this.appStore.packageId).subscribe((data)=>{
       this.response = data;
       this.onwardFlight = this.response.trip_flights[0].onward_flight;
       this.returnFlight = this.response.trip_flights[0].return_flight;
@@ -92,7 +92,6 @@ export class PreviewComponent implements OnInit {
       var body ={"published" : "true",
       "start_date":this.appStore.departureDate,
       "end_date":this.appStore.arrivalDate}
-      console.log("pid",this.appStore.packageId)
       this.superAgentApiService.publishPackage(body,this.appStore.packageId).subscribe(response => {
         this.notification.showSuccess("Successfully Published")
       });

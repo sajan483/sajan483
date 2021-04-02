@@ -38,7 +38,6 @@ export class loginHelper{
             this.notifyService.showSuccess(this.translate.instant('success !!'));
             this.appStore.currentUser = etype;
             this.appStore.userType = data.staff.employer_name;
-            console.log("dsd",this.appStore.userType)
             localStorage.setItem('currentUser', etype);
             this.router.navigate(['subagent/home/']);
           }

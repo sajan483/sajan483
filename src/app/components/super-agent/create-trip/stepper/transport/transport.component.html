@@ -15,22 +15,22 @@
                     <div class="col-md-4 mb30">
                         <label class="fs14 fw400 lh14 pl-1">Start Date :</label>
                         <div class="position-relative" [owlDateTimeTrigger]="dt1">
-                            <input [owlDateTime]="dt1" placeholder="Depature Date" class="owldatebrdr w-100 form-control" formControlName="depdate" [ngClass]="{ 'is-invalid': submitted && f.depdate.errors }">
+                            <input [min]="transportMin" [max]="transportMax" [owlDateTime]="dt1" placeholder="Depature Date" class="owldatebrdr w-100 form-control" formControlName="depdate" [ngClass]="{ 'is-invalid': submitted && f.depdate.errors }">
                             <i class="icns calendaricon icon_size_20 cursor-pointer owldateiconpostion"></i>
                             <owl-date-time #dt1 [pickerType]="'calendar'"></owl-date-time>
                         </div>
                     </div>
                     <div class="col-md-4 mb30">
-                        <label class="fs14 fw400 lh14 pl-1">Select Cab Service :</label>
+                        <label class="fs14 fw400 lh14 pl-1">Select Transport Service :</label>
                         <select class="owldatebrdr w-100 form-control" formControlName="cabservice" [ngClass]="{ 'is-invalid': submitted && f.cabservice.errors }">
-                            <option value="" disabled selected hidden>Select Cab Service Provider</option>
+                            <option value="" disabled selected hidden>Select Transport Service Provider</option>
                             <option *ngFor="let item of companyList" [value]="item.item_id">{{item.item_text}}</option>
                         </select>
                     </div>
                     <div class="col-md-4 mb30">
-                        <label class="fs14 fw400 lh14 pl-1">Select Cab Type :</label>
+                        <label class="fs14 fw400 lh14 pl-1">Select Vehicle Type :</label>
                         <select class="owldatebrdr w-100 form-control" formControlName="cabtype" [ngClass]="{ 'is-invalid': submitted && f.cabtype.errors }">
-                            <option value="" disabled selected hidden>Select Cab Type</option>
+                            <option value="" disabled selected hidden>Select Vehicle Type</option>
                             <option *ngFor="let item of vehicleTypeList" [value]="item.item_id">{{item.item_text}}</option>
                         </select>
                     </div>
@@ -41,15 +41,7 @@
                             <option *ngFor="let item of routeList" [value]="item.item_id">{{item.item_text}}</option>
                         </select>
                     </div>
-                    <div class="col-md-4 mb30">
-                        <label class="fs14 fw400 lh14 pl-1">Number of Days :</label>
-                        <input type="text" class="owldatebrdr w-100 form-control" numberOnly formControlName="numberofDays" [ngClass]="{ 'is-invalid': submitted && f.numberofDays.errors }">
-                    </div>
-                    <div class="col-md-4 mb30">
-                        <label class="fs14 fw400 lh14 pl-1">Person Per Vehicle :</label>
-                        <input type="text" class="owldatebrdr w-100 form-control" numberOnly formControlName="personpervehicle" [ngClass]="{ 'is-invalid': submitted && f.personpervehicle.errors }">
-                    </div>
-                    <div class="col-md-4">
+                    <div class="col-md-4 ">
                         <label class="fs14 fw400 lh14 pl-1">Price Per Person :</label>
                         <div class="input-group w-100">
                             <div class="input-group-prepend w20">
@@ -57,6 +49,10 @@
                             </div>
                             <input type="text" class="owldatebrdr w80 form-control" numberOnly formControlName="amoundperperson" [ngClass]="{ 'is-invalid': submitted && f.amoundperperson.errors }">
                         </div>
+                    </div>
+                    <div class="col-md-4 mb30">
+                        <label class="fs14 fw400 lh14 pl-1">Person Per Vehicle :</label>
+                        <input type="text" class="owldatebrdr w-100 form-control" numberOnly formControlName="personpervehicle" [ngClass]="{ 'is-invalid': submitted && f.personpervehicle.errors }">
                     </div>
                 </div>
             </div>

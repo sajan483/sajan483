@@ -41,7 +41,6 @@ export class HedderComponent implements OnInit, DoCheck {
   ngOnInit() {
     this.commonApiService.getLanguages().subscribe((data) => {
       this.userType = this.appStore.userType;
-      console.log("user",this.userType)
       this.languageList = data.results;
       var first = localStorage.getItem("userLanguage")
         ? localStorage.getItem("userLanguage")

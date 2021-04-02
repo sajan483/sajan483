@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormArray } from '@angular/forms';
 import { SuperAgentApiService } from 'src/app/Services/super-agent-api-services';
-import { CommonApiService } from 'src/app/Services/common-api-services';
 import { StepperAdapter } from 'src/app/adapters/super-agent/stepper-adapter';
 import { AppStore } from 'src/app/stores/app.store';
 import { HelperService } from "src/app/common/services/helper-service";
 import { StepperComponent } from '../stepper.component';
+import { AngularEditorConfig } from '@kolkov/angular-editor';
 
 @Component({
   selector: 'app-other-info',
@@ -23,7 +23,10 @@ export class OtherInfoComponent implements OnInit {
   itineraryUrlList = [];
   itineraryFiles = [];
   array: any[] = [];
-  imageAddButton:boolean=true;
+  imageAddButton:boolean = true;
+  otherInfoMin:any;
+  otherInfoMax:any;
+  travelDays: number;
 
   constructor(private _SuperAgentService:SuperAgentApiService,private appStore:AppStore,private helperService:HelperService,
     private stepper:StepperComponent) {
@@ -31,9 +34,43 @@ export class OtherInfoComponent implements OnInit {
     this.StepperAdapter = new StepperAdapter(this.helperService,null);
    }
 
+  /**
+   * configuratio settings for rich text editor
+   */
+   config: AngularEditorConfig = {
+    editable: true,
+    spellcheck: true,
+    height: '7rem',
+    minHeight: '5rem',
+    placeholder: 'Enter text here...',
+    translate: 'no',
+    defaultParagraphSeparator: 'p',
+    defaultFontName: 'Arial',
+    toolbarHiddenButtons: [
+      ['bold']
+      ],
+    customClasses: [
+      {
+        name: "quote",
+        class: "quote",
+      },
+      {
+        name: 'redText',
+        class: 'redText'
+      },
+      {
+        name: "titleText",
+        class: "titleText",
+        tag: "h1",
+      },
+    ]
+  }
+
   ngOnInit() {
     this.otherPackageForm = this.StepperAdapter.otherInfoForm();
-    console.log(this.appStore.packageId);
+    this.otherInfoMin = this.appStore.departureDate;
+    this.otherInfoMax = this.appStore.arrivalDate;
+    this.travelDays = this.helperService.noOfDaysBetweenTwoDates(this.appStore.departureDate,this.appStore.arrivalDate)
   }
 
   /**

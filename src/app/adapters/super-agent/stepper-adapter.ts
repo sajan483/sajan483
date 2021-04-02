@@ -1,7 +1,7 @@
 import { HelperService } from "src/app/common/services/helper-service";
 import { AppStore } from "src/app/stores/app.store";
 import { FormGroup, FormBuilder, Validators } from "@angular/forms";
-import { StepperComponent } from "src/app/components/super-agent/create-trip/stepper/stepper.component";
+
 
 export class StepperAdapter {
   fb: FormBuilder;
@@ -61,7 +61,6 @@ export class StepperAdapter {
       cabservice: ["", Validators.required],
       cabtype: ["", Validators.required],
       route: ["", Validators.required],
-      numberofDays: ["", Validators.required],
       personpervehicle: ["", Validators.required],
       amoundperperson: ["", Validators.required],
     });
@@ -102,8 +101,8 @@ export class StepperAdapter {
       arr: this.fb.array([this.createItem()]),
       visaservice: ['',Validators.required],
       adultpricevisa: ['',Validators.required],
-      childpricevisa: ['',Validators.required],
-      country: ['',Validators.required],
+      childpricevisa: ['',Validators.required]
+     // country: ['',Validators.required],
     })
   }
   /**
@@ -294,8 +293,8 @@ export class StepperAdapter {
   selectedHotelRequest(item,city){
     if(city == 'MAKKA'){
       var bodyMk = {
-        checkin_date :StepperComponent.searchData.mekkahData.checkIn,
-        checkout_date :StepperComponent.searchData.mekkahData.checkOut,
+        checkin_date :this.appStore.makkahCheckInDate,
+        checkout_date :this.appStore.makkahCheckOutDate,
         location : city,
         providers:item.providers,
         hotel_name: item.name,
@@ -306,8 +305,8 @@ export class StepperAdapter {
 
     if(city == 'MADEENA'){
      var bodyMd = {
-        checkin_date :StepperComponent.searchData.medinaData.checkIn,
-        checkout_date :StepperComponent.searchData.medinaData.checkOut,
+        checkin_date :this.appStore.medinahCheckInDate,
+        checkout_date :this.appStore.medinahCheckOutDate,
         location : city,
         providers:item.providers,
         hotel_name: item.name,
