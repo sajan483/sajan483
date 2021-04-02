@@ -23,7 +23,7 @@ export class HotelComponent implements OnInit {
   
 
   @ViewChild('pickerEnd' , {read: undefined, static: false}) pickerEnd: MatDatepicker<Date>;
-  private stepperAdapter: StepperAdapter = new StepperAdapter(null,null);
+  private stepperAdapter: StepperAdapter = new StepperAdapter(null,this.appStore);
   selectedHotel: any;
   selectedRoomGroups: any[];
   makkaInDate: any;

@@ -10,7 +10,7 @@
     </div>
     <div class="container mt-3 mb-5">
         <div class="boxborder">
-            <div>
+            <div *ngIf="onwardFlight">
                 <div class="w-100 bgf2 p20 brdr_btm_d3 d-flex justify-content-between">
                     <div class="fw600 fs16">Departure Flight</div>
                     <div class="cursor-pointer"><i class="blue_back_arrow rotate-90 icns icon_size_20"></i></div>
@@ -19,7 +19,7 @@
                     <div class="col-md-3">
                         <div class="d-inline-flex">
                             <div class="flightlogo m10 ml-0">
-                                <img src="https://imgak.mmtcdn.com/flights/assets/media/dt/common/icons/{{onwardFlight?.mac}}.png" alt="">
+                                <img src="https://imgak.mmtcdn.com/flights/assets/media/dt/common/icons/{{onwardFlight.mac}}.png" alt="">
                             </div>
                             <div>
                                 <div class="fs15">{{onwardFlight?.airline_name.split('|')[1]}} <span class="fs12 clr52">{{onwardFlight?.mac}}-{{onwardFlight?.flight_no}}</span></div>
@@ -84,7 +84,7 @@
                 </div>
             </div>
 
-            <div>
+            <div *ngIf="returnFlight">
                 <div class="w-100 bgf2 p20 brdr_btm_d3 d-flex justify-content-between">
                     <div class="fw600 fs16">Return Flight</div>
                     <div class="cursor-pointer"><i class="blue_back_arrow rotate-90 icns icon_size_20"></i></div>
@@ -114,8 +114,8 @@
                                 <div class="fs14 fw600">{{returnFlight?.duration_minutes}}</div>
                                 <div class="position-relative">
                                     <hr class="dashedline mt-2 mb-2">
-                                    <div class="position_dot" *ngIf="returnFlight?.stops > 0">
-                                        <span class="connectionflight" *ngFor="let item of returnFlight.connections">
+                                    <div class="position_dot" >
+                                        <!-- <span class="connectionflight" *ngFor="let item of returnFlight.connections">
                                             <div class="redround"></div>
                                             <span class="connectionflighttext">
                                                 <div class="d-inline-flex">
@@ -130,13 +130,13 @@
                                                     </div>
                                                 </div>
                                             </span>
-                                        </span>
+                                        </span> -->
                                     </div>
                                     <i class="flight_duration_icon icns icon_size_15 positioniconduration"></i>
                                 </div>
                                 <div class="d-flex justify-content-center pt-2">
-                                    <div class="returnR fs14 bg_green" *ngIf="returnFlight?.refundable == 'R'">R</div>
-                                    <div class="returnR fs14 bg_red" *ngIf="returnFlight?.refundable != 'R'">N</div>
+                                    <!-- <div class="returnR fs14 bg_green" *ngIf="returnFlight?.refundable == 'R'">R</div> -->
+                                    <!-- <div class="returnR fs14 bg_red" *ngIf="returnFlight?.refundable != 'R'">N</div> -->
                                 </div>
                             </div>
                             <div>
@@ -150,7 +150,7 @@
                 </div>
             </div>
 
-            <div>
+            <div *ngIf="makkahHotel">
                 <div class="w-100 bgf2 p20 brdr_btm_d3 d-flex justify-content-between">
                     <div class="fw600 fs16">Hotel in Makkah</div>
                     <div class="cursor-pointer"><i class="blue_back_arrow rotate-90 icns icon_size_20"></i></div>
@@ -158,9 +158,9 @@
                 <div class="row m-0 p30">
                     <div class="col-md-6">
                         <div>
-                            <div class="fs16 fw600">{{makkahHotel?.hotel?.name}}
-                                <span class="pl-1" *ngIf="makkahHotel.hotel.user_review">
-                                    <ngb-rating [(rate)]="makkahHotel.hotel.user_review" [readonly]="readonly" [max]=5>
+                            <div class="fs16 fw600">{{makkahHotel?.name}}
+                                <span class="pl-1" *ngIf="makkahHotel.user_review">
+                                    <ngb-rating [(rate)]="makkahHotel.user_review" [readonly]="readonly" [max]=5>
                                         <ng-template let-fill="fill" let-index="index">
                                             <span class="star" [class.filled]="fill === 100" [class.bad]="index < 2">&#9733;</span>
                                 </ng-template>
@@ -215,7 +215,7 @@
                 </div>
             </div>
 
-            <div>
+            <div *ngIf="madeenaHotel">
                 <div class="w-100 bgf2 p20 brdr_btm_d3 d-flex justify-content-between">
                     <div class="fw600 fs16">Hotel in Medina</div>
                     <div class="cursor-pointer"><i class="blue_back_arrow rotate-90 icns icon_size_20"></i></div>
@@ -223,7 +223,7 @@
                 <div class="row m-0 p30">
                     <div class="col-md-6">
                         <div>
-                            <div class="fs16 fw600">{{madeenaHotel?.hotel?.name}}
+                            <div class="fs16 fw600">{{madeenaHotel?.name}}
                                 <span class="pl-1" *ngIf="madeenaHotel.hotel.user_review">
                                     <ngb-rating [(rate)]="madeenaHotel.hotel.user_review" [readonly]="readonly" [max]=5>
                                         <ng-template let-fill="fill" let-index="index">
@@ -280,7 +280,7 @@
                 </div>
             </div>
 
-            <div>
+            <div *ngIf="transport">
                 <div class="w-100 bgf2 p20 brdr_btm_d3 d-flex justify-content-between">
                     <div class="fw600 fs16">Transport</div>
                     <div class="cursor-pointer"><i class="blue_back_arrow rotate-90 icns icon_size_20"></i></div>
@@ -301,7 +301,7 @@
                 </div>
             </div>
 
-            <div>
+            <div *ngIf="otherService">
                 <div class="w-100 bgf2 p20 brdr_btm_d3 d-flex justify-content-between">
                     <div class="fw600 fs16">Other Services</div>
                     <div class="cursor-pointer"><i class="blue_back_arrow rotate-90 icns icon_size_20"></i></div>
@@ -427,7 +427,7 @@
             </div>
         </div>
         <div class="d-flex justify-content-center mt-3">
-            <button class="searchbutton" class="publishTrip()">Publish</button>
+            <button class="searchbutton" class="publishTrip()" (click)="publishTrip()">Publish</button>
         </div>
     </div>
 </div>

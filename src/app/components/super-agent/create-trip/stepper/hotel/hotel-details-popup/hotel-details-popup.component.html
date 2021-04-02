@@ -195,30 +195,30 @@
                         <div class="roomInfoWrap">
                             <div class="col-md-12 bg-white">
                                 <div class="row">
-                                    <span class="txt-font pl-4 pt-4">Room Type</span> <span class="ml-auto txt-font  pt-4" style="margin-right: 100px;">Enter your
-                                                    rate of the room</span>
+                                    <span class="txt-font pl-4 pt-4">Room Type</span> <span class="ml-auto txt-font  pt-4 mr12">Enter your
+                                                    rate for the room</span>
                                 </div>
                                 <hr class="pb-0">
                                 <div class="row mb-2 btmBrdr" *ngFor="let room of selectedRoomGroups;let i = index ">
                                     <div class="col-md-8 bg1 btmBrdr">
                                         <div class="row">
-                                            <p class="pl-4" style="font-size: 16px;">{{room.name}}</p>
+                                            <p class="pl-4 fntSz16">{{room.name}}</p>
                                         </div>
                                         <div class="row pl-4">
-                                            <i class="hotelbedicon icns icon_size_20"></i><span class="pl-1" style="font-size: 14;font-family: lato-Regular;">
+                                            <i class="hotelbedicon icns icon_size_20"></i><span class="pl-1 font14Lt">
                                                             <p>1 {{'Room for'}} {{room?.adult_number}} {{'Adult(s)'}}</p>
                                                         </span>
                                         </div>
                                         <div class="">
                                             <span>{{room?.deal_description}}</span>
                                             <span id="features">
-                                                            <tag-input [(ngModel)]="room.features" [editable]="true"
-                                                                [identifyBy]="'id'" [displayBy]="'name'">
-                                                            </tag-input>
-                                                        </span>
+                                                <tag-input [(ngModel)]="room.features" [editable]="true"
+                                                    [identifyBy]="'id'" [displayBy]="'name'">
+                                                </tag-input>
+                                            </span>
                                         </div>
                                     </div>
-                                    <div class="col-md-4 bg2 p-1" style="height:200px">
+                                    <div class="col-md-4 bg2 p-1 height200">
                                         <div class="row">
                                             <div class="col-md-4 ml-4 mt-4">
                                                 <p class="mb-0 txt-font">Adult</p>
@@ -252,7 +252,7 @@
                         </div>
                     </section>
                 </div>
-                <div class="col-md-12 d-flex justify-content-center " style="margin-bottom: 150px;">
+                <div class="col-md-12 d-flex justify-content-center mb150">
                     <button class=" btn" [disabled]="!disableHotelSaveBtn()" [class.hidenormalbutton]="!disableHotelSaveBtn()" (click)="saveSelectedHotel(selectedHotel.city)">continue</button>
                 </div>
 
@@ -264,7 +264,7 @@
                     <h1 *ngIf="selectedHotel?.extensions?.length > 0" class="amntStyle">Extensions</h1>
                     <p *ngFor="let extension of selectedHotel?.extensions">{{extension?.value}}</p>
                     <h1 *ngIf="selectedHotel?.meta_data?.remark" class="amntStyle">{{'Remarks' }}</h1>
-                    <div style="font-size: 12px;" [innerHTML]="selectedHotel?.meta_data?.remark"></div>
+                    <div class="fnt12" [innerHTML]="selectedHotel?.meta_data?.remark"></div>
                     <div *ngIf="selectedHotel?.meta_data.amenities.length == 0">
                         {{'No Amenities' }}
                     </div>

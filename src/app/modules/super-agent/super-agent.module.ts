@@ -29,6 +29,8 @@ import { CarouselModule } from 'ngx-owl-carousel-o';
 import { HotelImagePopupComponent } from 'src/app/components/super-agent/create-trip/stepper/hotel/hotel-image-popup/hotel-image-popup.component';
 import { NgbRatingModule } from '@ng-bootstrap/ng-bootstrap';
 import { HotelLoaderComponent } from 'src/app/components/super-agent/create-trip/stepper/hotel/hotel-loader/hotel-loader.component';
+import { HttpClientModule } from '@angular/common/http';
+import { AngularEditorModule } from '@kolkov/angular-editor';
 
 
 @NgModule({
@@ -74,7 +76,9 @@ import { HotelLoaderComponent } from 'src/app/components/super-agent/create-trip
     MatTabsModule,
     NgbCarouselModule,
     CarouselModule,
-    NgbRatingModule
+    NgbRatingModule,
+    AngularEditorModule,
+    HttpClientModule
   ],
   providers: [
     DatePipe, GeneralHelper,CommonApiService,HelperService,SuperAgentApiService

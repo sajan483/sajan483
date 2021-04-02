@@ -21,6 +21,8 @@ export class TransportComponent implements OnInit {
   vehicleTypeList:any;
   routeList:any;
   StepperAdapter : StepperAdapter;
+  transportMin:any;
+  transportMax:any;
 
   constructor(private formBuilder: FormBuilder,private _commonApiService:CommonApiService,private stepper:StepperComponent,
     private _SuperAgentService:SuperAgentApiService,private helperService:HelperService,private appStore:AppStore) {
@@ -32,6 +34,8 @@ export class TransportComponent implements OnInit {
   ngOnInit() {
     this.callListApi();
     this.transportSelection = this.StepperAdapter.transportBookingForm();
+    this.transportMin = this.appStore.departureDate;
+    this.transportMax = this.appStore.arrivalDate;
   }
 
   /**
