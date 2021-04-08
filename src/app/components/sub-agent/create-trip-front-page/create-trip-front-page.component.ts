@@ -371,7 +371,7 @@ export class CreateTripFrontPageComponent implements OnInit, DoCheck {
     this.madeenaMin = this.makkaCheckOutDate;
     // this.makkaCheckOutDate = null;
     // this.madeenaCheckInDate = null;
-    this.madeenaCheckOutDate = null;
+    // this.madeenaCheckOutDate = null;
     this.transportStartDate = this.makkaCheckInDate;
     if (!this.activaleAllSearch) {
       if (this.makkaCheckInDate != null && this.makkaCheckOutDate != null) {

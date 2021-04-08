@@ -81,31 +81,6 @@ export class MakkaHotelComponent implements OnInit,DoCheck{
   ngOnInit() {
   }
 
-  /*
- * this method for sorting hotel list according to price,haram distance
- */
-
-  sortHotelList(asnd, dsnd, base) {
-    if(base == "price") {
-      if(asnd){
-        this.hotelsList.sort((a, b) => a.amount - b.amount);
-        this.isHotelsSortedByPrice = true;
-      }
-      if(dsnd) {
-      this.hotelsList.reverse();
-      this.isHotelsSortedByPrice = false;
-      }
-    }
-    if (asnd && base == "hararamDistance") {
-      this.hotelsList.sort((a, b) => a.haram_distance - b.haram_distance);
-      this.isHotelListSortedByHaramDistance = true;
-    }
-    if (dsnd && "hararamDistance") {
-      this.hotelsList.reverse();
-      this.isHotelListSortedByHaramDistance = false;
-    }
-  }
-
    /*
  * this method for showing hotelDetails PopUp
  */
@@ -201,4 +176,26 @@ export class MakkaHotelComponent implements OnInit,DoCheck{
     
   }
   
+   /*
+ * this method for sorting hotel list according to price,haram distance
+ */
+  priceHotelFilter(){
+    if(this.isHotelsSortedByPrice == false){
+      this.hotelsList.sort((a, b) => (a.amount) - (b.amount));
+      this.isHotelsSortedByPrice=true;
+    }else{
+      this.hotelsList.reverse();
+      this.isHotelsSortedByPrice=false;
+    }
+  }
+
+  haramdistancefilter(){
+    if(this.isHotelListSortedByHaramDistance == false){
+      this.hotelsList.sort((a, b) => (a.haram_distance) - (b.haram_distance));
+      this.isHotelListSortedByHaramDistance = true;
+    }else{
+      this.hotelsList.reverse();
+      this.isHotelListSortedByHaramDistance = false;
+    }
+  }
 }
