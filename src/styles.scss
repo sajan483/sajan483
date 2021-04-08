@@ -980,13 +980,15 @@ body {
 .lh14 {
     line-height: 14px;
 }
-.lh18{
-  line-height: 18px;
+
+.lh18 {
+    line-height: 18px;
 }
-.borderbox{
-  border: 1px solid #d6d6d6;
-  border-radius: 4px;
-  background-color: #ffffff;
+
+.borderbox {
+    border: 1px solid #d6d6d6;
+    border-radius: 4px;
+    background-color: #ffffff;
 }
 
 .textunderline {
@@ -1102,6 +1104,10 @@ body {
     margin-top: 15px;
 }
 
+.mt18 {
+    margin-top: 18px;
+}
+
 .mt24 {
     margin-top: 24px;
 }
@@ -1113,11 +1119,13 @@ body {
 .mt135 {
     margin-top: 135px;
 }
-.m10{
-  margin: 10px;
+
+.m10 {
+    margin: 10px;
 }
-.p8{
-  padding: 8px;
+
+.p8 {
+    padding: 8px;
 }
 
 .p10 {
@@ -1136,8 +1144,16 @@ body {
     padding-top: 25px;
 }
 
+.pt50 {
+    padding-top: 50px;
+}
+
 .pb5 {
     padding-bottom: 5px;
+}
+
+.pb30 {
+    padding-bottom: 30px;
 }
 
 .pl10 {
@@ -1166,6 +1182,10 @@ body {
 
 .brdr_btm_d3 {
     border-bottom: 1px solid #d3d3d3;
+}
+
+.brdr_right_d3 {
+    border-right: 1px solid #d3d3d3;
 }
 
 .brdr_bottom {
@@ -1288,7 +1308,7 @@ body {
     padding: 3px 15px;
     border-radius: 20px;
     font-size: 13px;
-    font-weight: 600;
+    font-weight: 500;
     cursor: pointer;
 }
 
