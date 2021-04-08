@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { NgxSpinnerService } from "ngx-spinner";
 import 'rxjs/add/observable/interval';
 import { Observable } from 'rxjs';
 import Swal from "sweetalert2";
@@ -52,10 +51,15 @@ export class PaymentStatusComponent implements OnInit {
   trnsprt: boolean = true;
   genHelper: GeneralHelper;
   createHelper: CreateTripHelper;
+  makkahotel:boolean=false;
+  transporttoggle:boolean=false;
+  bknStatus
+  noOfDaysInMakkah
+  noOfTravellers
+  noOfDaysInMedinah: any;
 
   constructor(private route: ActivatedRoute,
     private appStore: AppStore,
-    private paymentLoader: NgxSpinnerService,
     private translate: TranslateService,
     private common: SubAgentApiService, 
     private notifyService: NotificationService,
@@ -68,7 +72,6 @@ export class PaymentStatusComponent implements OnInit {
   ngOnInit() {
     this.genHelper.checkForAccessToken();
     this.createHelper = new CreateTripHelper(this.helperService);
-    this.paymentLoader.show();
     this.status = this.route.snapshot.params.status;
     this.getList();
   }
@@ -98,7 +101,7 @@ export class PaymentStatusComponent implements OnInit {
   }
 
   getData(data) {
-    this.paymentLoader.hide();
+    this.bknStatus=data.status
     this.reference_no = data.reference_no;
     if (this.dataArray) {
       this.dataArray.unsubscribe();
@@ -109,12 +112,15 @@ export class PaymentStatusComponent implements OnInit {
     }
     if (data.madina_hotel_booking) {
       this.tripMadeenaHotel = data.madina_hotel_booking;
+      this.noOfDaysInMedinah = this.tripMadeenaHotel.trip_hotel.num_of_days
     }
     if (data.makka_hotel_booking) {
       this.tripMakkahHotel = data.makka_hotel_booking;
+      this.noOfDaysInMakkah = this.tripMakkahHotel.trip_hotel.num_of_days
     }
     if (data.transport_booking) {
       this.tripTransport = data.transport_booking;
+      console.log(this.tripTransport);
       if (data.transport_booking.trip_transportation.trip_vehicles.length > 0) {
         this.transportFare = data.transport_booking.trip_transportation.trip_vehicles[0].price_per_vehicle;
       }
@@ -128,6 +134,7 @@ export class PaymentStatusComponent implements OnInit {
     }
     if (data.travellers) {
       this.tripTravellers = data.travellers;
+      this.noOfTravellers = this.tripTravellers.length
     }
   }
 
@@ -228,9 +235,7 @@ export class PaymentStatusComponent implements OnInit {
   }
   
   checkCancellation() {
-    this.paymentLoader.show();
     this.common.getCheckCancellation(this.route.snapshot.params.id).subscribe((data) => {
-      this.paymentLoader.hide();
       this.canCancel = data.can_cancel_booking;
       this.makkahCancellation = data.makkah_hotel_booking;
       this.medinahCancellation = data.medinah_hotel_booking;
@@ -298,41 +303,29 @@ export class PaymentStatusComponent implements OnInit {
     });
   }
 
-  toggleMakkaUp() {
-    (<HTMLElement>document.getElementById("makka")).style.display = "none";
-    this.makka = !this.makka;
+  toggleDetails(event){
+    var element = event.target;
+    var panel = element.nextElementSibling;
+    if (element.style.transform) {
+      element.style.transform= null;
+    } else {
+      element.style.transform= 'rotate(180deg)';
+    }
+    if (panel.style.maxHeight) {
+      panel.style.maxHeight = null;
+    } else {
+      panel.style.maxHeight = panel.scrollHeight + "px";
+    }
   }
 
-  toggleMakkaDown() {
-    (<HTMLElement>document.getElementById("makka")).style.display = "block";
-    this.makka = !this.makka;
+  toggleText(event){
+    var element = event.target;
+    var panel = element.nextElementSibling;
+    if (panel.style.maxHeight) {
+      panel.style.maxHeight = null;
+    } else {
+      panel.style.maxHeight = panel.scrollHeight + "px";
+    }
   }
 
-  toggleMedinahDown() {
-    (<HTMLElement>document.getElementById("medinah")).style.display = "block";
-    this.medinah = !this.medinah;
-  }
-
-  toggleMedinahUp() {
-    (<HTMLElement>document.getElementById("medinah")).style.display = "none";
-    this.medinah = !this.medinah;
-  }
-
-  toggleTransportUp() {
-    (<HTMLElement>document.getElementById("transport")).style.display = "none";
-    (<HTMLElement>document.getElementById("transportRate")).style.display = "none";
-    (<HTMLElement>document.getElementById("transportPolicy")).style.display = "none";
-    (<HTMLElement>document.getElementById("transportBrn")).style.display = "none";
-    (<HTMLElement>document.getElementById("trnsptNormal")).style.display = "none";
-    this.trnsprt = !this.trnsprt;
-  }
-
-  toggleTransportDown() {
-    (<HTMLElement>document.getElementById("transport")).style.display = "block";
-    (<HTMLElement>document.getElementById("transportPolicy")).style.display = "block";
-    (<HTMLElement>document.getElementById("transportRate")).style.display = "block";
-    (<HTMLElement>document.getElementById("transportBrn")).style.display = "block";
-    (<HTMLElement>document.getElementById("trnsptNormal")).style.display = "block";
-    this.trnsprt = !this.trnsprt;
-  }
 }

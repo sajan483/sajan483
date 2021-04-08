@@ -56,6 +56,6 @@ export class FlightCardComponent implements OnInit {
     } else {
       panel.style.maxHeight = panel.scrollHeight + "px";
     }
-}
+  }
 
 }
