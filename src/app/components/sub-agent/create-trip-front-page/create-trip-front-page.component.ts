@@ -178,7 +178,7 @@ export class CreateTripFrontPageComponent implements OnInit, DoCheck {
     */
   getTransportRoutes() {
     this.commonApiService
-      .getRoutes(localStorage.getItem("userLanguage"))
+      .getRoutes(sessionStorage.getItem("userLanguage"))
       .subscribe((data) => {
         this.routeList = data.routes;
       });
@@ -190,7 +190,7 @@ export class CreateTripFrontPageComponent implements OnInit, DoCheck {
     */
   getVehicleType(){
     this.commonApiService
-    .getVehicles(localStorage.getItem("userLanguage"))
+    .getVehicles(sessionStorage.getItem("userLanguage"))
     .subscribe((data) => {
       this.vehicleTypeList=data.vehicle_types;
     });

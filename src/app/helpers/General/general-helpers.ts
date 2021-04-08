@@ -8,14 +8,14 @@ export class GeneralHelper {
   constructor(private notifyService : NotificationService,
     private router : Router) { }
   getAccessTocken(): string {
-    if (localStorage && localStorage.getItem('accesstoken')) {
-      return localStorage.getItem('accesstoken');
+    if (sessionStorage && sessionStorage.getItem('accesstoken')) {
+      return sessionStorage.getItem('accesstoken');
     }
     return "";
   }
 
   checkForAccessToken(): void {
-    if (localStorage.getItem('accesstoken') == "") {
+    if (sessionStorage.getItem('accesstoken') == "") {
       this.notifyService.showWarning("Please Login")
       this.router.navigate(['/login']);
     }

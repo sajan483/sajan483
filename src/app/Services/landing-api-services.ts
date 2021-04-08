@@ -19,19 +19,19 @@ export class LandingApiService {
   httpOptions = {
     headers: new HttpHeaders({
       "Content-Type": "application/json",
-      Authorization: "Bearer " + localStorage.getItem("accesstoken"),
+      Authorization: "Bearer " + sessionStorage.getItem("accesstoken"),
     }),
   };
   options = {
     headers: new Headers({
       "Content-Type": "application/json",
-      Authorization: "Bearer " + localStorage.getItem("accesstoken"),
+      Authorization: "Bearer " + sessionStorage.getItem("accesstoken"),
     }),
   };
 
   optionsForForm = {
     headers: new Headers({
-      Authorization: "Bearer " + localStorage.getItem("accesstoken"),
+      Authorization: "Bearer " + sessionStorage.getItem("accesstoken"),
     }),
   };
 

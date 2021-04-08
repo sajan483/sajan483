@@ -178,8 +178,8 @@
     interval;
     showShimmer:boolean;
     noOfDaysInMakkah:number;
-    generalHelper : GeneralHelper
-    commonApiService : CommonApiService
+    generalHelper : GeneralHelper;
+    commonApiService : CommonApiService;
 
   constructor(
     private router: Router,
@@ -197,7 +197,7 @@
     private route: ActivatedRoute,
     private helperService:HelperService,
     private genHelper: GeneralHelper,
-    private _commonApiService : CommonApiService
+    private _commonApiService : CommonApiService 
   ) {
     this.generalHelper = genHelper;
     this.commonApiService = _commonApiService;
@@ -421,58 +421,31 @@
     (<HTMLInputElement>document.getElementById("continueBooking")).style.display = "block";
   }
 
+  travellers = new FormGroup({
+    title:new FormControl('Mr'),
+    first_name: new FormControl('', Validators.required),
+    last_name: new FormControl('', Validators.required),
+    gender:new FormControl('',Validators.required),
+    dob:new FormControl('',Validators.required),
+    nationality: new FormControl('',Validators.required),
+    passport_no:new FormControl('',Validators.required),
+    address:new FormControl('',Validators.required),
+    email:new FormControl('',Validators.required),
+    phone_number:new FormControl('',Validators.required),
+    country_of_residence:new FormControl('',Validators.required),
+    country_code:new FormControl('',Validators.required),
+    passport_expiry_date:new FormControl('',Validators.required)
+    });
+
   /**
    * Method to book trip and check availability
    */
   bookTrip(){
     this.submitted = true;
-    let travellers = [];
-    this.roomAdultsArray.controls.forEach((adult, j) => { 
-    if(this.mainTraveller[j]){
-      const x = {
-        "title": "Mr", 
-        "first_name" : (<HTMLInputElement>document.getElementById("firstName"+j)).value,
-        "last_name":(<HTMLInputElement>document.getElementById("lastName"+j)).value,
-        "email": (<HTMLInputElement>document.getElementById("email"+j)).value,
-        "phone_number": (<HTMLInputElement>document.getElementById("mobile"+j)).value,
-        "address":(<HTMLInputElement>document.getElementById("address"+j)).value,
-        "country_code": this.selectedCountry,
-        "phn_country_code":(<HTMLInputElement>document.getElementById("phn_country_code"+j)).value,
-      }
-    
-      const q=  {
-        "title": "Mr", 
-        "first_name": (<HTMLInputElement>document.getElementById("firstName"+j)).value,
-        "last_name": (<HTMLInputElement>document.getElementById("lastName"+j)).value,
-        "dob": this.datepipe.transform((<HTMLInputElement>document.getElementById("dob"+j)).value, 'yyyy-MM-dd'),
-        "gender": (document.getElementById("gender"+j).getElementsByClassName("mat-select-value-text")[0].getElementsByClassName("ng-star-inserted")[0]).innerHTML,
-        "nationality": this.selectedNationality,
-        "passport_no": (<HTMLInputElement>document.getElementById("passportNo"+j)).value,
-        "room_reference": 0+"_"+this.rooms[0].adults+"ADT_"+this.rooms[0].children+"CHD_"+this.rooms[0].child_ages.sort().join("_")+"",
-        "passport_expiry_date": this.datepipe.transform((<HTMLInputElement>document.getElementById("ped"+j)).value, 'yyyy-MM-dd'),
-        "contactinfo": x,
-        "country_of_residence":this.selectedCountry
-      }
-      travellers.push(q);
-      }else{
-        const q=  {
-            "first_name": (<HTMLInputElement>document.getElementById("firstName"+j)).value,
-            "last_name": (<HTMLInputElement>document.getElementById("lastName"+j)).value,
-            "dob":  this.datepipe.transform((<HTMLInputElement>document.getElementById("dob"+j)).value, 'yyyy-MM-dd'),
-            "gender": (document.getElementById("gender"+j).getElementsByClassName("mat-select-value-text")[0].getElementsByClassName("ng-star-inserted")[0]).innerHTML,
-            "nationality": this.selectedNationality,
-            "passport_no": (<HTMLInputElement>document.getElementById("passportNo"+j)).value,
-            "room_reference": 0+"_"+this.rooms[0].adults+"ADT_"+this.rooms[0].children+"CHD_"+this.rooms[0].child_ages.sort().join("_")+"",
-            "passport_expiry_date": this.datepipe.transform((<HTMLInputElement>document.getElementById("ped"+j)).value, 'yyyy-MM-dd'),
-            "country_of_residence":this.selectedCountry
-      }
-        travellers.push(q);
-      }
-  });
-  const body={travellers}
-    this.common.bookTrip(body,this.appStore.customeTripId).subscribe((data) => {
+    console.log("dsd",this.travellers.value)
+    this.common.bookTrip(this.travellers.value,this.appStore.customeTripId).subscribe((data) => {
       this.bookingId = data.id;
-      localStorage.setItem("reference_no",data.reference_no)
+      sessionStorage.setItem("reference_no",data.reference_no)
       this.common.checkAvailability(data.id).subscribe((response)=> {
           this.appStore.isAvailabilityFails = false;
           if(response.makkah_trip_hotel){
@@ -638,12 +611,10 @@
   fetchNessoryApisForPaymentPage(){
     this.commonApiService.getCountry("",this.selectedLanguage).subscribe((data) => {
       this.nationalityList = data.map(x => ( {item_text: x.name, item_id: x.short_iso_code } ));
+      this.countryList = data.map(x => ( {item_text: x.name, item_id: x.short_iso_code } ));
     });
     this.commonApiService.getNationality("",this.selectedLanguage).subscribe((data) => {
       this.phoneCodeList = data.map(x => ( {item_text: x.name, item_id: x.code } ));
-    });
-    this.commonApiService.getCountry("",this.selectedLanguage).subscribe((data) => {
-      this.countryList = data.map(x => ( {item_text: x.name, item_id: x.short_iso_code } ));
     });
   }
 

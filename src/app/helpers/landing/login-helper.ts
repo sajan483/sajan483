@@ -22,23 +22,23 @@ export class loginHelper{
     loginResponse(data:any,rememberme:boolean){
         var access = data.access;
         var etype = data.staff.employer_type;
-        localStorage.setItem('accesstoken', data.access);
+        sessionStorage.setItem('accesstoken', data.access);
         if (rememberme) {
-          localStorage.setItem('isTouched', 'true');
+          sessionStorage.setItem('isTouched', 'true');
         }
         if (!rememberme) {
-          localStorage.setItem('isTouched', null);
+          sessionStorage.setItem('isTouched', null);
           this.cookie.set("userName", null);
           this.cookie.set("password", null);
         }
 
-        localStorage.setItem('empId', data.staff.employer_id);
-        if (localStorage.getItem('accesstoken') != null) {
+        sessionStorage.setItem('empId', data.staff.employer_id);
+        if (sessionStorage.getItem('accesstoken') != null) {
           if (etype == 'branch') {
             this.notifyService.showSuccess(this.translate.instant('success !!'));
             this.appStore.currentUser = etype;
             this.appStore.userType = data.staff.employer_name;
-            localStorage.setItem('currentUser', etype);
+            sessionStorage.setItem('currentUser', etype);
             this.router.navigate(['subagent/home/']);
           }
           if (etype == 'agency') {
@@ -49,7 +49,7 @@ export class loginHelper{
               this.notifyService.showSuccess(this.translate.instant('success !!'));
               this.appStore.currentUser = etype;
               this.appStore.userType = data.staff.name;
-              localStorage.setItem('currentUser', etype);
+              sessionStorage.setItem('currentUser', etype);
               this.router.navigate(["superagent/createTrip"]);
             }
 

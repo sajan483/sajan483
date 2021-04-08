@@ -86,13 +86,15 @@ export class MakkaHotelComponent implements OnInit,DoCheck{
  */
 
   sortHotelList(asnd, dsnd, base) {
-    if (asnd && base == "price") {
-      this.hotelsList.sort((a, b) => a.amount - b.amount);
-      this.isHotelsSortedByPrice = true;
-    }
-    if (dsnd && base == "price") {
+    if(base == "price") {
+      if(asnd){
+        this.hotelsList.sort((a, b) => a.amount - b.amount);
+        this.isHotelsSortedByPrice = true;
+      }
+      if(dsnd) {
       this.hotelsList.reverse();
       this.isHotelsSortedByPrice = false;
+      }
     }
     if (asnd && base == "hararamDistance") {
       this.hotelsList.sort((a, b) => a.haram_distance - b.haram_distance);
