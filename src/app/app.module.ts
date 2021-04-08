@@ -27,7 +27,7 @@ import { OnlyNumberDirective } from './models/onlynumber.directive';
     HedderComponent,
     FooterComponent,
     SliderComponent,
-    PaginationComponent
+    PaginationComponent,
   ],
   imports: [
     BrowserModule,

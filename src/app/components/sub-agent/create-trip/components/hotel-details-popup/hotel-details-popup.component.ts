@@ -133,7 +133,6 @@ export class HotelDetailsPopupComponent implements OnInit ,OnChanges{
    * this method for booking hotel
    */
   bookHotel() {
-    this.showHotelDetails = false;
     this.makkahticked = true;
     this.makkahticked = true;
     this.madeendetailshow = true;
@@ -145,6 +144,7 @@ export class HotelDetailsPopupComponent implements OnInit ,OnChanges{
       this.commonService.saveSelectedHotel(this.createTripAdapter.bookHotelRequest(this.isGrouped,this.selectedRoomGroups,this.hotelData,this.hotelInfo)).subscribe((data) => {
         this.appStore.customeTripId = data.id;
         this.onNotify();
+        this.showHotelDetails = false;
       });
     }
     if(this.appStore.customeTripId ){
@@ -153,6 +153,7 @@ export class HotelDetailsPopupComponent implements OnInit ,OnChanges{
           this.onNotifyCreteTripForItineraryChange();
         }else{
           this.onNotify();
+          this.showHotelDetails = false;
         }
       });
     }
