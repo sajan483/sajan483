@@ -3,10 +3,10 @@
         <div class="hotel_filter_section filterbox col-md-12 row mrhntopphone mx-auto animationdiv">
             <div class="col-md-2 pl-0 pr-0 pt-1 ml-0 mr-0 fliter-arrow my-auto">
                 <div class="">
-                    <i class="filtericon icon_size_15 icns filterdiv"></i>
-                    <div class="fs12 fw500 text-uppercase">{{'Filters' | translate}}</div>
+                    <!-- <i class="filtericon icon_size_15 icns filterdiv"></i> -->
+                    <div class="">{{'Filters' | translate}}</div>
                 </div>
-            </div>
+            </div> 
             <div class="col-md-3 col-8  my-auto ">
                 <span class="pr-2 fs14">{{'Haram Distance' | translate}}</span>
                 <span class="fliter-arrow">
@@ -188,7 +188,7 @@
                                                 <div class="fs12 clr52">{{item?.email}}</div>
                                             </div>
                                         </div> -->
-                                        <div *ngIf="item.description">
+                                        <div *ngIf="item.description && item.description.length > 200">
                                             <div class="pb5 fs13 clr52 desptn divexpandanimation"
                                                 id="descrptionLess{{i}}">{{item?.description}}</div>
                                             <div class="readmorenavigate fs13" id="readMoreBttn{{i}}"

@@ -42,14 +42,14 @@ export class HedderComponent implements OnInit, DoCheck {
     this.commonApiService.getLanguages().subscribe((data) => {
       this.userType = this.appStore.userType;
       this.languageList = data.results;
-      var first = localStorage.getItem("userLanguage")
-        ? localStorage.getItem("userLanguage")
+      var first = sessionStorage.getItem("userLanguage")
+        ? sessionStorage.getItem("userLanguage")
         : "en-US";
       this.languageList.sort(function (x, y) {
         return x == first ? -1 : y == first ? 1 : 0;
       });
-      if (localStorage.getItem("userLanguage")) {
-        this.appStore.langCode = localStorage.getItem("userLanguage");
+      if (sessionStorage.getItem("userLanguage")) {
+        this.appStore.langCode = sessionStorage.getItem("userLanguage");
       } else {
         this.appStore.langCode = "en-US";
       }
@@ -59,7 +59,7 @@ export class HedderComponent implements OnInit, DoCheck {
   
 
   logout() {
-    localStorage.clear();
+    sessionStorage.clear();
     this.agencyActive = false;
     this.branchActive = false;
     this.appStore.currentUser = "";
@@ -76,7 +76,7 @@ export class HedderComponent implements OnInit, DoCheck {
       document.getElementById("langConverter")
     )).value;
     this.translate.use(this.appStore.langCode);
-    localStorage.setItem(
+    sessionStorage.setItem(
       "userLanguage",
       (<HTMLInputElement>document.getElementById("langConverter")).value
     );
@@ -94,11 +94,11 @@ export class HedderComponent implements OnInit, DoCheck {
   }
 
   ngDoCheck() {
-    if (localStorage.getItem("currentUser") == "agency") {
+    if (sessionStorage.getItem("currentUser") == "agency") {
       this.agencyActive = true;
       this.userType = this.appStore.userType;
     }
-    if (localStorage.getItem("currentUser") == "branch") {
+    if (sessionStorage.getItem("currentUser") == "branch") {
       this.branchActive = true;
       this.userType = this.appStore.userType;
     }
@@ -109,7 +109,7 @@ export class HedderComponent implements OnInit, DoCheck {
   }
 
   navigateagencyprofile() {
-    this.router.navigate(["Agency_profile", localStorage.getItem("empId")]);
+    this.router.navigate(["Agency_profile", sessionStorage.getItem("empId")]);
   }
 
 }

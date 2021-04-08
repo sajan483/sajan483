@@ -5294,10 +5294,6 @@ aside.roomPriceWrap {
 #payBtn{
   display :none;
 }
-  
-.mat-stepper-label-position-bottom .mat-horizontal-stepper-header {
-  pointer-events: none !important;
-}
 
 #phoneNumberSelect{
   .mat-form-field-flex{
@@ -5637,3 +5633,10 @@ aside.roomPriceWrap {
 .mat-tab-label-active {
   color: #1b416c;
 }
+
+::ng-deep .mat-horizontal-stepper-header{
+  pointer-events: none !important;
+}
+// .mat-stepper-label-position-bottom .mat-horizontal-stepper-header {
+//   pointer-events: none !important;
+// }

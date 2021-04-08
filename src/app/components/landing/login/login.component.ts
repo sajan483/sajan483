@@ -80,8 +80,8 @@ export class LoginComponent implements OnInit {
    * this method used for fetch username and password from cookie
    */
   checkTokenExists() {
-    if (localStorage.getItem("accesstoken") != null) {
-      if (localStorage.getItem("isTouched") == 'true') {
+    if (sessionStorage.getItem("accesstoken") != null) {
+      if (sessionStorage.getItem("isTouched") == 'true') {
         this.username = this.cookie.get("userName");
         this.password = this.cookie.get("password");
         this.rememberme = true;
