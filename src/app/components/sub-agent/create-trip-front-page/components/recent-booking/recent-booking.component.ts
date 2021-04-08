@@ -28,6 +28,13 @@ export class RecentBookingComponent implements OnInit {
   }
 
   /**
+   * navigate history page 
+   */
+  navigateHostory(){
+    this.router.navigate(["subagent/history"]);
+  }
+
+  /**
    * this merthod is used to copy data
    * @param val 
    */

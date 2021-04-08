@@ -1,109 +1,108 @@
 <div class="tbl p-2">
     <div class="d-flex justify-content-between pt-2">
-        <h1 class="tablehead blue_text fw600">Recent Booking</h1>
-        <div class="blackborderbttn">View All Bookings</div>
+        <h1 class="tablehead blue_text fw500 text-uppercase">Recent Booking</h1>
+        <div class="blackborderbttn" (click)="navigateHostory()">View All Bookings</div>
     </div>
     <div class="pt-2 pb-3">
         <table class="table" id="recentHistory">
             <thead class="thead-light">
-              <tr>
-                <th>Departure Date</th>
-                <th>No. of days</th>
-                <th>No. of Travellers</th>
-                <th>Booked by</th>
-                <th>Amount</th>
-                <th>Status</th>
-                <th></th>
-                <th></th>
-              </tr>
+                <tr>
+                    <th>Service</th>
+                    <th>Departure Date</th>
+                    <th>No. of days</th>
+                    <th>No. of Travellers</th>
+                    <th>Booked by</th>
+                    <th>Amount</th>
+                    <th>Status</th>
+                    <th></th>
+                    <th></th>
+                </tr>
             </thead>
             <tbody>
-              <tr *ngFor="let item of recentHistory;let i = index;">
-                <td>{{item?.custom_trip?.start_date | date:'mediumDate'}}</td>
-                <td>{{item?.num_days}}</td>
-                <td>{{item?.custom_trip?.adults+item?.custom_trip?.children+item?.custom_trip?.infants}}</td>
-                <td>{{item?.staff_name}}</td>
-                <td>SAR {{item?.total_amount}}</td>
-                <td>
-                    <span class="green_text" *ngIf="item?.status == 'success'">Success</span>
-                    <span class="red_text" *ngIf="item?.status == 'failed'">Failed</span>
-                </td>
-                <td><i class="infoicon icon_size_w17h23 icns cursor-pointer" data-toggle="modal" [attr.data-target]="'#myModal'+ i"></i>
-                  <div class="modal" id="myModal{{i}}">
-                    <div class="modal-dialog modal-dialog-centered">
-                      <div class="modal-content popupmoving">
-                        <div class="modal-header">
-                          <h4 class="modal-title">BRN Details</h4>
-                          <button type="button" class="close" data-dismiss="modal">&times;</button>
-                        </div>
-                        <div class="modal-body">
-
-                          <div *ngIf="item.custom_trip.makkah_trip">
-                            <h3 class="fs16 fw600 mb-0">Hotel in Makkah</h3>
-                            <div>
-                              <span class="text-uppercase fs13 clr7a">{{item.custom_trip.makkah_trip.name}}</span>
-                              <span class="pl-1">
-                                <ngb-rating [(rate)]="item.custom_trip.makkah_trip.rating" [readonly]="readonly" [max]=5>
-                                  <ng-template let-fill="fill" let-index="index">
-                                    <span class="star" [class.filled]="fill === 100" [class.bad]="index < 2">&#9733;</span>
-                                  </ng-template>
-                                </ngb-rating>
-                              </span>
-                            </div>
-                            <div>
-                              <span class="fs14 fw600 clr52">BRN : {{item.custom_trip.makkah_trip.brn}}</span>
-                              <span class="ml-3">
-                                <span (click)="copytext(item.custom_trip.makkah_trip.brn)" class="cursor-pointer list_clr mb-0" title="Copy BRN">
-                                  <i class="copyicon icon_size_15 icns"></i>
-                                </span>
-                              </span>
-                            </div>
-                          </div>
-
-                          <div class="mt-3" *ngIf="item.custom_trip.madinah_trip">
-                            <h3 class="fs16 fw600 mb-0">Hotel in Madinah</h3>
-                            <div>
-                              <span class="text-uppercase fs13 clr7a">{{item.custom_trip.madinah_trip.name}}</span>
-                              <span class="pl-1">
-                                <ngb-rating [(rate)]="item.custom_trip.madinah_trip.rating" [readonly]="readonly" [max]=5>
-                                  <ng-template let-fill="fill" let-index="index">
-                                    <span class="star" [class.filled]="fill === 100" [class.bad]="index < 2">&#9733;</span>
-                                  </ng-template>
-                                </ngb-rating>
-                              </span>
-                            </div>
-                            <div>
-                              <span class="fs14 fw600 clr52">BRN : {{item.custom_trip.madinah_trip.brn}}</span>
-                              <span class="ml-3">
-                                <span (click)="copytext(item.custom_trip.madinah_trip.brn)" class="cursor-pointer list_clr mb-0" title="Copy BRN">
-                                  <i class="copyicon icon_size_15 icns"></i>
-                                </span>
-                              </span>
-                            </div>
-                          </div>
-
-                          <div class="mt-3" *ngIf="item.custom_trip.trip_transportation">
-                            <h3 class="fs16 fw600 mb-0">Transport</h3>
-                            <div>
-                              <span class="text-uppercase fs13 clr7a">{{item.custom_trip.trip_transportation.name}}</span>
-                            </div>
-                            <div>
-                              <span class="fs14 fw600 clr52">BRN : {{item.custom_trip.trip_transportation.brn}}</span>
-                              <span class="ml-3">
-                                <span (click)="copytext(item.custom_trip.trip_transportation.brn)" class="cursor-pointer list_clr mb-0" title="Copy BRN">
-                                  <i class="copyicon icon_size_15 icns"></i>
-                                </span>
-                              </span>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </td>
-                <td><i class="viewicon icon_size_25 icns cursor-pointer" (click)="viewhistory(item.id);"></i></td>
-              </tr>
-            </tbody>
-          </table>
+                <tr *ngFor="let item of recentHistory;let i = index;">
+                    <td>
+                        <i class="makkahicon icns icon_size_20" title="Makkah" *ngIf="item.custom_trip.makkah_trip"></i>
+                        <i class="madeenaicon icns icon_size_20" title="Madeena" *ngIf="item.custom_trip.madinah_trip"></i>
+                        <i class="transportationicon icns icon_size_20" title="Transport" *ngIf="item.custom_trip.trip_transportation"></i>
+                    </td>
+                    <td>{{item?.custom_trip?.start_date | date:'mediumDate'}}</td>
+                    <td>{{item?.num_days}}</td>
+                    <td>{{item?.custom_trip?.adults+item?.custom_trip?.children+item?.custom_trip?.infants}}</td>
+                    <td>{{item?.staff_name}}</td>
+                    <td>SAR {{item?.total_amount}}</td>
+                    <td>
+                        <span class="green_text" *ngIf="item?.status == 'success'">Success</span>
+                        <span class="red_text" *ngIf="item?.status == 'failed'">Failed</span>
+                    </td>
+                    <td>
+                        <span class="brnnumb">
+                    <i class="infoicon icon_size_w17h23 icns cursor-pointer"></i>
+                    <span class="brnnumbView border_box_shadow">
+                      <div class="fs18 fw500 brdr_btm_d3">BRN Details</div>
+                      <div class="mt-3" *ngIf="item.custom_trip.makkah_trip">
+                        <h3 class="fs16 fw500 mb-0">Hotel in Makkah</h3>
+                        <div>
+                          <span class="text-uppercase fs13 clr7a">{{item.custom_trip.makkah_trip.name}}</span>
+                        <span class="pl-1">
+                              <ngb-rating [(rate)]="item.custom_trip.makkah_trip.rating" [readonly]="readonly" [max]=5>
+                                <ng-template let-fill="fill" let-index="index">
+                                  <span class="star" [class.filled]="fill === 100" [class.bad]="index < 2">&#9733;</span>
+                        </ng-template>
+                        </ngb-rating>
+                        </span>
     </div>
+    <div>
+        <span class="fs14 fw500 clr52">BRN : {{item.custom_trip.makkah_trip.brn}}</span>
+        <span class="ml-3">
+                            <span (click)="copytext(item.custom_trip.makkah_trip.brn)" class="cursor-pointer list_clr mb-0" title="Copy BRN">
+                              <i class="copyicon icon_size_15 icns"></i>
+                            </span>
+        </span>
+    </div>
+</div>
+
+<div class="mt-3" *ngIf="item.custom_trip.madinah_trip">
+    <h3 class="fs16 fw500 mb-0">Hotel in Madinah</h3>
+    <div>
+        <span class="text-uppercase fs13 clr7a">{{item.custom_trip.madinah_trip.name}}</span>
+        <span class="pl-1">
+                            <ngb-rating [(rate)]="item.custom_trip.madinah_trip.rating" [readonly]="readonly" [max]=5>
+                              <ng-template let-fill="fill" let-index="index">
+                                <span class="star" [class.filled]="fill === 100" [class.bad]="index < 2">&#9733;</span>
+        </ng-template>
+        </ngb-rating>
+        </span>
+    </div>
+    <div>
+        <span class="fs14 fw500 clr52">BRN : {{item.custom_trip.madinah_trip.brn}}</span>
+        <span class="ml-3">
+                            <span (click)="copytext(item.custom_trip.madinah_trip.brn)" class="cursor-pointer list_clr mb-0" title="Copy BRN">
+                              <i class="copyicon icon_size_15 icns"></i>
+                            </span>
+        </span>
+    </div>
+</div>
+
+<div class="mt-3" *ngIf="item.custom_trip.trip_transportation">
+    <h3 class="fs16 fw500 mb-0">Transport</h3>
+    <div>
+        <span class="text-uppercase fs13 clr7a">{{item.custom_trip.trip_transportation.name}}</span>
+    </div>
+    <div>
+        <span class="fs14 fw500 clr52">BRN : {{item.custom_trip.trip_transportation.brn}}</span>
+        <span class="ml-3">
+                            <span (click)="copytext(item.custom_trip.trip_transportation.brn)" class="cursor-pointer list_clr mb-0" title="Copy BRN">
+                              <i class="copyicon icon_size_15 icns"></i>
+                            </span>
+        </span>
+    </div>
+</div>
+</span>
+</span>
+</td>
+<td><i class="viewicon icon_size_25 icns cursor-pointer" (click)="viewhistory(item.id);" title="View Details"></i></td>
+</tr>
+</tbody>
+</table>
+</div>
 </div>
