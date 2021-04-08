@@ -6,30 +6,32 @@
                     <!-- <i class="filtericon icon_size_15 icns filterdiv"></i> -->
                     <div class="">{{'Filters' | translate}}</div>
                 </div>
-            </div> 
+            </div>
             <div class="col-md-3 col-8  my-auto ">
-                <span class="pr-2 fs14">{{'Haram Distance' | translate}}</span>
-                <span class="fliter-arrow">
-                    <div *ngIf="!isHotelListSortedByHaramDistance">
-                        <button (click)="sortHotelList('asnd',null,'hararamDistance')"><i
-                                class="fa fa-angle-down"></i></button>
-                    </div>
-                    <div *ngIf="isHotelListSortedByHaramDistance">
-                        <button (click)="sortHotelList(null,'dsnd','hararamDistance')"><i
-                                class="fa fa-angle-up"></i></button>
-                    </div>
-                </span>
+                <div (click)="haramdistancefilter()" class="cursor-pointer">
+                    <span class="pr-2 fs14">{{'Haram Distance' | translate}}</span>
+                    <span class="fliter-arrow">
+                        <div *ngIf="!isHotelListSortedByHaramDistance">
+                            <button><i class="fa fa-angle-down"></i></button>
+                        </div>
+                        <div *ngIf="isHotelListSortedByHaramDistance">
+                            <button><i class="fa fa-angle-up"></i></button>
+                        </div>
+                    </span>
+                </div>
             </div>
             <div class="col-md-2  my-auto  col-4">
-                <span class="pr-2 fs14">{{'Price' | translate}}</span>
-                <span class="fliter-arrow">
-                    <div *ngIf="!isHotelsSortedByPrice">
-                        <button (click)="sortHotelList('asnd',null,'price')"><i class="fa fa-angle-down"></i></button>
-                    </div>
-                    <div *ngIf="isHotelsSortedByPrice">
-                        <button (click)="sortHotelList(null,'dsnd','price')"><i class="fa fa-angle-up"></i></button>
-                    </div>
-                </span>
+                <div class="cursor-pointer" (click)="priceHotelFilter()">
+                    <span class="pr-2 fs14">{{'Price' | translate}}</span>
+                    <span class="fliter-arrow">
+                        <div *ngIf="!isHotelsSortedByPrice">
+                            <button ><i class="fa fa-angle-down"></i></button>
+                        </div>
+                        <div *ngIf="isHotelsSortedByPrice">
+                            <button ><i class="fa fa-angle-up"></i></button>
+                        </div>
+                    </span>
+                </div>
             </div>
             <div class="col-md-2 my-auto" (click)="moreFilter()">
                 <div class="cursor-pointer">
@@ -38,8 +40,7 @@
                 </div>
             </div>
             <div class="col-md-3 text-right pr-0">
-                <input class="haram_filter fs13 mt5" type="text" name="search" autocomplete="off"
-                    placeholder="Search By Hotel Name">
+                <input class="haram_filter fs13 mt5" type="text" name="search" autocomplete="off" placeholder="Search By Hotel Name">
             </div>
             <div class="col-md-12 p-0 maxhght0" id="moreFilterDown">
                 <div class="mt8 row ml-0 mr-0 brdr_top_d3">
@@ -54,31 +55,29 @@
                                                 <ng-template let-fill="fill" let-index="index">
                                                     <span class="star" [class.filled]="fill === 100"
                                                         [class.bad]="index < 2">&#9733;</span>
-                                                </ng-template>
-                                            </ngb-rating> (3)
-                                        </mat-checkbox>
-                                    </li>
-                                    <li>
-                                        <mat-checkbox>
-                                            <ngb-rating [rate]="4" [readonly]="readonly" [max]=5>
-                                                <ng-template let-fill="fill" let-index="index">
-                                                    <span class="star" [class.filled]="fill === 100"
-                                                        [class.bad]="index < 2">&#9733;</span>
-                                                </ng-template>
-                                            </ngb-rating> (5)
-                                        </mat-checkbox>
-                                    </li>
-                                    <li>
-                                        <mat-checkbox>
-                                            <ngb-rating [rate]="3" [readonly]="readonly" [max]=5>
-                                                <ng-template let-fill="fill" let-index="index">
-                                                    <span class="star" [class.filled]="fill === 100"
-                                                        [class.bad]="index < 2">&#9733;</span>
-                                                </ng-template>
-                                            </ngb-rating> (4)
-                                        </mat-checkbox>
-                                    </li>
-                                </ul>
+                            </ng-template>
+                            </ngb-rating> (3)
+                            </mat-checkbox>
+                            </li>
+                            <li>
+                                <mat-checkbox>
+                                    <ngb-rating [rate]="4" [readonly]="readonly" [max]=5>
+                                        <ng-template let-fill="fill" let-index="index">
+                                            <span class="star" [class.filled]="fill === 100" [class.bad]="index < 2">&#9733;</span>
+                                        </ng-template>
+                                    </ngb-rating> (5)
+                                </mat-checkbox>
+                            </li>
+                            <li>
+                                <mat-checkbox>
+                                    <ngb-rating [rate]="3" [readonly]="readonly" [max]=5>
+                                        <ng-template let-fill="fill" let-index="index">
+                                            <span class="star" [class.filled]="fill === 100" [class.bad]="index < 2">&#9733;</span>
+                                        </ng-template>
+                                    </ngb-rating> (4)
+                                </mat-checkbox>
+                            </li>
+                            </ul>
                             </span>
                         </div>
                     </div>
@@ -115,7 +114,7 @@
                                 </ul>
                             </span>
                         </div>
-                        
+
                     </div>
                 </div>
             </div>
@@ -156,22 +155,19 @@
                                             <div class="pl-1">
                                                 <ngb-rating [(rate)]="item.rating" [readonly]="readonly" [max]=5>
                                                     <ng-template let-fill="fill" let-index="index">
-                                                        <span class="star" [class.filled]="fill === 100"
-                                                            [class.bad]="index < 2">&#9733;</span>
+                                                        <span class="star" [class.filled]="fill === 100" [class.bad]="index < 2">&#9733;</span>
                                                     </ng-template>
                                                 </ngb-rating>
                                             </div>
                                         </div>
                                         <div class="d-inline-flex pb5" *ngIf="item.haram_distance">
                                             <div class="pr-2"><i class="makkahharam icns icon_size_15"></i></div>
-                                            <div class="fs13 clr52 fw400"><strong
-                                                    class="clr01 fs14 fw500">HARAM</strong> {{item?.haram_distance}} km
+                                            <div class="fs13 clr52 fw400"><strong class="clr01 fs14 fw500">HARAM</strong> {{item?.haram_distance}} km
                                             </div>
                                         </div>
                                         <div class="d-inline-flex pb5" *ngIf="item.nabawi_distance">
                                             <div class="pr-2"><i class="madeenanabawi icns icon_size_15"></i></div>
-                                            <div class="fs13 clr52 fw400"><strong
-                                                    class="clr01 fs14 fw500">NABAWI</strong> {{item?.nabawi_distance}} km
+                                            <div class="fs13 clr52 fw400"><strong class="clr01 fs14 fw500">NABAWI</strong> {{item?.nabawi_distance}} km
                                             </div>
                                         </div>
                                         <div class="d-inline-flex pb5" *ngIf="item.address">
@@ -189,22 +185,17 @@
                                             </div>
                                         </div> -->
                                         <div *ngIf="item.description && item.description.length > 200">
-                                            <div class="pb5 fs13 clr52 desptn divexpandanimation"
-                                                id="descrptionLess{{i}}">{{item?.description}}</div>
-                                            <div class="readmorenavigate fs13" id="readMoreBttn{{i}}"
-                                                (click)="readMore($event,i)">+ Read More</div>
-                                            <div class="readmorenavigate fs13 dsplynone" id="readLessBttn{{i}}"
-                                                (click)="readLess($event,i)">- Read Less</div>
+                                            <div class="pb5 fs13 clr52 desptn divexpandanimation" id="descrptionLess{{i}}">{{item?.description}}</div>
+                                            <div class="readmorenavigate fs13" id="readMoreBttn{{i}}" (click)="readMore($event,i)">+ Read More</div>
+                                            <div class="readmorenavigate fs13 dsplynone" id="readLessBttn{{i}}" (click)="readLess($event,i)">- Read Less</div>
                                         </div>
                                     </div>
                                 </div>
-                                <div
-                                    class="d-flex align-items-end flex-column result-details-right pr-0 col-md-4 col-12">
+                                <div class="d-flex align-items-end flex-column result-details-right pr-0 col-md-4 col-12">
                                     <div class="text-center">
                                         <h3 class="hotel_prise">{{item?.currency_code}} {{item?.amount | number:'.2-2'}}
                                         </h3>
-                                        <button class="searchbutton pull-right m-0" id="showHotelSelect{{i}}"
-                                            (click)="showHotelDetailsPopUp(item)">{{'Select Room' | translate}}</button>
+                                        <button class="searchbutton pull-right m-0" id="showHotelSelect{{i}}" (click)="showHotelDetailsPopUp(item)">{{'Select Room' | translate}}</button>
                                     </div>
                                 </div>
                             </div>
@@ -215,11 +206,9 @@
         </div>
     </div>
 </div>
-<div [style.display]="showDetailsShimmer ? 'block' : 'none'" class="viewHtlShimmer" tabindex="-1" role="dialog"
-    aria-labelledby="myModalLabel" aria-hidden="true">
+<div [style.display]="showDetailsShimmer ? 'block' : 'none'" class="viewHtlShimmer" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="bg_body w-100">
         <app-loader-hotel-popup></app-loader-hotel-popup>
     </div>
 </div>
-<app-hotel-details-popup (handleNotif)="childEvent($event)" (changeItinerary)="childEventForChangeItinerary($event)" *ngIf="showHotelDetails" [hotelInfo]="hotelInfo"
-    [hotelData]="hotelData"></app-hotel-details-popup>
+<app-hotel-details-popup (handleNotif)="childEvent($event)" (changeItinerary)="childEventForChangeItinerary($event)" *ngIf="showHotelDetails" [hotelInfo]="hotelInfo" [hotelData]="hotelData"></app-hotel-details-popup>
