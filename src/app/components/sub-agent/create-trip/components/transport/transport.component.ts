@@ -36,7 +36,7 @@ export class TransportComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.paxCount = this.appStore.vehicleMax;
+    this.paxCount = this.appStore.adultCount+this.appStore.childCount+this.appStore.infantCount;
   }
 
   /**

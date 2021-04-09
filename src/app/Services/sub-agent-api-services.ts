@@ -142,6 +142,7 @@ export class SubAgentApiService {
   }
 
   getCheckCancellation(id){
+    console.log(this.options)
     return this.http
     .get(this.BASE_URL + "custom_trip_booking/"+id+"/check_cancellation/", this.options)
     .map((res) => res.json());

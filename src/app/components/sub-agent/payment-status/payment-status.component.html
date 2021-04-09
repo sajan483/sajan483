@@ -1,6 +1,6 @@
 <div class="container-fluid pl-0 pr-0 mt60 pb-60" id="top">
     <div class="top_section" *ngIf="bknStatus == 'success'">
-        <div class="container">
+        <div class="container d-flex justify-content-between">
             <div class="d-inline-flex pdngsucess">
                 <div class="imagepdng">
                     <img class="tick_img" src="/assets/images/confirmation-tick.png" alt="">
@@ -10,10 +10,13 @@
                     <h3 class="text-white fs18">Your payment has been processed successfully</h3>
                 </div>
             </div>
+            <div class="text-white my-auto fs14">
+                <div class="cursor-pointer" (click)="navigateHomePage()"><i class="fa fa-chevron-left" aria-hidden="true"></i> Back to Home Page</div>
+            </div>
         </div>
     </div>
-    <div class="bg">
-        <div class="container" *ngIf="bknStatus == 'failure'">
+    <div class="bg" *ngIf="bknStatus == 'failure'">
+        <div class="container d-flex justify-content-between">
             <div class="d-inline-flex pdngerror">
                 <div class="">
                     <i class="fa fa-times-circle closeimg" aria-hidden="true"></i>
@@ -22,6 +25,9 @@
                     <h1 class="text-uppercase fs28 fw600 text-white mb-0">Failed..!! </h1>
                     <h3 class="text-white fs18">Your payment has been Failed</h3>
                 </div>
+            </div>
+            <div class="text-white my-auto fs14">
+                <div class="cursor-pointer" (click)="navigateHomePage()"><i class="fa fa-chevron-left" aria-hidden="true"></i> Back to Home Page</div>
             </div>
         </div>
     </div>
@@ -38,10 +44,10 @@
                                     <div class="fs14 fw600 success_text ml-2">BOOKED</div>
                                 </div>
                                 <div class="fs13 fw600 Premium_blue bookdpdng">
-                                    Reference No. - {{tripMakkahHotel?.brn}}
+                                    Reference No. (BRN) - {{tripMakkahHotel?.brn}}
                                 </div>
                             </div>
-                            <div class="float-right list_clr textunderline fs14 mr15">Policies</div>
+                            <!-- <div class="float-right list_clr textunderline fs14 mr15">Policies</div> -->
                         </div>
                         <div class="col-md-12 p-0 brdrbottom mb10" *ngIf="tripMakkahHotel?.status=='!success'">
                             <div class="d-inline-flex">
@@ -70,7 +76,10 @@
                                     <span class="Premium_blue fw600">{{noOfTravellers}}</span>
                                     <span class="crossline"></span>
                                     <span>Rooms</span>
-                                    <span class="Premium_blue fw600">{{tripMakkahHotel?.rooms.length}}</span>
+                                    <span class="Premium_blue fw600">{{tripMakkahHotel?.rooms?.length}}</span>
+                                    <span class="crossline" *ngIf="tripMakkahHotel.trip_hotel.hotel.distance"></span>
+                                    <span *ngIf="tripMakkahHotel.trip_hotel.hotel.distance">HARAM</span>
+                                    <span class="Premium_blue fw600" *ngIf="tripMakkahHotel.trip_hotel.hotel.distance">{{tripMakkahHotel?.trip_hotel?.hotel?.distance}}</span>
                                 </p>
                             </div>
                             <div class="float-right fs16 fw500 pt-2">
@@ -79,45 +88,47 @@
                         </div>
                         <div class="col-md-1 pl-0 pr-2 pt-1 m-auto text-center downarrow icns icon_size_20 arrowanimation" (click)="toggleDetails($event)">
                         </div>
-                        <div class="row col-md-12 p-0 ml-0 mr-0 mt-2 p20 brdrtop expansion">
-                            <div class="col-md-6 p-0">
-                                <div class="flexaround mrgndetails">
-                                    <div>
-                                        <div class="d-flex">
-                                            <i class="calendaricon icon_h18_w15 icns"></i>
-                                            <p class="pl-2 pr-2 fs13 fw500">CHECK-IN</p>
-                                            <i class="icon_h18_w11 icns downarrow"></i>
+                        <div class="row col-md-12 p-0 ml-0 mr-0 expansion">
+                            <div class="mt-2 brdrtop p20 row col-md-12 p-0 ml-0 mr-0">
+                                <div class="col-md-6 p-0">
+                                    <div class="flexaround mrgndetails">
+                                        <div>
+                                            <div class="d-flex">
+                                                <i class="calendaricon icon_h18_w15 icns"></i>
+                                                <p class="pl-2 pr-2 fs13 fw500">CHECK-IN</p>
+                                                <i class="icon_h18_w11 icns downarrow"></i>
+                                            </div>
+                                            <p class="fw600 fs21">{{tripMakkahHotel?.reservation_obj.hotelDetails.checkInDate | date:'mediumDate'}}</p>
+                                            <p class="clr52 fs12">{{tripMakkahHotel?.reservation_obj.hotelDetails.checkInDate | date:'EEEE'}}</p>
                                         </div>
-                                        <p class="fw600 fs21">{{tripMakkahHotel?.reservation_obj.hotelDetails.checkInDate | date:'mediumDate'}}</p>
-                                        <p class="clr52 fs12">{{tripMakkahHotel?.reservation_obj.hotelDetails.checkInDate | date:'EEEE'}}</p>
-                                    </div>
-                                    <div class="text-center mt-2">
-                                        <i class="nighticon icon_size_20 icns"></i>
-                                        <p class="textgrey font14">{{noOfDaysInMakkah}} Night<span *ngIf="noOfDaysInMakkah > 1">s</span></p>
-                                    </div>
-                                    <div class="text-left">
-                                        <div class="d-flex">
-                                            <i class="calendaricon icon_h18_w15 icns"></i>
-                                            <p class="pl-2 pr-2 fs13 fw500">CHECK-IN</p>
-                                            <i class="icon_h18_w11 icns downarrow"></i>
+                                        <div class="text-center mt-2">
+                                            <i class="nighticon icon_size_20 icns"></i>
+                                            <p class="textgrey font14">{{noOfDaysInMakkah}} Night<span *ngIf="noOfDaysInMakkah > 1">s</span></p>
                                         </div>
-                                        <p class="fw600 fs21">{{tripMakkahHotel?.reservation_obj.hotelDetails.checkOutDate | date:'mediumDate'}}</p>
-                                        <p class="clr52 fs12">{{tripMakkahHotel?.reservation_obj.hotelDetails.checkOutDate | date:'EEEE'}}</p>
+                                        <div class="text-left">
+                                            <div class="d-flex">
+                                                <i class="calendaricon icon_h18_w15 icns"></i>
+                                                <p class="pl-2 pr-2 fs13 fw500">CHECK-IN</p>
+                                                <i class="icon_h18_w11 icns downarrow"></i>
+                                            </div>
+                                            <p class="fw600 fs21">{{tripMakkahHotel?.reservation_obj.hotelDetails.checkOutDate | date:'mediumDate'}}</p>
+                                            <p class="clr52 fs12">{{tripMakkahHotel?.reservation_obj.hotelDetails.checkOutDate | date:'EEEE'}}</p>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="col-md-6 p-0">
-                                <div class="d-flex justify-content-center">
-                                    <img class="mapheight mrgndetails" src="{{tripMakkahHotel?.trip_hotel.hotel.images[0]?.image_url}}" alt="">
+                                <div class="col-md-6 p-0">
+                                    <div class="d-flex justify-content-center">
+                                        <img class="mapheight mrgndetails" src="{{tripMakkahHotel?.trip_hotel.hotel.images[0]?.image_url}}" alt="">
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="col-md-12 p-0 row m-0">
-                                <div class="col-md-12 row m-0 p-2 brdrtop">
-                                    <div class="col-md-4 col-6 clr52 fs14 fw600">{{tripMakkahHotel?.reservation_obj.hotelDetails.roomGroups[0].rooms[0].name.split('-')[0]}}</div>
-                                    <div class="col-md-4 col-6 fs14 clr52 fw500"><strong class="pr-1 fw600">{{noOfTravellers}}</strong>Guests</div>
-                                    <div class="col-md-2 col-6 fs12" *ngIf="tripMakkahHotel?.reservation_obj.hotelDetails.roomGroups[0].rooms[0].flags.isRefundable==!true">Non-Refundable</div>
-                                    <div class="col-md-2 col-6 fs12" *ngIf="tripMakkahHotel?.reservation_obj.hotelDetails.roomGroups[0].rooms[0].flags.isRefundable==true">Refundable</div>
-                                    <div class="col-md-2 col-6 text-right fs14">{{tripData?.currency}} {{tripMakkahHotel?.total_price | number:'1.2-2'}}</div>
+                                <div class="col-md-12 p-0 row m-0">
+                                    <div class="col-md-12 row m-0 p-2 brdrtop">
+                                        <div class="col-md-4 col-6 clr52 fs14 fw600">{{tripMakkahHotel?.reservation_obj.hotelDetails.roomGroups[0].rooms[0].name.split('-')[0]}}</div>
+                                        <div class="col-md-4 col-6 fs14 clr52 fw500"><strong class="pr-1 fw600">{{noOfTravellers}}</strong>Guests</div>
+                                        <div class="col-md-2 col-6 fs12" *ngIf="tripMakkahHotel?.reservation_obj.hotelDetails.roomGroups[0].rooms[0].flags.isRefundable==!true">Non-Refundable</div>
+                                        <div class="col-md-2 col-6 fs12" *ngIf="tripMakkahHotel?.reservation_obj.hotelDetails.roomGroups[0].rooms[0].flags.isRefundable==true">Refundable</div>
+                                        <div class="col-md-2 col-6 text-right fs14">{{tripData?.currency}} {{tripMakkahHotel?.total_price | number:'1.2-2'}}</div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -137,7 +148,7 @@
                                     {{tripMadeenaHotel?.brn}}
                                 </div>
                             </div>
-                            <div class="float-right list_clr textunderline fs14 mr15">Policies</div>
+                            <!-- <div class="float-right list_clr textunderline fs14 mr15">Policies</div> -->
                         </div>
                         <div class="col-md-12 p-0 brdrbottom mb10" *ngIf="tripMadeenaHotel?.status=='!success'">
                             <div class="d-inline-flex">
@@ -167,6 +178,9 @@
                                     <span class="crossline"></span>
                                     <span>Rooms</span>
                                     <span class="Premium_blue fw600">{{tripMadeenaHotel?.rooms.length}}</span>
+                                    <span *ngIf="tripMadeenaHotel.trip_hotel.hotel.distance" class="crossline"></span>
+                                    <span *ngIf="tripMadeenaHotel.trip_hotel.hotel.distance">NABAwI</span>
+                                    <span class="Premium_blue fw600" *ngIf="tripMadeenaHotel.trip_hotel.hotel.distance">{{tripMadeenaHotel?.trip_hotel?.hotel?.distance}}</span>
                                 </p>
                             </div>
                             <div class="float-right fs16 fw500 pt-2">
@@ -175,45 +189,47 @@
                         </div>
                         <div class="col-md-1 pl-0 pr-2 pt-1 m-auto text-center downarrow icns icon_size_20 arrowanimation" (click)="toggleDetails($event)">
                         </div>
-                        <div class="row col-md-12 p-0 ml-0 mr-0 mt-2 p20 brdrtop expansion">
-                            <div class="col-md-6 p-0">
-                                <div class="flexaround mrgndetails">
-                                    <div>
-                                        <div class="d-flex">
-                                            <i class="calendaricon icon_h18_w15 icns"></i>
-                                            <p class="pl-2 pr-2 fs13 fw500">CHECK-IN</p>
-                                            <i class="icon_h18_w11 icns downarrow"></i>
+                        <div class="row col-md-12 p-0 ml-0 mr-0 expansion">
+                            <div class="mt-2 brdrtop p20 row col-md-12 p-0 ml-0 mr-0">
+                                <div class="col-md-6 p-0">
+                                    <div class="flexaround mrgndetails">
+                                        <div>
+                                            <div class="d-flex">
+                                                <i class="calendaricon icon_h18_w15 icns"></i>
+                                                <p class="pl-2 pr-2 fs13 fw500">CHECK-IN</p>
+                                                <i class="icon_h18_w11 icns downarrow"></i>
+                                            </div>
+                                            <p class="fw600 fs21">{{tripMadeenaHotel?.reservation_obj.hotelDetails.checkInDate | date:'mediumDate'}}</p>
+                                            <p class="clr52 fs12">{{tripMadeenaHotel?.reservation_obj.hotelDetails.checkInDate | date:'EEEE'}}</p>
                                         </div>
-                                        <p class="fw600 fs21">{{tripMadeenaHotel?.reservation_obj.hotelDetails.checkInDate | date:'mediumDate'}}</p>
-                                        <p class="clr52 fs12">{{tripMadeenaHotel?.reservation_obj.hotelDetails.checkInDate | date:'EEEE'}}</p>
-                                    </div>
-                                    <div class="text-center mt-2">
-                                        <i class="nighticon icon_size_20 icns"></i>
-                                        <p class="textgrey font14">{{noOfDaysInMedinah}} Night<span *ngIf="noOfDaysInMedinah > 1">s</span></p>
-                                    </div>
-                                    <div class="text-left">
-                                        <div class="d-flex">
-                                            <i class="calendaricon icon_h18_w15 icns"></i>
-                                            <p class="pl-2 pr-2 fs13 fw500">CHECK-IN</p>
-                                            <i class="icon_h18_w11 icns downarrow"></i>
+                                        <div class="text-center mt-2">
+                                            <i class="nighticon icon_size_20 icns"></i>
+                                            <p class="textgrey font14">{{noOfDaysInMedinah}} Night<span *ngIf="noOfDaysInMedinah > 1">s</span></p>
                                         </div>
-                                        <p class="fw600 fs21">{{tripMadeenaHotel?.reservation_obj.hotelDetails.checkOutDate | date:'mediumDate'}}</p>
-                                        <p class="clr52 fs12">{{tripMadeenaHotel?.reservation_obj.hotelDetails.checkOutDate | date:'EEEE'}}</p>
+                                        <div class="text-left">
+                                            <div class="d-flex">
+                                                <i class="calendaricon icon_h18_w15 icns"></i>
+                                                <p class="pl-2 pr-2 fs13 fw500">CHECK-IN</p>
+                                                <i class="icon_h18_w11 icns downarrow"></i>
+                                            </div>
+                                            <p class="fw600 fs21">{{tripMadeenaHotel?.reservation_obj.hotelDetails.checkOutDate | date:'mediumDate'}}</p>
+                                            <p class="clr52 fs12">{{tripMadeenaHotel?.reservation_obj.hotelDetails.checkOutDate | date:'EEEE'}}</p>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="col-md-6 p-0">
-                                <div class="d-flex justify-content-center">
-                                    <img class="mapheight mrgndetails" src="{{tripMadeenaHotel?.trip_hotel.hotel.images[0]?.image_url}}" alt="">
+                                <div class="col-md-6 p-0">
+                                    <div class="d-flex justify-content-center">
+                                        <img class="mapheight mrgndetails" src="{{tripMadeenaHotel?.trip_hotel.hotel.images[0]?.image_url}}" alt="">
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="col-md-12 p-0 row m-0">
-                                <div class="col-md-12 row m-0 p-2 brdrtop">
-                                    <div class="col-md-4 col-6 clr52 fs14 fw600">{{tripMadeenaHotel?.reservation_obj.hotelDetails.roomGroups[0].rooms[0].name.split('-')[0]}}</div>
-                                    <div class="col-md-4 col-6 fs14 clr52 fw500"><strong class="pr-1 fw600">{{noOfTravellers}}</strong>Guests</div>
-                                    <div class="col-md-2 col-6 fs12" *ngIf="tripMadeenaHotel?.reservation_obj.hotelDetails.roomGroups[0].rooms[0].flags.isRefundable==!true">Non-Refundable</div>
-                                    <div class="col-md-2 col-6 fs12" *ngIf="tripMadeenaHotel?.reservation_obj.hotelDetails.roomGroups[0].rooms[0].flags.isRefundable==true">Refundable</div>
-                                    <div class="col-md-2 col-6 text-right fs14">{{tripData?.currency}} {{tripMadeenaHotel?.total_price | number:'1.2-2'}}</div>
+                                <div class="col-md-12 p-0 row m-0">
+                                    <div class="col-md-12 row m-0 p-2 brdrtop">
+                                        <div class="col-md-4 col-6 clr52 fs14 fw600">{{tripMadeenaHotel?.reservation_obj.hotelDetails.roomGroups[0].rooms[0].name.split('-')[0]}}</div>
+                                        <div class="col-md-4 col-6 fs14 clr52 fw500"><strong class="pr-1 fw600">{{noOfTravellers}}</strong>Guests</div>
+                                        <div class="col-md-2 col-6 fs12" *ngIf="tripMadeenaHotel?.reservation_obj.hotelDetails.roomGroups[0].rooms[0].flags.isRefundable==!true">Non-Refundable</div>
+                                        <div class="col-md-2 col-6 fs12" *ngIf="tripMadeenaHotel?.reservation_obj.hotelDetails.roomGroups[0].rooms[0].flags.isRefundable==true">Refundable</div>
+                                        <div class="col-md-2 col-6 text-right fs14">{{tripData?.currency}} {{tripMadeenaHotel?.total_price | number:'1.2-2'}}</div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -221,8 +237,8 @@
                 </div>
 
                 <!-- transport -->
-                <h2 class="fs16 Premium_blue fw600 pt25" *ngIf="tripTransport != null">Review Transport Details</h2>
-                <div class="border_box_shadow bg-white" *ngIf="tripTransport != null">
+                <h2 class="fs16 Premium_blue fw600 pt25" *ngIf="tripTransport?.total_price != null">Review Transport Details</h2>
+                <div class="border_box_shadow bg-white" *ngIf="tripTransport?.total_price != null">
                     <div class="row m-0 p10">
                         <div class="col-md-12 p-0 brdrbottom mb10" *ngIf="tripTransport?.status=='success'">
                             <div class="d-inline-flex">
@@ -234,7 +250,7 @@
                                     {{tripTransport?.brn}}
                                 </div>
                             </div>
-                            <div class="float-right list_clr textunderline fs14 mr15">Policies</div>
+                            <!-- <div class="float-right list_clr textunderline fs14 mr15">Policies</div> -->
                         </div>
                         <div class="col-md-12 p-0 brdrbottom mb10" *ngIf="tripTransport?.status=='!success'">
                             <div class="d-inline-flex">
@@ -249,7 +265,7 @@
                             <i class="transportblueicon icns icon_size_30 imgposition"></i>
                             <div class="Premium_blue fs14 fw600">
                                 <p>VEHICLE</p>
-                                <p>{{tripTransport.selected_transportation?.vehicle_types[0].vehicle_type_name}}</p>
+                                <p>{{tripTransport.selected_transportation?.vehicle_types[0]?.vehicle_type_name}}</p>
                             </div>
                         </div>
                         <div class="col-md-9 col-12 brdrR brdrL my-auto">
@@ -266,8 +282,8 @@
                         </div>
                         <div class="col-md-1 pl-0 pr-2 pt-1 m-auto text-center downarrow icns icon_size_20 arrowanimation" (click)="toggleDetails($event)">
                         </div>
-                        <div class="col-md-12 p-0 row ml-0 mr-0 mt-2 borderpading brdrtop expansion">
-                            <div class="col-md-12 transportbodypdng row m-0">
+                        <div class="col-md-12 p-0 row ml-0 mr-0  borderpading  expansion">
+                            <div class="col-md-12 transportbodypdng mt-2 row brdrtop m-0">
                                 <div class="col-md-4 p-0 mb-2">
                                     <p class="clr52 fs14"><i class="fa fa-circle pr-2 font9imp" aria-hidden="true"></i>{{tripTransport?.vehicle_types[0].max_capacity}} seater</p>
                                 </div>
@@ -307,17 +323,18 @@
                 <h2 class="fs16 Premium_blue fw600 pt25" *ngIf="tripTravellers != null">Passenger Details</h2>
                 <div class="border_box_shadow bg-white" *ngIf="tripTravellers != null">
                     <div class="row m-0 p10">
-                        <div class="col-md-4 col-12 pl-0 pr-0 my-auto">
-                            <strong><p>{{tripTravellers[0]?.first_name}}</p></strong>
-                        </div>
-                        <div class="col-md-7 col-12 brdrR brdrL my-auto">
-                            <p><strong>{{tripTravellers[0]?.gender}}</strong> [main traveller]</p>
-
+                        <div class="col-md-11 d-inline-flex brdrR">
+                            <div class=" my-auto text-capitalize">
+                                <strong><p>{{tripTravellers[0]?.contactinfo?.first_name}} {{tripTravellers[0]?.contactinfo?.last_name}}</p></strong>
+                            </div>
+                            <div class="  brdrL ml-2  my-auto">
+                                <p class="ml-2"><strong>{{tripTravellers[0]?.gender}}</strong></p>
+                            </div>
                         </div>
                         <div class="col-md-1 pl-0 pr-2 pt-1 m-auto text-center downarrow icns icon_size_20 arrowanimation" (click)="toggleDetails($event)">
                         </div>
-                        <div class="col-md-12 p-0 row ml-0 mr-0 mt-2 borderpading brdrtop expansion">
-                            <div class="col-md-12 transportbodypdng row m-0">
+                        <div class="col-md-12 p-0 row ml-0 mr-0 borderpading expansion">
+                            <div class="col-md-12 transportbodypdng mt-2 brdrtop row m-0">
                                 <div class="col-md-4 p-0 mb-2">
                                     <p class="clr52 fs14"><i class="fa fa-circle pr-2 font9imp" aria-hidden="true"></i>Date of Birth : {{tripTravellers[0]?.dob}}</p>
                                 </div>
@@ -361,7 +378,10 @@
                             <div class="fs15 fw600 text-uppercase pl-2 my-auto">Print invoice</div>
                         </div>
                         <div>
-                            <i class="rightarrow icns icon_size_20 my-auto h-100"></i>
+                            <i class="rightarrow icns icon_size_20 my-auto h-100" *ngIf="!invoicetoggle"></i>
+                            <div class="spinner-border" role="status" *ngIf="invoicetoggle">
+                                <span class="sr-only">Loading...</span>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -372,7 +392,10 @@
                             <div class="fs15 fw600 text-uppercase pl-2 my-auto">Download Voucher</div>
                         </div>
                         <div>
-                            <i class="rightarrow icns icon_size_20 my-auto h-100"></i>
+                            <i class="rightarrow icns icon_size_20 my-auto h-100" *ngIf="!vouchertoggle"></i>
+                            <div class="spinner-border" role="status" *ngIf="vouchertoggle">
+                                <span class="sr-only">Loading...</span>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -410,27 +433,27 @@
                     </div>
                 </div>
                 <div class="mt-3">
-                    <h2 class="fs20 fw600">Fare Summary</h2>
+                    <h2 class="fs18 fw600">Fare Summary</h2>
                     <div class="boxvouch">
                         <div (click)="toggleText($event)" class="pt-1">
                             <div class="d-inline-flex">
                                 <i class="downarrow icns icon_size_15 mr-2 mt-1 arrowanimation"></i>
                                 <div>For all service</div>
                             </div>
-                            <div class="float-right">{{tripData?.currency}} {{tripMakkahHotel?.total_price+tripMadeenaHotel?.total_price+tripTransport?.total_price}}</div>
+                            <div class="float-right">{{tripData?.currency}} {{tripMakkahHotel?.total_price+tripMadeenaHotel?.total_price+tripTransport?.total_price | number :'1.2-2'}}</div>
                         </div>
                         <div class="expansion det-text pl-3 pt-2 ">
                             <div class="d-flex justify-content-between">
                                 <div>Makkah Hotel</div>
-                                <div>{{tripData?.currency}} {{tripMakkahHotel?.total_price | number:'1.2-2'}}</div>
+                                <div>{{tripData?.currency}} {{tripMakkahHotel?.total_price | number :'1.2-2'}}</div>
                             </div>
                             <div class="d-flex justify-content-between">
                                 <div>Madeena Hotel</div>
-                                <div>{{tripData?.currency}} {{ tripMadeenaHotel?.total_price | number:'1.2-2'}}</div>
+                                <div>{{tripData?.currency}} {{ tripMadeenaHotel?.total_price | number :'1.2-2'}}</div>
                             </div>
                             <div class="d-flex justify-content-between">
                                 <div>Transport</div>
-                                <div>{{tripData?.currency}} {{tripTransport?.total_price | number:'1.2-2'}}</div>
+                                <div>{{tripData?.currency}} {{tripTransport?.total_price | number :'1.2-2'}}</div>
                             </div>
                         </div>
                         <div (click)="toggleText($event)" class="pt-1">

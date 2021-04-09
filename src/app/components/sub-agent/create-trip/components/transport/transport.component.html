@@ -1,46 +1,46 @@
 <div class="w-100">
-   <div *ngFor="let item of transportList;let i = index">
-      <div class="transportcard" *ngFor="let vehicle of item.vehicle_types; let index = index">
-         <div class="border_box_shadow bg-white">
-            <div class="row m-0">
-               <div class="col-md-3 p-0">
-                  <div class="transportimage" *ngIf="!vehicle.image">
-                     <img src="/assets/images/no_image.jpg">
-                  </div>
-                  <div class="transportimage" *ngIf="vehicle.image">
-                     <img src="{{vehicle.image}}">
-                  </div>
-               </div>
-               <div class="col-md-6 pdngdetailbox">
-                  <div class="fs18 fw600 text-capitalize">company name {{item?.company_name}}</div>
-                  <div class="fs14 fw600 text-capitalize mt10">bus {{vehicle?.vehicle_type_name[0]}}</div>
-                  <div class="row ml-0 mr-0 fs14 clr52 fw400">
-                     <div class="col-md-6 p-0 dgride">
-                        <div class="d-inline-flex mt10">
-                           <i class="staricon icon_h18_w15 icns"></i>
-                           <div class="Premium_blue fs13 fw600 ml-2">Premium {{vehicle?.categories[0]?.category_name}}</div>
+    <div *ngFor="let item of transportList;let i = index">
+        <div class="transportcard" *ngFor="let vehicle of item.vehicle_types; let index = index">
+            <div class="border_box_shadow bg-white">
+                <div class="row m-0">
+                    <div class="col-md-3 p-0">
+                        <div class="transportimage" *ngIf="!vehicle.image">
+                            <img src="/assets/images/no_image.jpg">
                         </div>
-                        <div class="d-inline-flex mt10">
-                           <i class="seatsicon icon_h18_w15 icns"></i>
-                           <div class="ml-2">{{vehicle?.categories[0]?.capacity}} Seater(s)</div>
+                        <div class="transportimage" *ngIf="vehicle.image">
+                            <img src="{{vehicle.image}}">
                         </div>
-                        <div class="d-inline-flex mt10">
-                           <i class="icontransport icon_h18_w15 icns"></i>
-                           <div class="ml-2">Booked Vehicle ({{vehicle?.vehicleCapacityCount}})</div>
+                    </div>
+                    <div class="col-md-6 pdngdetailbox">
+                        <div class="fs18 fw600 text-capitalize">{{item?.company_name}}</div>
+                        <div class="fs14 fw600 text-capitalize mt10">{{vehicle?.vehicle_type_name[0]}}</div>
+                        <div class="row ml-0 mr-0 fs14 clr52 fw400">
+                            <div class="col-md-6 p-0 dgride">
+                                <div class="d-inline-flex mt10">
+                                    <i class="staricon icon_h18_w15 icns"></i>
+                                    <div class="Premium_blue fs13 fw600 ml-2">{{vehicle?.categories[0]?.category_name}}</div>
+                                </div>
+                                <div class="d-inline-flex mt10">
+                                    <i class="seatsicon icon_h18_w15 icns"></i>
+                                    <div class="ml-2">{{vehicle?.categories[0]?.capacity}} Seater(s)</div>
+                                </div>
+                                <div class="d-inline-flex mt10">
+                                    <i class="icontransport icon_h18_w15 icns"></i>
+                                    <div class="ml-2">Booked Vehicle ({{vehicle?.vehicleCapacityCount}})</div>
+                                </div>
+                            </div>
+                            <div class="col-md-6 p-0">
+                                <div class="mt10">Pax Count: {{paxCount}}</div>
+                                <div class="mt10">Available Vehicle: {{vehicle?.categories[0]?.available_quantity}}</div>
+                                <div class="mt10">Model: {{vehicle?.categories[0]?.model}}</div>
+                            </div>
                         </div>
-                     </div>
-                     <div class="col-md-6 p-0">
-                        <div class="mt10">Pax Count: {{paxCount}}</div>
-                        <div class="mt10">Available Vehicle: {{vehicle?.categories[0]?.available_quantity}}</div>
-                        <div class="mt10">Model: {{vehicle?.categories[0]?.model}}</div>
-                     </div>
-                  </div>
-               </div>
-               <div class="col-md-3 bookdiv">
-                  <div class="text-center">
-                     <div class="customTooltip fs21 fw600">
-                        {{vehicle?.categories[0]?.fare_summary[2]?.currency}} {{(vehicle?.categories[0]?.fare_summary[2]?.amount + vehicle?.transport_amount) | number:'1.2-2'}}
-                        <span class="customtooltiptext">
+                    </div>
+                    <div class="col-md-3 bookdiv">
+                        <div class="text-center">
+                            <div class="customTooltip fs21 fw600">
+                                {{vehicle?.categories[0]?.fare_summary[2]?.currency}} {{(vehicle?.categories[0]?.fare_summary[2]?.amount + vehicle?.transport_amount) | number:'1.2-2'}}
+                                <span class="customtooltiptext">
                            <div class="container mb-2">
                               <p class="pt-2 fare_summary_heading  textright">
                                  {{'Fare Summary' | translate}} </p>
@@ -51,22 +51,22 @@
                                           <span>{{price?.name}} :
                                           </span><span>{{price?.currency}}
                                              {{price?.amount | number:'.2-2'}}</span>
-                                       </div>
-                                    </div>
-                                 </div>
-                              </div>
-                           </div>
-                        </span>
-                     </div>
-                     <div class="fs13 fw400 clr52">({{'Per Vehicle' | translate}})</div>
-                     <div>
-                        <button class="searchbutton mr-0" [disabled]="vehicle.categories[0].out_of_stock" (click)="bookTransport(item.company_code,item.vehicle_types[index])">Book</button>
-                        <p class="red_text fs13 fw500" *ngIf="vehicle.categories[0].out_of_stock">Out Of Stock</p>
-                     </div>
-                  </div>
-               </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-         </div>
-      </div>
-   </div>
+            </span>
+        </div>
+        <div class="fs13 fw400 clr52">({{'Per Vehicle' | translate}})</div>
+        <div>
+            <button class="searchbutton mr-0" [disabled]="vehicle.categories[0].out_of_stock" (click)="bookTransport(item.company_code,item.vehicle_types[index])">Book</button>
+            <p class="red_text fs13 fw500" *ngIf="vehicle.categories[0].out_of_stock">Out Of Stock</p>
+        </div>
+    </div>
+</div>
+</div>
+</div>
+</div>
+</div>
 </div>
