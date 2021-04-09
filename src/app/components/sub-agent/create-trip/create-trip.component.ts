@@ -21,6 +21,7 @@
   import { GeneralHelper } from "src/app/helpers/General/general-helpers";
   import { SubAgentApiService } from "src/app/Services/sub-agent-api-services";
   import { CommonApiService } from "src/app/Services/common-api-services";
+import { environment } from "src/environments/environment";
 
   @Component({
     selector: "app-create-trip",
@@ -36,6 +37,7 @@
   })
 
   export class CreateTripComponent implements OnInit, AfterViewChecked,DoCheck {
+    countryCode : any = environment.countryCodeCommen;
     showtransportsearch : boolean = true;
     static UserObjectData : any;
     static RoomData :any ;
@@ -119,7 +121,6 @@
     additionl_serviceId: any;
     vehicleId: any;
     vehicleMax: any;
-    countryCode: any;
     nationalityCode: any;
     diffDays: any;
     searchTransportId: any;
@@ -428,13 +429,13 @@
    * Method to book trip and check availability
    */
   bookTrip(){
-    //if(this.travellers.valid){
     this.submitted = true;
-    console.log("form",this.travellersForm.value)
+    if(this.travellersForm.invalid){return}
+    let roomRef = 0+"_"+this.rooms[0].adults+"ADT_"+this.rooms[0].children+"CHD_"+this.rooms[0].child_ages.sort().join("_")+"";
     let travellers = [];
-    travellers.push(this.travellersForm.value)
+    travellers.push(this.createTripAdapter.createTripBookingRequest(this.travellersForm,this.countryCode,roomRef))
     const body={travellers}
-    this.common.bookTrip(this.createTripAdapter.createTripBookingRequest(this.travellersForm),this.appStore.customeTripId).subscribe((data) => {
+    this.common.bookTrip(body,this.appStore.customeTripId).subscribe((data) => {
       this.bookingId = data.id;
       sessionStorage.setItem("reference_no",data.reference_no)
       this.common.checkAvailability(data.id).subscribe((response)=> {
@@ -479,8 +480,8 @@
           } 
         });
     });
-   //}
-  }
+   }
+  
 
   /**
    * Method to close payment popup after 30 sec

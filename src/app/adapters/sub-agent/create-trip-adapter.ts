@@ -327,44 +327,35 @@ export class CreateTripAdapter {
       nationality: new FormControl("", Validators.required),
       passport_no: new FormControl("", Validators.required),
       passport_expiry_date: new FormControl("", Validators.required),
-      room_reference: new FormControl(),
-      contact_info: new FormGroup({
-        title: new FormControl("Mr"),
-        first_name: new FormControl("", Validators.required),
-        last_name: new FormControl("", Validators.required),
-        email: new FormControl("", Validators.required),
-        phone_number: new FormControl("", Validators.required),
-        address: new FormControl("", Validators.required),
-        country_code: new FormControl("", Validators.required),
-        phn_country_code: new FormControl("", Validators.required),
-      }),
+      email: new FormControl("", [Validators.required,Validators.pattern("^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$")]),
+      phone_number: new FormControl("", Validators.required),
+      address: new FormControl("", Validators.required),
       country_of_residence: new FormControl("", Validators.required),
     });
   }
 
-  createTripBookingRequest(travellersForm) {
-    console.log("formAdt",travellersForm)
+  createTripBookingRequest(travellersForm,code,roomRef) {
     let body = {
       title: "Mr",
-      first_name:travellersForm.first_name,
-      last_name: travellersForm.last_name,
-      dob: "2021-04-22",
-      gender: travellersForm.gender,
-      nationality: travellersForm.nationality,
-      passport_no: travellersForm.passport_no,
-      room_reference: "0_1ADT_0CHD_0",
-      passport_expiry_date: "2021-04-28",
+      first_name:travellersForm.value.first_name,
+      last_name: travellersForm.value.last_name,
+      dob: travellersForm.value.dob.toJSON().split("T")[0],
+      gender: travellersForm.value.gender,
+      nationality: travellersForm.value.nationality,
+      passport_no: travellersForm.value.passport_no,
+      room_reference: roomRef,
+      passport_expiry_date:travellersForm.value.passport_expiry_date.toJSON().split("T")[0],
+      country_of_residence:"EY",
       contactinfo: {
         title: "Mr",
-        first_name:travellersForm.first_name,
-        last_name: travellersForm.last_name,
-        email:travellersForm.contact_info.email,
-        phone_number:travellersForm.contact_info.phone_number,
-        address:travellersForm.contact_info.address,
-        country_code:travellersForm.contact_info.country_code,
-        phn_country_code: "30",
+        first_name:travellersForm.value.first_name,
+        last_name: travellersForm.value.last_name,
+        email:travellersForm.value.email,
+        phone_number:travellersForm.value.phone_number,
+        address:travellersForm.value.address,
+        country_code:travellersForm.value.country_code,
+        phn_country_code: code,
       },
-      country_of_residence: travellersForm.country_code,
     };
     return body;
   }
