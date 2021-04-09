@@ -53,10 +53,12 @@ export class PaymentStatusComponent implements OnInit {
   createHelper: CreateTripHelper;
   makkahotel:boolean=false;
   transporttoggle:boolean=false;
-  bknStatus
-  noOfDaysInMakkah
-  noOfTravellers
+  bknStatus:any;
+  noOfDaysInMakkah:any;
+  noOfTravellers:any;
   noOfDaysInMedinah: any;
+  invoicetoggle: boolean = false;
+  vouchertoggle: boolean = false;
 
   constructor(private route: ActivatedRoute,
     private appStore: AppStore,
@@ -120,7 +122,6 @@ export class PaymentStatusComponent implements OnInit {
     }
     if (data.transport_booking) {
       this.tripTransport = data.transport_booking;
-      console.log(this.tripTransport);
       if (data.transport_booking.trip_transportation.trip_vehicles.length > 0) {
         this.transportFare = data.transport_booking.trip_transportation.trip_vehicles[0].price_per_vehicle;
       }
@@ -147,6 +148,7 @@ export class PaymentStatusComponent implements OnInit {
   }
 
   invoiceClick(item: any) {
+    this.invoicetoggle = true;
     if (item == "View") {
       this.invoiceClickHtml()
     }
@@ -156,6 +158,7 @@ export class PaymentStatusComponent implements OnInit {
   }
 
   voucherClick(item: any) {
+    this.vouchertoggle = true;
     if (item == "View") {
       this.voucherClickHtml()
     }
@@ -198,7 +201,7 @@ export class PaymentStatusComponent implements OnInit {
 
   invoiceClickPdf() {
     this.common.getInvoicePdf(this.route.snapshot.params.id).subscribe((data) => {
-      this.showInvoicePdf(data)
+      this.showInvoicePdf(data);
     });
   }
 
@@ -213,6 +216,7 @@ export class PaymentStatusComponent implements OnInit {
     link.href = data;
     link.download = "Invoice.pdf";
     link.click();
+    this.invoicetoggle = false;
   }
 
   voucherClickPdf() {
@@ -232,6 +236,7 @@ export class PaymentStatusComponent implements OnInit {
     link.href = data;
     link.download = "Voucher.pdf";
     link.click();
+    this.vouchertoggle = false;
   }
   
   checkCancellation() {
@@ -328,4 +333,7 @@ export class PaymentStatusComponent implements OnInit {
     }
   }
 
+  navigateHomePage(){
+    this.router.navigate(['subagent/home']);
+  }
 }
