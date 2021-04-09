@@ -5,10 +5,15 @@ import { CreateTripFrontPageComponent } from 'src/app/components/sub-agent/creat
 import { PaymentStatusComponent } from 'src/app/components/sub-agent/payment-status/payment-status.component';
 import { ProfilePageComponent } from 'src/app/components/sub-agent/profile-page/profile-page.component';
 import { CreateTripComponent } from 'src/app/components/sub-agent/create-trip/create-trip.component';
+import { TestComponent } from 'src/app/test/test.component';
 
 const myPath: Routes = [
   {
     path: "createTrip",component: CreateTripComponent
+    
+  },
+  {
+    path: "test",component: TestComponent
     
   },
   {

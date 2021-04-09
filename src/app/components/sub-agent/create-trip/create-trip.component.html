@@ -141,7 +141,6 @@
                                     </app-payment-transport>
                                 </div>
                             </div>
-
                             <div class="col-md-12">
                                 <div class="d-flex justify-content-between">
                                     <h3 class="fs16 fw600 Premium_blue">{{'Traveller Details' | translate}}</h3>
@@ -151,136 +150,129 @@
                             </div>
                             <div class="col-md-12 pl-0 pr-0 pb-0">
                                 <div class="travellers-detail">
-                                    <mat-accordion class="bg-white">
-                                        <form [formGroup]="travellers">
-                                            <div class="d-flex justify-content-between bg-white">
-                                            <div class="m-0 pl-0 pr-0 content-section">
+                                    <form [formGroup]="travellersForm" class="bg-white p-4 one-edge-shadow">
+                                        <div class="d-flex justify-content-between bg-white">
+                                            <div class="m-0 pl-0 pr-0 row">
                                                 <div class="col-md-12 row ">
                                                     <div class="col-md-3 pt-2">
                                                         <label class="mb-0 fs14 clrlabel">First Name</label>
-                                                        <mat-form-field appearance="outline">
-                                                            <input formControlName="first_name"
-                                                                id="firstName" matInput
-                                                                placeholder="Enter First Name">
-                                                        </mat-form-field>
+                                                        <input class="form-control pd" formControlName="first_name"
+                                                            id="firstName" placeholder="Enter First Name"
+                                                            [ngClass]="{ 'is-invalid': submitted && g.first_name.errors }">
                                                     </div>
                                                     <div class="col-md-3 pt-2">
                                                         <label class="mb-0 fs14 clrlabel">Last Name</label>
-                                                        <mat-form-field appearance="outline">
-                                                            <input id="lastName" matInput
-                                                                placeholder="Enter Last Name"
-                                                                formControlName="last_name">
-                                                        </mat-form-field>
+
+                                                        <input class="form-control pd" id="lastName"
+                                                            placeholder="Enter Last Name" formControlName="last_name"
+                                                            [ngClass]="{ 'is-invalid': submitted && g.last_name.errors }">
+                                                            
                                                     </div>
                                                     <div class="col-md-3 pt-2">
                                                         <label class="mb-0 fs14 clrlabel">Gender</label>
-                                                        <mat-form-field appearance="outline">
-                                                            <mat-label>Gender</mat-label>
-                                                            <mat-select placeholder="Gender" value=""
-                                                                id="gender" formControlName="gender">
-                                                                <mat-option value="MALE">MALE</mat-option>
-                                                                <mat-option value="FEMALE">FEMALE
-                                                                </mat-option>
-                                                            </mat-select>
-                                                        </mat-form-field>
+                                                        <mat-label>Gender</mat-label>
+                                                        <mat-select class="matSlct pd form-control" placeholder="Gender"
+                                                            value="" id="gender" formControlName="gender"
+                                                            [ngClass]="{ 'is-invalid': submitted && g.gender.errors }">
+                                                            <mat-option value="MALE">MALE</mat-option>
+                                                            <mat-option value="FEMALE">FEMALE
+                                                            </mat-option>
+                                                        </mat-select>
                                                     </div>
-                                                    <div class="col-md-3 pt-2">
-                                                        <label class="mb-0 fs14 clrlabel">Date of Birth</label>
-                                                        <mat-form-field appearance="outline" class="w88">
-                                                            <input matInput [matDatepicker]="picker"
-                                                                placeholder="MM/DD/YYYY" id="dob"
-                                                                formControlName="dob">
-                                                            <mat-datepicker-toggle matSuffix [for]="picker">
-                                                            </mat-datepicker-toggle>
-                                                            <mat-datepicker #picker>
-                                                            </mat-datepicker>
-                                                        </mat-form-field>
+                                                    <div class="col-md-3">
+                                                        <p class="mb-0 fs14 pl-1 pdt">Date Of Birth</p>
+                                                        <div [owlDateTimeTrigger]="dt11" class="position-relative">
+                                                            <input placeholder="Date of birth"
+                                                                class="owldatepicker form-control fs14 bordrservice removeoutline"
+                                                                [owlDateTime]="dt11" formControlName="dob"
+                                                                [ngClass]="{ 'is-invalid': submitted && g.dob.errors }">
+                                                            <i class="icns calendaricon icon_size_20 cursor-pointer calendarposition"></i>
+                                                        </div>
+                                                        <owl-date-time [pickerType]="'calendar'" #dt11></owl-date-time>
                                                     </div>
+                                                </div>
+                                                <div class="col-md-12 row">
                                                     <div class="col-md-3 pt-2">
                                                         <label class="mb-0 fs14 clrlabel">Passport Number</label>
-                                                        <mat-form-field appearance="outline">
-                                                            <input id="passportNo{{adultIndex}}" matInput
-                                                                placeholder="Enter Passport Number"
-                                                                formControlName="passport_no">
-                                                        </mat-form-field>
+                                                        <input class="form-control pd" id="passportNo"
+                                                            placeholder="Enter Passport Number"
+                                                            formControlName="passport_no"
+                                                            [ngClass]="{ 'is-invalid': submitted && g.passport_no.errors }">
                                                     </div>
-                                                    <div class="col-md-3 pt-2">
-                                                        <label class="mb-0 fs14 clrlabel">Passport Expiry Date</label>
-                                                        <mat-form-field appearance="outline" class="w88">
-                                                            <input id="ped" matInput
-                                                                [matDatepicker]="picker2" placeholder="MM/DD/YYYY"
-                                                                formControlName="passport_expiry_date">
-                                                            <mat-datepicker-toggle matSuffix [for]="picker2">
-                                                            </mat-datepicker-toggle>
-                                                            <mat-datepicker #picker2></mat-datepicker>
-                                                        </mat-form-field>
+                                                    <div class="col-md-3">
+                                                        <p class="mb-0 fs14 pl-1 pdt">Passport Expiry Date</p>
+                                                        <div [owlDateTimeTrigger]="dt10" class="position-relative">
+                                                            <input placeholder="Expiry Date"
+                                                                class="owldatepicker fs14 bordrservice removeoutline form-control"
+                                                                formControlName="passport_expiry_date"
+                                                                [owlDateTime]="dt10"
+                                                                [ngClass]="{ 'is-invalid': submitted && g.passport_expiry_date.errors }">
+                                                            <i
+                                                                class="icns calendaricon icon_size_20 cursor-pointer calendarposition"></i>
+                                                        </div>
+                                                        <owl-date-time [pickerType]="'calendar'" #dt10></owl-date-time>
                                                     </div>
                                                     <div class="col-md-3 pt-2">
                                                         <label class="mb-0 fs14 clrlabel">Nationality</label>
-                                                        <mat-form-field appearance="outline">
-                                                            <mat-select [(value)]="selectedNationality"
-                                                                placeholder="Select Nationality"
-                                                                id="nationality"
-                                                                formControlName="nationality">
-                                                                <mat-option *ngFor="let n of nationalityList"
-                                                                    value="{{n.item_id}}">{{n?.item_text}}
-                                                                </mat-option>
-                                                            </mat-select>
-                                                        </mat-form-field>
+                                                        <mat-select class="matSlct pd form-control"
+                                                            [(value)]="selectedNationality"
+                                                            placeholder="Select Nationality" id="nationality"
+                                                            formControlName="nationality" [ngClass]="{ 'is-invalid': submitted && g.nationality.errors }">
+                                                            <mat-option *ngFor="let n of nationalityList"
+                                                                value="{{n.item_id}}">
+                                                                {{n?.item_text}}
+                                                            </mat-option>
+                                                        </mat-select>
                                                     </div>
                                                     <div class="col-md-3 pt-2">
                                                         <label class="mb-0 fs14 clrlabel">Country of Residence</label>
-                                                        <mat-form-field appearance="outline">
-                                                            <mat-select [(value)]="selectedCountry"
-                                                                placeholder="Select Country of Residence"
-                                                                id="cor"
-                                                                formControlName="country_of_residence">
-                                                                <mat-option *ngFor="let n of countryList"
-                                                                    value="{{n.item_id}}">{{n?.item_text}}
-                                                                </mat-option>
-                                                            </mat-select>
-                                                        </mat-form-field>
+                                                        <mat-select class="matSlct pd form-control"
+                                                            [(value)]="selectedCountry"
+                                                            placeholder="Select Country of Residence" id="cor"
+                                                            formControlName="country_of_residence"
+                                                            [ngClass]="{ 'is-invalid': submitted && g.country_of_residence.errors }">
+                                                            <mat-option *ngFor="let n of countryList"
+                                                                value="{{n.item_id}}">{{n?.item_text}}
+                                                            </mat-option>
+                                                        </mat-select>
                                                     </div>
                                                 </div>
-                                                    <div class="col-md-12 row ">
-                                                        <div class="col-md-3 pt-2">
-                                                            <label class="mb-0 fs14 clrlabel w-100">Phone Number</label>
-                                                            <mat-form-field appearance="outline" class="w34">
-                                                                <select matNativeControl name="phn_country_code"
-                                                                    [(value)]="phoneCode" placeholder="Country Code"
-                                                                    formControlName="country_code"
-                                                                    id="phn_country_code">
-                                                                    <option *ngFor="let n of phoneCodeList"
-                                                                        value="{{n.item_id}}">{{n.item_id}}
-                                                                    </option>
-                                                                </select>
-                                                            </mat-form-field>
-                                                            <mat-form-field appearance="outline" class="w66">
-                                                                <input matInput id="mobile{{adultIndex}}"
-                                                                    placeholder="Enter Phone Number" numberOnly
-                                                                    formControlName="phone_number">
-                                                            </mat-form-field>
-                                                        </div>
-                                                        <div class="col-md-3 pt-2">
-                                                            <label class="mb-0 fs14 clrlabel">Email</label>
-                                                            <mat-form-field appearance="outline">
-                                                                <input matInput id="email{{adultIndex}}"
-                                                                    placeholder="Enter Email" formControlName="email">
-
-                                                            </mat-form-field>
-                                                        </div>
-                                                        <div class="col-md-3 pt-2">
-                                                            <label class="mb-0 fs14 clrlabel">Address</label>
-                                                            <mat-form-field appearance="outline">
-                                                                <input matInput id="address{{adultIndex}}"
-                                                                    placeholder="Enter Address"
-                                                                    formControlName="address">
-                                                            </mat-form-field>
+                                                <div class="col-md-12 row">
+                                                    <div class="col-md-3 pt-2" style="padding-left: 13px;">
+                                                        <label id="phnnumberlbl" class="mb-0">Phone Number</label>
+                                                        <div class="form-group row pl-2">
+                                                            <select name="" id="" class="form-control w20"
+                                                                [ngModelOptions]="{standalone: true}"
+                                                                [(ngModel)]="countryCode">
+                                                                <option *ngFor="let n of phoneCodeList"
+                                                                    value="{{n.item_id}}">{{n.item_id}}
+                                                                </option>
+                                                            </select>
+                                                            <input id="phnnumber" max="10"
+                                                                placeholder="Enter Phone Number" type="text"
+                                                                maxlength="15" formControlName="phone_number"
+                                                                class="form-control w80"
+                                                                [ngClass]="{ 'is-invalid': submitted && g.phone_number.errors }"
+                                                                numberOnly>
                                                         </div>
                                                     </div>
-                                            </div></div>
-                                        </form>
-                                    </mat-accordion>
+
+                                                    <div class="col-md-3 pt-2">
+                                                        <label class="mb-0 fs14 clrlabel">Email</label>
+                                                        <input class="form-control pd" id="email"
+                                                            placeholder="Enter Email" formControlName="email"
+                                                            [ngClass]="{ 'is-invalid': submitted && g.email.errors }">
+                                                    </div>
+                                                    <div class="col-md-3 pt-2">
+                                                        <label class="mb-0 fs14 clrlabel">Address</label>
+                                                        <input class="form-control pd" id="address"
+                                                            placeholder="Enter Address" formControlName="address"
+                                                            [ngClass]="{ 'is-invalid': submitted && g.address.errors }">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </form>
                                 </div>
                                 <div class="d-flex flex-row mrgin mt-2 mb-2 mr-4 ml-4">
                                     <div *ngIf="reference_no" class="mr-auto mt-2">
@@ -295,7 +287,8 @@
                                 <div class="d-flex flex-row m-2">
                                     <div class="p-2 ml-auto"></div>
                                     <div><button (click)="bookTrip()" type="submit" id="continueBooking"
-                                            class="searchbutton">{{'BOOK & CONTINUE' | translate}}</button> </div>
+                                            class="searchbutton">{{'BOOK &
+                                            CONTINUE' | translate}}</button> </div>
                                     <div class="p-2"></div>
                                 </div>
                                 <div style="height: 100px;background:#eaeaea;"></div>

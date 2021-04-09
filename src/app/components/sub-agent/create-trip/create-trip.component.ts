@@ -21,6 +21,7 @@
   import { GeneralHelper } from "src/app/helpers/General/general-helpers";
   import { SubAgentApiService } from "src/app/Services/sub-agent-api-services";
   import { CommonApiService } from "src/app/Services/common-api-services";
+import { environment } from "src/environments/environment";
 
   @Component({
     selector: "app-create-trip",
@@ -36,6 +37,7 @@
   })
 
   export class CreateTripComponent implements OnInit, AfterViewChecked,DoCheck {
+    countryCode : any = environment.countryCodeCommen;
     showtransportsearch : boolean = true;
     static UserObjectData : any;
     static RoomData :any ;
@@ -119,7 +121,6 @@
     additionl_serviceId: any;
     vehicleId: any;
     vehicleMax: any;
-    countryCode: any;
     nationalityCode: any;
     diffDays: any;
     searchTransportId: any;
@@ -180,6 +181,7 @@
     noOfDaysInMakkah:number;
     generalHelper : GeneralHelper;
     commonApiService : CommonApiService;
+    travellersForm:FormGroup;
 
   constructor(
     private router: Router,
@@ -315,7 +317,7 @@
       (<HTMLInputElement>document.getElementById("body")).classList.remove('mirror_css');
     }
     if(this.selectedCountry){
-      let selectedResidenceText= (document.getElementById("cor0").getElementsByClassName("mat-select-value-text")[0].getElementsByClassName("ng-star-inserted")[0]).innerHTML;
+      let selectedResidenceText= (document.getElementById("cor").getElementsByClassName("mat-select-value-text")[0].getElementsByClassName("ng-star-inserted")[0]).innerHTML;
       this.phoneCode = this.phoneCodeList.filter(x=>x.item_text == selectedResidenceText)[0].item_id; 
     }
   }
@@ -420,30 +422,20 @@
     (<HTMLInputElement>document.getElementById("payBtn")).style.display = "none";
     (<HTMLInputElement>document.getElementById("continueBooking")).style.display = "block";
   }
-
-  travellers = new FormGroup({
-    title:new FormControl('Mr'),
-    first_name: new FormControl('', Validators.required),
-    last_name: new FormControl('', Validators.required),
-    gender:new FormControl('',Validators.required),
-    dob:new FormControl('',Validators.required),
-    nationality: new FormControl('',Validators.required),
-    passport_no:new FormControl('',Validators.required),
-    address:new FormControl('',Validators.required),
-    email:new FormControl('',Validators.required),
-    phone_number:new FormControl('',Validators.required),
-    country_of_residence:new FormControl('',Validators.required),
-    country_code:new FormControl('',Validators.required),
-    passport_expiry_date:new FormControl('',Validators.required)
-    });
+  
+  get g() { return this.travellersForm.controls; }
 
   /**
    * Method to book trip and check availability
    */
   bookTrip(){
     this.submitted = true;
-    console.log("dsd",this.travellers.value)
-    this.common.bookTrip(this.travellers.value,this.appStore.customeTripId).subscribe((data) => {
+    if(this.travellersForm.invalid){return}
+    let roomRef = 0+"_"+this.rooms[0].adults+"ADT_"+this.rooms[0].children+"CHD_"+this.rooms[0].child_ages.sort().join("_")+"";
+    let travellers = [];
+    travellers.push(this.createTripAdapter.createTripBookingRequest(this.travellersForm,this.countryCode,roomRef))
+    const body={travellers}
+    this.common.bookTrip(body,this.appStore.customeTripId).subscribe((data) => {
       this.bookingId = data.id;
       sessionStorage.setItem("reference_no",data.reference_no)
       this.common.checkAvailability(data.id).subscribe((response)=> {
@@ -488,7 +480,8 @@
           } 
         });
     });
-  }
+   }
+  
 
   /**
    * Method to close payment popup after 30 sec
@@ -557,6 +550,7 @@
     this.callCorrespongingSteppers();
     this.setdataForUserDetailsAtLastPage();
     this.fetchNessoryApisForPaymentPage();
+    this.travellersForm = this.createTripAdapter.createTripBookingForm();
   }
   
   setUserDetails(){
@@ -701,9 +695,7 @@
     this.loadContent = true;
   }
 
-  get f() {
-    return this.form.controls;
-  }
+  get f() {return this.form.controls;}
 
   /**
    * Method to set route id from drop down
@@ -830,5 +822,4 @@
     this.appStore.customeTripBookingId = null;
     this.appStore.isAvailabilityFails = false;
   }
-
 }
