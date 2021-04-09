@@ -453,7 +453,7 @@ export class CreateTripFrontPageComponent implements OnInit, DoCheck {
     };
     CreateTripComponent.UserObjectData = this.userObject;
     if (this.enableMadina || this.enableMakka || this.activaleAllSearch) {
-       if(this.countTravalers == 1){
+       if(this.countAdult == 1){
          CreateTripComponent.RoomData = [
           {
             "children": 0,
@@ -466,7 +466,7 @@ export class CreateTripFrontPageComponent implements OnInit, DoCheck {
             queryParams: { steps: this.steps.join(",") },
           });
        }
-      if(this.countTravalers > 1){
+      if(this.countAdult > 1){
         this.appStore.showRoomAlPopup = true;
         this.showRoomAllocationPopup = this.appStore.showRoomAlPopup;
       }
