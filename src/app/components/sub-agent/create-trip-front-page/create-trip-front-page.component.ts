@@ -369,9 +369,6 @@ export class CreateTripFrontPageComponent implements OnInit, DoCheck {
     }
 
     this.madeenaMin = this.makkaCheckOutDate;
-    // this.makkaCheckOutDate = null;
-    // this.madeenaCheckInDate = null;
-    // this.madeenaCheckOutDate = null;
     this.transportStartDate = this.makkaCheckInDate;
     if (!this.activaleAllSearch) {
       if (this.makkaCheckInDate != null && this.makkaCheckOutDate != null) {
@@ -456,13 +453,29 @@ export class CreateTripFrontPageComponent implements OnInit, DoCheck {
     };
     CreateTripComponent.UserObjectData = this.userObject;
     if (this.enableMadina || this.enableMakka || this.activaleAllSearch) {
-      this.appStore.showRoomAlPopup = true;
-      this.showRoomAllocationPopup = this.appStore.showRoomAlPopup;
+       if(this.countTravalers == 1){
+         CreateTripComponent.RoomData = [
+          {
+            "children": 0,
+            "child_ages": [],
+            "seq_no": "0",
+            "adults": 1
+          }
+        ]
+        this.router.navigate(["subagent/createTrip"], {
+            queryParams: { steps: this.steps.join(",") },
+          });
+       }
+      if(this.countTravalers > 1){
+        this.appStore.showRoomAlPopup = true;
+        this.showRoomAllocationPopup = this.appStore.showRoomAlPopup;
+      }
     } else {
       this.router.navigate(["subagent/createTrip"], {
         queryParams: { steps: this.steps.join(",") },
       });
     }
+  
     this.dataForPopUp.steps = this.steps;
     this.dataForPopUp.user = this.userObject;
   }
