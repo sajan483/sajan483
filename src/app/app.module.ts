@@ -19,7 +19,6 @@ import { LandingApiService } from './Services/landing-api-services';
 import { CommonApiService } from './Services/common-api-services';
 import { OnlyNumberDirective } from './models/onlynumber.directive';
 
-
 @NgModule({
   declarations: [
     OnlyNumberDirective,
@@ -27,7 +26,7 @@ import { OnlyNumberDirective } from './models/onlynumber.directive';
     HedderComponent,
     FooterComponent,
     SliderComponent,
-    PaginationComponent,
+    PaginationComponent
   ],
   imports: [
     BrowserModule,
