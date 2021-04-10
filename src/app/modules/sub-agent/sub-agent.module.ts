@@ -34,9 +34,6 @@ import { NgxSpinnerModule } from "ngx-spinner";
 import { HelperService } from 'src/app/common/services/helper-service';
 import { PaymentTransportComponent } from 'src/app/components/sub-agent/create-trip/components/payment-transport/payment-transport.component';
 import { SubAgentApiService } from 'src/app/Services/sub-agent-api-services';
-import { TestComponent } from 'src/app/test/test.component';
-
-
 
 @NgModule({
   declarations: [
@@ -55,8 +52,7 @@ import { TestComponent } from 'src/app/test/test.component';
     RoomDetailsPopupComponent,
     LoaderHotelPopupComponent,
     HotelImagePopupComponent,
-    PaymentTransportComponent,
-    TestComponent
+    PaymentTransportComponent
   ],
 
   imports: [

@@ -154,7 +154,8 @@ export class HotelDetailsPopupComponent implements OnInit,OnChanges {
           }
         }
       }
-    if(this.hotelRoomCount > 0 && p.length < 1){return true;}
+    //if(this.hotelRoomCount > 0 && p.length < 1){return true;}
+    if(this.hotelRoomCount > 0 ){return true;}
     return false;
     }
 

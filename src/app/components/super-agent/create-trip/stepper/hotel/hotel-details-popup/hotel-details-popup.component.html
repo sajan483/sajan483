@@ -239,7 +239,7 @@
                                                 </div>
                                             </div>
                                             <div class="row ml-4 br-rad mt-4 bgLgrn">
-                                                <input class="chkBx" type="checkbox" (change)="selectHotelRoom($event,room,i)">
+                                                <input class="chkBx" type="checkbox"  (change)="selectHotelRoom($event,room,i)">
                                                 <span class="pad6">Select Room</span>
                                             </div>
                                         </div>
@@ -253,7 +253,7 @@
                     </section>
                 </div>
                 <div class="col-md-12 d-flex justify-content-center mb150">
-                    <button class=" btn" [disabled]="!disableHotelSaveBtn()" [class.hidenormalbutton]="!disableHotelSaveBtn()" (click)="saveSelectedHotel(selectedHotel.city)">continue</button>
+                    <button class=" btn" [disabled]="!disableHotelSaveBtn()" (click)="saveSelectedHotel(selectedHotel.city)">continue</button>
                 </div>
 
             </mat-tab>
