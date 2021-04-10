@@ -442,16 +442,16 @@
                             </div>
                             <div class="float-right">{{tripData?.currency}} {{tripMakkahHotel?.total_price+tripMadeenaHotel?.total_price+tripTransport?.total_price | number :'1.2-2'}}</div>
                         </div>
-                        <div class="expansion det-text pl-3 pt-2 ">
-                            <div class="d-flex justify-content-between">
+                        <div class="expansion det-text pl-3 pt-1 ">
+                            <div class="d-flex justify-content-between" *ngIf="tripMakkahHotel?.total_price">
                                 <div>Makkah Hotel</div>
                                 <div>{{tripData?.currency}} {{tripMakkahHotel?.total_price | number :'1.2-2'}}</div>
                             </div>
-                            <div class="d-flex justify-content-between">
+                            <div class="d-flex justify-content-between" *ngIf="tripMadeenaHotel?.total_price">
                                 <div>Madeena Hotel</div>
                                 <div>{{tripData?.currency}} {{ tripMadeenaHotel?.total_price | number :'1.2-2'}}</div>
                             </div>
-                            <div class="d-flex justify-content-between">
+                            <div class="d-flex justify-content-between" *ngIf="tripTransport?.total_price">
                                 <div>Transport</div>
                                 <div>{{tripData?.currency}} {{tripTransport?.total_price | number :'1.2-2'}}</div>
                             </div>

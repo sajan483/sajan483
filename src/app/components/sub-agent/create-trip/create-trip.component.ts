@@ -65,7 +65,8 @@ import { environment } from "src/environments/environment";
     tripTransport: any;
     selectedRoomGroups: any[];
     isGrouped: any;
-    nationality: any;
+    nationality: any = environment.selectedCountryCommen;
+    country_of_residence : any = environment.selectedCountryCommen;
     noOfDaysInMadeena: number = 0;
     makkahticked:boolean = false;
     madeendetailshow:boolean=false;
@@ -433,7 +434,7 @@ import { environment } from "src/environments/environment";
     if(this.travellersForm.invalid){return}
     let roomRef = 0+"_"+this.rooms[0].adults+"ADT_"+this.rooms[0].children+"CHD_"+this.rooms[0].child_ages.sort().join("_")+"";
     let travellers = [];
-    travellers.push(this.createTripAdapter.createTripBookingRequest(this.travellersForm,this.countryCode,roomRef))
+    travellers.push(this.createTripAdapter.createTripBookingRequest(this.travellersForm,this.countryCode,roomRef,this.nationality,this.country_of_residence))
     const body={travellers}
     this.common.bookTrip(body,this.appStore.customeTripId).subscribe((data) => {
       this.bookingId = data.id;
@@ -605,7 +606,6 @@ import { environment } from "src/environments/environment";
   fetchNessoryApisForPaymentPage(){
     this.commonApiService.getCountry("",this.selectedLanguage).subscribe((data) => {
       this.nationalityList = data.map(x => ( {item_text: x.name, item_id: x.short_iso_code } ));
-      this.countryList = data.map(x => ( {item_text: x.name, item_id: x.short_iso_code } ));
     });
     this.commonApiService.getNationality("",this.selectedLanguage).subscribe((data) => {
       this.phoneCodeList = data.map(x => ( {item_text: x.name, item_id: x.code } ));

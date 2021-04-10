@@ -324,28 +324,26 @@ export class CreateTripAdapter {
       last_name: new FormControl("", Validators.required),
       gender: new FormControl("", Validators.required),
       dob: new FormControl("", Validators.required),
-      nationality: new FormControl("", Validators.required),
       passport_no: new FormControl("", Validators.required),
       passport_expiry_date: new FormControl("", Validators.required),
       email: new FormControl("", [Validators.required,Validators.pattern("^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$")]),
       phone_number: new FormControl("", Validators.required),
       address: new FormControl("", Validators.required),
-      country_of_residence: new FormControl("", Validators.required),
     });
   }
 
-  createTripBookingRequest(travellersForm,code,roomRef) {
+  createTripBookingRequest(travellersForm,code,roomRef,nationality,country_of_residence) {
     let body = {
       title: "Mr",
       first_name:travellersForm.value.first_name,
       last_name: travellersForm.value.last_name,
       dob: travellersForm.value.dob.toJSON().split("T")[0],
       gender: travellersForm.value.gender,
-      nationality: travellersForm.value.nationality,
+      nationality: nationality,
       passport_no: travellersForm.value.passport_no,
       room_reference: roomRef,
       passport_expiry_date:travellersForm.value.passport_expiry_date.toJSON().split("T")[0],
-      country_of_residence:"EY",
+      country_of_residence:country_of_residence,
       contactinfo: {
         title: "Mr",
         first_name:travellersForm.value.first_name,
@@ -353,7 +351,6 @@ export class CreateTripAdapter {
         email:travellersForm.value.email,
         phone_number:travellersForm.value.phone_number,
         address:travellersForm.value.address,
-        country_code:travellersForm.value.country_code,
         phn_country_code: code,
       },
     };
