@@ -46,7 +46,7 @@ export class loginHelper{
               this.notifyService.showWarning(this.translate.instant('processing !!'));
               this.router.navigate(["upload", data.staff.employer_id]);
             }
-            else if(data.staff.is_umrah_operator == 'False'){
+            if(data.staff.is_umrah_operator == 'False'){
               this.notifyService.showSuccess(this.translate.instant('success !!'));
               this.appStore.currentUser = etype;
               this.appStore.userType = data.staff.name;

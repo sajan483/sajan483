@@ -21,6 +21,7 @@ export class HomeComponent implements OnInit {
   menuIconClass: ElementRef;
   @ViewChild("menuPopupClass", { read: ElementRef, static: false })
   menuPopupClass: ElementRef;
+  packages: any[]=[];
 
   constructor(private renderer2: Renderer2,private branchApi:BranchApiService) {
     this.renderer2.listen("window", "click", (e: Event) => {
@@ -54,7 +55,8 @@ export class HomeComponent implements OnInit {
 
   ngOnInit() {
     this.branchApi.getPackages().subscribe((data)=>{
-      console.log(data)
+      this.packages = data.results;
+      console.log(this.packages)
     })
   }
 
