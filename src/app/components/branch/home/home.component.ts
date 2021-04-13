@@ -1,4 +1,5 @@
 import { Component, OnInit,ViewChild, ElementRef, Renderer2 } from '@angular/core';
+import { BranchApiService } from 'src/app/Services/branch-api-service'
 
 @Component({
   selector: 'app-home',
@@ -6,7 +7,6 @@ import { Component, OnInit,ViewChild, ElementRef, Renderer2 } from '@angular/cor
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit {
-
   service : any = 'All';
   showSelectionPopUp: boolean;
   countAdult: number = 1;
@@ -22,8 +22,7 @@ export class HomeComponent implements OnInit {
   @ViewChild("menuPopupClass", { read: ElementRef, static: false })
   menuPopupClass: ElementRef;
 
-  constructor(private renderer2: Renderer2) {
-
+  constructor(private renderer2: Renderer2,private branchApi:BranchApiService) {
     this.renderer2.listen("window", "click", (e: Event) => {
       if (
         (this.menuPopupClass &&
@@ -54,6 +53,9 @@ export class HomeComponent implements OnInit {
    }
 
   ngOnInit() {
+    this.branchApi.getPackages().subscribe((data)=>{
+      console.log(data)
+    })
   }
 
   showSelectionPopup() {

@@ -17,6 +17,7 @@ import { SliderComponent } from './common/components/slider/slider.component';
 import { PaginationComponent } from './common/components/pagination/pagination.component';
 import { LandingApiService } from './Services/landing-api-services';
 import { CommonApiService } from './Services/common-api-services';
+import { BranchApiService } from 'src/app/Services/branch-api-service'
 import { OnlyNumberDirective } from './models/onlynumber.directive';
 
 @NgModule({
@@ -46,7 +47,7 @@ import { OnlyNumberDirective } from './models/onlynumber.directive';
       isolate: false
     }),
   ],
-  providers: [DatePipe,CookieService,LandingApiService,CommonApiService],
+  providers: [DatePipe,CookieService,LandingApiService,CommonApiService,BranchApiService],
   bootstrap: [AppComponent]
 })
 
