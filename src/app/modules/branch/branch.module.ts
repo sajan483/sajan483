@@ -2,20 +2,26 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { BranchRouteModule } from './landing-routing.module';
 import { HomeComponent } from 'src/app/components/branch/home/home.component';
-import { MatStepperModule, MatInputModule, MatButtonModule, MatDatepickerModule, MatNativeDateModule, MatTabsModule, MatFormFieldModule, MatSelectModule, MatRadioModule, MatExpansionModule, MatCheckboxModule, MatProgressBarModule } from '@angular/material';
-import { FormsModule } from '@angular/forms';
-
+import { PackageDetailsComponent } from 'src/app/components/branch/home/package-details/package-details.component';
+import { MatButtonModule, MatIconModule, MatInputModule, MatRadioModule, MatTabsModule } from '@angular/material';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
   declarations: [
-    HomeComponent
+    HomeComponent,
+    PackageDetailsComponent
   ],
   imports: [
     CommonModule,
     BranchRouteModule,
-    MatRadioModule,
-    FormsModule
+    MatIconModule,
+    MatTabsModule,
+    FormsModule,
+    ReactiveFormsModule,
+    MatInputModule,
+    MatButtonModule,
+    MatRadioModule
   ]
 })
 export class BranchModule { }
