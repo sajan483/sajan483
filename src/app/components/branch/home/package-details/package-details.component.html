@@ -1,0 +1,136 @@
+<div class="outer">
+    <div class="banner">
+        <img src="/assets/images/mkbg.jpg">
+        <div class="black position-absolute">
+            <h4>LUXURY UMRAH PACKAGE FROM KOZHIKKODE 2021</h4>
+            <p>Akbar Travels Kozhikkode | Departure Date : April 22 Onwards</p>
+        </div>
+        <div class="bottom">
+            <div class="container">
+                <div class="row">
+                    <div class="aligner">
+                        <div class="d-flex box-3">
+                            <mat-icon class="icon">room</mat-icon>
+                            <div>
+                                <p>Departure From</p>
+                                <h5>Kozhikkode Airport</h5>
+                            </div>
+                        </div>
+                        <div class="d-flex box-3">
+                            <mat-icon class="icon">schedule</mat-icon>
+                            <div>
+                                <p>Duration</p>
+                                <h5>14 Days</h5>
+                            </div>
+                        </div>
+                        <div class="d-flex box-3">
+                            <mat-icon class="icon">calendar_today</mat-icon>
+                            <div>
+                                <p>Departure Date</p>
+                                <h5>21 April Onwards</h5>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="content">
+        <div class="container">
+            <mat-tab-group>
+                <mat-tab label="MEMBERS & OVERVIEW">
+                    <div class="members">
+                        <div class="head-box">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <p>People traveling with me</p>
+                                </div>
+                                <div class="col-md-6 right-outer">
+                                    <div class="right-box">
+                                        <div class="d-flex mr-5">
+                                            <mat-icon class="black p-icon mt-1 mr-2">groups</mat-icon>
+                                            <div>
+                                                <p class="group">Travel group size</p>
+                                                <p class="grn-txt black m-0">40 People</p>
+                                            </div>
+                                        </div>
+                                        <div class="d-flex mt-2">
+                                            <mat-icon>verified</mat-icon>
+                                            <p class="grn-txt">12 Slots available</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row mt-4 mb-2" [formGroup]="fareForm">
+                            <div class="col-md fare-box">
+                                <mat-form-field appearance="outline" class="fw">
+                                    <mat-label>Adult</mat-label>
+                                    <input matInput placeholder="₹" formControlName="adult" numberOnly>
+                                </mat-form-field>
+                            </div>
+                            <div class="col-md fare-box br-left">
+                                <mat-form-field appearance="outline" class="fw">
+                                    <mat-label>Child</mat-label>
+                                    <input matInput placeholder="₹" formControlName="child" numberOnly>
+                                </mat-form-field>
+                            </div>
+                            <div class="col-md fare-box br-left">
+                                <mat-form-field appearance="outline" class="fw">
+                                    <mat-label>Infant</mat-label>
+                                    <input matInput placeholder="₹" formControlName="infant" numberOnly>
+                                </mat-form-field>
+                            </div>
+                            <div class="col-md-2 btn-outer">
+                                <button [disabled]="continue" class="searchbutton pull-right">Book Package</button>
+                            </div>
+                        </div>
+                        <div class="overview">
+                            <p class="ovr-txt mt-4">Package Overview</p>
+                            <p class="grey-txt">Akbar Tours and Travels is an established agency to provide best and affordable Umrah Package from Kozikod to Umrah Pilgrims. Team of Akbar Umrah takes a keen interest to make your journey for Umrah to Makkah hassle-free, comfortable
+                                and an experience worth cherishing forever.
+                            </p>
+                        </div>
+                        <div class="itenerary">
+                            <p class="it-head">Itenerary</p>
+
+                            <ul class="sessions">
+                                <span>
+                                <li>
+                                    <div class="time">Day 1</div>
+                                    <div class="clr52 fs14 mt-2">wzsxedcrftvguybhunjwexrctvubyhnjiome4d5rf6tgy7hu8ji</div>
+                                    <div class="row m-0">
+                                      <div class="col-md-3 pl-0 mt-2">
+                                          <img class="itineraryimg" src="/assets/images/nabwa.png">
+                                      </div>
+                                    </div>
+                                </li>
+                            </span>
+                                <div class="itenaryfull">
+                                    <span>
+                                    <li>
+                                        <div class="time">Day 1</div>
+                                    <div class="clr52 fs14 mt-2">wzsxedcrftvguybhunjwexrctvubyhnjiome4d5rf6tgy7hu8ji</div>
+                                    <div class="row m-0">
+                                      <div class="col-md-3 pl-0 mt-2">
+                                          <img class="itineraryimg" src="/assets/images/nabwa.png">
+                                      </div>
+                                    </div>
+                                    </li>
+                                </span>
+                                </div>
+                                <button class="addAnotherBttn mt-3"><i class="fa fa-plus-circle" aria-hidden="true"></i> View Full Itinerary</button>
+                            </ul>
+
+                        </div>
+                    </div>
+                </mat-tab>
+                <mat-tab label="INCLUSION / EXCLUSION"> </mat-tab>
+                <mat-tab label="POLICY"> </mat-tab>
+            </mat-tab-group>
+            <div class="btn-box">
+                <button [disabled]="continue" class="searchbutton">Book Package</button>
+            </div>
+        </div>
+    </div>
+</div>

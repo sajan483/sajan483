@@ -287,6 +287,7 @@ export class FlightComponent implements OnInit {
         {
           "adult_price": this.fareForm.controls.adult.value,
           "infant_price": this.fareForm.controls.infant.value,
+          "child_price": this.fareForm.controls.child.value,
           "onward_flight": {
             "flight_id": this.footerData.depFlight.id,
             "flight_type": "ONWARD",
