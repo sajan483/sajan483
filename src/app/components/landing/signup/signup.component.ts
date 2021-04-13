@@ -34,6 +34,7 @@ export class SignupComponent implements OnInit {
     private _commonApiService:CommonApiService) { 
     this.signupAdapter = new signupAdapter();
     this.signupForm = this.signupAdapter.createSignupGroup();
+    this.commonApiService = this._commonApiService
   }
 
   get f() { return this.signupForm.controls; }
@@ -48,6 +49,7 @@ export class SignupComponent implements OnInit {
   coutryList(){
     this.commonApiService.getCountries().subscribe(res =>{
       this.countries = res;
+      console.log(this.countries)
     })
   }
 

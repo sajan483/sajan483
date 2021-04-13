@@ -45,7 +45,15 @@ export class loginHelper{
             if (data.staff.is_approved == 'False') {
               this.notifyService.showWarning(this.translate.instant('processing !!'));
               this.router.navigate(["upload", data.staff.employer_id]);
-            } else {
+            }
+            else if(data.staff.is_umrah_operator == 'False'){
+              this.notifyService.showSuccess(this.translate.instant('success !!'));
+              this.appStore.currentUser = etype;
+              this.appStore.userType = data.staff.name;
+              sessionStorage.setItem('currentUser', etype);
+              this.router.navigate(["branch/home"]);
+            }
+            else if(data.staff.is_umrah_operator == 'True'){
               this.notifyService.showSuccess(this.translate.instant('success !!'));
               this.appStore.currentUser = etype;
               this.appStore.userType = data.staff.name;

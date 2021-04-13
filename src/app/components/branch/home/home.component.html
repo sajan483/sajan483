@@ -1,1 +1,139 @@
-<h1 style="margin-top: 200px;">HOME</h1>
+<div class="topofcomponent">
+    <div class="text-center bg_blue text-white p10">
+        <h1 class="mb-0 fs28">UMRAH PACKAGES</h1>
+        <h3 class="fs18">Get a great price on your Umrah Packages.</h3>
+    </div>
+    <div class="bg_f1">
+        <div class="algn justifycenter container">
+            <div class="p-2 d-flex">
+                <div class="subtext m-auto">Sort By</div>
+                <div class="position-relative">
+                    <div class="position-relative d-flex justify-content-between w200 bordrservice m-3 p-2 cursor-pointer" (click)="showSelectionPopup()" #serviceDropDown>
+                        <p class="fs14 my-auto">{{service}}</p>
+                        <i class="icns downarrow icon_h28_w15"></i>
+                    </div>
+                    <div class="travellerpopupp popupmoving" *ngIf="showSelectionPopUp" #selectionPopUp>
+                        <div class="travellersouterr">
+                            <div class="d-flex flex-column w-100">
+                                <div class="p10">
+                                    <mat-radio-group class="exampleradiogroup" [(ngModel)]="service">
+                                        <mat-radio-button value="All" (change)="onServiceItemChange('All')">All</mat-radio-button>
+                                        <mat-radio-button value="Makkah Hotel" (change)="onServiceItemChange('Makkah Hotel')">Makkah Hotel</mat-radio-button>
+                                        <mat-radio-button value="Medina Hotel" (change)="onServiceItemChange('Medina Hotel')">Medina Hotel</mat-radio-button>
+                                        <mat-radio-button value="Transport" (change)="onServiceItemChange('Transport')">Transport</mat-radio-button>
+                                    </mat-radio-group>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="p-2 d-flex">
+                <div class="subtext m-auto">Travellers</div>
+                <div class="position-relative">
+                    <div class="position-relative d-flex justify-content-between w200 bordrservice m-3 p-2 cursor-pointer" (click)="showTravelersPopUp()" #menuIconClass>
+                        <p class="fs14 my-auto">{{countAdult + countChild + countInfant}} Travellers</p>
+                        <i class="icns downarrow icon_h28_w15"></i>
+                    </div>
+                    <div class="travellerpopup popupmoving" *ngIf="displayTabtravel" #menuPopupClass>
+                        <div class="travellersouter travellerOuter">
+                            <div class="d-flex flex-column" class="w-100">
+                                <div class="d-flex justify-content-between travellerslide">
+                                    <div class="texttraveller pt-1">Adults</div>
+                                    <div class="p-1 ml-2" class="texttravellerd margnR50">
+                                        {{countAdult}}
+                                    </div>
+                                    <div>
+                                        <div class="btn-group">
+                                            <a class="firstbttn bttnfrst" (click)="minusAdult();">-</a>
+                                            <a class="secondbttn bttnscnd" (click)="addAdult();">+</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="d-flex justify-content-between travellerslide">
+                                    <div class="texttraveller">Children
+                                        <p>2 - 12 Years</p>
+                                    </div>
+                                    <div class="p-1 ml-1" class="texttravellerd">
+                                        {{countChild}}</div>
+                                    <div>
+                                        <div class="btn-group">
+                                            <a class="firstbttn bttnfrst" (click)="minusChild();">-</a>
+                                            <a class="secondbttn bttnscnd" (click)="addChild();">+</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="d-flex justify-content-between travellerslide">
+                                    <div class="texttraveller textright">Infants
+                                        <p>0 - 23 months</p>
+                                    </div>
+                                    <div class="p-1" class="texttravellerd">{{countInfant}}</div>
+                                    <div>
+                                        <div class="btn-group">
+                                            <a class="firstbttn bttnfrst" (click)="minusInfant();">-</a>
+                                            <a class="secondbttn bttnscnd" (click)="addInfant();">+</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="my-auto">
+                <button class="search_bttn">GO</button>
+            </div>
+        </div>
+    </div>
+    <div class="container mt-3">
+        <div class="row mx-0">
+            <div class="col-md-4">
+                <div class="margincard px-0 bordershadow">
+                    <div>
+                        <img class="carttag" src="/assets/images/tag-bg.png" alt="">
+                        <p class="recmmtdtext">Recommended</p>
+                    </div>
+                    <div class="image-div">
+                        <img class="border_radius_top" src="/assets/images/imagemakkah.jpg" alt="">
+                    </div>
+                    <div class="cardHead">Luxuary Umrah Packages</div>
+                    <div class="d-flex justify-content-start detailsicon">
+                        <div class="text-center">
+                            <i class="airplane_blue icns icon_size_20"></i>
+                            <p class="iconnames">Flight</p>
+                        </div>
+                        <div class="plussize">+</div>
+                        <div class="text-center">
+                            <i class="hotelblueicon icns icon_size_20"></i>
+                            <p class="iconnames">Hotel</p>
+                        </div>
+                        <div class="plussize">+</div>
+                        <div class="text-center">
+                            <i class="transportblueicon icns icon_size_20"></i>
+                            <p class="iconnames">Travel</p>
+                        </div>
+                        <div class="plussize">+</div>
+                        <div class="text-center">
+                            <i class="visa_icon_blue icns icon_size_20"></i>
+                            <p class="iconnames">Visa</p>
+                        </div>
+                    </div>
+
+                    <div class="col-md-12 pt-2">
+                        <p class="night_from "><i class="fa fa-map-marker loctionicon pr8" aria-hidden="true"></i> From Kozhikode / March 2021</p>
+                        <p class="night_from"><i class="fa fa-moon-o loctionicon pr1" aria-hidden="true"></i> 14 Nights</p>
+                    </div>
+                    <div class="row col-md-12 pt-3 pb-3">
+                        <div class="col-md-6 pad-lft">
+                            <p class="operatedby text-uppercase">Operated By</p>
+                            <p class="operatedname">Akbartravels</p>
+                        </div>
+                        <div class="col-md-6 bttnright">
+                            <button class="blackborderbttn bg-white" type="button">View Details</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
