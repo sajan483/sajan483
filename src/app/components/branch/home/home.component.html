@@ -87,41 +87,41 @@
     </div>
     <div class="container mt-3">
         <div class="row mx-0">
-            <div class="col-md-4">
+            <div class="col-md-4" *ngFor="let item of packages">
                 <div class="margincard px-0 bordershadow">
-                    <div>
+                    <!-- <div>
                         <img class="carttag" src="/assets/images/tag-bg.png" alt="">
                         <p class="recmmtdtext">Recommended</p>
-                    </div>
+                    </div> -->
                     <div class="image-div">
                         <img class="border_radius_top" src="/assets/images/imagemakkah.jpg" alt="">
                     </div>
-                    <div class="cardHead">Luxuary Umrah Packages</div>
+                    <div class="cardHead">{{item.title}}</div>
                     <div class="d-flex justify-content-start detailsicon">
-                        <div class="text-center">
+                        <div class="text-center" *ngIf="item.trip_flight_id != null">
                             <i class="airplane_blue icns icon_size_20"></i>
                             <p class="iconnames">Flight</p>
                         </div>
-                        <div class="plussize">+</div>
-                        <div class="text-center">
+                        <div class="plussize" *ngIf="item.hotels.length > 0">+</div>
+                        <div class="text-center" *ngIf="item.hotels.length > 0">
                             <i class="hotelblueicon icns icon_size_20"></i>
                             <p class="iconnames">Hotel</p>
                         </div>
-                        <div class="plussize">+</div>
-                        <div class="text-center">
+                        <div class="plussize" *ngIf="item.trip_transportation_id != null">+</div>
+                        <div class="text-center" *ngIf="item.trip_transportation_id != null">
                             <i class="transportblueicon icns icon_size_20"></i>
                             <p class="iconnames">Travel</p>
                         </div>
-                        <div class="plussize">+</div>
-                        <div class="text-center">
+                        <div class="plussize" *ngIf="item.trip_visa_id != null">+</div>
+                        <div class="text-center" *ngIf="item.trip_visa_id != null">
                             <i class="visa_icon_blue icns icon_size_20"></i>
                             <p class="iconnames">Visa</p>
                         </div>
                     </div>
 
                     <div class="col-md-12 pt-2">
-                        <p class="night_from "><i class="fa fa-map-marker loctionicon pr8" aria-hidden="true"></i> From Kozhikode / March 2021</p>
-                        <p class="night_from"><i class="fa fa-moon-o loctionicon pr1" aria-hidden="true"></i> 14 Nights</p>
+                        <p class="night_from "><i class="fa fa-map-marker loctionicon pr8" aria-hidden="true"></i> From Kozhikode / {{item.start_date | date:'MMMM y'}}</p>
+                        <p class="night_from"><i class="fa fa-moon-o loctionicon pr1" aria-hidden="true"></i> {{item.num_days}} Nights</p>
                     </div>
                     <div class="row col-md-12 pt-3 pb-3">
                         <div class="col-md-6 pad-lft">

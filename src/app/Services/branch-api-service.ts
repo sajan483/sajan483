@@ -17,6 +17,6 @@ export class BranchApiService{
     constructor(private http: Http){}
 
     getPackages(){
-        return this.http.get(this.BASE_URL + "packages/suggested/", this.options).map(res => res.json());
+        return this.http.get(this.BASE_URL + "b2capis/packages/", this.options).map(res => res.json());
     }
 }
