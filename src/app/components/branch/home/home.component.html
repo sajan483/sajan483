@@ -85,7 +85,7 @@
             </div>
         </div>
     </div>
-    <div class="container mt-3">
+    <div class="container mt-3 mb-5">
         <div class="row mx-0">
             <div class="col-md-4" *ngFor="let item of packages">
                 <div class="margincard px-0 bordershadow">
@@ -120,8 +120,12 @@
                     </div>
 
                     <div class="col-md-12 pt-2">
-                        <p class="night_from "><i class="fa fa-map-marker loctionicon pr8" aria-hidden="true"></i> From Kozhikode / {{item.start_date | date:'MMMM y'}}</p>
-                        <p class="night_from"><i class="fa fa-moon-o loctionicon pr1" aria-hidden="true"></i> {{item.num_days}} Nights</p>
+                        <div class="night_from d-flex"><i class="icns locationmarkicon icon_size_15"></i>
+                            <div class="pl-2">From Kozhikode / {{item.start_date | date:'MMMM y'}}</div>
+                        </div>
+                        <div class="night_from d-inline-flex"><i class="icns moonicon icon_size_15"></i>
+                            <div class="pl-2">{{item.num_days}} Nights</div>
+                        </div>
                     </div>
                     <div class="row col-md-12 pt-3 pb-3">
                         <div class="col-md-6 pad-lft">

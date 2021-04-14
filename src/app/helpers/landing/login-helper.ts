@@ -34,34 +34,58 @@ export class loginHelper{
 
         sessionStorage.setItem('empId', data.staff.employer_id);
         if (sessionStorage.getItem('accesstoken') != null) {
-          if (etype == 'branch') {
+          if(data.staff.is_super_agent == 'True'){
             this.notifyService.showSuccess(this.translate.instant('success !!'));
             this.appStore.currentUser = etype;
-            this.appStore.userType = data.staff.employer_name;
+            this.appStore.userType = data.staff.name;
             sessionStorage.setItem('currentUser', etype);
-            this.router.navigate(['subagent/home/']);
-          }
-          if (etype == 'agency') {
+            this.router.navigate(["superagent/createTrip"]);
+          }else{
             if (data.staff.is_approved == 'False') {
               this.notifyService.showWarning(this.translate.instant('processing !!'));
               this.router.navigate(["upload", data.staff.employer_id]);
-            }
-            if(data.staff.is_umrah_operator == 'False'){
+            } else if(data.staff.is_umrah_operator == 'False'){
               this.notifyService.showSuccess(this.translate.instant('success !!'));
               this.appStore.currentUser = etype;
               this.appStore.userType = data.staff.name;
               sessionStorage.setItem('currentUser', etype);
               this.router.navigate(["branch/home"]);
-            }
-            else if(data.staff.is_umrah_operator == 'True'){
+            } else{
               this.notifyService.showSuccess(this.translate.instant('success !!'));
               this.appStore.currentUser = etype;
-              this.appStore.userType = data.staff.name;
+              this.appStore.userType = data.staff.employer_name;
               sessionStorage.setItem('currentUser', etype);
-              this.router.navigate(["superagent/createTrip"]);
+              this.router.navigate(['subagent/home/']);
             }
-
           }
+          // if (etype == 'branch') {
+          //   this.notifyService.showSuccess(this.translate.instant('success !!'));
+          //   this.appStore.currentUser = etype;
+          //   this.appStore.userType = data.staff.employer_name;
+          //   sessionStorage.setItem('currentUser', etype);
+          //   this.router.navigate(['subagent/home/']);
+          // }
+          // if (etype == 'agency') {
+          //   if (data.staff.is_approved == 'False') {
+          //     this.notifyService.showWarning(this.translate.instant('processing !!'));
+          //     this.router.navigate(["upload", data.staff.employer_id]);
+          //   }
+          //   else if(data.staff.is_umrah_operator == 'False'){
+          //     this.notifyService.showSuccess(this.translate.instant('success !!'));
+          //     this.appStore.currentUser = etype;
+          //     this.appStore.userType = data.staff.name;
+          //     sessionStorage.setItem('currentUser', etype);
+          //     this.router.navigate(["branch/home"]);
+          //   }
+          //   else if(data.staff.is_umrah_operator == 'True'){
+          //     this.notifyService.showSuccess(this.translate.instant('success !!'));
+          //     this.appStore.currentUser = etype;
+          //     this.appStore.userType = data.staff.name;
+          //     sessionStorage.setItem('currentUser', etype);
+          //     this.router.navigate(["superagent/createTrip"]);
+          //   }
+
+          // }
         }
     }
 }
