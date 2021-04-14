@@ -17,6 +17,18 @@ export class BranchApiService{
     constructor(private http: Http){}
 
     getPackages(){
-        return this.http.get(this.BASE_URL + "b2capis/packages/", this.options).map(res => res.json());
+      return this.http.get(this.BASE_URL + "packages/", this.options).map(res => res.json());
+    }
+
+    getPackageDetails(id){
+      return this.http
+        .get(this.BASE_URL + "packages/"+id+"/", this.options)
+        .map((res) => res.json());
+    }
+
+    bookPackage(data, id){
+      return this.http
+        .post(this.BASE_URL + "packages/"+id+"/booking/", data, this.options)
+        .map((res) => res.json());
     }
 }
