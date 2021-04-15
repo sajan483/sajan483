@@ -90,7 +90,6 @@ export class HotelComponent implements OnInit {
       }
     });
   }
-
   setHotelCheckOutDateRange(){
     this.pickerEnd.open();
   }
