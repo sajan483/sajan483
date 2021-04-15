@@ -392,7 +392,7 @@ import { environment } from "src/environments/environment";
  */
   getTripData(){
     this.setPaymentPageAfterItineraryModified();
-    this.common.getTrip(this.appStore.customeTripId).subscribe((data) => {
+    this.common.getTrip(sessionStorage.getItem('custom_trip_id')).subscribe((data) => {
       this.tripData = data;
       if(this.tripData){
       if(this.tripData.makkah_trip_hotel){
@@ -437,7 +437,7 @@ import { environment } from "src/environments/environment";
     let travellers = [];
     travellers.push(this.createTripAdapter.createTripBookingRequest(this.travellersForm,this.countryCode,roomRef,this.nationality,this.country_of_residence))
     const body={travellers}
-    this.common.bookTrip(body,this.appStore.customeTripId).subscribe((data) => {
+    this.common.bookTrip(body,sessionStorage.getItem('custom_trip_id')).subscribe((data) => {
       this.bookingId = data.id;
       sessionStorage.setItem("reference_no",data.reference_no)
       this.common.checkAvailability(data.id).subscribe((response)=> {
@@ -558,10 +558,7 @@ import { environment } from "src/environments/environment";
   }
   
   setUserDetails(){
-    //this.userDetails = CreateTripComponent.UserObjectData;
     this.userDetails = JSON.parse(sessionStorage.getItem('userObject'));
-    console.log("userObject",this.userDetails)
-    //this.appStore.userDetails = this.userDetails;
     if(typeof(this.userDetails) == 'undefined'){this.router.navigate(['subagent/home'])}
     if(this.userDetails){
     this.totalTravellers = this.userDetails.travallersCount;
@@ -758,7 +755,7 @@ import { environment } from "src/environments/environment";
  */
   moveToPaymentPage(){
     this.getTripData();
-    if(this.appStore.customeTripId && this.steps.length > 2){
+    if(sessionStorage.getItem('custom_trip_id') && this.steps.length > 2){
       this.move(3)
     }else{
       this.move(1)
@@ -823,8 +820,8 @@ import { environment } from "src/environments/environment";
    * Method for clearing appstore
    */
   clearAppStore(){
-    this.appStore.customeTripId = null;
-    this.appStore.customeTripBookingId = null;
+    sessionStorage.setItem('custom_trip_id',"");
+    sessionStorage.setItem('custome_trip_booking_id',"");
     this.appStore.isAvailabilityFails = false;
   }
 }

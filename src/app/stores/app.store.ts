@@ -17,8 +17,6 @@ export class AppStore {
   @observable stepsArray:string[];
   @observable roomArray:Room[];
   @observable userDetails:any;
-  @observable customeTripId:any;
-  @observable customeTripBookingId:any;
   @observable transportSearchId:any;
   @observable vehicleMax:number;
   @observable showRoomAlPopup:boolean;

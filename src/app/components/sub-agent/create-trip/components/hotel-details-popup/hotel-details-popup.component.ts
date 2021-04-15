@@ -91,7 +91,7 @@ export class HotelDetailsPopupComponent implements OnInit ,OnChanges{
   ngOnChanges() {
     this.totalTravellers = this.appStore.adultCount + this.appStore.childCount;
     this.selectedHotel = this.hotelData;
-    this.rooms = this.appStore.roomArray;
+    this.rooms = JSON.parse(sessionStorage.getItem('roomData'));
     
     /*
      * this method for fetching selected hotel details
@@ -140,15 +140,15 @@ export class HotelDetailsPopupComponent implements OnInit ,OnChanges{
     if(!this.appStore.isAvailabilityFails){
       this.appStore.stepperIndex += 1;
     }
-    if(!this.appStore.customeTripId){
+    if(!sessionStorage.getItem('custom_trip_id')){
       this.commonService.saveSelectedHotel(this.createTripAdapter.bookHotelRequest(this.isGrouped,this.selectedRoomGroups,this.hotelData,this.hotelInfo)).subscribe((data) => {
-        this.appStore.customeTripId = data.id;
+        sessionStorage.setItem('custom_trip_id',data.id);
         this.onNotify();
         this.showHotelDetails = false;
       });
     }
-    if(this.appStore.customeTripId ){
-      this.commonService.updateCustomTrip(this.appStore.customeTripId,this.createTripAdapter.bookHotelRequest(this.isGrouped,this.selectedRoomGroups,this.hotelData,this.hotelInfo)).subscribe((data) => {
+    if(sessionStorage.getItem('custom_trip_id')){
+      this.commonService.updateCustomTrip(sessionStorage.getItem('custom_trip_id'),this.createTripAdapter.bookHotelRequest(this.isGrouped,this.selectedRoomGroups,this.hotelData,this.hotelInfo)).subscribe((data) => {
         if(this.appStore.isAvailabilityFails){
           this.onNotifyCreteTripForItineraryChange();
         }else{
