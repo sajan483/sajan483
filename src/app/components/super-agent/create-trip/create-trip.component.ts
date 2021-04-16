@@ -21,10 +21,11 @@ export class CreateTripComponent implements OnInit {
   todayStamp = new Date();
   searchForm: FormGroup;
   returnMin=new Date();
-  medinahInMin:Date;
-  medinahOutMin:Date;
   mekkahInMin:Date;
   mekkahOutMin:Date;
+  medinahInMin:Date;
+  medinahOutMin:Date;
+  medinahOutMax:Date;
   airportListFilteredSrc:Observable<listAirport[]>;
   airportListFilteredDest:Observable<listAirport[]>;
   airlinesFiltered: Observable<airlineList[]>;
@@ -49,7 +50,8 @@ export class CreateTripComponent implements OnInit {
     name:"Emirates",
     code:"EK"
   };
-  searchData
+  searchData;
+  destError:boolean=false;
 
   @ViewChild('pickerReturn' , {read: undefined, static: false}) pickerReturn: MatDatepicker<Date>;
   @ViewChild('pickerMedOut' , {read: undefined, static: false}) pickerMedOut: MatDatepicker<Date>;
@@ -78,11 +80,17 @@ export class CreateTripComponent implements OnInit {
     this.destination.setValue(this.destLocation.iata)
     this.airline.setValue(this.airlineDetails.name)
     this.searchForm.controls.departDate.setValue(this.todayStamp);
+    this.returnMin=this.incrementDate(this.searchForm.controls.departDate.value,1)
     this.searchForm.controls.returnDate.setValue(this.incrementDate(this.searchForm.controls.departDate.value,14));
     this.searchForm.controls.mekIn.setValue(this.todayStamp);
     this.searchForm.controls.mekOut.setValue(this.incrementDate(this.searchForm.controls.mekIn.value,2));
     this.searchForm.controls.medIn.setValue(this.searchForm.controls.mekOut.value);
     this.searchForm.controls.medOut.setValue(this.incrementDate(this.searchForm.controls.medIn.value,2));
+    this.mekkahInMin = this.form.departDate.value;
+    this.mekkahOutMin=this.incrementDate(this.form.mekIn.value,1)
+    this.medinahOutMax = this.form.returnDate.value;
+    this.medinahInMin=this.form.mekOut.value
+    this.medinahOutMin=this.incrementDate(this.form.medIn.value,1)
     this.getAirportListSrc()
     this.getAirportListDest()
     this.getAirlineList()
@@ -106,12 +114,13 @@ export class CreateTripComponent implements OnInit {
   }
 
   setReturnMinDate(){
-   this.returnMin=this.form.departDate.value
+   this.returnMin= this.incrementDate(this.form.departDate.value,1) 
    this.pickerReturn.open()
   }
 
   setMekkahInMinDate(){
     this.mekkahInMin=this.form.departDate.value
+    this.medinahOutMax = this.form.returnDate.value
    }
 
   setMekkahOutMinDate(){
@@ -191,7 +200,13 @@ export class CreateTripComponent implements OnInit {
   }
 
   setDestLocation(data){
-    this.destLocation.city = data.city
+    this.destError = false
+    if(this.fromLocation.city == data.city){
+      this.destError = true
+    }
+    else{
+      this.destLocation.city = data.city
+    }
   }
 
   setAirline(data){

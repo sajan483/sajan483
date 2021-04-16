@@ -27,8 +27,8 @@
             <div class="modify-box" *ngIf="flightListingFlag && modifyButton">
                 <button mat-raised-button (click)="modifySearch()">Modify Search</button>
             </div>
-            <div id="search-section" class="search-section" [formGroup]="searchForm" *ngIf="!modifyButton">
-                <div class="row no-pm">
+            <div id="searchSection" class="search-section" [formGroup]="searchForm" *ngIf="!modifyButton">
+                <div class="row no-pm animated fadeInUp">
                     <div class="col-md-4 no-pm">
                         <div class="row no-pm">
                             <div class="col-md br-right">
@@ -115,6 +115,7 @@
                             </div>
                         </div>
                     </div>
+                    <mat-error class="text-center mt-3" *ngIf="searchError">Search values not changed. Please change values for a new search</mat-error>
                 </div>
             </div>
 
