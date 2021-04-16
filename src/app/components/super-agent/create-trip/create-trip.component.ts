@@ -235,6 +235,6 @@ export class CreateTripComponent implements OnInit {
     StepperComponent.searchData = this.searchData;
     this.appStore.dataFromFrontPage  = this.searchData;
     this.router.navigateByUrl('superagent/stepper');
-    console.log("asasasas",this.searchData)
+    sessionStorage.setItem('searchData',JSON.stringify(this.searchData))
   }
 }

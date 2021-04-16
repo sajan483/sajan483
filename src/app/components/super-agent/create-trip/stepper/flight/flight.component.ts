@@ -68,7 +68,7 @@ export class FlightComponent implements OnInit {
     private commonService: SuperAgentApiService, private stepper: StepperComponent, private appStore: AppStore) { }
 
   ngOnInit() {
-    this.searchData= StepperComponent.searchData.flightData
+    this.searchData = JSON.parse(sessionStorage.getItem('searchData'))
     this.searchForm = this.fb.group({
 			departDate: ['', Validators.required],
 			returnDate: ['', Validators.required],
