@@ -45,7 +45,7 @@ export class StepperAdapter {
       var body = {
         check_in_date: hotelSearchForm.get("hotelCheckInDate").value.toJSON().split("T")[0],
         check_out_date:hotelSearchForm.get("hotelCheckOutDate").value.toJSON().split("T")[0],
-        location: city,
+        location: city
       };
       return body;
     }

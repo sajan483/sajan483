@@ -60,7 +60,7 @@
                                     <div class="d-inline-flex">
                                         <div>
                                             <h3 class="hotel_name" title="{{item?.name}}">
-                                                {{item?.name | titlecase }}</h3>
+                                                {{item?.name | titlecase }} / Similar</h3>
                                         </div>
                                         <div class="pl-1">
                                         </div>
@@ -79,13 +79,12 @@
                                         <div class="pr-2"><i class="locationicon icns icon_size_15"></i></div>
                                         <div class="fs12 clr52">{{item?.address}}</div>
                                     </div>
-                                    <div *ngIf="item.description">
-                                        <div class="pb5 fs13 clr52 desptn divexpandanimation" id="descrptionLess{{i}}">
-                                            {{item?.description}}</div>
-                                        <div class="readmorenavigate fs13" id="readMoreBttn{{i}}">+ Read More</div>
-                                        <div class="readmorenavigate fs13 dsplynone" id="readLessBttn{{i}}">- Read Less</div>
+                                    <div *ngIf="item.description && item.description.length > 200">
+                                        <div class="pb5 fs13 clr52 desptn divexpandanimation" id="descrptionLess{{i}}">{{item?.description}}</div>
+                                        <div class="readmorenavigate fs13" id="readMoreBttn{{i}}" (click)="readMore($event,i)">+ Read More</div>
+                                        <div class="readmorenavigate fs13 dsplynone" id="readLessBttn{{i}}" (click)="readLess($event,i)">- Read Less</div>
                                     </div>
-                                </div>
+                                </div>  
                             </div>
                             <div class="d-flex align-items-end flex-column result-details-right pr-0 col-md-4 col-12">
                                 <div class="text-center">

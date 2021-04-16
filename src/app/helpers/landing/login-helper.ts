@@ -34,7 +34,7 @@ export class loginHelper{
 
         sessionStorage.setItem('empId', data.staff.employer_id);
         if (sessionStorage.getItem('accesstoken') != null) {
-          if(data.staff.is_super_agent == 'True'){
+          if(data.staff.is_super_agent){
             this.notifyService.showSuccess(this.translate.instant('success !!'));
             this.appStore.currentUser = etype;
             this.appStore.userType = data.staff.name;

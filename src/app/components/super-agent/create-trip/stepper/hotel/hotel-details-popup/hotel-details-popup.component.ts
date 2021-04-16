@@ -68,6 +68,7 @@ export class HotelDetailsPopupComponent implements OnInit,OnChanges {
     });
 
     this.selectedRoomGroups.forEach((element,i)=>{
+      element.isChecked = false;
       if(element.pax_info[i] && element.pax_info[i].type && element.pax_info[i].type == 'ADT'){
           element.adult_number = element.pax_info[i].quantity
       }
@@ -116,27 +117,22 @@ export class HotelDetailsPopupComponent implements OnInit,OnChanges {
   }
 
   selectHotelRoom(e, room, i){
+    this.selectedRoomGroups.forEach((el,j)=>{(j == i)?el.isChecked = true:el.isChecked = false})
     let q =  {
       "currency": "INR",
       "available_rooms": room.available_count,
       "total_rooms": room.max_rooms,
       "title": room.name,
-      "adult_price": (<HTMLInputElement>document.getElementById("adultPrice"+ room.room_id+""+ i)).value,
-      "child_price": (<HTMLInputElement>document.getElementById("childPrice"+ room.room_id+""+ i)).value,
+      "adult_price": (<HTMLInputElement>document.getElementById("adultPrice"+i)).value,
+      "child_price": (<HTMLInputElement>document.getElementById("childPrice"+i)).value,
       "per_room_price": room.amount,
       "custom_pax_info": room.pax_info_str,
       "description": room.description,
       "room_id": room.room_id,
       "room_group_obj": room.room_group_obj
     }
-    if(e.target.checked){
       this.roomVariation.push(q)
       this.hotelRoomCount ++;
-    }else{
-       this.hotelRoomCount --;
-      var removeIndex = this.roomVariation.map(function(item) { return item.room_id; }).indexOf(room.room_id);
-      this.roomVariation.splice(removeIndex, 1);
-    }
   }
 
   hideHotelDetailsPopup(){
@@ -167,4 +163,10 @@ export class HotelDetailsPopupComponent implements OnInit,OnChanges {
       if(event == 'hide')
       this.viewImagePopup=false
     }
+
+    getDetailsPopupFlag(event){
+      if(event == 'hide')
+      this.selectedRoomDetails=false
+    }
+
   }
