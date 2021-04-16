@@ -35,6 +35,8 @@ export class HotelDetailsPopupComponent implements OnInit,OnChanges {
   selectedRoomCount:number = 1;
   noOfDays : number;
   noOfImages:number = 1;
+  adultPrice: string;
+  childPrice: string;
 
   constructor(private stepper: StepperComponent,
     private superAgentApiService:SuperAgentApiService, private appStore : AppStore,
@@ -117,14 +119,22 @@ export class HotelDetailsPopupComponent implements OnInit,OnChanges {
   }
 
   selectHotelRoom(e, room, i){
+    this.adultPrice = (<HTMLInputElement>document.getElementById("adultPrice"+i)).value,
+    this.childPrice = (<HTMLInputElement>document.getElementById("childPrice"+i)).value
     this.selectedRoomGroups.forEach((el,j)=>{(j == i)?el.isChecked = true:el.isChecked = false})
+    this.setRoomVariation(room,i)
+      this.hotelRoomCount ++;
+  }
+
+  setRoomVariation(room,i){
+    this.roomVariation = [];
     let q =  {
       "currency": "INR",
       "available_rooms": room.available_count,
       "total_rooms": room.max_rooms,
       "title": room.name,
-      "adult_price": (<HTMLInputElement>document.getElementById("adultPrice"+i)).value,
-      "child_price": (<HTMLInputElement>document.getElementById("childPrice"+i)).value,
+      "adult_price": this.adultPrice,
+      "child_price": this.childPrice,
       "per_room_price": room.amount,
       "custom_pax_info": room.pax_info_str,
       "description": room.description,
@@ -132,7 +142,16 @@ export class HotelDetailsPopupComponent implements OnInit,OnChanges {
       "room_group_obj": room.room_group_obj
     }
       this.roomVariation.push(q)
-      this.hotelRoomCount ++;
+    }
+
+  addAdultPrice(room,i){
+    this.adultPrice = (<HTMLInputElement>document.getElementById("adultPrice"+i)).value;
+    this.setRoomVariation(room,i)
+  }
+
+  addChildPrice(room,i){
+    this.childPrice = (<HTMLInputElement>document.getElementById("childPrice"+i)).value;
+    this.setRoomVariation(room,i)
   }
 
   hideHotelDetailsPopup(){
@@ -141,17 +160,7 @@ export class HotelDetailsPopupComponent implements OnInit,OnChanges {
   }
 
   disableHotelSaveBtn(){
-    var p:any[] = [] ;
-    if(this.roomVariation.length > 0){
-      for(let i = 0;i < this.roomVariation.length;i++){
-        if(this.roomVariation[i].adult_price == ""
-          && this.roomVariation[i].child_price == ""){
-            p.push("0")
-          }
-        }
-      }
-    //if(this.hotelRoomCount > 0 && p.length < 1){return true;}
-    if(this.hotelRoomCount > 0 ){return true;}
+    if(this.hotelRoomCount > 0 && this.addAdultPrice.length > 0 && this.childPrice.length > 0){return true;}
     return false;
     }
 
