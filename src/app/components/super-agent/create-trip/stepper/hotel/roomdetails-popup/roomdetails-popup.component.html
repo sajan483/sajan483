@@ -1,4 +1,4 @@
-<div [style.display]="selectedRoomDetails ? 'block' : 'none'" class="modal" id="roomDetailsPopup" tabindex="-1"
+<div [style.display]="showHotelDetails ? 'block' : 'none'" class="modal" id="roomDetailsPopup" tabindex="-1"
     role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="popupmoving container mt135">
         <div class="modal-content">
@@ -18,7 +18,7 @@
                                 <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
                             </ol>
                             <ngb-carousel #carousel >
-                                <ng-template ngbSlide *ngFor="let img of setViewData.images; index as i">
+                                <ng-template ngbSlide *ngFor="let img of setViewData?.images; index as i">
                                     <a href="" target="_blank" rel="nofollow noopener noreferrer">
                                         <div class="picsum-img-wrapper">
                                             <img [src]="img.image_url" alt="My image {{i + 1}} description">

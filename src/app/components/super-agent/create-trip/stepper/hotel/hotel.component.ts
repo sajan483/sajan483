@@ -117,4 +117,16 @@ export class HotelComponent implements OnInit {
     }
   }
 
+  readMore( event,i ){
+    (<HTMLElement>document.getElementById("readLessBttn"+i)).style.display = "inline-block";
+    (<HTMLElement>document.getElementById("readMoreBttn"+i)).style.display = "none";
+    event.target.previousElementSibling.style.maxHeight = event.target.previousElementSibling.scrollHeight + "px";
+  }
+
+  readLess(event,i){
+    (<HTMLElement>document.getElementById("readLessBttn"+i)).style.display = "none";
+    (<HTMLElement>document.getElementById("readMoreBttn"+i)).style.display = "inline-block";
+    event.target.previousElementSibling.previousElementSibling.style.maxHeight = null;
+  }
+
 }
