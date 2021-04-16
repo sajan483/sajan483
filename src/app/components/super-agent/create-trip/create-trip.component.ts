@@ -200,7 +200,10 @@ export class CreateTripComponent implements OnInit {
   }
 
   submitData(){
-    this.appStore.totalTravellers = this.form.adult.value+this.form.children.value+this.form.infant.value;
+    var a = parseInt(this.form.adult.value);
+    var b = parseInt(this.form.children.value);
+    var c = parseInt(this.form.infant.value)
+    this.appStore.totalTravellers = a+b+c;
     this.searchData = {
       travellersData : {
         adult: this.form.adult.value,
@@ -232,5 +235,6 @@ export class CreateTripComponent implements OnInit {
     StepperComponent.searchData = this.searchData;
     this.appStore.dataFromFrontPage  = this.searchData;
     this.router.navigateByUrl('superagent/stepper');
+    console.log("asasasas",this.searchData)
   }
 }

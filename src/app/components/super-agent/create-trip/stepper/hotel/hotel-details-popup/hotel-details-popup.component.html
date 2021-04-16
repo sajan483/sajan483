@@ -226,7 +226,7 @@
                                                     <div class="input-group-prepend bg-white brdr-rt">
                                                         <span class="input-group-text brdr-rt" id="basic-addon1">&#8377;</span>
                                                     </div>
-                                                    <input type="text" id="adultPrice{{i}}" class="txt" placeholder="20000" aria-label="200" aria-describedby="basic-addon1" >
+                                                    <input (input)="addAdultPrice(room,i)" type="text" id="adultPrice{{i}}" class="txt" placeholder="20000" aria-label="200" aria-describedby="basic-addon1" >
                                                 </div>
                                             </div>
                                             <div class="col-md-4 ml-4 mt-4">
@@ -235,7 +235,7 @@
                                                     <div class="input-group-prepend bg-white brdr-rt">
                                                         <span class="input-group-text brdr-rt br-rad" id="basic-addon1">&#8377;</span>
                                                     </div>
-                                                    <input type="text" id="childPrice{{i}}" class="br-rad txt" placeholder="20000" aria-label="200" aria-describedby="basic-addon1">
+                                                    <input (input)="addChildPrice(room,i)" type="text" id="childPrice{{i}}" class="br-rad txt" placeholder="20000" aria-label="200" aria-describedby="basic-addon1">
                                                 </div>
                                             </div>
                                             <div *ngIf="!room.isChecked" class="row ml-4 br-rad mt-4 bgLgrn cursor-pointer" (click)="selectHotelRoom($event,room,i)">
