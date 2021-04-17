@@ -102,7 +102,6 @@ export class StepperAdapter {
       visaservice: ['',Validators.required],
       adultpricevisa: ['',Validators.required],
       childpricevisa: ['',Validators.required]
-     // country: ['',Validators.required],
     })
   }
   /**
@@ -110,10 +109,10 @@ export class StepperAdapter {
    */
   createItem():FormGroup {
     return this.fb.group({
-      category: ['',Validators.required],
-      name: ['',Validators.required],
-      description: ['',Validators.required],
-      price: ['',Validators.required],
+      category: [''],
+      name: [''],
+      description: [''],
+      price: [''],
     })
   }
   /**
@@ -135,15 +134,24 @@ export class StepperAdapter {
     });
     var body ={
       "other_services":other,
+    }
+    return body; 
+  }
+
+  /**
+   * visa service body
+   */
+  visaServiceBody(myForm,currency){
+    var price: number = +myForm.adultpricevisa;
+    var body ={
       "trip_visa": {
         'visa_type': myForm.visaservice, 
-        'price': myForm.adultpricevisa, 
-        'country': myForm.country, 
+        'price': price,
         'currency': currency,
         'title':'visa'
       }
     }
-    return body; 
+    return body;
   }
 
   /**

@@ -23,6 +23,10 @@ export class TransportComponent implements OnInit {
   StepperAdapter : StepperAdapter;
   transportMin:any;
   transportMax:any;
+  companyShimmer: boolean = true;
+  vehicleTypeshimmer: boolean = true;
+  routeShimmer: boolean = true;
+  bttnactive: boolean =false;
 
   constructor(private formBuilder: FormBuilder,private _commonApiService:CommonApiService,private stepper:StepperComponent,
     private _SuperAgentService:SuperAgentApiService,private helperService:HelperService,private appStore:AppStore) {
@@ -44,12 +48,15 @@ export class TransportComponent implements OnInit {
   callListApi(){
     this.commonApiService.getCompanies(this.appStore.langCode).subscribe((data) => {
       this.companyList = data.companies.map(x => ( {item_text: x.name, item_id: x.code } ));
+      this.companyShimmer = false;
     });
     this.commonApiService.getVehicles(this.appStore.langCode).subscribe((data)=>{
       this.vehicleTypeList = data.vehicle_types.map(x => ( {item_text: x.name, item_id: x.code} ));
+      this.vehicleTypeshimmer = false;
     })
     this.commonApiService.getRoutes(this.appStore.langCode).subscribe((data)=>{
       this.routeList = data.routes.map(x => ( {item_text: x.name, item_id: x.code } ));
+      this.routeShimmer = false;
     })
   }
 
@@ -64,6 +71,7 @@ export class TransportComponent implements OnInit {
     if (this.transportSelection.invalid) {
         return;
     }
+    this.bttnactive = true;
     this.saveTransport();
   }
 
@@ -71,9 +79,10 @@ export class TransportComponent implements OnInit {
    * this method for update transport to create trip
    */
   saveTransport(){
-    this.stepper.stepContent('otherServices','')
     let body = this.StepperAdapter.transportBookingBody(this.transportSelection.value,this.appStore.langCode);
     this.SuperAgentApiService.updatePackageAPI(body,this.appStore.currencyCode,this.appStore.langCode,this.appStore.packageId).subscribe((data)=>{
+      this.stepper.stepContent('otherServices','');
+      this.bttnactive = false;
     })
   }
 

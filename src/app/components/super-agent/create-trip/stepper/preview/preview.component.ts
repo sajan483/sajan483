@@ -4,6 +4,7 @@ import { CommonApiService } from 'src/app/Services/common-api-services';
 import { AppStore } from 'src/app/stores/app.store';
 import { StepperComponent } from '../stepper.component';
 import { NotificationService } from 'src/app/common/services/notification.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-preview',
@@ -31,8 +32,10 @@ export class PreviewComponent implements OnInit {
   readonly = true;
   appStore:AppStore;
   notification:NotificationService;
+  shimmer:boolean = true;
 
-  constructor(private _SuperAgentService:SuperAgentApiService,private _commonService:CommonApiService,private _appStore:AppStore, private stepper :StepperComponent) { 
+  constructor(private _SuperAgentService:SuperAgentApiService,private _commonService:CommonApiService,private _appStore:AppStore, private stepper :StepperComponent
+    ,private router: Router) { 
     this.superAgentApiService=this._SuperAgentService;
     this.commonApiService = this._commonService;
     this.appStore = _appStore;
@@ -63,6 +66,7 @@ export class PreviewComponent implements OnInit {
 
   packageDetails(){
     this.superAgentApiService.getPackageDetails(this.appStore.packageId).subscribe((data)=>{
+      this.shimmer = false;
       this.response = data;
       this.onwardFlight = this.response.trip_flights[0].onward_flight;
       this.returnFlight = this.response.trip_flights[0].return_flight;
@@ -93,12 +97,24 @@ export class PreviewComponent implements OnInit {
       "start_date":this.appStore.departureDate,
       "end_date":this.appStore.arrivalDate}
       this.superAgentApiService.publishPackage(body,this.appStore.packageId).subscribe(response => {
-        this.notification.showSuccess("Successfully Published")
+        this.notification.showSuccess("Successfully Published");
+        this.router.navigate(["/superagent/createTrip"]);
       });
     }
   }
 
   back(){
     this.stepper.stepContent('otherInfo','')
+  }
+
+  toggleDetails(event,type){
+    var panel = event.target;
+    if (panel.style.transform) {
+      panel.style.transform = null;
+      (document.getElementById('toggleDiv'+type)).style.maxHeight = null;
+    } else {
+      panel.style.transform = 'rotate(-90deg)';
+      (document.getElementById('toggleDiv'+type)).style.maxHeight = '0px'
+    }
   }
 }
