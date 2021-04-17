@@ -31,6 +31,7 @@ import { NgbRatingModule } from '@ng-bootstrap/ng-bootstrap';
 import { HotelLoaderComponent } from 'src/app/components/super-agent/create-trip/stepper/hotel/hotel-loader/hotel-loader.component';
 import { HttpClientModule } from '@angular/common/http';
 import { AngularEditorModule } from '@kolkov/angular-editor';
+import { BranchListComponent } from 'src/app/components/super-agent/branch-list/branch-list.component';
 
 
 @NgModule({
@@ -50,7 +51,8 @@ import { AngularEditorModule } from '@kolkov/angular-editor';
     FlightDetailsComponent,
     RoomdetailsPopupComponent,
     HotelImagePopupComponent,
-    HotelLoaderComponent
+    HotelLoaderComponent,
+    BranchListComponent
   ],
   imports: [
     CommonModule,

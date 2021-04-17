@@ -16,6 +16,7 @@ export class PaymentComponent implements OnInit {
   SuperAgentApiService:SuperAgentApiService;
   StepperAdapter : StepperAdapter;
   suggestedAmound: any;
+  bttnactive: boolean = false;
 
   constructor(private formBuilder: FormBuilder,private _SuperAgentService:SuperAgentApiService,
     private appStore:AppStore,private stepper:StepperComponent) { 
@@ -49,12 +50,14 @@ export class PaymentComponent implements OnInit {
     if (this.advancepayment.invalid) {
         return;
     }
-    this.stepper.stepContent('otherInfo','');
+    this.bttnactive = true;
+    
     /**
      * payment detail update package api
      */
     this.SuperAgentApiService.updatePackageAPI(this.advancepayment.value,this.appStore.currencyCode,this.appStore.langCode,this.appStore.packageId).subscribe((data)=>{
-      
+        this.stepper.stepContent('otherInfo','');
+        this.bttnactive = false;
     })
   }
 

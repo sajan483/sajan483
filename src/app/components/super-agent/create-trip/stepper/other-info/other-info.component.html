@@ -14,7 +14,7 @@
                 <div>
                     <div class="w-100 bgf2 p20 brdr_btm_d3 d-flex justify-content-between">
                         <div class="fw600 fs16">Add Generic Info</div>
-                        <div class="cursor-pointer"><i class="blue_back_arrow rotate-90 icns icon_size_20"></i></div>
+                        <!-- <div class="cursor-pointer"><i class="blue_back_arrow rotate-90 icns icon_size_20"></i></div> -->
                     </div>
                     <div class="row m-0 p30">
                         <div class="col-md-6 mb30">
@@ -42,7 +42,7 @@
                 <div>
                     <div class="w-100 bgf2 p20 d-flex justify-content-between">
                         <div class="fw600 fs16">Add Itinerary</div>
-                        <div class="cursor-pointer"><i class="blue_back_arrow rotate-90 icns icon_size_20"></i></div>
+                        <!-- <div class="cursor-pointer"><i class="blue_back_arrow rotate-90 icns icon_size_20"></i></div> -->
                     </div>
                     <div formArrayName="itinerary" *ngFor="let a of getControls(); let i = index">
                         <div [formGroupName]="i">
@@ -63,15 +63,14 @@
                                 <div class="col-md-4 mb30">
                                     <label class="fs14 fw400 lh14 pl-1">From Date :</label>
                                     <div class="position-relative" [owlDateTimeTrigger]="dt5">
-                                        <input [owlDateTime]="dt5" placeholder="Depature Date" class="owldatebrdr w-100 form-control" formControlName="depdate"
-                                        [min]="otherInfoMin" [max]="otherInfoMax" [ngClass]="{ 'is-invalid': submitted && getValidity(i) }">
+                                        <input [owlDateTime]="dt5" placeholder="Depature Date" class="owldatebrdr w-100 form-control" formControlName="depdate" [min]="otherInfoMin" [max]="otherInfoMax" [ngClass]="{ 'is-invalid': submitted && getValidity(i) }">
                                         <i class="icns calendaricon icon_size_20 cursor-pointer owldateiconpostion"></i>
                                         <owl-date-time #dt5 [pickerType]="'calendar'"></owl-date-time>
                                     </div>
                                 </div>
                                 <div class="col-md-12 mb30">
                                     <label class="fs14 fw400 lh14 pl-1">Add Overview :</label>
-                                    <angular-editor formControlName="itinerary_overview" [config]="config" [ngClass]="{ 'is-invalid': submitted && getValidity(i) }" ></angular-editor>
+                                    <angular-editor formControlName="itinerary_overview" [config]="config" [ngClass]="{ 'is-invalid': submitted && getValidity(i) }"></angular-editor>
                                 </div>
                                 <div class="col-md-12">
                                     <div class="w-100 row m-0">
@@ -94,34 +93,34 @@
                 <div>
                     <div class="w-100 bgf2 p20 d-flex justify-content-between brdr_btm_d3">
                         <div class="fw600 fs16">Add Exclusions & Inclusions</div>
-                        <div class="cursor-pointer"><i class="blue_back_arrow rotate-90 icns icon_size_20"></i></div>
+                        <!-- <div class="cursor-pointer"><i class="blue_back_arrow rotate-90 icns icon_size_20"></i></div> -->
                     </div>
                     <div class="row m-0 p30">
                         <div class="col-md-12 mb30">
                             <label class="fs14 fw400 lh14 pl-1">Exclusions :</label>
-                            <angular-editor formControlName="exclusion" [config]="config" [ngClass]="{ 'is-invalid': submitted && f.exclusion.errors}" ></angular-editor>
+                            <angular-editor formControlName="exclusion" [config]="config" [ngClass]="{ 'is-invalid': submitted && f.exclusion.errors}"></angular-editor>
                         </div>
                         <div class="col-md-12 mb30">
                             <label class="fs14 fw400 lh14 pl-1">Inclusion :</label>
-                            <angular-editor formControlName="inclusion" [config]="config" [ngClass]="{ 'is-invalid': submitted && f.inclusion.errors}" ></angular-editor>
+                            <angular-editor formControlName="inclusion" [config]="config" [ngClass]="{ 'is-invalid': submitted && f.inclusion.errors}"></angular-editor>
                         </div>
                     </div>
                 </div>
                 <div>
                     <div class="w-100 bgf2 p20 d-flex justify-content-between brdr_btm_d3">
                         <div class="fw600 fs16">Add Trip Polices</div>
-                        <div class="cursor-pointer"><i class="blue_back_arrow rotate-90 icns icon_size_20"></i></div>
+                        <!-- <div class="cursor-pointer"><i class="blue_back_arrow rotate-90 icns icon_size_20"></i></div> -->
                     </div>
                     <div class="row m-0 p30">
                         <div class="col-md-12 mb30">
                             <label class="fs14 fw400 lh14 pl-1">Polices :</label>
-                            <angular-editor formControlName="polices" [config]="config" [ngClass]="{ 'is-invalid': submitted && f.polices.errors}" ></angular-editor>
+                            <angular-editor formControlName="polices" [config]="config" [ngClass]="{ 'is-invalid': submitted && f.polices.errors}"></angular-editor>
                         </div>
                     </div>
                 </div>
             </div>
             <div class="d-flex justify-content-center mt-3">
-                <button class="searchbutton">Continue</button>
+                <button class="searchbutton" [class.bttnactive]="bttnactive">Continue</button>
             </div>
         </form>
     </div>

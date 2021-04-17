@@ -27,6 +27,7 @@ export class OtherInfoComponent implements OnInit {
   otherInfoMin:any;
   otherInfoMax:any;
   travelDays: number;
+  bttnactive: boolean = false;
 
   constructor(private _SuperAgentService:SuperAgentApiService,private appStore:AppStore,private helperService:HelperService,
     private stepper:StepperComponent) {
@@ -164,7 +165,7 @@ export class OtherInfoComponent implements OnInit {
     if (this.otherPackageForm.invalid) {
       return;
     }
-    
+    this.bttnactive = true;
     this.upadteOtherInfo();
     this.postTripImg();
     this.updateItenary();
@@ -184,9 +185,10 @@ export class OtherInfoComponent implements OnInit {
   updateItenary(){
     var body=this.StepperAdapter.itineraryBody(this.f.itinerary.value,this.array);
     this.SuperAgentApiService.forItinerarySetAPI(body,this.appStore.currencyCode,this.appStore.langCode,this.appStore.packageId).subscribe((data)=>{
-      
+      this.stepper.stepContent('preview','');
+      this.bttnactive = false;
     })
-    this.stepper.stepContent('preview','');
+    
   }
 
   getValidity(i){

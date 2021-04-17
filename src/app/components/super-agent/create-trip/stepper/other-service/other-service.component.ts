@@ -21,6 +21,11 @@ export class OtherServiceComponent implements OnInit {
   countryList: any;
   visaService: any;
   StepperAdapter : StepperAdapter;
+  addButton: boolean = true;
+  serviceBox: boolean = false;
+  serviceShimmer : boolean = true;
+  visaShimmer: boolean = true;
+  bttnactive :boolean = false;
 
   constructor(private _SuperAgentService:SuperAgentApiService,private _commonApiService:CommonApiService,
     private appStore:AppStore,private stepper:StepperComponent) { 
@@ -38,7 +43,12 @@ export class OtherServiceComponent implements OnInit {
    * service array remove
    */
   removeItem(i){
-    this.arr.removeAt(i);
+    if(i==0){
+      this.addButton = true;
+      this.serviceBox = false;
+    }else{
+      this.arr.removeAt(i);
+    }
   }
 
   /**
@@ -50,13 +60,6 @@ export class OtherServiceComponent implements OnInit {
   }
 
   get f() { return this.myForm.controls; }
-
-  /**
-   * check field is empty
-   */
-  getValidity(i){
-    return (<FormArray>this.f.arr).controls[i].invalid;
-  }
 
   /**
    * get form array Controls
@@ -71,10 +74,14 @@ export class OtherServiceComponent implements OnInit {
   onSubmit() {
     this.submitted = true;
 
+    console.log(this.myForm.controls.arr.invalid)
+    
     // stop here if form is invalid
-    if (this.myForm.invalid && this.myForm.get('arr').invalid) {
+    if (this.myForm.invalid) {
         return;
     }
+    this.bttnactive = true;
+    
     this.addOtherService();
   }
 
@@ -84,12 +91,11 @@ export class OtherServiceComponent implements OnInit {
   apiCalles(){
     this.SuperAgentApiService.getPackageCategories(this.appStore.langCode).subscribe((data)=>{
       this.serviceCategoryList = data.categories.map(x => ( {item_text: x.name, item_id: x.id } ));
-    })
-    this.commonApiService.getCountries().subscribe((data)=>{
-      this.countryList = data.map(x => ( {item_text:x.name}));
+      this.serviceShimmer = false;
     })
     this.SuperAgentApiService.getVisaType().subscribe((data)=>{
       this.visaService = data.results.map(x => ( {item_text:x.title, item_id:x.id}))
+      this.visaShimmer = false;
     })
   }
 
@@ -97,16 +103,27 @@ export class OtherServiceComponent implements OnInit {
    * update other service in package api
    */
   addOtherService(){
-    this.stepper.stepContent('payment','');
-    var body = this.StepperAdapter.otherServiceBookingBody(this.f.arr.value,this.myForm.value,this.appStore.currencyCode);
-    this.SuperAgentApiService.updatePackageAPI(body,this.appStore.currencyCode,this.appStore.langCode,this.appStore.packageId).subscribe((data)=>{
+    var body1 = this.StepperAdapter.visaServiceBody(this.myForm.value,this.appStore.currencyCode);
+    this.SuperAgentApiService.updatePackageAPI(body1,this.appStore.currencyCode,this.appStore.langCode,this.appStore.packageId).subscribe((data)=>{
+      this.stepper.stepContent('payment','');
+      this.bttnactive = false;
     })
+
+    if(this.myForm.controls.arr.invalid){
+      var body = this.StepperAdapter.otherServiceBookingBody(this.f.arr.value,this.myForm.value,this.appStore.currencyCode);
+      this.SuperAgentApiService.updatePackageAPI(body,this.appStore.currencyCode,this.appStore.langCode,this.appStore.packageId).subscribe((data)=>{
+      })
+    }
   }
 
   back(){
     this.stepper.stepContent('transport','')
   }
 
+  addService(){
+    this.addButton = false;
+    this.serviceBox = true;
+  }
 }
 
 //f.arr.controls[i].controls.price.errors
