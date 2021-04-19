@@ -157,4 +157,26 @@ export class SuperAgentApiService {
   publishPackage(data: any,id:number) {
     return this.http.put(this.BASE_URL +  "packages/"+id+"/", data, this.options).map(res => res.json());
   }
+
+  getBranchlist(lang){
+    return this.http
+      .get(this.BASE_URL + 'branches/?lang=' + lang, this.options)
+      .map((res) => res.json());
+  }
+
+  getPaginatedStaffList(pageNumber: number, lang) {
+    return this.http.get(this.BASE_URL + 'staff/?search=&role=&page=' + pageNumber + '&lang=' + lang, this.options).map((res) => res.json());
+  }
+
+  getAgency(){
+    return this.http
+      .get(this.BASE_URL + 'agencies/', this.options)
+      .map((res) => res.json());
+  }
+
+  branchCreation(data){
+    return this.http
+      .post(this.BASE_URL + "branches/", data, this.options)
+      .map((res) => res.json());
+  }
 }

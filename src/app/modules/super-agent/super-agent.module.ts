@@ -32,7 +32,14 @@ import { HotelLoaderComponent } from 'src/app/components/super-agent/create-trip
 import { HttpClientModule } from '@angular/common/http';
 import { AngularEditorModule } from '@kolkov/angular-editor';
 import { BranchListComponent } from 'src/app/components/super-agent/branch-list/branch-list.component';
-
+import { DashboardComponent } from 'src/app/components/super-agent/dashboard/dashboard.component';
+import { AccountDetailsComponent } from 'src/app/components/super-agent/account-details/account-details.component';
+import { BranchCreationComponent } from 'src/app/components/super-agent/branch-creation/branch-creation.component';
+import { BranchUpdationComponent } from 'src/app/components/super-agent/branch-updation/branch-updation.component';
+import { ProfileComponent } from 'src/app/components/super-agent/profile/profile.component';
+import { StaffCreationComponent } from 'src/app/components/super-agent/staff-creation/staff-creation.component';
+import { StaffListComponent } from 'src/app/components/super-agent/staff-list/staff-list.component';
+import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 
 @NgModule({
   declarations: [
@@ -52,7 +59,14 @@ import { BranchListComponent } from 'src/app/components/super-agent/branch-list/
     RoomdetailsPopupComponent,
     HotelImagePopupComponent,
     HotelLoaderComponent,
-    BranchListComponent
+    BranchListComponent,
+    DashboardComponent,
+    AccountDetailsComponent,
+    BranchCreationComponent,
+    BranchUpdationComponent,
+    ProfileComponent,
+    StaffCreationComponent,
+    StaffListComponent
   ],
   imports: [
     CommonModule,
@@ -80,7 +94,8 @@ import { BranchListComponent } from 'src/app/components/super-agent/branch-list/
     CarouselModule,
     NgbRatingModule,
     AngularEditorModule,
-    HttpClientModule
+    HttpClientModule,
+    NgMultiSelectDropDownModule,
   ],
   providers: [
     DatePipe, GeneralHelper,CommonApiService,HelperService,SuperAgentApiService

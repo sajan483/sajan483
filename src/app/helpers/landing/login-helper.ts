@@ -39,7 +39,7 @@ export class loginHelper{
             this.appStore.currentUser = etype;
             this.appStore.userType = data.staff.name;
             sessionStorage.setItem('currentUser', etype);
-            this.router.navigate(["superagent/createTrip"]);
+            this.router.navigate(["superagent/dashboard"]);
           }else{
             if (data.staff.is_approved == 'False') {
               this.notifyService.showWarning(this.translate.instant('processing !!'));

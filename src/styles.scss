@@ -256,6 +256,13 @@ body {
 }
 
 #selectDateToChart {
+    .multiselect-dropdown .dropdown-btn .dropdown-multiselect__caret {
+        top: -5px !important;
+        right: -17px !important;
+    }
+    .dropdown-list {
+        width: auto !important;
+    }
     .multiselect-dropdown .dropdown-btn .selected-item {
         border: none;
         background: none;

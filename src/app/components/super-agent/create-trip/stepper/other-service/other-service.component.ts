@@ -73,8 +73,6 @@ export class OtherServiceComponent implements OnInit {
    */
   onSubmit() {
     this.submitted = true;
-
-    console.log(this.myForm.controls.arr.invalid)
     
     // stop here if form is invalid
     if (this.myForm.invalid) {
