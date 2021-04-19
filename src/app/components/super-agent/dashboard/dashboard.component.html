@@ -1,0 +1,186 @@
+<div class="margintophead">
+    <div class="first-div-dashboard text-center animationdiv">
+        <div class="container">
+            <h1 class="mb-0 fs34">WELCOME..!!</h1>
+            <h5 class="mb-0 fs18">View Your recent orders and mange your bookings.</h5>
+        </div>
+    </div>
+    <div class="container">
+        <div class="secont_div_dashboard mt15">
+            <div class="row m-0">
+                <div class="col-md-4 pl-0 pr0 animationdiv">
+                    <div class="flexbetween createpackge redleft borderbox cursor-pointer" (click)="navigate('superagent/createTrip');">
+                        <i class="icns createpackages icon_size_60"></i>
+                        <p class="my-auto fw500">CREATE PACKAGE</p>
+                        <i class="icns rightarrow icon_size_25 my-auto"></i>
+                    </div>
+                </div>
+                <div class="col-md-4 pl-0 pr0 animationdiv">
+                    <div class="flexbetween createpackge blueleft borderbox cursor-pointer" (click)="navigate('superagent/branch_list');">
+                        <i class="icns menubranches icon_size_60"></i>
+                        <p class="my-auto fw500">BRANCHES</p>
+                        <i class="icns rightarrow icon_size_25 my-auto"></i>
+                    </div>
+                </div>
+                <div class="col-md-4 pl-0 pr-0 animationdiv">
+                    <div class="flexbetween createpackge roseleft borderbox cursor-pointer" (click)="navigate('superagent/staff_list');">
+                        <i class="icns staffmanagment icon_size_60"></i>
+                        <p class="my-auto fw500">STAFF MANAGEMENT</p>
+                        <i class="icns rightarrow icon_size_25 my-auto"></i>
+                    </div>
+                </div>
+                <div class="col-md-8 pl-0 pr0 mt15 animationdiv">
+                    <div class="borderbox p20">
+                        <div class="flexbetween">
+                            <div class="mt-1 salesoverride">SALES OVERVIEW</div>
+                            <div>
+                                <div id="selectDateToChart">
+                                    <ng-multiselect-dropdown name="city" [data]="cities" [(ngModel)]="selectedItem" [settings]="dropdownSettings" (onSelect)="onItemSelect($event)" [disabled]="disabled">
+                                    </ng-multiselect-dropdown>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row m-0">
+                            <div class="col-md-6 brdrright">
+                                <div class="d-flex p20">
+                                    <div class="p12500">
+                                        <i class="icns upgreen icon_size_25"></i>
+                                    </div>
+                                    <div>
+                                        <h1 class="totalcount mb-0"><span class="blackbox"></span> 50,000</h1>
+                                        <p class="fs14 clr01">TOTAL REVENUE</p>
+                                    </div>
+                                </div>
+                                <div class="d-flex p20">
+                                    <div class="p12500">
+                                        <i class="icns upgreen icon_size_25"></i>
+                                    </div>
+                                    <div>
+                                        <h1 class="totalcount mb-0"><span class="blackbox"></span> 50,000</h1>
+                                        <p class="fs14 clr01">TOTAL YOU EARN</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="d-flex p20">
+                                    <div class="p12500">
+                                        <i class="icns upgreen icon_size_25"></i>
+                                    </div>
+                                    <div>
+                                        <h1 class="totalcount mb-0"><span class="blackbox"></span> 50,000</h1>
+                                        <p class="fs14 clr01">NO. OF SALES</p>
+                                    </div>
+                                </div>
+                                <div class="d-flex p20">
+                                    <div class="p12500">
+                                        <i class="icns downred icon_size_25"></i>
+                                    </div>
+                                    <div>
+                                        <h1 class="totalcount mb-0"><span class="blackbox"></span> 50,000</h1>
+                                        <p class="fs14 clr01">BRANCH SALES</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 pl-0 pr-0 mt15">
+                    <div class="borderbox p20">
+                        <div class="d-flex justify-content-end">
+                            <div id="selectDateToChart">
+                                <ng-multiselect-dropdown name="city" [data]="cities" [(ngModel)]="selectedItem" [settings]="dropdownSettings" (onSelect)="onItemSelect($event)" [disabled]="disabled">
+                                </ng-multiselect-dropdown>
+                            </div>
+                        </div>
+                        <div class="position-relative">
+                            <div class="salespersntage">
+                                <p class="totalcount fw500 mb-0">65%</p>
+                                <p class="fs14 mb-0">SALES</p>
+                            </div>
+                            <canvas id="myChart" height="215" width="300"></canvas>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="col-md-12 pl-0 pr-0 mt15 mb-2 animationdiv">
+                    <div class="borderbox p20">
+                        <div class="flexbetween">
+                            <div class="salesoverride">PACKAGES OVERVIEW</div>
+                            <div class="viewallpckgs hidemobile">View All Packages</div>
+                            <div class="viewallpckgs showmobile">View All</div>
+                        </div>
+                        <table class="table mt-2 hidemobile">
+                            <thead class="tablehead">
+                                <tr>
+                                    <th scope="col">Package Name</th>
+                                    <th scope="col">Departure From</th>
+                                    <th scope="col">Departure Date</th>
+                                    <th scope="col">Travel group size</th>
+                                    <th scope="col">Slots Available</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Luxury Umrah package from Kozhikode 2020</td>
+                                    <td>Kozhikode</td>
+                                    <td>
+                                        <p>12 March Onwards</p>
+                                        <p class="textred">(15 days remaining )</p>
+                                    </td>
+                                    <td>30</td>
+                                    <td>
+                                        <p class="redbox commonbox">15</p>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Luxury Umrah package from Kozhikode 2020</td>
+                                    <td>Kozhikode</td>
+                                    <td>
+                                        <p>12 April Onwards</p>
+                                    </td>
+                                    <td>30</td>
+                                    <td>
+                                        <p class="orngebox commonbox">10</p>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Luxury Umrah package from Kozhikode 2020</td>
+                                    <td>Kozhikode</td>
+                                    <td>
+                                        <p>28 April Onwards</p>
+                                    </td>
+                                    <td>30</td>
+                                    <td>
+                                        <p>10</p>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <div class="showmobile">
+                            <div class="borderbox mt-2 p-2 packagelisting">
+                                <p><strong>Luxury Umrah package from Kozhikode 2020</strong></p>
+                                <p><strong>Departure From :</strong>Kozikode</p>
+                                <p><strong>Departure Date :</strong>12 March Onwards</p>
+                                <p><strong>Travel group size :</strong>30</p>
+                                <p><strong>Slots Available :</strong>20</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="bottommenu hidemobile animationdiv">
+        <div class="container">
+            <div class="flexcenter commonp">
+                <p>HOME</p>
+                <p>CREATE PACKAGES</p>
+                <p>BRANCHES</p>
+                <p>STAFF MANAGEMENT</p>
+                <p>ACCOUNT DETAILS</p>
+                <p>MY PROFILE</p>
+                <p>SUPPORT</p>
+            </div>
+        </div>
+    </div>
+</div>
