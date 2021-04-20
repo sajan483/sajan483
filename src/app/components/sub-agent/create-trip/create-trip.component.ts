@@ -112,6 +112,7 @@ import { environment } from "src/environments/environment";
     private createTripAdapter: CreateTripAdapter = new CreateTripAdapter(this.helperService,this.appStore);
     returnDate: any;
     private createTripHelper: CreateTripHelper = new CreateTripHelper(this.helperService);
+    private helper: HelperService = new HelperService(null,null);
     retDate: any;
     routeId: any;
     categoryId: any;
@@ -160,7 +161,6 @@ import { environment } from "src/environments/environment";
     menuIconClass: ElementRef;
     @ViewChild("menuPopupClass", { read: ElementRef, static: false })
     menuPopupClass: ElementRef;
-    //rooms: Room[] = [];
     rooms:any[] = [];
     phoneCodeList: any;
     @ViewChild("menuIcon", { read: ElementRef, static: false })
@@ -343,6 +343,9 @@ import { environment } from "src/environments/environment";
     }
     this.common.searchTransport(filrerData).subscribe((data) => {
       this.searchTransportId = data.search_id;
+      this.steps = JSON.parse(sessionStorage.getItem('steps'))
+      if(this.steps && this.steps.length > 2 ){this.stageArray.push(2)}
+      sessionStorage.setItem('stageArray',JSON.stringify(this.stageArray))
       this.appStore.transportSearchId = data.search_id;
       this.common.searchTransportList(this.searchTransportId,this.selectedCurrency,this.selectedLanguage).subscribe((response) => {
         if ((response && response.transportations && response.transportations.length == 0) ||  (response && response.transportations && response.transportations.filter(x=>x.vehicle_types.length > 0) == 0)) {
@@ -536,16 +539,24 @@ import { environment } from "src/environments/environment";
   public form: FormGroup;
   public loadContent: boolean = false;
   public data = [];
-   
+
+  onlyUnique(value, index, self) {
+    return self.indexOf(value) === index;
+  }
+
   ngOnInit() {
+    sessionStorage.setItem('steps',JSON.stringify(this.steps))
+    this.stageArray = JSON.parse(sessionStorage.getItem('stageArray'))
+    if(this.stageArray){
+      this.stageArray.sort()
+      this.stageArray.onlyUnique
+      this.move(1)
+    }
     this.generalHelper.checkForAccessToken();
     if(!this.appStore.showShimmer){this.appStore.showShimmer = true,this.showShimmer = true}
     this.setUserDetails()
     this.travellersCount = this.appStore.totalTravellers;
-   // this.rooms = CreateTripComponent.RoomData;
     this.rooms =  JSON.parse(sessionStorage.getItem('roomData'))
-   // console.log("room",this.rooms)
-   // this.appStore.roomArray = this.rooms;
     this.appStore.stepperIndex = 0;
     this.selectedCurrency = "SAR";
     if(this.steps.includes("3")){this.fetchNessoryApisForTransport();}
@@ -771,6 +782,10 @@ import { environment } from "src/environments/environment";
         let response = data;
         this.hotelsList = data.results;
         if (typeof response.search_id != "undefined") {
+          this.steps = JSON.parse(sessionStorage.getItem('steps'))
+          if(this.steps && this.steps.length > 2 && city == 'MAKKA'){this.stageArray.push(0)}
+          if(this.steps && this.steps.length > 2 && city == 'MADEENA'){this.stageArray.push(1)}
+          sessionStorage.setItem('stageArray',JSON.stringify(this.stageArray))
           if(city == "MAKKA"){this.appStore.makkahSearchId = response.search_id;}
           if(city == "MADEENA"){this.appStore.madinahSearchId = response.search_id;
             this.noOfDaysInMadeena = this.appStore.noOfDaysInMadeena;

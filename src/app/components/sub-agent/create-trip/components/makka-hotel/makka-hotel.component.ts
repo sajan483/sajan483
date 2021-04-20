@@ -52,6 +52,8 @@ export class MakkaHotelComponent implements OnInit,DoCheck{
   hotelData: any;
   showDetailsShimmer: boolean;
   generalHelper:GeneralHelper;
+  stageArray:number[]=[];
+  steps: any[];
   
   constructor(
     private commonService: SubAgentApiService,
@@ -79,6 +81,7 @@ export class MakkaHotelComponent implements OnInit,DoCheck{
   }
 
   ngOnInit() {
+    
   }
 
    /*
@@ -86,7 +89,7 @@ export class MakkaHotelComponent implements OnInit,DoCheck{
  */
   showHotelDetailsPopUp(item) {
     this.showDetailsShimmer=true;
-    this.hotelInfo = item;
+    sessionStorage.setItem('hotelInfo',JSON.stringify(item))
     this.appStore.showHotelDetails = true;
     this.appStore.showHotelDetailsShimmer = true;
     this.showHotelDetailsShimmer = true;
@@ -116,8 +119,11 @@ export class MakkaHotelComponent implements OnInit,DoCheck{
     this.setDefaultLangAndCurrency();
     this.commonService.getSelectedHotelInfo(this.createTripAdapter.selectedHotelInfoRequest(this.selectedLanguage,item,this.search), this.selectedCurrency,this.selectedLanguage).subscribe(
       (data) => {
-        this.hotelData = data;
-        this.showHotelDetails = true;
+        sessionStorage.setItem('hotelData',JSON.stringify(data))
+        sessionStorage.setItem('showHotelDetails','true')
+        if(sessionStorage.getItem('showHotelDetails') == 'true'){
+          this.showHotelDetails = true;
+        }
         this.showDetailsShimmer = false;
       },
       (error) => {

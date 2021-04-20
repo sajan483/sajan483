@@ -4,7 +4,7 @@
         <div class="boxradus_hotel pt-0">
             <div class="bg-white p8">
                 <div class="container d-flex justify-content-between">
-                    <div *ngIf="selectedHotel.meta_data">
+                    <div *ngIf="selectedHotel?.meta_data">
                         <h2 class="fs22 mb-0">
                             {{selectedHotel?.name | titlecase}}
                             <span class="pl-1">

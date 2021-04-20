@@ -57,6 +57,8 @@ export class HotelDetailsPopupComponent implements OnInit ,OnChanges{
   roomImageGallery: boolean;
   totalTravellers : number;
   noOfImages: number;
+  hotelData:any;
+  hotelInfo:any;
    
   constructor(
     private commonService: SubAgentApiService,
@@ -66,8 +68,8 @@ export class HotelDetailsPopupComponent implements OnInit ,OnChanges{
     private translate :TranslateService,
   ) {}
 
-  @Input() hotelInfo : any;
-  @Input() hotelData : any;
+  //@Input() hotelInfo : any;
+  //@Input() hotelData : any;
   @Output() handleNotif = new EventEmitter();
   @Output() changeItinerary = new EventEmitter();
 
@@ -85,10 +87,22 @@ export class HotelDetailsPopupComponent implements OnInit ,OnChanges{
     this.changeItinerary.emit("notify parent");
   }
 
-  ngOnInit() {
+   ngOnInit() {
+    
+    this.totalTravellers = this.appStore.adultCount + this.appStore.childCount;
+    this.rooms = JSON.parse(sessionStorage.getItem('roomData'));
+    /*
+     * this method for fetching selected hotel details
+     */
+    if(sessionStorage.getItem('hotelData') != null){
+      this.hotelData = JSON.parse(sessionStorage.getItem('hotelData'))
+      this.selectedHotel = this.hotelData;
+      this.setData()
+    }
   }
 
   ngOnChanges() {
+    //this.showHotelDetails = true
     this.totalTravellers = this.appStore.adultCount + this.appStore.childCount;
     this.selectedHotel = this.hotelData;
     this.rooms = JSON.parse(sessionStorage.getItem('roomData'));
@@ -96,7 +110,8 @@ export class HotelDetailsPopupComponent implements OnInit ,OnChanges{
     /*
      * this method for fetching selected hotel details
      */
-    if(typeof(this.hotelData) != 'undefined'){
+    if(sessionStorage.getItem('hotelData') != null){
+      this.hotelData = JSON.parse(sessionStorage.getItem('hotelData'))
       this.setData()
     }
   }
@@ -105,6 +120,7 @@ export class HotelDetailsPopupComponent implements OnInit ,OnChanges{
      * this method for setting dom data
      */
   setData(){
+    this.hotelInfo = JSON.parse(sessionStorage.getItem('hotelInfo'))
     const x = this.createTripSupport.setDataForHotelDeatils(this.hotelData,this.hotelInfo,this.rooms);
     if(x && x.roomGroups.length > 0){
       this.appStore.showHotelDetailsShimmer = false;
