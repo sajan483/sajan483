@@ -82,7 +82,7 @@ export class HotelComponent implements OnInit {
   }
 
   searchHotels(city){
-    this.superAgentApiService.agencyHotelSearch(this.stepperAdapter.hotelSearchRequest(city,null,this.hotelSearchForm),'en-US')
+    this.superAgentApiService.agencyHotelSearch(this.stepperAdapter.hotelSearchRequest(city,null,this.hotelSearchForm),this.appStore.langCode)
     .subscribe(response =>{
       if(response){
         this.hotelsList.response = response;

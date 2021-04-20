@@ -102,7 +102,7 @@ export class HedderComponent implements OnInit, DoCheck {
     }
     if (sessionStorage.getItem("currentUser") == "branch") {
       this.branchActive = true;
-      this.userType = this.appStore.userType;
+      this.userType = sessionStorage.getItem('userType')
     }
     if (sessionStorage.getItem("currentUser") == "subagent") {
       this.subAgencyActive = true;

@@ -452,9 +452,10 @@ export class CreateTripFrontPageComponent implements OnInit, DoCheck {
       vehicleCapacity:this.vehicleMaxCapacity
     };
     CreateTripComponent.UserObjectData = this.userObject;
+    sessionStorage.setItem("userObject",JSON.stringify(this.userObject));
     if (this.enableMadina || this.enableMakka || this.activaleAllSearch) {
        if(this.countAdult == 1){
-         CreateTripComponent.RoomData = [
+         var arr:any[] = [
           {
             "children": 0,
             "child_ages": [],
@@ -462,6 +463,7 @@ export class CreateTripFrontPageComponent implements OnInit, DoCheck {
             "adults": 1
           }
         ]
+        sessionStorage.setItem("roomData",JSON.stringify(arr));
         this.router.navigate(["subagent/createTrip"], {
             queryParams: { steps: this.steps.join(",") },
           });
@@ -475,7 +477,6 @@ export class CreateTripFrontPageComponent implements OnInit, DoCheck {
         queryParams: { steps: this.steps.join(",") },
       });
     }
-  
     this.dataForPopUp.steps = this.steps;
     this.dataForPopUp.user = this.userObject;
   }

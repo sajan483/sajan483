@@ -116,7 +116,7 @@ export class HotelDetailsPopupComponent implements OnInit, OnChanges {
     }
     if(city == 'MADEENA'){
       this.stepper.stepContent('transport',null);
-      this.superAgentApiService.updatePackageAPI(this.stepperAdapter.saveHotelRequest(this.selectedHotel,this.roomVariation,city),'SAR','en-US',this.appStore.packageId).subscribe((res) => {
+      this.superAgentApiService.updatePackageAPI(this.stepperAdapter.saveHotelRequest(this.selectedHotel,this.roomVariation,city),this.appStore.currencyCode,this.appStore.langCode,this.appStore.packageId).subscribe((res) => {
     });
     }
   }

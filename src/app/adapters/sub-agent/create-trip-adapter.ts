@@ -17,7 +17,7 @@ export class CreateTripAdapter {
    * method for creating hotel search request
    */
   hotelSearchRequest(city: any, userDetails: any) {
-    var rooms = this.appStore.roomArray;
+    var rooms = JSON.parse(sessionStorage.getItem('roomData'));
     if (rooms && rooms.length > 0) {
       rooms.forEach((item, i) => {
         item.seq_no = i.toString();

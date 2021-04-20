@@ -20,7 +20,7 @@ import { SubAgentApiService } from "src/app/Services/sub-agent-api-services";
 export class MakkaHotelComponent implements OnInit,DoCheck{
   rooms: any;
   userDetails: any;
-  selectedCurrency: any = "SAR";
+  selectedCurrency: any = this.appStore.currencyCode;
   selectedLanguage: any;
   isHotelsSortedByPrice: boolean = false;
   isHotelListSortedByHaramDistance: boolean;
@@ -101,7 +101,7 @@ export class MakkaHotelComponent implements OnInit,DoCheck{
    */
   setDefaultLangAndCurrency(){
     if (typeof this.selectedCurrency == "undefined") {
-      this.selectedCurrency = "SAR";
+      this.selectedCurrency = this.appStore.currencyCode;
     } 
     if (typeof this.selectedLanguage == "undefined") {
       var lang: any = this.selectedLanguage =  "en-US" ;

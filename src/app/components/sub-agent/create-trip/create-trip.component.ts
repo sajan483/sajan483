@@ -160,7 +160,8 @@ import { environment } from "src/environments/environment";
     menuIconClass: ElementRef;
     @ViewChild("menuPopupClass", { read: ElementRef, static: false })
     menuPopupClass: ElementRef;
-    rooms: Room[] = [];
+    //rooms: Room[] = [];
+    rooms:any[] = [];
     phoneCodeList: any;
     @ViewChild("menuIcon", { read: ElementRef, static: false })
     menuIcon: ElementRef;
@@ -541,8 +542,10 @@ import { environment } from "src/environments/environment";
     if(!this.appStore.showShimmer){this.appStore.showShimmer = true,this.showShimmer = true}
     this.setUserDetails()
     this.travellersCount = this.appStore.totalTravellers;
-    this.rooms = CreateTripComponent.RoomData;
-    this.appStore.roomArray = this.rooms;
+   // this.rooms = CreateTripComponent.RoomData;
+    this.rooms =  JSON.parse(sessionStorage.getItem('roomData'))
+   // console.log("room",this.rooms)
+   // this.appStore.roomArray = this.rooms;
     this.appStore.stepperIndex = 0;
     this.selectedCurrency = "SAR";
     if(this.steps.includes("3")){this.fetchNessoryApisForTransport();}
@@ -555,8 +558,10 @@ import { environment } from "src/environments/environment";
   }
   
   setUserDetails(){
-    this.userDetails = CreateTripComponent.UserObjectData;
-    this.appStore.userDetails = this.userDetails;
+    //this.userDetails = CreateTripComponent.UserObjectData;
+    this.userDetails = JSON.parse(sessionStorage.getItem('userObject'));
+    console.log("userObject",this.userDetails)
+    //this.appStore.userDetails = this.userDetails;
     if(typeof(this.userDetails) == 'undefined'){this.router.navigate(['subagent/home'])}
     if(this.userDetails){
     this.totalTravellers = this.userDetails.travallersCount;
