@@ -45,6 +45,8 @@ export class HotelComponent implements OnInit {
     this.superAgentApiService = _superAgentApiService; 
    }
 
+   //
+
   ngOnInit() {
     this.setHotelSearchForm();
     this.hotelSearch()
