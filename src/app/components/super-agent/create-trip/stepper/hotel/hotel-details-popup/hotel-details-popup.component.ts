@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnChanges, OnInit, Output } from '@angular/core';
+import { AfterViewInit, Component, EventEmitter, Input, OnChanges, OnInit, Output } from '@angular/core';
 import { StepperAdapter } from 'src/app/adapters/super-agent/stepper-adapter';
 import { HelperService } from 'src/app/common/services/helper-service';
 import { SuperAgentApiService } from 'src/app/Services/super-agent-api-services';
@@ -11,7 +11,7 @@ import { StepperComponent } from '../../stepper.component';
   styleUrls: ['./hotel-details-popup.component.scss']
 })
 
-export class HotelDetailsPopupComponent implements OnInit,OnChanges {
+export class HotelDetailsPopupComponent implements OnInit, OnChanges {
   viewImagePopup:boolean=false;
   loader:boolean=true;
   private stepperAdapter: StepperAdapter = new StepperAdapter(null,null);
@@ -42,62 +42,69 @@ export class HotelDetailsPopupComponent implements OnInit,OnChanges {
     private superAgentApiService:SuperAgentApiService, private appStore : AppStore,
     private helperService : HelperService) { }
 
-  ngOnInit() {
-    
+  ngOnChanges() {
+    this.setPopUp()
   }
 
-  ngOnChanges(){
-    this.setPopUp();
+  ngOnInit() {
   }
 
   setPopUp(){
     if(typeof(this.popupData) != 'undefined'){
-    this.selectedHotel = [];
-    this.selectedRoomGroups = [];
-    this.selectedHotel = this.popupData;
-    this.totalTravellers = this.appStore.totalTravellers;
-    this.noOfDays = this.helperService.noOfDaysBetweenTwoDates(this.selectedHotel.check_in_time,this.selectedHotel.check_out_time)
-    this.selectedHotel.room_groups.forEach(element => {
-      element.rooms.forEach(room => {
-        this.selectedRoomGroups.push(room)
+      this.selectedHotel = [];
+      this.selectedRoomGroups = [];
+      this.selectedHotel = this.popupData;
+      this.totalTravellers = this.appStore.totalTravellers;
+      this.noOfDays = this.helperService.noOfDaysBetweenTwoDates(this.selectedHotel.check_in_time,this.selectedHotel.check_out_time)
+      
+      this.selectedHotel.room_groups.forEach(element => {
+        element.rooms.forEach(room => {
+          this.selectedRoomGroups.push(room)
+        });
       });
-    });
-    let arr:any[] = [];
-    this.selectedRoomGroups.forEach(function (element) {
-      arr = [];
-      arr.push(element.name);
-      element.nameArray = arr;
-    });
+      
+      let arr:any[] = [];
+      this.selectedRoomGroups.forEach(function (element) {
+        arr = [];
+        arr.push(element.name);
+        element.nameArray = arr;
+      });
 
-    this.selectedRoomGroups.forEach((element,i)=>{
-      element.isChecked = false;
-      if(element.pax_info[i] && element.pax_info[i].type && element.pax_info[i].type == 'ADT'){
+      this.selectedRoomGroups.forEach((element,i)=>{
+        element.isChecked = false;
+        if(element.pax_info[i] && element.pax_info[i].type && element.pax_info[i].type == 'ADT'){
           element.adult_number = element.pax_info[i].quantity
-      }
-      if( element.pax_info[i] && element.pax_info[i].type && element.pax_info[i].type == 'CHD'){
+        }
+        if(element.pax_info[i] && element.pax_info[i].type && element.pax_info[i].type == 'CHD'){
           element.child_number = element.pax_info[i].quantity
-    }
-})
-  this.hotelPics = [];
-  this.hotelPics1 = [];
-  this.hotelPics2 = [];
-  this.moreimages = false;
-  this.imageshow = 0;
-  for(let i=0;i<this.selectedHotel.meta_data.images.length;++i){
-    this.hotelPics.push(this.selectedHotel.meta_data.images[i].image_url)
-    if (i<=5) {
-      this.hotelPics1.push(this.selectedHotel.meta_data.images[i].image_url)
-    } 
-    if(i>=6 && i<=11) {
-      this.hotelPics2.push(this.selectedHotel.meta_data.images[i].image_url)
-      this.moreimages = true;
-    }
-   }
-   this.loader=false
-  }
-  else{
+        }
+      })
+
+      this.hotelPics = [];
+      this.hotelPics1 = [];
     this.loader=false
+    this.hotelPics2 = [];
+      this.moreimages = false;
+      this.imageshow = 0;
+
+      for(let i=0;i<this.selectedHotel.meta_data.images.length;++i){
+        this.hotelPics.push(this.selectedHotel.meta_data.images[i].image_url)
+        if (i<=5) {
+          this.hotelPics1.push(this.selectedHotel.meta_data.images[i].image_url)
+        } 
+        if(i>=6 && i<=11) {
+          this.hotelPics2.push(this.selectedHotel.meta_data.images[i].image_url)
+          this.moreimages = true;
+        }
+      } 
+    }
+    this.hideLoader()
   }
+
+  hideLoader(){
+    setTimeout(function(){
+      this.loader=false
+    }, 2000);
   }
 
   saveSelectedHotel(city){

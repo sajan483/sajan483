@@ -1,4 +1,7 @@
-<div class="w-100 bgf2 ptpb25" *ngIf="showHotelDetails == 'false'">
+<div *ngIf="loader">
+    <app-hotel-loader></app-hotel-loader>
+</div>
+<div class="w-100 bgf2 ptpb25" *ngIf="showHotelDetails == 'false' && !loader">
     <div class="container d-flex justify-content-between">
         <div class="d-inline-flex cursor-pointer ml-auto mr-3" (click)="back()">
             <i class="blue_back_arrow icns icon_size_15"></i>
@@ -6,7 +9,7 @@
         </div>
     </div>
 </div>
-<div class="animationdiv container" *ngIf="showHotelDetails == 'false'">
+<div class="animationdiv container" *ngIf="showHotelDetails == 'false' && !loader">
     <!-- <div class="modify-box" id="modify-box m-2" *ngIf="showHtlModifyBtn">
         <button class="searchbutton ml-2" (click)="showHtlModifyBtn = !showHtlModifyBtn">Modify Search</button>
     </div>
@@ -84,7 +87,7 @@
                                         <div class="readmorenavigate fs13" id="readMoreBttn{{i}}" (click)="readMore($event,i)">+ Read More</div>
                                         <div class="readmorenavigate fs13 dsplynone" id="readLessBttn{{i}}" (click)="readLess($event,i)">- Read Less</div>
                                     </div>
-                                </div>  
+                                </div>
                             </div>
                             <div class="d-flex align-items-end flex-column result-details-right pr-0 col-md-4 col-12">
                                 <div class="text-center">
