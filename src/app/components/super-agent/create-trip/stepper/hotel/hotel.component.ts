@@ -6,6 +6,8 @@ import { NotificationService } from 'src/app/common/services/notification.servic
 import { SuperAgentApiService } from 'src/app/Services/super-agent-api-services';
 import { AppStore } from 'src/app/stores/app.store';
 import { StepperComponent } from '../stepper.component';
+import { HotelsList } from "src/app/models/custome_trip";
+
 
 @Component({
   selector: 'app-hotel',
@@ -16,10 +18,12 @@ import { StepperComponent } from '../stepper.component';
 export class HotelComponent implements OnInit {
   showHtlModifyBtn:boolean = true;
   hotelSearchForm:FormGroup;
-  @Input() hotelsList : any;
+  @Input() hotelCity : any;
+  hotelsList: HotelsList = {response:[],city:undefined} ;
   formBuilder:FormBuilder;
   superAgentApiService : SuperAgentApiService;
   showHotelDetails:string = 'false';
+  loader:boolean=true;
   
 
   @ViewChild('pickerEnd' , {read: undefined, static: false}) pickerEnd: MatDatepicker<Date>;
@@ -41,9 +45,22 @@ export class HotelComponent implements OnInit {
     this.superAgentApiService = _superAgentApiService; 
    }
 
+   //
+
   ngOnInit() {
     this.setHotelSearchForm();
+    this.hotelSearch()
   }
+
+  hotelSearch() {
+    this.superAgentApiService
+      .agencyHotelSearch(this.stepperAdapter.hotelSearchRequest(this.hotelCity,StepperComponent.searchData,null),'en-US')
+      .subscribe((data) => {
+        this.hotelsList.response = data;
+        this.hotelsList.city = this.hotelCity;
+        this.loader=false
+   });
+ }
 
   setHotelSearchForm(){
     this.hotelSearchForm = this.formBuilder.group({
@@ -83,16 +100,15 @@ export class HotelComponent implements OnInit {
   }
 
   fetchSelectedHotelInfo(item,city) {
-    this.superAgentApiService
-      .getPackageHotelInfo(this.stepperAdapter.selectedHotelRequest(item,city),'SAR','en-US')
-      .subscribe((data) => {
+    this.superAgentApiService.getPackageHotelInfo(this.stepperAdapter.selectedHotelRequest(item,city),'SAR','en-US').subscribe((data) => {
         this.popupData = data;
         this.popupData.city = city
       },(error)=>{
       this.notifyService.showWarning("No details availabe");
       this.showHotelDetails = 'false';
-      });
-    }
+      }
+    );
+  }
     
   dateFormater(makkahCheckInDate: any) {
     throw new Error('Method not implemented.');
@@ -113,7 +129,7 @@ export class HotelComponent implements OnInit {
     this.stepper.stepContent('flight','')
     }
     else{
-      this.stepper.stepContent('hotel','hotelMakkah')   
+      this.stepper.stepContent('hotel','MAKKA')   
     }
   }
 

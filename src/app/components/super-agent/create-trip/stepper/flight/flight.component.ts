@@ -6,8 +6,8 @@ import { listAirport } from 'src/app/models/listAirport';
 import { airlineList } from 'src/app/models/airlineList';
 import { StepperComponent } from '../stepper.component';
 import { SuperAgentApiService } from 'src/app/Services/super-agent-api-services';
-import { EventEmitter } from 'events';
 import { AppStore } from 'src/app/stores/app.store';
+import { HelperService } from 'src/app/common/services/helper-service';
 
 @Component({
   selector: 'app-flight',
@@ -61,11 +61,13 @@ export class FlightComponent implements OnInit {
   };
   footerFlag:string='false';
   footerData;
-  fareSelection:boolean=false
+  fareSelection:boolean=false;
+  searchError:boolean=false;
+  listBody
 
   constructor(
     private fb: FormBuilder,
-    private commonService: SuperAgentApiService, private stepper: StepperComponent, private appStore: AppStore) { }
+    private commonService: SuperAgentApiService, private stepper: StepperComponent, private appStore: AppStore, private helperService : HelperService) { }
 
   ngOnInit() {
     this.searchData = JSON.parse(sessionStorage.getItem('searchData'))
@@ -81,6 +83,13 @@ export class FlightComponent implements OnInit {
     this.searchResult.destLocation=this.destLocation
     this.searchResult.fromLocation=this.fromLocation
     this.listFlights()
+    this.listBody = {
+      boarding_airport:this.searchData.source,
+      destination_airport:this.searchData.destination,
+      airlines:this.searchData.airline,
+      onward_date: this.searchData.departureDate,
+      return_date: this.searchData.returnDate,
+    };
   }
 
   get form() { return this.searchForm.controls; }
@@ -202,44 +211,51 @@ export class FlightComponent implements OnInit {
   }
 
   searchFlights(){
-    this.footerFlag='false'
-    if(this.submit){
-      this.loader=true
-      this.flightListingFlag=false
-      let ddate
-      let rdate
-
-      if(this.searchForm.controls.departDate.value == this.searchData.departureDate){
-        ddate = this.searchData.departureDate
-      } else{
-        ddate = this.searchForm.controls.departDate.value.toJSON().split("T")[0]
+    let ddate
+    let rdate
+    if(this.searchForm.controls.departDate.value == this.searchData.departureDate){
+      ddate = this.searchData.departureDate
+    } else{
+      ddate = this.searchForm.controls.departDate.value.toJSON().split("T")[0]
+    }
+    if(this.searchForm.controls.returnDate.value == this.searchData.returnDate){
+      rdate = this.searchData.returnDate
+    } else {
+      rdate = this.searchForm.controls.returnDate.value.toJSON().split("T")[0]
+    }
+    var searchBody = {
+      boarding_airport:this.source.value,
+      destination_airport:this.destination.value,
+      airlines:this.airlineDetails.code,
+      onward_date: ddate,
+      return_date: rdate,
+    };
+    if(JSON.stringify(this.listBody)===JSON.stringify(searchBody)){
+      this.searchError=true
+      console.log(this.listBody, searchBody);
+    }
+    else{
+      this.searchError=false;
+      this.listBody=searchBody
+      console.log(this.listBody, searchBody);
+      this.footerFlag='false'
+      if(this.submit){
+        this.loader=true
+        this.flightListingFlag=false
+        this.commonService.searchFlights(searchBody).subscribe((data) => {
+          if(data.flights[0].length > 0 && data.flights[1].length > 0){
+            this.searchResult.departureFlights = data.flights[0];
+            this.searchResult.returnFlights = data.flights[1];
+            this.available=true
+            this.loader=false;
+            this.flightListingFlag = true;
+          }
+          else {
+            this.loader=false;
+            this.available=false;
+          }
+        })
       }
-      if(this.searchForm.controls.returnDate.value == this.searchData.returnDate){
-        rdate = this.searchData.returnDate
-      } else {
-        rdate = this.searchForm.controls.returnDate.value.toJSON().split("T")[0]
-      }
-      var body
-      body = {
-        boarding_airport:this.source.value,
-        destination_airport:this.destination.value,
-        airlines:this.airlineDetails.code,
-        onward_date: ddate,
-        return_date: rdate,
-      };
-      this.commonService.searchFlights(body).subscribe((data) => {
-        if(data.flights[0].length > 0 && data.flights[1].length > 0){
-          this.searchResult.departureFlights = data.flights[0];
-          this.searchResult.returnFlights = data.flights[1];
-          this.available=true
-          this.loader=false;
-          this.flightListingFlag = true;
-        }
-        else {
-          this.loader=false;
-          this.available=false;
-        }
-      })
     }
   }
 
@@ -280,9 +296,11 @@ export class FlightComponent implements OnInit {
     let data = {
       "start_date": this.searchData.departureDate,
       "end_date": this.searchData.returnDate,
+      "max_passengers":StepperComponent.searchData.travellersData.adult,
+      "num_days": this.helperService.noOfDaysBetweenTwoDates(this.searchData.departureDate,this.searchData.returnDate),
       "arr_date_time_stamp": Math.floor(new Date(this.searchData.returnDate).getTime()/1000),
       "arr_airport_code": this.destLocation.iata,
-      "title": "",
+      "title": "",  
         "trip_flights": [
         {
           "adult_price": this.fareForm.controls.adult.value,

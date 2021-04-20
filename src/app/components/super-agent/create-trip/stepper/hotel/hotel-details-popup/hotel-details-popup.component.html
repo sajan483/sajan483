@@ -88,9 +88,7 @@
             <div *ngIf="selectedHotel?.name">
                 <h2 class="fs22 mb-0">
                     {{selectedHotel?.name | titlecase}}
-                    <span class="pl-1">
-            
-                                </span>
+                    <span class="pl-1"></span>
                 </h2>
             </div>
             <div class="d-flex my-auto backbutton cursor-pointer" (click)="hideHotelDetailsPopup()">
@@ -226,7 +224,7 @@
                                                     <div class="input-group-prepend bg-white brdr-rt">
                                                         <span class="input-group-text brdr-rt" id="basic-addon1">&#8377;</span>
                                                     </div>
-                                                    <input (input)="addAdultPrice(room,i)" type="text" id="adultPrice{{i}}" class="txt" placeholder="20000" aria-label="200" aria-describedby="basic-addon1" >
+                                                    <input (input)="addAdultPrice(room,i)" type="text" id="adultPrice{{i}}" class="txt" placeholder="20000" aria-label="200" aria-describedby="basic-addon1">
                                                 </div>
                                             </div>
                                             <div class="col-md-4 ml-4 mt-4">
@@ -239,11 +237,11 @@
                                                 </div>
                                             </div>
                                             <div *ngIf="!room.isChecked" class="row ml-4 br-rad mt-4 bgLgrn cursor-pointer" (click)="selectHotelRoom($event,room,i)">
-                                                <div  class="chkbxHtlDtls bgWt mt12"></div>
+                                                <div class="chkbxHtlDtls bgWt mt12"></div>
                                                 <span class="pad6">Select Room</span>
                                             </div>
                                             <div *ngIf="room.isChecked" class="row ml-4 br-rad mt-4 bgLgrn cursor-pointer" (click)="selectHotelRoom($event,room,i)">
-                                                <div *ngIf="room.isChecked" class="chkbxHtlDtls mt7" ><i class="fa fa-check-square"></i></div>
+                                                <div *ngIf="room.isChecked" class="chkbxHtlDtls mt7"><i class="fa fa-check-square"></i></div>
                                                 <span class="pad6">Select Room</span>
                                             </div>
                                         </div>

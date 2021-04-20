@@ -63,6 +63,7 @@
                         </mat-option>
                     </mat-autocomplete>
                     <p class="airport-name">{{destLocation.city}}</p>
+                    <mat-error *ngIf="destError">From & To airports can't be same</mat-error>
                 </div>
                 <div class="col-md-2 br-right ht d-flex align-items-center cr-point" (click)="pickerDepart.open()">
                     <div>
@@ -145,7 +146,7 @@
                                     CHECK-OUT
                                     <mat-icon class="align-middle">keyboard_arrow_down</mat-icon>
                                 </p>
-                                <input class="date-input" [min]="medinahOutMin" matInput [matDatepicker]="pickerMedOut" (dateChange)="setMekkahInMinDate()" formControlName="medOut">
+                                <input class="date-input" [min]="medinahOutMin" [max]="medinahOutMax" matInput [matDatepicker]="pickerMedOut" (dateChange)="setMekkahInMinDate()" formControlName="medOut">
                                 <mat-datepicker #pickerMedOut></mat-datepicker>
                             </div>
                         </div>
@@ -153,7 +154,7 @@
                 </div>
             </div>
             <div class="btn-outer">
-                <button class="searchbutton" [disabled]="!submit" (click)="submitData()" mat-raised-button>CREATE PACKAGE</button>
+                <button class="searchbutton" [disabled]="!submit || destError" (click)="submitData()" mat-raised-button>CREATE PACKAGE</button>
             </div>
         </mat-card>
     </div>

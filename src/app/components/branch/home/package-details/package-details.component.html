@@ -51,18 +51,18 @@
                                             <mat-icon class="black p-icon mt-1 mr-2">groups</mat-icon>
                                             <div>
                                                 <p class="group">Travel group size</p>
-                                                <p class="grn-txt black m-0">40 People</p>
+                                                <p class="grn-txt black m-0">{{maxCount}} People</p>
                                             </div>
                                         </div>
                                         <div class="d-flex mt-2">
                                             <mat-icon>verified</mat-icon>
-                                            <p class="grn-txt">12 Slots available</p>
+                                            <p class="grn-txt">{{availabilityCount}} Slots available</p>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="row mt-4 mb-2" [formGroup]="fareForm">
+                        <div class="row mt-4 mb-2" [formGroup]="countForm">
                             <div class="col-md fare-box">
                                 <mat-form-field appearance="outline" class="fw">
                                     <mat-label>Adult</mat-label>
@@ -82,7 +82,7 @@
                                 </mat-form-field>
                             </div>
                             <div class="col-md-2 btn-outer">
-                                <button [disabled]="continue" class="searchbutton pull-right">Book Package</button>
+                                <button [disabled]="continue" class="searchbutton pull-right" (click)="bookPackage()">Book Package</button>
                             </div>
                         </div>
                         <div class="overview">
@@ -91,35 +91,35 @@
                                 and an experience worth cherishing forever.
                             </p>
                         </div>
-                        <div class="itenerary">
+                        <div class="itenerary" *ngIf="itenerary?.length">
                             <p class="it-head">Itenerary</p>
 
                             <ul class="sessions">
-                                <span>
-                                <li>
-                                    <div class="time">Day 1</div>
-                                    <div class="clr52 fs14 mt-2">wzsxedcrftvguybhunjwexrctvubyhnjiome4d5rf6tgy7hu8ji</div>
+                                <span *ngFor="let item of itenerary;let i=index;">
+                                <li *ngIf="i<2">
+                                    <div class="time">Day {{item?.num_of_days}} : {{item?.title}} - {{item?.from_date | date:'longDate'}}</div>
+                                    <div class="clr52 fs14 mt-2">{{item?.details}}</div>
                                     <div class="row m-0">
-                                      <div class="col-md-3 pl-0 mt-2">
-                                          <img class="itineraryimg" src="/assets/images/nabwa.png">
+                                      <div class="col-md-3 pl-0 mt-2" *ngFor="let img of item.attachments">
+                                          <img [src]="img.file" class="iteneraryimg" alt="">
                                       </div>
                                     </div>
                                 </li>
                             </span>
                                 <div class="itenaryfull">
-                                    <span>
-                                    <li>
-                                        <div class="time">Day 1</div>
-                                    <div class="clr52 fs14 mt-2">wzsxedcrftvguybhunjwexrctvubyhnjiome4d5rf6tgy7hu8ji</div>
-                                    <div class="row m-0">
-                                      <div class="col-md-3 pl-0 mt-2">
-                                          <img class="itineraryimg" src="/assets/images/nabwa.png">
-                                      </div>
-                                    </div>
+                                    <span *ngFor="let item of itenerary;let i=index;">
+                                    <li *ngIf="i>1">
+                                        <div class="time">Day {{item?.num_of_days}} : {{item?.title}} - {{item?.from_date | date:'longDate'}}</div>
+                                        <div class="clr52 fs14 mt-2">{{item?.details}}</div>
+                                        <div class="row m-0">
+                                          <div class="col-md-3 pl-0 mt-2" *ngFor="let img of item.attachments">
+                                              <img [src]="img.file" class="iteneraryimg" alt="">
+                                          </div>
+                                        </div>
                                     </li>
                                 </span>
                                 </div>
-                                <button class="addAnotherBttn mt-3"><i class="fa fa-plus-circle" aria-hidden="true"></i> View Full Itinerary</button>
+                                <button class="addAnotherBttn mt-3" (click)="expandItenary($event)" *ngIf="itenerary.length > 2"><i class="fa fa-plus-circle" aria-hidden="true"></i> View Full itenerary</button>
                             </ul>
 
                         </div>

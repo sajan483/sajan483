@@ -41,7 +41,7 @@ export class HotelDetailsPopupComponent implements OnInit ,OnChanges{
   stageArray: any;
   madeendetailshow: boolean;
   steps: any;
-  madeenaloader: boolean;
+  loader: boolean=true;
   isGroupedMakka: any;
   ddate: any;
   countadult: any;

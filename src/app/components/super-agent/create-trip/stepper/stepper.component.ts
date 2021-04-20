@@ -18,9 +18,9 @@ export class StepperComponent implements OnInit {
   static searchData: any;
   hotelFlag;
   superAgentApiService: SuperAgentApiService;
-  hotelsList: HotelsList = {response:[],city:undefined} ;
   helperService: HelperService;
   dataFromSearchPage: any;
+  hotelCity
 
   constructor(
     private _superAgentApiService: SuperAgentApiService,
@@ -34,11 +34,6 @@ export class StepperComponent implements OnInit {
   ngOnInit() {
     document.getElementById(this.selector).style.backgroundColor = "#f3ac3c";
     this.dataFromSearchPage = StepperComponent.searchData;
-    if(typeof(this.dataFromSearchPage) != 'undefined'){
-      this.hotelSearch("MAKKA",this.dataFromSearchPage);
-      this.hotelSearch("MADEENA",this.dataFromSearchPage);
-    }
-    
   }
 
   stepContent(component, flag) {
@@ -50,24 +45,6 @@ export class StepperComponent implements OnInit {
       this.selector = component;
       document.getElementById(component).style.backgroundColor = "#f3ac3c";
     }
-    if(component == 'hotel' && flag == 'hotelMedinah'){
-      this.hotelSearch("MADEENA",this.dataFromSearchPage);
-    }
-    else{
-      this.hotelSearch("MAKKA",this.dataFromSearchPage);
-    }
-  }
-
-  /*
-   * this method for fetching hotel list
-   */
-  hotelSearch(city: string,dataFromSearchPage) {
-     this.superAgentApiService
-       .agencyHotelSearch(this.stepperAdapter.hotelSearchRequest(city,dataFromSearchPage,null),'en-US')
-       .subscribe((data) => {
-         this.hotelsList.response = data;
-         this.hotelsList.city = city;
-    });
   }
 
 }
