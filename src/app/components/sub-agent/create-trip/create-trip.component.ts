@@ -549,7 +549,7 @@ import { environment } from "src/environments/environment";
     this.stageArray = JSON.parse(sessionStorage.getItem('stageArray'))
     if(this.stageArray){
       this.stageArray.sort()
-      this.stageArray.onlyUnique
+      //this.stageArray.onlyUnique
       this.move(1)
     }
     this.generalHelper.checkForAccessToken();
