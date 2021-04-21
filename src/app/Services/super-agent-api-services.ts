@@ -179,4 +179,32 @@ export class SuperAgentApiService {
       .post(this.BASE_URL + "branches/", data, this.options)
       .map((res) => res.json());
   }
+
+  getSelectedBranch(id: any) {
+    return this.http.get(this.BASE_URL + 'branches/' + id + '/', this.options).map(res => res.json());
+  }
+
+  updateBranch(id: any, data: any) {
+    return this.http.put(this.BASE_URL + 'branches/' + id + '/', data, this.options).map(res => res.json());
+  }
+
+  staffRegister(data:any){
+    return this.http
+      .post(this.BASE_URL + "staff/", data, this.options)
+      .map((res) => res.json());
+  }
+
+  getAccountHistory() {
+    return this.http.get(this.BASE_URL + 'account/account_statement/', this.options).map(res => res.json());
+  }
+  getAccountDateHistory(fromdate:string,todate:string) {
+    return this.http.get(this.BASE_URL + 'account/account_statement/?from_date='+fromdate+'&to_date='+todate, this.options).map(res => res.json());
+  }
+
+  getAgencyApprovedDetails(id:any) {
+    return this.http
+      .get(this.BASE_URL + "agencies/"+id+"/approval_details/", this.options)
+      .map((res) => res.json());
+  } 
+
 }

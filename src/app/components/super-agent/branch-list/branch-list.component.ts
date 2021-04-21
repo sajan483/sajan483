@@ -35,4 +35,8 @@ export class BranchListComponent implements OnInit {
     this.router.navigate(['/superagent/create_branch'])
   }
 
+  navigateUpdatebranch(id){
+    this.router.navigate(['/superagent/update_branch',id])
+  }
+
 }

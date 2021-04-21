@@ -19,4 +19,20 @@ export class BranchAdapter {
             code: ["", Validators.required],
         })
     }
+
+    agentStaffCreationForm(){
+        this.fb = new FormBuilder();
+        return this.fb.group({
+            name: ["", Validators.required],
+            email: ["", [Validators.required, Validators.email]],
+            phone_number: ["",[Validators.required, Validators.pattern("[[0-9]{10}$")],],
+            role: ["", Validators.required],
+            username: ["", Validators.required],
+            password: ["", [Validators.required, Validators.minLength(6)]],
+            employer_type:[""],
+            employer_id:[""]
+        });
+    }
+
+
 }

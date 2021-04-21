@@ -41,6 +41,7 @@ import { StaffCreationComponent } from 'src/app/components/super-agent/staff-cre
 import { StaffListComponent } from 'src/app/components/super-agent/staff-list/staff-list.component';
 import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 import { OnlyNumberDirective } from 'src/app/models/onlynumber.super.directive';
+import { DateRangePickerModule } from '@syncfusion/ej2-angular-calendars';
 
 @NgModule({
   declarations: [
@@ -98,6 +99,7 @@ import { OnlyNumberDirective } from 'src/app/models/onlynumber.super.directive';
     AngularEditorModule,
     HttpClientModule,
     NgMultiSelectDropDownModule,
+    DateRangePickerModule
   ],
   providers: [
     DatePipe, GeneralHelper,CommonApiService,HelperService,SuperAgentApiService
