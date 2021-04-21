@@ -21,7 +21,7 @@ export class PaymentComponent implements OnInit {
   constructor(private formBuilder: FormBuilder,private _SuperAgentService:SuperAgentApiService,
     private appStore:AppStore,private stepper:StepperComponent) { 
     this.SuperAgentApiService=this._SuperAgentService;
-    this.StepperAdapter = new StepperAdapter(null,null);
+    this.StepperAdapter = new StepperAdapter(null);
   }
 
   ngOnInit() {

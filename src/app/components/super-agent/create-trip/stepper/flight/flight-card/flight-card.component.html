@@ -34,10 +34,11 @@
                             <p class="black-12">{{item.ArrivalTime | date:'shortDate'}}</p>
                         </div>
                     </div>
-                    <div class="fc-bottom" (click)="toggleDetails(item, $event, i)">
+                    <!-- <div class="fc-bottom" (click)="toggleDetails(item, $event, i)"> -->
+                    <div class="fc-bottom">
                         <p class="green" *ngIf="item.Refundable == 'R'">R</p>
                         <p class="red" *ngIf="item.Refundable != 'R'">N</p>
-                        <p class="f-detail">+ Flight Details</p>
+                        <!-- <p class="f-detail">+ Flight Details</p> -->
                     </div>
                     <div class="expansion">
                         <app-flight-details></app-flight-details>
@@ -79,10 +80,11 @@
                             <p class="black-12">{{item.ArrivalTime | date:'shortDate'}}</p>
                         </div>
                     </div>
-                    <div class="fc-bottom" (click)="toggleDetails(item, $event, i)">
+                    <!-- <div class="fc-bottom" (click)="toggleDetails(item, $event, i)"> -->
+                    <div class="fc-bottom">
                         <p class="green" *ngIf="item.Refundable == 'R'">R</p>
                         <p class="red" *ngIf="item.Refundable != 'R'">N</p>
-                        <p class="f-detail">+ Flight Details</p>
+                        <!-- <p class="f-detail">+ Flight Details</p> -->
                     </div>
                     <div class="expansion">
                         <app-flight-details></app-flight-details>
