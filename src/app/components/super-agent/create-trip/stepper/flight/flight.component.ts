@@ -245,6 +245,8 @@ export class FlightComponent implements OnInit {
         this.flightListingFlag=false
         this.commonService.searchFlights(searchBody).subscribe((data) => {
           if(data.flights[0].length > 0 && data.flights[1].length > 0){
+            data.flights[0].forEach(element => {element.isTouched = false});
+            data.flights[1].forEach(element => {element.isTouched = false});
             this.searchResult.departureFlights = data.flights[0];
             this.searchResult.returnFlights = data.flights[1];
             this.available=true

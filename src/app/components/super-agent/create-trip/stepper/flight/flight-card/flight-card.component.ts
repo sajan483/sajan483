@@ -28,7 +28,9 @@ export class FlightCardComponent implements OnInit {
 
   setDepFlight(item, i){
     this.footerFlag='true'
-    document.getElementById('depCard'+i).style.background="#ddedfd";
+    this.searchResult.departureFlights.forEach((element,j) => {(j == i) ? element.isTouched = true:element.isTouched = false});
+    this.searchResult.departureFlights.forEach((element,h) => {document.getElementById('depCard'+h).style.background="#ffffff"});
+    this.searchResult.departureFlights.forEach((element) => {if(element.isTouched) {document.getElementById('depCard'+i).style.background="#ddedfd"}});
     this.footerFlagEmitter.emit(this.footerFlag);
     this.footerData.depFlight = item;
     this.footerDataEmitter.emit(this.footerData);
@@ -36,7 +38,9 @@ export class FlightCardComponent implements OnInit {
   
   setArrFlight(item, i){
     this.footerFlag='true'
-    document.getElementById('arrCard'+i).style.background="#ddedfd";
+    this.searchResult.returnFlights.forEach((element,j) => {(j == i) ? element.isTouched = true:element.isTouched = false});
+    this.searchResult.returnFlights.forEach((element,h) => {document.getElementById('arrCard'+h).style.background="#ffffff"});
+    this.searchResult.returnFlights.forEach((element) => {if(element.isTouched) {document.getElementById('arrCard'+i).style.background="#ddedfd"}});
     this.footerFlagEmitter.emit(this.footerFlag);
     this.footerData.retFlight = item;
     this.footerDataEmitter.emit(this.footerData);
