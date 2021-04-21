@@ -11,8 +11,8 @@ export const environment = {
   baseUrl:'https://b2b.betatest.akbarumrah.com/apis/',
   baseUrl2:'https://b2ctest.akbarumrah.com/apis/'
 
-  // baseUrl:'http://192.168.10.79:8000/',
-  // baseUrl2:'http://192.168.10.79:8000/'
+   //baseUrl:'http://192.168.10.79:8000/',
+   //baseUrl2:'http://192.168.10.79:8000/'
 };
 
 /*
