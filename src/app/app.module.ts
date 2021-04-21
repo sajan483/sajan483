@@ -18,11 +18,9 @@ import { PaginationComponent } from './common/components/pagination/pagination.c
 import { LandingApiService } from './Services/landing-api-services';
 import { CommonApiService } from './Services/common-api-services';
 import { BranchApiService } from 'src/app/Services/branch-api-service'
-import { OnlyNumberDirective } from './models/onlynumber.directive';
 
 @NgModule({
-  declarations: [
-    OnlyNumberDirective,
+  declarations: [    
     AppComponent,
     HedderComponent,
     FooterComponent,

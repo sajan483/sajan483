@@ -247,9 +247,9 @@ export class CreateTripComponent implements OnInit {
     this.appStore.makkahCheckOutDate = this.form.mekOut.value.toJSON().split("T")[0];
     this.appStore.medinahCheckInDate = this.form.medIn.value.toJSON().split("T")[0];
     this.appStore.medinahCheckOutDate = this.form.medOut.value.toJSON().split("T")[0];
+    sessionStorage.setItem('searchData',JSON.stringify(this.searchData))
     StepperComponent.searchData = this.searchData;
     this.appStore.dataFromFrontPage  = this.searchData;
     this.router.navigateByUrl('superagent/stepper');
-    sessionStorage.setItem('searchData',JSON.stringify(this.searchData))
   }
 }

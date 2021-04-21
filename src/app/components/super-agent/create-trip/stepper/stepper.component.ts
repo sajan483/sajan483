@@ -12,7 +12,7 @@ import { AppStore } from "src/app/stores/app.store";
   providers: [],
 })
 export class StepperComponent implements OnInit {
-  private stepperAdapter: StepperAdapter = new StepperAdapter(null,this.appStore);
+  private stepperAdapter: StepperAdapter = new StepperAdapter(null);
   showShimmer: boolean;
   selector: string = "flight";
   static searchData: any;

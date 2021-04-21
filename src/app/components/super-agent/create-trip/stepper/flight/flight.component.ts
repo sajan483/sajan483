@@ -47,6 +47,7 @@ export class FlightComponent implements OnInit {
     code:"EK"
   };
   searchData;
+  flightSearchData;
   searchResult={
     destLocation:{
       iata:'',
@@ -71,6 +72,8 @@ export class FlightComponent implements OnInit {
 
   ngOnInit() {
     this.searchData = JSON.parse(sessionStorage.getItem('searchData'))
+    this.flightSearchData = this.searchData.flightData
+    console.log(this.flightSearchData);
     this.searchForm = this.fb.group({
 			departDate: ['', Validators.required],
 			returnDate: ['', Validators.required],
@@ -84,11 +87,11 @@ export class FlightComponent implements OnInit {
     this.searchResult.fromLocation=this.fromLocation
     this.listFlights()
     this.listBody = {
-      boarding_airport:this.searchData.source,
-      destination_airport:this.searchData.destination,
-      airlines:this.searchData.airline,
-      onward_date: this.searchData.departureDate,
-      return_date: this.searchData.returnDate,
+      boarding_airport:this.flightSearchData.source,
+      destination_airport:this.flightSearchData.destination,
+      airlines:this.flightSearchData.airline,
+      onward_date: this.flightSearchData.departureDate,
+      return_date: this.flightSearchData.returnDate,
     };
   }
 
@@ -122,11 +125,11 @@ export class FlightComponent implements OnInit {
   }
 
   modifySearch(){
-    this.source.setValue(this.searchData.source)
-    this.destination.setValue(this.searchData.destination)
-    this.airline.setValue(this.searchData.airline)
-    this.searchForm.controls.departDate.setValue(this.searchData.departureDate);
-    this.searchForm.controls.returnDate.setValue(this.searchData.returnDate);
+    this.source.setValue(this.flightSearchData.source)
+    this.destination.setValue(this.flightSearchData.destination)
+    this.airline.setValue(this.flightSearchData.airline)
+    this.searchForm.controls.departDate.setValue(this.flightSearchData.departureDate);
+    this.searchForm.controls.returnDate.setValue(this.flightSearchData.returnDate);
     this.getAirportListSrc()
     this.getAirportListDest()
     this.getAirlineList()
@@ -213,13 +216,13 @@ export class FlightComponent implements OnInit {
   searchFlights(){
     let ddate
     let rdate
-    if(this.searchForm.controls.departDate.value == this.searchData.departureDate){
-      ddate = this.searchData.departureDate
-    } else{
+    if(this.searchForm.controls.departDate.value == this.flightSearchData.departureDate){
+      ddate = this.flightSearchData.departureDate
+    } else {
       ddate = this.searchForm.controls.departDate.value.toJSON().split("T")[0]
     }
-    if(this.searchForm.controls.returnDate.value == this.searchData.returnDate){
-      rdate = this.searchData.returnDate
+    if(this.searchForm.controls.returnDate.value == this.flightSearchData.returnDate){
+      rdate = this.flightSearchData.returnDate
     } else {
       rdate = this.searchForm.controls.returnDate.value.toJSON().split("T")[0]
     }
@@ -232,12 +235,10 @@ export class FlightComponent implements OnInit {
     };
     if(JSON.stringify(this.listBody)===JSON.stringify(searchBody)){
       this.searchError=true
-      console.log(this.listBody, searchBody);
     }
-    else{
+    else {
       this.searchError=false;
       this.listBody=searchBody
-      console.log(this.listBody, searchBody);
       this.footerFlag='false'
       if(this.submit){
         this.loader=true
@@ -261,11 +262,11 @@ export class FlightComponent implements OnInit {
 
   listFlights(){
     var body = {
-      boarding_airport:this.searchData.source,
-      destination_airport:this.searchData.destination,
-      airlines:this.searchData.airline,
-      onward_date: this.searchData.departureDate,
-      return_date: this.searchData.returnDate,
+      boarding_airport:this.flightSearchData.source,
+      destination_airport:this.flightSearchData.destination,
+      airlines:this.flightSearchData.airline,
+      onward_date: this.flightSearchData.departureDate,
+      return_date: this.flightSearchData.returnDate,
     };
     this.commonService.searchFlights(body).subscribe((data) => {
       if(data.flights[0].length > 0 && data.flights[1].length > 0){
@@ -294,11 +295,11 @@ export class FlightComponent implements OnInit {
 
   saveFlight(){
     let data = {
-      "start_date": this.searchData.departureDate,
-      "end_date": this.searchData.returnDate,
+      "start_date": this.flightSearchData.departureDate,
+      "end_date": this.flightSearchData.returnDate,
       "max_passengers":StepperComponent.searchData.travellersData.adult,
-      "num_days": this.helperService.noOfDaysBetweenTwoDates(this.searchData.departureDate,this.searchData.returnDate),
-      "arr_date_time_stamp": Math.floor(new Date(this.searchData.returnDate).getTime()/1000),
+      "num_days": this.helperService.noOfDaysBetweenTwoDates(this.flightSearchData.departureDate,this.flightSearchData.returnDate),
+      "arr_date_time_stamp": Math.floor(new Date(this.flightSearchData.returnDate).getTime()/1000),
       "arr_airport_code": this.destLocation.iata,
       "title": "",  
         "trip_flights": [

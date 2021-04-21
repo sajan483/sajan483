@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, EventEmitter, Input, OnChanges, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, OnInit, Output } from '@angular/core';
 import { StepperAdapter } from 'src/app/adapters/super-agent/stepper-adapter';
 import { HelperService } from 'src/app/common/services/helper-service';
 import { SuperAgentApiService } from 'src/app/Services/super-agent-api-services';
@@ -14,7 +14,7 @@ import { StepperComponent } from '../../stepper.component';
 export class HotelDetailsPopupComponent implements OnInit, OnChanges {
   viewImagePopup:boolean=false;
   loader:boolean=true;
-  private stepperAdapter: StepperAdapter = new StepperAdapter(null,null);
+  private stepperAdapter: StepperAdapter = new StepperAdapter(null);
   showHotelDetails:string = 'true';
   @Output() showHotelDetailsEmitter = new EventEmitter();
   selectedHotel: any;
@@ -47,6 +47,7 @@ export class HotelDetailsPopupComponent implements OnInit, OnChanges {
   }
 
   ngOnInit() {
+    this.hideLoader()
   }
 
   setPopUp(){
@@ -82,8 +83,8 @@ export class HotelDetailsPopupComponent implements OnInit, OnChanges {
 
       this.hotelPics = [];
       this.hotelPics1 = [];
-    this.loader=false
-    this.hotelPics2 = [];
+      this.loader=false
+      this.hotelPics2 = [];
       this.moreimages = false;
       this.imageshow = 0;
 
@@ -96,20 +97,20 @@ export class HotelDetailsPopupComponent implements OnInit, OnChanges {
           this.hotelPics2.push(this.selectedHotel.meta_data.images[i].image_url)
           this.moreimages = true;
         }
-      } 
+      }
     }
-    this.hideLoader()
   }
 
   hideLoader(){
     setTimeout(function(){
       this.loader=false
+      console.log(this.loader);
     }, 2000);
   }
 
   saveSelectedHotel(city){
     if(city == 'MAKKA'){
-      this.stepper.stepContent('hotel','hotelMedinah');
+      this.stepper.stepContent('hotel','MADEENA');
       this.superAgentApiService.updatePackageAPI(this.stepperAdapter.saveHotelRequest(this.selectedHotel,this.roomVariation,city),'SAR','en-US',this.appStore.packageId).subscribe((res) => {
     });
     }

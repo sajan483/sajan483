@@ -1,21 +1,14 @@
 import { HelperService } from "src/app/common/services/helper-service";
-import { AppStore } from "src/app/stores/app.store";
 import { FormGroup, FormBuilder, Validators } from "@angular/forms";
 
 
 export class StepperAdapter {
   fb: FormBuilder;
   helperService: HelperService;
-  appStore:AppStore;
+  searchData
     
 
-  constructor(
-    private _helperService: HelperService,
-    private _appStore: AppStore
-  ) {
-    this.helperService = _helperService;
-    this.appStore = _appStore;
-  }
+  constructor(private _helperService: HelperService) {this.helperService = _helperService;}
 
   /**
    * method for creating hotel search request
@@ -25,7 +18,7 @@ export class StepperAdapter {
       if(city == 'MAKKA'){
         var body = {
           check_in_date:
-           dataFromSearchPage.mekkahData.checkIn,
+          dataFromSearchPage.mekkahData.checkIn,
           check_out_date:dataFromSearchPage.mekkahData.checkOut,
           location: city,
         };
@@ -40,7 +33,7 @@ export class StepperAdapter {
         };
         return body;
       }
-  }
+    }
     if(hotelSearchForm) {
       var body = {
         check_in_date: hotelSearchForm.get("hotelCheckInDate").value.toJSON().split("T")[0],
@@ -299,10 +292,11 @@ export class StepperAdapter {
    * @param city makkah or medinah
    */
   selectedHotelRequest(item,city){
+    var searchData = JSON.parse(sessionStorage.getItem('searchData'))
     if(city == 'MAKKA'){
       var bodyMk = {
-        checkin_date :this.appStore.makkahCheckInDate,
-        checkout_date :this.appStore.makkahCheckOutDate,
+        checkin_date :searchData.mekkahData.checkIn,
+        checkout_date :searchData.mekkahData.checkOut,
         location : city,
         providers:item.providers,
         hotel_name: item.name,
@@ -313,8 +307,8 @@ export class StepperAdapter {
 
     if(city == 'MADEENA'){
      var bodyMd = {
-        checkin_date :this.appStore.medinahCheckInDate,
-        checkout_date :this.appStore.medinahCheckOutDate,
+      checkin_date :searchData.medinaData.checkIn,
+      checkout_date :searchData.medinaData.checkOut,
         location : city,
         providers:item.providers,
         hotel_name: item.name,

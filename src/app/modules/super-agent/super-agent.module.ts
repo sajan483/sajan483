@@ -40,6 +40,7 @@ import { ProfileComponent } from 'src/app/components/super-agent/profile/profile
 import { StaffCreationComponent } from 'src/app/components/super-agent/staff-creation/staff-creation.component';
 import { StaffListComponent } from 'src/app/components/super-agent/staff-list/staff-list.component';
 import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
+import { OnlyNumberDirective } from 'src/app/models/onlynumber.super.directive';
 
 @NgModule({
   declarations: [
@@ -66,7 +67,8 @@ import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
     BranchUpdationComponent,
     ProfileComponent,
     StaffCreationComponent,
-    StaffListComponent
+    StaffListComponent,
+    OnlyNumberDirective
   ],
   imports: [
     CommonModule,

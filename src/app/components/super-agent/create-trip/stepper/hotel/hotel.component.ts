@@ -27,7 +27,7 @@ export class HotelComponent implements OnInit {
   
 
   @ViewChild('pickerEnd' , {read: undefined, static: false}) pickerEnd: MatDatepicker<Date>;
-  private stepperAdapter: StepperAdapter = new StepperAdapter(null,this.appStore);
+  private stepperAdapter: StepperAdapter = new StepperAdapter(null);
   selectedHotel: any;
   selectedRoomGroups: any[];
   makkaInDate: any;
@@ -53,8 +53,9 @@ export class HotelComponent implements OnInit {
   }
 
   hotelSearch() {
+    var data = JSON.parse(sessionStorage.getItem('searchData'))
     this.superAgentApiService
-      .agencyHotelSearch(this.stepperAdapter.hotelSearchRequest(this.hotelCity,StepperComponent.searchData,null),'en-US')
+      .agencyHotelSearch(this.stepperAdapter.hotelSearchRequest(this.hotelCity, data, null),'en-US')
       .subscribe((data) => {
         this.hotelsList.response = data;
         this.hotelsList.city = this.hotelCity;

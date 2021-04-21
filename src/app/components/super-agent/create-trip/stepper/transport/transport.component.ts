@@ -32,7 +32,7 @@ export class TransportComponent implements OnInit {
     private _SuperAgentService:SuperAgentApiService,private helperService:HelperService,private appStore:AppStore) {
     this.commonApiService = this._commonApiService;
     this.SuperAgentApiService=this._SuperAgentService;
-    this.StepperAdapter = new StepperAdapter(this.helperService,null);
+    this.StepperAdapter = new StepperAdapter(null);
    }
 
   ngOnInit() {
@@ -87,7 +87,7 @@ export class TransportComponent implements OnInit {
   }
 
   back(){
-    this.stepper.stepContent('hotel','hotelMedinah')
+    this.stepper.stepContent('hotel','MADEENA')
   }
 
 }

@@ -32,7 +32,7 @@ export class OtherInfoComponent implements OnInit {
   constructor(private _SuperAgentService:SuperAgentApiService,private appStore:AppStore,private helperService:HelperService,
     private stepper:StepperComponent) {
     this.SuperAgentApiService=this._SuperAgentService;
-    this.StepperAdapter = new StepperAdapter(this.helperService,null);
+    this.StepperAdapter = new StepperAdapter(this.helperService);
    }
 
   /**

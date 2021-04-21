@@ -31,7 +31,7 @@ export class OtherServiceComponent implements OnInit {
     private appStore:AppStore,private stepper:StepperComponent) { 
     this.SuperAgentApiService=this._SuperAgentService;
     this.commonApiService = this._commonApiService;
-    this.StepperAdapter = new StepperAdapter(null,null);
+    this.StepperAdapter = new StepperAdapter(null);
   }
 
   ngOnInit() {
