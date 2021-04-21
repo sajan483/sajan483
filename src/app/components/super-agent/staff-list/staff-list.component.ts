@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { SuperAgentApiService } from 'src/app/Services/super-agent-api-services';
 import { AppStore } from 'src/app/stores/app.store';
 
@@ -12,7 +13,7 @@ export class StaffListComponent implements OnInit {
   staffList:any;
   shimmer:boolean = true;
 
-  constructor(private _SuperAgentService:SuperAgentApiService,private appStore:AppStore) {
+  constructor(private _SuperAgentService:SuperAgentApiService,private appStore:AppStore,private route:Router) {
     this.superAgentApiService=this._SuperAgentService;
    }
 
@@ -25,6 +26,10 @@ export class StaffListComponent implements OnInit {
       this.staffList = data.results;
       this.shimmer = false;
     })
+  }
+
+  navigate(){
+    this.route.navigate(['/superagent/staff_creation'])
   }
 
 }

@@ -88,7 +88,7 @@
                 <div class="form-group col-md-8">
                     <select formControlName="agency" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.agency.errors }">
                         <option value="" disabled selected>Select Agency</option>
-                        <option *ngFor="let item of agencies" [value]="item.name">{{item.name}}</option>
+                        <option *ngFor="let item of agencies" [value]="item.id">{{item.name}}</option>
                     </select>
                     <div *ngIf="submitted && f.agency.errors" class="invalid-feedback">
                         <div *ngIf="f.agency.errors.required">Please select Agency</div>

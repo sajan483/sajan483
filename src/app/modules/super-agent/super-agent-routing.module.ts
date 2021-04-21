@@ -31,10 +31,10 @@ const myPath: Routes = [
     path: "create_branch",component: BranchCreationComponent
   },
   {
-    path: "update_branch",component: BranchUpdationComponent
+    path: "update_branch/:id",component: BranchUpdationComponent
   },
   {
-    path: "profile",component: ProfileComponent
+    path: "profile/:id",component: ProfileComponent
   },
   {
     path: "staff_creation",component: StaffCreationComponent
