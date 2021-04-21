@@ -59,6 +59,7 @@ export class HotelDetailsPopupComponent implements OnInit ,OnChanges{
   noOfImages: number;
   hotelData:any;
   hotelInfo:any;
+  @Output() detailsFlag = new EventEmitter();
    
   constructor(
     private commonService: SubAgentApiService,
@@ -88,7 +89,6 @@ export class HotelDetailsPopupComponent implements OnInit ,OnChanges{
   }
 
    ngOnInit() {
-    
     this.totalTravellers = this.appStore.adultCount + this.appStore.childCount;
     this.rooms = JSON.parse(sessionStorage.getItem('roomData'));
     /*
@@ -99,7 +99,8 @@ export class HotelDetailsPopupComponent implements OnInit ,OnChanges{
       this.selectedHotel = this.hotelData;
       this.setData()
     }
-  }
+
+  } 
 
   ngOnChanges() {
     //this.showHotelDetails = true
@@ -120,6 +121,7 @@ export class HotelDetailsPopupComponent implements OnInit ,OnChanges{
      * this method for setting dom data
      */
   setData(){
+    console.log(this.hotelData);
     this.hotelInfo = JSON.parse(sessionStorage.getItem('hotelInfo'))
     const x = this.createTripSupport.setDataForHotelDeatils(this.hotelData,this.hotelInfo,this.rooms);
     if(x && x.roomGroups.length > 0){
@@ -143,6 +145,8 @@ export class HotelDetailsPopupComponent implements OnInit ,OnChanges{
   hideHotelDetailsPupup() {
     this.showHotelDetails = false;
     this.appStore.showHotelDetails = false;
+    sessionStorage.setItem('hotelDetailsFlag','close')
+    this.detailsFlag.emit('hide')
   }
 
   /*
@@ -160,7 +164,7 @@ export class HotelDetailsPopupComponent implements OnInit ,OnChanges{
       this.commonService.saveSelectedHotel(this.createTripAdapter.bookHotelRequest(this.isGrouped,this.selectedRoomGroups,this.hotelData,this.hotelInfo)).subscribe((data) => {
         sessionStorage.setItem('custom_trip_id',data.id);
         this.onNotify();
-        this.showHotelDetails = false;
+        // this.showHotelDetails = false;
       });
     }
     if(sessionStorage.getItem('custom_trip_id')){
@@ -169,10 +173,12 @@ export class HotelDetailsPopupComponent implements OnInit ,OnChanges{
           this.onNotifyCreteTripForItineraryChange();
         }else{
           this.onNotify();
-          this.showHotelDetails = false;
+          // this.showHotelDetails = false;
         }
       });
     }
+    sessionStorage.setItem('hotelDetailsFlag','close')
+    this.appStore.showShimmer = !this.appStore.showShimmer
   }
 
   /*

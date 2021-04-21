@@ -52,7 +52,7 @@ export class MakkaHotelComponent implements OnInit,DoCheck{
   hotelData: any;
   showDetailsShimmer: boolean;
   generalHelper:GeneralHelper;
-  stageArray:number[]=[];
+  stageArray:number;
   steps: any[];
   
   constructor(
@@ -81,23 +81,40 @@ export class MakkaHotelComponent implements OnInit,DoCheck{
   }
 
   ngOnInit() {
-    
+    if(this.hotelsList[0].city == "Makkah"){
+      this.stageArray  = 0
+      sessionStorage.setItem('stageArray',JSON.stringify(this.stageArray))
+    }
+    else{
+      this.stageArray  = 1
+      sessionStorage.setItem('stageArray',JSON.stringify(this.stageArray))
+    }
+
+    this.checkDetailsOpen()
+
+  }
+
+
+  checkDetailsOpen(){
+    var flag = sessionStorage.getItem('hotelDetailsFlag')
+    if(flag=='open'){
+      this.showHotelDetails = true
+    }
   }
 
    /*
  * this method for showing hotelDetails PopUp
  */
   showHotelDetailsPopUp(item) {
-    this.showDetailsShimmer=true;
-    sessionStorage.setItem('hotelInfo',JSON.stringify(item))
-    this.showHotelDetails = true
-    //this.appStore.showHotelDetails = true;
-    this.appStore.showHotelDetailsShimmer = true;
-    this.showHotelDetailsShimmer = true;
-    this.selectedRoomCount = 0;
-    this.selectedTravellersCount = 0;
-    this.totalRoomPrice = 0;
-    this.fetchSelectedHotelInfo(item);
+      this.showDetailsShimmer=true;
+      sessionStorage.setItem('hotelInfo',JSON.stringify(item))
+      //this.appStore.showHotelDetails = true;
+      this.appStore.showHotelDetailsShimmer = true;
+      this.showHotelDetailsShimmer = true;
+      this.selectedRoomCount = 0;
+      this.selectedTravellersCount = 0;
+      this.totalRoomPrice = 0;
+      this.fetchSelectedHotelInfo(item);
   }
 
   /*
@@ -126,6 +143,11 @@ export class MakkaHotelComponent implements OnInit,DoCheck{
         //   this.showHotelDetails = true;
         // }
         this.showDetailsShimmer = false;
+        this.showHotelDetails = true
+        var flag = sessionStorage.getItem('stageArray')
+        if(flag === '0' || flag === '1'){
+          sessionStorage.setItem('hotelDetailsFlag','open')
+        }
       },
       (error) => {
         this.showDetailsShimmer = false;
@@ -205,4 +227,12 @@ export class MakkaHotelComponent implements OnInit,DoCheck{
       this.isHotelListSortedByHaramDistance = false;
     }
   }
+
+  getDetailsPopupFlag($event){
+    if($event == 'hide'){
+      this.showHotelDetails=false
+      sessionStorage.removeItem('hotelData')
+    }
+  }
+
 }

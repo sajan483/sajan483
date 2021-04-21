@@ -211,5 +211,8 @@
         <app-loader-hotel-popup></app-loader-hotel-popup>
     </div>
 </div>
+
+<div *ngIf="showHotelDetails">
+    <app-hotel-details-popup (handleNotif)="childEvent($event)" (changeItinerary)="childEventForChangeItinerary($event)" (detailsFlag)="getDetailsPopupFlag($event)"></app-hotel-details-popup>
+</div>
 <!-- <app-hotel-details-popup (handleNotif)="childEvent($event)" (changeItinerary)="childEventForChangeItinerary($event)" *ngIf="showHotelDetails" [hotelInfo]="hotelInfo" [hotelData]="hotelData"></app-hotel-details-popup> -->
-<app-hotel-details-popup (handleNotif)="childEvent($event)" (changeItinerary)="childEventForChangeItinerary($event)" *ngIf="showHotelDetails"></app-hotel-details-popup>

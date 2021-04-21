@@ -434,6 +434,7 @@ export class CreateTripFrontPageComponent implements OnInit, DoCheck {
   * 
   */
   searchButtonClicked() {
+    this.clearSession()
     this.setNoOfMadeenaDays();
     this.appStore.showRoomAlPopup = false;
     this.userObject = {
@@ -479,6 +480,20 @@ export class CreateTripFrontPageComponent implements OnInit, DoCheck {
     }
     this.dataForPopUp.steps = this.steps;
     this.dataForPopUp.user = this.userObject;
+  }
+
+  clearSession(){
+    sessionStorage.setItem('stageArray','0');
+    sessionStorage.removeItem('hotelDetailsFlag');
+    sessionStorage.removeItem('mdSearchId');
+    sessionStorage.removeItem('mkSearchId');
+    sessionStorage.removeItem('custome_trip_booking_id');
+    sessionStorage.removeItem('custom_trip_id');
+    sessionStorage.removeItem('roomData');
+    sessionStorage.removeItem('userObject');
+    sessionStorage.removeItem('hotelData');
+    sessionStorage.removeItem('hotelInfo');
+    sessionStorage.removeItem('steps');
   }
 
   /**

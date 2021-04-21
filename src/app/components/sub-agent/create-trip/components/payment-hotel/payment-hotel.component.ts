@@ -28,7 +28,7 @@ export class PaymentHotelComponent implements OnInit,OnChanges {
   }
 
   goToHotelStepper(event){
-    if(event ){
+    if(event){
       this.notifyCreateTrip.emit(event)
     }
   }
