@@ -65,14 +65,14 @@ export class CreateTripAdapter {
     search: any
   ) {
     if (selectedHotelInfo.city == "Makkah") {
-      search = this.appStore.makkahSearchId;
+      search = sessionStorage.getItem('mkSearchId');
     }
     if (
       selectedHotelInfo.city == "Madina" ||
       selectedHotelInfo.city == "Madinah" ||
       selectedHotelInfo.city == "Medinah"
     ) {
-      search = this.appStore.madinahSearchId;
+      search = sessionStorage.getItem('mdSearchId');
     }
     var body = {
       search: search,

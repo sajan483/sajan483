@@ -345,7 +345,6 @@ import { environment } from "src/environments/environment";
       this.searchTransportId = data.search_id;
       this.steps = JSON.parse(sessionStorage.getItem('steps'))
       if(this.steps && this.steps.length > 2 ){this.stageArray.push(2)}
-      sessionStorage.setItem('stageArray',JSON.stringify(this.stageArray))
       this.appStore.transportSearchId = data.search_id;
       this.common.searchTransportList(this.searchTransportId,this.selectedCurrency,this.selectedLanguage).subscribe((response) => {
         if ((response && response.transportations && response.transportations.length == 0) ||  (response && response.transportations && response.transportations.filter(x=>x.vehicle_types.length > 0) == 0)) {
@@ -546,12 +545,9 @@ import { environment } from "src/environments/environment";
 
   ngOnInit() {
     sessionStorage.setItem('steps',JSON.stringify(this.steps))
+    sessionStorage.setItem('stageArray',JSON.stringify(this.stageArray))
     this.stageArray = JSON.parse(sessionStorage.getItem('stageArray'))
-    if(this.stageArray){
-      this.stageArray.sort()
-      //this.stageArray.onlyUnique
-      this.move(1)
-    }
+    if(this.stageArray){this.moveToCorrespondingStageAfterRefresh()}
     this.generalHelper.checkForAccessToken();
     if(!this.appStore.showShimmer){this.appStore.showShimmer = true,this.showShimmer = true}
     this.setUserDetails()
@@ -566,6 +562,15 @@ import { environment } from "src/environments/environment";
     this.setdataForUserDetailsAtLastPage();
     this.fetchNessoryApisForPaymentPage();
     this.travellersForm = this.createTripAdapter.createTripBookingForm();
+  }
+
+  moveToCorrespondingStageAfterRefresh(){
+    console.log("sas",this.stageArray)
+    var target = 0;
+    if(this.stageArray.length > 0){this.stageArray = this.stageArray.filter(this.onlyUnique)}
+    this.stageArray.forEach((element)=>{if (element>target) {target = element;}})
+    console.log('target',target)
+    this.move(target)
   }
   
   setUserDetails(){
@@ -782,12 +787,13 @@ import { environment } from "src/environments/environment";
         let response = data;
         this.hotelsList = data.results;
         if (typeof response.search_id != "undefined") {
+          if(city == "MAKKA"){sessionStorage.setItem('mkSearchId',response.search_id)}
           this.steps = JSON.parse(sessionStorage.getItem('steps'))
-          if(this.steps && this.steps.length > 2 && city == 'MAKKA'){this.stageArray.push(0)}
-          if(this.steps && this.steps.length > 2 && city == 'MADEENA'){this.stageArray.push(1)}
+          if(city == 'MAKKA' && this.steps && this.steps.length == 1 || this.steps.length > 1){this.stageArray.push(0)}
+          if(city == 'MADEENA' && this.steps && this.steps.length == 1 ){this.stageArray.push(0)}
+          if(city == 'MADEENA' && this.steps && this.steps.length > 1 ){this.stageArray.push(1)}
           sessionStorage.setItem('stageArray',JSON.stringify(this.stageArray))
-          if(city == "MAKKA"){this.appStore.makkahSearchId = response.search_id;}
-          if(city == "MADEENA"){this.appStore.madinahSearchId = response.search_id;
+          if(city == "MADEENA"){sessionStorage.setItem('mdSearchId',response.search_id);
             this.noOfDaysInMadeena = this.appStore.noOfDaysInMadeena;
             this.travellersCount = this.appStore.totalTravellers;
             this.madeenaCheckInDate = this.userDetails.madeenaCheckinDate;

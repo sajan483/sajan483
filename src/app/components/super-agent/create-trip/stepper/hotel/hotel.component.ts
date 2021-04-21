@@ -45,8 +45,6 @@ export class HotelComponent implements OnInit {
     this.superAgentApiService = _superAgentApiService; 
    }
 
-   //
-
   ngOnInit() {
     this.setHotelSearchForm();
     this.hotelSearch()
@@ -90,12 +88,16 @@ export class HotelComponent implements OnInit {
       }
     });
   }
+  
   setHotelCheckOutDateRange(){
     this.pickerEnd.open();
   }
 
   showHotelDetailsPopUp(item,city){
-    this.showHotelDetails = 'true';
+    sessionStorage.setItem('showHotelDetails','true')
+   // if(sessionStorage.getItem('showHotelDetails') == 'true'){
+      this.showHotelDetails = 'true';
+    //}
     this.fetchSelectedHotelInfo(item,city)
   }
 

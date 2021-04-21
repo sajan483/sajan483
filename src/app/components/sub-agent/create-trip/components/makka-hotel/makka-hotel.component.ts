@@ -90,7 +90,8 @@ export class MakkaHotelComponent implements OnInit,DoCheck{
   showHotelDetailsPopUp(item) {
     this.showDetailsShimmer=true;
     sessionStorage.setItem('hotelInfo',JSON.stringify(item))
-    this.appStore.showHotelDetails = true;
+    this.showHotelDetails = true
+    //this.appStore.showHotelDetails = true;
     this.appStore.showHotelDetailsShimmer = true;
     this.showHotelDetailsShimmer = true;
     this.selectedRoomCount = 0;
@@ -120,10 +121,10 @@ export class MakkaHotelComponent implements OnInit,DoCheck{
     this.commonService.getSelectedHotelInfo(this.createTripAdapter.selectedHotelInfoRequest(this.selectedLanguage,item,this.search), this.selectedCurrency,this.selectedLanguage).subscribe(
       (data) => {
         sessionStorage.setItem('hotelData',JSON.stringify(data))
-        sessionStorage.setItem('showHotelDetails','true')
-        if(sessionStorage.getItem('showHotelDetails') == 'true'){
-          this.showHotelDetails = true;
-        }
+        // sessionStorage.setItem('showHotelDetails','true')
+        // if(sessionStorage.getItem('showHotelDetails') == 'true'){
+        //   this.showHotelDetails = true;
+        // }
         this.showDetailsShimmer = false;
       },
       (error) => {
@@ -145,11 +146,11 @@ export class MakkaHotelComponent implements OnInit,DoCheck{
    */
   ngDoCheck(){
     this.generalHelper.checkForAccessToken();
-    if(this.appStore.showHotelDetails) {
-      this.showHotelDetails = true;
-    } else if(!this.appStore.showHotelDetails) {
-      this.showHotelDetails = false;
-    }
+    // if(this.appStore.showHotelDetails) {
+    //   this.showHotelDetails = true;
+    // } else if(!this.appStore.showHotelDetails) {
+    //   this.showHotelDetails = false;
+    // }
     if(this.appStore.showHotelDetailsShimmer){
       this.showHotelDetailsShimmer = true;
     }
@@ -180,7 +181,7 @@ export class MakkaHotelComponent implements OnInit,DoCheck{
       (<HTMLElement>document.getElementById("moreFilterDown")).style.maxHeight = "416px";
     }
     
-  }
+  } 
   
    /*
  * this method for sorting hotel list according to price,haram distance
