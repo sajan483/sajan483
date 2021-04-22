@@ -24,7 +24,7 @@
                             </div>
                         </div>
                         <div class="d-flex box-3">
-                            <mat-icon class="icon">calendar_today</mat-icon>
+                            <mat-icon class="icon">today</mat-icon>
                             <div>
                                 <p>Departure Date</p>
                                 <h5>21 April Onwards</h5>
@@ -66,57 +66,57 @@
                             <div class="col-md fare-box">
                                 <mat-form-field appearance="outline" class="fw">
                                     <mat-label>Adult</mat-label>
-                                    <input matInput placeholder="₹" formControlName="adult" numberOnly>
+                                    <input type="number" matInput placeholder="₹" formControlName="adult" numberOnly>
                                 </mat-form-field>
                             </div>
                             <div class="col-md fare-box br-left">
                                 <mat-form-field appearance="outline" class="fw">
                                     <mat-label>Child</mat-label>
-                                    <input matInput placeholder="₹" formControlName="child" numberOnly>
+                                    <input type="number" matInput placeholder="₹" formControlName="child" numberOnly>
                                 </mat-form-field>
                             </div>
                             <div class="col-md fare-box br-left">
                                 <mat-form-field appearance="outline" class="fw">
                                     <mat-label>Infant</mat-label>
-                                    <input matInput placeholder="₹" formControlName="infant" numberOnly>
+                                    <input type="number" matInput placeholder="₹" formControlName="infant" numberOnly>
                                 </mat-form-field>
                             </div>
                             <div class="col-md-2 btn-outer">
-                                <button [disabled]="continue" class="searchbutton pull-right" (click)="bookPackage()">Book Package</button>
+                                <button [disabled]="continue" class="searchbutton pull-right" (click)="navigatePayment()">Book Package</button>
                             </div>
                         </div>
-                        <div class="overview">
-                            <p class="ovr-txt mt-4">Package Overview</p>
-                            <p class="grey-txt">Akbar Tours and Travels is an established agency to provide best and affordable Umrah Package from Kozikod to Umrah Pilgrims. Team of Akbar Umrah takes a keen interest to make your journey for Umrah to Makkah hassle-free, comfortable
+                        <div class=" overview ">
+                            <p class="ovr-txt mt-4 ">Package Overview</p>
+                            <p class="grey-txt ">Akbar Tours and Travels is an established agency to provide best and affordable Umrah Package from Kozikod to Umrah Pilgrims. Team of Akbar Umrah takes a keen interest to make your journey for Umrah to Makkah hassle-free, comfortable
                                 and an experience worth cherishing forever.
                             </p>
                         </div>
-                        <div class="itenerary" *ngIf="itenerary?.length">
-                            <p class="it-head">Itenerary</p>
+                        <div class="itenerary " *ngIf="itenerary?.length ">
+                            <p class="it-head ">Itenerary</p>
 
-                            <ul class="sessions">
-                                <span *ngFor="let item of itenerary;let i=index;">
-                                <li *ngIf="i<2">
-                                    <div class="time">Day {{item?.num_of_days}} : {{item?.title}} - {{item?.from_date | date:'longDate'}}</div>
-                                    <div class="clr52 fs14 mt-2">{{item?.details}}</div>
-                                    <div class="row m-0">
-                                      <div class="col-md-3 pl-0 mt-2" *ngFor="let img of item.attachments">
-                                          <img [src]="img.file" class="iteneraryimg" alt="">
+                            <ul class="sessions ">
+                                <span *ngFor="let item of itenerary;let i=index; ">
+                                <li *ngIf="i<1 ">
+                                    <div class="time ">Day {{item?.num_of_days}} : {{item?.title}} - {{item?.from_date | date:'longDate'}}</div>
+                                    <div class="clr52 fs14 mt-2 " [innerHTML]="item?.details "></div>
+                                    <div class="row m-0 ">
+                                      <div class="col-md-3 pl-0 mt-2 " *ngFor="let img of item.attachments ">
+                                          <img [src]="img.file " class="itineraryimg " alt=" ">
                                       </div>
                                     </div>
                                 </li>
                             </span>
-                                <div class="itenaryfull">
-                                    <span *ngFor="let item of itenerary;let i=index;">
-                                    <li *ngIf="i>1">
-                                        <div class="time">Day {{item?.num_of_days}} : {{item?.title}} - {{item?.from_date | date:'longDate'}}</div>
-                                        <div class="clr52 fs14 mt-2">{{item?.details}}</div>
-                                        <div class="row m-0">
-                                          <div class="col-md-3 pl-0 mt-2" *ngFor="let img of item.attachments">
-                                              <img [src]="img.file" class="iteneraryimg" alt="">
-                                          </div>
-                                        </div>
-                                    </li>
+                                <div class="itenaryfull ">
+                                    <span *ngFor="let item of itenerary;let i=index; ">
+                                    <li *ngIf="i>0">
+                                <div class="time">Day {{item?.num_of_days}} : {{item?.title}} - {{item?.from_date | date:'longDate'}}</div>
+                                <div class="clr52 fs14 mt-2" [innerHTML]="item?.details">{{item?.details}}</div>
+                                <div class="row m-0">
+                                    <div class="col-md-3 pl-0 mt-2" *ngFor="let img of item.attachments">
+                                        <img [src]="img.file" class="itineraryimg" alt="">
+                                    </div>
+                                </div>
+                                </li>
                                 </span>
                                 </div>
                                 <button class="addAnotherBttn mt-3" (click)="expandItenary($event)" *ngIf="itenerary.length > 2"><i class="fa fa-plus-circle" aria-hidden="true"></i> View Full itenerary</button>
@@ -129,7 +129,7 @@
                 <mat-tab label="POLICY"> </mat-tab>
             </mat-tab-group>
             <div class="btn-box">
-                <button [disabled]="continue" class="searchbutton">Book Package</button>
+                <button [disabled]="continue" class="searchbutton" (click)="navigatePayment()">Book Package</button>
             </div>
         </div>
     </div>

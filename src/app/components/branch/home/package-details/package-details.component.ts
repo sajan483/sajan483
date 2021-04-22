@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
 import { BranchApiService } from 'src/app/Services/branch-api-service';
 
 @Component({
@@ -10,15 +11,17 @@ import { BranchApiService } from 'src/app/Services/branch-api-service';
 export class PackageDetailsComponent implements OnInit {
 
   countForm: FormGroup;
-  itenerary
-  availabilityCount
-  maxCount
+  itenerary:any;
+  availabilityCount:any;
+  maxCount:any;
+  id:any;
 
-  constructor(private fb: FormBuilder, private branchService: BranchApiService) { }
+  constructor(private fb: FormBuilder, private branchService: BranchApiService,private activeRouter:ActivatedRoute,
+    private route:Router) { }
 
   ngOnInit() {
     this.countForm = this.fb.group({
-			adult: ['', Validators.required],
+			adult: [1, Validators.required],
 			child: [0],
 			infant: [0]
     });
@@ -26,22 +29,29 @@ export class PackageDetailsComponent implements OnInit {
   }
 
   get continue() {
-    if(this.countForm.valid){
-      return true
-    }
-    else {
+    if(this.countForm.valid && (this.countForm.controls.adult.value + this.countForm.controls.child.value + this.countForm.controls.infant.value) <= this.availabilityCount ){
       return false
     }
+    else {
+      return true
+    }
+  }
+
+  checkCount(){
+
   }
 
   get count() { return this.countForm.controls}
 
   getPackageDetails(){
-    this.branchService.getPackageDetails(4670).subscribe((data)=>{
-      this.itenerary = data.itinerary_set;
-      this.availabilityCount = data.max_passengers - data.booked_count;
-      this.maxCount = data.max_passengers
-    })
+    this.id = this.activeRouter.params.subscribe(data=>{
+      this.id = data['id'];
+      this.branchService.getPackageDetails(this.id).subscribe((data)=>{
+        this.itenerary = data.itinerary_set;
+        this.availabilityCount = data.max_passengers - data.booked_count;
+        this.maxCount = data.max_passengers
+      })
+    });
   }
 
   expandItenary(event){
@@ -62,6 +72,10 @@ export class PackageDetailsComponent implements OnInit {
     this.branchService.bookPackage(data, 4670).subscribe((data)=>{
       console.log(data);
     })
+  }
+
+  navigatePayment(){
+    this.route.navigate(["/branch/payment"])
   }
 
 }

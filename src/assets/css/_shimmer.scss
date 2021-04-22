@@ -1,6 +1,6 @@
 .shine {
     background: #f6f7f8;
-    background-image: linear-gradient(to right, #f6f7f8 0%, #edeef1 20%, #f6f7f8 40%, #f6f7f8 100%);
+    background-image: linear-gradient(to right, #f6f7f8 0%, #dddede 20%, #f6f7f8 40%, #f6f7f8 100%);
     background-repeat: no-repeat;
     background-size: 800px 104px;
     display: inline-block;
@@ -89,6 +89,14 @@
     width: 130px;
 }
 
+.ws200 {
+    width: 200px;
+}
+
 .brdr_rdius_4 {
     border-radius: 4px;
+}
+
+.bsize170 {
+    background-size: 800px 170px !important;
 }

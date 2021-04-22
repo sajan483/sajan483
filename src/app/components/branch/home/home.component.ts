@@ -1,4 +1,5 @@
 import { Component, OnInit,ViewChild, ElementRef, Renderer2 } from '@angular/core';
+import { Router } from '@angular/router';
 import { BranchApiService } from 'src/app/Services/branch-api-service'
 
 @Component({
@@ -22,8 +23,9 @@ export class HomeComponent implements OnInit {
   @ViewChild("menuPopupClass", { read: ElementRef, static: false })
   menuPopupClass: ElementRef;
   packages: any[]=[];
+  shimmer: boolean =true;
 
-  constructor(private renderer2: Renderer2,private branchApi:BranchApiService) {
+  constructor(private renderer2: Renderer2,private branchApi:BranchApiService,private route:Router) {
     this.renderer2.listen("window", "click", (e: Event) => {
       if (
         (this.menuPopupClass &&
@@ -55,8 +57,12 @@ export class HomeComponent implements OnInit {
 
   ngOnInit() {
     this.branchApi.getPackages().subscribe((data)=>{
-      this.packages = data;
-      console.log(this.packages)
+      data.forEach(element => {
+        if(element.title != ""){
+          this.packages.push(element);
+        }
+      });
+      this.shimmer = false;
     })
   }
 
@@ -130,4 +136,7 @@ export class HomeComponent implements OnInit {
     this.countInfant = this.countInfant + 1;
   }
 
+  viewPackageDetails(id:number){
+    this.route.navigate(['/branch/details/'+id])
+  }
 }

@@ -206,9 +206,16 @@
     font-weight: bold;
     line-height: 1.57;
     color: #f18e00;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
 }
 
 .bttnright {
     padding-right: 0;
     text-align: end;
+}
+
+.disablebtn {
+    cursor: default !important;
 }
