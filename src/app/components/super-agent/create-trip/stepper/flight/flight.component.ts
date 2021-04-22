@@ -247,8 +247,8 @@ export class FlightComponent implements OnInit {
           if(data.flights[0].length > 0 && data.flights[1].length > 0){
             data.flights[0].forEach(element => {element.isTouched = false});
             data.flights[1].forEach(element => {element.isTouched = false});
-            this.searchResult.departureFlights = data.flights[0];
-            this.searchResult.returnFlights = data.flights[1];
+            this.searchResult.departureFlights = data.flights[0].sort((a, b) => (a.GrossFare) - (b.GrossFare));
+            this.searchResult.returnFlights = data.flights[1].sort((a, b) => (a.GrossFare) - (b.GrossFare));
             this.available=true
             this.loader=false;
             this.flightListingFlag = true;
@@ -272,8 +272,8 @@ export class FlightComponent implements OnInit {
     };
     this.commonService.searchFlights(body).subscribe((data) => {
       if(data.flights[0].length > 0 && data.flights[1].length > 0){
-        this.searchResult.departureFlights = data.flights[0];
-        this.searchResult.returnFlights = data.flights[1];
+        this.searchResult.departureFlights = data.flights[0].sort((a, b) => (a.GrossFare) - (b.GrossFare));
+        this.searchResult.returnFlights = data.flights[1].sort((a, b) => (a.GrossFare) - (b.GrossFare));
         this.loader=false;
         this.flightListingFlag = true;
         this.available=true;
