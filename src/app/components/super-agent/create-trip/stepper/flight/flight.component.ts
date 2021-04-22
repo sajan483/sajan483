@@ -258,7 +258,6 @@ export class FlightComponent implements OnInit {
             this.available=false;
           }
         })
-        console.log("dsd",this.searchResult.departureFlights)
       }
     }
   }
