@@ -35,7 +35,7 @@
                             <div class="mt-1 salesoverride">SALES OVERVIEW</div>
                             <div>
                                 <div id="selectDateToChart">
-                                    <ng-multiselect-dropdown name="city" [data]="cities" [(ngModel)]="selectedItem" [settings]="dropdownSettings" (onSelect)="onItemSelect($event)" [disabled]="disabled">
+                                    <ng-multiselect-dropdown name="city" [data]="cities" [(ngModel)]="selectedItem" [settings]="dropdownSettings">
                                     </ng-multiselect-dropdown>
                                 </div>
                             </div>
@@ -88,7 +88,7 @@
                     <div class="borderbox p20">
                         <div class="d-flex justify-content-end">
                             <div id="selectDateToChart">
-                                <ng-multiselect-dropdown name="city" [data]="cities" [(ngModel)]="selectedItem" [settings]="dropdownSettings" (onSelect)="onItemSelect($event)" [disabled]="disabled">
+                                <ng-multiselect-dropdown name="city" [data]="cities" [(ngModel)]="selectedItem" [settings]="dropdownSettings">
                                 </ng-multiselect-dropdown>
                             </div>
                         </div>

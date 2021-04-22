@@ -47,7 +47,7 @@ export class loginHelper{
                 etype = 'branch';
                 this.appStore.userType = data.staff.name;
                 sessionStorage.setItem('currentUser', etype);
-                this.router.navigate(["subagent/home"]);
+                this.router.navigate(["branch/home"]);
               }
             }
             if(data.staff.employer_type == 'agency'){
