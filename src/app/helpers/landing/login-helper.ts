@@ -36,7 +36,7 @@ export class loginHelper{
         if (sessionStorage.getItem('accesstoken') != null) {
           if(data.staff.is_super_agent){
             this.notifyService.showSuccess(this.translate.instant('success !!'));
-            this.appStore.currentUser = etype;
+            etype = 'superagent';
             this.appStore.userType = data.staff.name;
             sessionStorage.setItem('currentUser', etype);
             this.router.navigate(["superagent/dashboard"]);
@@ -44,7 +44,7 @@ export class loginHelper{
             if(data.staff.employer_type == 'branch'){
               if(data.staff.is_umrah_operator == 'True'){
                 this.notifyService.showSuccess(this.translate.instant('success !!'));
-                this.appStore.currentUser = etype;
+                etype = 'branch';
                 this.appStore.userType = data.staff.name;
                 sessionStorage.setItem('currentUser', etype);
                 this.router.navigate(["branch/home"]);
@@ -56,13 +56,13 @@ export class loginHelper{
                 this.router.navigate(["upload", data.staff.employer_id]);
               } else if(data.staff.is_umrah_operator == 'False'){
                 this.notifyService.showSuccess(this.translate.instant('success !!'));
-                this.appStore.currentUser = etype;
+                etype = 'branch';
                 this.appStore.userType = data.staff.name;
                 sessionStorage.setItem('currentUser', etype);
                 this.router.navigate(["branch/home"]);
               } else{
                 this.notifyService.showSuccess(this.translate.instant('success !!'));
-                this.appStore.currentUser = etype;
+                etype = 'subagent';
                 this.appStore.userType = data.staff.employer_name;
                 sessionStorage.setItem('currentUser', etype);
                 this.router.navigate(['subagent/home/']);

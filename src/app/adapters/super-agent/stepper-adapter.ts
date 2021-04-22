@@ -5,7 +5,7 @@ import { FormGroup, FormBuilder, Validators } from "@angular/forms";
 export class StepperAdapter {
   fb: FormBuilder;
   helperService: HelperService;
-  searchData
+  searchData:any
     
 
   constructor(private _helperService: HelperService) {this.helperService = _helperService;}
@@ -65,6 +65,8 @@ export class StepperAdapter {
    * @param currency 
    */
   transportBookingBody(transportSelection,currency){
+    console.log("1");
+    
     var data ={
       trip_transportation: {
         trip_vehicles: [
@@ -136,10 +138,12 @@ export class StepperAdapter {
    */
   visaServiceBody(myForm,currency){
     var price: number = +myForm.adultpricevisa;
+    var kidPrice: number = +myForm.childpricevisa;
     var body ={
       "trip_visa": {
         'visa_type': myForm.visaservice, 
         'price': price,
+        'infant_price': kidPrice,
         'currency': currency,
         'title':'visa'
       }

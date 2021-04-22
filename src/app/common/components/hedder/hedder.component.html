@@ -1,9 +1,10 @@
 <nav class="navbar navbar-expand-lg navbar-light positionfixed" *ngIf="router.url !== '/login' && router.url !== '/signup'">
     <div class="collapse navbar-collapse container">
-        <a class="navbar-brand cursor-pointer" *ngIf="branchActive" (click)="navigatepage('subagent/home');"><img class="logohight" src="/assets/images/agent-logo.png" alt=""></a>
-        <a class="navbar-brand cursor-pointer" *ngIf="agencyActive" (click)="navigatepage('superagent/createTrip');"><img class="logohight" src="/assets/images/agent-logo.png" alt=""></a>
+        <a class="navbar-brand cursor-pointer" *ngIf="branchActive" (click)="navigatepage('branch/home');"><img class="logohight" src="/assets/images/agent-logo.png" alt=""></a>
+        <a class="navbar-brand cursor-pointer" *ngIf="superAgencyActive" (click)="navigatepage('superagent/dashboard');"><img class="logohight" src="/assets/images/agent-logo.png" alt=""></a>
+        <a class="navbar-brand cursor-pointer" *ngIf="subAgencyActive" (click)="navigatepage('subagent/home');"><img class="logohight" src="/assets/images/agent-logo.png" alt=""></a>
         <form class="form-inline my-2 my-lg-0">
-            <div class="dropdown" *ngIf="branchActive">
+            <div class="dropdown" *ngIf="subAgencyActive">
                 <div class="d-flex cursor-pointer hidemobile">
                     <div class="pr-2">
                         <p class="mb-0 wlcmtext">Welcome <i class="fa fa-caret-down" aria-hidden="true"></i></p>
@@ -42,11 +43,11 @@
                 </div>
             </div>
 
-            <div class="dropdown" *ngIf="agencyActive">
+            <div class="dropdown" *ngIf="superAgencyActive">
                 <div class="d-flex cursor-pointer hidemobile">
                     <div class="pr-2">
                         <p class="mb-0 wlcmtext">Welcome <i class="fa fa-caret-down" aria-hidden="true"></i></p>
-                        <p class="mb-0 f15" style="color: brown;">Super Agent</p>
+                        <p class="mb-0 f15" style="color: brown;">{{userType}}</p>
                     </div>
                     <i class="userpic icns icon_size_40"></i>
                 </div>
@@ -82,6 +83,45 @@
                         <div class="d-flex padngover">
                             <i class="icns myprofile icon_size_20"></i>
                             <p class="f15 my-auto pl20" [class.clrred]="router.url === '/superagent/profile/1'">My Profile</p>
+                        </div>
+                    </a>
+                    <a class="bgred" (click)="logout();">
+                        <div class="d-flex padngover">
+                            <i class="icns logouticon icon_size_20"></i>
+                            <p class="f15 my-auto pl20">Logout</p>
+                        </div>
+                    </a>
+                </div>
+            </div>
+
+            <div class="dropdown" *ngIf="branchActive">
+                <div class="d-flex cursor-pointer hidemobile">
+                    <div class="pr-2">
+                        <p class="mb-0 wlcmtext">Welcome <i class="fa fa-caret-down" aria-hidden="true"></i></p>
+                        <p class="mb-0 f15" style="color: brown;">{{userType}}</p>
+                    </div>
+                    <i class="userpic icns icon_size_40"></i>
+                </div>
+                <div class="dinsplaymobile hidesystem mr-3">
+                    <i class="fa fa-bars" aria-hidden="true"></i>
+                </div>
+                <div class="dropdown-content animationdivfast">
+                    <a class="" (click)="navigatepage('branch/home');">
+                        <div class="d-flex padngover mt-2">
+                            <i class="icns createpackages icon_size_25"></i>
+                            <p class="f15 my-auto pl15" [class.clrred]="router.url === '/branch/home'">Packages</p>
+                        </div>
+                    </a>
+                    <a>
+                        <div class="d-flex padngover">
+                            <i class="icns staffmanagment icon_size_20"></i>
+                            <p class="f15 my-auto pl20">Staff Mangement</p>
+                        </div>
+                    </a>
+                    <a>
+                        <div class="d-flex padngover">
+                            <i class="icns myprofile icon_size_20"></i>
+                            <p class="f15 my-auto pl20">My Profile</p>
                         </div>
                     </a>
                     <a class="bgred" (click)="logout();">

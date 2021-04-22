@@ -55,7 +55,7 @@ export class HomeComponent implements OnInit {
 
   ngOnInit() {
     this.branchApi.getPackages().subscribe((data)=>{
-      this.packages = data.results;
+      this.packages = data;
       console.log(this.packages)
     })
   }

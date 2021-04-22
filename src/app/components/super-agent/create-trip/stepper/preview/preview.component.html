@@ -752,7 +752,7 @@
             </div>
         </div>
         <div class="d-flex justify-content-center mt-3">
-            <button class="searchbutton" (click)="publishTrip()">Publish</button>
+            <button class="searchbutton" [class.bttnactive]="bttnactive" (click)="publishTrip()">Publish</button>
         </div>
     </div>
 </div>

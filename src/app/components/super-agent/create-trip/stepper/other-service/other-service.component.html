@@ -59,30 +59,39 @@
                         Visa Services Offered
                     </div>
                     <div class="row m-0 p30">
-                        <div class="col-md-4 mb30">
+                        <div class="col-md-4 mb30 errortooltip">
                             <label class="fs14 fw400 lh14 pl-1">Visa Service :</label>
                             <div class="shine w-100 h35 brdr_rdius_4" *ngIf="visaShimmer"></div>
                             <select class="owldatebrdr w-100 form-control" *ngIf="!visaShimmer" formControlName="visaservice" [ngClass]="{ 'is-invalid': submitted && f.visaservice.errors }">
                                 <option value="" disabled selected hidden>Select Visa Service</option>
                                 <option *ngFor="let item of visaService" [value]="item.item_id">{{item.item_text}}</option>
                             </select>
+                            <div *ngIf="submitted && f.visaservice.errors" class="errortooltiptext top107">
+                                this field is required
+                            </div>
                         </div>
-                        <div class="col-md-4">
+                        <div class="col-md-4 mb30 errortooltip">
                             <label class="fs14 fw400 lh14 pl-1">Rate For Adult :</label>
                             <div class="input-group w-100">
                                 <div class="input-group-prepend w20">
                                     <span class="input-group-text priceicon" id="basic-addon1">&#8377;</span>
                                 </div>
                                 <input type="text" class="owldatebrdr w80 form-control" numberOnly formControlName="adultpricevisa" [ngClass]="{ 'is-invalid': submitted && f.adultpricevisa.errors }">
+                                <div *ngIf="submitted && f.adultpricevisa.errors" class="errortooltiptext top110">
+                                    this field is required
+                                </div>
                             </div>
                         </div>
-                        <div class="col-md-4">
+                        <div class="col-md-4 mb30 errortooltip">
                             <label class="fs14 fw400 lh14 pl-1">Rate For Kid :</label>
                             <div class="input-group w-100">
                                 <div class="input-group-prepend w20">
                                     <span class="input-group-text priceicon" id="basic-addon1">&#8377;</span>
                                 </div>
                                 <input type="text" class="owldatebrdr w80 form-control" numberOnly formControlName="childpricevisa" [ngClass]="{ 'is-invalid': submitted && f.childpricevisa.errors }">
+                                <div *ngIf="submitted && f.childpricevisa.errors" class="errortooltiptext top110">
+                                    this field is required
+                                </div>
                             </div>
                         </div>
                     </div>
