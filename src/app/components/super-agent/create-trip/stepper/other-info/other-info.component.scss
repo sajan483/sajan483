@@ -35,7 +35,6 @@
     font-size: 20px;
 }
 
-.angular-editor-textarea.is-invalid,
-.angular-editor-textarea:invalid {
-    border-color: #dc3545;
+.errorbrdr {
+    border: 1px solid #dc3545 !important;
 }

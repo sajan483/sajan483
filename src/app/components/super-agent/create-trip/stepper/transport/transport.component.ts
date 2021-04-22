@@ -32,7 +32,7 @@ export class TransportComponent implements OnInit {
     private _SuperAgentService:SuperAgentApiService,private helperService:HelperService,private appStore:AppStore) {
     this.commonApiService = this._commonApiService;
     this.SuperAgentApiService=this._SuperAgentService;
-    this.StepperAdapter = new StepperAdapter(null);
+    this.StepperAdapter = new StepperAdapter(helperService);
    }
 
   ngOnInit() {

@@ -12,50 +12,68 @@
         <form [formGroup]="transportSelection" (ngSubmit)="onSubmit()">
             <div class="boxborder p30">
                 <div class="row m-0">
-                    <div class="col-md-4 mb30">
+                    <div class="col-md-4 mb30 errortooltip">
                         <label class="fs14 fw400 lh14 pl-1">Start Date :</label>
                         <div class="position-relative" [owlDateTimeTrigger]="dt1">
                             <input [min]="transportMin" [max]="transportMax" [owlDateTime]="dt1" placeholder="Depature Date" class="owldatebrdr w-100 form-control" formControlName="depdate" [ngClass]="{ 'is-invalid': submitted && f.depdate.errors }">
                             <i class="icns calendaricon icon_size_20 cursor-pointer owldateiconpostion"></i>
                             <owl-date-time #dt1 [pickerType]="'calendar'"></owl-date-time>
                         </div>
+                        <div *ngIf="submitted && f.depdate.errors" class="errortooltiptext top107">
+                            this field is required
+                        </div>
                     </div>
-                    <div class="col-md-4 mb30">
+                    <div class="col-md-4 mb30 errortooltip">
                         <label class="fs14 fw400 lh14 pl-1">Select Transport Service :</label>
                         <div class="shine w-100 h35 brdr_rdius_4" *ngIf="companyShimmer"></div>
                         <select class="owldatebrdr w-100 form-control" *ngIf="!companyShimmer" formControlName="cabservice" [ngClass]="{ 'is-invalid': submitted && f.cabservice.errors }">
                             <option value="" disabled selected hidden>Select Transport Service Provider</option>
                             <option *ngFor="let item of companyList" [value]="item.item_id">{{item.item_text}}</option>
                         </select>
+                        <div *ngIf="submitted && f.cabservice.errors" class="errortooltiptext top107">
+                            this field is required
+                        </div>
                     </div>
-                    <div class="col-md-4 mb30">
+                    <div class="col-md-4 mb30 errortooltip">
                         <label class="fs14 fw400 lh14 pl-1">Select Vehicle Type :</label>
                         <div class="shine w-100 h35 brdr_rdius_4" *ngIf="vehicleTypeshimmer"></div>
                         <select class="owldatebrdr w-100 form-control" *ngIf="!vehicleTypeshimmer" formControlName="cabtype" [ngClass]="{ 'is-invalid': submitted && f.cabtype.errors }">
                             <option value="" disabled selected hidden>Select Vehicle Type</option>
                             <option *ngFor="let item of vehicleTypeList" [value]="item.item_id">{{item.item_text}}</option>
                         </select>
+                        <div *ngIf="submitted && f.cabtype.errors" class="errortooltiptext top107">
+                            this field is required
+                        </div>
                     </div>
-                    <div class="col-md-4 mb30">
+                    <div class="col-md-4 mb30 errortooltip">
                         <label class="fs14 fw400 lh14 pl-1">Start Route :</label>
                         <div class="shine w-100 h35 brdr_rdius_4" *ngIf="routeShimmer"></div>
                         <select class="owldatebrdr w-100 form-control" *ngIf="!routeShimmer" formControlName="route" [ngClass]="{ 'is-invalid': submitted && f.route.errors }">
                             <option value="" disabled selected hidden>Route</option>
                             <option *ngFor="let item of routeList" [value]="item.item_id">{{item.item_text}}</option>
                         </select>
+                        <div *ngIf="submitted && f.route.errors" class="errortooltiptext top107">
+                            this field is required
+                        </div>
                     </div>
-                    <div class="col-md-4 ">
+                    <div class="col-md-4 errortooltip">
                         <label class="fs14 fw400 lh14 pl-1">Price Per Person :</label>
                         <div class="input-group w-100">
                             <div class="input-group-prepend w20">
                                 <span class="input-group-text priceicon" id="basic-addon1">&#8377;</span>
                             </div>
                             <input type="text" class="owldatebrdr w80 form-control" numberOnly formControlName="amoundperperson" [ngClass]="{ 'is-invalid': submitted && f.amoundperperson.errors }">
+                            <div *ngIf="submitted && f.amoundperperson.errors" class="errortooltiptext top110">
+                                this field is required
+                            </div>
                         </div>
                     </div>
-                    <div class="col-md-4 mb30">
+                    <div class="col-md-4 mb30 errortooltip">
                         <label class="fs14 fw400 lh14 pl-1">Person Per Vehicle :</label>
                         <input type="text" class="owldatebrdr w-100 form-control" numberOnly formControlName="personpervehicle" [ngClass]="{ 'is-invalid': submitted && f.personpervehicle.errors }">
+                        <div *ngIf="submitted && f.personpervehicle.errors" class="errortooltiptext top107">
+                            this field is required
+                        </div>
                     </div>
                 </div>
             </div>

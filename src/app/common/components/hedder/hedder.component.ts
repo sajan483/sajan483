@@ -16,7 +16,8 @@ import { CommonApiService } from "src/app/Services/common-api-services";
 export class HedderComponent implements OnInit, DoCheck {
   gettype: any;
   public currentUser: any;
-  agencyActive: boolean;
+  superAgencyActive: boolean;
+  subAgencyActive:boolean;
   branchActive: boolean;
   languageList: any;
   activeArabic: boolean = false;
@@ -60,8 +61,9 @@ export class HedderComponent implements OnInit, DoCheck {
 
   logout() {
     sessionStorage.clear();
-    this.agencyActive = false;
+    this.superAgencyActive = false;
     this.branchActive = false;
+    this.subAgencyActive = false;
     this.appStore.currentUser = "";
     this.router.navigate(["/login"]);
   }
@@ -94,12 +96,16 @@ export class HedderComponent implements OnInit, DoCheck {
   }
 
   ngDoCheck() {
-    if (sessionStorage.getItem("currentUser") == "agency") {
-      this.agencyActive = true;
+    if (sessionStorage.getItem("currentUser") == "superagent") {
+      this.superAgencyActive = true;
       this.userType = this.appStore.userType;
     }
     if (sessionStorage.getItem("currentUser") == "branch") {
       this.branchActive = true;
+      this.userType = this.appStore.userType;
+    }
+    if (sessionStorage.getItem("currentUser") == "subagent") {
+      this.subAgencyActive = true;
       this.userType = this.appStore.userType;
     }
   }

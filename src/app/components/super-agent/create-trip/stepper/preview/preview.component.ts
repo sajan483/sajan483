@@ -33,6 +33,7 @@ export class PreviewComponent implements OnInit {
   appStore:AppStore;
   notification:NotificationService;
   shimmer:boolean = true;
+  bttnactive:boolean = false;
 
   constructor(private _SuperAgentService:SuperAgentApiService,private _commonService:CommonApiService,private _appStore:AppStore, private stepper :StepperComponent
     ,private router: Router) { 
@@ -65,7 +66,7 @@ export class PreviewComponent implements OnInit {
   }
 
   packageDetails(){
-    this.superAgentApiService.getPackageDetails(this.appStore.packageId).subscribe((data)=>{
+    this.superAgentApiService.getPackageDetails(7210).subscribe((data)=>{
       this.shimmer = false;
       this.response = data;
       this.onwardFlight = this.response.trip_flights[0].onward_flight;
@@ -92,11 +93,13 @@ export class PreviewComponent implements OnInit {
   }
 
   publishTrip(){
+    this.bttnactive =true;
     if(this.appStore.packageId){
       var body ={"published" : "true",
       "start_date":this.appStore.departureDate,
       "end_date":this.appStore.arrivalDate}
       this.superAgentApiService.publishPackage(body,this.appStore.packageId).subscribe(response => {
+        this.bttnactive =false;
         this.notification.showSuccess("Successfully Published");
         this.router.navigate(["/superagent/createTrip"]);
       });

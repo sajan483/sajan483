@@ -1425,3 +1425,53 @@ body {
     font-weight: 800;
     font-size: 18px;
 }
+
+//error tooltip message
+.errortooltip {
+    position: relative;
+    display: inline-block;
+}
+
+.errortooltiptext {
+    visibility: hidden;
+    font-size: 12px;
+    width: 200px;
+    background-color: #dc3545;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px 0;
+    position: absolute;
+    z-index: 1;
+    left: 50%;
+    margin-left: -60px;
+}
+
+.errortooltiptext::after {
+    content: "";
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: transparent transparent #dc3545 transparent;
+}
+
+.errortooltip:hover {
+    .errortooltiptext {
+        visibility: visible;
+    }
+}
+
+.top102 {
+    top: 102%;
+}
+
+.top107 {
+    top: 107%;
+}
+
+.top110 {
+    top: 110%;
+}
