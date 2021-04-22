@@ -21,7 +21,7 @@
   import { GeneralHelper } from "src/app/helpers/General/general-helpers";
   import { SubAgentApiService } from "src/app/Services/sub-agent-api-services";
   import { CommonApiService } from "src/app/Services/common-api-services";
-import { environment } from "src/environments/environment";
+  import { environment } from "src/environments/environment";
 
   @Component({
     selector: "app-create-trip",
@@ -545,28 +545,21 @@ import { environment } from "src/environments/environment";
   ngOnInit() {
     sessionStorage.setItem('steps',JSON.stringify(this.steps))
     this.stageArray = sessionStorage.getItem('stageArray')
-    if(this.stageArray){this.moveToCorrespondingStageAfterRefresh()}
+    if(this.stageArray){this.move(this.stageArray)}
     this.generalHelper.checkForAccessToken();
-    if(!this.appStore.showShimmer){this.appStore.showShimmer = true,this.showShimmer = true}
+    if(!this.appStore.showShimmer){
+      this.appStore.showShimmer = true,this.showShimmer = true
+    }
     this.setUserDetails()
     this.travellersCount = this.appStore.totalTravellers;
     this.rooms =  JSON.parse(sessionStorage.getItem('roomData'))
-    this.appStore.stepperIndex = 0;
     this.selectedCurrency = "SAR";
-    if(this.steps.includes("3")){this.fetchNessoryApisForTransport();}
     this.multiSelectDropDownSettings()
     this.setForm();
     this.callCorrespongingSteppers();
     this.setdataForUserDetailsAtLastPage();
     this.fetchNessoryApisForPaymentPage();
     this.travellersForm = this.createTripAdapter.createTripBookingForm();
-  }
-
-  moveToCorrespondingStageAfterRefresh(){
-    // if(this.stageArray.length > 0){this.stageArray = this.stageArray.filter(this.onlyUnique)}
-    // this.stageArray.forEach((element)=>{if (element>target) {target = element;}})
-    // console.log('target',target)
-    this.move(this.stageArray)
   }
   
   setUserDetails(){
@@ -653,16 +646,6 @@ import { environment } from "src/environments/environment";
    * Method to call corresponding steppers according to user selection  
    */
   callCorrespongingSteppers(){
-    // if(this.steps.includes("1")){ this.hotelSearch("MAKKA"); }
-    
-    // if(!this.steps.includes("1") && this.steps.includes("2")){
-    //   this.madeenaloader = true;
-    //   this.hotelSearch("MADEENA");
-    // }
-
-    // if(this.steps.includes("3") && !this.steps.includes("2") && !this.steps.includes("1")){
-    //   this.transportSearch();
-    // }
     var flag = sessionStorage.getItem('stageArray')
     var details = sessionStorage.getItem('hotelDetailsFlag')
     console.log(details);
@@ -866,8 +849,7 @@ import { environment } from "src/environments/environment";
    * Method for clearing appstore
    */
   clearAppStore(){
-    sessionStorage.setItem('custom_trip_id',"");
-    sessionStorage.setItem('custome_trip_booking_id',"");
     this.appStore.isAvailabilityFails = false;
   }
+  
 }
