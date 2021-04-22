@@ -136,7 +136,7 @@ export class TransportComponent implements OnInit {
       };
       arrayList.push(q);
     }
-    if (this.appStore.customeTripId) {
+    if (sessionStorage.getItem('custom_trip_id')) {
       let x = {
         start_date: start_date_formatted,
         end_date: end_date_formatted
@@ -149,9 +149,9 @@ export class TransportComponent implements OnInit {
           vehicle_types: arrayList,
         },
       };
-      this.commonService.updateCustomTrip(this.appStore.customeTripId, x).subscribe(
+      this.commonService.updateCustomTrip(sessionStorage.getItem('custom_trip_id'), x).subscribe(
         (data) => {
-          if (this.appStore.customeTripBookingId) {
+          if (sessionStorage.getItem('custome_trip_booking_id')) {
             this.setStepperIndex();
             this.onNotify();
             (<HTMLElement>(
@@ -186,10 +186,10 @@ export class TransportComponent implements OnInit {
       
       this.commonService.bookCustomTrip(x).subscribe(
         (data) => {
-          this.appStore.customeTripId = data.id;
+          sessionStorage.setItem('custom_trip_id',data.id)
           this.setStepperIndex();
           this.onNotify();
-          if (this.appStore.customeTripBookingId) {
+          if (sessionStorage.getItem('custome_trip_booking_id')) {
            this.onNotify();
             (<HTMLElement>(
               document.getElementById("changeTransport")

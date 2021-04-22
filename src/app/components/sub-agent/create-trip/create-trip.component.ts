@@ -21,7 +21,7 @@
   import { GeneralHelper } from "src/app/helpers/General/general-helpers";
   import { SubAgentApiService } from "src/app/Services/sub-agent-api-services";
   import { CommonApiService } from "src/app/Services/common-api-services";
-import { environment } from "src/environments/environment";
+  import { environment } from "src/environments/environment";
 
   @Component({
     selector: "app-create-trip",
@@ -70,10 +70,9 @@ import { environment } from "src/environments/environment";
     noOfDaysInMadeena: number = 0;
     makkahticked:boolean = false;
     madeendetailshow:boolean=false;
-    madeenaloader:boolean=false;
     searchTransport: boolean ;
     mdate: any;
-    stageArray:number[]=[];
+    stageArray
     searchServiceButtonActive: boolean;
     bookingId: any;
     setDataForAddServiceCountPopUP:any = {};
@@ -112,6 +111,7 @@ import { environment } from "src/environments/environment";
     private createTripAdapter: CreateTripAdapter = new CreateTripAdapter(this.helperService,this.appStore);
     returnDate: any;
     private createTripHelper: CreateTripHelper = new CreateTripHelper(this.helperService);
+    private helper: HelperService = new HelperService(null,null);
     retDate: any;
     routeId: any;
     categoryId: any;
@@ -160,7 +160,7 @@ import { environment } from "src/environments/environment";
     menuIconClass: ElementRef;
     @ViewChild("menuPopupClass", { read: ElementRef, static: false })
     menuPopupClass: ElementRef;
-    rooms: Room[] = [];
+    rooms:any[] = [];
     phoneCodeList: any;
     @ViewChild("menuIcon", { read: ElementRef, static: false })
     menuIcon: ElementRef;
@@ -342,6 +342,8 @@ import { environment } from "src/environments/environment";
     }
     this.common.searchTransport(filrerData).subscribe((data) => {
       this.searchTransportId = data.search_id;
+      this.steps = JSON.parse(sessionStorage.getItem('steps'))
+      if(this.steps && this.steps.length > 2 ){this.stageArray =2}
       this.appStore.transportSearchId = data.search_id;
       this.common.searchTransportList(this.searchTransportId,this.selectedCurrency,this.selectedLanguage).subscribe((response) => {
         if ((response && response.transportations && response.transportations.length == 0) ||  (response && response.transportations && response.transportations.filter(x=>x.vehicle_types.length > 0) == 0)) {
@@ -391,7 +393,7 @@ import { environment } from "src/environments/environment";
  */
   getTripData(){
     this.setPaymentPageAfterItineraryModified();
-    this.common.getTrip(this.appStore.customeTripId).subscribe((data) => {
+    this.common.getTrip(sessionStorage.getItem('custom_trip_id')).subscribe((data) => {
       this.tripData = data;
       if(this.tripData){
       if(this.tripData.makkah_trip_hotel){
@@ -436,7 +438,7 @@ import { environment } from "src/environments/environment";
     let travellers = [];
     travellers.push(this.createTripAdapter.createTripBookingRequest(this.travellersForm,this.countryCode,roomRef,this.nationality,this.country_of_residence))
     const body={travellers}
-    this.common.bookTrip(body,this.appStore.customeTripId).subscribe((data) => {
+    this.common.bookTrip(body,sessionStorage.getItem('custom_trip_id')).subscribe((data) => {
       this.bookingId = data.id;
       sessionStorage.setItem("reference_no",data.reference_no)
       this.common.checkAvailability(data.id).subscribe((response)=> {
@@ -535,17 +537,23 @@ import { environment } from "src/environments/environment";
   public form: FormGroup;
   public loadContent: boolean = false;
   public data = [];
-   
+
+  onlyUnique(value, index, self) {
+    return self.indexOf(value) === index;
+  }
+
   ngOnInit() {
+    sessionStorage.setItem('steps',JSON.stringify(this.steps))
+    this.stageArray = sessionStorage.getItem('stageArray')
+    if(this.stageArray){this.move(this.stageArray)}
     this.generalHelper.checkForAccessToken();
-    if(!this.appStore.showShimmer){this.appStore.showShimmer = true,this.showShimmer = true}
+    if(!this.appStore.showShimmer){
+      this.appStore.showShimmer = true,this.showShimmer = true
+    }
     this.setUserDetails()
     this.travellersCount = this.appStore.totalTravellers;
-    this.rooms = CreateTripComponent.RoomData;
-    this.appStore.roomArray = this.rooms;
-    this.appStore.stepperIndex = 0;
+    this.rooms =  JSON.parse(sessionStorage.getItem('roomData'))
     this.selectedCurrency = "SAR";
-    if(this.steps.includes("3")){this.fetchNessoryApisForTransport();}
     this.multiSelectDropDownSettings()
     this.setForm();
     this.callCorrespongingSteppers();
@@ -555,8 +563,7 @@ import { environment } from "src/environments/environment";
   }
   
   setUserDetails(){
-    this.userDetails = CreateTripComponent.UserObjectData;
-    this.appStore.userDetails = this.userDetails;
+    this.userDetails = JSON.parse(sessionStorage.getItem('userObject'));
     if(typeof(this.userDetails) == 'undefined'){this.router.navigate(['subagent/home'])}
     if(this.userDetails){
     this.totalTravellers = this.userDetails.travallersCount;
@@ -639,15 +646,14 @@ import { environment } from "src/environments/environment";
    * Method to call corresponding steppers according to user selection  
    */
   callCorrespongingSteppers(){
-    if(this.steps.includes("1")){ this.hotelSearch("MAKKA"); }
-    
-    if(!this.steps.includes("1") && this.steps.includes("2")){
-      this.madeenaloader = true;
-      this.hotelSearch("MADEENA");
+    var flag = sessionStorage.getItem('stageArray')
+    var details = sessionStorage.getItem('hotelDetailsFlag')
+    console.log(details);
+    if(flag == '0'){
+      this.hotelSearch("MAKKA");
     }
-
-    if(this.steps.includes("3") && !this.steps.includes("2") && !this.steps.includes("1")){
-      this.transportSearch();
+    if(flag == '1'){
+      this.hotelSearch("MADEENA");
     }
   }
 
@@ -753,7 +759,7 @@ import { environment } from "src/environments/environment";
  */
   moveToPaymentPage(){
     this.getTripData();
-    if(this.appStore.customeTripId && this.steps.length > 2){
+    if(sessionStorage.getItem('custom_trip_id') && this.steps.length > 2){
       this.move(3)
     }else{
       this.move(1)
@@ -764,27 +770,52 @@ import { environment } from "src/environments/environment";
  * this method for fetching hotel list
  */
   hotelSearch(city:string) {
-    this.common.pilotHotelSearch( this.createTripAdapter.hotelSearchRequest(city,this.userDetails), this.appStore.langCode).subscribe(
-      (data) => {
-        let response = data;
-        this.hotelsList = data.results;
-        if (typeof response.search_id != "undefined") {
-          if(city == "MAKKA"){this.appStore.makkahSearchId = response.search_id;}
-          if(city == "MADEENA"){this.appStore.madinahSearchId = response.search_id;
-            this.noOfDaysInMadeena = this.appStore.noOfDaysInMadeena;
-            this.travellersCount = this.appStore.totalTravellers;
-            this.madeenaCheckInDate = this.userDetails.madeenaCheckinDate;
-            this.madeenaCheckOutDate = this.userDetails.madeenaCheckoutDate;
+
+      this.common.pilotHotelSearch( this.createTripAdapter.hotelSearchRequest(city,this.userDetails), this.appStore.langCode).subscribe(
+        (data) => {
+          this.hotelsList = data;
+          console.log(city);
+          if(city === "MAKKA"){sessionStorage.setItem('mkSearchId',data.search_id)};
+          console.log(data.search_id);
+          if(city === "MADEENA"){
+            sessionStorage.setItem('mdSearchId',data.search_id);
           }
-          this.common.getHotelList(response.search_id,this.selectedCurrency,"en-US")
-            .subscribe(
-              (data) => {
-                this.hotelsList = data;
-                if (this.hotelsList.length == 0) {this.notifyService.showWarning(this.translateService.instant( "No hotel(s) availabe plz change date"));}
-              },
-              (error) => {this.notifyService.showWarning(this.translateService.instant("Server busy try later"));});}
-      },
-      (error) => {this.notifyService.showWarning(this.translateService.instant("Server busy try later"));});
+          this.common.getHotelList(data.search_id,this.selectedCurrency,"en-US").subscribe(
+            (data) => {
+              this.hotelsList = data;
+              if (this.hotelsList.length == 0) {this.notifyService.showWarning(this.translateService.instant( "No hotel(s) availabe plz change date"));}
+            },
+            (error) => {this.notifyService.showWarning(this.translateService.instant("Server busy try later"));}
+          );
+        }),
+        (error) => {this.notifyService.showWarning(this.translateService.instant("Server busy try later"));};
+
+    // this.common.pilotHotelSearch( this.createTripAdapter.hotelSearchRequest(city,this.userDetails), this.appStore.langCode).subscribe(
+    //   (data) => {
+    //     let response = data;
+    //     this.hotelsList = data;
+    //     if (typeof response.search_id != "undefined") {
+    //       if(city == "MAKKA"){sessionStorage.setItem('mkSearchId',response.search_id)}
+    //       this.steps = JSON.parse(sessionStorage.getItem('steps'))
+    //       // if(city == 'MAKKA' && this.steps && this.steps.length == 1 || this.steps.length > 1){this.stageArray = [0]}
+    //       // if(city == 'MADEENA' && this.steps && this.steps.length == 1 ){this.stageArray.push(0)}
+    //       // if(city == 'MADEENA' && this.steps && this.steps.length > 1 ){this.stageArray.push(1)}
+    //       // sessionStorage.setItem('stageArray',JSON.stringify(this.stageArray))
+    //       if(city == "MADEENA"){sessionStorage.setItem('mdSearchId',response.search_id);
+    //         this.noOfDaysInMadeena = this.appStore.noOfDaysInMadeena;
+    //         this.travellersCount = this.appStore.totalTravellers;
+    //         this.madeenaCheckInDate = this.userDetails.madeenaCheckinDate;
+    //         this.madeenaCheckOutDate = this.userDetails.madeenaCheckoutDate;
+    //       }
+    //       this.common.getHotelList(response.search_id,this.selectedCurrency,"en-US")
+    //         .subscribe(
+    //           (data) => {
+    //             this.hotelsList = data;
+    //             if (this.hotelsList.length == 0) {this.notifyService.showWarning(this.translateService.instant( "No hotel(s) availabe plz change date"));}
+    //           },
+    //           (error) => {this.notifyService.showWarning(this.translateService.instant("Server busy try later"));});}
+    //   },
+    //   (error) => {this.notifyService.showWarning(this.translateService.instant("Server busy try later"));});
   }
 
   /*
@@ -792,7 +823,7 @@ import { environment } from "src/environments/environment";
  */
   ngDoCheck(){
     this.generalHelper.checkForAccessToken();
-    if(!this.appStore.showShimmer) { this.showShimmer = false;} 
+    if(!this.appStore.showShimmer) { this.showShimmer = false;}
   }
 
    /**
@@ -818,8 +849,7 @@ import { environment } from "src/environments/environment";
    * Method for clearing appstore
    */
   clearAppStore(){
-    this.appStore.customeTripId = null;
-    this.appStore.customeTripBookingId = null;
     this.appStore.isAvailabilityFails = false;
   }
+  
 }

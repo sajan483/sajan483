@@ -137,14 +137,14 @@ export class SubAgentApiService {
     
   getConfirmCancellation(id,data){
     return this.http
-    .post(this.BASE_URL + "custom_trip_booking/"+id+"/confirm_cancellation/",data, this.options)
+    .post(this.BASE_URL + "b2b_trip_booking/"+id+"/confirm_cancellation/",data, this.options)
     .map((res) => res.json());
   }
 
   getCheckCancellation(id){
     console.log(this.options)
     return this.http
-    .get(this.BASE_URL + "custom_trip_booking/"+id+"/check_cancellation/", this.options)
+    .get(this.BASE_URL + "b2b_trip_booking/"+id+"/check_cancellation/", this.options)
     .map((res) => res.json());
   }
 

@@ -20,7 +20,7 @@ import { SubAgentApiService } from "src/app/Services/sub-agent-api-services";
 export class MakkaHotelComponent implements OnInit,DoCheck{
   rooms: any;
   userDetails: any;
-  selectedCurrency: any = "SAR";
+  selectedCurrency: any = this.appStore.currencyCode;
   selectedLanguage: any;
   isHotelsSortedByPrice: boolean = false;
   isHotelListSortedByHaramDistance: boolean;
@@ -52,6 +52,8 @@ export class MakkaHotelComponent implements OnInit,DoCheck{
   hotelData: any;
   showDetailsShimmer: boolean;
   generalHelper:GeneralHelper;
+  stageArray:number;
+  steps: any[];
   
   constructor(
     private commonService: SubAgentApiService,
@@ -79,21 +81,40 @@ export class MakkaHotelComponent implements OnInit,DoCheck{
   }
 
   ngOnInit() {
+    if(this.hotelsList[0].city == "Makkah"){
+      this.stageArray  = 0
+      sessionStorage.setItem('stageArray',JSON.stringify(this.stageArray))
+    }
+    else{
+      this.stageArray  = 1
+      sessionStorage.setItem('stageArray',JSON.stringify(this.stageArray))
+    }
+
+    this.checkDetailsOpen()
+
+  }
+
+
+  checkDetailsOpen(){
+    var flag = sessionStorage.getItem('hotelDetailsFlag')
+    if(flag=='open'){
+      this.showHotelDetails = true
+    }
   }
 
    /*
  * this method for showing hotelDetails PopUp
  */
   showHotelDetailsPopUp(item) {
-    this.showDetailsShimmer=true;
-    this.hotelInfo = item;
-    this.appStore.showHotelDetails = true;
-    this.appStore.showHotelDetailsShimmer = true;
-    this.showHotelDetailsShimmer = true;
-    this.selectedRoomCount = 0;
-    this.selectedTravellersCount = 0;
-    this.totalRoomPrice = 0;
-    this.fetchSelectedHotelInfo(item);
+      this.showDetailsShimmer=true;
+      sessionStorage.setItem('hotelInfo',JSON.stringify(item))
+      //this.appStore.showHotelDetails = true;
+      this.appStore.showHotelDetailsShimmer = true;
+      this.showHotelDetailsShimmer = true;
+      this.selectedRoomCount = 0;
+      this.selectedTravellersCount = 0;
+      this.totalRoomPrice = 0;
+      this.fetchSelectedHotelInfo(item);
   }
 
   /*
@@ -101,7 +122,7 @@ export class MakkaHotelComponent implements OnInit,DoCheck{
    */
   setDefaultLangAndCurrency(){
     if (typeof this.selectedCurrency == "undefined") {
-      this.selectedCurrency = "SAR";
+      this.selectedCurrency = this.appStore.currencyCode;
     } 
     if (typeof this.selectedLanguage == "undefined") {
       var lang: any = this.selectedLanguage =  "en-US" ;
@@ -116,9 +137,17 @@ export class MakkaHotelComponent implements OnInit,DoCheck{
     this.setDefaultLangAndCurrency();
     this.commonService.getSelectedHotelInfo(this.createTripAdapter.selectedHotelInfoRequest(this.selectedLanguage,item,this.search), this.selectedCurrency,this.selectedLanguage).subscribe(
       (data) => {
-        this.hotelData = data;
-        this.showHotelDetails = true;
+        sessionStorage.setItem('hotelData',JSON.stringify(data))
+        // sessionStorage.setItem('showHotelDetails','true')
+        // if(sessionStorage.getItem('showHotelDetails') == 'true'){
+        //   this.showHotelDetails = true;
+        // }
         this.showDetailsShimmer = false;
+        this.showHotelDetails = true
+        var flag = sessionStorage.getItem('stageArray')
+        if(flag === '0' || flag === '1'){
+          sessionStorage.setItem('hotelDetailsFlag','open')
+        }
       },
       (error) => {
         this.showDetailsShimmer = false;
@@ -139,11 +168,11 @@ export class MakkaHotelComponent implements OnInit,DoCheck{
    */
   ngDoCheck(){
     this.generalHelper.checkForAccessToken();
-    if(this.appStore.showHotelDetails) {
-      this.showHotelDetails = true;
-    } else if(!this.appStore.showHotelDetails) {
-      this.showHotelDetails = false;
-    }
+    // if(this.appStore.showHotelDetails) {
+    //   this.showHotelDetails = true;
+    // } else if(!this.appStore.showHotelDetails) {
+    //   this.showHotelDetails = false;
+    // }
     if(this.appStore.showHotelDetailsShimmer){
       this.showHotelDetailsShimmer = true;
     }
@@ -174,7 +203,7 @@ export class MakkaHotelComponent implements OnInit,DoCheck{
       (<HTMLElement>document.getElementById("moreFilterDown")).style.maxHeight = "416px";
     }
     
-  }
+  } 
   
    /*
  * this method for sorting hotel list according to price,haram distance
@@ -198,4 +227,12 @@ export class MakkaHotelComponent implements OnInit,DoCheck{
       this.isHotelListSortedByHaramDistance = false;
     }
   }
+
+  getDetailsPopupFlag($event){
+    if($event == 'hide'){
+      this.showHotelDetails=false
+      sessionStorage.removeItem('hotelData')
+    }
+  }
+
 }

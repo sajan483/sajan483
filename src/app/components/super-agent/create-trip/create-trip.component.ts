@@ -241,6 +241,7 @@ export class CreateTripComponent implements OnInit {
         checkOut:this.form.medOut.value.toJSON().split("T")[0]
       }
     };
+
     this.appStore.departureDate = this.form.departDate.value.toJSON().split("T")[0];
     this.appStore.arrivalDate = this.form.returnDate.value.toJSON().split("T")[0];
     this.appStore.makkahCheckInDate = this.form.mekIn.value.toJSON().split("T")[0];

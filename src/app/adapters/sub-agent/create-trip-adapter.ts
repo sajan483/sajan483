@@ -17,7 +17,7 @@ export class CreateTripAdapter {
    * method for creating hotel search request
    */
   hotelSearchRequest(city: any, userDetails: any) {
-    var rooms = this.appStore.roomArray;
+    var rooms = JSON.parse(sessionStorage.getItem('roomData'));
     if (rooms && rooms.length > 0) {
       rooms.forEach((item, i) => {
         item.seq_no = i.toString();
@@ -65,14 +65,14 @@ export class CreateTripAdapter {
     search: any
   ) {
     if (selectedHotelInfo.city == "Makkah") {
-      search = this.appStore.makkahSearchId;
+      search = sessionStorage.getItem('mkSearchId');
     }
     if (
       selectedHotelInfo.city == "Madina" ||
       selectedHotelInfo.city == "Madinah" ||
       selectedHotelInfo.city == "Medinah"
     ) {
-      search = this.appStore.madinahSearchId;
+      search = sessionStorage.getItem('mdSearchId');
     }
     var body = {
       search: search,

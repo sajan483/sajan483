@@ -96,6 +96,7 @@ export class PreviewComponent implements OnInit {
     this.bttnactive =true;
     if(this.appStore.packageId){
       var body ={"published" : "true",
+      "status":"active",
       "start_date":this.appStore.departureDate,
       "end_date":this.appStore.arrivalDate}
       this.superAgentApiService.publishPackage(body,this.appStore.packageId).subscribe(response => {

@@ -434,6 +434,7 @@ export class CreateTripFrontPageComponent implements OnInit, DoCheck {
   * 
   */
   searchButtonClicked() {
+    this.clearSession()
     this.setNoOfMadeenaDays();
     this.appStore.showRoomAlPopup = false;
     this.userObject = {
@@ -452,9 +453,10 @@ export class CreateTripFrontPageComponent implements OnInit, DoCheck {
       vehicleCapacity:this.vehicleMaxCapacity
     };
     CreateTripComponent.UserObjectData = this.userObject;
+    sessionStorage.setItem("userObject",JSON.stringify(this.userObject));
     if (this.enableMadina || this.enableMakka || this.activaleAllSearch) {
        if(this.countAdult == 1){
-         CreateTripComponent.RoomData = [
+         var arr:any[] = [
           {
             "children": 0,
             "child_ages": [],
@@ -462,6 +464,7 @@ export class CreateTripFrontPageComponent implements OnInit, DoCheck {
             "adults": 1
           }
         ]
+        sessionStorage.setItem("roomData",JSON.stringify(arr));
         this.router.navigate(["subagent/createTrip"], {
             queryParams: { steps: this.steps.join(",") },
           });
@@ -475,9 +478,22 @@ export class CreateTripFrontPageComponent implements OnInit, DoCheck {
         queryParams: { steps: this.steps.join(",") },
       });
     }
-  
     this.dataForPopUp.steps = this.steps;
     this.dataForPopUp.user = this.userObject;
+  }
+
+  clearSession(){
+    sessionStorage.setItem('stageArray','0');
+    sessionStorage.removeItem('hotelDetailsFlag');
+    sessionStorage.removeItem('mdSearchId');
+    sessionStorage.removeItem('mkSearchId');
+    sessionStorage.removeItem('custome_trip_booking_id');
+    sessionStorage.removeItem('custom_trip_id');
+    sessionStorage.removeItem('roomData');
+    sessionStorage.removeItem('userObject');
+    sessionStorage.removeItem('hotelData');
+    sessionStorage.removeItem('hotelInfo');
+    sessionStorage.removeItem('steps');
   }
 
   /**
@@ -736,8 +752,6 @@ export class CreateTripFrontPageComponent implements OnInit, DoCheck {
     this.appStore.noOfDaysInMakkah = 0;
     this.noOfDaysInMakkah = 0;
     this.noOfDaysInMadeenah = 0;
-    this.appStore.customeTripId = null;
-    this.appStore.customeTripBookingId = null;
     this.appStore.isAvailabilityFails = false;
   }
 

@@ -69,13 +69,13 @@ export class CommonApiService {
 
   getRoutes(lang) {
     return this.http
-      .get(this.BASE_URL + "ground_transports/routes/?lang=" + lang , this.options)
+      .get(this.BASE_URL + "ground_transports/routes/?lang=" + 'en-US' , this.options)
       .map((res) => res.json());
   }
 
   getVehicles(lang) {
     return this.http
-      .get(this.BASE_URL + "ground_transports/vehicle_types/?lang=" + lang , this.options)
+      .get(this.BASE_URL + "ground_transports/vehicle_types/?lang=" + 'en-US' , this.options)
       .map((res) => res.json());
   }
   getCompanies(lang) {

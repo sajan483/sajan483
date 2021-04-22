@@ -4,7 +4,7 @@
         <div class="boxradus_hotel pt-0">
             <div class="bg-white p8">
                 <div class="container d-flex justify-content-between">
-                    <div *ngIf="selectedHotel.meta_data">
+                    <div *ngIf="selectedHotel?.meta_data">
                         <h2 class="fs22 mb-0">
                             {{selectedHotel?.name | titlecase}}
                             <span class="pl-1">
@@ -31,16 +31,16 @@
                             </span>
                         </div>
                         <div class="hotel_photo_gallery cursor-pointer" (click)="viewAllImagePopup()">
-                            <div class="firstimg" *ngIf="hotelPics[0]">
+                            <div class="firstimg" *ngIf="hotelPics && hotelPics[0]">
                                 <img [src]='hotelPics[0]' alt="">
                             </div>
-                            <div class="secongimg" *ngIf="hotelPics[1]">
+                            <div class="secongimg" *ngIf="hotelPics && hotelPics[1]">
                                 <img [src]='hotelPics[1]' alt="">
                             </div>
-                            <div class="thirdimg" *ngIf="hotelPics[2]">
+                            <div class="thirdimg" *ngIf="hotelPics && hotelPics[2]">
                                 <img [src]='hotelPics[2]' alt="">
                             </div>
-                            <div class="forthimg position-relative" *ngIf="hotelPics[3]">
+                            <div class="forthimg position-relative" *ngIf="hotelPics && hotelPics[3]">
                                 <div class="allimagesgallery">
                                     <i class="galleryplusicon icon_size_20 icns"></i>
                                     <div class="text-white">View All ({{noOfImages}})</div>

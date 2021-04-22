@@ -57,6 +57,9 @@ export class HotelDetailsPopupComponent implements OnInit ,OnChanges{
   roomImageGallery: boolean;
   totalTravellers : number;
   noOfImages: number;
+  hotelData:any;
+  hotelInfo:any;
+  @Output() detailsFlag = new EventEmitter();
    
   constructor(
     private commonService: SubAgentApiService,
@@ -66,8 +69,8 @@ export class HotelDetailsPopupComponent implements OnInit ,OnChanges{
     private translate :TranslateService,
   ) {}
 
-  @Input() hotelInfo : any;
-  @Input() hotelData : any;
+  //@Input() hotelInfo : any;
+  //@Input() hotelData : any;
   @Output() handleNotif = new EventEmitter();
   @Output() changeItinerary = new EventEmitter();
 
@@ -85,18 +88,31 @@ export class HotelDetailsPopupComponent implements OnInit ,OnChanges{
     this.changeItinerary.emit("notify parent");
   }
 
-  ngOnInit() {
-  }
+   ngOnInit() {
+    this.totalTravellers = this.appStore.adultCount + this.appStore.childCount;
+    this.rooms = JSON.parse(sessionStorage.getItem('roomData'));
+    /*
+     * this method for fetching selected hotel details
+     */
+    if(sessionStorage.getItem('hotelData') != null){
+      this.hotelData = JSON.parse(sessionStorage.getItem('hotelData'))
+      this.selectedHotel = this.hotelData;
+      this.setData()
+    }
+
+  } 
 
   ngOnChanges() {
+    //this.showHotelDetails = true
     this.totalTravellers = this.appStore.adultCount + this.appStore.childCount;
     this.selectedHotel = this.hotelData;
-    this.rooms = this.appStore.roomArray;
+    this.rooms = JSON.parse(sessionStorage.getItem('roomData'));
     
     /*
      * this method for fetching selected hotel details
      */
-    if(typeof(this.hotelData) != 'undefined'){
+    if(sessionStorage.getItem('hotelData') != null){
+      this.hotelData = JSON.parse(sessionStorage.getItem('hotelData'))
       this.setData()
     }
   }
@@ -105,6 +121,8 @@ export class HotelDetailsPopupComponent implements OnInit ,OnChanges{
      * this method for setting dom data
      */
   setData(){
+    console.log(this.hotelData);
+    this.hotelInfo = JSON.parse(sessionStorage.getItem('hotelInfo'))
     const x = this.createTripSupport.setDataForHotelDeatils(this.hotelData,this.hotelInfo,this.rooms);
     if(x && x.roomGroups.length > 0){
       this.appStore.showHotelDetailsShimmer = false;
@@ -127,6 +145,8 @@ export class HotelDetailsPopupComponent implements OnInit ,OnChanges{
   hideHotelDetailsPupup() {
     this.showHotelDetails = false;
     this.appStore.showHotelDetails = false;
+    sessionStorage.setItem('hotelDetailsFlag','close')
+    this.detailsFlag.emit('hide')
   }
 
   /*
@@ -140,23 +160,25 @@ export class HotelDetailsPopupComponent implements OnInit ,OnChanges{
     if(!this.appStore.isAvailabilityFails){
       this.appStore.stepperIndex += 1;
     }
-    if(!this.appStore.customeTripId){
+    if(!sessionStorage.getItem('custom_trip_id')){
       this.commonService.saveSelectedHotel(this.createTripAdapter.bookHotelRequest(this.isGrouped,this.selectedRoomGroups,this.hotelData,this.hotelInfo)).subscribe((data) => {
-        this.appStore.customeTripId = data.id;
+        sessionStorage.setItem('custom_trip_id',data.id);
         this.onNotify();
-        this.showHotelDetails = false;
+        // this.showHotelDetails = false;
       });
     }
-    if(this.appStore.customeTripId ){
-      this.commonService.updateCustomTrip(this.appStore.customeTripId,this.createTripAdapter.bookHotelRequest(this.isGrouped,this.selectedRoomGroups,this.hotelData,this.hotelInfo)).subscribe((data) => {
+    if(sessionStorage.getItem('custom_trip_id')){
+      this.commonService.updateCustomTrip(sessionStorage.getItem('custom_trip_id'),this.createTripAdapter.bookHotelRequest(this.isGrouped,this.selectedRoomGroups,this.hotelData,this.hotelInfo)).subscribe((data) => {
         if(this.appStore.isAvailabilityFails){
           this.onNotifyCreteTripForItineraryChange();
         }else{
           this.onNotify();
-          this.showHotelDetails = false;
+          // this.showHotelDetails = false;
         }
       });
     }
+    sessionStorage.setItem('hotelDetailsFlag','close')
+    this.appStore.showShimmer = !this.appStore.showShimmer
   }
 
   /*
