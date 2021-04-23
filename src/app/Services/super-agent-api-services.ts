@@ -99,7 +99,7 @@ export class SuperAgentApiService {
 
   uploadTripImage(data,currency,lang,id){
     let formData = new FormData();
-    formData.append('file',data[0]);
+    formData.append('[attachments][0][file]',data[0]);
     return this.http
       .put(this.BASE_URL + "packages/"+43+"/?currency=" + currency + "&lang=" + lang, formData, this.options)
       .map((res) => res.json());
