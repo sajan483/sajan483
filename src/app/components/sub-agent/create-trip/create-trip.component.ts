@@ -72,7 +72,7 @@
     madeendetailshow:boolean=false;
     searchTransport: boolean ;
     mdate: any;
-    stageArray
+    stage
     searchServiceButtonActive: boolean;
     bookingId: any;
     setDataForAddServiceCountPopUP:any = {};
@@ -343,7 +343,7 @@
     this.common.searchTransport(filrerData).subscribe((data) => {
       this.searchTransportId = data.search_id;
       this.steps = JSON.parse(sessionStorage.getItem('steps'))
-      if(this.steps && this.steps.length > 2 ){this.stageArray =2}
+      if(this.steps && this.steps.length > 2 ){this.stage =2}
       this.appStore.transportSearchId = data.search_id;
       this.common.searchTransportList(this.searchTransportId,this.selectedCurrency,this.selectedLanguage).subscribe((response) => {
         if ((response && response.transportations && response.transportations.length == 0) ||  (response && response.transportations && response.transportations.filter(x=>x.vehicle_types.length > 0) == 0)) {
@@ -392,7 +392,7 @@
  * Method to fetch saved itinerary
  */
   getTripData(){
-    this.setPaymentPageAfterItineraryModified();
+    // this.setPaymentPageAfterItineraryModified();
     this.common.getTrip(sessionStorage.getItem('custom_trip_id')).subscribe((data) => {
       this.tripData = data;
       if(this.tripData){
@@ -544,8 +544,8 @@
 
   ngOnInit() {
     sessionStorage.setItem('steps',JSON.stringify(this.steps))
-    this.stageArray = sessionStorage.getItem('stageArray')
-    if(this.stageArray){this.move(this.stageArray)}
+    this.stage = sessionStorage.getItem('stage')
+    this.moveStep()
     this.generalHelper.checkForAccessToken();
     if(!this.appStore.showShimmer){
       this.appStore.showShimmer = true,this.showShimmer = true
@@ -560,6 +560,10 @@
     this.setdataForUserDetailsAtLastPage();
     this.fetchNessoryApisForPaymentPage();
     this.travellersForm = this.createTripAdapter.createTripBookingForm();
+  }
+
+  moveStep(){
+    this.move(this.stage)
   }
   
   setUserDetails(){
@@ -646,15 +650,42 @@
    * Method to call corresponding steppers according to user selection  
    */
   callCorrespongingSteppers(){
-    var flag = sessionStorage.getItem('stageArray')
-    var details = sessionStorage.getItem('hotelDetailsFlag')
-    console.log(details);
-    if(flag == '0'){
-      this.hotelSearch("MAKKA");
+    let stepLength = JSON.parse(sessionStorage.getItem('steps')).length
+    if(stepLength > 1){
+      var flag = sessionStorage.getItem('stage')
+      var details = sessionStorage.getItem('hotelDetailsFlag')
+      console.log(details);
+      if(flag == '0'){
+        this.hotelSearch("MAKKA");
+      }
+      if(flag == '1'){
+        this.hotelSearch("MADEENA");
+      }
+      if(flag == '2'){
+        this.transportSearch()
+      }
+      if(flag == '3'){
+        this.getTripData()
+      }
+    }else{
+      var flag = sessionStorage.getItem('stage')
+      var step = JSON.parse(sessionStorage.getItem('steps'))[0]
+      var details = sessionStorage.getItem('hotelDetailsFlag')
+      console.log(details);
+      if(step == '1'){
+        this.hotelSearch("MAKKA");
+      }
+      if(step == '2'){
+        this.hotelSearch("MADEENA");
+      }
+      if(step == '3'){
+        this.transportSearch()
+      }
+      if(flag == '1'){
+        this.getTripData()
+      }
     }
-    if(flag == '1'){
-      this.hotelSearch("MADEENA");
-    }
+    
   }
 
   get roomAdultsArray() : FormArray {
@@ -727,13 +758,37 @@
  * this method for call back from hotel-details-popup component
  */
   createTripHandle(event){
-    this.move(this.appStore.stepperIndex)
-    if(this.steps.includes("3") && this.appStore.stepperIndex == 2){
-      this.transportSearch();
-    }
-    this.getTripData()
-    if(this.steps.includes("2") && this.appStore.stepperIndex == 1){
-      this.hotelSearch("MADEENA");
+    // this.move(this.appStore.stepperIndex)
+    // if(this.steps.includes("3") && this.appStore.stepperIndex == 2){
+    //   this.transportSearch();
+    // }
+    // this.getTripData()
+    // if(this.steps.includes("2") && this.appStore.stepperIndex == 1){
+    //   this.hotelSearch("MADEENA");
+    // }
+    let stepLength = JSON.parse(sessionStorage.getItem('steps')).length
+    if(stepLength > 1){
+      console.log(sessionStorage.getItem('stage'));
+      if(sessionStorage.getItem('modify')==null){
+        this.move(JSON.parse(sessionStorage.getItem('stage')))
+        let stage = JSON.parse(sessionStorage.getItem('stage'))
+        if(stage == 2){
+          this.transportSearch()
+        }
+        if(stage == 3){
+          this.getTripData()
+        }
+        if(stage == 1){
+          this.hotelSearch("MADEENA");
+        }
+      }
+      else{
+        this.move(3)
+        this.getTripData()
+      }
+    }else{
+      this.move(1)
+      this.getTripData()
     }
   }
 
@@ -750,8 +805,11 @@
   }
 
   moveToTransportPage(){
-    if( this.steps.includes("3") && !this.steps.includes("1"))
-    { this.move(0)} else {this.move(2) }
+    let stepLength = JSON.parse(sessionStorage.getItem('steps')).length
+    if(stepLength > 1){
+      {this.move(2) }
+    }
+    else { this.move(0)}  
   }
 
   /*
@@ -797,10 +855,10 @@
     //     if (typeof response.search_id != "undefined") {
     //       if(city == "MAKKA"){sessionStorage.setItem('mkSearchId',response.search_id)}
     //       this.steps = JSON.parse(sessionStorage.getItem('steps'))
-    //       // if(city == 'MAKKA' && this.steps && this.steps.length == 1 || this.steps.length > 1){this.stageArray = [0]}
-    //       // if(city == 'MADEENA' && this.steps && this.steps.length == 1 ){this.stageArray.push(0)}
-    //       // if(city == 'MADEENA' && this.steps && this.steps.length > 1 ){this.stageArray.push(1)}
-    //       // sessionStorage.setItem('stageArray',JSON.stringify(this.stageArray))
+    //       // if(city == 'MAKKA' && this.steps && this.steps.length == 1 || this.steps.length > 1){this.stage = [0]}
+    //       // if(city == 'MADEENA' && this.steps && this.steps.length == 1 ){this.stage.push(0)}
+    //       // if(city == 'MADEENA' && this.steps && this.steps.length > 1 ){this.stage.push(1)}
+    //       // sessionStorage.setItem('stage',JSON.stringify(this.stage))
     //       if(city == "MADEENA"){sessionStorage.setItem('mdSearchId',response.search_id);
     //         this.noOfDaysInMadeena = this.appStore.noOfDaysInMadeena;
     //         this.travellersCount = this.appStore.totalTravellers;

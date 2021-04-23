@@ -134,8 +134,9 @@
                                     <div class="listing-photo-gallery title__media-container">
                                         <span>
                                             <section class="uitk-cell uitk-card-media title__media-container">
-                                                <div class="photo-gallery noimghotel" *ngIf="item.image_path">
-                                                    <img src="{{item.image_path}}" alt="">
+                                                <div class="photo-gallery noimghotel">
+                                                    <img src="{{item.image_path}}" alt="" *ngIf="item.image_path != null">
+                                                    <img src="/assets/images/no_image.jpg" *ngIf="item.image_path == null">
                                                 </div>
                                             </section>
                                         </span>

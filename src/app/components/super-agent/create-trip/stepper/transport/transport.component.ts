@@ -27,7 +27,6 @@ export class TransportComponent implements OnInit {
   vehicleTypeshimmer: boolean = true;
   routeShimmer: boolean = true;
   bttnactive: boolean =false;
-
   constructor(private formBuilder: FormBuilder,private _commonApiService:CommonApiService,private stepper:StepperComponent,
     private _SuperAgentService:SuperAgentApiService,private helperService:HelperService,private appStore:AppStore) {
     this.commonApiService = this._commonApiService;
