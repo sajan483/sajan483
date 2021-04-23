@@ -257,7 +257,7 @@ export class FlightComponent implements OnInit {
             this.loader=false;
             this.available=false;
           }
-        })
+        }) 
       }
     }
   }
