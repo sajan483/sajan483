@@ -66,7 +66,7 @@ export class PreviewComponent implements OnInit {
   }
 
   packageDetails(){
-    this.superAgentApiService.getPackageDetails(7210).subscribe((data)=>{
+    this.superAgentApiService.getPackageDetails(this.appStore.packageId).subscribe((data)=>{
       this.shimmer = false;
       this.response = data;
       this.onwardFlight = this.response.trip_flights[0].onward_flight;
