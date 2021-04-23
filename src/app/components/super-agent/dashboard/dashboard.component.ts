@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Chart } from 'node_modules/chart.js';
 import { Router } from "@angular/router";
+import { SuperAgentApiService } from 'src/app/Services/super-agent-api-services';
 
 @Component({
   selector: 'app-dashboard',
@@ -8,20 +9,30 @@ import { Router } from "@angular/router";
   styleUrls: ['./dashboard.component.scss']
 })
 export class DashboardComponent implements OnInit {
-  cities = [];
+  months = [];
   selectedItem = [];
   dropdownSettings: any = {};
+  dashboardData: any;
 
-  constructor(public router: Router) { }
+  constructor(public router: Router,public superAgentApiService:SuperAgentApiService) { }
 
   ngOnInit() {
     this.multiSelction();
-    this.chartSale();
+    
+    this.fetchSalesOverView('')
   }
 
+  fetchSalesOverView(month){
+    this.superAgentApiService.getSalesOverView(month).subscribe(data=>{
+      console.log('data',data)
+      this.dashboardData = data;
+      this.months = this.dashboardData.available_months
+      this.chartSale();
+    });
+  }
+  
   multiSelction(){
-    this.cities = ['Jan 2020', 'Feb 2020', 'Mar 2020', 'Apr 2020', 'May'];
-    this.selectedItem = ['Dec 2020'];
+    this.selectedItem = ['Apr 2021'];
     this.dropdownSettings = {
         singleSelection: true,
         selectAllText: 'Select All',
@@ -29,27 +40,28 @@ export class DashboardComponent implements OnInit {
         allowSearchFilter: false,
         closeDropDownOnSelection: true
     };
-}
-chartSale(){
-    var myChart = new Chart("myChart", {
-        type: 'doughnut',
-        data: {
-            labels: ['Active Packages','Sales'],
-            datasets: [{
-                label: '# of Votes',
-                data: [35, 65],
-                backgroundColor: [
-                    '#e2a8a6',
-                    '#8ac95a'
-                ],
-                borderWidth: 1
-            }]
-        },
-        
-    });
-}
-
-navigate(link: any) {
-    this.router.navigate([link]);
   }
+
+  onItemSelect(mnth) {this.fetchSalesOverView(mnth[0])}
+
+  chartSale(){
+      var myChart = new Chart("myChart", {
+          type: 'doughnut',
+          data: {
+              labels: ['Active Packages','Sales'],
+              datasets: [{
+                  label: '# of Votes',
+                  data: [this.dashboardData.sales_overview.activate_package_percentage, this.dashboardData.sales_overview.sales_percentage],
+                  backgroundColor: [
+                      '#e2a8a6',
+                      '#8ac95a'
+                  ],
+                  borderWidth: 1
+              }]
+          },
+          
+      });
+  }
+
+  navigate(link: any) {this.router.navigate([link]);}
 }

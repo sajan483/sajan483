@@ -35,7 +35,11 @@
                             <div class="mt-1 salesoverride">SALES OVERVIEW</div>
                             <div>
                                 <div id="selectDateToChart">
-                                    <ng-multiselect-dropdown name="city" [data]="cities" [(ngModel)]="selectedItem" [settings]="dropdownSettings">
+                                    <ng-multiselect-dropdown 
+                                    name="city" [data]="months" 
+                                    [(ngModel)]="selectedItem" 
+                                    [settings]="dropdownSettings"
+                                    (onSelect)="onItemSelect(selectedItem)">
                                     </ng-multiselect-dropdown>
                                 </div>
                             </div>
@@ -47,7 +51,7 @@
                                         <i class="icns upgreen icon_size_25"></i>
                                     </div>
                                     <div>
-                                        <h1 class="totalcount mb-0"><span class="blackbox"></span> 50,000</h1>
+                                        <h1 class="totalcount mb-0"><span class="blackbox"></span> {{dashboardData?.sales_overview?.total_revenue}}</h1>
                                         <p class="fs14 clr01">TOTAL REVENUE</p>
                                     </div>
                                 </div>
@@ -56,7 +60,7 @@
                                         <i class="icns upgreen icon_size_25"></i>
                                     </div>
                                     <div>
-                                        <h1 class="totalcount mb-0"><span class="blackbox"></span> 50,000</h1>
+                                        <h1 class="totalcount mb-0"><span class="blackbox"></span> {{dashboardData?.sales_overview?.total_earn}}</h1>
                                         <p class="fs14 clr01">TOTAL YOU EARN</p>
                                     </div>
                                 </div>
@@ -67,7 +71,7 @@
                                         <i class="icns upgreen icon_size_25"></i>
                                     </div>
                                     <div>
-                                        <h1 class="totalcount mb-0"><span class="blackbox"></span> 50,000</h1>
+                                        <h1 class="totalcount mb-0"><span class="blackbox"></span> {{dashboardData?.sales_overview?.no_of_sales}}</h1>
                                         <p class="fs14 clr01">NO. OF SALES</p>
                                     </div>
                                 </div>
@@ -76,7 +80,7 @@
                                         <i class="icns downred icon_size_25"></i>
                                     </div>
                                     <div>
-                                        <h1 class="totalcount mb-0"><span class="blackbox"></span> 50,000</h1>
+                                        <h1 class="totalcount mb-0"><span class="blackbox"></span> {{dashboardData?.sales_overview?.branch_sales}}</h1>
                                         <p class="fs14 clr01">BRANCH SALES</p>
                                     </div>
                                 </div>
@@ -88,13 +92,16 @@
                     <div class="borderbox p20">
                         <div class="d-flex justify-content-end">
                             <div id="selectDateToChart">
-                                <ng-multiselect-dropdown name="city" [data]="cities" [(ngModel)]="selectedItem" [settings]="dropdownSettings">
+                                <ng-multiselect-dropdown name="city" 
+                                [data]="months" 
+                                [(ngModel)]="selectedItem" 
+                                [settings]="dropdownSettings">
                                 </ng-multiselect-dropdown>
                             </div>
                         </div>
                         <div class="position-relative">
                             <div class="salespersntage">
-                                <p class="totalcount fw500 mb-0">65%</p>
+                                <p class="totalcount fw500 mb-0">{{dashboardData?.sales_overview?.sales_percentage}}%</p>
                                 <p class="fs14 mb-0">SALES</p>
                             </div>
                             <canvas id="myChart" height="215" width="300"></canvas>
@@ -120,38 +127,16 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td>Luxury Umrah package from Kozhikode 2020</td>
-                                    <td>Kozhikode</td>
+                                <tr *ngFor="let package of dashboardData?.packages_overview">
+                                    <td>{{package?.title | titlecase}}</td>
+                                    <td>{{package?.departure_from}}</td>
                                     <td>
-                                        <p>12 March Onwards</p>
-                                        <p class="textred">(15 days remaining )</p>
+                                        <p>{{package?.departure_from}}</p>
+                                        <p *ngIf="package?.remaining_days != 'expired'" class="textred">({{package?.remaining_days}} days remaining )</p>
                                     </td>
-                                    <td>30</td>
+                                    <td>{{package?.group_size}}</td>
                                     <td>
-                                        <p class="redbox commonbox">15</p>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>Luxury Umrah package from Kozhikode 2020</td>
-                                    <td>Kozhikode</td>
-                                    <td>
-                                        <p>12 April Onwards</p>
-                                    </td>
-                                    <td>30</td>
-                                    <td>
-                                        <p class="orngebox commonbox">10</p>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>Luxury Umrah package from Kozhikode 2020</td>
-                                    <td>Kozhikode</td>
-                                    <td>
-                                        <p>28 April Onwards</p>
-                                    </td>
-                                    <td>30</td>
-                                    <td>
-                                        <p>10</p>
+                                        <p class="redbox commonbox">{{package?.slots_available}}</p>
                                     </td>
                                 </tr>
                             </tbody>

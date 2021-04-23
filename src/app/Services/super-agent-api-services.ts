@@ -18,6 +18,7 @@ import { environment } from "src/environments/environment";
 @Injectable()
 export class SuperAgentApiService {
   BASE_URL: any = environment.baseUrl;
+  BASE_URL2: any = environment.baseUrl2;
 
   httpOptions = {
     headers: new HttpHeaders({
@@ -194,6 +195,7 @@ export class SuperAgentApiService {
   getAccountHistory() {
     return this.http.get(this.BASE_URL + 'account/account_statement/', this.options).map(res => res.json());
   }
+
   getAccountDateHistory(fromdate:string,todate:string) {
     return this.http.get(this.BASE_URL + 'account/account_statement/?from_date='+fromdate+'&to_date='+todate, this.options).map(res => res.json());
   }
@@ -204,4 +206,7 @@ export class SuperAgentApiService {
       .map((res) => res.json());
   } 
 
+  getSalesOverView(month) {
+    return this.http.get(this.BASE_URL2 +'dashboard/overview?month='+month, this.options).map(res => res.json());
+  }
 }
