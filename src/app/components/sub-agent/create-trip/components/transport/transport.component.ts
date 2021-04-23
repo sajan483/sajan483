@@ -36,22 +36,22 @@ export class TransportComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.paxCount = this.appStore.adultCount+this.appStore.childCount+this.appStore.infantCount;
+    this.paxCount = JSON.parse(sessionStorage.getItem('userObject')).travallersCount
   }
 
   /**
    * This method is for booking vehicles
    */
   bookTransport(company_code, vehicle) {
-    let start_date_formatted = this.healperService.dateFormaterMdy(
-      this.appStore.userDetails.makkahCheckinDate)
-      ? this.healperService.dateFormaterYMd(this.appStore.userDetails.makkahCheckinDate)
-      : this.healperService.dateFormaterYMd(this.appStore.userDetails.transportStartDate);
-    let end_date_formatted = this.appStore.stepsArray.includes("2")
-      ? this.healperService.dateFormaterYMd(this.appStore.userDetails.madeenaCheckoutDate)
-      : this.healperService.dateFormaterYMd(this.appStore.userDetails.makkahCheckoutDate);
+    var userDetails = JSON.parse(sessionStorage.getItem('userObject'))
+    let start_date_formatted = this.healperService.dateFormaterMdy(userDetails.makkahCheckinDate)
+      ? this.healperService.dateFormaterYMd(userDetails.makkahCheckinDate)
+      : this.healperService.dateFormaterYMd(userDetails.transportStartDate);
+    let end_date_formatted = (sessionStorage.getItem('stage')==='2')
+      ? this.healperService.dateFormaterYMd(userDetails.madeenaCheckoutDate)
+      : this.healperService.dateFormaterYMd(userDetails.makkahCheckoutDate);
     let arrayList = [];
-    let travellerCount = this.appStore.adultCount + this.appStore.childCount;
+    let travellerCount = this.paxCount
     let firstcategory = [];
     let secondcategory = [];
     let thirdcategory = [];
@@ -170,8 +170,8 @@ export class TransportComponent implements OnInit {
       );
     } else {
       let x = {
-        max_passengers: this.appStore.userDetails.travellersCount,
-        booked_count: this.appStore.userDetails.travellersCount,
+        max_passengers: JSON.parse(sessionStorage.getItem('userObject')).vehicleCapacity,
+        booked_count: this.paxCount,
         start_date: start_date_formatted,
         end_date: end_date_formatted
           ? end_date_formatted
@@ -206,6 +206,7 @@ export class TransportComponent implements OnInit {
         }
       );
     }
+    sessionStorage.setItem('stage','3')
   }
 
   setStepperIndex(){

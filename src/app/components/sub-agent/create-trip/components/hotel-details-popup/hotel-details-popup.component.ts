@@ -38,7 +38,7 @@ export class HotelDetailsPopupComponent implements OnInit ,OnChanges{
   selectedHotelInfo: SelectedHotel;
   showhotelDetails: boolean;
   makkahticked: boolean;
-  stageArray: any;
+  stage: any;
   madeendetailshow: boolean;
   steps: any;
   loader: boolean=true;
@@ -163,18 +163,18 @@ export class HotelDetailsPopupComponent implements OnInit ,OnChanges{
     if(!sessionStorage.getItem('custom_trip_id')){
       this.commonService.saveSelectedHotel(this.createTripAdapter.bookHotelRequest(this.isGrouped,this.selectedRoomGroups,this.hotelData,this.hotelInfo)).subscribe((data) => {
         sessionStorage.setItem('custom_trip_id',data.id);
+        sessionStorage.setItem('stage','1')
         this.onNotify();
-        // this.showHotelDetails = false;
       });
     }
     if(sessionStorage.getItem('custom_trip_id')){
       this.commonService.updateCustomTrip(sessionStorage.getItem('custom_trip_id'),this.createTripAdapter.bookHotelRequest(this.isGrouped,this.selectedRoomGroups,this.hotelData,this.hotelInfo)).subscribe((data) => {
-        if(this.appStore.isAvailabilityFails){
-          this.onNotifyCreteTripForItineraryChange();
-        }else{
+          if(JSON.parse(sessionStorage.getItem('steps')).length == 1){
+            sessionStorage.setItem('stage','1')
+          }else {
+            sessionStorage.setItem('stage','2')
+          }
           this.onNotify();
-          // this.showHotelDetails = false;
-        }
       });
     }
     sessionStorage.setItem('hotelDetailsFlag','close')

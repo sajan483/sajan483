@@ -1,5 +1,4 @@
-<div [style.display]="showHotelDetails ? 'block' : 'none'" class="viewHtl" tabindex="-1" role="dialog"
-    aria-labelledby="myModalLabel" aria-hidden="true">
+<div [style.display]="showHotelDetails ? 'block' : 'none'" class="viewHtl" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog" *ngIf="selectedHotel">
         <div class="boxradus_hotel pt-0">
             <div class="bg-white p8">
@@ -11,8 +10,8 @@
                                 <ngb-rating [(rate)]="selectedHotel.meta_data.rating" [readonly]="readonly" [max]=5>
                                     <ng-template let-fill="fill" let-index="index">
                                         <span class="star" [class.filled]="fill === 100" [class.bad]="index < 2">&#9733;</span>
-                                    </ng-template>
-                                </ngb-rating>
+                            </ng-template>
+                            </ngb-rating>
                             </span>
                         </h2>
                     </div>
@@ -81,7 +80,7 @@
                                     <span class="fs16 clr52 fw500">{{'Room' | translate}} </span> {{totalTravellers}}
                                     <span class="fs16 clr52 fw500">{{'Guest' | translate}} </span>
                                 </h6>
-                            </div> 
+                            </div>
                             <div class="p-2">
                                 <div class="d-inline-flex">
                                     <i class="locationicon icns icon_size_15"></i>
@@ -90,7 +89,7 @@
                                         <div class="fs13 clr52">{{selectedHotel?.meta_data?.address}}</div>
                                     </div>
                                 </div>
-                                <div >
+                                <div>
                                     <div class="mt-2 d-inline-flex">
                                         <div *ngIf="selectedHotel.meta_data.phone" class="d-inline-flex pr-3">
                                             <div class="pr-2"><i class="Phoneicon icns icon_size_15"></i></div>
@@ -102,7 +101,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                
+
                             </div>
                         </div>
                     </div>
@@ -148,7 +147,7 @@
                                                                     <span class="clr52 fs14 fw400 mr-3 d-inline-block" *ngIf="v < 10"><i class="greentickicon icon_size_15 icns mr-1"></i>{{feature?.name}}</span>
                                                                 </span>
                                                             </div>
-                                                            
+
                                                             <div class="mt5">
                                                                 <a class="roomview" (click)="showRoomDetailsPopUp(room)">
                                                                     + More Details
@@ -159,7 +158,7 @@
                                                     <li class="roomRate">
                                                         <div class="clr52 fs14 fw500 text-center" *ngFor="let item of room.board_types">{{item?.type}}</div>
                                                         <div class="d-flex justify-content-center mt5">
-                                                            <mat-radio-button [checked]="room.isRoomSelectionChecked" (click)="roomSelectionCheckboxChecked(i,j)"></mat-radio-button>
+                                                            <mat-radio-button [checked]="room.isRoomSelectionChecked" (click)="roomSelectionCheckboxChecked(i,j)" *ngIf="room?.amount"></mat-radio-button>
                                                         </div>
                                                         <strong class="customTooltip">
                                                             <span class="cursortext-dark-pointer text-dark fw600" data-room-price="139">{{room?.fare_summary[0].currency}} {{room?.amount | number:'.2-2'}}
@@ -189,7 +188,7 @@
                                                             <span *ngIf="room.is_refundable == 'Non-Refundable'" class="red_text">{{room?.is_refundable}}</span>
                                                         </div>
                                                     </li>
-                
+
                                                 </ul>
                                             </div>
                                         </div>
@@ -217,7 +216,7 @@
                                                             </strong>
                                                             <div class="d-inline-flex">
                                                                 <i class="hotelbedicon icon_size_20 icns mr-2"></i>
-                                                                <p class="clr52 fs14 fw400 "> 
+                                                                <p class="clr52 fs14 fw400 ">
                                                                     1 {{'Room for' | translate}} {{room?.adult_number}} {{'Adult(s)' | translate}}
                                                                 </p>
                                                                 <p class="pl-1 clr52 fs14 fw400 " *ngIf="room.child_number > 0">
@@ -241,7 +240,7 @@
                                                         <div class="d-flex justify-content-center">
                                                             <mat-radio-button (click)="roomSelectionCheckboxChecked(i,j)"></mat-radio-button>
                                                         </div>
-                                                        
+
                                                         <strong class="customTooltip">
                                                             <span class="cursortext-dark-pointer text-dark fw600">{{selectedHotel?.currency}} {{room?.insertedAmount}}
                                                                 <span class="customtooltiptext">
@@ -296,7 +295,7 @@
                                         </div>
                                         <div class="clr52 fs14 fw500 mt10">{{'VAT & Taxes Included' | translate}}</div>
                                         <button class="searchbutton mt10" (click)="bookHotel()" [disabled]="!makkaSelectActivate">{{'Select' | translate}}</button>
-                                        
+
                                     </div>
                                 </aside>
                             </section>
@@ -341,5 +340,3 @@
 <div *ngIf="roomImageGallery">
     <app-hotel-image-popup [imagecollection]="hotelPics"></app-hotel-image-popup>
 </div>
-
-

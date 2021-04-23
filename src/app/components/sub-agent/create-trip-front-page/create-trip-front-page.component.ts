@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, ElementRef, Renderer2, DoCheck, } from "@angular/core";
+import { Component, OnInit, ViewChild, ElementRef, Renderer2, DoCheck, AfterViewInit, } from "@angular/core";
 import { IDropdownSettings } from "ng-multiselect-dropdown";
 import { Router } from "@angular/router";
 import { TranslateService } from "@ngx-translate/core";
@@ -20,7 +20,7 @@ import { CommonApiService } from "src/app/Services/common-api-services";
   styleUrls: ["./create-trip-front-page.component.scss"]
 })
 
-export class CreateTripFrontPageComponent implements OnInit, DoCheck {
+export class CreateTripFrontPageComponent implements OnInit, DoCheck, AfterViewInit {
   crTripHelper: CreateTripHelper;
   historyList: listHistory;
   userRooms: Room[] = [];
@@ -162,22 +162,30 @@ export class CreateTripFrontPageComponent implements OnInit, DoCheck {
     this.appStore.infantCount = 0;
     this.appStore.showHotelDetailsShimmer = false;
 
+  }
+
+  ngAfterViewInit(){
+    
     /**
      * This method for fetching transport routes
      * 
      */
-    this.getTransportRoutes();
 
-    /**
-     * This method for fetching vehicle type
-     * 
-     */
-    this.getVehicleType();
 
-    /**
-     * this method for listing recent booking
-     */
-    this.listRecentBooking();
+     if(sessionStorage.getItem('accesstoken')){
+      this.getTransportRoutes();
+      this.getVehicleType();
+     }
+
+     /**
+      * This method for fetching vehicle type
+      * 
+      */
+ 
+     /**
+      * this method for listing recent booking
+      */
+     this.listRecentBooking();
 
   }
   
@@ -483,7 +491,7 @@ export class CreateTripFrontPageComponent implements OnInit, DoCheck {
   }
 
   clearSession(){
-    sessionStorage.setItem('stageArray','0');
+    sessionStorage.setItem('stage','0');
     sessionStorage.removeItem('hotelDetailsFlag');
     sessionStorage.removeItem('mdSearchId');
     sessionStorage.removeItem('mkSearchId');

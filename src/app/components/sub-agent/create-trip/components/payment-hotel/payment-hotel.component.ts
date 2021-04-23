@@ -28,8 +28,23 @@ export class PaymentHotelComponent implements OnInit,OnChanges {
   }
 
   goToHotelStepper(event){
-    if(event){
-      this.notifyCreateTrip.emit(event)
+    let stepLength = JSON.parse(sessionStorage.getItem('steps')).length
+    if(stepLength > 1){
+      if(event == "makkah"){
+        sessionStorage.setItem('stage','0')
+        sessionStorage.setItem('modify','yes')
+        location.reload()
+      }
+      else{
+        sessionStorage.setItem('stage','1')
+        sessionStorage.setItem('modify','yes')
+        location.reload()
+      }
     }
+    else{
+      sessionStorage.setItem('stage','0')
+      location.reload()
+    }
+    
   }
 }

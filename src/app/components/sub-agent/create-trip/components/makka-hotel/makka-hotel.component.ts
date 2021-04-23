@@ -52,7 +52,7 @@ export class MakkaHotelComponent implements OnInit,DoCheck{
   hotelData: any;
   showDetailsShimmer: boolean;
   generalHelper:GeneralHelper;
-  stageArray:number;
+  stage:number;
   steps: any[];
   
   constructor(
@@ -82,12 +82,12 @@ export class MakkaHotelComponent implements OnInit,DoCheck{
 
   ngOnInit() {
     if(this.hotelsList[0].city == "Makkah"){
-      this.stageArray  = 0
-      sessionStorage.setItem('stageArray',JSON.stringify(this.stageArray))
+      this.stage  = 0
+      sessionStorage.setItem('stage',JSON.stringify(this.stage))
     }
     else{
-      this.stageArray  = 1
-      sessionStorage.setItem('stageArray',JSON.stringify(this.stageArray))
+      this.stage  = 1
+      sessionStorage.setItem('stage',JSON.stringify(this.stage))
     }
 
     this.checkDetailsOpen()
@@ -144,7 +144,7 @@ export class MakkaHotelComponent implements OnInit,DoCheck{
         // }
         this.showDetailsShimmer = false;
         this.showHotelDetails = true
-        var flag = sessionStorage.getItem('stageArray')
+        var flag = sessionStorage.getItem('stage')
         if(flag === '0' || flag === '1'){
           sessionStorage.setItem('hotelDetailsFlag','open')
         }
