@@ -116,7 +116,6 @@ export class HotelComponent implements OnInit {
         this.detailsLoader = false
         this.showHotelDetails = 'true';
       },(error)=>{
-        this.notifyService.showWarning("No details availabe");
         this.showHotelDetails = 'false';
       }
     );

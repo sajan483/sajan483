@@ -162,11 +162,7 @@ export class TransportComponent implements OnInit {
             this.onNotify();
           }
         },
-        (error) => {
-          this.notifyService.showWarning(
-            this.translateService.instant("No Vehicle Available")
-          );
-        }
+        (error) => {}
       );
     } else {
       let x = {
@@ -199,11 +195,7 @@ export class TransportComponent implements OnInit {
             this.onNotify();
           }
         },
-        (error) => {
-          this.notifyService.showWarning(
-            this.translateService.instant("No Vehicle Available")
-          );
-        }
+        (error) => {}
       );
     }
     sessionStorage.setItem('stage','3')

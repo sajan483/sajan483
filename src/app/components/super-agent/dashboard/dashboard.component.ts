@@ -24,7 +24,6 @@ export class DashboardComponent implements OnInit {
 
   fetchSalesOverView(month){
     this.superAgentApiService.getSalesOverView(month).subscribe(data=>{
-      console.log('data',data)
       this.dashboardData = data;
       this.months = this.dashboardData.available_months
       this.chartSale();

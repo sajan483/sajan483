@@ -49,7 +49,6 @@ export class SignupComponent implements OnInit {
   coutryList(){
     this.commonApiService.getCountries().subscribe(res =>{
       this.countries = res;
-      console.log(this.countries)
     })
   }
 

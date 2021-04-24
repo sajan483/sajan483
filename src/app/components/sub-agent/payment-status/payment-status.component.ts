@@ -261,7 +261,6 @@ export class PaymentStatusComponent implements OnInit {
   
   confirmCancellation() {
     if ((<HTMLTextAreaElement>document.getElementById("confirmCancellationInput")).value == "") {
-      this.notifyService.showWarning(this.translate.instant("Please mention the reason for cancellation"))
     } else {
       let body = {
         "cancellation_reason": (<HTMLTextAreaElement>document.getElementById("confirmCancellationInput")).value

@@ -65,7 +65,6 @@ export class StepperAdapter {
    * @param currency 
    */
   transportBookingBody(transportSelection,currency){
-    console.log("1");
     
     var data ={
       trip_transportation: {

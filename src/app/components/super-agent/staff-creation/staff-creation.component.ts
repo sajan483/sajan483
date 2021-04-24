@@ -48,7 +48,6 @@ export class StaffCreationComponent implements OnInit {
    * This method for submitting staff details
    */
   onSubmit() {
-    console.log(this.AgentStaffRegisterForm.value)
     this.submitted = true;
     if (this.AgentStaffRegisterForm.invalid) {
       return;

@@ -144,7 +144,6 @@ export class RoomAllocationPopupComponent implements OnInit {
       }
     }
     if(a.includes("0")){
-      this.notifyService.showWarning(this.translate.instant('Please fill the age of each child'));
       (<HTMLButtonElement>document.getElementById("roomSelectBttn")).disabled = true;
     }else{
       (<HTMLButtonElement>document.getElementById("roomSelectBttn")).disabled = false;
@@ -211,7 +210,6 @@ export class RoomAllocationPopupComponent implements OnInit {
     if (i != -1 && total < this.countAdult) {
       this.userRooms[i].adults = this.userRooms[i].adults + 1;
     } else {
-      this.notifyService.showWarning(this.translate.instant('maximum number of adult reached'));
     }
   }
 
@@ -240,7 +238,6 @@ export class RoomAllocationPopupComponent implements OnInit {
     if (i != -1 && total < this.countChild) {
       this.userRooms[i].children = this.userRooms[i].children + 1;
     } else {
-      this.notifyService.showWarning(this.translate.instant('maximum number of child reached'));
     }
   }
   removeChildFromRoom(i: number) {
