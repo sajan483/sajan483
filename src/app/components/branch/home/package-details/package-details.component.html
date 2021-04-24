@@ -87,16 +87,14 @@
                         </div>
                         <div class=" overview ">
                             <p class="ovr-txt mt-4 ">Package Overview</p>
-                            <p class="grey-txt ">Akbar Tours and Travels is an established agency to provide best and affordable Umrah Package from Kozikod to Umrah Pilgrims. Team of Akbar Umrah takes a keen interest to make your journey for Umrah to Makkah hassle-free, comfortable
-                                and an experience worth cherishing forever.
-                            </p>
+                            <p class="grey-txt " [innerHTML]="packageDetails?.instructions"></p>
                         </div>
                         <div class="itenerary " *ngIf="itenerary?.length ">
                             <p class="it-head ">Itenerary</p>
 
                             <ul class="sessions ">
                                 <span *ngFor="let item of itenerary;let i=index; ">
-                                <li *ngIf="i<1 ">
+                                <li *ngIf="i<2">
                                     <div class="time ">Day {{item?.num_of_days}} : {{item?.title}} - {{item?.from_date | date:'longDate'}}</div>
                                     <div class="clr52 fs14 mt-2 " [innerHTML]="item?.details "></div>
                                     <div class="row m-0 ">
@@ -108,16 +106,16 @@
                             </span>
                                 <div class="itenaryfull ">
                                     <span *ngFor="let item of itenerary;let i=index; ">
-                                    <li *ngIf="i>0">
-                                <div class="time">Day {{item?.num_of_days}} : {{item?.title}} - {{item?.from_date | date:'longDate'}}</div>
-                                <div class="clr52 fs14 mt-2" [innerHTML]="item?.details">{{item?.details}}</div>
-                                <div class="row m-0">
-                                    <div class="col-md-3 pl-0 mt-2" *ngFor="let img of item.attachments">
-                                        <img [src]="img.file" class="itineraryimg" alt="">
-                                    </div>
-                                </div>
-                                </li>
-                                </span>
+                                        <li *ngIf="i>1">
+                                            <div class="time">Day {{item?.num_of_days}} : {{item?.title}} - {{item?.from_date | date:'longDate'}}</div>
+                                            <div class="clr52 fs14 mt-2" [innerHTML]="item?.details">{{item?.details}}</div>
+                                            <div class="row m-0">
+                                                <div class="col-md-3 pl-0 mt-2" *ngFor="let img of item.attachments">
+                                                    <img [src]="img.file" class="itineraryimg" alt="">
+                                                </div>
+                                            </div>
+                                        </li>
+                                    </span>
                                 </div>
                                 <button class="addAnotherBttn mt-3" (click)="expandItenary($event)" *ngIf="itenerary.length > 2"><i class="fa fa-plus-circle" aria-hidden="true"></i> View Full itenerary</button>
                             </ul>
@@ -125,11 +123,27 @@
                         </div>
                     </div>
                 </mat-tab>
-                <mat-tab label="INCLUSION / EXCLUSION"> </mat-tab>
-                <mat-tab label="POLICY"> </mat-tab>
+                <mat-tab label="INCLUSION / EXCLUSION">
+                    <div class="members">
+                        <div class="">
+                            <div class="fs16 fw600">Inclusions</div>
+                            <div class="fs14 clr52 mt-2" [innerHTML]="packageDetails?.inclusions"></div>
+                        </div>
+                        <div class="mt-2">
+                            <div class="fs16 fw600">Exclusions</div>
+                            <div class="fs14 clr52 mt-2" [innerHTML]="packageDetails?.exclusions"></div>
+                        </div>
+                    </div>
+                </mat-tab>
+                <mat-tab label="POLICY">
+                    <div class="members">
+                        <div class="fs16 fw600">Policies</div>
+                        <div class="fs14 clr52 mt-2" [innerHTML]="packageDetails?.terms"></div>
+                    </div>
+                </mat-tab>
             </mat-tab-group>
             <div class="btn-box">
-                <button [disabled]="continue" class="searchbutton" (click)="navigatePayment()">Book Package</button>
+                <button [disabled]="continue" class="searchbutton" (click)="bookPackage()">Book Package</button>
             </div>
         </div>
     </div>

@@ -15,6 +15,7 @@ export class PackageDetailsComponent implements OnInit {
   availabilityCount:any;
   maxCount:any;
   id:any;
+  packageDetails: any;
 
   constructor(private fb: FormBuilder, private branchService: BranchApiService,private activeRouter:ActivatedRoute,
     private route:Router) { }
@@ -47,6 +48,7 @@ export class PackageDetailsComponent implements OnInit {
     this.id = this.activeRouter.params.subscribe(data=>{
       this.id = data['id'];
       this.branchService.getPackageDetails(this.id).subscribe((data)=>{
+        this.packageDetails = data;
         this.itenerary = data.itinerary_set;
         this.availabilityCount = data.max_passengers - data.booked_count;
         this.maxCount = data.max_passengers
@@ -70,12 +72,8 @@ export class PackageDetailsComponent implements OnInit {
       children_without_bed: this.countForm.controls.child.value
     }
     this.branchService.bookPackage(data, 4670).subscribe((data)=>{
-      console.log(data);
+      this.route.navigate(["/branch/payment"])
     })
-  }
-
-  navigatePayment(){
-    this.route.navigate(["/branch/payment"])
   }
 
 }

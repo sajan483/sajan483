@@ -7,10 +7,10 @@
         <div class="algn justifycenter container">
             <div class="p-2 d-flex">
                 <div class="subtext m-auto">Sort By</div>
-                <div class="position-relative">
-                    <div class="position-relative d-flex justify-content-between w200 bordrservice p-2 cursor-pointer" (click)="showSelectionPopup()" #serviceDropDown>
+                <div class="position-relative p-2">
+                    <div class="position-relative d-flex justify-content-between w200 bordrservice px-2 cursor-pointer" (click)="showSelectionPopup()" #serviceDropDown>
                         <p class="fs14 my-auto">{{service}}</p>
-                        <i class="icns downarrow icon_h28_w15"></i>
+                        <i class="icns downarrow icon_h32_w12"></i>
                     </div>
                     <div class="travellerpopupp popupmoving" *ngIf="showSelectionPopUp" #selectionPopUp>
                         <div class="travellersouterr">
@@ -39,11 +39,13 @@
                 <div class="p-2">
                     <select name="" id="" class="form-control">
                         <option value="" disabled selected>Starting Airport</option>
+                        <option value="" *ngFor="let item of depatureAirports">{{item}}</option>
                     </select>
                 </div>
                 <div class="p-2">
                     <select name="" id="" class="form-control">
                         <option value="" disabled selected>Number of days</option>
+                        <option value="" *ngFor="let item of numberOfDays">{{item}}</option>
                     </select>
                 </div>
             </div>
