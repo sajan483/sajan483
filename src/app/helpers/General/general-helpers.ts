@@ -16,7 +16,6 @@ export class GeneralHelper {
 
   checkForAccessToken(): void {
     if (sessionStorage.getItem('accesstoken') == "") {
-      this.notifyService.showWarning("Please Login")
       this.router.navigate(['/login']);
     }
   }

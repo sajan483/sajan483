@@ -38,8 +38,6 @@ export class StaffListComponent implements OnInit {
   }
 
   displayActivePage(activePageNumber: number) {
-    console.log(this.totalPage);
-    console.log(activePageNumber);
     this.activePage = activePageNumber;
     if(activePageNumber < this.totalPage - 1){
       this.paginateStaffList(this.activePage);

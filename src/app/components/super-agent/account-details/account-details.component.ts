@@ -34,7 +34,6 @@ export class AccountDetailsComponent implements OnInit {
    */
   getAccoundHistory(){
     this.superAgentApiService.getAccountHistory().subscribe(response => {
-      console.log(response)
       this.isFound = response.Response.ResponseDescription;
       this.accountHistory = response.ResponseDeatils.AccountStatment;
       this.showSpinner = false;

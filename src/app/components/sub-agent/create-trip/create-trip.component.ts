@@ -522,14 +522,12 @@
           this.router.navigate(['subagent/payment/'+this.bookingId+'/success']);
         }
         else{
-          this.notifyService.showWarning(response.errors[0])
         }
       },error=>{
         this.spinner.hide();
         this.createTripHelper.showSweetAlert(this.translateService.instant('Oops...'),"error",this.translateService.instant('Account Does Not Exist'));
       });
     }else{
-      this.notifyService.showWarning(this.translateService.instant("Payment Credentials Missing"))
     }
   }
   
@@ -654,7 +652,6 @@
     if(stepLength > 1){
       var flag = sessionStorage.getItem('stage')
       var details = sessionStorage.getItem('hotelDetailsFlag')
-      console.log(details);
       if(flag == '0'){
         this.hotelSearch("MAKKA");
       }
@@ -671,7 +668,6 @@
       var flag = sessionStorage.getItem('stage')
       var step = JSON.parse(sessionStorage.getItem('steps'))[0]
       var details = sessionStorage.getItem('hotelDetailsFlag')
-      console.log(details);
       if(step == '1'){
         this.hotelSearch("MAKKA");
       }
@@ -768,7 +764,6 @@
     // }
     let stepLength = JSON.parse(sessionStorage.getItem('steps')).length
     if(stepLength > 1){
-      console.log(sessionStorage.getItem('stage'));
       if(sessionStorage.getItem('modify')==null){
         this.move(JSON.parse(sessionStorage.getItem('stage')))
         let stage = JSON.parse(sessionStorage.getItem('stage'))
@@ -832,48 +827,20 @@
       this.common.pilotHotelSearch( this.createTripAdapter.hotelSearchRequest(city,this.userDetails), this.appStore.langCode).subscribe(
         (data) => {
           this.hotelsList = data;
-          console.log(city);
           if(city === "MAKKA"){sessionStorage.setItem('mkSearchId',data.search_id)};
-          console.log(data.search_id);
           if(city === "MADEENA"){
             sessionStorage.setItem('mdSearchId',data.search_id);
           }
           this.common.getHotelList(data.search_id,this.selectedCurrency,"en-US").subscribe(
             (data) => {
               this.hotelsList = data;
-              if (this.hotelsList.length == 0) {this.notifyService.showWarning(this.translateService.instant( "No hotel(s) availabe plz change date"));}
+              if (this.hotelsList.length == 0) {
+              }
             },
-            (error) => {this.notifyService.showWarning(this.translateService.instant("Server busy try later"));}
+            (error) => {}
           );
         }),
-        (error) => {this.notifyService.showWarning(this.translateService.instant("Server busy try later"));};
-
-    // this.common.pilotHotelSearch( this.createTripAdapter.hotelSearchRequest(city,this.userDetails), this.appStore.langCode).subscribe(
-    //   (data) => {
-    //     let response = data;
-    //     this.hotelsList = data;
-    //     if (typeof response.search_id != "undefined") {
-    //       if(city == "MAKKA"){sessionStorage.setItem('mkSearchId',response.search_id)}
-    //       this.steps = JSON.parse(sessionStorage.getItem('steps'))
-    //       // if(city == 'MAKKA' && this.steps && this.steps.length == 1 || this.steps.length > 1){this.stage = [0]}
-    //       // if(city == 'MADEENA' && this.steps && this.steps.length == 1 ){this.stage.push(0)}
-    //       // if(city == 'MADEENA' && this.steps && this.steps.length > 1 ){this.stage.push(1)}
-    //       // sessionStorage.setItem('stage',JSON.stringify(this.stage))
-    //       if(city == "MADEENA"){sessionStorage.setItem('mdSearchId',response.search_id);
-    //         this.noOfDaysInMadeena = this.appStore.noOfDaysInMadeena;
-    //         this.travellersCount = this.appStore.totalTravellers;
-    //         this.madeenaCheckInDate = this.userDetails.madeenaCheckinDate;
-    //         this.madeenaCheckOutDate = this.userDetails.madeenaCheckoutDate;
-    //       }
-    //       this.common.getHotelList(response.search_id,this.selectedCurrency,"en-US")
-    //         .subscribe(
-    //           (data) => {
-    //             this.hotelsList = data;
-    //             if (this.hotelsList.length == 0) {this.notifyService.showWarning(this.translateService.instant( "No hotel(s) availabe plz change date"));}
-    //           },
-    //           (error) => {this.notifyService.showWarning(this.translateService.instant("Server busy try later"));});}
-    //   },
-    //   (error) => {this.notifyService.showWarning(this.translateService.instant("Server busy try later"));});
+        (error) => {};
   }
 
   /*

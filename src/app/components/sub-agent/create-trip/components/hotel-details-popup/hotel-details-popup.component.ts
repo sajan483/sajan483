@@ -121,7 +121,6 @@ export class HotelDetailsPopupComponent implements OnInit ,OnChanges{
      * this method for setting dom data
      */
   setData(){
-    console.log(this.hotelData);
     this.hotelInfo = JSON.parse(sessionStorage.getItem('hotelInfo'))
     const x = this.createTripSupport.setDataForHotelDeatils(this.hotelData,this.hotelInfo,this.rooms);
     if(x && x.roomGroups.length > 0){

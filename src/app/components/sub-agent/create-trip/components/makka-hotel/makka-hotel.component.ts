@@ -138,10 +138,6 @@ export class MakkaHotelComponent implements OnInit,DoCheck{
     this.commonService.getSelectedHotelInfo(this.createTripAdapter.selectedHotelInfoRequest(this.selectedLanguage,item,this.search), this.selectedCurrency,this.selectedLanguage).subscribe(
       (data) => {
         sessionStorage.setItem('hotelData',JSON.stringify(data))
-        // sessionStorage.setItem('showHotelDetails','true')
-        // if(sessionStorage.getItem('showHotelDetails') == 'true'){
-        //   this.showHotelDetails = true;
-        // }
         this.showDetailsShimmer = false;
         this.showHotelDetails = true
         var flag = sessionStorage.getItem('stage')
@@ -151,7 +147,6 @@ export class MakkaHotelComponent implements OnInit,DoCheck{
       },
       (error) => {
         this.showDetailsShimmer = false;
-        this.notifyService.showWarning(this.translateService.instant("No details availabe"));
       }
     );
   }
