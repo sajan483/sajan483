@@ -202,5 +202,3 @@ export class OtherInfoComponent implements OnInit {
   }
 
 }
-
-//f.itinerary.controls[i].controls.depdate.errors
