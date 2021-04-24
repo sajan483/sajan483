@@ -79,7 +79,8 @@ export class TransportComponent implements OnInit {
    */
   saveTransport(){
     let body = this.StepperAdapter.transportBookingBody(this.transportSelection.value,this.appStore.langCode);
-    this.SuperAgentApiService.updatePackageAPI(body,this.appStore.currencyCode,this.appStore.langCode,this.appStore.packageId).subscribe((data)=>{
+    this.SuperAgentApiService.updatePackageAPI(body,this.appStore.currencyCode,this.appStore.langCode,sessionStorage.getItem('packageId')).subscribe((data)=>{
+      sessionStorage.setItem('selector','otherServices')
       this.stepper.stepContent('otherServices','');
       this.bttnactive = false;
     })
@@ -87,6 +88,7 @@ export class TransportComponent implements OnInit {
 
   back(){
     this.stepper.stepContent('hotel','MADEENA')
+    sessionStorage.setItem('selector','hotelMadeena')   
   }
 
 }

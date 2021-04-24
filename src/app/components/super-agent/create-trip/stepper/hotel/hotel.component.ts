@@ -24,6 +24,7 @@ export class HotelComponent implements OnInit {
   superAgentApiService : SuperAgentApiService;
   showHotelDetails;
   loader:boolean=true;
+  detailsLoader:boolean=false;
   
 
   @ViewChild('pickerEnd' , {read: undefined, static: false}) pickerEnd: MatDatepicker<Date>;
@@ -106,11 +107,13 @@ export class HotelComponent implements OnInit {
   }
 
   fetchSelectedHotelInfo(item,city) {
+    this.detailsLoader = true
     this.superAgentApiService.getPackageHotelInfo(this.stepperAdapter.selectedHotelRequest(item,city),'SAR','en-US').subscribe((data) => {
         this.popupData = data;
         this.popupData.city = city
         sessionStorage.setItem('hotelDetailsData',JSON.stringify(this.popupData))
         sessionStorage.setItem('hotelDetails','open')
+        this.detailsLoader = false
         this.showHotelDetails = 'true';
       },(error)=>{
         this.notifyService.showWarning("No details availabe");
@@ -136,9 +139,11 @@ export class HotelComponent implements OnInit {
   back(){
     if(this.hotelsList.city == 'MAKKA'){
     this.stepper.stepContent('flight','')
+    sessionStorage.setItem('selector','flight')
     }
     else{
-      this.stepper.stepContent('hotel','MAKKA')   
+      this.stepper.stepContent('hotel','MAKKA')
+      sessionStorage.setItem('selector','hotelMakkah')   
     }
   }
 

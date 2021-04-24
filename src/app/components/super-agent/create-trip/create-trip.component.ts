@@ -51,7 +51,10 @@ export class CreateTripComponent implements OnInit {
     code:"EK"
   };
   searchData;
+  searchDataOld;
   destError:boolean=false;
+  srcError:boolean=false;
+
 
   @ViewChild('pickerReturn' , {read: undefined, static: false}) pickerReturn: MatDatepicker<Date>;
   @ViewChild('pickerMedOut' , {read: undefined, static: false}) pickerMedOut: MatDatepicker<Date>;
@@ -76,21 +79,39 @@ export class CreateTripComponent implements OnInit {
       mekIn: ['', Validators.required],
 			mekOut: ['', Validators.required]
     });
-    this.source.setValue(this.fromLocation.iata)
-    this.destination.setValue(this.destLocation.iata)
-    this.airline.setValue(this.airlineDetails.name)
-    this.searchForm.controls.departDate.setValue(this.todayStamp);
-    this.returnMin=this.incrementDate(this.searchForm.controls.departDate.value,1)
-    this.searchForm.controls.returnDate.setValue(this.incrementDate(this.searchForm.controls.departDate.value,14));
-    this.searchForm.controls.mekIn.setValue(this.todayStamp);
-    this.searchForm.controls.mekOut.setValue(this.incrementDate(this.searchForm.controls.mekIn.value,2));
-    this.searchForm.controls.medIn.setValue(this.searchForm.controls.mekOut.value);
-    this.searchForm.controls.medOut.setValue(this.incrementDate(this.searchForm.controls.medIn.value,2));
-    this.mekkahInMin = this.form.departDate.value;
-    this.mekkahOutMin=this.incrementDate(this.form.mekIn.value,1)
-    this.medinahOutMax = this.form.returnDate.value;
-    this.medinahInMin=this.form.mekOut.value
-    this.medinahOutMin=this.incrementDate(this.form.medIn.value,1)
+    // if(sessionStorage.getItem('searchData') == null){
+
+      this.source.setValue(this.fromLocation.iata)
+      this.destination.setValue(this.destLocation.iata)
+      this.airline.setValue(this.airlineDetails.name)
+      this.searchForm.controls.departDate.setValue(this.todayStamp);
+      this.returnMin=this.incrementDate(this.searchForm.controls.departDate.value,1)
+      this.searchForm.controls.returnDate.setValue(this.incrementDate(this.searchForm.controls.departDate.value,14));
+      this.searchForm.controls.mekIn.setValue(this.todayStamp);
+      this.searchForm.controls.mekOut.setValue(this.incrementDate(this.searchForm.controls.mekIn.value,2));
+      this.searchForm.controls.medIn.setValue(this.searchForm.controls.mekOut.value);
+      this.searchForm.controls.medOut.setValue(this.incrementDate(this.searchForm.controls.medIn.value,2));
+      this.mekkahInMin = this.form.departDate.value;
+      this.mekkahOutMin=this.incrementDate(this.form.mekIn.value,1)
+      this.medinahOutMax = this.form.returnDate.value;
+      this.medinahInMin=this.form.mekOut.value
+      this.medinahOutMin=this.incrementDate(this.form.medIn.value,1)
+      
+    // } else {
+    //   this.searchDataOld = JSON.parse(sessionStorage.getItem('searchData'))
+    //   this.source.setValue(this.searchDataOld.flightData.source)
+    //   this.destination.setValue(this.searchDataOld.flightData.destination)
+    //   this.airline.setValue(this.searchDataOld.flightData.airlineName)
+    //   this.searchForm.controls.departDate.setValue(this.searchDataOld.flightData.departureDate);
+    //   this.searchForm.controls.returnDate.setValue(this.searchDataOld.flightData.returnDate);
+    //   this.searchForm.controls.mekIn.setValue(this.searchDataOld.mekkahData.checkIn);
+    //   this.searchForm.controls.mekOut.setValue(this.searchDataOld.mekkahData.checkOut);
+    //   this.searchForm.controls.medIn.setValue(this.searchDataOld.medinaData.checkIn);
+    //   this.searchForm.controls.medOut.setValue(this.searchDataOld.medinaData.checkOut);
+    //   this.destLocation.city = this.searchDataOld.flightData.destinationName
+    //   this.fromLocation.city = this.searchDataOld.flightData.sourceName
+    // }
+    
     this.getAirportListSrc()
     this.getAirportListDest()
     this.getAirlineList()
@@ -196,7 +217,14 @@ export class CreateTripComponent implements OnInit {
   }
 
   setFromLocation(data){
-    this.fromLocation.city = data.city
+    this.srcError = false
+    if(this.destLocation.city == data.city){
+      this.srcError = true
+    }
+    else{
+      this.fromLocation.city = data.city
+      this.fromLocation.iata = data.iata
+    }
   }
 
   setDestLocation(data){
@@ -206,6 +234,7 @@ export class CreateTripComponent implements OnInit {
     }
     else{
       this.destLocation.city = data.city
+      this.destLocation.iata = data.iat
     }
   }
 
@@ -227,10 +256,13 @@ export class CreateTripComponent implements OnInit {
       },
       flightData:{
         source:this.source.value,
+        sourceName:this.fromLocation.city,
         destination:this.destination.value,
+        destinationName:this.destLocation.city,
         departureDate:this.form.departDate.value.toJSON().split("T")[0],
         returnDate:this.form.returnDate.value.toJSON().split("T")[0],
-        airline:this.airlineDetails.code
+        airline:this.airlineDetails.code,
+        airlineName:this.airlineDetails.name
       },
       mekkahData:{
         checkIn:this.form.mekIn.value.toJSON().split("T")[0],

@@ -33,7 +33,7 @@ export class PaymentComponent implements OnInit {
    * this method for call suggested amounts
    */
   callSuggestedAmount(){
-    this.SuperAgentApiService.getPackageDetails(this.appStore.packageId).subscribe((data)=>{
+    this.SuperAgentApiService.getPackageDetails(sessionStorage.getItem('packageId')).subscribe((data)=>{
       this.suggestedAmound = data;
     })
   }
@@ -55,7 +55,8 @@ export class PaymentComponent implements OnInit {
     /**
      * payment detail update package api
      */
-    this.SuperAgentApiService.updatePackageAPI(this.advancepayment.value,this.appStore.currencyCode,this.appStore.langCode,this.appStore.packageId).subscribe((data)=>{
+    this.SuperAgentApiService.updatePackageAPI(this.advancepayment.value,this.appStore.currencyCode,this.appStore.langCode,sessionStorage.getItem('packageId')).subscribe((data)=>{
+      sessionStorage.setItem('selector','otherInfo')
         this.stepper.stepContent('otherInfo','');
         this.bttnactive = false;
     })
@@ -63,6 +64,7 @@ export class PaymentComponent implements OnInit {
 
   back(){
     this.stepper.stepContent('otherServices','')
+    sessionStorage.setItem('selector','otherServices')
   }
 
 }

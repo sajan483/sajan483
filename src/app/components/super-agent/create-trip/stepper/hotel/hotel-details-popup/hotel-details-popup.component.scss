@@ -763,18 +763,6 @@ small.nonRefundable {
     }
 }
 
-.shine {
-    background: #f6f7f8;
-    background-image: linear-gradient( to right, #f6f7f8 0%, #edeef1 20%, #dee4ea 40%, #f6f7f8 100%);
-    background-repeat: no-repeat;
-    background-size: 440px;
-    -webkit-animation-duration: 1s;
-    -webkit-animation-fill-mode: forwards;
-    -webkit-animation-iteration-count: infinite;
-    -webkit-animation-name: placeholderShimmer;
-    -webkit-animation-timing-function: linear;
-}
-
 .box {
     height: 200px;
     background: white;
@@ -888,39 +876,50 @@ small.nonRefundable {
         grid-row: 3;
     }
 }
-.mr12{
+
+.mr12 {
     margin-right: 12%;
 }
-.height200{
+
+.height200 {
     height: 200px;
 }
-.fntSz16{
+
+.fntSz16 {
     font-size: 16px;
 }
-.font14Lt{
+
+.font14Lt {
     font-size: 14px;
     font-family: lato-regular;
 }
-.mb150{
-  margin-bottom: 150px;
+
+.mb150 {
+    margin-bottom: 150px;
 }
-.fnt12{
+
+.fnt12 {
     font-size: 12px;
 }
-.chkbxHtlDtls{
+
+.chkbxHtlDtls {
     width: 10px;
     height: 10px;
     margin-left: 10px;
 }
-.bgWt{
+
+.bgWt {
     background-color: white;
 }
-.bgBl{
+
+.bgBl {
     background-color: blue;
 }
-.mt12{
+
+.mt12 {
     margin-top: 12px;
 }
-.mt7{
+
+.mt7 {
     margin-top: 7px;
 }

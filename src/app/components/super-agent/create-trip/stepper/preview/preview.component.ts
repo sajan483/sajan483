@@ -66,7 +66,7 @@ export class PreviewComponent implements OnInit {
   }
 
   packageDetails(){
-    this.superAgentApiService.getPackageDetails(this.appStore.packageId).subscribe((data)=>{
+    this.superAgentApiService.getPackageDetails(sessionStorage.getItem('packageId')).subscribe((data)=>{
       this.shimmer = false;
       this.response = data;
       this.onwardFlight = this.response.trip_flights[0].onward_flight;
@@ -94,12 +94,12 @@ export class PreviewComponent implements OnInit {
 
   publishTrip(){
     this.bttnactive =true;
-    if(this.appStore.packageId){
+    if(sessionStorage.getItem('packageId') != null){
       var body ={"published" : "true",
       "status":"active",
       "start_date":this.appStore.departureDate,
       "end_date":this.appStore.arrivalDate}
-      this.superAgentApiService.publishPackage(body,this.appStore.packageId).subscribe(response => {
+      this.superAgentApiService.publishPackage(body,parseInt(sessionStorage.getItem('packageId'))).subscribe(response => {
         this.bttnactive =false;
         this.notification.showSuccess("Successfully Published");
         this.router.navigate(["/superagent/createTrip"]);
@@ -109,6 +109,7 @@ export class PreviewComponent implements OnInit {
 
   back(){
     this.stepper.stepContent('otherInfo','')
+    sessionStorage.setItem('selector','otherInfo')
   }
 
   toggleDetails(event,type){

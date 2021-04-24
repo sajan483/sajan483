@@ -109,7 +109,7 @@ export class OtherInfoComponent implements OnInit {
 
   /**
    * remove hero image
-   */
+   */payment
   deleteTripImg(i:number){
     const index = this.urls.indexOf(i);
     this.urls.splice(index,1);
@@ -172,19 +172,20 @@ export class OtherInfoComponent implements OnInit {
   }
 
   postTripImg(){
-    this.SuperAgentApiService.uploadTripImage(this.tripImg,this.appStore.currencyCode,this.appStore.langCode,this.appStore.packageId).subscribe((data)=>{
+    this.SuperAgentApiService.uploadTripImage(this.tripImg,this.appStore.currencyCode,this.appStore.langCode,sessionStorage.getItem('packageId')).subscribe((data)=>{
     })
   }
 
   upadteOtherInfo(){
     var body= this.StepperAdapter.otherInfoBody(this.otherPackageForm.value);
-    this.SuperAgentApiService.updatePackageAPI(body,this.appStore.currencyCode,this.appStore.langCode,this.appStore.packageId).subscribe((data)=>{
+    this.SuperAgentApiService.updatePackageAPI(body,this.appStore.currencyCode,this.appStore.langCode,sessionStorage.getItem('packageId')).subscribe((data)=>{
     })
   }
 
   updateItenary(){
     var body=this.StepperAdapter.itineraryBody(this.f.itinerary.value,this.array);
-    this.SuperAgentApiService.forItinerarySetAPI(body,this.appStore.currencyCode,this.appStore.langCode,this.appStore.packageId).subscribe((data)=>{
+    this.SuperAgentApiService.forItinerarySetAPI(body,this.appStore.currencyCode,this.appStore.langCode,sessionStorage.getItem('packageId')).subscribe((data)=>{
+      sessionStorage.setItem('selector','preview')
       this.stepper.stepContent('preview','');
       this.bttnactive = false;
     })
@@ -197,6 +198,7 @@ export class OtherInfoComponent implements OnInit {
 
   back(){
     this.stepper.stepContent('payment','')
+    sessionStorage.setItem('selector','payment')
   }
 
 }

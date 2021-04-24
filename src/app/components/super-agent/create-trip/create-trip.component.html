@@ -45,6 +45,7 @@
                         </mat-option>
                     </mat-autocomplete>
                     <p class="airport-name">{{fromLocation.city}}</p>
+                    <mat-error *ngIf="srcError">From & To airports can't be same</mat-error>
                 </div>
                 <div class="col-md-3 br-right">
                     <p class="hint">SELECT DESTINATION</p>

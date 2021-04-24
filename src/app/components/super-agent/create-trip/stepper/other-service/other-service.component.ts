@@ -102,7 +102,8 @@ export class OtherServiceComponent implements OnInit {
    */
   addOtherService(){
     var body1 = this.StepperAdapter.visaServiceBody(this.myForm.value,this.appStore.currencyCode);
-    this.SuperAgentApiService.updatePackageAPI(body1,this.appStore.currencyCode,this.appStore.langCode,this.appStore.packageId).subscribe((data)=>{
+    this.SuperAgentApiService.updatePackageAPI(body1,this.appStore.currencyCode,this.appStore.langCode,sessionStorage.getItem('packageId')).subscribe((data)=>{
+      sessionStorage.setItem('selector','payment')
       this.stepper.stepContent('payment','');
       this.bttnactive = false;
     })
@@ -116,6 +117,7 @@ export class OtherServiceComponent implements OnInit {
 
   back(){
     this.stepper.stepContent('transport','')
+    sessionStorage.setItem('selector','transport')   
   }
 
   addService(){
