@@ -184,7 +184,6 @@ export class SuperAgentApiService {
     formData.append( `[attachments][${0}][file]`, data[0].file)
     return this.http
       .put(this.BASE_URL + "packages/"+id+"/?currency=" + currency + "&lang=" + lang,formData,this.optionsForForm);
-  
   }
 
   forItinerarySetAPI(param,currency,lang,id){
