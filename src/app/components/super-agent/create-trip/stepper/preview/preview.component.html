@@ -664,7 +664,7 @@
                             <div class="fs16 fw600">{{response?.title}}</div>
                             <div class="mt-2 fs14 clr52" [innerHTML]="response?.instructions"></div>
                             <div class="mainimage mt-2">
-                                <img src="/assets/images/imagemakkah.jpg" class="itineraryimg" alt="">
+                                <img src="{{response?.attachments[0].file}}" class="itineraryimg" alt="">
                             </div>
                         </div>
                         <div id="timeLine" class="mt-3 col-md-12">

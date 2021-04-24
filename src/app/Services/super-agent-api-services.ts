@@ -181,11 +181,9 @@ export class SuperAgentApiService {
 
   uploadTripImage(data,currency,lang,id){
     let formData = new FormData();
-    formData.append('[attachments][0][file]',data[0].file);
-    console.log("m",formData.get('[attachments][0][file]'));
-     return this.http
-      .put(this.BASE_URL + "packages/"+id+"/?currency=" + currency + "&lang=" + lang, formData, this.options)
-      .map((res) => res.json());
+    formData.append( `[attachments][${0}][file]`, data[0].file)
+    return this.http
+      .put(this.BASE_URL + "packages/"+id+"/?currency=" + currency + "&lang=" + lang,formData,this.optionsForForm);
   }
 
   forItinerarySetAPI(param,currency,lang,id){
@@ -203,7 +201,6 @@ export class SuperAgentApiService {
           if(item.attachments){
             item.attachments.map(x=>x.file).forEach((photo,i) => {
             formData.append(`[itinerary_set][${index}][attachments][${i}][file]`, photo);
-            console.log('dsdsdsd',formData.get('[itinerary_set][${index}][attachments][${i}][file]`'))
             });
           }       
         });
