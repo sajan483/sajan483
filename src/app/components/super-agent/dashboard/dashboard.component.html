@@ -95,7 +95,8 @@
                                 <ng-multiselect-dropdown name="city" 
                                 [data]="months" 
                                 [(ngModel)]="selectedItem" 
-                                [settings]="dropdownSettings">
+                                [settings]="dropdownSettings"
+                                (onSelect)="onItemSelect(selectedItem)">
                                 </ng-multiselect-dropdown>
                             </div>
                         </div>
