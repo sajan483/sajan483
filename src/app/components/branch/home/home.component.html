@@ -8,7 +8,7 @@
             <div class="p-2 d-flex">
                 <div class="subtext m-auto">Sort By</div>
                 <div class="position-relative">
-                    <div class="position-relative d-flex justify-content-between w200 bordrservice m-3 p-2 cursor-pointer" (click)="showSelectionPopup()" #serviceDropDown>
+                    <div class="position-relative d-flex justify-content-between w200 bordrservice p-2 cursor-pointer" (click)="showSelectionPopup()" #serviceDropDown>
                         <p class="fs14 my-auto">{{service}}</p>
                         <i class="icns downarrow icon_h28_w15"></i>
                     </div>
@@ -17,71 +17,35 @@
                             <div class="d-flex flex-column w-100">
                                 <div class="p10">
                                     <mat-radio-group class="exampleradiogroup" [(ngModel)]="service">
-                                        <mat-radio-button value="All" (change)="onServiceItemChange('All')">All</mat-radio-button>
-                                        <mat-radio-button value="Makkah Hotel" (change)="onServiceItemChange('Makkah Hotel')">Makkah Hotel</mat-radio-button>
-                                        <mat-radio-button value="Medina Hotel" (change)="onServiceItemChange('Medina Hotel')">Medina Hotel</mat-radio-button>
-                                        <mat-radio-button value="Transport" (change)="onServiceItemChange('Transport')">Transport</mat-radio-button>
+                                        <mat-radio-button value="All Months" (change)="onServiceItemChange('all')">All Months</mat-radio-button>
+                                        <mat-radio-button value="January" (change)="onServiceItemChange('1')">January</mat-radio-button>
+                                        <mat-radio-button value="February" (change)="onServiceItemChange('2')">February</mat-radio-button>
+                                        <mat-radio-button value="March" (change)="onServiceItemChange('3')">March</mat-radio-button>
+                                        <mat-radio-button value="April" (change)="onServiceItemChange('4')">April</mat-radio-button>
+                                        <mat-radio-button value="May" (change)="onServiceItemChange('5')">May</mat-radio-button>
+                                        <mat-radio-button value="June" (change)="onServiceItemChange('6')">June</mat-radio-button>
+                                        <mat-radio-button value="July" (change)="onServiceItemChange('7')">July</mat-radio-button>
+                                        <mat-radio-button value="August" (change)="onServiceItemChange('8')">August</mat-radio-button>
+                                        <mat-radio-button value="September" (change)="onServiceItemChange('9')">September</mat-radio-button>
+                                        <mat-radio-button value="October" (change)="onServiceItemChange('10')">October</mat-radio-button>
+                                        <mat-radio-button value="November" (change)="onServiceItemChange('11')">November</mat-radio-button>
+                                        <mat-radio-button value="December" (change)="onServiceItemChange('12')">December</mat-radio-button>
                                     </mat-radio-group>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="p-2 d-flex">
-                <div class="subtext m-auto">Travellers</div>
-                <div class="position-relative">
-                    <div class="position-relative d-flex justify-content-between w200 bordrservice m-3 p-2 cursor-pointer" (click)="showTravelersPopUp()" #menuIconClass>
-                        <p class="fs14 my-auto">{{countAdult + countChild + countInfant}} Travellers</p>
-                        <i class="icns downarrow icon_h28_w15"></i>
-                    </div>
-                    <div class="travellerpopup popupmoving" *ngIf="displayTabtravel" #menuPopupClass>
-                        <div class="travellersouter travellerOuter">
-                            <div class="d-flex flex-column" class="w-100">
-                                <div class="d-flex justify-content-between travellerslide">
-                                    <div class="texttraveller pt-1">Adults</div>
-                                    <div class="p-1 ml-2" class="texttravellerd margnR50">
-                                        {{countAdult}}
-                                    </div>
-                                    <div>
-                                        <div class="btn-group">
-                                            <a class="firstbttn bttnfrst" (click)="minusAdult();">-</a>
-                                            <a class="secondbttn bttnscnd" (click)="addAdult();">+</a>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="d-flex justify-content-between travellerslide">
-                                    <div class="texttraveller">Children
-                                        <p>2 - 12 Years</p>
-                                    </div>
-                                    <div class="p-1 ml-1" class="texttravellerd">
-                                        {{countChild}}</div>
-                                    <div>
-                                        <div class="btn-group">
-                                            <a class="firstbttn bttnfrst" (click)="minusChild();">-</a>
-                                            <a class="secondbttn bttnscnd" (click)="addChild();">+</a>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="d-flex justify-content-between travellerslide">
-                                    <div class="texttraveller textright">Infants
-                                        <p>0 - 23 months</p>
-                                    </div>
-                                    <div class="p-1" class="texttravellerd">{{countInfant}}</div>
-                                    <div>
-                                        <div class="btn-group">
-                                            <a class="firstbttn bttnfrst" (click)="minusInfant();">-</a>
-                                            <a class="secondbttn bttnscnd" (click)="addInfant();">+</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                <div class="p-2">
+                    <select name="" id="" class="form-control">
+                        <option value="" disabled selected>Starting Airport</option>
+                    </select>
                 </div>
-            </div>
-            <div class="my-auto">
-                <button class="search_bttn">GO</button>
+                <div class="p-2">
+                    <select name="" id="" class="form-control">
+                        <option value="" disabled selected>Number of days</option>
+                    </select>
+                </div>
             </div>
         </div>
     </div>

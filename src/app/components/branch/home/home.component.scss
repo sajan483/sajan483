@@ -10,14 +10,6 @@
     box-shadow: 0 4px 5px 0 rgba(0, 0, 0, 0.23);
 }
 
-.selectPop {
-    flex-direction: column;
-    box-sizing: border-box;
-    display: flex;
-    place-content: flex-start;
-    align-items: flex-start;
-}
-
 .travellerpopupp {
     z-index: 100;
     position: absolute;
@@ -36,74 +28,11 @@
     border-radius: 4px;
 }
 
-.travellerpopup {
-    position: absolute;
-    left: 15px;
-    top: 64px;
-    z-index: 99;
-}
-
-.travellerpopup p {
-    color: gray;
-    font-size: 10px;
-    margin-bottom: 0;
-}
-
-.travellerpopup .justify-content-between {
-    padding: 10px 15px;
-}
-
-.travellerpopup .texttravellerd {
-    padding-top: 5px;
-}
-
-.travellerpopup .texttraveller,
-.travellerpopup .texttravellerd {
-    font-size: 15px;
-    font-weight: 500;
-}
-
-.travellerOuter {
-    flex-direction: column;
-    box-sizing: border-box;
-    display: flex;
-    place-content: flex-start;
-    align-items: flex-start;
-}
-
 .travellersouter {
     background: #fff;
     width: 240px !important;
     border: 1px solid #d4d4d4;
     box-shadow: 0 4px 5px 0 rgba(0, 0, 0, 0.23);
-}
-
-.btn-group .firstbttn {
-    border-radius: 7px 0 0 7px;
-    padding: 4px 10px;
-    background-color: white;
-    color: #000;
-}
-
-.btn-group .secondbttn {
-    border-radius: 0 7px 7px 0;
-    padding: 4px 10px;
-    background-color: white;
-    color: #000;
-}
-
-.btn-group .firstbttn:hover,
-.btn-group .secondbttn:hover {
-    background-color: #b5cb13;
-    color: white;
-    text-decoration: none;
-}
-
-.btn-group a {
-    border: 1px solid #d4d4d4;
-    cursor: pointer;
-    font-size: 18px;
-    font-weight: 500;
 }
 
 .justifycenter {
@@ -112,16 +41,6 @@
 
 .algn {
     display: flex;
-}
-
-.search_bttn {
-    background-color: #b5cb13;
-    color: #000;
-    padding: 10px 26px;
-    border-radius: 4px;
-    cursor: pointer;
-    outline: none;
-    border: none;
 }
 
 .margincard {

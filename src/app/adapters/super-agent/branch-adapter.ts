@@ -16,7 +16,6 @@ export class BranchAdapter {
             city: ["", Validators.required],
             agency: ["", Validators.required],
             email: ["", [Validators.required, Validators.email]],
-            code: ["", Validators.required],
         })
     }
 
@@ -29,8 +28,7 @@ export class BranchAdapter {
             role: ["", Validators.required],
             username: ["", Validators.required],
             password: ["", [Validators.required, Validators.minLength(6)]],
-            employer_type:[""],
-            employer_id:[""]
+            agency:["", Validators.required],
         });
     }
 
