@@ -18,9 +18,8 @@ export class StaffCreationComponent implements OnInit {
   branchlists: any[] = [];
   branchAdapter:BranchAdapter;
   superAgentApiService:SuperAgentApiService;
-  emp_id: any;
-  agency:string = 'agency';
-  branch:string = 'branch';
+  agencyId: any;
+  bttnactive:boolean =false;
 
   constructor(private route:Router,private _SuperAgentService:SuperAgentApiService,private notifyService:NotificationService,
     private appStore:AppStore) { 
@@ -29,7 +28,7 @@ export class StaffCreationComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.emp_id = sessionStorage.getItem("employer_id");
+    this.agencyId = sessionStorage.getItem("agency_Id");
     this.AgentStaffRegisterForm = this.branchAdapter.agentStaffCreationForm();
     this.getBranchList();
   }
@@ -54,6 +53,7 @@ export class StaffCreationComponent implements OnInit {
     if (this.AgentStaffRegisterForm.invalid) {
       return;
     }
+    this.bttnactive = true;
     this.staffCreation();
   }
 
@@ -61,8 +61,10 @@ export class StaffCreationComponent implements OnInit {
     this.superAgentApiService.staffRegister(this.AgentStaffRegisterForm.value).subscribe(data=>{
       this.notifyService.showSuccess("Success !!");
       this.navigateStaffList();
+      this.bttnactive = false;
     },error=>{
-      this.notifyService.showError("staff with this phone number already exists.")
+      this.notifyService.showError("staff with this phone number already exists.");
+      this.bttnactive = false;
     })
   }
 

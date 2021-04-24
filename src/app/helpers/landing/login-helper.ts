@@ -22,7 +22,9 @@ export class loginHelper{
     loginResponse(data:any,rememberme:boolean){
         var access = data.access;
         var etype = data.staff.employer_type;
-        sessionStorage.setItem('accesstoken', data.access);
+        sessionStorage.setItem('userTypeName',data.staff.name);
+        sessionStorage.setItem('currentUser', etype);
+        sessionStorage.setItem('accesstoken', access);
         if (rememberme) {
           sessionStorage.setItem('isTouched', 'true');
         }
@@ -31,44 +33,17 @@ export class loginHelper{
           this.cookie.set("userName", null);
           this.cookie.set("password", null);
         }
-
-        sessionStorage.setItem('empId', data.staff.employer_id);
         if (sessionStorage.getItem('accesstoken') != null) {
-          if(data.staff.is_super_agent){
+          if(data.staff.employer_type == 'SUPER'){
             this.notifyService.showSuccess(this.translate.instant('success !!'));
-            etype = 'superagent';
-            this.appStore.userType = data.staff.name;
-            sessionStorage.setItem('currentUser', etype);
+            sessionStorage.setItem('agency_Id', data.staff.agency_id);
             this.router.navigate(["superagent/dashboard"]);
-          }else{
-            if(data.staff.employer_type == 'branch'){
-              if(data.staff.is_umrah_operator == 'True'){
-                this.notifyService.showSuccess(this.translate.instant('success !!'));
-                etype = 'branch';
-                this.appStore.userType = data.staff.name;
-                sessionStorage.setItem('currentUser', etype);
-                this.router.navigate(["branch/home"]);
-              }
-            }
-            if(data.staff.employer_type == 'agency'){
-              if (data.staff.is_approved == 'False') {
-                this.notifyService.showWarning(this.translate.instant('processing !!'));
-                this.router.navigate(["upload", data.staff.employer_id]);
-              } else if(data.staff.is_umrah_operator == 'False'){
-                this.notifyService.showSuccess(this.translate.instant('success !!'));
-                etype = 'branch';
-                this.appStore.userType = data.staff.name;
-                sessionStorage.setItem('currentUser', etype);
-                this.router.navigate(["branch/home"]);
-              } else{
-                this.notifyService.showSuccess(this.translate.instant('success !!'));
-                etype = 'subagent';
-                this.appStore.userType = data.staff.employer_name;
-                sessionStorage.setItem('currentUser', etype);
-                this.router.navigate(['subagent/home/']);
-              }
-            }
-            
+          }else if(data.staff.employer_type == 'SUB'){
+            this.notifyService.showSuccess(this.translate.instant('success !!'));
+            this.router.navigate(['subagent/home/']);
+          }else if(data.staff.employer_type == 'BRANCH'){
+            this.notifyService.showSuccess(this.translate.instant('success !!'));
+            this.router.navigate(["branch/home"]);
           }
           
         }

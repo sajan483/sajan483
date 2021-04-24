@@ -22,7 +22,6 @@ export class HedderComponent implements OnInit, DoCheck {
   languageList: any;
   activeArabic: boolean = false;
   showNavBar: boolean = false;
-  empid: string;
   commonApiService:CommonApiService;
   
   userType:any;
@@ -96,17 +95,17 @@ export class HedderComponent implements OnInit, DoCheck {
   }
 
   ngDoCheck() {
-    if (sessionStorage.getItem("currentUser") == "superagent") {
+    if (sessionStorage.getItem("currentUser") == "SUPER") {
       this.superAgencyActive = true;
-      this.userType = this.appStore.userType;
+      this.userType = sessionStorage.getItem('userTypeName');
     }
-    if (sessionStorage.getItem("currentUser") == "branch") {
+    if (sessionStorage.getItem("currentUser") == "BRANCH") {
       this.branchActive = true;
-      this.userType = sessionStorage.getItem('userType')
+      this.userType = sessionStorage.getItem('userTypeName')
     }
-    if (sessionStorage.getItem("currentUser") == "subagent") {
+    if (sessionStorage.getItem("currentUser") == "SUB") {
       this.subAgencyActive = true;
-      this.userType = this.appStore.userType;
+      this.userType = sessionStorage.getItem('userTypeName');
     }
   }
 

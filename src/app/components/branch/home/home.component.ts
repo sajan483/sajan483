@@ -8,7 +8,7 @@ import { BranchApiService } from 'src/app/Services/branch-api-service'
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit {
-  service : any = 'All';
+  service : any = 'All Months';
   showSelectionPopUp: boolean;
   countAdult: number = 1;
   countChild: number = 0;
@@ -18,27 +18,11 @@ export class HomeComponent implements OnInit {
   serviceDropDown: ElementRef;
   @ViewChild("selectionPopUp", { read: ElementRef, static: false })
   selectionPopUp: ElementRef;
-  @ViewChild("menuIconClass", { read: ElementRef, static: false })
-  menuIconClass: ElementRef;
-  @ViewChild("menuPopupClass", { read: ElementRef, static: false })
-  menuPopupClass: ElementRef;
   packages: any[]=[];
   shimmer: boolean =true;
+  depatureAirports:any[] = [];
 
   constructor(private renderer2: Renderer2,private branchApi:BranchApiService,private route:Router) {
-    this.renderer2.listen("window", "click", (e: Event) => {
-      if (
-        (this.menuPopupClass &&
-          this.menuPopupClass.nativeElement.contains(e.target)) ||
-        (this.menuIconClass &&
-          this.menuIconClass.nativeElement.contains(e.target))
-      ) {
-        // Clicked inside plus preventing click on icon
-      } else {
-        // Clicked outside
-        this.displayTabtravel = false;
-      }
-    });
 
     this.renderer2.listen("window", "click", (e: Event) => {
       if (
@@ -63,7 +47,11 @@ export class HomeComponent implements OnInit {
         }
       });
       this.shimmer = false;
+      data.forEach(element =>{
+        this.depatureAirports.push(element.boarding_airport)
+      })
     })
+    console.log(this.depatureAirports)
   }
 
   showSelectionPopup() {

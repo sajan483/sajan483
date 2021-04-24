@@ -17,6 +17,7 @@ export class BranchCreationComponent implements OnInit {
   respone: any;
   branchAdapter:BranchAdapter;
   superAgentApiService:SuperAgentApiService;
+  bttnactive:boolean =false;
 
   constructor(private route:Router,private _SuperAgentService:SuperAgentApiService,private notifyService:NotificationService) {
     this.branchAdapter = new BranchAdapter();
@@ -43,6 +44,7 @@ export class BranchCreationComponent implements OnInit {
     if(this.createBranch.invalid){
       return;
     }
+    this.bttnactive = true;
     this.branchCreation();
   }
 
@@ -50,6 +52,7 @@ export class BranchCreationComponent implements OnInit {
     this.superAgentApiService.branchCreation(this.createBranch.value).subscribe((data)=>{
       this.notifyService.showSuccess('SUCCESS !!');
       this.navigateBranchList();
+      this.bttnactive=false;
     })
   }
 

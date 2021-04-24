@@ -43,6 +43,8 @@ export class LoginComponent implements OnInit {
   loginAdapter: loginAdapter;
   loginHelperClass: loginHelper;
   commonApiService:CommonApiService;
+  bttnactive:boolean=false;
+
   constructor(private http: HttpClient,
     private router: Router,
     private translate: TranslateService,
@@ -107,6 +109,7 @@ export class LoginComponent implements OnInit {
       })
       return;
     } else {
+      this.bttnactive = true;
       if (this.rememberme) {
         this.loginHelperClass.setDataForCookies(this.username, this.password);
       }
@@ -115,8 +118,9 @@ export class LoginComponent implements OnInit {
         this.loginHelperClass.loginResponse(data, this.rememverme);
         var emp_id = data.staff.employer_id;
         sessionStorage.setItem("employer_id",emp_id);
-        
+        this.bttnactive = false;
       }, error => {
+        this.bttnactive = false;
         Swal.fire({
           icon: 'error',
           title: 'Oops...',
