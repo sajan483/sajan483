@@ -14,7 +14,7 @@ import { AppStore } from "src/app/stores/app.store";
 export class StepperComponent implements OnInit {
   private stepperAdapter: StepperAdapter = new StepperAdapter(null);
   showShimmer: boolean;
-  selector: string = "flight";
+  selector
   static searchData: any;
   hotelFlag;
   superAgentApiService: SuperAgentApiService;
@@ -32,8 +32,28 @@ export class StepperComponent implements OnInit {
   }
 
   ngOnInit() {
-    document.getElementById(this.selector).style.backgroundColor = "#f3ac3c";
-    this.dataFromSearchPage = StepperComponent.searchData;
+
+    if(sessionStorage.getItem('selector') == null){
+      this.selector = 'flight'
+      document.getElementById(this.selector).style.backgroundColor = "#f3ac3c";
+      this.dataFromSearchPage = StepperComponent.searchData;
+    }
+
+    if(sessionStorage.getItem('selector') === 'hotelMakkah'){
+      document.getElementById('flight').style.backgroundColor = "#f3ac3c";
+      document.getElementById('MAKKA').style.backgroundColor = "#f3ac3c";
+      this.selector = 'hotel'
+      this.hotelFlag='MAKKA'
+    }
+    
+    if(sessionStorage.getItem('selector') === 'hotelMadeena'){
+      document.getElementById('flight').style.backgroundColor = "#f3ac3c";
+      document.getElementById('MAKKA').style.backgroundColor = "#f3ac3c";
+      document.getElementById('MADEENA').style.backgroundColor = "#f3ac3c";
+      console.log('test');
+      this.selector = 'hotel'
+      this.hotelFlag='MADEENA'
+    }
   }
 
   stepContent(component, flag) {

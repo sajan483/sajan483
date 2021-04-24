@@ -292,6 +292,9 @@ export class FlightComponent implements OnInit {
 
   navigateHotel(component, id){
     this.stepper.stepContent(component,id)
+    if(id == 'MAKKA'){
+      sessionStorage.setItem('selector','hotelMakkah')
+    }
     this.saveFlight()
   }
 
@@ -299,7 +302,7 @@ export class FlightComponent implements OnInit {
     let data = {
       "start_date": this.flightSearchData.departureDate,
       "end_date": this.flightSearchData.returnDate,
-      "max_passengers":StepperComponent.searchData.travellersData.adult,
+      "max_passengers":this.searchData.travellersData.adult,
       "num_days": this.helperService.noOfDaysBetweenTwoDates(this.flightSearchData.departureDate,this.flightSearchData.returnDate),
       "arr_date_time_stamp": Math.floor(new Date(this.flightSearchData.returnDate).getTime()/1000),
       "arr_airport_code": this.destLocation.iata,
@@ -380,7 +383,8 @@ export class FlightComponent implements OnInit {
     var currency = this.appStore.currencyCode
     var lang = this.appStore.langCode
     this.commonService.createPackage(data,currency,lang).subscribe((data) => {
-      this.appStore.packageId = data.id     
+      this.appStore.packageId = data.id
+      sessionStorage.setItem('packageId',data.id)   
     })
   }
 

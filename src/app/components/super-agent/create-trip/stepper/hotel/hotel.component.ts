@@ -22,7 +22,7 @@ export class HotelComponent implements OnInit {
   hotelsList: HotelsList = {response:[],city:undefined} ;
   formBuilder:FormBuilder;
   superAgentApiService : SuperAgentApiService;
-  showHotelDetails:string = 'false';
+  showHotelDetails;
   loader:boolean=true;
   
 
@@ -46,8 +46,16 @@ export class HotelComponent implements OnInit {
    }
 
   ngOnInit() {
-    this.setHotelSearchForm();
-    this.hotelSearch()
+    if(sessionStorage.getItem('hotelDetails')=='open'){
+      this.loader=false
+      this.showHotelDetails = 'true'
+      this.hotelSearch()
+      this.setHotelSearchForm();
+    } else {
+      this.showHotelDetails = 'false'
+      this.setHotelSearchForm();
+      this.hotelSearch()
+    }
   }
 
   hotelSearch() {
@@ -94,10 +102,6 @@ export class HotelComponent implements OnInit {
   }
 
   showHotelDetailsPopUp(item,city){
-    sessionStorage.setItem('showHotelDetails','true')
-   // if(sessionStorage.getItem('showHotelDetails') == 'true'){
-      this.showHotelDetails = 'true';
-    //}
     this.fetchSelectedHotelInfo(item,city)
   }
 
@@ -105,9 +109,12 @@ export class HotelComponent implements OnInit {
     this.superAgentApiService.getPackageHotelInfo(this.stepperAdapter.selectedHotelRequest(item,city),'SAR','en-US').subscribe((data) => {
         this.popupData = data;
         this.popupData.city = city
+        sessionStorage.setItem('hotelDetailsData',JSON.stringify(this.popupData))
+        sessionStorage.setItem('hotelDetails','open')
+        this.showHotelDetails = 'true';
       },(error)=>{
-      this.notifyService.showWarning("No details availabe");
-      this.showHotelDetails = 'false';
+        this.notifyService.showWarning("No details availabe");
+        this.showHotelDetails = 'false';
       }
     );
   }
