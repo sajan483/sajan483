@@ -20,7 +20,8 @@ export class HomeComponent implements OnInit {
   selectionPopUp: ElementRef;
   packages: any[]=[];
   shimmer: boolean =true;
-  depatureAirports:any[] = [];
+  depatureAirports:any;
+  numberOfDays:any;
 
   constructor(private renderer2: Renderer2,private branchApi:BranchApiService,private route:Router) {
 
@@ -41,17 +42,28 @@ export class HomeComponent implements OnInit {
 
   ngOnInit() {
     this.branchApi.getPackages().subscribe((data)=>{
+      var airport:string[]=[];
+      var days:number[]=[];
       data.forEach(element => {
-        if(element.title != ""){
+        if(element.published_to != null){
           this.packages.push(element);
         }
       });
       this.shimmer = false;
       data.forEach(element =>{
-        this.depatureAirports.push(element.boarding_airport)
+        airport.push(element.boarding_airport)
+        days.push(element.num_days);
       })
+      this.depatureAirports = this.onlyUnique(airport)
+      this.numberOfDays = this.onlyUnique(days)
     })
-    console.log(this.depatureAirports)
+    
+  }
+
+  onlyUnique(array) {
+    return array.filter(function(elem, index, self) {
+      return index == self.indexOf(elem);
+    })
   }
 
   showSelectionPopup() {
@@ -60,68 +72,6 @@ export class HomeComponent implements OnInit {
 
   onServiceItemChange(value){
     this.service = value;
-  }
-
-  /**
-   * This method for showing traveller popup
-   * 
-   */
-  showTravelersPopUp() {
-    this.displayTabtravel = !this.displayTabtravel;
-  }
-
-  /**
-   * This method for adding adult count at the traveller popup
-   * 
-   */
-  addAdult() {
-    this.countAdult = this.countAdult + 1;
-  }
-
-  /**
-   * This method for decreasing adult count at the traveller popup
-   * 
-   */
-  minusAdult() {
-    if (this.countAdult > 1) {
-      this.countAdult = this.countAdult - 1;
-    }
-  }
-
-  /**
-   * This method for adding child count at the traveller popup
-   * 
-   */
-  addChild() {
-    this.countChild = this.countChild + 1;
-  }
-
-  /**
-   * This method for decreasing child count at the traveller popup
-   * 
-   */
-  minusChild() {
-    if (this.countChild > 1) {
-      this.countChild = this.countChild - 1;
-    }
-  }
-
-  /**
-     * This method for decreasing infant count at the traveller popup
-     * 
-     */
-  minusInfant() {
-    if (this.countInfant > 0) {
-      this.countInfant = this.countInfant - 1;
-    }
-  }
-
-  /**
-   * This method for adding infant count at the traveller popup
-   * 
-   */
-  addInfant() {
-    this.countInfant = this.countInfant + 1;
   }
 
   viewPackageDetails(id:number){
