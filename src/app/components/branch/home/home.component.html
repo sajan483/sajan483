@@ -37,15 +37,15 @@
                     </div>
                 </div>
                 <div class="p-2">
-                    <select name="" id="" class="form-control">
-                        <option value="" disabled selected>Starting Airport</option>
-                        <option value="" *ngFor="let item of depatureAirports">{{item}}</option>
+                    <select name="" id="" class="form-control" (change)="onAirportSelected($event.target.value)">
+                        <option  disabled selected>Starting Airport</option>
+                        <option  *ngFor="let item of depatureAirports">{{item}}</option>
                     </select>
                 </div>
                 <div class="p-2">
-                    <select name="" id="" class="form-control">
-                        <option value="" disabled selected>Number of days</option>
-                        <option value="" *ngFor="let item of numberOfDays">{{item}}</option>
+                    <select name="" id="" class="form-control" (change)="onNoOfDaysSelected($event.target.value)">
+                        <option disabled selected>Number of days</option>
+                        <option *ngFor="let item of numberOfDays">{{item}}</option>
                     </select>
                 </div>
             </div>

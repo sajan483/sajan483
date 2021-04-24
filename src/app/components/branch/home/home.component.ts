@@ -19,6 +19,7 @@ export class HomeComponent implements OnInit {
   @ViewChild("selectionPopUp", { read: ElementRef, static: false })
   selectionPopUp: ElementRef;
   packages: any[]=[];
+  tempPackages:any[]=[];
   shimmer: boolean =true;
   depatureAirports:any;
   numberOfDays:any;
@@ -57,7 +58,7 @@ export class HomeComponent implements OnInit {
       this.depatureAirports = this.onlyUnique(airport)
       this.numberOfDays = this.onlyUnique(days)
     })
-    
+    this.tempPackages = this.packages
   }
 
   onlyUnique(array) {
@@ -74,7 +75,9 @@ export class HomeComponent implements OnInit {
     this.service = value;
   }
 
-  viewPackageDetails(id:number){
-    this.route.navigate(['/branch/details/'+id])
-  }
+  onNoOfDaysSelected(item){this.packages = this.tempPackages;this.packages = this.packages.filter(x => x.num_days <= item)}
+
+  onAirportSelected(item){this.packages = this.tempPackages;this.packages = this.packages.filter(x => x.boarding_airport == item)}
+
+  viewPackageDetails(id:number){this.route.navigate(['/branch/details/'+id])}
 }
