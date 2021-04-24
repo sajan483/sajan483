@@ -76,4 +76,6 @@ export class PackageDetailsComponent implements OnInit {
     })
   }
 
+  navigatePayment(){}
+
 }
