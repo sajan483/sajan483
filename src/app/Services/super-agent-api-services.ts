@@ -73,7 +73,6 @@ export class SuperAgentApiService {
       .post(this.BASE_URL + "packages/hotels/search/?lang=" + lang, data, this.options)
       .map((res) => res.json());
   }
-
   updatePackageAPI(data,currency,lang,id){
     return this.http
       .put(this.BASE_URL + "packages/"+id+"/?currency=" + currency + "&lang=" + lang, data, this.options)
@@ -96,36 +95,6 @@ export class SuperAgentApiService {
     return this.http
       .get(this.BASE_URL + "packages/"+id+"/", this.options)
       .map((res) => res.json());
-  }
-
-  uploadTripImage(data,currency,lang,id){
-    let formData = new FormData();
-    formData.append('[attachments][0][file]',data[0]);
-    return this.http
-      .put(this.BASE_URL + "packages/"+id+"/?currency=" + currency + "&lang=" + lang, formData, this.options)
-      .map((res) => res.json());
-  }
-
-  forItinerarySetAPI(param,currency,lang,id){
-    let formData = new FormData();
-    param.forEach((item,index) => {
-          if(item.title){
-            formData.append(`[itinerary_set][${index}][title]`, item.title);
-          }
-          if(item.from_date){
-            formData.append(`[itinerary_set][${index}][from_date]`, item.from_date);
-          }
-          if(item.details){
-            formData.append(`[itinerary_set][${index}][details]`, item.details);
-          }
-          if(item.attachments){
-            item.attachments.map(x=>x.file).forEach((photo,i) => {
-            formData.append(`[itinerary_set][${index}][attachments][${i}][file]`, photo);
-            });
-          }       
-        });
-    return this.http
-      .put(this.BASE_URL + "packages/"+id+"/?currency=" + currency + "&lang=" + lang,formData,this.optionsForForm);
   }
 
   getPackageHotelInfo(data,currency,lang) {
@@ -209,4 +178,37 @@ export class SuperAgentApiService {
   getSalesOverView(month) {
     return this.http.get(this.BASE_URL2 +'dashboard/overview?month='+month, this.options).map(res => res.json());
   }
+
+  uploadTripImage(data,currency,lang,id){
+    let formData = new FormData();
+    formData.append('[attachments][0][file]',data[0].file);
+    console.log("m",formData.get('[attachments][0][file]'));
+     return this.http
+      .put(this.BASE_URL + "packages/"+id+"/?currency=" + currency + "&lang=" + lang, formData, this.options)
+      .map((res) => res.json());
+  }
+
+  forItinerarySetAPI(param,currency,lang,id){
+    let formData = new FormData();
+    param.forEach((item,index) => {
+          if(item.title){
+            formData.append(`[itinerary_set][${index}][title]`, item.title);
+          }
+          if(item.from_date){
+            formData.append(`[itinerary_set][${index}][from_date]`, item.from_date);
+          }
+          if(item.details){
+            formData.append(`[itinerary_set][${index}][details]`, item.details);
+          }
+          if(item.attachments){
+            item.attachments.map(x=>x.file).forEach((photo,i) => {
+            formData.append(`[itinerary_set][${index}][attachments][${i}][file]`, photo);
+            console.log('dsdsdsd',formData.get('[itinerary_set][${index}][attachments][${i}][file]`'))
+            });
+          }       
+        });
+    return this.http
+      .put(this.BASE_URL + "packages/"+id+"/?currency=" + currency + "&lang=" + lang,formData,this.optionsForForm);
+  }
+
 }

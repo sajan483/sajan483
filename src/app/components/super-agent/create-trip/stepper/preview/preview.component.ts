@@ -11,6 +11,7 @@ import { Router } from '@angular/router';
   templateUrl: './preview.component.html',
   styleUrls: ['./preview.component.scss']
 })
+
 export class PreviewComponent implements OnInit {
   superAgentApiService:SuperAgentApiService;
   commonApiService:CommonApiService;
