@@ -73,7 +73,6 @@ export class SuperAgentApiService {
       .post(this.BASE_URL + "packages/hotels/search/?lang=" + lang, data, this.options)
       .map((res) => res.json());
   }
-
   updatePackageAPI(data,currency,lang,id){
     return this.http
       .put(this.BASE_URL + "packages/"+id+"/?currency=" + currency + "&lang=" + lang, data, this.options)
