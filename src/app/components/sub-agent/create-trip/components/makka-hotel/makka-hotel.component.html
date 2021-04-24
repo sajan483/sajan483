@@ -175,16 +175,6 @@
                                             <div class="pr-2"><i class="locationicon icns icon_size_15"></i></div>
                                             <div class="fs12 clr52">{{item?.address}}</div>
                                         </div>
-                                        <!-- <div class="d-inline-flex pb5">
-                                            <div *ngIf="item.phone" class="d-inline-flex pr-3">
-                                                <div class="pr-2"><i class="Phoneicon icns icon_size_15"></i></div>
-                                                <div class="fs12 clr52">{{item?.phone}}</div>
-                                            </div>
-                                            <div *ngIf="item.email" class="d-inline-flex">
-                                                <div class="pr-2"><i class="mailicon icns icon_size_15"></i></div>
-                                                <div class="fs12 clr52">{{item?.email}}</div>
-                                            </div>
-                                        </div> -->
                                         <div *ngIf="item.description && item.description.length > 200">
                                             <div class="pb5 fs13 clr52 desptn divexpandanimation" id="descrptionLess{{i}}">{{item?.description}}</div>
                                             <div class="readmorenavigate fs13" id="readMoreBttn{{i}}" (click)="readMore($event,i)">+ Read More</div>
@@ -216,4 +206,3 @@
 <div *ngIf="showHotelDetails">
     <app-hotel-details-popup (handleNotif)="childEvent($event)" (changeItinerary)="childEventForChangeItinerary($event)" (detailsFlag)="getDetailsPopupFlag($event)"></app-hotel-details-popup>
 </div>
-<!-- <app-hotel-details-popup (handleNotif)="childEvent($event)" (changeItinerary)="childEventForChangeItinerary($event)" *ngIf="showHotelDetails" [hotelInfo]="hotelInfo" [hotelData]="hotelData"></app-hotel-details-popup> -->
