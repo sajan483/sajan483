@@ -104,5 +104,5 @@
     </div>
 </div>
 <div *ngIf="showHotelDetails == 'true'">
-    <app-hotel-details-popup [popupData]="popupData" (showHotelDetailsEmitter)="getPopupFlag($event)"></app-hotel-details-popup>
+    <app-hotel-details-popup (showHotelDetailsEmitter)="getPopupFlag($event)"></app-hotel-details-popup>
 </div>

@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnChanges, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, OnChanges, OnInit, Output } from '@angular/core';
 import { StepperAdapter } from 'src/app/adapters/super-agent/stepper-adapter';
 import { HelperService } from 'src/app/common/services/helper-service';
 import { SuperAgentApiService } from 'src/app/Services/super-agent-api-services';
@@ -11,7 +11,7 @@ import { StepperComponent } from '../../stepper.component';
   styleUrls: ['./hotel-details-popup.component.scss']
 })
 
-export class HotelDetailsPopupComponent implements OnInit, OnChanges {
+export class HotelDetailsPopupComponent implements OnInit {
   viewImagePopup:boolean=false;
   loader:boolean=true;
   private stepperAdapter: StepperAdapter = new StepperAdapter(null);
@@ -24,8 +24,7 @@ export class HotelDetailsPopupComponent implements OnInit, OnChanges {
   hotelPics2: any[];
   moreimages: boolean;
   imageshow: number;
-
-  @Input() popupData :any;
+  popupData
   selectedRoomInfo: any;
   selectedRoomDetails: boolean = false;
   roomVariation: any[] = [];
@@ -42,12 +41,10 @@ export class HotelDetailsPopupComponent implements OnInit, OnChanges {
     private superAgentApiService:SuperAgentApiService, private appStore : AppStore,
     private helperService : HelperService) { }
 
-  ngOnChanges() {
-    this.setPopUp()
-  }
-
   ngOnInit() {
-    this.hideLoader()
+    this.popupData = JSON.parse(sessionStorage.getItem('hotelDetailsData'))
+    this.loader=false
+    this.setPopUp()
   }
 
   setPopUp(){
@@ -83,7 +80,6 @@ export class HotelDetailsPopupComponent implements OnInit, OnChanges {
 
       this.hotelPics = [];
       this.hotelPics1 = [];
-      this.loader=false
       this.hotelPics2 = [];
       this.moreimages = false;
       this.imageshow = 0;
@@ -101,23 +97,20 @@ export class HotelDetailsPopupComponent implements OnInit, OnChanges {
     }
   }
 
-  hideLoader(){
-    setTimeout(function(){
-      this.loader=false
-      console.log(this.loader);
-    }, 2000);
-  }
-
   saveSelectedHotel(city){
     if(city == 'MAKKA'){
       this.stepper.stepContent('hotel','MADEENA');
-      this.superAgentApiService.updatePackageAPI(this.stepperAdapter.saveHotelRequest(this.selectedHotel,this.roomVariation,city),'SAR','en-US',this.appStore.packageId).subscribe((res) => {
+      this.superAgentApiService.updatePackageAPI(this.stepperAdapter.saveHotelRequest(this.selectedHotel,this.roomVariation,city),'SAR','en-US',sessionStorage.getItem('packageId')).subscribe((res) => {
     });
+    sessionStorage.setItem('selector','hotelMadeena')
+    sessionStorage.setItem('hotelDetails','close')
     }
     if(city == 'MADEENA'){
       this.stepper.stepContent('transport',null);
-      this.superAgentApiService.updatePackageAPI(this.stepperAdapter.saveHotelRequest(this.selectedHotel,this.roomVariation,city),this.appStore.currencyCode,this.appStore.langCode,this.appStore.packageId).subscribe((res) => {
+      this.superAgentApiService.updatePackageAPI(this.stepperAdapter.saveHotelRequest(this.selectedHotel,this.roomVariation,city),this.appStore.currencyCode,this.appStore.langCode,sessionStorage.getItem('packageId')).subscribe((res) => {
     });
+    sessionStorage.setItem('selector','transport')
+    sessionStorage.setItem('hotelDetails','close')
     }
   }
 
@@ -163,8 +156,9 @@ export class HotelDetailsPopupComponent implements OnInit, OnChanges {
   }
 
   hideHotelDetailsPopup(){
-    this.showHotelDetails = 'false';
+    this.showHotelDetails = 'false';  
     this.showHotelDetailsEmitter.emit(this.showHotelDetails);
+    sessionStorage.setItem('hotelDetails','close')
   }
 
   disableHotelSaveBtn(){
