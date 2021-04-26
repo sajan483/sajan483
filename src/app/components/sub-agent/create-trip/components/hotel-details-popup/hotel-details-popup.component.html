@@ -278,7 +278,7 @@
                                 </div>
                                 <aside class="roomPriceWrap">
                                     <div class="roominfo-title">
-                                        {{'Price for' | translate}} {{selectedRoomCount}} {{'Room for' | translate}} {{noOfDays}} nights
+                                        {{'Price for' | translate}} {{selectedRoomCount}} {{'Room for' | translate}} {{numberOfDays}} nights
                                     </div>
                                     <div class="stickyPrice text-center">
                                         <div>
@@ -291,7 +291,7 @@
                                             <span class="fw500 fs24 text-dark">{{selectedHotel?.currency }} {{totalRoomPrice | number:'.2-2'}} </span>
                                         </strong>
                                         <div class="clr52 fs12 fw500 mt10">
-                                            {{'Price for' | translate}} {{selectedRoomCount}} {{'Room for' | translate}} {{noOfDays}} {{'Nights' | translate}}
+                                            {{'Price for' | translate}} {{selectedRoomCount}} {{'Room for' | translate}} {{numberOfDays}} {{'Nights' | translate}}
                                         </div>
                                         <div class="clr52 fs14 fw500 mt10">{{'VAT & Taxes Included' | translate}}</div>
                                         <button class="searchbutton mt10" (click)="bookHotel()" [disabled]="!makkaSelectActivate">{{'Select' | translate}}</button>
