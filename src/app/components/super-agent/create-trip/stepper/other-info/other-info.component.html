@@ -61,7 +61,7 @@
                                 <div class="col-md-4 mb30">
                                     <label class="fs14 fw400 lh14 pl-1">Day(s) :</label>
                                     <select class="owldatebrdr w-100 form-control" formControlName="days" [ngClass]="{ 'is-invalid': submitted && getValidity(i) }">
-                                        <option *ngFor="let k of [].constructor(travelDays);let i = index;" value ="{{i+1}}" >day {{i+1}}</option>
+                                        <option *ngFor="let k of [].constructor(travelDays);let i = index;" [value] ="i+1" >day {{i+1}}</option>
                                     </select>
                                 </div>
                                 <div class="col-md-4 mb30">

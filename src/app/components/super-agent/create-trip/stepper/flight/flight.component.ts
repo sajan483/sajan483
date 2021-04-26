@@ -8,6 +8,8 @@ import { StepperComponent } from '../stepper.component';
 import { SuperAgentApiService } from 'src/app/Services/super-agent-api-services';
 import { AppStore } from 'src/app/stores/app.store';
 import { HelperService } from 'src/app/common/services/helper-service';
+import Swal from 'sweetalert2';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-flight',
@@ -34,6 +36,8 @@ export class FlightComponent implements OnInit {
   destination = new FormControl();
   airline = new FormControl();
   flightListingFlag:boolean=false;
+  srcError:boolean = false;
+  destError:boolean = false;
   fromLocation:any = {
     iata:"DXB",
     city:"Dubai"
@@ -68,7 +72,7 @@ export class FlightComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
-    private commonService: SuperAgentApiService, private stepper: StepperComponent, private appStore: AppStore, private helperService : HelperService) { }
+    private commonService: SuperAgentApiService, private stepper: StepperComponent, private appStore: AppStore, private helperService : HelperService, private router : Router) { }
 
   ngOnInit() {
     this.searchData = JSON.parse(sessionStorage.getItem('searchData'))
@@ -98,7 +102,7 @@ export class FlightComponent implements OnInit {
   get fare() { return this.fareForm.controls}
 
   get submit() {
-    if(this.source.value != null && this.source.value != '' && this.destination.value != null && this.destination.value != '' && this.airline.value != null && this.airline.value != '' && this.searchForm.valid){
+    if(this.source.value != null && this.source.value != '' && this.destination.value != null && this.destination.value != '' && this.airline.value != null && this.airline.value != '' && this.searchForm.valid && !this.destError && !this.srcError){
       return true
     }
     else{
@@ -136,7 +140,7 @@ export class FlightComponent implements OnInit {
   }
 
   setReturnMinDate(){
-   this.returnMin=this.form.departDate.value
+   this.returnMin = this.form.departDate.value
   }
 
   getAirportListSrc(){
@@ -196,15 +200,29 @@ export class FlightComponent implements OnInit {
   }
 
   setFromLocation(data){
-    this.fromLocation.city = data.city
-    this.fromLocation.iata = data.iata
-    this.searchResult.fromLocation.city = data.city
+    this.srcError = false
+    this.destError = false
+    if(this.destLocation.city == data.city){
+      this.srcError = true
+    }
+    else{
+      this.fromLocation.city = data.city
+      this.fromLocation.iata = data.iata
+      this.searchResult.fromLocation.city = data.city
+    }
   }
 
   setDestLocation(data){
-    this.destLocation.city = data.city
-    this.destLocation.iata = data.iata
-    this.searchResult.destLocation.city = data.city
+    this.destError = false
+    this.srcError=false
+    if(this.fromLocation.city == data.city){
+      this.destError = true
+    }
+    else{
+      this.destLocation.city = data.city
+      this.destLocation.iata = data.iata
+      this.searchResult.destLocation.city = data.city
+    }
   }
 
   setAirline(data){
@@ -256,6 +274,14 @@ export class FlightComponent implements OnInit {
             this.loader=false;
             this.available=false;
           }
+        }, error => {
+          Swal.fire({
+            icon: 'error',
+            text: 'Something Went Wrong',
+            confirmButtonText: 'Search Again'
+          }).then((result) => {
+            this.router.navigate(['superagent/createTrip']);
+          })
         }) 
       }
     }
@@ -282,6 +308,14 @@ export class FlightComponent implements OnInit {
         this.loader=false;
         this.available=false;
       }
+    }, error => {
+      Swal.fire({
+        icon: 'error',
+        text: 'Something Went Wrong',
+        confirmButtonText: 'Search Again'
+      }).then((result) => {
+        this.router.navigate(['superagent/createTrip']);
+      })
     })
   }
 
