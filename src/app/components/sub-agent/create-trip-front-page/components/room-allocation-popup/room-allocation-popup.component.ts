@@ -150,7 +150,7 @@ export class RoomAllocationPopupComponent implements OnInit {
       this.router.navigate(['subagent/createTrip'], { queryParams: { steps: this.dataFromPopUp.steps.join(",")} });
       this.appStore.showRoomAlPopup = false;
     }
-    CreateTripComponent.RoomData = this.userRooms;
+    sessionStorage.setItem("roomData",JSON.stringify(this.userRooms));
   }
 
   /**
