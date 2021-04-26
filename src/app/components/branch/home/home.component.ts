@@ -57,7 +57,7 @@ export class HomeComponent implements OnInit {
         days.push(element.num_days);
       })
       this.depatureAirports = this.onlyUnique(airport)
-      this.numberOfDays = this.onlyUnique(days)
+      this.numberOfDays = this.onlyUnique(days).sort((a, b)=> a-b)
     })
     this.tempPackages = this.packages
   }
