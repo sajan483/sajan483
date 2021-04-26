@@ -46,7 +46,7 @@ export class HotelDetailsPopupComponent implements OnInit ,OnChanges{
   ddate: any;
   countadult: any;
   countchild: any;
-  noOfDays: number;
+  numberOfDays: number;
   search: string = "";
   setViewData: {};
   selectedRoomDetails: boolean = false;
@@ -69,8 +69,6 @@ export class HotelDetailsPopupComponent implements OnInit ,OnChanges{
     private translate :TranslateService,
   ) {}
 
-  //@Input() hotelInfo : any;
-  //@Input() hotelData : any;
   @Output() handleNotif = new EventEmitter();
   @Output() changeItinerary = new EventEmitter();
 
@@ -89,7 +87,7 @@ export class HotelDetailsPopupComponent implements OnInit ,OnChanges{
   }
 
    ngOnInit() {
-    this.totalTravellers = this.appStore.adultCount + this.appStore.childCount;
+    this.totalTravellers = JSON.parse(sessionStorage.getItem('userObject')).travallersCount;
     this.rooms = JSON.parse(sessionStorage.getItem('roomData'));
     /*
      * this method for fetching selected hotel details
@@ -104,7 +102,7 @@ export class HotelDetailsPopupComponent implements OnInit ,OnChanges{
 
   ngOnChanges() {
     //this.showHotelDetails = true
-    this.totalTravellers = this.appStore.adultCount + this.appStore.childCount;
+    this.totalTravellers = JSON.parse(sessionStorage.getItem('userObject')).travallersCount;
     this.selectedHotel = this.hotelData;
     this.rooms = JSON.parse(sessionStorage.getItem('roomData'));
     
@@ -129,12 +127,13 @@ export class HotelDetailsPopupComponent implements OnInit ,OnChanges{
       this.showHotelDetails = true; 
       this.selectedRoomGroups = x.roomGroups;
       this.makkaSelectActivate = x.isSelectBtnActive;
-      this.noOfDays = x.diffDays;
       this.hotelPics = x.hotelPics;
       this.isGrouped = x.isGrouped;
       this.noOfImages = this.hotelPics.length;
       if(x.roomPrice > 0){ this.totalRoomPrice = x.roomPrice }
+      this.numberOfDays = JSON.parse(sessionStorage.getItem('noOfDays'))
     }
+    
   }
 
   

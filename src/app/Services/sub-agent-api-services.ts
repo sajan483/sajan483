@@ -15,28 +15,30 @@ import { environment } from "src/environments/environment";
 import { Observable } from "rxjs/internal/Observable";
 import { listAirport } from "../models/listAirport";
 
+var access = sessionStorage.getItem("accesstoken");
+
 @Injectable()
 export class SubAgentApiService {
   BASE_URL: any = environment.baseUrl;
   BASE_URL2: any = environment.baseUrl2;
-
+  
   httpOptions = {
     headers: new HttpHeaders({
       "Content-Type": "application/json",
-      Authorization: "Bearer " + sessionStorage.getItem("accesstoken"),
+      Authorization: "Bearer " + access,
     }),
   };
 
   options = {
     headers: new Headers({
       "Content-Type": "application/json",
-      Authorization: "Bearer " + sessionStorage.getItem("accesstoken"),
+      Authorization: "Bearer " + access,
     }),
   };
 
   optionsForForm = {
     headers: new Headers({
-      Authorization: "Bearer " + sessionStorage.getItem("accesstoken"),
+      Authorization: "Bearer " + access,
     }),
   };
 
@@ -52,6 +54,7 @@ export class SubAgentApiService {
       .get(this.BASE_URL + "staff/profile/", this.options)
       .map((res) => res.json());
   }
+  
   getSelectedHotelInfo(data, currency, lang) {
     return this.http
       .post(
@@ -97,7 +100,7 @@ export class SubAgentApiService {
   
   updateCustomTrip(id,data){
     return this.http
-    .put(this.BASE_URL2 + "custom_trips/"+id+"/",data, this.options)
+    .put(this.BASE_URL + "custom_trips/"+id+"/",data, this.options)
     .map((res) => res.json());
   }
 
