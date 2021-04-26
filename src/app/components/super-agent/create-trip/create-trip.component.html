@@ -112,7 +112,7 @@
                                     CHECK-IN
                                     <mat-icon class="align-middle">keyboard_arrow_down</mat-icon>
                                 </p>
-                                <input class="date-input" [min]="mekkahInMin" matInput [matDatepicker]="pickerMekIn" (dateChange)="setMekkahOutMinDate()" formControlName="mekIn">
+                                <input class="date-input" [min]="mekkahInMin" [max]="mekkahInMax" matInput [matDatepicker]="pickerMekIn" (dateChange)="setMekkahOutMinDate()" formControlName="mekIn">
                                 <mat-datepicker #pickerMekIn></mat-datepicker>
                             </div>
                         </div>
@@ -122,7 +122,7 @@
                                     CHECK-OUT
                                     <mat-icon class="align-middle">keyboard_arrow_down</mat-icon>
                                 </p>
-                                <input class="date-input" [min]="mekkahOutMin" matInput [matDatepicker]="pickerMekOut" (dateChange)="setMedinahInMinDate()" formControlName="mekOut">
+                                <input class="date-input" [min]="mekkahOutMin" [max]="mekkahOutMax" matInput [matDatepicker]="pickerMekOut" (dateChange)="setMedinahInMinDate()" formControlName="mekOut">
                                 <mat-datepicker #pickerMekOut></mat-datepicker>
                             </div>
                         </div>
@@ -137,7 +137,7 @@
                                     CHECK-IN
                                     <mat-icon class="align-middle">keyboard_arrow_down</mat-icon>
                                 </p>
-                                <input class="date-input" [min]="medinahInMin" matInput [matDatepicker]="pickerMedIn" (dateChange)="setMedinahOutMinDate()" formControlName="medIn">
+                                <input class="date-input" [min]="medinahInMin" [max]="medinahInMax" matInput [matDatepicker]="pickerMedIn" (dateChange)="setMedinahOutMinDate()" formControlName="medIn">
                                 <mat-datepicker #pickerMedIn></mat-datepicker>
                             </div>
                         </div>

@@ -33,73 +33,73 @@ export class StepperComponent implements OnInit {
 
   ngOnInit() {
 
-    if(sessionStorage.getItem('selector') == null){
+    if(sessionStorage.getItem('selector') == null || sessionStorage.getItem('selector') === 'flight'){
       this.selector = 'flight'
       document.getElementById(this.selector).style.backgroundColor = "#f3ac3c";
       this.dataFromSearchPage = StepperComponent.searchData;
     }
 
     if(sessionStorage.getItem('selector') === 'hotelMakkah'){
-      document.getElementById('flight').style.backgroundColor = "#f3ac3c";
+      document.getElementById('flight').style.backgroundColor = "#6da631";
       document.getElementById('MAKKA').style.backgroundColor = "#f3ac3c";
       this.selector = 'hotel'
       this.hotelFlag='MAKKA'
     }
     
     if(sessionStorage.getItem('selector') === 'hotelMadeena'){
-      document.getElementById('flight').style.backgroundColor = "#f3ac3c";
-      document.getElementById('MAKKA').style.backgroundColor = "#f3ac3c";
+      document.getElementById('flight').style.backgroundColor = "#6da631";
+      document.getElementById('MAKKA').style.backgroundColor = "#6da631";
       document.getElementById('MADEENA').style.backgroundColor = "#f3ac3c";
       this.selector = 'hotel'
       this.hotelFlag='MADEENA'
     }
 
     if(sessionStorage.getItem('selector') === 'transport'){
-      document.getElementById('flight').style.backgroundColor = "#f3ac3c";
-      document.getElementById('MAKKA').style.backgroundColor = "#f3ac3c";
-      document.getElementById('MADEENA').style.backgroundColor = "#f3ac3c";
+      document.getElementById('flight').style.backgroundColor = "#6da631";
+      document.getElementById('MAKKA').style.backgroundColor = "#6da631";
+      document.getElementById('MADEENA').style.backgroundColor = "#6da631";
       document.getElementById('transport').style.backgroundColor = "#f3ac3c";
       this.selector = 'transport'
     }
 
     if(sessionStorage.getItem('selector') === 'otherServices'){
-      document.getElementById('flight').style.backgroundColor = "#f3ac3c";
-      document.getElementById('MAKKA').style.backgroundColor = "#f3ac3c";
-      document.getElementById('MADEENA').style.backgroundColor = "#f3ac3c";
-      document.getElementById('transport').style.backgroundColor = "#f3ac3c";
+      document.getElementById('flight').style.backgroundColor = "#6da631";
+      document.getElementById('MAKKA').style.backgroundColor = "#6da631";
+      document.getElementById('MADEENA').style.backgroundColor = "#6da631";
+      document.getElementById('transport').style.backgroundColor = "#6da631";
       document.getElementById('otherServices').style.backgroundColor = "#f3ac3c";
       this.selector = 'otherServices'
     }
 
     if(sessionStorage.getItem('selector') === 'payment'){
-      document.getElementById('flight').style.backgroundColor = "#f3ac3c";
-      document.getElementById('MAKKA').style.backgroundColor = "#f3ac3c";
-      document.getElementById('MADEENA').style.backgroundColor = "#f3ac3c";
-      document.getElementById('transport').style.backgroundColor = "#f3ac3c";
-      document.getElementById('otherServices').style.backgroundColor = "#f3ac3c";
+      document.getElementById('flight').style.backgroundColor = "#6da631";
+      document.getElementById('MAKKA').style.backgroundColor = "#6da631";
+      document.getElementById('MADEENA').style.backgroundColor = "#6da631";
+      document.getElementById('transport').style.backgroundColor = "#6da631";
+      document.getElementById('otherServices').style.backgroundColor = "#6da631";
       document.getElementById('payment').style.backgroundColor = "#f3ac3c";
       this.selector = 'payment'
     }
 
     if(sessionStorage.getItem('selector') === 'otherInfo'){
-      document.getElementById('flight').style.backgroundColor = "#f3ac3c";
-      document.getElementById('MAKKA').style.backgroundColor = "#f3ac3c";
-      document.getElementById('MADEENA').style.backgroundColor = "#f3ac3c";
-      document.getElementById('transport').style.backgroundColor = "#f3ac3c";
-      document.getElementById('otherServices').style.backgroundColor = "#f3ac3c";
-      document.getElementById('payment').style.backgroundColor = "#f3ac3c";
+      document.getElementById('flight').style.backgroundColor = "#6da631";
+      document.getElementById('MAKKA').style.backgroundColor = "#6da631";
+      document.getElementById('MADEENA').style.backgroundColor = "#6da631";
+      document.getElementById('transport').style.backgroundColor = "#6da631";
+      document.getElementById('otherServices').style.backgroundColor = "#6da631";
+      document.getElementById('payment').style.backgroundColor = "#6da631";
       document.getElementById('otherInfo').style.backgroundColor = "#f3ac3c";
       this.selector = 'otherInfo'
     }
 
     if(sessionStorage.getItem('selector') === 'preview'){
-      document.getElementById('flight').style.backgroundColor = "#f3ac3c";
-      document.getElementById('MAKKA').style.backgroundColor = "#f3ac3c";
-      document.getElementById('MADEENA').style.backgroundColor = "#f3ac3c";
-      document.getElementById('transport').style.backgroundColor = "#f3ac3c";
-      document.getElementById('otherServices').style.backgroundColor = "#f3ac3c";
-      document.getElementById('payment').style.backgroundColor = "#f3ac3c";
-      document.getElementById('otherInfo').style.backgroundColor = "#f3ac3c";
+      document.getElementById('flight').style.backgroundColor = "#6da631";
+      document.getElementById('MAKKA').style.backgroundColor = "#6da631";
+      document.getElementById('MADEENA').style.backgroundColor = "#6da631";
+      document.getElementById('transport').style.backgroundColor = "#6da631";
+      document.getElementById('otherServices').style.backgroundColor = "#6da631";
+      document.getElementById('payment').style.backgroundColor = "#6da631";
+      document.getElementById('otherInfo').style.backgroundColor = "#6da631";
       document.getElementById('preview').style.backgroundColor = "#f3ac3c";
       this.selector = 'preview'
     }
@@ -107,14 +107,66 @@ export class StepperComponent implements OnInit {
   }
 
   stepContent(component, flag) {
+
+    if(component == 'flight'){
+      document.getElementById('flight').style.backgroundColor = "#f3ac3c";
+      this.selector = 'flight'
+    }
+
     if (component == "hotel") {
       this.selector = component;
       this.hotelFlag = flag;
-      document.getElementById(flag).style.backgroundColor = "#f3ac3c";
-    } else {
-      this.selector = component;
-      document.getElementById(component).style.backgroundColor = "#f3ac3c";
+
+      if(flag == "MAKKA"){
+        document.getElementById('flight').style.backgroundColor = "#6da631";
+        document.getElementById(flag).style.backgroundColor = "#f3ac3c";
+      }
+      else {
+        document.getElementById('flight').style.backgroundColor = "#6da631";
+        document.getElementById('MAKKA').style.backgroundColor = "#6da631";
+        document.getElementById(flag).style.backgroundColor = "#f3ac3c";
+      }
+
     }
+
+    if(component == 'transport'){
+      document.getElementById('flight').style.backgroundColor = "#6da631";
+      document.getElementById('MAKKA').style.backgroundColor = "#6da631";
+      document.getElementById('MADEENA').style.backgroundColor = "#6da631";
+      document.getElementById('transport').style.backgroundColor = "#f3ac3c";
+      this.selector = 'transport'
+    }
+
+    if(component == 'otherServices'){
+      document.getElementById('flight').style.backgroundColor = "#6da631";
+      document.getElementById('MAKKA').style.backgroundColor = "#6da631";
+      document.getElementById('MADEENA').style.backgroundColor = "#6da631";
+      document.getElementById('transport').style.backgroundColor = "#6da631";
+      document.getElementById('otherServices').style.backgroundColor = "#f3ac3c";
+      this.selector = 'otherServices'
+    }
+
+    if(component == 'payment'){
+      document.getElementById('flight').style.backgroundColor = "#6da631";
+      document.getElementById('MAKKA').style.backgroundColor = "#6da631";
+      document.getElementById('MADEENA').style.backgroundColor = "#6da631";
+      document.getElementById('transport').style.backgroundColor = "#6da631";
+      document.getElementById('otherServices').style.backgroundColor = "#6da631";
+      document.getElementById('payment').style.backgroundColor = "#f3ac3c";
+      this.selector = 'payment'
+    }
+
+    if(component == 'otherInfo'){
+      document.getElementById('flight').style.backgroundColor = "#6da631";
+      document.getElementById('MAKKA').style.backgroundColor = "#6da631";
+      document.getElementById('MADEENA').style.backgroundColor = "#6da631";
+      document.getElementById('transport').style.backgroundColor = "#6da631";
+      document.getElementById('otherServices').style.backgroundColor = "#6da631";
+      document.getElementById('payment').style.backgroundColor = "#6da631";
+      document.getElementById('otherInfo').style.backgroundColor = "#f3ac3c";
+      this.selector = 'otherInfo'
+    }
+
   }
 
 }

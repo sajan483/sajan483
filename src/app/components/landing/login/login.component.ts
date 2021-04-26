@@ -116,8 +116,6 @@ export class LoginComponent implements OnInit {
       const body = { 'username': this.username, 'password': this.password }
       this.common.login(body).subscribe(data => {
         this.loginHelperClass.loginResponse(data, this.rememverme);
-        var emp_id = data.staff.employer_id;
-        sessionStorage.setItem("employer_id",emp_id);
         this.bttnactive = false;
       }, error => {
         this.bttnactive = false;

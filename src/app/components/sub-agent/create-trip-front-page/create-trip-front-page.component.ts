@@ -165,27 +165,9 @@ export class CreateTripFrontPageComponent implements OnInit, DoCheck, AfterViewI
   }
 
   ngAfterViewInit(){
-    
-    /**
-     * This method for fetching transport routes
-     * 
-     */
-
-
-     if(sessionStorage.getItem('accesstoken')){
-      this.getTransportRoutes();
-      this.getVehicleType();
-     }
-
-     /**
-      * This method for fetching vehicle type
-      * 
-      */
- 
-     /**
-      * this method for listing recent booking
-      */
-     this.listRecentBooking();
+    this.getTransportRoutes();
+    this.getVehicleType();
+    this.listRecentBooking();
 
   }
   

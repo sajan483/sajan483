@@ -35,8 +35,9 @@ export class loginHelper{
         }
         if (sessionStorage.getItem('accesstoken') != null) {
           if(data.staff.employer_type == 'SUPER'){
-            this.notifyService.showSuccess(this.translate.instant('success !!'));
+            console.log(data.staff.agency_id);
             sessionStorage.setItem('agency_Id', data.staff.agency_id);
+            this.notifyService.showSuccess(this.translate.instant('success !!'));
             this.router.navigate(["superagent/dashboard"]);
           }else if(data.staff.employer_type == 'SUB'){
             this.notifyService.showSuccess(this.translate.instant('success !!'));

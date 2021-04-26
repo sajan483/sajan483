@@ -48,6 +48,7 @@
                                     </mat-option>
                                 </mat-autocomplete>
                                 <p class="airport-name">{{fromLocation.city}}</p>
+                                <mat-error *ngIf="srcError">From & To airports can't be same</mat-error>
                             </div>
                             <div class="col-md br-right">
                                 <p class="hint">SELECT DESTINATION</p>
@@ -66,6 +67,7 @@
                                     </mat-option>
                                 </mat-autocomplete>
                                 <p class="airport-name">{{destLocation.city}}</p>
+                                <mat-error *ngIf="destError">From & To airports can't be same</mat-error>
                             </div>
                         </div>
                     </div>
@@ -170,7 +172,7 @@
                     </div>
                     <p class="route">
                         {{footerData.depFlight.FromName.split('|')[1]}} to {{footerData.depFlight.ToName.split('|')[1]}} &nbsp;&nbsp;
-                        <span>{{footerData.depFlight.Stops}} stops &nbsp;|&nbsp; {{footerData.depFlight.Duration}} &nbsp;</span>
+                        <span>{{footerData.depFlight.Stops}} stop<span *ngIf="footerData.depFlight.Stops > 1">s</span> &nbsp;|&nbsp; {{footerData.depFlight.Duration}} &nbsp;</span>
                     </p>
                 </div>
                 <div class="second-section row">
@@ -216,7 +218,7 @@
                     </div>
                     <p class="route">
                         {{footerData.retFlight.FromName.split('|')[1]}} to {{footerData.retFlight.ToName.split('|')[1]}} &nbsp;&nbsp;
-                        <span>{{footerData.retFlight.Stops}} stops &nbsp;|&nbsp; {{footerData.retFlight.Duration}} &nbsp;</span>
+                        <span>{{footerData.retFlight.Stops}} stop<span *ngIf="footerData.retFlight.Stops > 1">s</span> &nbsp;|&nbsp; {{footerData.retFlight.Duration}} &nbsp;</span>
                     </p>
                 </div>
                 <div class="second-section row">

@@ -7,7 +7,8 @@ import { SuperAgentApiService } from 'src/app/Services/super-agent-api-services'
 import { AppStore } from 'src/app/stores/app.store';
 import { StepperComponent } from '../stepper.component';
 import { HotelsList } from "src/app/models/custome_trip";
-
+import Swal from 'sweetalert2';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-hotel',
@@ -41,7 +42,7 @@ export class HotelComponent implements OnInit {
   popupData: any;
 
   constructor(private fb:FormBuilder,private _superAgentApiService:SuperAgentApiService,
-    private notifyService:NotificationService,private appStore:AppStore, private stepper:StepperComponent) {
+    private notifyService:NotificationService,private appStore:AppStore, private stepper:StepperComponent,private router: Router) {
     this.formBuilder = fb;
     this.superAgentApiService = _superAgentApiService; 
    }
@@ -62,13 +63,22 @@ export class HotelComponent implements OnInit {
   hotelSearch() {
     var data = JSON.parse(sessionStorage.getItem('searchData'))
     this.superAgentApiService
-      .agencyHotelSearch(this.stepperAdapter.hotelSearchRequest(this.hotelCity, data, null),'en-US')
-      .subscribe((data) => {
-        this.hotelsList.response = data;
-        this.hotelsList.city = this.hotelCity;
-        this.loader=false
-   });
- }
+    .agencyHotelSearch(this.stepperAdapter.hotelSearchRequest(this.hotelCity, data, null),'en-US')
+    .subscribe((data) => {
+      this.hotelsList.response = data;
+      this.hotelsList.city = this.hotelCity;
+      this.loader=false
+    }, error => {
+      Swal.fire({
+        icon: 'error',
+        text: 'Something Went Wrong',
+        confirmButtonText: 'Search Again'
+      }).then((result) => {
+        this.router.navigate(['superagent/createTrip']);
+        sessionStorage.removeItem('selector')
+      })
+    });
+  }
 
   setHotelSearchForm(){
     this.hotelSearchForm = this.formBuilder.group({
@@ -137,6 +147,7 @@ export class HotelComponent implements OnInit {
 
   back(){
     if(this.hotelsList.city == 'MAKKA'){
+    console.log(this.hotelsList.city);
     this.stepper.stepContent('flight','')
     sessionStorage.setItem('selector','flight')
     }

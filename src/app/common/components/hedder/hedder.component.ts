@@ -114,7 +114,7 @@ export class HedderComponent implements OnInit, DoCheck {
   }
 
   navigateagencyprofile() {
-    this.router.navigate(["/superagent/profile/", sessionStorage.getItem("employer_id")]);
+    this.router.navigate(["/superagent/profile/", sessionStorage.getItem("agency_Id")]);
   }
 
 }
