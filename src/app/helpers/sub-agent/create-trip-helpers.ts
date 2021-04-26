@@ -18,7 +18,7 @@ export class CreateTripHelper {
     var selectedRoomGroups = [];
     var container: TripRoom = new TripRoom();
     var totalRoomPrice = 0;
-    container.diffDays = this.helperService.noOfDaysBetweenTwoDates(selectedHotel.check_in_time, selectedHotel.check_out_time);
+    sessionStorage.setItem("noOfDays",JSON.stringify(this.helperService.noOfDaysBetweenTwoDates(selectedHotel.check_in_time, selectedHotel.check_out_time))) 
     for (let i = 0; i < selectedHotel.room_groups.length; ++i) {
       for (let j = 0; j < selectedHotel.room_groups[i].rooms.length; ++j) {
         selectedHotel.room_groups[i].rooms[j].insertedState =
