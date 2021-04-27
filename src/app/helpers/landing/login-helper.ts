@@ -34,19 +34,22 @@ export class loginHelper{
           this.cookie.set("password", null);
         }
         if (sessionStorage.getItem('accesstoken') != null) {
-          if(data.staff.employer_type == 'SUPER'){
-            console.log(data.staff.agency_id);
-            sessionStorage.setItem('agency_Id', data.staff.agency_id);
-            this.notifyService.showSuccess(this.translate.instant('success !!'));
-            this.router.navigate(["superagent/dashboard"]);
-          }else if(data.staff.employer_type == 'SUB'){
-            this.notifyService.showSuccess(this.translate.instant('success !!'));
-            this.router.navigate(['subagent/home/']);
-          }else if(data.staff.employer_type == 'BRANCH'){
-            this.notifyService.showSuccess(this.translate.instant('success !!'));
-            this.router.navigate(["branch/home"]);
+          if(data.staff.is_approved == 'False'){
+            this.notifyService.showWarning('Processing !!');
+            this.router.navigate(["upload/"+data.staff.agency_id])
+          }else{
+            if(data.staff.employer_type == 'SUPER'){
+              this.notifyService.showSuccess(this.translate.instant('success !!'));
+              sessionStorage.setItem('agency_Id', data.staff.agency_id);
+              this.router.navigate(["superagent/dashboard"]);
+            }else if(data.staff.employer_type == 'SUB'){
+              this.notifyService.showSuccess(this.translate.instant('success !!'));
+              this.router.navigate(['subagent/home/']);
+            }else if(data.staff.employer_type == 'BRANCH'){
+              this.notifyService.showSuccess(this.translate.instant('success !!'));
+              this.router.navigate(["branch/packages"]);
+            }
           }
-          
         }
     }
 }

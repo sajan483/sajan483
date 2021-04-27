@@ -198,3 +198,19 @@
     overflow: hidden;
     transition: max-height 0.2s ease-out;
 }
+
+.mainimage {
+    max-width: 277px;
+    max-height: 87px;
+}
+
+.selectionbox {
+    min-width: 140px;
+    margin-left: 20px;
+}
+
+.mrgins {
+    margin-left: -25px !important;
+    margin-right: -25px !important;
+    padding: 15px 25px;
+}

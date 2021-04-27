@@ -7,16 +7,16 @@ import { ConfirmationComponent } from 'src/app/components/branch/home/confirmati
 
 const myPath: Routes = [
     {
-        path: "home", component: HomeComponent,
+        path: "packages", component: HomeComponent,
     },
     {
-      path: "details/:id", component: PackageDetailsComponent,
+      path: "packages/:id/details", component: PackageDetailsComponent,
     },
     {
-      path: "payment", component: PaxAndPaymentComponent,
+      path: "payment/:id", component: PaxAndPaymentComponent,
     },
     {
-      path: "confirmation", component: ConfirmationComponent,
+      path: ":id/success", component: ConfirmationComponent,
     },
 ];
 

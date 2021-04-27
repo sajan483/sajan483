@@ -439,7 +439,6 @@
     travellers.push(this.createTripAdapter.createTripBookingRequest(this.travellersForm,this.countryCode,roomRef,this.nationality,this.country_of_residence))
     const body={travellers}
     sessionStorage.setItem('bookingData', JSON.stringify(body))
-    console.log(body);
     this.common.bookTrip(body,sessionStorage.getItem('custom_trip_id')).subscribe((data) => {
       this.bookingId = data.id;
       sessionStorage.setItem("reference_no",data.reference_no)
@@ -562,7 +561,6 @@
     this.travellersForm = this.createTripAdapter.createTripBookingForm();
     if(sessionStorage.getItem('bookingData') != null){
       let data = JSON.parse(sessionStorage.getItem('bookingData')).travellers[0];
-      console.log(data);
       this.travellersForm.controls.first_name.setValue(data.first_name);
       this.travellersForm.controls.last_name.setValue(data.last_name)
       this.travellersForm.controls.gender.setValue(data.gender)

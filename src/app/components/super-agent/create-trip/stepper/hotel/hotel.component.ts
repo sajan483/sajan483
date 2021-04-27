@@ -147,7 +147,6 @@ export class HotelComponent implements OnInit {
 
   back(){
     if(this.hotelsList.city == 'MAKKA'){
-    console.log(this.hotelsList.city);
     this.stepper.stepContent('flight','')
     sessionStorage.setItem('selector','flight')
     }

@@ -26,9 +26,22 @@ export class BranchApiService{
         .map((res) => res.json());
     }
 
+    packagePricing(data, id){
+      return this.http
+        .post(this.BASE_URL + "packages/"+id+"/prices/", data, this.options)
+        .map((res) => res.json());
+    }
+
     bookPackage(data, id){
       return this.http
         .post(this.BASE_URL + "packages/"+id+"/booking/", data, this.options)
         .map((res) => res.json());
     }
+
+    getBookingDetails(Pid,Bid){
+      return this.http
+        .get(this.BASE_URL + "packages/"+Pid+"/bookings_details/"+Bid+"/", this.options)
+        .map((res) => res.json());
+    }
+
 }

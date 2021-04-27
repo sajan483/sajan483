@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { BranchApiService } from 'src/app/Services/branch-api-service';
 
@@ -9,40 +8,23 @@ import { BranchApiService } from 'src/app/Services/branch-api-service';
   styleUrls: ['./package-details.component.scss']
 })
 export class PackageDetailsComponent implements OnInit {
-
-  countForm: FormGroup;
   itenerary:any;
   availabilityCount:any;
   maxCount:any;
   id:any;
   packageDetails: any;
+  branchId:number;
+  adultCount:any = 1;
+  infantCount:any = 0;
+  chindWithoutBedCount:any = 0;
+  availability: number;
 
-  constructor(private fb: FormBuilder, private branchService: BranchApiService,private activeRouter:ActivatedRoute,
+  constructor(private branchService: BranchApiService,private activeRouter:ActivatedRoute,
     private route:Router) { }
 
   ngOnInit() {
-    this.countForm = this.fb.group({
-			adult: [1, Validators.required],
-			child: [0],
-			infant: [0]
-    });
     this.getPackageDetails()
   }
-
-  get continue() {
-    if(this.countForm.valid && (this.countForm.controls.adult.value + this.countForm.controls.child.value + this.countForm.controls.infant.value) <= this.availabilityCount ){
-      return false
-    }
-    else {
-      return true
-    }
-  }
-
-  checkCount(){
-
-  }
-
-  get count() { return this.countForm.controls}
 
   getPackageDetails(){
     this.id = this.activeRouter.params.subscribe(data=>{
@@ -51,7 +33,10 @@ export class PackageDetailsComponent implements OnInit {
         this.packageDetails = data;
         this.itenerary = data.itinerary_set;
         this.availabilityCount = data.max_passengers - data.booked_count;
-        this.maxCount = data.max_passengers
+        this.availability = this.availabilityCount;
+        this.maxCount = data.max_passengers;
+        this.branchId = data.id;
+        sessionStorage.setItem("advancePct",data.advance_pct)
       })
     });
   }
@@ -66,16 +51,41 @@ export class PackageDetailsComponent implements OnInit {
   }
 
   bookPackage(){
-    var data = {
-      adults : this.countForm.controls.adult.value,
-      infants: this.countForm.controls.infant.value,
-      children_without_bed: this.countForm.controls.child.value
+    sessionStorage.setItem("bookAdult",this.adultCount);
+    sessionStorage.setItem("bookChildWithoutBed",this.chindWithoutBedCount);
+    sessionStorage.setItem("bookInfant",this.infantCount);
+    var adult:number = +this.adultCount;
+    var childwithoutbed:number = +this.chindWithoutBedCount;
+    var infant:number = +this.infantCount;
+    var body = {
+      adults : adult,
+      infants: infant,
+      child_without_bed: childwithoutbed,
+      child_with_bed: 0,
+      other_services:[]
     }
-    this.branchService.bookPackage(data, 4670).subscribe((data)=>{
-      this.route.navigate(["/branch/payment"])
-    })
+    
+    this.id = this.activeRouter.params.subscribe(data=>{
+      this.id = data['id'];
+      this.branchService.packagePricing(body, this.id).subscribe((data)=>{
+        sessionStorage.setItem("totoalPrice",data.total_price);
+        this.route.navigate(["/branch/payment/"+this.branchId])
+      })
+    });
   }
 
-  navigatePayment(){}
+  selectInfant(value){
+    this.infantCount = value;
+    this.availability = this.availabilityCount - this.infantCount - this.chindWithoutBedCount - this.adultCount;
+  }
 
+  selectAdult(value){
+    this.adultCount = value;
+    this.availability = this.availabilityCount - this.infantCount - this.chindWithoutBedCount - this.adultCount;
+  }
+
+  selectChildWithoutBed(value){
+    this.chindWithoutBedCount = value;
+    this.availability = this.availabilityCount - this.infantCount - this.chindWithoutBedCount - this.adultCount;
+  }
 }

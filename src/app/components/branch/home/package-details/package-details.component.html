@@ -2,8 +2,8 @@
     <div class="banner">
         <img src="/assets/images/mkbg.jpg">
         <div class="black position-absolute">
-            <h4>LUXURY UMRAH PACKAGE FROM KOZHIKKODE 2021</h4>
-            <p>Akbar Travels Kozhikkode | Departure Date : April 22 Onwards</p>
+            <h4 class="text-capitalize">{{packageDetails?.title}}</h4>
+            <p>{{packageDetails?.operated_by}} | Departure Date : {{packageDetails?.start_date | date:'LLLL dd'}} Onwards</p>
         </div>
         <div class="bottom">
             <div class="container">
@@ -13,21 +13,21 @@
                             <mat-icon class="icon">room</mat-icon>
                             <div>
                                 <p>Departure From</p>
-                                <h5>Kozhikkode Airport</h5>
+                                <h5>{{packageDetails?.trip_flights[0]?.onward_flight?.boarding_airport?.name}}</h5>
                             </div>
                         </div>
                         <div class="d-flex box-3">
                             <mat-icon class="icon">schedule</mat-icon>
                             <div>
                                 <p>Duration</p>
-                                <h5>14 Days</h5>
+                                <h5>{{packageDetails?.num_days}} Days</h5>
                             </div>
                         </div>
                         <div class="d-flex box-3">
                             <mat-icon class="icon">today</mat-icon>
                             <div>
                                 <p>Departure Date</p>
-                                <h5>21 April Onwards</h5>
+                                <h5>{{packageDetails?.start_date | date:'LLLL dd'}} Onwards</h5>
                             </div>
                         </div>
                     </div>
@@ -62,32 +62,43 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="row mt-4 mb-2" [formGroup]="countForm">
-                            <div class="col-md fare-box">
-                                <mat-form-field appearance="outline" class="fw">
-                                    <mat-label>Adult</mat-label>
-                                    <input type="number" matInput placeholder="₹" formControlName="adult" numberOnly>
-                                </mat-form-field>
+                        <div class="row mt-4 mb-2 bg_f5 mrgins">
+                            <div class="col-md-3 pt-1">
+                                <div class="d-inline-flex">
+                                    <div class="fs14 fw500 my-auto">Adult</div>
+                                    <select name="" id="" class="form-control selectionbox" (change)="selectAdult($event.target.value)">
+                                        <option *ngFor="let k of [].constructor(availability);let i = index;" [value]="i+1">{{i+1}}</option>
+                                    </select>
+                                </div>
                             </div>
-                            <div class="col-md fare-box br-left">
-                                <mat-form-field appearance="outline" class="fw">
-                                    <mat-label>Child</mat-label>
-                                    <input type="number" matInput placeholder="₹" formControlName="child" numberOnly>
-                                </mat-form-field>
+                            <div class="col-md-3 brdr_left_right_d3 pt-1">
+                                <div class="d-inline-flex">
+                                    <div class="fs14 fw500 my-auto">Child</div>
+                                    <select name="" id="" class="form-control selectionbox" (change)="selectChildWithoutBed($event.target.value)">
+                                        <option value="0">0</option>
+                                        <option *ngFor="let k of [].constructor(availability);let i = index;" [value]="i+1">{{i+1}}</option>
+                                    </select>
+                                </div>
                             </div>
-                            <div class="col-md fare-box br-left">
-                                <mat-form-field appearance="outline" class="fw">
-                                    <mat-label>Infant</mat-label>
-                                    <input type="number" matInput placeholder="₹" formControlName="infant" numberOnly>
-                                </mat-form-field>
+                            <div class="col-md-3 pt-1">
+                                <div class="d-inline-flex">
+                                    <div class="fs14 fw500 my-auto">Infant</div>
+                                    <select name="" id="" class="form-control selectionbox" (change)="selectInfant($event.target.value)">
+                                        <option value="0">0</option>
+                                        <option *ngFor="let k of [].constructor(availability);let i = index;" [value]="i+1">{{i+1}}</option>
+                                    </select>
+                                </div>
                             </div>
-                            <div class="col-md-2 btn-outer">
-                                <button [disabled]="continue" class="searchbutton pull-right" (click)="navigatePayment()">Book Package</button>
+                            <div class="col-md-3">
+                                <button class="searchbutton pull-right m-0" (click)="bookPackage()">Book Package</button>
                             </div>
                         </div>
                         <div class=" overview ">
                             <p class="ovr-txt mt-4 ">Package Overview</p>
                             <p class="grey-txt " [innerHTML]="packageDetails?.instructions"></p>
+                            <div class="mainimage mt-2 mb-2" *ngIf="packageDetails?.attachments[0]?.file">
+                                <img src="{{packageDetails?.attachments[0].file}}" class="itineraryimg" alt="">
+                            </div>
                         </div>
                         <div class="itenerary " *ngIf="itenerary?.length ">
                             <p class="it-head ">Itenerary</p>
