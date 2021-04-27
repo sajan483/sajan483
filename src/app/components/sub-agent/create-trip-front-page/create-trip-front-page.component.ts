@@ -484,6 +484,7 @@ export class CreateTripFrontPageComponent implements OnInit, DoCheck, AfterViewI
     sessionStorage.removeItem('hotelData');
     sessionStorage.removeItem('hotelInfo');
     sessionStorage.removeItem('steps');
+    sessionStorage.removeItem('bookingData');
   }
 
   /**

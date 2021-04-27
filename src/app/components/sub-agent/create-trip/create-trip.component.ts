@@ -438,6 +438,8 @@
     let travellers = [];
     travellers.push(this.createTripAdapter.createTripBookingRequest(this.travellersForm,this.countryCode,roomRef,this.nationality,this.country_of_residence))
     const body={travellers}
+    sessionStorage.setItem('bookingData', JSON.stringify(body))
+    console.log(body);
     this.common.bookTrip(body,sessionStorage.getItem('custom_trip_id')).subscribe((data) => {
       this.bookingId = data.id;
       sessionStorage.setItem("reference_no",data.reference_no)
@@ -558,6 +560,22 @@
     this.setdataForUserDetailsAtLastPage();
     this.fetchNessoryApisForPaymentPage();
     this.travellersForm = this.createTripAdapter.createTripBookingForm();
+    if(sessionStorage.getItem('bookingData') != null){
+      let data = JSON.parse(sessionStorage.getItem('bookingData')).travellers[0];
+      console.log(data);
+      this.travellersForm.controls.first_name.setValue(data.first_name);
+      this.travellersForm.controls.last_name.setValue(data.last_name)
+      this.travellersForm.controls.gender.setValue(data.gender)
+      this.travellersForm.controls.dob.setValue(data.dob)
+      this.travellersForm.controls.passport_no.setValue(data.passport_no)
+      this.travellersForm.controls.passport_expiry_date.setValue(data.passport_expiry_date)
+      this.nationality = data.nationality;
+      this.country_of_residence = data.country_of_residence;
+      this.countryCode = data.contactinfo.phn_country_code;
+      this.travellersForm.controls.phone_number.setValue(data.contactinfo.phone_number)
+      this.travellersForm.controls.address.setValue(data.contactinfo.address)
+      this.travellersForm.controls.email.setValue(data.contactinfo.email)
+    }
   }
 
   moveStep(){

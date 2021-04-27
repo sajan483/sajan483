@@ -5,6 +5,7 @@ import { AppStore } from 'src/app/stores/app.store';
 import { StepperComponent } from '../stepper.component';
 import { NotificationService } from 'src/app/common/services/notification.service';
 import { Router } from '@angular/router';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-preview',
@@ -96,14 +97,20 @@ export class PreviewComponent implements OnInit {
   publishTrip(){
     this.bttnactive =true;
     if(sessionStorage.getItem('packageId') != null){
-      var body ={"published" : "true",
-      "status":"active",
+      var body ={
+      "status":"ACTIVE",
       "start_date":this.appStore.departureDate,
       "end_date":this.appStore.arrivalDate}
       this.superAgentApiService.publishPackage(body,parseInt(sessionStorage.getItem('packageId'))).subscribe(response => {
         this.bttnactive =false;
-        this.notification.showSuccess("Successfully Published");
-        this.router.navigate(["/superagent/createTrip"]);
+        Swal.fire({
+          icon: 'success',
+          text: 'Package created successfully',
+          confirmButtonText: 'Create New'
+        }).then((result) => {
+          this.router.navigate(['superagent/createTrip']);
+          sessionStorage.removeItem('selector')
+        })
       });
     }
   }
