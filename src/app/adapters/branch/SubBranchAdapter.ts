@@ -2,6 +2,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms'
 
 export class subBranchAdapter {
     fb: FormBuilder;
+    today:Date = new Date();
 
     constructor(){}
 
@@ -20,7 +21,8 @@ export class subBranchAdapter {
 	        "adults":+sessionStorage.getItem("bookAdult"),
 	        "children_with_bed":0,
 	        "children_without_bed":+sessionStorage.getItem("bookChildWithoutBed"),
-	        "infants":+sessionStorage.getItem("bookInfant"),
+            "infants":+sessionStorage.getItem("bookInfant"),
+            "booking_date":this.today,
 	        "contactinfo": {
                 "title": "Mr",
                 "first_name": value.name,

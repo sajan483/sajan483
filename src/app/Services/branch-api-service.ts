@@ -38,5 +38,10 @@ export class BranchApiService{
         .map((res) => res.json());
     }
 
+    getBookingDetails(Pid,Bid){
+      return this.http
+        .get(this.BASE_URL + "packages/"+Pid+"/bookings_details/"+Bid+"/", this.options)
+        .map((res) => res.json());
+    }
 
 }

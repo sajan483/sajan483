@@ -47,7 +47,7 @@ export class loginHelper{
               this.router.navigate(['subagent/home/']);
             }else if(data.staff.employer_type == 'BRANCH'){
               this.notifyService.showSuccess(this.translate.instant('success !!'));
-              this.router.navigate(["branch/home"]);
+              this.router.navigate(["branch/packages"]);
             }
           }
         }

@@ -50,7 +50,6 @@ export class HomeComponent implements OnInit {
           this.packages.push(element);
         }
       });
-      console.log("data",this.packages);
       this.shimmer = false;
       data.forEach(element =>{
         airport.push(element.boarding_airport)
@@ -81,5 +80,5 @@ export class HomeComponent implements OnInit {
   onAirportSelected(item){
     (this.packages.length == 0) ? this.packages = this.tempPackages:this.packages;this.packages=this.packages.filter(x => x.boarding_airport == item)}
 
-  viewPackageDetails(id:number){this.route.navigate(['/branch/details/'+id])}
+  viewPackageDetails(id:number){this.route.navigate(['/branch/packages/'+id+'/details'])}
 }

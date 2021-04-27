@@ -59,13 +59,8 @@ export class PaxAndPaymentComponent implements OnInit {
 
     var body = this.branchAdapter.paymentBody(this.contactInfoForm.value,this.advanceAmount);
     this.branchService.bookPackage(body,this.packageId).subscribe((data)=>{
-      console.log(data)
       sessionStorage.setItem("bookingId",data.id);
       this.route.navigate(["/branch/"+this.packageId+"/success"]);
     })
-  }
-
-  navigateConfirm(){
-    this.route.navigate(["/branch/confirmation"])
   }
 }
