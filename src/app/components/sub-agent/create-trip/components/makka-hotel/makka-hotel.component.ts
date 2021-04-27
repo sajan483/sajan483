@@ -1,6 +1,6 @@
 import { DatePipe } from "@angular/common";
 import { DoCheck, EventEmitter, Input,Output } from "@angular/core";
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit,Pipe,PipeTransform} from "@angular/core";
 import { Router } from "@angular/router";
 import { TranslateService } from "@ngx-translate/core";
 import { CreateTripAdapter } from "src/app/adapters/sub-agent/create-trip-adapter";
@@ -27,7 +27,7 @@ export class MakkaHotelComponent implements OnInit,DoCheck{
   selectedRoomCount: number;
   selectedTravellersCount: number;
   totalRoomPrice: number;
-  userFilter: any;
+  userFilter: any = { name: '' };
   selectedHotel: any;
   selectedRoomGroups: any[];
   makkaHotelName: any;

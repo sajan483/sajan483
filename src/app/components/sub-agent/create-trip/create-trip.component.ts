@@ -626,10 +626,10 @@
    */
   fetchNessoryApisForTransport(){
     this.selectedLanguage = this.appStore.langCode
-    this.commonApiService.getVehicles(this.selectedLanguage).subscribe((data) => {
+    this.common.getVehicles(this.selectedLanguage).subscribe((data) => {
       this.vehicleTypeList = data.vehicle_types.map(x => ( {item_text: x.name, item_id: x.code} ));
     });
-    this.commonApiService.getRoutes(this.selectedLanguage).subscribe((data) => {
+    this.common.getRoutes(this.selectedLanguage).subscribe((data) => {
       this.routeList = data.routes.map(x => ( {item_text: x.name, item_id: x.code } ));
     });
     this.common.getCategories(this.selectedLanguage).subscribe((data) => {

@@ -33,14 +33,14 @@
                     </span>
                 </div>
             </div>
-            <div class="col-md-2 my-auto" (click)="moreFilter()">
+            <!-- <div class="col-md-2 my-auto" (click)="moreFilter()">
                 <div class="cursor-pointer">
                     <span class="pr-2 fs14">More Filters</span>
                     <span><i class="fa fa-angle-down"></i></span>
                 </div>
-            </div>
-            <div class="col-md-3 text-right pr-0">
-                <input class="haram_filter fs13 mt5" type="text" name="search" autocomplete="off" placeholder="Search By Hotel Name">
+            </div> -->
+            <div class="col-md-3 text-right ml-auto pr-0">
+                <input class="haram_filter fs13 mt5" type="text" name="search" [(ngModel)]="userFilter.name" autocomplete="off" placeholder="Search By Hotel Name">
             </div>
             <div class="col-md-12 p-0 maxhght0" id="moreFilterDown">
                 <div class="mt8 row ml-0 mr-0 brdr_top_d3">
