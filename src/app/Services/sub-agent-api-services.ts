@@ -280,4 +280,17 @@ export class SubAgentApiService {
       this.httpOptions
     );
   }
+
+  getRoutes(lang) {
+    return this.http
+      .get(this.BASE_URL + "ground_transports/routes/?lang=" + 'en-US' , this.options)
+      .map((res) => res.json());
+  }
+
+  getVehicles(lang) {
+    return this.http
+      .get(this.BASE_URL + "ground_transports/vehicle_types/?lang=" + 'en-US' , this.options)
+      .map((res) => res.json());
+  }
+
 }
