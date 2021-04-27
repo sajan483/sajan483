@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { BranchRouteModule } from './landing-routing.module';
+import { BranchRouteModule } from './branch-routing.module';
 import { HomeComponent } from 'src/app/components/branch/home/home.component';
 import { PackageDetailsComponent } from 'src/app/components/branch/home/package-details/package-details.component';
 import { MatButtonModule, MatIconModule, MatInputModule, MatRadioModule, MatTabsModule } from '@angular/material';
