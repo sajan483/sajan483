@@ -104,6 +104,8 @@ export class OtherInfoComponent implements OnInit {
             this.tripImg.push({'file':event.target.files[i]})
             reader.readAsDataURL(event.target.files[i]);
         }
+        console.log(this.tripImg);
+        
     }
   }
 
@@ -113,7 +115,9 @@ export class OtherInfoComponent implements OnInit {
   deleteTripImg(i:number){
     const index = this.urls.indexOf(i);
     this.urls.splice(index,1);
+    this.tripImg.splice(index,1);
     this.imageAddButton = true;
+    console.log(this.tripImg);
   }
 
   /**
@@ -123,6 +127,7 @@ export class OtherInfoComponent implements OnInit {
     trns.urlList.splice(i,1)
     trns.attachmentFile.splice(i,1)
     this.array.slice(i,1)
+    this.itineraryFiles.slice(i,1)
   }
   /**
    * add itinerary image
@@ -142,6 +147,8 @@ export class OtherInfoComponent implements OnInit {
         item.attachmentFile = this.itineraryFiles.filter(x=>x.itinerary_id == index);
         this.array.push({'file':event.target.files[i],'itinerary_id':index});
         itineraryReader.readAsDataURL(event.target.files[i]);
+        console.log(this.itineraryFiles,this.array);
+        
       }
     }
   }

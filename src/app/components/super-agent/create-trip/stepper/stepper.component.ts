@@ -167,6 +167,18 @@ export class StepperComponent implements OnInit {
       this.selector = 'otherInfo'
     }
 
+    if(sessionStorage.getItem('selector') === 'preview'){
+      document.getElementById('flight').style.backgroundColor = "#6da631";
+      document.getElementById('MAKKA').style.backgroundColor = "#6da631";
+      document.getElementById('MADEENA').style.backgroundColor = "#6da631";
+      document.getElementById('transport').style.backgroundColor = "#6da631";
+      document.getElementById('otherServices').style.backgroundColor = "#6da631";
+      document.getElementById('payment').style.backgroundColor = "#6da631";
+      document.getElementById('otherInfo').style.backgroundColor = "#6da631";
+      document.getElementById('preview').style.backgroundColor = "#f3ac3c";
+      this.selector = 'preview'
+    }
+
   }
 
 }

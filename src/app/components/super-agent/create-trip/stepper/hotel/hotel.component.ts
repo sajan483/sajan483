@@ -113,11 +113,11 @@ export class HotelComponent implements OnInit {
   }
 
   showHotelDetailsPopUp(item,city){
+    this.detailsLoader = true
     this.fetchSelectedHotelInfo(item,city)
   }
 
   fetchSelectedHotelInfo(item,city) {
-    this.detailsLoader = true
     this.superAgentApiService.getPackageHotelInfo(this.stepperAdapter.selectedHotelRequest(item,city),'SAR','en-US').subscribe((data) => {
         this.popupData = data;
         this.popupData.city = city
