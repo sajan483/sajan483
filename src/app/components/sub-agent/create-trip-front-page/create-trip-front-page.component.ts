@@ -144,12 +144,13 @@ export class CreateTripFrontPageComponent implements OnInit, DoCheck, AfterViewI
   }
 
   ngOnInit() {
-    this.activaleAllSearch = true;
+    this.enableSearchButton = false;
     this.service = "All";
+    this.setDomDataOnRefresh()
+    this.activaleAllSearch = true;
     this.enableMakka = true;
     this.enableMadina = true;
     this.enableTransport = true;
-    this.enableSearchButton = false;
     this.goButtonEnable = false;
     /**
    * This method for checking the availability of the access token
@@ -164,11 +165,52 @@ export class CreateTripFrontPageComponent implements OnInit, DoCheck, AfterViewI
 
   }
 
+  setDomDataOnRefresh(){
+    var obj = JSON.parse(sessionStorage.getItem('userObject'))
+    if(obj != null){
+      this.enableGoButton()
+      this.onServiceItemChange(sessionStorage.getItem('service'))
+      this.goButtonClicked() 
+      this.countTravalers = obj.travallersCount
+      var ser = sessionStorage.getItem('service')
+      if(ser == 'All'){
+        this.makkaCheckInDate = obj.makkahCheckinDate,
+        this.makkaCheckOutDate = obj.makkahCheckoutDate,
+        this.madeenaCheckInDate = obj.madeenaCheckinDate,
+        this.madeenaCheckOutDate = obj.madeenaCheckoutDate,
+        this.transportStartDate = obj.transportStartDate
+      }
+      if(ser == 'Makkah Hotel'){
+        this.service = 'Makkah Hotel'
+        this.makkaCheckInDate = obj.makkahCheckinDate,
+        this.makkaCheckOutDate = obj.makkahCheckoutDate,
+        this.special_code_makkah = obj.specialCodeMakkah,
+        this.subPcc_makkah = obj.subPcc_makkah,
+        this.enableSearchButton = true;
+      }
+      if(ser == 'Medina Hotel'){
+        this.service = 'Medina Hotel'
+        this.madeenaCheckInDate = obj.madeenaCheckinDate,
+        this.madeenaCheckOutDate = obj.madeenaCheckoutDate
+        this.subPcc_medinah = obj.subPcc_medinah,
+        this.special_code_medinah = obj.specialCodeMedinah,
+        this.enableSearchButton = true;
+      }
+      if(ser == 'Transport'){
+        this.service = 'Transport'
+        this.transportStartDate = obj.transportStartDate
+        this.vehicleCode = obj.vehicleType,
+        this.vehicleMaxCapacity = obj.vehicleCapacity,
+        this.routetransport = obj.transportRoute
+        this.enableSearchButton = true;
+      }
+    }
+  }
+
   ngAfterViewInit(){
     this.getTransportRoutes();
     this.getVehicleType();
     this.listRecentBooking();
-
   }
   
    /**
@@ -277,7 +319,7 @@ export class CreateTripFrontPageComponent implements OnInit, DoCheck, AfterViewI
    */
   goButtonClicked() {
     this.resetBooleans();
-    this.clearPreviousDataForFreshSearch();
+    //this.clearPreviousDataForFreshSearch();
     (<HTMLElement>document.getElementById("dateEnterDiv")).style.maxHeight = "456px";
     this.appStore.adultCount = this.countAdult;
     this.appStore.childCount = this.countChild;
@@ -672,6 +714,7 @@ export class CreateTripFrontPageComponent implements OnInit, DoCheck, AfterViewI
    */
 
   onServiceItemChange(value) {
+    sessionStorage.setItem('service',value)
     // (<HTMLElement>document.getElementById("dateEnterDiv")).style.maxHeight = "0px";
     this.service = value;
     if (value == "All") {
