@@ -101,7 +101,7 @@ export class CreateTripFrontPageComponent implements OnInit, DoCheck, AfterViewI
   madeenaMaxdate: Date;
   madeenaMindate: any;
   constructor(
-    private commonApiService: CommonApiService,
+    private commonApiService: SubAgentApiService,
     private subAgentApiService:SubAgentApiService,
     private appStore: AppStore,
     private translate: TranslateService,
@@ -178,6 +178,8 @@ export class CreateTripFrontPageComponent implements OnInit, DoCheck, AfterViewI
         this.madeenaCheckInDate = obj.madeenaCheckinDate,
         this.madeenaCheckOutDate = obj.madeenaCheckoutDate,
         this.transportStartDate = obj.transportStartDate
+        this.noOfDaysInMakkah = obj.noOfDaysInMakkah
+        this.noOfDaysInMadeenah = obj.noOfDaysInMadeenah
       }
       if(ser == 'Makkah Hotel'){
         this.service = 'Makkah Hotel'
@@ -390,6 +392,12 @@ export class CreateTripFrontPageComponent implements OnInit, DoCheck, AfterViewI
     }
   }
 
+  resetDatesForRefresh(){
+    if(this.service == 'All'){this.clearPreviousDataForFreshSearch()}
+    if(this.service == 'Makkah Hotel'){this.makkaCheckInDate = null ; this.makkaCheckOutDate = null}
+    if(this.service == 'Medina Hotel'){this.madeenaCheckInDate = null;this.madeenaCheckOutDate = null }
+  }
+
   /**
    * This method for show serch button when makkah date input changes
    * 
@@ -466,6 +474,7 @@ export class CreateTripFrontPageComponent implements OnInit, DoCheck, AfterViewI
   */
   searchButtonClicked() {
     this.clearSession()
+    sessionStorage.setItem('service',this.service)
     this.setNoOfMadeenaDays();
     this.appStore.showRoomAlPopup = false;
     this.userObject = {
@@ -483,7 +492,9 @@ export class CreateTripFrontPageComponent implements OnInit, DoCheck, AfterViewI
       subPcc_medinah: this.subPcc_medinah,
       specialCodeMedinah: this.special_code_medinah,
       vehicleType:this.vehicleCode,
-      vehicleCapacity:this.vehicleMaxCapacity
+      vehicleCapacity:this.vehicleMaxCapacity,
+      noOfDaysInMadeenah :this.noOfDaysInMadeenah,
+      noOfDaysInMakkah:this.noOfDaysInMakkah
     };
     CreateTripComponent.UserObjectData = this.userObject;
     sessionStorage.setItem("userObject",JSON.stringify(this.userObject));
@@ -715,9 +726,8 @@ export class CreateTripFrontPageComponent implements OnInit, DoCheck, AfterViewI
    */
 
   onServiceItemChange(value) {
-    sessionStorage.setItem('service',value)
-    // (<HTMLElement>document.getElementById("dateEnterDiv")).style.maxHeight = "0px";
     this.service = value;
+    sessionStorage.setItem('service',this.service)
     if (value == "All") {
       this.activaleAllSearch = true;
       this.enableMakka = true;
@@ -773,7 +783,7 @@ export class CreateTripFrontPageComponent implements OnInit, DoCheck, AfterViewI
    */
 
   clearPreviousDataForFreshSearch() {
-    this.makkaCheckInDate = null;
+    this.makkaCheckInDate = null
     this.makkaCheckOutDate = null;
     this.subPcc_makkah = null;
     this.special_Code_makkah = null;
