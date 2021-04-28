@@ -22,6 +22,7 @@
   import { SubAgentApiService } from "src/app/Services/sub-agent-api-services";
   import { CommonApiService } from "src/app/Services/common-api-services";
   import { environment } from "src/environments/environment";
+  import Swal from 'sweetalert2';
 
   @Component({
     selector: "app-create-trip",
@@ -853,7 +854,15 @@
               if (this.hotelsList.length == 0) {
               }
             },
-            (error) => {}
+            (error) => {
+              Swal.fire({
+                icon: 'error',
+                text: 'Something Went Wrong',
+                confirmButtonText: 'Search Again'
+              }).then((result) => {
+                this.router.navigate(['subagent/home']);
+              })
+            }
           );
         }),
         (error) => {};
