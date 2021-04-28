@@ -6061,9 +6061,9 @@ input[type="radio"]:checked:after {
     color: #1b416c;
 }
 
-// #subAgencyCreateTrip .mat-horizontal-stepper-header-container {
-//     pointer-events: none !important;
-// }
+#subAgencyCreateTrip .mat-horizontal-stepper-header-container {
+    pointer-events: none !important;
+}
 
 .matSlct{
   border: 1px solid #c2c2c2;
