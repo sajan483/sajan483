@@ -13,10 +13,10 @@ const myPath: Routes = [
       path: "packages/:id/details", component: PackageDetailsComponent,
     },
     {
-      path: "payment/:id", component: PaxAndPaymentComponent,
+      path: "packages/:id/payment", component: PaxAndPaymentComponent,
     },
     {
-      path: ":id/success", component: ConfirmationComponent,
+      path: "packages/:id/success", component: ConfirmationComponent,
     },
 ];
 

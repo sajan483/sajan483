@@ -1,3 +1,4 @@
+import { DatePipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -22,9 +23,11 @@ export class PaxAndPaymentComponent implements OnInit {
   branchAdapter:subBranchAdapter;
   submitted = false;
   packageId: any;
+  bttnactv:boolean = false;
 
-  constructor(private route:Router,private fb: FormBuilder, private branchService: BranchApiService,private activeRouter:ActivatedRoute) {
-      this.branchAdapter = new subBranchAdapter();
+  constructor(private route:Router,private fb: FormBuilder, private branchService: BranchApiService,private activeRouter:ActivatedRoute,
+    private datePipe:DatePipe) {
+      this.branchAdapter = new subBranchAdapter(this.datePipe);
      }
 
   ngOnInit() {
@@ -56,11 +59,12 @@ export class PaxAndPaymentComponent implements OnInit {
     if (this.contactInfoForm.invalid) {
       return;
     }
-
+    this.bttnactv = true;
     var body = this.branchAdapter.paymentBody(this.contactInfoForm.value,this.advanceAmount);
     this.branchService.bookPackage(body,this.packageId).subscribe((data)=>{
       sessionStorage.setItem("bookingId",data.id);
-      this.route.navigate(["/branch/"+this.packageId+"/success"]);
+      this.bttnactv = false;
+      this.route.navigate(["/branch/packages/"+this.packageId+"/success"]);
     })
   }
 }

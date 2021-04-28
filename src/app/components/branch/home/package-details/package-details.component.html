@@ -1,7 +1,11 @@
 <div class="outer">
     <div class="banner">
         <img src="/assets/images/mkbg.jpg">
-        <div class="black position-absolute">
+        <div class="black position-absolute" *ngIf="shimmer">
+            <h4 class="text-capitalize">Package Title</h4>
+            <p>Agency Name | Departure Date : xxx Onwards</p>
+        </div>
+        <div class="black position-absolute" *ngIf="!shimmer">
             <h4 class="text-capitalize">{{packageDetails?.title}}</h4>
             <p>{{packageDetails?.operated_by}} | Departure Date : {{packageDetails?.start_date | date:'LLLL dd'}} Onwards</p>
         </div>
@@ -13,21 +17,24 @@
                             <mat-icon class="icon">room</mat-icon>
                             <div>
                                 <p>Departure From</p>
-                                <h5>{{packageDetails?.trip_flights[0]?.onward_flight?.boarding_airport?.name}}</h5>
+                                <h5 *ngIf="shimmer">International Airport</h5>
+                                <h5 *ngIf="!shimmer">{{packageDetails?.trip_flights[0]?.onward_flight?.boarding_airport?.name}}</h5>
                             </div>
                         </div>
                         <div class="d-flex box-3">
                             <mat-icon class="icon">schedule</mat-icon>
                             <div>
                                 <p>Duration</p>
-                                <h5>{{packageDetails?.num_days}} Days</h5>
+                                <h5 *ngIf="shimmer">0 Days</h5>
+                                <h5 *ngIf="!shimmer">{{packageDetails?.num_days}} Days</h5>
                             </div>
                         </div>
                         <div class="d-flex box-3">
                             <mat-icon class="icon">today</mat-icon>
                             <div>
                                 <p>Departure Date</p>
-                                <h5>{{packageDetails?.start_date | date:'LLLL dd'}} Onwards</h5>
+                                <h5 *ngIf="shimmer">xx Onwards</h5>
+                                <h5 *ngIf="!shimmer">{{packageDetails?.start_date | date:'LLLL dd'}} Onwards</h5>
                             </div>
                         </div>
                     </div>
@@ -51,12 +58,14 @@
                                             <mat-icon class="black p-icon mt-1 mr-2">groups</mat-icon>
                                             <div>
                                                 <p class="group">Travel group size</p>
-                                                <p class="grn-txt black m-0">{{maxCount}} People</p>
+                                                <p class="grn-txt black m-0" *ngIf="shimmer">00 People</p>
+                                                <p class="grn-txt black m-0" *ngIf="!shimmer">{{maxCount}} People</p>
                                             </div>
                                         </div>
                                         <div class="d-flex mt-2">
                                             <mat-icon>verified</mat-icon>
-                                            <p class="grn-txt">{{availabilityCount}} Slots available</p>
+                                            <p class="grn-txt" *ngIf="shimmer">00 Slots available</p>
+                                            <p class="grn-txt" *ngIf="!shimmer">{{availabilityCount}} Slots available</p>
                                         </div>
                                     </div>
                                 </div>
@@ -90,31 +99,58 @@
                                 </div>
                             </div>
                             <div class="col-md-3">
-                                <button class="searchbutton pull-right m-0" (click)="bookPackage()">Book Package</button>
+                                <button class="searchbutton pull-right m-0" [class.bttnactive]="bttnactv" [disabled]="shimmer" (click)="bookPackage()">Book Package</button>
                             </div>
                         </div>
                         <div class=" overview ">
                             <p class="ovr-txt mt-4 ">Package Overview</p>
-                            <p class="grey-txt " [innerHTML]="packageDetails?.instructions"></p>
+                            <div *ngIf="shimmer">
+                                <div class="shine h16 w-100"></div>
+                                <div class="shine h16 w-100"></div>
+                                <div class="shine h16 w-100"></div>
+                                <div class="shine h16 w-100"></div>
+                            </div>
+                            <p *ngIf="!shimmer" class="grey-txt" [innerHTML]="packageDetails?.instructions"></p>
+                            <div *ngIf="shimmer" class="mainimageshimmer">
+                                <div class="shine w-100 h-100"></div>
+                            </div>
                             <div class="mainimage mt-2 mb-2" *ngIf="packageDetails?.attachments[0]?.file">
                                 <img src="{{packageDetails?.attachments[0].file}}" class="itineraryimg" alt="">
                             </div>
                         </div>
-                        <div class="itenerary " *ngIf="itenerary?.length ">
-                            <p class="it-head ">Itenerary</p>
-
-                            <ul class="sessions ">
+                        <div class="itenerary " *ngIf="shimmer">
+                            <p class="it-head mt-2">Itenerary</p>
+                            <ul class="sessions">
+                                <span *ngFor="let k of [].constructor(2);let i = index;">
+                                    <li>
+                                        <div>
+                                            <div class="shine h16 w-100"></div>
+                                            <div class="shine h16 w-100"></div>
+                                            <div class="shine h16 w-100"></div>
+                                            <div class="shine h16 w-100"></div>
+                                        </div>
+                                        <div class="mainimageshimmer">
+                                            <div class="shine w-100 h-100"></div>
+                                        </div>
+                                    </li>
+                                </span>
+                                <button class="addAnotherBttn mt-3"><i class="fa fa-plus-circle" aria-hidden="true"></i> View Full itenerary</button>
+                            </ul>
+                        </div>
+                        <div class="itenerary " *ngIf="itenerary?.length">
+                            <p class="it-head mt-2">Itenerary</p>
+                            <ul class="sessions">
                                 <span *ngFor="let item of itenerary;let i=index; ">
-                                <li *ngIf="i<2">
-                                    <div class="time ">Day {{item?.num_of_days}} : {{item?.title}} - {{item?.from_date | date:'longDate'}}</div>
-                                    <div class="clr52 fs14 mt-2 " [innerHTML]="item?.details "></div>
-                                    <div class="row m-0 ">
-                                      <div class="col-md-3 pl-0 mt-2 " *ngFor="let img of item.attachments ">
-                                          <img [src]="img.file " class="itineraryimg " alt=" ">
-                                      </div>
-                                    </div>
-                                </li>
-                            </span>
+                                    <li *ngIf="i<2">
+                                        <div class="time ">Day {{item?.num_of_days}} : {{item?.title}} - {{item?.from_date | date:'longDate'}}</div>
+                                        <div class="clr52 fs14 mt-2 " [innerHTML]="item?.details "></div>
+                                        <div class="row m-0 ">
+                                            <div class="col-md-3 pl-0 mt-2 " *ngFor="let img of item.attachments ">
+                                                <img [src]="img.file " class="itineraryimg " alt=" ">
+                                            </div>
+                                        </div>
+                                    </li>
+                                </span>
                                 <div class="itenaryfull ">
                                     <span *ngFor="let item of itenerary;let i=index; ">
                                         <li *ngIf="i>1">
@@ -130,7 +166,6 @@
                                 </div>
                                 <button class="addAnotherBttn mt-3" (click)="expandItenary($event)" *ngIf="itenerary.length > 2"><i class="fa fa-plus-circle" aria-hidden="true"></i> View Full itenerary</button>
                             </ul>
-
                         </div>
                     </div>
                 </mat-tab>
@@ -138,23 +173,41 @@
                     <div class="members">
                         <div class="">
                             <div class="fs16 fw600">Inclusions</div>
-                            <div class="fs14 clr52 mt-2" [innerHTML]="packageDetails?.inclusions"></div>
+                            <div *ngIf="shimmer">
+                                <div class="shine h16 w-100"></div>
+                                <div class="shine h16 w-100"></div>
+                                <div class="shine h16 w-100"></div>
+                                <div class="shine h16 w-100"></div>
+                            </div>
+                            <div class="fs14 clr52 mt-2" *ngIf="!shimmer" [innerHTML]="packageDetails?.inclusions"></div>
                         </div>
                         <div class="mt-2">
                             <div class="fs16 fw600">Exclusions</div>
-                            <div class="fs14 clr52 mt-2" [innerHTML]="packageDetails?.exclusions"></div>
+                            <div *ngIf="shimmer">
+                                <div class="shine h16 w-100"></div>
+                                <div class="shine h16 w-100"></div>
+                                <div class="shine h16 w-100"></div>
+                                <div class="shine h16 w-100"></div>
+                            </div>
+                            <div class="fs14 clr52 mt-2" *ngIf="!shimmer" [innerHTML]="packageDetails?.exclusions"></div>
                         </div>
                     </div>
                 </mat-tab>
                 <mat-tab label="POLICY">
                     <div class="members">
                         <div class="fs16 fw600">Policies</div>
-                        <div class="fs14 clr52 mt-2" [innerHTML]="packageDetails?.terms"></div>
+                        <div *ngIf="shimmer">
+                            <div class="shine h16 w-100"></div>
+                            <div class="shine h16 w-100"></div>
+                            <div class="shine h16 w-100"></div>
+                            <div class="shine h16 w-100"></div>
+                        </div>
+                        <div class="fs14 clr52 mt-2" *ngIf="!shimmer" [innerHTML]="packageDetails?.terms"></div>
                     </div>
                 </mat-tab>
             </mat-tab-group>
             <div class="btn-box">
-                <button [disabled]="continue" class="searchbutton" (click)="bookPackage()">Book Package</button>
+                <button [disabled]="shimmer" class="searchbutton" [class.bttnactive]="bttnactv" (click)="bookPackage()">Book Package</button>
             </div>
         </div>
     </div>

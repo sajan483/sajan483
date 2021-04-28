@@ -1,5 +1,5 @@
-<div class="outer">
-    <div class="banner">
+<div class="outer printPt0">
+    <div class="banner printBlock">
         <img src="/assets/images/mkbg.jpg">
         <div class="black position-absolute">
             <h4 class="text-capitalize">{{packageDetails?.title}}</h4>
@@ -34,7 +34,7 @@
                             <mat-icon class="icon">group</mat-icon>
                             <div>
                                 <p>Members</p>
-                                <h5>{{bookingDetails?.adults}} Adults, {{bookingDetails?.children_without_bed}} Childs<span *ngIf="bookingDetails?.infants != 0">, {{bookingDetails?.infants}} Infants</span></h5>
+                                <h5>{{bookingDetails?.adults}} Adults<span *ngIf="bookingDetails?.children_without_bed != 0">, {{bookingDetails?.children_without_bed}} Childs</span><span *ngIf="bookingDetails?.infants != 0">, {{bookingDetails?.infants}} Infants</span></h5>
                             </div>
                         </div>
                     </div>
@@ -58,21 +58,38 @@
                 </div>
             </div>
         </div>
+        <div class="printdisplay">
+            <div class="text-center pt-2">
+                <h4 class="text-capitalize fs22">{{packageDetails?.title}}</h4>
+                <div class="fs16">{{packageDetails?.operated_by}} | Departure Date : {{packageDetails?.start_date | date:'LLLL dd'}} Onwards</div>
+                <div class="fs16">Duration : {{packageDetails?.num_days}} Days</div>
+                <div class="fs16">Members : {{bookingDetails?.adults}} Adults<span *ngIf="bookingDetails?.children_without_bed != 0">, {{bookingDetails?.children_without_bed}} Childs</span><span *ngIf="bookingDetails?.infants != 0">, {{bookingDetails?.infants}} Infants</span></div>
+            </div>
+        </div>
         <div class="container mt-3">
             <div class="boxborder p30">
                 <div class="fs22 fw500 blue_text">Contact details</div>
                 <div class="row mx-0 mt-3 ">
                     <div class="col-md-4 pl-0 brdr_right_d3">
                         <label class="fs14 fw400 lh14">Full Name</label>
-                        <div class="fs16 fw500">{{bookingDetails?.contactinfo?.first_name}}</div>
+                        <div *ngIf="shimmer">
+                            <div class="shine ws200 h20"></div>
+                        </div>
+                        <div *ngIf="!shimmer" class="fs16 fw500">{{bookingDetails?.contactinfo?.first_name}}</div>
                     </div>
                     <div class="col-md-4 brdr_right_d3">
                         <label class="fs14 fw400 lh14">Email</label>
-                        <div class="fs16 fw500">{{bookingDetails?.contactinfo?.email}}</div>
+                        <div *ngIf="shimmer">
+                            <div class="shine ws200 h20"></div>
+                        </div>
+                        <div *ngIf="!shimmer" class="fs16 fw500">{{bookingDetails?.contactinfo?.email}}</div>
                     </div>
                     <div class="col-md-4">
                         <label class="fs14 fw400 lh14">Contact Number</label>
-                        <div class="fs16 fw500">{{bookingDetails?.contactinfo?.phone_number}}</div>
+                        <div *ngIf="shimmer">
+                            <div class="shine ws200 h20"></div>
+                        </div>
+                        <div *ngIf="!shimmer" class="fs16 fw500">{{bookingDetails?.contactinfo?.phone_number}}</div>
                     </div>
                 </div>
             </div>
@@ -80,23 +97,26 @@
                 <div class="row mx-0">
                     <div class="col-md-4 px-0 brdr_right_d3 text-center">
                         <div class="fs22 fw500 mb-1">Final Package Price</div>
-                        <div class="fs22 fw500">₹ {{bookingDetails?.total_amount | number:'1.0'}} /-</div>
+                        <div class="shine ws110 h35" *ngIf="shimmer"></div>
+                        <div class="fs22 fw500" *ngIf="!shimmer">₹ {{bookingDetails?.total_amount | number:'1.0'}} /-</div>
                         <p class="clr52 fs14">GST Included</p>
                     </div>
                     <div class="col-md-4 px-0 brdr_right_d3 text-center">
                         <div class="fs22 fw500 mb-1">Booking Advance Payable</div>
-                        <div class="fs22 fw500">₹ {{bookingDetails?.advance_amount | number:'1.0'}} /-</div>
+                        <div class="shine ws110 h35" *ngIf="shimmer"></div>
+                        <div class="fs22 fw500" *ngIf="!shimmer">₹ {{bookingDetails?.advance_amount | number:'1.0'}} /-</div>
                         <p class="clr52 fs14">GST Included</p>
                     </div>
                     <div class="col-md-4 px-0 text-center green_text">
                         <div class="fs22 fw500 mb-1">Balance Amount</div>
-                        <div class="fs22 fw500">₹ {{bookingDetails?.total_amount - bookingDetails?.advance_amount | number:'1.0'}} /-</div>
+                        <div class="shine ws110 h35" *ngIf="shimmer"></div>
+                        <div class="fs22 fw500" *ngIf="!shimmer">₹ {{bookingDetails?.total_amount - bookingDetails?.advance_amount | number:'1.0'}} /-</div>
                         <p class="clr52 fs14">GST Included</p>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="mt-2 container text-right">
+        <div class="mt-2 container text-right printBlock">
             <div class="d-inline-flex" (click)="printPage()">
                 <i class="printicon icns icon_size_15 mt-1 mr-1"></i>
                 <div class="printtext fs14">Print this page</div>

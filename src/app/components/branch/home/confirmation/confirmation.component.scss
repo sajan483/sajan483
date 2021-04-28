@@ -73,3 +73,19 @@
     text-decoration: underline;
     cursor: pointer;
 }
+
+.printdisplay {
+    display: none;
+}
+
+@media print {
+    .printdisplay {
+        display: block !important;
+    }
+    .printBlock {
+        display: none;
+    }
+    .printPt0 {
+        padding-top: 0 !important;
+    }
+}

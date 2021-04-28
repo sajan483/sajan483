@@ -15,6 +15,7 @@ export class ConfirmationComponent implements OnInit {
   countChildWithoutBed: number;
   bookingId: number;
   bookingDetails:any;
+  shimmer:boolean=true;
 
   constructor(private activeRouter:ActivatedRoute,private branchService: BranchApiService) { }
 
@@ -30,18 +31,13 @@ export class ConfirmationComponent implements OnInit {
       })
     
       this.branchService.getBookingDetails(this.id,this.bookingId).subscribe((data)=>{
+        this.shimmer = false;
         this.bookingDetails = data[0];
       })
     });
   }
 
   printPage(){
-    const printContent = document.getElementById("printDiv");
-    const WindowPrt = window.open('', '', 'left=0,top=0,width=900,height=900,toolbar=0,scrollbars=0,status=0');
-    WindowPrt.document.write(printContent.innerHTML);
-    WindowPrt.document.close();
-    WindowPrt.focus();
-    WindowPrt.print();
-    WindowPrt.close();
+    window.print()
   }
 }
