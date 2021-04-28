@@ -8,6 +8,7 @@ import { BranchApiService } from 'src/app/Services/branch-api-service';
   styleUrls: ['./package-details.component.scss']
 })
 export class PackageDetailsComponent implements OnInit {
+  continue:boolean;
   itenerary:any;
   availabilityCount:any;
   maxCount:any;
