@@ -19,6 +19,8 @@ export class PackageDetailsComponent implements OnInit {
   infantCount:any = 0;
   chindWithoutBedCount:any = 0;
   availability: number;
+  shimmer:boolean = true;
+  bttnactv:boolean = false;
 
   constructor(private branchService: BranchApiService,private activeRouter:ActivatedRoute,
     private route:Router) { }
@@ -37,7 +39,8 @@ export class PackageDetailsComponent implements OnInit {
         this.availability = this.availabilityCount;
         this.maxCount = data.max_passengers;
         this.branchId = data.id;
-        sessionStorage.setItem("advancePct",data.advance_pct)
+        sessionStorage.setItem("advancePct",data.advance_pct);
+        this.shimmer= false;
       })
     });
   }
@@ -52,6 +55,7 @@ export class PackageDetailsComponent implements OnInit {
   }
 
   bookPackage(){
+    this.bttnactv = true;
     sessionStorage.setItem("bookAdult",this.adultCount);
     sessionStorage.setItem("bookChildWithoutBed",this.chindWithoutBedCount);
     sessionStorage.setItem("bookInfant",this.infantCount);
@@ -70,23 +74,24 @@ export class PackageDetailsComponent implements OnInit {
       this.id = data['id'];
       this.branchService.packagePricing(body, this.id).subscribe((data)=>{
         sessionStorage.setItem("totoalPrice",data.total_price);
-        this.route.navigate(["/branch/payment/"+this.branchId])
+        this.bttnactv = false;
+        this.route.navigate(["/branch/packages/"+this.branchId+"/payment"])
       })
     });
   }
 
   selectInfant(value){
     this.infantCount = value;
-    this.availability = this.availabilityCount - this.infantCount - this.chindWithoutBedCount - this.adultCount;
+    this.availability = this.availabilityCount - (this.infantCount + this.chindWithoutBedCount + this.adultCount);
   }
 
   selectAdult(value){
     this.adultCount = value;
-    this.availability = this.availabilityCount - this.infantCount - this.chindWithoutBedCount - this.adultCount;
+    this.availability = this.availabilityCount - (this.infantCount + this.chindWithoutBedCount + this.adultCount);
   }
 
   selectChildWithoutBed(value){
     this.chindWithoutBedCount = value;
-    this.availability = this.availabilityCount - this.infantCount - this.chindWithoutBedCount - this.adultCount;
+    this.availability = this.availabilityCount - (this.infantCount + this.chindWithoutBedCount + this.adultCount);
   }
 }

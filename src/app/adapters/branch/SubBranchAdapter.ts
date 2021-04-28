@@ -1,10 +1,11 @@
+import { DatePipe } from '@angular/common';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms'
 
 export class subBranchAdapter {
     fb: FormBuilder;
     today:Date = new Date();
 
-    constructor(){}
+    constructor(private datePipe:DatePipe){}
 
     createBranchForm(){
         this.fb = new FormBuilder();
@@ -16,13 +17,14 @@ export class subBranchAdapter {
     }
 
     paymentBody(value:any,advance:number){
+        var day = this.datePipe.transform(this.today, "yyyy/MM/dd");
         var body ={
             "advance_amount":advance,
 	        "adults":+sessionStorage.getItem("bookAdult"),
 	        "children_with_bed":0,
 	        "children_without_bed":+sessionStorage.getItem("bookChildWithoutBed"),
             "infants":+sessionStorage.getItem("bookInfant"),
-            "booking_date":this.today,
+            "booking_date":day,
 	        "contactinfo": {
                 "title": "Mr",
                 "first_name": value.name,
