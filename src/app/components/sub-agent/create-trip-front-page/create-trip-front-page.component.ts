@@ -76,9 +76,6 @@ export class CreateTripFrontPageComponent implements OnInit, DoCheck, AfterViewI
   roomaloctionpopup: any;
   userObject: {};
   countTravalers: number;
-  public adultCount: number;
-  public childCount: number;
-  public infantCount: number;
   Special_Code_makkah: any;
   Special_Code_medinah: any;
   showSelectionPopUp: boolean;
@@ -146,12 +143,12 @@ export class CreateTripFrontPageComponent implements OnInit, DoCheck, AfterViewI
   ngOnInit() {
     this.enableSearchButton = false;
     this.service = "All";
-    this.setDomDataOnRefresh()
     this.activaleAllSearch = true;
     this.enableMakka = true;
     this.enableMadina = true;
     this.enableTransport = true;
     this.goButtonEnable = false;
+    this.setDomDataOnRefresh()
     /**
    * This method for checking the availability of the access token
    * 
@@ -172,6 +169,8 @@ export class CreateTripFrontPageComponent implements OnInit, DoCheck, AfterViewI
       this.onServiceItemChange(sessionStorage.getItem('service'))
       this.goButtonClicked() 
       this.countTravalers = obj.travallersCount
+      this.countAdult = obj.adults
+      this.countChild = obj.children
       var ser = sessionStorage.getItem('service')
       if(ser == 'All'){
         this.makkaCheckInDate = obj.makkahCheckinDate,
@@ -471,6 +470,8 @@ export class CreateTripFrontPageComponent implements OnInit, DoCheck, AfterViewI
     this.appStore.showRoomAlPopup = false;
     this.userObject = {
       travallersCount: this.countTravalers,
+      adults:this.countAdult,
+      children:this.countChild,
       transportStartDate: this.transportStartDate,
       transportRoute: this.routetransport,
       madeenaCheckinDate: this.madeenaCheckInDate,
