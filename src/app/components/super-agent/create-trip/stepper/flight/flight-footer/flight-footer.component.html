@@ -20,7 +20,7 @@
                     <div class="flag">
                         <div class="flag-border"></div>
                         <p class="black-12 text-center">{{footerData.depFlight.Duration}}</p>
-                        <img src="/assets/images/india.ico">
+                        <div class="stop-box" *ngIf="footerData.depFlight.Stops > 0"></div>
                         <p class="grey-12 text-center">{{footerData.depFlight.Stops}} Stop</p>
                     </div>
                     <div class="arrive">
@@ -49,7 +49,7 @@
                     <div class="flag">
                         <div class="flag-border"></div>
                         <p class="black-12 text-center">{{footerData.retFlight.Duration}}</p>
-                        <img src="/assets/images/india.ico">
+                        <div class="stop-box" *ngIf="footerData.retFlight.Stops > 0"></div>
                         <p class="grey-12 text-center">{{footerData.retFlight.Stops}} Stop</p>
                     </div>
                     <div class="arrive">

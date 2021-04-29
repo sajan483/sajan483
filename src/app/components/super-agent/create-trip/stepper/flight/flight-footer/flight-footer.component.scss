@@ -90,10 +90,12 @@
                 border-bottom: 1px dotted #000;
                 position: absolute;
             }
-            img {
-                width: 20px;
-                height: auto;
+            .stop-box {
+                width: 15px;
+                height: 15px;
+                background: crimson;
                 margin: 0 auto !important;
+                border-radius: 50%;
             }
         }
     }
