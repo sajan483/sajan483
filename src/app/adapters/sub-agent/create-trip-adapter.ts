@@ -333,16 +333,16 @@ export class CreateTripAdapter {
   }
 
   createTripBookingRequest(travellersForm,code,roomRef,nationality,country_of_residence) {
-    let body = {
+   let body = {
       title: "Mr",
       first_name:travellersForm.value.first_name,
       last_name: travellersForm.value.last_name,
-      dob: travellersForm.value.dob.toJSON().split("T")[0],
+      dob: (travellersForm.value.dob.length == 10) ? travellersForm.value.dob: travellersForm.value.dob.toJSON().split("T")[0],
       gender: travellersForm.value.gender,
       nationality: nationality,
       passport_no: travellersForm.value.passport_no,
       room_reference: roomRef,
-      passport_expiry_date:travellersForm.value.passport_expiry_date.toJSON().split("T")[0],
+      passport_expiry_date:(travellersForm.value.passport_expiry_date.length == 10)?travellersForm.value.passport_expiry_date:travellersForm.value.passport_expiry_date.toJSON().split("T")[0],
       country_of_residence:country_of_residence,
       contactinfo: {
         title: "Mr",
