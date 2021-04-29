@@ -277,27 +277,27 @@ export class CreateTripComponent implements OnInit {
         sourceName:this.fromLocation.city,
         destination:this.destination.value,
         destinationName:this.destLocation.city,
-        departureDate:this.incrementDate(dep,1),
-        returnDate:this.incrementDate(ret,1),
+        departureDate:dep,
+        returnDate:ret,
         airline:this.airlineDetails.code,
         airlineName:this.airlineDetails.name
       },
       mekkahData:{
-        checkIn:this.incrementDate(mkIn,1),
-        checkOut:this.incrementDate(mkOut,1)
+        checkIn:mkIn,
+        checkOut:mkOut
       },
       medinaData:{
-        checkIn:this.incrementDate(mdIn,1),
-        checkOut:this.incrementDate(mdOut,1)
+        checkIn:mdIn,
+        checkOut:mdOut
       }
     };
 
     this.appStore.departureDate = dep;
     this.appStore.arrivalDate = ret;
-    this.appStore.makkahCheckInDate = this.incrementDate(mkIn,1);
-    this.appStore.makkahCheckOutDate = this.incrementDate(mkOut,1);
-    this.appStore.medinahCheckInDate = this.incrementDate(mdIn,1);
-    this.appStore.medinahCheckOutDate = this.incrementDate(mdOut,1)
+    this.appStore.makkahCheckInDate = mkIn;
+    this.appStore.makkahCheckOutDate = mkOut;
+    this.appStore.medinahCheckInDate = mdIn;
+    this.appStore.medinahCheckOutDate = mdOut;
     sessionStorage.setItem('searchData',JSON.stringify(this.searchData))
     StepperComponent.searchData = this.searchData;
     this.appStore.dataFromFrontPage  = this.searchData;
