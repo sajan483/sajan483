@@ -1,28 +1,28 @@
 <div class="tbl">
     <div class="container">
         <div class="header">
-            <h1>{{'Booking History' | translate}}</h1>
+            <h1>{{'Booking History' }}</h1>
             
         </div>
         <div class="pt-2 pb-3">
         <table id="customers">
             <thead>
                <tr>
-                <th>{{'No' | translate}}</th>
+                <th>{{'No' }}</th>
                 <th>
-                    {{'Depature Date' | translate}}
+                    {{'Depature Date' }}
                 </th>
                 <th>
-                    {{'Return Date' | translate}}
+                    {{'Return Date' }}
                 </th>
                 <th>
-                    {{'Travellers' | translate}}
+                    {{'Travellers' }}
                 </th>
                 <th>
-                    {{'Booking Date' | translate}}
+                    {{'Booking Date' }}
                 </th>
                 <th>
-                    {{'Status' | translate}}
+                    {{'Status' }}
                 </th>
                 
                </tr>
@@ -33,9 +33,9 @@
                     <td>{{item.custom_trip.start_date | date:'mediumDate'}}</td>
                     <td>{{item.custom_trip.end_date | date:'mediumDate'}}</td>
                     <td>
-                        <div *ngIf="item.custom_trip.adults != 0">{{'Adults' | translate}} : {{item.custom_trip.adults}}</div>
-                        <div *ngIf="item.custom_trip.children != 0">{{'Children' | translate}} : {{item.custom_trip.children}}</div>
-                        <div *ngIf="item.custom_trip.infants != 0">{{'Infants' | translate}} : {{item.custom_trip.infants}}</div>
+                        <div *ngIf="item.custom_trip.adults != 0">{{'Adults' }} : {{item.custom_trip.adults}}</div>
+                        <div *ngIf="item.custom_trip.children != 0">{{'Children' }} : {{item.custom_trip.children}}</div>
+                        <div *ngIf="item.custom_trip.infants != 0">{{'Infants' }} : {{item.custom_trip.infants}}</div>
                     </td>
                     <td>{{item.booking_date | date:'mediumDate'}}</td>
                     <td>{{item.status}}</td>

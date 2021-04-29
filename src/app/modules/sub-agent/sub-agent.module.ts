@@ -104,7 +104,7 @@ import { OnlyNumberDirective } from 'src/app/models/onlynumber.directive';
 })
 
 export class SubAgentModule {
-  constructor(public translateService: TranslateService) {
-    translateService.setDefaultLang('en-US'); /* Setting up the Translate Json to English - `en` */
-  }
+   //constructor(public translateService: TranslateService) {
+  //   translateService.setDefaultLang('en-US'); /* Setting up the Translate Json to English - `en` */
+  //}
 }

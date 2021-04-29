@@ -4,12 +4,12 @@
             <div class="col-md-2 pl-0 pr-0 pt-1 ml-0 mr-0 fliter-arrow my-auto">
                 <div class="">
                     <!-- <i class="filtericon icon_size_15 icns filterdiv"></i> -->
-                    <div class="">{{'Filters' | translate}}</div>
+                    <div class="">{{'Filters' }}</div>
                 </div>
             </div>
             <div class="col-md-3 col-8  my-auto ">
                 <div (click)="haramdistancefilter()" class="cursor-pointer">
-                    <span class="pr-2 fs14">{{'Haram Distance' | translate}}</span>
+                    <span class="pr-2 fs14">{{'Haram Distance' }}</span>
                     <span class="fliter-arrow">
                         <div *ngIf="!isHotelListSortedByHaramDistance">
                             <button><i class="fa fa-angle-down"></i></button>
@@ -22,7 +22,7 @@
             </div>
             <div class="col-md-2  my-auto  col-4">
                 <div class="cursor-pointer" (click)="priceHotelFilter()">
-                    <span class="pr-2 fs14">{{'Price' | translate}}</span>
+                    <span class="pr-2 fs14">{{'Price' }}</span>
                     <span class="fliter-arrow">
                         <div *ngIf="!isHotelsSortedByPrice">
                             <button ><i class="fa fa-angle-down"></i></button>
@@ -127,7 +127,7 @@
                             <section class="uitk-cell uitk-card-media">
                                 <div *ngIf="item.has_special_deal" class="hotelRibbon">
                                     <span class="hotelRibbon3">
-                                        {{'Has special deal' | translate}}
+                                        {{'Has special deal' }}
                                     </span>
                                 </div>
                                 <header class="title">
@@ -186,7 +186,7 @@
                                     <div class="text-center">
                                         <h3 class="hotel_prise">{{item?.currency_code}} {{item?.amount | number:'.2-2'}}
                                         </h3>
-                                        <button class="searchbutton pull-right m-0" id="showHotelSelect{{i}}" (click)="showHotelDetailsPopUp(item)">{{'Select Room' | translate}}</button>
+                                        <button class="searchbutton pull-right m-0" id="showHotelSelect{{i}}" (click)="showHotelDetailsPopUp(item)">{{'Select Room' }}</button>
                                     </div>
                                 </div>
                             </div>
