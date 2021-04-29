@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { BranchApiService } from 'src/app/Services/branch-api-service';
 
@@ -21,13 +22,30 @@ export class PackageDetailsComponent implements OnInit {
   availability: number;
   shimmer:boolean = true;
   bttnactv:boolean = false;
+  countForm: FormGroup;
 
   constructor(private branchService: BranchApiService,private activeRouter:ActivatedRoute,
-    private route:Router) { }
+    private route:Router,private fb: FormBuilder) { }
 
   ngOnInit() {
+    this.countForm = this.fb.group({
+			adult: [1, Validators.required],
+			child: [0],
+			infant: [0]
+    });
     this.getPackageDetails()
   }
+
+  get continues() {
+    if(this.countForm.valid && (this.countForm.controls.adult.value + this.countForm.controls.child.value + this.countForm.controls.infant.value) <= this.availabilityCount ){
+      return false
+    }
+    else {
+      return true
+    }
+  }
+
+  get count() { return this.countForm.controls}
 
   getPackageDetails(){
     this.id = this.activeRouter.params.subscribe(data=>{
@@ -56,12 +74,12 @@ export class PackageDetailsComponent implements OnInit {
 
   bookPackage(){
     this.bttnactv = true;
-    sessionStorage.setItem("bookAdult",this.adultCount);
-    sessionStorage.setItem("bookChildWithoutBed",this.chindWithoutBedCount);
-    sessionStorage.setItem("bookInfant",this.infantCount);
-    var adult:number = +this.adultCount;
-    var childwithoutbed:number = +this.chindWithoutBedCount;
-    var infant:number = +this.infantCount;
+    sessionStorage.setItem("bookAdult",this.countForm.controls.adult.value);
+    sessionStorage.setItem("bookChildWithoutBed",this.countForm.controls.child.value);
+    sessionStorage.setItem("bookInfant",this.countForm.controls.infant.value);
+    var adult:number = this.countForm.controls.adult.value;
+    var childwithoutbed:number = this.countForm.controls.child.value;
+    var infant:number = this.countForm.controls.infant.value;
     var body = {
       adults : adult,
       infants: infant,
@@ -80,18 +98,4 @@ export class PackageDetailsComponent implements OnInit {
     });
   }
 
-  selectInfant(value){
-    this.infantCount = value;
-    this.availability = this.availabilityCount - (this.infantCount + this.chindWithoutBedCount + this.adultCount);
-  }
-
-  selectAdult(value){
-    this.adultCount = value;
-    this.availability = this.availabilityCount - (this.infantCount + this.chindWithoutBedCount + this.adultCount);
-  }
-
-  selectChildWithoutBed(value){
-    this.chindWithoutBedCount = value;
-    this.availability = this.availabilityCount - (this.infantCount + this.chindWithoutBedCount + this.adultCount);
-  }
 }

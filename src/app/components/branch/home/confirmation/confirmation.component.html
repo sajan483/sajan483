@@ -1,6 +1,7 @@
 <div class="outer printPt0">
     <div class="banner printBlock">
-        <img src="/assets/images/mkbg.jpg">
+        <img *ngIf="!packageDetails?.attachments[0].file" src="/assets/images/mkbg.jpg">
+        <img *ngIf="packageDetails?.attachments[0].file" src="{{packageDetails?.attachments[0].file}}" alt="">
         <div class="black position-absolute">
             <h4 class="text-capitalize">{{packageDetails?.title}}</h4>
             <p>{{packageDetails?.operated_by}} | Departure Date : {{packageDetails?.start_date | date:'LLLL dd'}} Onwards</p>
