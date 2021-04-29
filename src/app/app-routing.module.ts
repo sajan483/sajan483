@@ -20,9 +20,8 @@ const myPath: Routes = [
   },
   {
     path: "branch",
-    loadChildren: () =>
-      import("./modules/branch/branch.module").then((m) => m.BranchModule),
-  }     
+    loadChildren: () =>import("./modules/branch/branch.module").then((m) => m.BranchModule),
+  }      
 ];
 
 @NgModule({
