@@ -82,8 +82,7 @@ export class CreateTripComponent implements OnInit {
       mekIn: ['', Validators.required],
 			mekOut: ['', Validators.required]
     });
-    // if(sessionStorage.getItem('searchData') == null){
-
+     if(sessionStorage.getItem('searchData') == null){
       this.source.setValue(this.fromLocation.iata)
       this.destination.setValue(this.destLocation.iata)
       this.airline.setValue(this.airlineDetails.name)
@@ -103,20 +102,21 @@ export class CreateTripComponent implements OnInit {
       this.medinahInMax = this.form.returnDate.value;
       this.medinahOutMin = this.incrementDate(this.form.medIn.value,1)
       
-    // } else {
-    //   this.searchDataOld = JSON.parse(sessionStorage.getItem('searchData'))
-    //   this.source.setValue(this.searchDataOld.flightData.source)
-    //   this.destination.setValue(this.searchDataOld.flightData.destination)
-    //   this.airline.setValue(this.searchDataOld.flightData.airlineName)
-    //   this.searchForm.controls.departDate.setValue(this.searchDataOld.flightData.departureDate);
-    //   this.searchForm.controls.returnDate.setValue(this.searchDataOld.flightData.returnDate);
-    //   this.searchForm.controls.mekIn.setValue(this.searchDataOld.mekkahData.checkIn);
-    //   this.searchForm.controls.mekOut.setValue(this.searchDataOld.mekkahData.checkOut);
-    //   this.searchForm.controls.medIn.setValue(this.searchDataOld.medinaData.checkIn);
-    //   this.searchForm.controls.medOut.setValue(this.searchDataOld.medinaData.checkOut);
-    //   this.destLocation.city = this.searchDataOld.flightData.destinationName
-    //   this.fromLocation.city = this.searchDataOld.flightData.sourceName
-    // }
+    } else {
+      this.searchDataOld = JSON.parse(sessionStorage.getItem('searchData'))
+      this.source.setValue(this.searchDataOld.flightData.source)
+      this.destination.setValue(this.searchDataOld.flightData.destination)
+      this.airline.setValue(this.searchDataOld.flightData.airlineName)
+      this.searchForm.controls.adult.setValue(this.searchDataOld.travellersData.adult)
+      this.searchForm.controls.departDate.setValue(this.searchDataOld.flightData.departureDate);
+      this.searchForm.controls.returnDate.setValue(this.searchDataOld.flightData.returnDate);
+      this.searchForm.controls.mekIn.setValue(this.searchDataOld.mekkahData.checkIn);
+      this.searchForm.controls.mekOut.setValue(this.searchDataOld.mekkahData.checkOut);
+      this.searchForm.controls.medIn.setValue(this.searchDataOld.medinaData.checkIn);
+      this.searchForm.controls.medOut.setValue(this.searchDataOld.medinaData.checkOut);
+      this.destLocation.city = this.searchDataOld.flightData.destinationName
+      this.fromLocation.city = this.searchDataOld.flightData.sourceName
+    }
     
     this.getAirportListSrc()
     this.getAirportListDest()
@@ -259,6 +259,12 @@ export class CreateTripComponent implements OnInit {
     var a = parseInt(this.form.adult.value);
     var b = parseInt(this.form.children.value);
     var c = parseInt(this.form.infant.value)
+    var dep = (this.form.departDate.value.length < 11)?this.form.departDate.value:this.form.departDate.value.toJSON().split("T")[0]
+    var ret = (this.form.returnDate.value.length < 11)?this.form.returnDate.value:this.form.returnDate.value.toJSON().split("T")[0]
+    var mkIn = (this.form.mekIn.value.length < 11)?this.form.mekIn.value:this.form.mekIn.value.toJSON().split("T")[0]
+    var mkOut = (this.form.mekOut.value.length < 11)?this.form.mekOut.value:this.form.mekOut.value.toJSON().split("T")[0]
+    var mdIn = (this.form.medIn.value.length < 11)?this.form.medIn.value:this.form.medIn.value.toJSON().split("T")[0]
+    var mdOut = (this.form.medOut.value.length < 11)?this.form.medOut.value:this.form.medOut.value.toJSON().split("T")[0] 
     this.appStore.totalTravellers = a+b+c;
     this.searchData = {
       travellersData : {
@@ -271,27 +277,27 @@ export class CreateTripComponent implements OnInit {
         sourceName:this.fromLocation.city,
         destination:this.destination.value,
         destinationName:this.destLocation.city,
-        departureDate:this.form.departDate.value.toJSON().split("T")[0],
-        returnDate:this.form.returnDate.value.toJSON().split("T")[0],
+        departureDate:this.incrementDate(dep,1),
+        returnDate:this.incrementDate(ret,1),
         airline:this.airlineDetails.code,
         airlineName:this.airlineDetails.name
       },
       mekkahData:{
-        checkIn:this.form.mekIn.value.toJSON().split("T")[0],
-        checkOut:this.form.mekOut.value.toJSON().split("T")[0]
+        checkIn:this.incrementDate(mkIn,1),
+        checkOut:this.incrementDate(mkOut,1)
       },
       medinaData:{
-        checkIn:this.form.medIn.value.toJSON().split("T")[0],
-        checkOut:this.form.medOut.value.toJSON().split("T")[0]
+        checkIn:this.incrementDate(mdIn,1),
+        checkOut:this.incrementDate(mdOut,1)
       }
     };
 
-    this.appStore.departureDate = this.form.departDate.value.toJSON().split("T")[0];
-    this.appStore.arrivalDate = this.form.returnDate.value.toJSON().split("T")[0];
-    this.appStore.makkahCheckInDate = this.form.mekIn.value.toJSON().split("T")[0];
-    this.appStore.makkahCheckOutDate = this.form.mekOut.value.toJSON().split("T")[0];
-    this.appStore.medinahCheckInDate = this.form.medIn.value.toJSON().split("T")[0];
-    this.appStore.medinahCheckOutDate = this.form.medOut.value.toJSON().split("T")[0];
+    this.appStore.departureDate = dep;
+    this.appStore.arrivalDate = ret;
+    this.appStore.makkahCheckInDate = this.incrementDate(mkIn,1);
+    this.appStore.makkahCheckOutDate = this.incrementDate(mkOut,1);
+    this.appStore.medinahCheckInDate = this.incrementDate(mdIn,1);
+    this.appStore.medinahCheckOutDate = this.incrementDate(mdOut,1)
     sessionStorage.setItem('searchData',JSON.stringify(this.searchData))
     StepperComponent.searchData = this.searchData;
     this.appStore.dataFromFrontPage  = this.searchData;
