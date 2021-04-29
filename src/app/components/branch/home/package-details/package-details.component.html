@@ -1,6 +1,7 @@
 <div class="outer">
     <div class="banner">
-        <img src="/assets/images/mkbg.jpg">
+        <img *ngIf="!packageDetails?.attachments[0].file" src="/assets/images/mkbg.jpg">
+        <img *ngIf="packageDetails?.attachments[0].file" src="{{packageDetails?.attachments[0].file}}" alt="">
         <div class="black position-absolute" *ngIf="shimmer">
             <h4 class="text-capitalize">Package Title</h4>
             <p>Agency Name | Departure Date : xxx Onwards</p>
@@ -71,35 +72,27 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="row mt-4 mb-2 bg_f5 mrgins">
+                        <div class="row mt-4 mb-2 bg_f5 mrgins" [formGroup]="countForm">
                             <div class="col-md-3 pt-1">
                                 <div class="d-inline-flex">
                                     <div class="fs14 fw500 my-auto">Adult</div>
-                                    <select name="" id="" class="form-control selectionbox" (change)="selectAdult($event.target.value)">
-                                        <option *ngFor="let k of [].constructor(availability);let i = index;" [value]="i+1">{{i+1}}</option>
-                                    </select>
+                                    <input type="number" placeholder="₹" formControlName="adult" class="form-control selectionbox" pattern="^[1-9][0-9]*$" required oninput="if(!this.value.match('^[1-9][0-9]*$'))this.value='';">
                                 </div>
                             </div>
                             <div class="col-md-3 brdr_left_right_d3 pt-1">
                                 <div class="d-inline-flex">
                                     <div class="fs14 fw500 my-auto">Child</div>
-                                    <select name="" id="" class="form-control selectionbox" (change)="selectChildWithoutBed($event.target.value)">
-                                        <option value="0">0</option>
-                                        <option *ngFor="let k of [].constructor(availability);let i = index;" [value]="i+1">{{i+1}}</option>
-                                    </select>
+                                    <input type="number" placeholder="₹" formControlName="child" class="form-control selectionbox">
                                 </div>
                             </div>
                             <div class="col-md-3 pt-1">
                                 <div class="d-inline-flex">
                                     <div class="fs14 fw500 my-auto">Infant</div>
-                                    <select name="" id="" class="form-control selectionbox" (change)="selectInfant($event.target.value)">
-                                        <option value="0">0</option>
-                                        <option *ngFor="let k of [].constructor(availability);let i = index;" [value]="i+1">{{i+1}}</option>
-                                    </select>
+                                    <input type="number" placeholder="₹" formControlName="infant" class="form-control selectionbox">
                                 </div>
                             </div>
                             <div class="col-md-3">
-                                <button class="searchbutton pull-right m-0" [class.bttnactive]="bttnactv" [disabled]="shimmer" (click)="bookPackage()">Book Package</button>
+                                <button class="searchbutton pull-right m-0" [class.bttnactive]="bttnactv" [disabled]="continues" (click)="bookPackage()">Book Package</button>
                             </div>
                         </div>
                         <div class=" overview ">
@@ -207,7 +200,7 @@
                 </mat-tab>
             </mat-tab-group>
             <div class="btn-box">
-                <button [disabled]="shimmer" class="searchbutton" [class.bttnactive]="bttnactv" (click)="bookPackage()">Book Package</button>
+                <button [disabled]="continues" class="searchbutton" [class.bttnactive]="bttnactv" (click)="bookPackage()">Book Package</button>
             </div>
         </div>
     </div>

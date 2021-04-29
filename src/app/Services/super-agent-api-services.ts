@@ -192,6 +192,9 @@ export class SuperAgentApiService {
           if(item.title){
             formData.append(`[itinerary_set][${index}][title]`, item.title);
           }
+          if(item.noOfDays){
+            formData.append(`[itinerary_set][${index}][num_of_days]`, item.noOfDays);
+          }
           if(item.from_date){
             formData.append(`[itinerary_set][${index}][from_date]`, item.from_date);
           }
