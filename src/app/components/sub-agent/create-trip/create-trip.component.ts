@@ -843,8 +843,9 @@
 
       this.common.pilotHotelSearch( this.createTripAdapter.hotelSearchRequest(city,this.userDetails), this.appStore.langCode).subscribe(
         (data) => {
-          this.hotelsList = data;
-          if(city === "MAKKA"){sessionStorage.setItem('mkSearchId',data.search_id)};
+          if(city === "MAKKA"){
+            this.hotelsList = data;
+            sessionStorage.setItem('mkSearchId',data.search_id)};
           if(city === "MADEENA"){
             sessionStorage.setItem('mdSearchId',data.search_id);
           }

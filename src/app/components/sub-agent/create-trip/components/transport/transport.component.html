@@ -43,7 +43,7 @@
                                 <span class="customtooltiptext">
                            <div class="container mb-2">
                               <p class="pt-2 fare_summary_heading  textright">
-                                 {{'Fare Summary' | translate}} </p>
+                                 {{'Fare Summary' }} </p>
                               <div>
                                  <div>
                                     <div class="col-md-12 p-0 m-0 row pb-2 ">
@@ -58,7 +58,7 @@
             </div>
             </span>
         </div>
-        <div class="fs13 fw400 clr52">({{'Per Vehicle' | translate}})</div>
+        <div class="fs13 fw400 clr52">({{'Per Vehicle' }})</div>
         <div>
             <button class="searchbutton mr-0" [disabled]="vehicle.categories[0].out_of_stock" (click)="bookTransport(item.company_code,item.vehicle_types[index])">Book</button>
             <p class="red_text fs13 fw500" *ngIf="vehicle.categories[0].out_of_stock">Out Of Stock</p>

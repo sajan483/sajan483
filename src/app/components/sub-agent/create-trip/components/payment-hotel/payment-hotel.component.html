@@ -54,11 +54,11 @@
                                 <div class="modal-body mb-4">
                                     <div
                                         *ngIf="tripHotel?.room_variations[0]?.room?.cancellation_policy?.rules.length < 1  && !tripHotel?.cancellation_policy?.description">
-                                        {{'No Policies Found' | translate}}
+                                        {{'No Policies Found' }}
                                     </div>
                                     <div *ngIf="tripHotel?.hotel?.policies?.length > 0">
                                         <h6 class="mt-1 ml-3" style="margin-left: 10px;">
-                                            {{'Policies' | translate}}</h6>
+                                            {{'Policies' }}</h6>
                                         <div class="col-md-12 row m-0 mb-1">
                                             <div class="col-md-12 pl-0 m-0"
                                                 *ngFor="let item of tripHotel.hotel.policies">
@@ -80,7 +80,7 @@
                                                 </h6>
                                                 <p *ngIf="!tripHotel?.room_variations[0]?.room?.cancellation_policy?.is_refundable"
                                                     style="color: #d33a2f;padding-left: 10px;padding-top: 10px;">
-                                                    {{'Non Refundable' | translate}} </p>
+                                                    {{'Non Refundable' }} </p>
                                             </div>
                                             <div class="pb-2 m-0">
                                                 <p>{{item?.room?.cancellation_policy?.description}}
@@ -133,9 +133,9 @@
                             translate}}</p>
                         <div class="col-md-12 p-0 m-0 row pb-2">
                             <div class="col-md-12 textAlign ">
-                                <span>{{'GDS Fee' | translate}} :
+                                <span>{{'GDS Fee' }} :
                                     {{tripHotel?.prices_summary?.gds_fee}}</span><br>
-                                <span>{{'OTA Fee' | translate}} :
+                                <span>{{'OTA Fee' }} :
                                     {{tripHotel?.prices_summary?.ota_fee}}</span>
                             </div>
                         </div>

@@ -6,7 +6,7 @@
     <div class="container">
         <div>
             <mat-horizontal-stepper #stepper>
-                <mat-step label="{{'Makkah Hotel' | translate}}" *ngIf="steps.includes('1')" state="apartment">
+                <mat-step label="{{'Makkah Hotel' }}" *ngIf="steps.includes('1')" state="apartment">
                     <div *ngIf="showShimmer">
                         <app-loader></app-loader>
                     </div>
@@ -37,7 +37,7 @@
                         </app-makka-hotel>
                     </div>
                 </mat-step>
-                <mat-step label="{{'Madeena Hotel' | translate}}" *ngIf="steps.includes('2')" state="apartment">
+                <mat-step label="{{'Madeena Hotel' }}" *ngIf="steps.includes('2')" state="apartment">
                     <div *ngIf="showShimmer">
                         <app-loader></app-loader>
                     </div>
@@ -68,7 +68,7 @@
                         </app-makka-hotel>
                     </div>
                 </mat-step>
-                <mat-step label="{{'Transport' | translate}}" *ngIf="steps.includes('3')" state="directions_bus">
+                <mat-step label="{{'Transport' }}" *ngIf="steps.includes('3')" state="directions_bus">
                     <div class="pr-0 pl-0 pt-1 mt80">
                         <div class="headerdiv">
                             <div class="container d-flex justify-content-between">
@@ -91,11 +91,11 @@
                             <div class="mt60">
                                 <div class="col-md-12  row m-0 justify-content-between filterstyle p015" *ngIf="isTransportResponseEmpty">
                                     <div id="routeSection" class="col-md-5 mb-0 pl-0">
-                                        <ng-multiselect-dropdown [placeholder]="'Route' | translate" [data]="routeList" [settings]="dropdownSettings" (onSelect)="onRouteSelect($event)">
+                                        <ng-multiselect-dropdown [placeholder]="'Route' " [data]="routeList" [settings]="dropdownSettings" (onSelect)="onRouteSelect($event)">
                                         </ng-multiselect-dropdown>
                                     </div>
                                     <div id="vehicleSection" class="col-md-5 mb-0 pl-0 mt3">
-                                        <ng-multiselect-dropdown [placeholder]="'Vehicle Type'| translate" [data]="vehicleTypeList" [(ngModel)]="vehicleTypeItems" [settings]="dropdownSettings" (onSelect)="onVehicleSelect($event)">
+                                        <ng-multiselect-dropdown [placeholder]="'Vehicle Type'" [data]="vehicleTypeList" [(ngModel)]="vehicleTypeItems" [settings]="dropdownSettings" (onSelect)="onVehicleSelect($event)">
                                         </ng-multiselect-dropdown>
                                     </div>
                                     <div id="transportSearchSection" class="col-md-2 pr-0 pl-0 mt3 w95">
@@ -109,11 +109,11 @@
                         </div>
                     </div>
                 </mat-step>
-                <mat-step label="{{'Payment' | translate}}" state="payment">
+                <mat-step label="{{'Payment' }}" state="payment">
                     <form [formGroup]="paymentForm">
                         <div class="col-md-12 p-0 mt80">
                             <div class="col-md-12" *ngIf="tripMakkahHotel || tripMadeenaHotel">
-                                <h3 class="fs16 fw600 Premium_blue">{{'Review your hotel details'| translate}}</h3>
+                                <h3 class="fs16 fw600 Premium_blue">{{'Review your hotel details'}}</h3>
                             </div>
                             <app-payment-hotel [tripHotel]="tripMakkahHotel" (notifyCreateTrip)="moveToCorrespondingPage($event)" [city]="cityFirst">
                             </app-payment-hotel>
@@ -121,7 +121,7 @@
                             </app-payment-hotel>
                             <div *ngIf="tripTransport">
                                 <div class="col-md-12">
-                                    <h3 class="fs16 fw600 Premium_blue">{{'Review your Transport details' | translate}}
+                                    <h3 class="fs16 fw600 Premium_blue">{{'Review your Transport details' }}
                                     </h3>
                                 </div>
                                 <div *ngIf="!makkatransport">
@@ -131,9 +131,9 @@
                             </div>
                             <div class="col-md-12">
                                 <div class="d-flex justify-content-between">
-                                    <h3 class="fs16 fw600 Premium_blue">{{'Traveller Details' | translate}}</h3>
+                                    <h3 class="fs16 fw600 Premium_blue">{{'Traveller Details' }}</h3>
                                     <span class="fs12 darkyellow">{{'Please make sure you enter the Name as per your
-                                        Government photo id.' | translate}}</span>
+                                        Government photo id.' }}</span>
                                 </div>
                             </div>
                             <div class="col-md-12 pl-0 pr-0 pb-0">
@@ -228,12 +228,12 @@
                                             translate}}
                                             :{{reference_no}} </span>
                                     </div>
-                                    <div class="text-align-end"><button type="submit" id="payBtn" class="searchbutton" data-toggle="modal" data-target="#ibanPopup" (click)="setTimerForIbanPopup()">{{'PAY' | translate}}</button> </div>
+                                    <div class="text-align-end"><button type="submit" id="payBtn" class="searchbutton" data-toggle="modal" data-target="#ibanPopup" (click)="setTimerForIbanPopup()">{{'PAY' }}</button> </div>
                                 </div>
                                 <div class="d-flex flex-row m-2">
                                     <div class="p-2 ml-auto"></div>
                                     <div><button (click)="bookTrip()" type="submit" id="continueBooking" class="searchbutton">{{'BOOK &
-                                            CONTINUE ' | translate}}</button> </div>
+                                            CONTINUE ' }}</button> </div>
                                     <div class="p-2"></div>
                                 </div>
                                 <div style="height: 100px;background:#eaeaea;"></div>
@@ -259,27 +259,27 @@
                 <div class="container">
                     <div class="row">
                         <div *ngIf="setDataForAddServiceCountPopUP?.additional_service_code == '1'">
-                            <h6>{{'No of Umrah Guidance Needed' | translate }} :</h6>
+                            <h6>{{'No of Umrah Guidance Needed'  }} :</h6>
                         </div>
                         <div *ngIf="setDataForAddServiceCountPopUP?.additional_service_code == '2'">
-                            <h6>{{'No of Wheel Chair Needed' | translate }} :</h6>
+                            <h6>{{'No of Wheel Chair Needed'  }} :</h6>
                         </div>
                         <div *ngIf="setDataForAddServiceCountPopUP?.additional_service_code == '3'">
-                            <h6>{{'No of Wheel Chair with Assistant Needed' | translate }} :</h6>
+                            <h6>{{'No of Wheel Chair with Assistant Needed'  }} :</h6>
                         </div>
                         <div *ngIf="setDataForAddServiceCountPopUP?.additional_service_code == '4'">
-                            <h6>{{'No of Male Companion Needed' | translate }} :</h6>
+                            <h6>{{'No of Male Companion Needed'  }} :</h6>
                         </div>
                         <div *ngIf="setDataForAddServiceCountPopUP?.additional_service_code == '5'">
-                            <h6>{{'No of Female Companion Needed' | translate }} :</h6>
+                            <h6>{{'No of Female Companion Needed'  }} :</h6>
                         </div>
                         <div *ngIf="setDataForAddServiceCountPopUP?.additional_service_code == '6'">
-                            <h6>{{'No of Baby Sitter Needed' | translate }} :</h6>
+                            <h6>{{'No of Baby Sitter Needed'  }} :</h6>
                         </div>
                     </div>
                     <div class="row">
                         <mat-form-field>
-                            <mat-label>{{'Select' | translate}}</mat-label>
+                            <mat-label>{{'Select' }}</mat-label>
                             <select matNativeControl [(ngModel)]="addSrvCount" name="service">
                                 <option
                                     *ngFor="let k of [].constructor(setDataForAddServiceCountPopUP?.quantity) | slice:0:50; let p = index;"
@@ -297,19 +297,19 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title">{{'IBAN Payment' | translate}}</h4>
+                <h4 class="modal-title">{{'IBAN Payment' }}</h4>
                 <button id="ibanClose" type="button" class="close" data-dismiss="modal">&times;</button>
             </div>
             <div class="modal-body">
                 <div class="modal-body" style="font-size: 12px;">
                     <div class="col-md-12">
-                        <div class="col-md-12 pb-1"><strong style="color: red;">*</strong> {{'IBAN Accound Number' | translate}}:
+                        <div class="col-md-12 pb-1"><strong style="color: red;">*</strong> {{'IBAN Accound Number' }}:
                         </div>
                         <div class="col-md-12"><input type="text" class="form-control" id="acc_no" [(ngModel)]="accNo">
                         </div>
                     </div>
                     <div class="col-md-12">
-                        <div class="col-md-12 pb-1"><strong style="color: red;">*</strong> {{'Authe Code' | translate}}:
+                        <div class="col-md-12 pb-1"><strong style="color: red;">*</strong> {{'Authe Code' }}:
                         </div>
                         <div class="col-md-12"><input type="text" class="form-control" id="auth_code" [(ngModel)]="authCode"></div>
                     </div>

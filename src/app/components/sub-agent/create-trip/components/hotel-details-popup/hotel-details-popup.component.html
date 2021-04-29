@@ -26,7 +26,7 @@
                     <div class="col-md-7 col-12 row">
                         <div *ngIf="selectedHotel?.has_special_deal" class="hotelRibbon">
                             <span class="hotelRibbon3">
-                                {{'Has special deal' | translate}}
+                                {{'Has special deal' }}
                             </span>
                         </div>
                         <div class="hotel_photo_gallery cursor-pointer" (click)="viewAllImagePopup()">
@@ -62,7 +62,7 @@
                                 </div>
                                 <div class="text-center mt-2">
                                     <i class="icon_size_20 icns nighticon"></i>
-                                    <h5 class="clr52 fs14">{{numberOfDays}} {{'Night(s)' | translate}}</h5>
+                                    <h5 class="clr52 fs14">{{numberOfDays}} {{'Night(s)' }}</h5>
                                 </div>
                                 <div>
                                     <div class="d-inline-flex">
@@ -75,17 +75,17 @@
                                 </div>
                             </div>
                             <div class="p-2 roomsGuests mt-2">
-                                <label>{{'ROOMS & GUESTS' | translate}}</label>
+                                <label>{{'ROOMS & GUESTS' }}</label>
                                 <h6 class="date">{{selectedRoomCount}}
-                                    <span class="fs16 clr52 fw500">{{'Room' | translate}} </span> {{totalTravellers}}
-                                    <span class="fs16 clr52 fw500">{{'Guest' | translate}} </span>
+                                    <span class="fs16 clr52 fw500">{{'Room' }} </span> {{totalTravellers}}
+                                    <span class="fs16 clr52 fw500">{{'Guest' }} </span>
                                 </h6>
                             </div>
                             <div class="p-2">
                                 <div class="d-inline-flex">
                                     <i class="locationicon icns icon_size_15"></i>
                                     <div class="pl-2">
-                                        <div class="fs13 fw400">{{'ADDRESS' | translate}}</div>
+                                        <div class="fs13 fw400">{{'ADDRESS' }}</div>
                                         <div class="fs13 clr52">{{selectedHotel?.meta_data?.address}}</div>
                                     </div>
                                 </div>
@@ -113,15 +113,15 @@
                         <div id="selectRoom">
                             <section class="roomSelectWrap">
                                 <div class="roomInfoWrap">
-                                    <div class="roomInfo-title textright">{{'Occupancy' | translate}}</div>
-                                    <div class="roomTypeNPrice-title textright">{{'Room Type' | translate}}</div>
-                                    <div class="roomPriceWrap-title textright">{{'Price' | translate}}</div>
+                                    <div class="roomInfo-title textright">{{'Occupancy' }}</div>
+                                    <div class="roomTypeNPrice-title textright">{{'Room Type' }}</div>
+                                    <div class="roomPriceWrap-title textright">{{'Price' }}</div>
                                     <div *ngIf="!isGrouped">
                                         <div class="item" *ngFor="let item2 of selectedRoomGroups;let i = index ">
                                             <div class="roomInfo textright">
                                                 <label class="room">
                                                     <i class="bedicon icon_size_25 icns"></i>
-                                                    {{'Room' | translate}}&nbsp;{{i+1}}
+                                                    {{'Room' }}&nbsp;{{i+1}}
                                                 </label>
                                             </div>
                                             <div class="roomTypeNPrice" *ngFor="let room of item2.rooms; let j= index;">
@@ -129,7 +129,7 @@
                                                     <li class="roomtypeName media">
                                                         <div class="roomRibbon" *ngIf="room?.has_special_deal">
                                                             <span class="roomRibbon6">
-                                                                <p>{{'Special Deal' | translate}}</p>
+                                                                <p>{{'Special Deal' }}</p>
                                                                 <p>{{room?.deal_description}}</p>
                                                             </span>
                                                         </div>
@@ -139,8 +139,8 @@
                                                             </strong>
                                                             <div class="d-inline-flex">
                                                                 <i class="hotelbedicon icon_size_20 icns mr-2"></i>
-                                                                <p class="clr52 fs14 fw400">1 {{'Room for' | translate}} {{room?.adult_number}} {{'Adult(s)' | translate}}</p>
-                                                                <p class="pl-1 clr52 fs14 fw400" *ngIf="room.child_number > 0">& {{room?.child_number}} {{'Child(s)' | translate}}</p>
+                                                                <p class="clr52 fs14 fw400">1 {{'Room for' }} {{room?.adult_number}} {{'Adult(s)' }}</p>
+                                                                <p class="pl-1 clr52 fs14 fw400" *ngIf="room.child_number > 0">& {{room?.child_number}} {{'Child(s)' }}</p>
                                                             </div>
                                                             <div>
                                                                 <span *ngFor="let feature of room.features;let v = index;">
@@ -165,7 +165,7 @@
                                                                 <span class="customtooltiptext">
                                                                     <div class="container mb-2">
                                                                         <p class="pt-2 fare_summary_heading textright">
-                                                                            {{'Fare Summary' | translate}} </p>
+                                                                            {{'Fare Summary' }} </p>
                                                                         <div *ngFor="let item of selectedRoomGroups">
                                                                             <div *ngFor="let room of item.rooms">
                                                                                 <div class="col-md-12 p-0 m-0 row pb-2" *ngIf="room.insertedRmCount > 0">
@@ -177,7 +177,7 @@
                                                                             </div>
                                                                         </div>
                                                                         <p class=" pt-2 pr-5 hotel_price_total textright">
-                                                                            {{'You Pay' | translate}} {{totalRoomPrice | number:'.2-2'}}</p>
+                                                                            {{'You Pay' }} {{totalRoomPrice | number:'.2-2'}}</p>
                                                                     </div>
                                                                 </span>
                                                             </span>
@@ -198,7 +198,7 @@
                                             <div class="roomInfo textright">
                                                 <label class="room">
                                                     <i class="bedicon icon_size_25 icns"></i>
-                                                    {{'ROOM GROUP' | translate}}&nbsp;{{i+1}}
+                                                    {{'ROOM GROUP' }}&nbsp;{{i+1}}
                                                 </label>
                                             </div>
                                             <div class="roomTypeNPrice" *ngFor="let room of item2.rooms; let j= index;">
@@ -206,7 +206,7 @@
                                                     <li class="roomtypeName media">
                                                         <div class="roomRibbon" *ngIf="room?.has_special_deal">
                                                             <span class="roomRibbon6">
-                                                                <p>{{'Special Deal' | translate}}</p>
+                                                                <p>{{'Special Deal' }}</p>
                                                                 <p>{{room?.deal_description}}</p>
                                                             </span>
                                                         </div>
@@ -217,10 +217,10 @@
                                                             <div class="d-inline-flex">
                                                                 <i class="hotelbedicon icon_size_20 icns mr-2"></i>
                                                                 <p class="clr52 fs14 fw400 ">
-                                                                    1 {{'Room for' | translate}} {{room?.adult_number}} {{'Adult(s)' | translate}}
+                                                                    1 {{'Room for' }} {{room?.adult_number}} {{'Adult(s)' }}
                                                                 </p>
                                                                 <p class="pl-1 clr52 fs14 fw400 " *ngIf="room.child_number > 0">
-                                                                    & {{room?.child_number}} {{'Child(s)' | translate}}
+                                                                    & {{room?.child_number}} {{'Child(s)' }}
                                                                 </p>
                                                             </div>
                                                             <div>
@@ -246,7 +246,7 @@
                                                                 <span class="customtooltiptext">
                                                                     <div class="container mb-2">
                                                                         <p class="pt-2 fare_summary_heading textright">
-                                                                            {{'Fare Summary' | translate}} </p>
+                                                                            {{'Fare Summary' }} </p>
                                                                         <div *ngFor="let item of selectedRoomGroups">
                                                                             <div *ngFor="let room of item.rooms">
                                                                                 <div class="col-md-12 p-0 m-0 row pb-2"
@@ -261,7 +261,7 @@
                                                                             </div>
                                                                         </div>
                                                                         <p class=" pt-2 pr-5 hotel_price_total textright">
-                                                                            {{'You Pay' | translate}} {{totalRoomPrice | number:'.2-2'}}</p>
+                                                                            {{'You Pay' }} {{totalRoomPrice | number:'.2-2'}}</p>
                                                                     </div>
                                                                 </span>
                                                             </span>
@@ -278,23 +278,23 @@
                                 </div>
                                 <aside class="roomPriceWrap">
                                     <div class="roominfo-title">
-                                        {{'Price for' | translate}} {{selectedRoomCount}} {{'Room for' | translate}} {{numberOfDays}} nights
+                                        {{'Price for' }} {{selectedRoomCount}} {{'Room for' }} {{numberOfDays}} nights
                                     </div>
                                     <div class="stickyPrice text-center">
                                         <div>
                                             <div class="d-inline-flex mt15">
                                                 <i class="selectedgreentickicon icns icon_size_20 mr-2"></i>
-                                                <div class="green_text fs14 fw600">{{selectedRoomCount}} {{'Room Selected' | translate}}</div>
+                                                <div class="green_text fs14 fw600">{{selectedRoomCount}} {{'Room Selected' }}</div>
                                             </div>
                                         </div>
                                         <strong class="mt10">
                                             <span class="fw500 fs24 text-dark">{{selectedHotel?.currency }} {{totalRoomPrice | number:'.2-2'}} </span>
                                         </strong>
                                         <div class="clr52 fs12 fw500 mt10">
-                                            {{'Price for' | translate}} {{selectedRoomCount}} {{'Room for' | translate}} {{numberOfDays}} {{'Nights' | translate}}
+                                            {{'Price for' }} {{selectedRoomCount}} {{'Room for' }} {{numberOfDays}} {{'Nights' }}
                                         </div>
-                                        <div class="clr52 fs14 fw500 mt10">{{'VAT & Taxes Included' | translate}}</div>
-                                        <button class="searchbutton mt10" (click)="bookHotel()" [disabled]="!makkaSelectActivate">{{'Select' | translate}}</button>
+                                        <div class="clr52 fs14 fw500 mt10">{{'VAT & Taxes Included' }}</div>
+                                        <button class="searchbutton mt10" (click)="bookHotel()" [disabled]="!makkaSelectActivate">{{'Select' }}</button>
 
                                     </div>
                                 </aside>
@@ -303,14 +303,14 @@
                     </mat-tab>
                     <mat-tab label="More Details">
                         <div class="borderbox mb80 p20">
-                            <h1 class="fs24">{{'Details' | translate}}</h1>
+                            <h1 class="fs24">{{'Details' }}</h1>
                             <p>{{selectedHotel?.meta_data?.description}}</p>
                             <h1 *ngIf="selectedHotel?.extensions?.length > 0" class="amntStyle">Extensions</h1>
                             <p *ngFor="let extension of selectedHotel?.extensions">{{extension?.value}}</p>
-                            <h1 *ngIf="selectedHotel?.meta_data?.remark" class="amntStyle">{{'Remarks' | translate}}</h1>
+                            <h1 *ngIf="selectedHotel?.meta_data?.remark" class="amntStyle">{{'Remarks' }}</h1>
                             <div style="font-size: 12px;" [innerHTML]="selectedHotel?.meta_data?.remark"></div>
                             <div *ngIf="selectedHotel?.meta_data.amenities.length == 0">
-                                {{'No Amenities' | translate}}
+                                {{'No Amenities' }}
                             </div>
                             <div class="row ml-0 mr-0 mt10">
                                 <div class="col-md-3 p-0" *ngFor="let item of selectedHotel?.meta_data.amenities">
@@ -325,7 +325,7 @@
                                 <p>{{policy?.description}}</p>
                             </div>
                             <div class="noDataPresent" *ngIf="selectedHotel?.policies && selectedHotel?.policies.length == 0">
-                                {{'No Policies Found' | translate}}
+                                {{'No Policies Found' }}
                             </div>
                         </div>
                     </mat-tab>
