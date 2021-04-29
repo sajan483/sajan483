@@ -298,6 +298,8 @@ export class CreateTripComponent implements OnInit {
     this.appStore.makkahCheckOutDate = mkOut;
     this.appStore.medinahCheckInDate = mdIn;
     this.appStore.medinahCheckOutDate = mdOut;
+    sessionStorage.setItem("departureDate",dep);
+    sessionStorage.setItem("arrivalDate",ret);
     sessionStorage.setItem('searchData',JSON.stringify(this.searchData))
     StepperComponent.searchData = this.searchData;
     this.appStore.dataFromFrontPage  = this.searchData;

@@ -37,8 +37,13 @@ export class TransportComponent implements OnInit {
   ngOnInit() {
     this.callListApi();
     this.transportSelection = this.StepperAdapter.transportBookingForm();
-    this.transportMin = this.appStore.departureDate;
-    this.transportMax = this.appStore.arrivalDate;
+    this.transportMin = sessionStorage.getItem("departureDate");
+    this.transportMax = sessionStorage.getItem("arrivalDate");
+    this.SuperAgentApiService.getPackageDetails(sessionStorage.getItem('packageId')).subscribe((data)=>{
+      if(data.trip_transportation != null){
+        this.transportSelection = this.StepperAdapter.savedTransportForm(data.trip_transportation);
+      }
+    })
   }
 
   /**

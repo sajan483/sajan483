@@ -20,6 +20,7 @@ export class ConfirmationComponent implements OnInit {
   constructor(private activeRouter:ActivatedRoute,private branchService: BranchApiService) { }
 
   ngOnInit() {
+    window.scroll(0,0);
     this.bookingId = +sessionStorage.getItem("bookingId");
     this.getDetailApi();
   }

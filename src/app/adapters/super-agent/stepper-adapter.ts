@@ -59,6 +59,18 @@ export class StepperAdapter {
     });
   }
 
+  savedTransportForm(data): FormGroup{
+    this.fb = new FormBuilder();
+    return this.fb.group({
+      depdate: [data.travel_date, Validators.required],
+      cabservice: [data.company_code, Validators.required],
+      cabtype: [data.trip_vehicles[0].vehicle_type.code, Validators.required],
+      route: [data.route, Validators.required],
+      personpervehicle: [data.trip_vehicles[0].pax_per_vehicle, Validators.required],
+      amoundperperson: [data.trip_vehicles[0].price_per_pax, Validators.required],
+    });
+  }
+
   /**
    * this methode for booking transport request
    * @param transportSelection 
@@ -160,6 +172,16 @@ export class StepperAdapter {
       'child_with_bed_price': ['', Validators.required],
       'child_without_bed_price': ['', Validators.required],
       'advance_pct': ['', Validators.required],
+    })
+  }
+
+  savedPaymentForm(data):FormGroup{
+    this.fb = new FormBuilder();
+    return this.fb.group({
+      'adult_price': [data.adult_price, Validators.required],
+      'child_with_bed_price': [data.child_with_bed_price, Validators.required],
+      'child_without_bed_price': [data.child_without_bed_price, Validators.required],
+      'advance_pct': [data.advance_pct, Validators.required],
     })
   }
 

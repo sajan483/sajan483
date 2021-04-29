@@ -42,6 +42,7 @@ export class HotelDetailsPopupComponent implements OnInit {
     private helperService : HelperService) { }
 
   ngOnInit() {
+    window.scroll(0,0);
     this.popupData = JSON.parse(sessionStorage.getItem('hotelDetailsData'))
     this.loader=false
     this.setPopUp()

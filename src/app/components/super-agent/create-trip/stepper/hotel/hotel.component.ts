@@ -48,6 +48,7 @@ export class HotelComponent implements OnInit {
    }
 
   ngOnInit() {
+    window.scroll(0,0);
     if(sessionStorage.getItem('hotelDetails')=='open'){
       this.loader=false
       this.showHotelDetails = 'true'

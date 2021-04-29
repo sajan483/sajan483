@@ -51,7 +51,7 @@ export class HomeComponent implements OnInit {
         }
       });
       this.shimmer = false;
-      data.forEach(element =>{
+      this.packages.forEach(element =>{
         airport.push(element.boarding_airport)
         days.push(element.num_days);
       })

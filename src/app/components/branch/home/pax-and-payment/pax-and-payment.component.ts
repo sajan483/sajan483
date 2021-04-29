@@ -31,6 +31,7 @@ export class PaxAndPaymentComponent implements OnInit {
      }
 
   ngOnInit() {
+    window.scroll(0,0);
     this.contactInfoForm = this.branchAdapter.createBranchForm();
     this.calculation();
     this.id = this.activeRouter.params.subscribe(data=>{
