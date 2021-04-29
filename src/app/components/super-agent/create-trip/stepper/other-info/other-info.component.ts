@@ -74,14 +74,14 @@ export class OtherInfoComponent implements OnInit {
   packageDetails(){
     this.SuperAgentService.getPackageDetails(sessionStorage.getItem('packageId')).subscribe((data)=>{
       console.log(data);
-      if(data.title != null) {
+      if(data.title != null || data.title != "") {
         this.otherPackageForm.controls.title.setValue(data.title)
         this.otherPackageForm.controls.exclusion.setValue(data.exclusions)
         this.otherPackageForm.controls.inclusion.setValue(data.inclusions)
         this.otherPackageForm.controls.polices.setValue(data.terms)
         this.otherPackageForm.controls.overview.setValue(data.instructions)
         
-        if(data.attachments != []){
+        if(data.attachments.length = 0){
           data.attachments.forEach(element => {
             this.urls.push(element.file);
           });
