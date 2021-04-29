@@ -28,6 +28,7 @@ export class PackageDetailsComponent implements OnInit {
     private route:Router,private fb: FormBuilder) { }
 
   ngOnInit() {
+    window.scroll(0,0);
     this.countForm = this.fb.group({
 			adult: [1, Validators.required],
 			child: [0],

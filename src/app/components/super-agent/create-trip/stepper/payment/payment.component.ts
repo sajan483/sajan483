@@ -34,7 +34,9 @@ export class PaymentComponent implements OnInit {
    */
   callSuggestedAmount(){
     this.SuperAgentApiService.getPackageDetails(sessionStorage.getItem('packageId')).subscribe((data)=>{
-      this.suggestedAmound = data;
+      if(data.adult_price != null){
+        this.advancepayment = this.StepperAdapter.savedPaymentForm(data);
+      }
     })
   }
 
