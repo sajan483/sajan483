@@ -14,7 +14,6 @@ import { AngularEditorConfig } from '@kolkov/angular-editor';
 })
 export class OtherInfoComponent implements OnInit {
   otherPackageForm:FormGroup;
-  SuperAgentApiService:SuperAgentApiService;
   StepperAdapter : StepperAdapter;
   submitted = false;
   itinerary:FormArray;
@@ -29,11 +28,8 @@ export class OtherInfoComponent implements OnInit {
   travelDays: number;
   bttnactive: boolean = false;
 
-  constructor(private _SuperAgentService:SuperAgentApiService,private appStore:AppStore,private helperService:HelperService,
-    private stepper:StepperComponent) {
-    this.SuperAgentApiService=this._SuperAgentService;
-    this.StepperAdapter = new StepperAdapter(this.helperService);
-   }
+  constructor(private SuperAgentService:SuperAgentApiService,private appStore:AppStore,private helperService:HelperService,
+    private stepper:StepperComponent) {this.StepperAdapter = new StepperAdapter(this.helperService)}
 
   /**
    * configuratio settings for rich text editor
@@ -68,10 +64,32 @@ export class OtherInfoComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.packageDetails()
     this.otherPackageForm = this.StepperAdapter.otherInfoForm();
     this.otherInfoMin = this.appStore.departureDate;
     this.otherInfoMax = this.appStore.arrivalDate;
     this.travelDays = this.helperService.noOfDaysBetweenTwoDates(this.appStore.departureDate,this.appStore.arrivalDate)
+  }
+
+  packageDetails(){
+    this.SuperAgentService.getPackageDetails(sessionStorage.getItem('packageId')).subscribe((data)=>{
+      console.log(data);
+      if(data.title != null) {
+        this.otherPackageForm.controls.title.setValue(data.title)
+        this.otherPackageForm.controls.exclusion.setValue(data.exclusions)
+        this.otherPackageForm.controls.inclusion.setValue(data.inclusions)
+        this.otherPackageForm.controls.polices.setValue(data.terms)
+        this.otherPackageForm.controls.overview.setValue(data.instructions)
+        
+        if(data.attachments != []){
+          data.attachments.forEach(element => {
+            this.urls.push(element.file);
+          });
+          this.tripImg = data.attachments
+          this.imageAddButton = false;
+        }
+      }
+    })
   }
 
   /**
@@ -176,19 +194,19 @@ export class OtherInfoComponent implements OnInit {
   }
 
   postTripImg(){
-    this.SuperAgentApiService.uploadTripImage(this.tripImg,this.appStore.currencyCode,this.appStore.langCode,sessionStorage.getItem('packageId')).subscribe((data)=>{
+    this.SuperAgentService.uploadTripImage(this.tripImg,this.appStore.currencyCode,this.appStore.langCode,sessionStorage.getItem('packageId')).subscribe((data)=>{
     })
   }
 
   upadteOtherInfo(){
     var body= this.StepperAdapter.otherInfoBody(this.otherPackageForm.value);
-    this.SuperAgentApiService.updatePackageAPI(body,this.appStore.currencyCode,this.appStore.langCode,sessionStorage.getItem('packageId')).subscribe((data)=>{
+    this.SuperAgentService.updatePackageAPI(body,this.appStore.currencyCode,this.appStore.langCode,sessionStorage.getItem('packageId')).subscribe((data)=>{
     })
   }
 
   updateItenary(){
     var body=this.StepperAdapter.itineraryBody(this.f.itinerary.value,this.array);
-    this.SuperAgentApiService.forItinerarySetAPI(body,this.appStore.currencyCode,this.appStore.langCode,sessionStorage.getItem('packageId')).subscribe((data)=>{
+    this.SuperAgentService.forItinerarySetAPI(body,this.appStore.currencyCode,this.appStore.langCode,sessionStorage.getItem('packageId')).subscribe((data)=>{
       sessionStorage.setItem('selector','preview')
       this.stepper.stepContent('preview','');
       this.bttnactive = false;

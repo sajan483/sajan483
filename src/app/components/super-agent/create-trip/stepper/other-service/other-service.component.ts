@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormArray } from '@angular/forms';
+import { FormGroup, FormArray, FormBuilder } from '@angular/forms';
 import { SuperAgentApiService } from 'src/app/Services/super-agent-api-services';
-import { CommonApiService } from 'src/app/Services/common-api-services';
 import { StepperAdapter } from 'src/app/adapters/super-agent/stepper-adapter';
 import { AppStore } from 'src/app/stores/app.store';
 import { StepperComponent } from '../stepper.component';
@@ -15,8 +14,6 @@ export class OtherServiceComponent implements OnInit {
   myForm: FormGroup;
   arr: FormArray;
   submitted = false;
-  SuperAgentApiService:SuperAgentApiService;
-  commonApiService : CommonApiService;
   serviceCategoryList: any;
   countryList: any;
   visaService: any;
@@ -27,18 +24,34 @@ export class OtherServiceComponent implements OnInit {
   visaShimmer: boolean = true;
   bttnactive :boolean = false;
 
-  constructor(private _SuperAgentService:SuperAgentApiService,private _commonApiService:CommonApiService,
-    private appStore:AppStore,private stepper:StepperComponent) { 
-    this.SuperAgentApiService=this._SuperAgentService;
-    this.commonApiService = this._commonApiService;
+  constructor(private SuperAgentService:SuperAgentApiService,private appStore:AppStore,private stepper:StepperComponent) { 
     this.StepperAdapter = new StepperAdapter(null);
   }
 
   ngOnInit() {
     this.apiCalles();
     this.myForm = this.StepperAdapter.otherServiceBookingForm();
+    this.packageDetails()
   }
   
+  packageDetails(){
+    this.SuperAgentService.getPackageDetails(sessionStorage.getItem('packageId')).subscribe((data)=>{
+      console.log(data);
+      var visaDetails = data.trip_visa
+      var visaServices = data.other_services
+      if(visaDetails != null) {
+        this.myForm.controls.visaservice.setValue(visaDetails.visa_type)
+        this.myForm.controls.adultpricevisa.setValue(visaDetails.price)
+        this.myForm.controls.childpricevisa.setValue(visaDetails.infant_price)
+      }
+      // if(visaServices != null && visaServices.length == 1){
+      //   this.serviceBox = true
+      //   this.addButton = false
+      //   this.myForm.controls.arr.controls.category.setValue(visaDetails.additional_service.category.id)
+      // }
+    })
+  }
+
   /**
    * service array remove
    */
@@ -81,17 +94,19 @@ export class OtherServiceComponent implements OnInit {
     this.bttnactive = true;
     
     this.addOtherService();
+    console.log(this.myForm.controls);
+    
   }
 
   /**
    * api calls for categories list,country list & visa type list
    */
   apiCalles(){
-    this.SuperAgentApiService.getPackageCategories(this.appStore.langCode).subscribe((data)=>{
+    this.SuperAgentService.getPackageCategories(this.appStore.langCode).subscribe((data)=>{
       this.serviceCategoryList = data.categories.map(x => ( {item_text: x.name, item_id: x.id } ));
       this.serviceShimmer = false;
     })
-    this.SuperAgentApiService.getVisaType().subscribe((data)=>{
+    this.SuperAgentService.getVisaType().subscribe((data)=>{
       this.visaService = data.results.map(x => ( {item_text:x.title, item_id:x.id}))
       this.visaShimmer = false;
     })
@@ -102,7 +117,7 @@ export class OtherServiceComponent implements OnInit {
    */
   addOtherService(){
     var body1 = this.StepperAdapter.visaServiceBody(this.myForm.value,this.appStore.currencyCode);
-    this.SuperAgentApiService.updatePackageAPI(body1,this.appStore.currencyCode,this.appStore.langCode,sessionStorage.getItem('packageId')).subscribe((data)=>{
+    this.SuperAgentService.updatePackageAPI(body1,this.appStore.currencyCode,this.appStore.langCode,sessionStorage.getItem('packageId')).subscribe((data)=>{
       sessionStorage.setItem('selector','payment')
       this.stepper.stepContent('payment','');
       this.bttnactive = false;
@@ -110,7 +125,7 @@ export class OtherServiceComponent implements OnInit {
 
     if(this.serviceBox){
       var body = this.StepperAdapter.otherServiceBookingBody(this.f.arr.value,this.myForm.value,this.appStore.currencyCode);
-      this.SuperAgentApiService.updatePackageAPI(body,this.appStore.currencyCode,this.appStore.langCode,sessionStorage.getItem('packageId')).subscribe((data)=>{
+      this.SuperAgentService.updatePackageAPI(body,this.appStore.currencyCode,this.appStore.langCode,sessionStorage.getItem('packageId')).subscribe((data)=>{
       })
     }
   }

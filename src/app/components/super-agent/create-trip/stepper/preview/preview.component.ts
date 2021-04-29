@@ -14,7 +14,6 @@ import Swal from 'sweetalert2';
 })
 
 export class PreviewComponent implements OnInit {
-  superAgentApiService:SuperAgentApiService;
   commonApiService:CommonApiService;
   onwardFlight: any;
   returnFlight: any;
@@ -37,9 +36,8 @@ export class PreviewComponent implements OnInit {
   shimmer:boolean = true;
   bttnactive:boolean = false;
 
-  constructor(private _SuperAgentService:SuperAgentApiService,private _commonService:CommonApiService,private _appStore:AppStore, private stepper :StepperComponent
-    ,private router: Router) { 
-    this.superAgentApiService=this._SuperAgentService;
+  constructor(private SuperAgentService:SuperAgentApiService,private _commonService:CommonApiService,private _appStore:AppStore, private stepper :StepperComponent
+    ,private router: Router) {
     this.commonApiService = this._commonService;
     this.appStore = _appStore;
   }
@@ -69,7 +67,7 @@ export class PreviewComponent implements OnInit {
   }
 
   packageDetails(){
-    this.superAgentApiService.getPackageDetails(sessionStorage.getItem('packageId')).subscribe((data)=>{
+    this.SuperAgentService.getPackageDetails(sessionStorage.getItem('packageId')).subscribe((data)=>{
       this.shimmer = false;
       this.response = data;
       this.onwardFlight = this.response.trip_flights[0].onward_flight;
@@ -102,7 +100,7 @@ export class PreviewComponent implements OnInit {
       "status":"ACTIVE",
       "start_date":this.appStore.departureDate,
       "end_date":this.appStore.arrivalDate}
-      this.superAgentApiService.publishPackage(body,parseInt(sessionStorage.getItem('packageId'))).subscribe(response => {
+      this.SuperAgentService.publishPackage(body,parseInt(sessionStorage.getItem('packageId'))).subscribe(response => {
         this.bttnactive =false;
         Swal.fire({
           icon: 'success',
