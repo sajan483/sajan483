@@ -847,6 +847,9 @@
             this.hotelsList = data;
             sessionStorage.setItem('mkSearchId',data.search_id)};
           if(city === "MADEENA"){
+            this.madeenaCheckInDate = JSON.parse(sessionStorage.getItem('userObject')).madeenaCheckinDate;
+            this.madeenaCheckOutDate = JSON.parse(sessionStorage.getItem('userObject')).madeenaCheckoutDate
+            this.noOfDaysInMadeena  = this.helperService.noOfDaysBetweenTwoDates(this.madeenaCheckOutDate,this.madeenaCheckInDate)
             sessionStorage.setItem('mdSearchId',data.search_id);
           }
           this.common.getHotelList(data.search_id,this.selectedCurrency,"en-US").subscribe(

@@ -156,9 +156,11 @@
                                                         </div>
                                                     </li>
                                                     <li class="roomRate">
-                                                        <div class="clr52 fs14 fw500 text-center" *ngFor="let item of room.board_types">{{item?.type}}</div>
+                                                        <div class="clr52 fs14 fw500 text-center" *ngFor="let item of room.board_types;let p = index;">{{item?.type}}</div>
                                                         <div class="d-flex justify-content-center mt5">
-                                                            <mat-radio-button [checked]="room.isRoomSelectionChecked" (click)="roomSelectionCheckboxChecked(i,j)" *ngIf="room?.amount"></mat-radio-button>
+                                                            <!-- //<mat-radio-group> -->
+                                                                <mat-radio-button [checked]="room.isRoomSelectionChecked" id="p" (click)="roomSelectionCheckboxChecked(i,j)" *ngIf="room?.amount"></mat-radio-button>
+                                                            <!-- </mat-radio-group> -->
                                                         </div>
                                                         <strong class="customTooltip">
                                                             <span class="cursortext-dark-pointer text-dark fw600" data-room-price="139">{{room?.fare_summary[0].currency}} {{room?.amount | number:'.2-2'}}
