@@ -101,18 +101,18 @@ export class HotelDetailsPopupComponent implements OnInit ,OnChanges{
   } 
 
   ngOnChanges() {
-    //this.showHotelDetails = true
-    this.totalTravellers = JSON.parse(sessionStorage.getItem('userObject')).travallersCount;
-    this.selectedHotel = this.hotelData;
-    this.rooms = JSON.parse(sessionStorage.getItem('roomData'));
+    // //this.showHotelDetails = true
+    // this.totalTravellers = JSON.parse(sessionStorage.getItem('userObject')).travallersCount;
+    // this.selectedHotel = this.hotelData;
+    // this.rooms = JSON.parse(sessionStorage.getItem('roomData'));
     
-    /*
-     * this method for fetching selected hotel details
-     */
-    if(sessionStorage.getItem('hotelData') != null){
-      this.hotelData = JSON.parse(sessionStorage.getItem('hotelData'))
-      this.setData()
-    }
+    // /*
+    //  * this method for fetching selected hotel details
+    //  */
+    // if(sessionStorage.getItem('hotelData') != null){
+    //   this.hotelData = JSON.parse(sessionStorage.getItem('hotelData'))
+    //   this.setData()
+    // }
   }
 
   /*
@@ -186,19 +186,15 @@ export class HotelDetailsPopupComponent implements OnInit ,OnChanges{
     if (this.selectedRoomGroups[i].rooms.length > 0) {
       for (let k = 0; k < this.selectedRoomGroups[i].rooms.length; k++) {
         if (this.selectedRoomGroups[i].rooms[k].isRoomSelectionChecked) {
-          this.selectedRoomGroups[i].rooms[k].isRoomSelectionChecked = !this
-            .selectedRoomGroups[i].rooms[k].isRoomSelectionChecked;
-          this.totalRoomPrice =
-            this.totalRoomPrice - this.selectedRoomGroups[i].rooms[k].amount;
+            this.selectedRoomGroups[i].rooms[k].isRoomSelectionChecked = false
+            this.totalRoomPrice = this.totalRoomPrice - this.selectedRoomGroups[i].rooms[k].amount;
         }
       }
     }
 
     if (!this.selectedRoomGroups[i].rooms[j].isRoomSelectionChecked) {
-      this.selectedRoomGroups[i].rooms[j].isRoomSelectionChecked = !this
-        .selectedRoomGroups[i].rooms[j].isRoomSelectionChecked;
-      this.totalRoomPrice =
-        this.totalRoomPrice + this.selectedRoomGroups[i].rooms[j].amount;
+        this.selectedRoomGroups[i].rooms[j].isRoomSelectionChecked = true
+        this.totalRoomPrice = this.totalRoomPrice + this.selectedRoomGroups[i].rooms[j].amount;
         this.makkaSelectActivate = true;
     }
   }

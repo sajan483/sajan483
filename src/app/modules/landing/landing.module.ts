@@ -49,7 +49,7 @@ import { LandingApiService } from 'src/app/Services/landing-api-services';
 })
 
 export class LandingModule {
-  constructor(public translateService: TranslateService) {
-    translateService.setDefaultLang('en-US'); /* Setting up the Translate Json to English - `en` */
-  }
+  // constructor(public translateService: TranslateService) {
+  //   translateService.setDefaultLang('en-US'); /* Setting up the Translate Json to English - `en` */
+  // }
 }
