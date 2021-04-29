@@ -17,12 +17,7 @@ const myPath: Routes = [
     path: "superagent",
     loadChildren: () =>
       import("./modules/super-agent/super-agent.module").then((m) => m.SuperAgentModule),
-  },
-  {
-    path: "branch",
-    loadChildren: () =>
-      import("./modules/branch/branch.module").then((m) => m.BranchModule),
-  }     
+  }   
 ];
 
 @NgModule({
