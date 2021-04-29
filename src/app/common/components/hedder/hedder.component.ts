@@ -110,6 +110,9 @@ export class HedderComponent implements OnInit, DoCheck {
   }
 
   navigatepage(link: any) {
+    if(link == 'superagent/createTrip'){
+      sessionStorage.removeItem('selector')
+    }
     this.router.navigate([link]);
   }
 
