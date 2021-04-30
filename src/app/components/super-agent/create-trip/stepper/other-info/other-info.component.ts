@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormArray } from '@angular/forms';
+import { FormGroup, FormArray, FormBuilder } from '@angular/forms';
 import { SuperAgentApiService } from 'src/app/Services/super-agent-api-services';
 import { StepperAdapter } from 'src/app/adapters/super-agent/stepper-adapter';
 import { AppStore } from 'src/app/stores/app.store';
@@ -29,7 +29,7 @@ export class OtherInfoComponent implements OnInit {
   bttnactive: boolean = false;
 
   constructor(private SuperAgentService:SuperAgentApiService,private appStore:AppStore,private helperService:HelperService,
-    private stepper:StepperComponent) {this.StepperAdapter = new StepperAdapter(this.helperService)}
+    private stepper:StepperComponent,private _formBuilder:FormBuilder) {this.StepperAdapter = new StepperAdapter(this.helperService)}
 
   /**
    * configuratio settings for rich text editor
@@ -73,20 +73,30 @@ export class OtherInfoComponent implements OnInit {
 
   packageDetails(){
     this.SuperAgentService.getPackageDetails(sessionStorage.getItem('packageId')).subscribe((data)=>{
+<<<<<<< HEAD
       (data);
+=======
+>>>>>>> test
       if(data.title != null || data.title != "") {
         this.otherPackageForm.controls.title.setValue(data.title)
         this.otherPackageForm.controls.exclusion.setValue(data.exclusions)
         this.otherPackageForm.controls.inclusion.setValue(data.inclusions)
         this.otherPackageForm.controls.polices.setValue(data.terms)
         this.otherPackageForm.controls.overview.setValue(data.instructions)
-        
-        if(data.attachments.length = 0){
-          data.attachments.forEach(element => {
-            this.urls.push(element.file);
-          });
-          this.tripImg = data.attachments
-          this.imageAddButton = false;
+        if(data?.attachments[0]?.file){this.urls.push(data.attachments[0].file)}
+        this.imageAddButton = false;
+        if(data.itinerary_set != null && data.itinerary_set.length > 0){
+          const formArray = new FormArray([]);
+          for (let i=0 ;i< data.itinerary_set.length;i++) {
+           this.addItinerary()
+           formArray.push(this._formBuilder.group({
+            days:data.itinerary_set[i].num_of_days,
+            itinerary_title:data.itinerary_set[i].title,
+            depdate:data.itinerary_set[i].from_date,
+            itinerary_overview:data.itinerary_set[i].details,
+           }));
+         }
+         this.otherPackageForm.setControl('itinerary',formArray)
         }
       }
     })
@@ -122,7 +132,6 @@ export class OtherInfoComponent implements OnInit {
             this.tripImg.push({'file':event.target.files[i]})
             reader.readAsDataURL(event.target.files[i]);
         }
-        
     }
   }
 
