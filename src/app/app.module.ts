@@ -49,8 +49,8 @@ import { BranchApiService } from 'src/app/Services/branch-api-service';
 
 export class AppModule {
   constructor(public translateService: TranslateService){
-    translateService.addLangs(["en-US","ar-AE"]);
-    translateService.setDefaultLang('en-US'); /* Setting up the Translate Json to English - `en` */
+    //translateService.addLangs(["en-US","ar-AE"]);
+    //translateService.setDefaultLang('en-US'); /* Setting up the Translate Json to English - `en` */
   }
   
 }
