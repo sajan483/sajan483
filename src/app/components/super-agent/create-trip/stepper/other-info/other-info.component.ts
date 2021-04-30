@@ -83,7 +83,7 @@ export class OtherInfoComponent implements OnInit {
         this.otherPackageForm.controls.inclusion.setValue(data.inclusions)
         this.otherPackageForm.controls.polices.setValue(data.terms)
         this.otherPackageForm.controls.overview.setValue(data.instructions)
-        if(data?.attachments[0]?.file){this.urls.push(data.attachments[0].file)}
+        if(data.attachments[0].file){this.urls.push(data.attachments[0].file)}
         this.imageAddButton = false;
         if(data.itinerary_set != null && data.itinerary_set.length > 0){
           const formArray = new FormArray([]);
