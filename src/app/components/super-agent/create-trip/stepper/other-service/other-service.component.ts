@@ -36,7 +36,7 @@ export class OtherServiceComponent implements OnInit {
   
   packageDetails(){
     this.SuperAgentService.getPackageDetails(sessionStorage.getItem('packageId')).subscribe((data)=>{
-      console.log(data);
+      (data);
       var visaDetails = data.trip_visa
       var visaServices = data.other_services
       if(visaDetails != null) {
@@ -94,7 +94,7 @@ export class OtherServiceComponent implements OnInit {
     this.bttnactive = true;
     
     this.addOtherService();
-    console.log(this.myForm.controls);
+    (this.myForm.controls);
     
   }
 
