@@ -24,7 +24,7 @@ export class OtherServiceComponent implements OnInit {
   visaShimmer: boolean = true;
   bttnactive :boolean = false;
 
-  constructor(private SuperAgentService:SuperAgentApiService,private appStore:AppStore,private stepper:StepperComponent) { 
+  constructor(private SuperAgentService:SuperAgentApiService,private appStore:AppStore,private stepper:StepperComponent,private _formBuilder:FormBuilder) { 
     this.StepperAdapter = new StepperAdapter(null);
   }
 
@@ -38,20 +38,28 @@ export class OtherServiceComponent implements OnInit {
     this.SuperAgentService.getPackageDetails(sessionStorage.getItem('packageId')).subscribe((data)=>{
       console.log(data);
       var visaDetails = data.trip_visa
-      var visaServices = data.other_services
+      var otherServices = data.other_services
       if(visaDetails != null) {
         this.myForm.controls.visaservice.setValue(visaDetails.visa_type)
         this.myForm.controls.adultpricevisa.setValue(visaDetails.price)
         this.myForm.controls.childpricevisa.setValue(visaDetails.infant_price)
       }
-      // if(visaServices != null && visaServices.length == 1){
-      //   this.serviceBox = true
-      //   this.addButton = false
-      //   this.myForm.controls.arr.controls.category.setValue(visaDetails.additional_service.category.id)
-      // }
+       if(otherServices != null && otherServices.length > 0){
+         const formArray = new FormArray([]);
+         for (let i=0 ;i< otherServices.length;i++) {
+          this.serviceBox = true;this.addButton = false
+          formArray.push(this._formBuilder.group({
+            description:otherServices[i].additional_service.description,
+            price:otherServices[i].price,
+            category:otherServices[i].additional_service.category.id,
+            name:otherServices[i].additional_service.name
+          }));
+        }
+        this.myForm.setControl('arr',formArray)
+       }
     })
   }
-
+ 
   /**
    * service array remove
    */
@@ -140,5 +148,3 @@ export class OtherServiceComponent implements OnInit {
     this.serviceBox = true;
   }
 }
-
-//f.arr.controls[i].controls.price.errors
