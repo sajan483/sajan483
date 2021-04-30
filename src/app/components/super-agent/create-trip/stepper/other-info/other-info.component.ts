@@ -73,10 +73,6 @@ export class OtherInfoComponent implements OnInit {
 
   packageDetails(){
     this.SuperAgentService.getPackageDetails(sessionStorage.getItem('packageId')).subscribe((data)=>{
-<<<<<<< HEAD
-      (data);
-=======
->>>>>>> test
       if(data.title != null || data.title != "") {
         this.otherPackageForm.controls.title.setValue(data.title)
         this.otherPackageForm.controls.exclusion.setValue(data.exclusions)
