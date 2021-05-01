@@ -1,5 +1,4 @@
 import {Component,EventEmitter,Input,OnChanges,OnInit,Output,} from "@angular/core";
-import { TranslateService } from "@ngx-translate/core";
 import { CreateTripAdapter } from "src/app/adapters/sub-agent/create-trip-adapter";
 import { HelperService } from "src/app/common/services/helper-service";
 import { CreateTripHelper } from "src/app/helpers/sub-agent/create-trip-helpers";
@@ -66,7 +65,6 @@ export class HotelDetailsPopupComponent implements OnInit ,OnChanges{
     private helperService: HelperService,
     private appStore: AppStore,
     private notifyService: NotificationService,
-    private translate :TranslateService,
   ) {}
 
   @Output() handleNotif = new EventEmitter();

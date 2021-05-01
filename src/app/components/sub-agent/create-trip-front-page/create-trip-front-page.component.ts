@@ -1,7 +1,6 @@
 import { Component, OnInit, ViewChild, ElementRef, Renderer2, DoCheck, AfterViewInit, } from "@angular/core";
 import { IDropdownSettings } from "ng-multiselect-dropdown";
 import { Router } from "@angular/router";
-import { TranslateService } from "@ngx-translate/core";
 import { NotificationService } from "../../../common/services/notification.service";
 import { CreateTripComponent } from "../create-trip/create-trip.component";
 import { AppStore } from "../../../stores/app.store";
@@ -104,7 +103,6 @@ export class CreateTripFrontPageComponent implements OnInit, DoCheck, AfterViewI
     private commonApiService: SubAgentApiService,
     private subAgentApiService:SubAgentApiService,
     private appStore: AppStore,
-    private translate: TranslateService,
     private renderer2: Renderer2,
     private router: Router,
     private notifyService: NotificationService,
@@ -649,7 +647,6 @@ export class CreateTripFrontPageComponent implements OnInit, DoCheck, AfterViewI
   }
 
   ngAfterViewChecked() {
-    this.translate.use("en-US");
     if (this.appStore.langCode == "ar-AE") {
       (<HTMLInputElement>document.getElementById("body")).classList.add(
         "mirror_css"
