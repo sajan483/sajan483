@@ -10,7 +10,7 @@ import { SubAgentApiService } from 'src/app/Services/sub-agent-api-services';
   styleUrls: ['./profile-page.component.scss']
 })
 export class ProfilePageComponent implements OnInit {
-  details: staff_details;
+  details: any;
   upgradebttn: boolean = false;
   genHelper: GeneralHelper;
   constructor(private router: Router, private common: SubAgentApiService, private _gHelper: GeneralHelper) {
