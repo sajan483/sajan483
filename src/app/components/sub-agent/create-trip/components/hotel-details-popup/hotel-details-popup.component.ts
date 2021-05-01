@@ -58,6 +58,7 @@ export class HotelDetailsPopupComponent implements OnInit ,OnChanges{
   noOfImages: number;
   hotelData:any;
   hotelInfo:any;
+  activeBttn:boolean = false;
   @Output() detailsFlag = new EventEmitter();
    
   constructor(
@@ -149,6 +150,7 @@ export class HotelDetailsPopupComponent implements OnInit ,OnChanges{
    * this method for booking hotel
    */
   bookHotel() {
+    this.activeBttn = true;
     this.makkahticked = true;
     this.makkahticked = true;
     this.madeendetailshow = true;
@@ -158,6 +160,7 @@ export class HotelDetailsPopupComponent implements OnInit ,OnChanges{
     }
     if(!sessionStorage.getItem('custom_trip_id')){
       this.commonService.saveSelectedHotel(this.createTripAdapter.bookHotelRequest(this.isGrouped,this.selectedRoomGroups,this.hotelData,this.hotelInfo)).subscribe((data) => {
+        this.activeBttn = true;
         sessionStorage.setItem('custom_trip_id',data.id);
         sessionStorage.setItem('stage','1')
         this.onNotify();
@@ -165,6 +168,7 @@ export class HotelDetailsPopupComponent implements OnInit ,OnChanges{
     }
     if(sessionStorage.getItem('custom_trip_id')){
       this.commonService.updateCustomTrip(sessionStorage.getItem('custom_trip_id'),this.createTripAdapter.bookHotelRequest(this.isGrouped,this.selectedRoomGroups,this.hotelData,this.hotelInfo)).subscribe((data) => {
+        this.activeBttn = true;
           if(JSON.parse(sessionStorage.getItem('steps')).length == 1){
             sessionStorage.setItem('stage','1')
           }else {
