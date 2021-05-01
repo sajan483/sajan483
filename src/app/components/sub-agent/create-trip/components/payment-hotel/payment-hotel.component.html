@@ -171,7 +171,21 @@
         </div>
     </div>
     <div class="col-md-6 p-0">
-
+        <div class="p20">
+            <div class="d-inline-flex">
+                <i class="locationicon icns icon_size_20"></i>
+                <div class="clr52 fs14">ADDRESS</div>
+            </div>
+            <div class="fs12 clr52 pl-2">{{tripHotel?.hotel?.address}}</div>
+            <div class="d-inline-flex mt-2">
+                <i class="mailicon icns icon_size_20"></i>
+                <div class="clr52 fs14 pl-2">{{tripHotel?.hotel?.email}}</div>
+            </div>
+            <div class="d-inline-flex ml-3">
+                <i class="Phoneicon icns icon_size_20"></i>
+                <div class="clr52 fs14 pl-2">{{tripHotel?.hotel?.phone_number}}</div>
+            </div>
+        </div>
     </div>
     <div class="col-md-12 p-0 row m-0">
         <div class="col-md-12 row m-0 p-2 brdrtop" *ngFor="let room of tripHotel?.room_variations">
