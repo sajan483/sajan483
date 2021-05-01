@@ -1,6 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { TranslateService } from '@ngx-translate/core';
 import { Room } from 'src/app/models/visaTypes';
 import { NotificationService } from 'src/app/common/services/notification.service';
 import { AppStore } from 'src/app/stores/app.store';
@@ -27,7 +26,6 @@ export class RoomAllocationPopupComponent implements OnInit {
 
   constructor(private appStore:AppStore,
     private notifyService:NotificationService,
-    private translate:TranslateService,
     private router:Router) { }
   
   ngOnInit() {
