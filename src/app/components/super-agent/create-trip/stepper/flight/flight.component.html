@@ -140,20 +140,20 @@
         <div class="container" *ngIf="fareSelection">
             <h4 class="main-head brbottom">Enter your rate of the flight</h4>
             <div class="row pt10" [formGroup]="fareForm">
-                <div class="col-md-3 fare-box">
-                    <mat-form-field appearance="outline" class="fw">
+                <div class="col-md-3 fare-box ">
+                    <mat-form-field appearance="outline" class="fw bgWhite  m-0">
                         <mat-label>Adult</mat-label>
                         <input matInput placeholder="₹" formControlName="adult" numberOnly>
                     </mat-form-field>
                 </div>
                 <div class="col-md-3 fare-box">
-                    <mat-form-field appearance="outline" class="fw">
+                    <mat-form-field appearance="outline" class="fw bgWhite m-0">
                         <mat-label>Child</mat-label>
                         <input matInput placeholder="₹" formControlName="child" numberOnly>
                     </mat-form-field>
                 </div>
                 <div class="col-md-3 fare-box">
-                    <mat-form-field appearance="outline" class="fw">
+                    <mat-form-field appearance="outline" class="fw bgWhite m-0">
                         <mat-label>Infant</mat-label>
                         <input matInput placeholder="₹" formControlName="infant" numberOnly>
                     </mat-form-field>
