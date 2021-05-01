@@ -29,8 +29,8 @@
                 {{tripTransport?.trip_vehicles[0]?.currency}} {{tripTransport?.prices_summary?.total_price + tripTransport?.prices_summary?.gds_fee + tripTransport?.prices_summary?.ota_fee | number:'.2-2'}}
                 <span class="customtooltiptext">
                     <div class="container mb-2">
-                        <p class="pt-2 fare_summary_heading">{{'Fare Summary' |
-                            translate}} </p>
+                        <p class="pt-2 fare_summary_heading">{{'Fare Summary'
+                            }} </p>
                         <div class="col-md-12 p-0 m-0 row pb-2">
                             <div class="col-md-12 textAlign ">
                                 <span>{{'GDS Fee' }} :
@@ -39,8 +39,7 @@
                                     {{tripTransport?.prices_summary?.ota_fee}}</span>
                             </div>
                         </div>
-                        <p class=" pt-2 pr-5 hotel_price_total">{{'You Pay' |
-                            translate}} {{tripTransport?.prices_summary?.total_price}}
+                        <p class=" pt-2 pr-5 hotel_price_total">{{'You Pay'}} {{tripTransport?.prices_summary?.total_price}}
                         </p>
                     </div>
                 </span>
