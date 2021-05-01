@@ -1,13 +1,11 @@
 import { CookieService } from 'ngx-cookie-service';
 import { NotificationService } from '../../common/services/notification.service';
-import { TranslateService } from '@ngx-translate/core';
 import { AppStore } from 'src/app/stores/app.store';
 import { Router } from '@angular/router';
 
 export class loginHelper{
     constructor(private cookie: CookieService,
         private notifyService: NotificationService,
-        private translate: TranslateService,
         private appStore: AppStore,
         private router: Router){}
 
@@ -39,14 +37,14 @@ export class loginHelper{
             this.router.navigate(["upload/"+data.staff.agency_id])
           }else{
             if(data.staff.employer_type == 'SUPER'){
-              this.notifyService.showSuccess(this.translate.instant('success !!'));
+              this.notifyService.showSuccess('success !!');
               sessionStorage.setItem('agency_Id', data.staff.agency_id);
               this.router.navigate(["superagent/dashboard"]);
             }else if(data.staff.employer_type == 'SUB'){
-              this.notifyService.showSuccess(this.translate.instant('success !!'));
+              this.notifyService.showSuccess('success !!');
               this.router.navigate(['subagent/home/']);
             }else if(data.staff.employer_type == 'BRANCH'){
-              this.notifyService.showSuccess(this.translate.instant('success !!'));
+              this.notifyService.showSuccess('success !!');
               this.router.navigate(["branch/packages"]);
             }
           }

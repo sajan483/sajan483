@@ -29,7 +29,7 @@ import { RoomDetailsPopupComponent } from 'src/app/components/sub-agent/create-t
 import { MobxAngularModule } from 'mobx-angular';
 import { CarouselModule } from 'ngx-owl-carousel-o';
 import { NgxGalleryModule } from 'ngx-gallery';
-import { TranslatorFactory } from 'src/app/app.module';
+//import { TranslatorFactory } from 'src/app/app.module';
 import { NgxSpinnerModule } from "ngx-spinner";
 import { HelperService } from 'src/app/common/services/helper-service';
 import { PaymentTransportComponent } from 'src/app/components/sub-agent/create-trip/components/payment-transport/payment-transport.component';
@@ -87,14 +87,14 @@ import { OnlyNumberDirective } from 'src/app/models/onlynumber.directive';
     MatNativeDateModule,
     CarouselModule,
     NgMultiSelectDropDownModule.forRoot(),
-    TranslateModule.forChild({
-      loader: {
-        provide: TranslateLoader,
-        useFactory: TranslatorFactory,
-        deps: [HttpClient]
-      },
-      isolate: true
-    })
+    // TranslateModule.forChild({
+    //   loader: {
+    //     provide: TranslateLoader,
+    //     useFactory: TranslatorFactory,
+    //     deps: [HttpClient]
+    //   },
+    //   isolate: true
+    // })
   ],
   exports: [
     TranslateModule,
