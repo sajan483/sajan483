@@ -13,6 +13,7 @@ export class DashboardComponent implements OnInit {
   selectedItem = [];
   dropdownSettings: any = {};
   dashboardData: any;
+  shimmer:boolean = true;
 
   constructor(public router: Router,public superAgentApiService:SuperAgentApiService) { }
 
@@ -24,6 +25,7 @@ export class DashboardComponent implements OnInit {
 
   fetchSalesOverView(month){
     this.superAgentApiService.getSalesOverView(month).subscribe(data=>{
+      this.shimmer = false;
       this.dashboardData = data;
       this.months = this.dashboardData.available_months
       this.chartSale();

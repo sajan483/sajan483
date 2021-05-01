@@ -35,11 +35,7 @@
                             <div class="mt-1 salesoverride">SALES OVERVIEW</div>
                             <div>
                                 <div id="selectDateToChart">
-                                    <ng-multiselect-dropdown 
-                                    name="city" [data]="months" 
-                                    [(ngModel)]="selectedItem" 
-                                    [settings]="dropdownSettings"
-                                    (onSelect)="onItemSelect(selectedItem)">
+                                    <ng-multiselect-dropdown name="city" [data]="months" [(ngModel)]="selectedItem" [settings]="dropdownSettings" (onSelect)="onItemSelect(selectedItem)">
                                     </ng-multiselect-dropdown>
                                 </div>
                             </div>
@@ -92,11 +88,7 @@
                     <div class="borderbox p20">
                         <div class="d-flex justify-content-end">
                             <div id="selectDateToChart">
-                                <ng-multiselect-dropdown name="city" 
-                                [data]="months" 
-                                [(ngModel)]="selectedItem" 
-                                [settings]="dropdownSettings"
-                                (onSelect)="onItemSelect(selectedItem)">
+                                <ng-multiselect-dropdown name="city" [data]="months" [(ngModel)]="selectedItem" [settings]="dropdownSettings" (onSelect)="onItemSelect(selectedItem)">
                                 </ng-multiselect-dropdown>
                             </div>
                         </div>
@@ -127,12 +119,31 @@
                                     <th scope="col">Slots Available</th>
                                 </tr>
                             </thead>
-                            <tbody>
+                            <tbody *ngIf="shimmer">
+                                <tr *ngFor="let k of [].constructor(3);">
+                                    <td>
+                                        <div class="shine w-100 h25"></div>
+                                    </td>
+                                    <td>
+                                        <div class="shine w-100 h25"></div>
+                                    </td>
+                                    <td>
+                                        <div class="shine w-100 h25"></div>
+                                    </td>
+                                    <td>
+                                        <div class="shine w-100 h25"></div>
+                                    </td>
+                                    <td>
+                                        <div class="shine w-100 h25"></div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                            <tbody *ngIf="!shimmer">
                                 <tr *ngFor="let package of dashboardData?.packages_overview">
                                     <td>{{package?.title | titlecase}}</td>
                                     <td>{{package?.departure_from}}</td>
                                     <td>
-                                        <p>{{package?.departure_from}}</p>
+                                        <p>{{package?.departure_date | date : 'dd MMMM'}} Onwards</p>
                                         <p *ngIf="package?.remaining_days != 'expired'" class="textred">({{package?.remaining_days}} days remaining )</p>
                                     </td>
                                     <td>{{package?.group_size}}</td>
@@ -143,12 +154,12 @@
                             </tbody>
                         </table>
                         <div class="showmobile">
-                            <div class="borderbox mt-2 p-2 packagelisting">
-                                <p><strong>Luxury Umrah package from Kozhikode 2020</strong></p>
-                                <p><strong>Departure From :</strong>Kozikode</p>
-                                <p><strong>Departure Date :</strong>12 March Onwards</p>
-                                <p><strong>Travel group size :</strong>30</p>
-                                <p><strong>Slots Available :</strong>20</p>
+                            <div class="borderbox mt-2 p-2 packagelisting" *ngFor="let package of dashboardData?.packages_overview">
+                                <p><strong>{{package?.title | titlecase}}</strong></p>
+                                <p><strong>Departure From :</strong>{{package?.departure_from}}</p>
+                                <p><strong>Departure Date :</strong>{{package?.departure_date | date : 'dd MMMM'}} Onwards</p>
+                                <p><strong>Travel group size :</strong>{{package?.group_size}}</p>
+                                <p><strong>Slots Available :</strong>{{package?.slots_available}}</p>
                             </div>
                         </div>
                     </div>

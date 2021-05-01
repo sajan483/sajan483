@@ -120,12 +120,18 @@ export class HotelComponent implements OnInit {
 
   fetchSelectedHotelInfo(item,city) {
     this.superAgentApiService.getPackageHotelInfo(this.stepperAdapter.selectedHotelRequest(item,city),'SAR','en-US').subscribe((data) => {
-        this.popupData = data;
-        this.popupData.city = city
-        sessionStorage.setItem('hotelDetailsData',JSON.stringify(this.popupData))
-        sessionStorage.setItem('hotelDetails','open')
-        this.detailsLoader = false
-        this.showHotelDetails = 'true';
+        if(data.status == "failure"){
+          this.showHotelDetails = 'false';
+          this.detailsLoader = false;
+          this.notifyService.showError("something wrong please select another hotel")
+        }else{
+          this.popupData = data;
+          this.popupData.city = city
+          sessionStorage.setItem('hotelDetailsData',JSON.stringify(this.popupData))
+          sessionStorage.setItem('hotelDetails','open')
+          this.detailsLoader = false
+          this.showHotelDetails = 'true';
+        }
       },(error)=>{
         this.showHotelDetails = 'false';
       }
