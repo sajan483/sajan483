@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { Router} from '@angular/router';
 import { listHistory } from '../../../models/listHistory';
 import { NgxSpinnerService } from "ngx-spinner";
-import { TranslateService } from "@ngx-translate/core";
 import { SubAgentApiService } from 'src/app/Services/sub-agent-api-services';
 
 
@@ -19,7 +18,7 @@ export class BookingHistoryComponent implements OnInit {
   pageNo:number;
   pageSize:number;
   history: listHistory;
-  constructor(private paymentLoader: NgxSpinnerService,private common:SubAgentApiService,private router:Router,private translate: TranslateService) { }
+  constructor(private paymentLoader: NgxSpinnerService,private common:SubAgentApiService,private router:Router) { }
 
   /**
    * this methode is used for user is logged or not
