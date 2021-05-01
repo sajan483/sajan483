@@ -70,15 +70,15 @@ export class HomeComponent implements OnInit {
   showSelectionPopup() {this.showSelectionPopUp = !this.showSelectionPopUp;}
 
   onServiceItemChange(value){
-    (this.packages.length == 0) ? this.packages = this.tempPackages: this.packages;
+    this.packages = this.tempPackages;
     (value == 'all') ? this.tempPackages :this.packages = this.packages.filter(x=>x.start_date.split('-')[1] == value)
   }
 
   onNoOfDaysSelected(item){
-    (this.packages.length == 0) ? this.packages = this.tempPackages:this.packages;this.packages=this.packages.filter(x => x.num_days <= item)}
+   this.packages = this.tempPackages;this.packages = this.packages.filter(x => x.num_days == item)}
 
   onAirportSelected(item){
-    (this.packages.length == 0) ? this.packages = this.tempPackages:this.packages;this.packages=this.packages.filter(x => x.boarding_airport == item)}
+    this.packages = this.tempPackages;this.packages.filter(x => x.boarding_airport == item)}
 
   viewPackageDetails(id:number){this.route.navigate(['/branch/packages/'+id+'/details'])}
 }
