@@ -369,3 +369,13 @@
         margin-top: 15px;
     }
 }
+.bgWhite{
+    background: white;
+    border-radius: 10px;
+}
+
+::ng-deep{
+    .mat-form-field-appearance-outline .mat-form-field-wrapper {
+        margin:0 !important;
+   }
+}
