@@ -9,9 +9,7 @@ import { FooterComponent } from './common/components/footer/footer.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
 import { DatePipe } from '@angular/common';
-import { TranslateModule, TranslateLoader, TranslateService } from '@ngx-translate/core';
-import { TranslateHttpLoader} from '@ngx-translate/http-loader';
-export function TranslatorFactory(httpClient: HttpClient) { return new TranslateHttpLoader(httpClient, './assets/i18n/', '.json'); }
+//export function TranslatorFactory(httpClient: HttpClient) { return new TranslateHttpLoader(httpClient, './assets/i18n/', '.json'); }
 import { CookieService } from 'ngx-cookie-service';
 import { SliderComponent } from './common/components/slider/slider.component';
 import { LandingApiService } from './Services/landing-api-services';
@@ -34,21 +32,21 @@ import { BranchApiService } from 'src/app/Services/branch-api-service';
     ToastrModule.forRoot({
       preventDuplicates: true,maxOpened:1
     }),
-    TranslateModule.forRoot({
-      loader: {
-        provide: TranslateLoader,
-        useFactory: TranslatorFactory,
-        deps: [HttpClient]
-      },
-      isolate: false
-    }),
+    // TranslateModule.forRoot({
+    //   loader: {
+    //     provide: TranslateLoader,
+    //     useFactory: TranslatorFactory,
+    //     deps: [HttpClient]
+    //   },
+    //   isolate: false
+    // }),
   ],
   providers: [DatePipe,CookieService,LandingApiService,CommonApiService,BranchApiService],
   bootstrap: [AppComponent]
 })
 
 export class AppModule {
-  constructor(public translateService: TranslateService){
+  constructor(){
     //translateService.addLangs(["en-US","ar-AE"]);
     //translateService.setDefaultLang('en-US'); /* Setting up the Translate Json to English - `en` */
   }

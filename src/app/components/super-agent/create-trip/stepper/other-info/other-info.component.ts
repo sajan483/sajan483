@@ -66,21 +66,21 @@ export class OtherInfoComponent implements OnInit {
   ngOnInit() {
     this.packageDetails()
     this.otherPackageForm = this.StepperAdapter.otherInfoForm();
+    var travelesData = JSON.parse(sessionStorage.getItem('searchData'))
     this.otherInfoMin = this.appStore.departureDate;
     this.otherInfoMax = this.appStore.arrivalDate;
-    this.travelDays = this.helperService.noOfDaysBetweenTwoDates(this.appStore.departureDate,this.appStore.arrivalDate)
+    this.travelDays = this.helperService.noOfDaysBetweenTwoDates(travelesData.flightData.departureDate,travelesData.flightData.returnDate)
   }
 
   packageDetails(){
     this.SuperAgentService.getPackageDetails(sessionStorage.getItem('packageId')).subscribe((data)=>{
-      if(data.title != null || data.title != "") {
+      if(data.itinerary_set != null) {
         this.otherPackageForm.controls.title.setValue(data.title)
         this.otherPackageForm.controls.exclusion.setValue(data.exclusions)
         this.otherPackageForm.controls.inclusion.setValue(data.inclusions)
         this.otherPackageForm.controls.polices.setValue(data.terms)
         this.otherPackageForm.controls.overview.setValue(data.instructions)
-        if(data.attachments[0].file){this.urls.push(data.attachments[0].file)}
-        this.imageAddButton = false;
+        if(data && data.attachments && data.attachments[0] && data.attachments[0].file){this.urls.push(data.attachments[0].file);this.imageAddButton = false;}
         if(data.itinerary_set != null && data.itinerary_set.length > 0){
           const formArray = new FormArray([]);
           for (let i=0 ;i< data.itinerary_set.length;i++) {

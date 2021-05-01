@@ -1,7 +1,6 @@
 import { Component, OnInit, DoCheck } from "@angular/core";
 import { Router } from "@angular/router";
 import { AppStore } from "src/app/stores/app.store";
-import { TranslateService } from "@ngx-translate/core";
 import { CookieService } from "ngx-cookie-service";
 import { LandingApiService } from "src/app/Services/landing-api-services";
 import { CommonApiService } from "src/app/Services/common-api-services";
@@ -30,7 +29,6 @@ export class HedderComponent implements OnInit, DoCheck {
   constructor(
     public router: Router,
     private appStore: AppStore,
-    private translate: TranslateService,
     private common: LandingApiService,
     private cookie: CookieService,
     private _commonSpiService:CommonApiService
@@ -53,7 +51,6 @@ export class HedderComponent implements OnInit, DoCheck {
       } else {
         this.appStore.langCode = "en-US";
       }
-      this.translate.use(this.appStore.langCode);
     });
   }
   
@@ -76,7 +73,6 @@ export class HedderComponent implements OnInit, DoCheck {
     this.appStore.langCode = (<HTMLInputElement>(
       document.getElementById("langConverter")
     )).value;
-    this.translate.use(this.appStore.langCode);
     sessionStorage.setItem(
       "userLanguage",
       (<HTMLInputElement>document.getElementById("langConverter")).value

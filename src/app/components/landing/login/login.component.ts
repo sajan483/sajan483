@@ -5,7 +5,6 @@ import { HttpClient } from '@angular/common/http';
 import { NotificationService } from '../../../common/services/notification.service';
 import Swal from 'sweetalert2';
 import { AppStore } from 'src/app/stores/app.store';
-import { TranslateService } from '@ngx-translate/core';
 import { Country } from 'src/app/models/airportList';
 import { CookieService } from 'ngx-cookie-service';
 import { environment } from '../../../../environments/environment'
@@ -47,7 +46,6 @@ export class LoginComponent implements OnInit {
 
   constructor(private http: HttpClient,
     private router: Router,
-    private translate: TranslateService,
     private appStore: AppStore,
     private fb: FormBuilder,
     private notifyService: NotificationService,
@@ -57,7 +55,7 @@ export class LoginComponent implements OnInit {
     private _gHelper: GeneralHelper) {
     this.gHelper = _gHelper;
     this.commonApiService = this._commonApiService;
-    this.loginHelperClass = new loginHelper(this.cookie, this.notifyService, this.translate, this.appStore, this.router);
+    this.loginHelperClass = new loginHelper(this.cookie, this.notifyService, this.appStore, this.router);
     this.loginAdapter = new loginAdapter();
     this.token = this.gHelper.getAccessTocken();
     this.frmSignup = this.loginAdapter.createLoginGroup();
@@ -122,7 +120,7 @@ export class LoginComponent implements OnInit {
         Swal.fire({
           icon: 'error',
           title: 'Oops...',
-          text: this.translate.instant('Invalid Username or Password'),
+          text: 'Invalid Username or Password',
         })
       });
 
@@ -133,7 +131,6 @@ export class LoginComponent implements OnInit {
    * this method is used convert to arabic language
    */
   ngAfterViewChecked() {
-    this.translate.use(this.appStore.langCode);
     if (this.appStore.langCode == "ar-AE") {
       (<HTMLInputElement>document.getElementById("body")).classList.add('mirror_css');
     } else {
@@ -163,14 +160,14 @@ export class LoginComponent implements OnInit {
         Swal.fire({
           icon: 'error',
           title: 'Oops...',
-          text: this.translate.instant(res.errors),
+          text: res.errors,
         })
       }
     }, (error) => {
       Swal.fire({
         icon: 'error',
         title: 'Oops...',
-        text: this.translate.instant('Something went wrong'),
+        text: 'Something went wrong',
       })
     })
   }
@@ -190,21 +187,21 @@ export class LoginComponent implements OnInit {
         Swal.fire({
           icon: 'success',
           title: 'Success',
-          text: this.translate.instant(res.message),
+          text: res.message,
         })
       }
       if (res.status == 'failure') {
         Swal.fire({
           icon: 'error',
           title: 'Ooops',
-          text: this.translate.instant(res.errors[0]),
+          text: res.errors[0],
         })
       }
     }, (error) => {
       Swal.fire({
         icon: 'error',
         title: 'Oops...',
-        text: this.translate.instant('Something went wrong'),
+        text:'Something went wrong',
       })
     })
   }

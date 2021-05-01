@@ -55,7 +55,6 @@ export class HotelDetailsPopupComponent implements OnInit {
       this.selectedHotel = this.popupData;
       this.totalTravellers = this.appStore.totalTravellers;
       this.noOfDays = this.helperService.noOfDaysBetweenTwoDates(this.selectedHotel.check_in_time,this.selectedHotel.check_out_time)
-      
       this.selectedHotel.room_groups.forEach(element => {
         element.rooms.forEach(room => {
           this.selectedRoomGroups.push(room)
