@@ -1,5 +1,4 @@
 import { Component, EventEmitter, Input, OnInit, Output } from "@angular/core";
-import { TranslateService } from "@ngx-translate/core";
 import { HelperService } from "src/app/common/services/helper-service";
 import { NotificationService } from "src/app/common/services/notification.service";
 import { SubAgentApiService } from "src/app/Services/sub-agent-api-services";
@@ -24,7 +23,6 @@ export class TransportComponent implements OnInit {
     private _healperService: HelperService,
     private _notifyService:NotificationService,
     private _commonService:SubAgentApiService,
-    private translateService: TranslateService,
     private appStore:AppStore) {
       this.healperService = _healperService;
       this.notifyService = _notifyService;

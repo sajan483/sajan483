@@ -1,5 +1,4 @@
   import { Component,OnInit,ViewChild,ViewEncapsulation,AfterViewChecked,ElementRef,Renderer2} from "@angular/core";
-  import { TranslateService} from '@ngx-translate/core';
   import { FormBuilder,FormGroup,FormArray,FormControl,Validators,} from "@angular/forms";
   import { MAT_STEPPER_GLOBAL_OPTIONS } from "@angular/cdk/stepper";
   import { Room} from "../../../models/visaTypes";
@@ -194,7 +193,6 @@
     private datepipe: DatePipe,
     private http: HttpClient,
     private appStore: AppStore,
-    private translateService: TranslateService,
     private fb: FormBuilder,
     private toastr: ToastrService,
     private notifyService: NotificationService,
@@ -312,7 +310,6 @@
   ngAfterViewChecked() {
     this.selectedCurrency = this.appStore.currencyCode;
     this.selectedLanguage = this.appStore.langCode;
-    this.translateService.use(this.appStore.langCode)
     if(this.appStore.langCode == "ar-AE"){
       (<HTMLInputElement>document.getElementById("body")).classList.add('mirror_css');
     }else{
@@ -349,7 +346,7 @@
       this.common.searchTransportList(this.searchTransportId,this.selectedCurrency,this.selectedLanguage).subscribe((response) => {
         if ((response && response.transportations && response.transportations.length == 0) ||  (response && response.transportations && response.transportations.filter(x=>x.vehicle_types.length > 0) == 0)) {
           this.isTransportResponseEmpty = true;
-         this.createTripHelper.showSweetAlert(this.translateService.instant('Sorry, we could not find transport for this route'),"warning",this.translateService.instant('Modify search and try again'));
+         this.createTripHelper.showSweetAlert('Sorry, we could not find transport for this route',"warning",'Modify search and try again');
         }else{
           this.transportList = response.transportations.sort((n1,n2) => n1.vehicle_types.map(x=>x.categories[0].fare_summary[2].amount) - n2.vehicle_types.map(x=>x.categories[0].fare_summary[2].amount));
           this.transportListData = response.transportations.sort((n1,n2) => n1.vehicle_types.map(x=>x.categories[0].fare_summary[2].amount) - n2.vehicle_types.map(x=>x.categories[0].fare_summary[2].amount));
@@ -480,7 +477,7 @@
           }
           
           if(response.refetch_trip == true){
-            this.createTripHelper.showSweetAlert(this.translateService.instant('Price has been changed'),"warning",this.translateService.instant('OK'))
+            this.createTripHelper.showSweetAlert('Price has been changed',"warning",'OK')
             this.getTripData();
           } 
         });
@@ -527,7 +524,7 @@
         }
       },error=>{
         this.spinner.hide();
-        this.createTripHelper.showSweetAlert(this.translateService.instant('Oops...'),"error",this.translateService.instant('Account Does Not Exist'));
+        this.createTripHelper.showSweetAlert('Oops...',"error",'Account Does Not Exist');
       });
     }else{
     }
