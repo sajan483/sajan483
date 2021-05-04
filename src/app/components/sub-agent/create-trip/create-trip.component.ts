@@ -837,8 +837,7 @@
  * this method for fetching hotel list
  */
   hotelSearch(city:string) {
-
-      this.common.pilotHotelSearch( this.createTripAdapter.hotelSearchRequest(city,this.userDetails), this.appStore.langCode).subscribe(
+        this.common.pilotHotelSearch( this.createTripAdapter.hotelSearchRequest(city,this.userDetails), this.appStore.langCode).subscribe(
         (data) => {
           if(city === "MAKKA"){
             this.hotelsList = data;
@@ -853,6 +852,13 @@
             (data) => {
               this.hotelsList = data;
               if (this.hotelsList.length == 0) {
+                Swal.fire({
+                  icon: 'error',
+                  text: 'Something Went Wrong',
+                  confirmButtonText: 'Search Again'
+                }).then((result) => {
+                  this.router.navigate(['subagent/home']);
+                })
               }
             },
             (error) => {
@@ -866,7 +872,15 @@
             }
           );
         }),
-        (error) => {};
+        (error) => {
+          Swal.fire({
+            icon: 'error',
+            text: 'Something Went Wrong',
+            confirmButtonText: 'Search Again'
+          }).then((result) => {
+            this.router.navigate(['subagent/home']);
+          })
+        };
   }
 
   /*
