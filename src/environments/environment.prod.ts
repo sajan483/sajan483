@@ -4,5 +4,5 @@ export const environment = {
   timeLeft : 0,
   selectedCountryCommen : 'India',
   baseUrl:'https://b2b.betatest.akbarumrah.com/apis/',
-  baseUrl2:'https://b2ctest.akbarumrah.com/apis/b2b/'
+  baseUrl2:'https://b2b.betatest.akbarumrah.com/apis/b2b/'
 };

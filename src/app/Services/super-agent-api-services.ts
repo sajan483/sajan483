@@ -176,7 +176,7 @@ export class SuperAgentApiService {
   } 
 
   getSalesOverView(month) {
-    return this.http.get(this.BASE_URL2 +'dashboard/overview?month='+month, this.options).map(res => res.json());
+    return this.http.get(this.BASE_URL2 +'dashboard/overview/?month='+month, this.options).map(res => res.json());
   }
 
   uploadTripImage(data,currency,lang,id){
