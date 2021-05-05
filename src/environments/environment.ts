@@ -9,11 +9,13 @@ export const environment = {
   timeLeft : 0,
   selectedCountryCommen : 'India',
   baseUrl:'https://b2b.betatest.akbarumrah.com/apis/',
-  baseUrl2:'https://b2ctest.akbarumrah.com/apis/b2b/'
+  baseUrl2:'https://b2b.betatest.akbarumrah.com/apis/b2b/'
   
+   //New Test Server
    // baseUrl:'http://192.168.10.79:8000/',
    // baseUrl2:'http://192.168.10.79:8000/'
-
+  
+  //Aymen's system 
   //  baseUrl:'http://192.168.70.74:8000/',
   //  baseUrl2:'http://192.168.70.74:8000/'
 
