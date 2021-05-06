@@ -71,6 +71,7 @@ export class CreateTripComponent implements OnInit {
     private appStore:AppStore) { }
 
   ngOnInit() {
+    sessionStorage.removeItem('selector')
     this.searchForm = this.fb.group({
       adult:[1, Validators.required],
       children:[0],
