@@ -3,7 +3,6 @@ import { ActivatedRoute, Router } from '@angular/router';
 import 'rxjs/add/observable/interval';
 import { Observable } from 'rxjs';
 import Swal from "sweetalert2";
-import { TranslateService } from '@ngx-translate/core';
 import { AppStore } from 'src/app/stores/app.store';
 import { NotificationService } from 'src/app/common/services/notification.service';
 import { GeneralHelper } from 'src/app/helpers/General/general-helpers';
@@ -62,7 +61,6 @@ export class PaymentStatusComponent implements OnInit {
 
   constructor(private route: ActivatedRoute,
     private appStore: AppStore,
-    private translate: TranslateService,
     private common: SubAgentApiService, 
     private notifyService: NotificationService,
     private router: Router, 
@@ -94,7 +92,6 @@ export class PaymentStatusComponent implements OnInit {
   }
 
   ngAfterViewChecked() {
-    this.translate.use(this.appStore.langCode);
     if (this.appStore.langCode == "ar-AE") {
       (<HTMLInputElement>document.getElementById("body")).classList.add('mirror_css');
     } else {
@@ -251,7 +248,7 @@ export class PaymentStatusComponent implements OnInit {
         this.cancelationPopup = true;
       } else {
         Swal.fire({
-          text: this.translate.instant('Sorry, No Cancellation Available'),
+          text: 'Sorry, No Cancellation Available',
           icon: "warning",
           confirmButtonText: "ok",
         });
