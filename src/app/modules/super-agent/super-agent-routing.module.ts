@@ -10,6 +10,7 @@ import { BranchUpdationComponent } from 'src/app/components/super-agent/branch-u
 import { ProfileComponent } from 'src/app/components/super-agent/profile/profile.component';
 import { StaffCreationComponent } from 'src/app/components/super-agent/staff-creation/staff-creation.component';
 import { StaffListComponent } from 'src/app/components/super-agent/staff-list/staff-list.component';
+import { ViewPackagesComponent } from 'src/app/components/super-agent/view-packages/view-packages.component';
 
 const myPath: Routes = [
   {
@@ -41,6 +42,9 @@ const myPath: Routes = [
   },
   {
     path: "staff_list",component: StaffListComponent
+  },
+  {
+    path: "view_package",component: ViewPackagesComponent
   }
 ];
 

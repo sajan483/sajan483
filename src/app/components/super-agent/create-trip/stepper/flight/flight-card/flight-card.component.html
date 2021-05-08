@@ -20,7 +20,7 @@
                         <div class="depart">
                             <p class="black-18">{{item.DepartureTime | date:'HH:mm'}}</p>
                             <p class="grey-12 split">{{item.FromName.split('|')[0]}}</p>
-                            <p class="black-12">{{item.DepartureTime | date:'shortDate'}}</p>
+                            <p class="black-12">{{item.DepartureTime | date:'dd/MM/yyyy'}}</p>
                         </div>
                         <div class="flag">
                             <div class="flag-border"></div>
@@ -31,7 +31,7 @@
                         <div class="arrive">
                             <p class="black-18">{{item.ArrivalTime | date:'HH:mm'}}</p>
                             <p class="grey-12 split">{{item.ToName.split('|')[0]}}</p>
-                            <p class="black-12">{{item.ArrivalTime | date:'shortDate'}}</p>
+                            <p class="black-12">{{item.ArrivalTime | date:'dd/MM/yyyy'}}</p>
                         </div>
                     </div>
                     <!-- <div class="fc-bottom" (click)="toggleDetails(item, $event, i)"> -->

@@ -7,6 +7,7 @@ import { MatButtonModule, MatIconModule, MatInputModule, MatRadioModule, MatTabs
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { PaxAndPaymentComponent } from 'src/app/components/branch/home/pax-and-payment/pax-and-payment.component';
 import { ConfirmationComponent } from 'src/app/components/branch/home/confirmation/confirmation.component';
+import { ProfileComponent } from 'src/app/components/branch/profile/profile.component';
 
 
 @NgModule({
@@ -14,7 +15,8 @@ import { ConfirmationComponent } from 'src/app/components/branch/home/confirmati
     HomeComponent,
     PackageDetailsComponent,
     PaxAndPaymentComponent,
-    ConfirmationComponent
+    ConfirmationComponent,
+    ProfileComponent
   ],
   imports: [
     CommonModule,

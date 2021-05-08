@@ -21,7 +21,7 @@ import { BranchApiService } from 'src/app/Services/branch-api-service';
     AppComponent,
     HedderComponent,
     FooterComponent,
-    SliderComponent,
+    SliderComponent
   ],
   imports: [
     BrowserModule,

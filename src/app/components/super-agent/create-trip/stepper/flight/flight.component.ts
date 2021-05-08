@@ -77,6 +77,18 @@ export class FlightComponent implements OnInit {
   ngOnInit() {
     this.searchData = JSON.parse(sessionStorage.getItem('searchData'))
     this.flightSearchData = this.searchData.flightData
+    this.fromLocation = {
+      iata:this.flightSearchData.source,
+      city:this.flightSearchData.sourceName
+    };
+    this.destLocation = {
+      iata:this.flightSearchData.destination,
+      city:this.flightSearchData.destinationName
+    };
+    this.airlineDetails = {
+      name:this.flightSearchData.airlineName,
+      code:this.flightSearchData.airline
+    };
     this.searchForm = this.fb.group({
 			departDate: ['', Validators.required],
 			returnDate: ['', Validators.required],
