@@ -43,6 +43,7 @@ import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 import { OnlyNumberDirective } from 'src/app/models/onlynumber.super.directive';
 import { DateRangePickerModule } from '@syncfusion/ej2-angular-calendars';
 import { PaginationComponent } from 'src/app/components/super-agent/pagination/pagination.component';
+import { ViewPackagesComponent } from 'src/app/components/super-agent/view-packages/view-packages.component';
 
 @NgModule({
   declarations: [
@@ -71,7 +72,8 @@ import { PaginationComponent } from 'src/app/components/super-agent/pagination/p
     StaffCreationComponent,
     StaffListComponent,
     OnlyNumberDirective,
-    PaginationComponent
+    PaginationComponent,
+    ViewPackagesComponent
   ],
   imports: [
     CommonModule,

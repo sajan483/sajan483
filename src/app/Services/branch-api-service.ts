@@ -44,4 +44,10 @@ export class BranchApiService{
         .map((res) => res.json());
     }
 
+    getProfile(){
+      return this.http
+        .get(this.BASE_URL + "staff/profile/", this.options)
+        .map((res) => res.json());
+    }
+
 }

@@ -1,6 +1,6 @@
 import { Component, OnInit,ViewChild, ElementRef, Renderer2 } from '@angular/core';
 import { Router } from '@angular/router';
-import { BranchApiService } from 'src/app/Services/branch-api-service'
+import { BranchApiService } from 'src/app/Services/branch-api-service';
 
 @Component({
   selector: 'app-home',

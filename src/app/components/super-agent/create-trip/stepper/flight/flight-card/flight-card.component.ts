@@ -24,7 +24,8 @@ export class FlightCardComponent implements OnInit {
   }
 
 
-  ngOnInit() {}
+  ngOnInit() {
+  }
 
   setDepFlight(item, i){
     this.footerFlag='true'

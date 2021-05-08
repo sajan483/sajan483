@@ -55,6 +55,12 @@
                     <i class="fa fa-bars" aria-hidden="true"></i>
                 </div>
                 <div class="dropdown-content animationdivfast">
+                    <a class="" (click)="navigatepage('superagent/dashboard');">
+                        <div class="d-flex padngover mt-2">
+                            <i class="icns dashboardicon icon_size_25"></i>
+                            <p class="f15 my-auto pl15" [class.clrred]="router.url === '/superagent/dashboard'">Dashboard</p>
+                        </div>
+                    </a>
                     <a class="" (click)="navigatepage('superagent/createTrip');">
                         <div class="d-flex padngover mt-2">
                             <i class="icns createpackages icon_size_25"></i>
@@ -71,6 +77,12 @@
                         <div class="d-flex padngover">
                             <i class="icns staffmanagment icon_size_20"></i>
                             <p class="f15 my-auto pl20" [class.clrred]="router.url === '/superagent/staff_list'">Staff Mangement</p>
+                        </div>
+                    </a>
+                    <a (click)="navigatepage('/superagent/view_package');">
+                        <div class="d-flex padngover">
+                            <i class="icns view_list_icon icon_size_20"></i>
+                            <p class="f15 my-auto pl20" [class.clrred]="router.url === '/superagent/view_package'">View Packages</p>
                         </div>
                     </a>
                     <a (click)="navigatepage('/superagent/account_details');">
@@ -117,13 +129,13 @@
                             <i class="icns staffmanagment icon_size_20"></i>
                             <p class="f15 my-auto pl20">Staff Mangement</p>
                         </div>
-                    </a>
-                    <a>
+                    </a> -->
+                    <a (click)="navigatepage('branch/profile');">
                         <div class="d-flex padngover">
                             <i class="icns myprofile icon_size_20"></i>
                             <p class="f15 my-auto pl20">My Profile</p>
                         </div>
-                    </a> -->
+                    </a>
                     <a class="bgred" (click)="logout();">
                         <div class="d-flex padngover">
                             <i class="icns logouticon icon_size_20"></i>
