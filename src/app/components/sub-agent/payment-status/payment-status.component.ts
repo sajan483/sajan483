@@ -106,6 +106,7 @@ export class PaymentStatusComponent implements OnInit {
       this.dataArray.unsubscribe();
     }
     this.tripData = data;
+    console.log("tripdata",this.tripData)
     if (data.trip_flights && data.trip_flights.length > 0) {
       this.tripFlight = data.trip_flights[0];
     }
