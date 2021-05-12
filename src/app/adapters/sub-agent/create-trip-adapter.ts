@@ -220,7 +220,7 @@ export class CreateTripAdapter {
         country_of_residence: "IN",
         nationality: "IN",
         makkah_trip_hotel: {
-          search: this.appStore.makkahSearchId,
+          search: sessionStorage.getItem('mkSearchId'),
           lang: "en-US",
           hotel: {
             name: name ? name : "sample",
@@ -277,7 +277,7 @@ export class CreateTripAdapter {
         country_of_residence: "IN",
         nationality: "IN",
         medinah_trip_hotel: {
-          search: this.appStore.madinahSearchId,
+          search:sessionStorage.getItem('mdSearchId'),
           lang: "en-US",
           hotel: {
             name: name ? name : "sample",

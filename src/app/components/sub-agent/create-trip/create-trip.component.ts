@@ -342,7 +342,7 @@
       this.searchTransportId = data.search_id;
       this.steps = JSON.parse(sessionStorage.getItem('steps'))
       if(this.steps && this.steps.length > 2 ){this.stage =2}
-      this.appStore.transportSearchId = data.search_id;
+      sessionStorage.setItem("transportSearchId",data.search_id);
       this.common.searchTransportList(this.searchTransportId,this.selectedCurrency,this.selectedLanguage).subscribe((response) => {
         if ((response && response.transportations && response.transportations.length == 0) ||  (response && response.transportations && response.transportations.filter(x=>x.vehicle_types.length > 0) == 0)) {
           this.isTransportResponseEmpty = true;

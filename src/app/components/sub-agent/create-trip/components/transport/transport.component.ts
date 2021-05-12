@@ -141,7 +141,7 @@ export class TransportComponent implements OnInit {
           ? end_date_formatted
           : start_date_formatted,
         trip_transportation: {
-          search: this.appStore.transportSearchId,
+          search: sessionStorage.getItem('transportSearchId'),
           lang:"en-US",
           company_code: company_code,
           vehicle_types: arrayList,
@@ -171,7 +171,7 @@ export class TransportComponent implements OnInit {
           ? end_date_formatted
           : start_date_formatted,
         trip_transportation: {
-          search: this.appStore.transportSearchId,
+          search: sessionStorage.getItem('transportSearchId'),
           lang: "en-US",
           company_code: company_code,
           vehicle_types: arrayList,
