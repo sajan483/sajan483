@@ -100,11 +100,9 @@ export class PaymentStatusComponent implements OnInit {
   }
 
   getData(data) {
-    this.bknStatus=data.status
+    this.bknStatus = data.status
     this.reference_no = data.reference_no;
-    if (this.dataArray) {
-      this.dataArray.unsubscribe();
-    }
+    if (this.dataArray) {this.dataArray.unsubscribe();}
     this.tripData = data;
     if (data.trip_flights && data.trip_flights.length > 0) {
       this.tripFlight = data.trip_flights[0];

@@ -1,5 +1,5 @@
 <div class="container-fluid pl-0 pr-0 mt60 pb-60" id="top">
-    <div class="top_section" *ngIf="bknStatus == 'success'">
+    <div class="top_section" *ngIf="bknStatus == 'available'">
         <div class="container d-flex justify-content-between">
             <div class="d-inline-flex pdngsucess">
                 <div class="imagepdng">
@@ -15,7 +15,7 @@
             </div>
         </div>
     </div>
-    <div class="bg" *ngIf="bknStatus == 'failure'">
+    <div class="bg" *ngIf="bknStatus == 'not available'">
         <div class="container d-flex justify-content-between">
             <div class="d-inline-flex pdngerror">
                 <div class="">
@@ -62,7 +62,7 @@
                             <i class="hotelblueicon icns icon_size_30 imgposition"></i>
                             <div class="Premium_blue fs14 fw600 ">
                                 <div>MEKKAH</div>
-                                <div>{{tripMakkahHotel?.reservation_obj.hotelDetails.checkInDate | date:'dd/MM/yyyy'}}</div>
+                                <div>{{tripMakkahHotel?.trip_hotel?.check_in_time | date:'dd/MM/yyyy'}}</div>
                             </div>
                         </div>
                         <div class="col-md-9 col-12 brdrR brdrL my-auto">
@@ -98,8 +98,8 @@
                                                 <p class="pl-2 pr-2 fs13 fw500">CHECK-IN</p>
                                                 <i class="icon_h18_w11 icns downarrow"></i>
                                             </div>
-                                            <p class="fw600 fs21">{{tripMakkahHotel?.reservation_obj.hotelDetails.checkInDate | date:'mediumDate'}}</p>
-                                            <p class="clr52 fs12">{{tripMakkahHotel?.reservation_obj.hotelDetails.checkInDate | date:'EEEE'}}</p>
+                                            <p class="fw600 fs21">{{tripMakkahHotel?.trip_hotel?.check_in_time | date:'dd/MM/yyyy'}}</p>
+                                            <p class="clr52 fs12">{{tripMakkahHotel?.trip_hotel?.check_in_time | date:'EEEE'}}</p>
                                         </div>
                                         <div class="text-center mt-2">
                                             <i class="nighticon icon_size_20 icns"></i>
@@ -108,11 +108,11 @@
                                         <div class="text-left">
                                             <div class="d-flex">
                                                 <i class="calendaricon icon_h18_w15 icns"></i>
-                                                <p class="pl-2 pr-2 fs13 fw500">CHECK-IN</p>
+                                                <p class="pl-2 pr-2 fs13 fw500">CHECK-OUT</p>
                                                 <i class="icon_h18_w11 icns downarrow"></i>
                                             </div>
-                                            <p class="fw600 fs21">{{tripMakkahHotel?.reservation_obj.hotelDetails.checkOutDate | date:'mediumDate'}}</p>
-                                            <p class="clr52 fs12">{{tripMakkahHotel?.reservation_obj.hotelDetails.checkOutDate | date:'EEEE'}}</p>
+                                            <p class="fw600 fs21">{{tripMakkahHotel?.trip_hotel?.check_out_time | date:'dd/MM/yyyy'}}</p>
+                                            <p class="clr52 fs12">{{tripMakkahHotel?.trip_hotel?.check_out_time | date:'EEEE'}}</p>
                                         </div>
                                     </div>
                                 </div>
@@ -132,10 +132,9 @@
                                 </div>
                                 <div class="col-md-12 p-0 row m-0">
                                     <div class="col-md-12 row m-0 p-2 brdrtop">
-                                        <div class="col-md-4 col-6 clr52 fs14 fw600">{{tripMakkahHotel?.reservation_obj.hotelDetails.roomGroups[0].rooms[0].name.split('-')[0]}}</div>
                                         <div class="col-md-4 col-6 fs14 clr52 fw500"><strong class="pr-1 fw600">{{noOfTravellers}}</strong>Guests</div>
-                                        <div class="col-md-2 col-6 fs12" *ngIf="tripMakkahHotel?.reservation_obj.hotelDetails.roomGroups[0].rooms[0].flags.isRefundable==!true">Non-Refundable</div>
-                                        <div class="col-md-2 col-6 fs12" *ngIf="tripMakkahHotel?.reservation_obj.hotelDetails.roomGroups[0].rooms[0].flags.isRefundable==true">Refundable</div>
+                                        <div class="col-md-2 col-6 fs12" *ngIf="tripMakkahHotel?.refundable_amount == null">Non-Refundable</div>
+                                        <div class="col-md-2 col-6 fs12" *ngIf="tripMakkahHotel?.refundable_amount != null">Refundable</div>
                                         <div class="col-md-2 col-6 text-right fs14">{{tripData?.currency}} {{tripMakkahHotel?.total_price | number:'1.2-2'}}</div>
                                     </div>
                                 </div>
@@ -172,7 +171,7 @@
                             <i class="hotelblueicon icns icon_size_30 imgposition"></i>
                             <div class="Premium_blue fs14 fw600 ">
                                 <div>MEDINAH</div>
-                                <div>{{tripMadeenaHotel?.reservation_obj.hotelDetails.checkInDate | date:'dd/MM/yyyy'}}</div>
+                                <div>{{tripMadeenaHotel?.trip_hotel?.check_in_time | date:'dd/MM/yyyy'}}</div>
                             </div>
                         </div>
                         <div class="col-md-9 col-12 brdrR brdrL my-auto">
@@ -208,8 +207,8 @@
                                                 <p class="pl-2 pr-2 fs13 fw500">CHECK-IN</p>
                                                 <i class="icon_h18_w11 icns downarrow"></i>
                                             </div>
-                                            <p class="fw600 fs21">{{tripMadeenaHotel?.reservation_obj.hotelDetails.checkInDate | date:'mediumDate'}}</p>
-                                            <p class="clr52 fs12">{{tripMadeenaHotel?.reservation_obj.hotelDetails.checkInDate | date:'EEEE'}}</p>
+                                            <p class="fw600 fs21">{{tripMadeenaHotel?.trip_hotel?.check_in_time | date:'dd/MM/yyyy'}}</p>
+                                            <p class="clr52 fs12">{{tripMadeenaHotel?.trip_hotel?.check_in_time | date:'EEEE'}}</p>
                                         </div>
                                         <div class="text-center mt-2">
                                             <i class="nighticon icon_size_20 icns"></i>
@@ -218,11 +217,11 @@
                                         <div class="text-left">
                                             <div class="d-flex">
                                                 <i class="calendaricon icon_h18_w15 icns"></i>
-                                                <p class="pl-2 pr-2 fs13 fw500">CHECK-IN</p>
+                                                <p class="pl-2 pr-2 fs13 fw500">CHECK-OUT</p>
                                                 <i class="icon_h18_w11 icns downarrow"></i>
                                             </div>
-                                            <p class="fw600 fs21">{{tripMadeenaHotel?.reservation_obj.hotelDetails.checkOutDate | date:'mediumDate'}}</p>
-                                            <p class="clr52 fs12">{{tripMadeenaHotel?.reservation_obj.hotelDetails.checkOutDate | date:'EEEE'}}</p>
+                                            <p class="fw600 fs21">{{tripMadeenaHotel?.trip_hotel?.check_out_time | date:'dd/MM/yyyy'}}</p>
+                                            <p class="clr52 fs12">{{tripMadeenaHotel?.trip_hotel?.check_out_time | date:'EEEE'}}</p>
                                         </div>
                                     </div>
                                 </div>
@@ -242,10 +241,9 @@
                                 </div>
                                 <div class="col-md-12 p-0 row m-0">
                                     <div class="col-md-12 row m-0 p-2 brdrtop">
-                                        <div class="col-md-4 col-6 clr52 fs14 fw600">{{tripMadeenaHotel?.reservation_obj.hotelDetails.roomGroups[0].rooms[0].name.split('-')[0]}}</div>
                                         <div class="col-md-4 col-6 fs14 clr52 fw500"><strong class="pr-1 fw600">{{noOfTravellers}}</strong>Guests</div>
-                                        <div class="col-md-2 col-6 fs12" *ngIf="tripMadeenaHotel?.reservation_obj.hotelDetails.roomGroups[0].rooms[0].flags.isRefundable==!true">Non-Refundable</div>
-                                        <div class="col-md-2 col-6 fs12" *ngIf="tripMadeenaHotel?.reservation_obj.hotelDetails.roomGroups[0].rooms[0].flags.isRefundable==true">Refundable</div>
+                                        <div class="col-md-2 col-6 fs12" *ngIf="tripMadeenaHotel?.refundable_amount == null">Non-Refundable</div>
+                                        <div class="col-md-2 col-6 fs12" *ngIf="tripMadeenaHotel?.refundable_amount != null">Refundable</div>
                                         <div class="col-md-2 col-6 text-right fs14">{{tripData?.currency}} {{tripMadeenaHotel?.total_price | number:'1.2-2'}}</div>
                                     </div>
                                 </div>
