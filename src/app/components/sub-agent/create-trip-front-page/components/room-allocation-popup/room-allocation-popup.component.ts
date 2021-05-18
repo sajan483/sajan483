@@ -41,12 +41,14 @@ export class RoomAllocationPopupComponent implements OnInit {
    * This method for allocating rooms according to trveller count
    */
   setRoomAllocation() {
-    this.userRooms = [];
+      var obj = JSON.parse(sessionStorage.getItem('userObject'))
+      this.userRooms = [];
       let adultsPerRoom = 5;
-      this.countAdult = this.appStore.adultCount;
-      this.countChild = this.appStore.childCount;
+      this.countAdult = obj.adults;
+      this.countChild = obj.children;
+      this.countInfant = obj.infant
       var adult = this.countAdult;
-      var child = this.countChild;
+      var child = this.countChild + this.countInfant;
       let nofrooms = Math.ceil(adult/ adultsPerRoom);
       let childrenperroom = 4;
       let extrachildrenroom = child % nofrooms;
@@ -109,7 +111,7 @@ export class RoomAllocationPopupComponent implements OnInit {
    * This method for enable select button
    */
   enableButton() {
-    var totalTravlers = this.countAdult + this.countChild;
+    var totalTravlers = this.countAdult + this.countChild + this.countInfant;
     let totAdt = 0;
     let totChd = 0;
     let arrayCount = 0;
