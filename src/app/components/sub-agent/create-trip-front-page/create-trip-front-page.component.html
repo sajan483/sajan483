@@ -229,6 +229,10 @@
         </div>
     </div>
     <div class="borderbox container tablewidth mt-2 animationdiv">
+        <div class="d-flex justify-content-between pt-3 px-2">
+            <h1 class="fs16 blue_text fw500 text-uppercase">Recent Booking</h1>
+            <div class="blackborderbttn" (click)="navigateHostory()">View All Bookings</div>
+        </div>
         <app-recent-booking [recentHistory]="historyList"></app-recent-booking>
     </div>
 </div>
