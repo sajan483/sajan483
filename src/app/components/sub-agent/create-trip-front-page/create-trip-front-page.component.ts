@@ -169,6 +169,7 @@ export class CreateTripFrontPageComponent implements OnInit, DoCheck, AfterViewI
       this.countTravalers = obj.travallersCount
       this.countAdult = obj.adults
       this.countChild = obj.children
+      this.countInfant = obj.infant
       var ser = sessionStorage.getItem('service')
       if(ser == 'All'){
         this.makkaCheckInDate = obj.makkahCheckinDate,
@@ -318,7 +319,6 @@ export class CreateTripFrontPageComponent implements OnInit, DoCheck, AfterViewI
    */
   goButtonClicked() {
     this.resetBooleans();
-    //this.clearPreviousDataForFreshSearch();
     (<HTMLElement>document.getElementById("dateEnterDiv")).style.maxHeight = "456px";
     this.appStore.adultCount = this.countAdult;
     this.appStore.childCount = this.countChild;
@@ -479,6 +479,7 @@ export class CreateTripFrontPageComponent implements OnInit, DoCheck, AfterViewI
       travallersCount: this.countTravalers,
       adults:this.countAdult,
       children:this.countChild,
+      infant:this.countInfant,
       transportStartDate: this.transportStartDate,
       transportRoute: this.routetransport,
       madeenaCheckinDate: this.madeenaCheckInDate,
@@ -497,24 +498,24 @@ export class CreateTripFrontPageComponent implements OnInit, DoCheck, AfterViewI
     CreateTripComponent.UserObjectData = this.userObject;
     sessionStorage.setItem("userObject",JSON.stringify(this.userObject));
     if (this.enableMadina || this.enableMakka || this.activaleAllSearch) {
-       if(this.countAdult == 1){
-         var arr:any[] = [
-          {
-            "children": 0,
-            "child_ages": [],
-            "seq_no": "0",
-            "adults": 1
-          }
-        ]
-        sessionStorage.setItem("roomData",JSON.stringify(arr));
-        this.router.navigate(["subagent/createTrip"], {
-            queryParams: { steps: this.steps.join(",") },
-          });
-       }
-      if(this.countAdult > 1){
+      //  if(this.countAdult == 1){
+      //    var arr:any[] = [
+      //     {
+      //       "children": 0,
+      //       "child_ages": [],
+      //       "seq_no": "0",
+      //       "adults": 1
+      //     }
+      //   ]
+      //   sessionStorage.setItem("roomData",JSON.stringify(arr));
+      //   this.router.navigate(["subagent/createTrip"], {
+      //       queryParams: { steps: this.steps.join(",") },
+      //     });
+      //  }
+      // if(this.countAdult > 1){
         this.appStore.showRoomAlPopup = true;
         this.showRoomAllocationPopup = this.appStore.showRoomAlPopup;
-      }
+      //}
     } else {
       this.router.navigate(["subagent/createTrip"], {
         queryParams: { steps: this.steps.join(",") },
