@@ -818,4 +818,11 @@ export class CreateTripFrontPageComponent implements OnInit, DoCheck, AfterViewI
       this.showRoomAllocationPopup = false;
     }
   }
+
+   /**
+   * navigate history page 
+   */
+  navigateHostory(){
+    this.router.navigate(["subagent/history"]);
+  }
 }

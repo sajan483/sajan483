@@ -26,12 +26,7 @@ export class RecentBookingComponent implements OnInit {
     this.router.navigate(["subagent/payment",id,"history"]);
   }
 
-  /**
-   * navigate history page 
-   */
-  navigateHostory(){
-    this.router.navigate(["subagent/history"]);
-  }
+ 
 
   /**
    * this merthod is used to copy data
