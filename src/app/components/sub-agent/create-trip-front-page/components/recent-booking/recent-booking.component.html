@@ -1,5 +1,5 @@
 <div class="tbl p-2">
-    <div class="d-flex justify-content-between pt-2">
+    <div class="d-flex justify-content-between pt-2" *ngIf="router.url === '/subagent/home'">
         <h1 class="tablehead blue_text fw500 text-uppercase">Recent Booking</h1>
         <div class="blackborderbttn" (click)="navigateHostory()">View All Bookings</div>
     </div>
@@ -18,6 +18,34 @@
                     <th></th>
                 </tr>
             </thead>
+            <tbody *ngIf="recentHistory == null">
+                <tr *ngFor="let k of [].constructor(6);let i = index;">
+                    <td>
+                        <div class="shine h20 w-100"></div>
+                    </td>
+                    <td>
+                        <div class="shine h20 w-100"></div>
+                    </td>
+                    <td>
+                        <div class="shine h20 w-100"></div>
+                    </td>
+                    <td>
+                        <div class="shine h20 w-100"></div>
+                    </td>
+                    <td>
+                        <div class="shine h20 w-100"></div>
+                    </td>
+                    <td>
+                        <div class="shine h20 w-100"></div>
+                    </td>
+                    <td>
+                        <div class="shine h20 w-100"></div>
+                    </td>
+                    <td>
+                        <div class="shine h20 w-100"></div>
+                    </td>
+                </tr>
+            </tbody>
             <tbody>
                 <tr *ngFor="let item of recentHistory;let i = index;">
                     <td>
