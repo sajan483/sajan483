@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild, ElementRef, Renderer2, DoCheck, AfterViewInit, } from "@angular/core";
 import { IDropdownSettings } from "ng-multiselect-dropdown";
 import { Router } from "@angular/router";
+import { TranslateService } from '@ngx-translate/core';
 import { NotificationService } from "../../../common/services/notification.service";
 import { CreateTripComponent } from "../create-trip/create-trip.component";
 import { AppStore } from "../../../stores/app.store";
@@ -101,13 +102,14 @@ export class CreateTripFrontPageComponent implements OnInit, DoCheck, AfterViewI
   madeenaMindate: any;
   constructor(
     private commonApiService: SubAgentApiService,
-    private subAgentApiService:SubAgentApiService,
+    private subAgentApiService: SubAgentApiService,
     private appStore: AppStore,
     private renderer2: Renderer2,
     private router: Router,
     private notifyService: NotificationService,
     private helperService: HelperService,
-    private _genHelper: GeneralHelper
+    private _genHelper: GeneralHelper,
+    private translate: TranslateService,
   ) {
     this.genHelper = _genHelper;
     this.renderer2.listen("window", "click", (e: Event) => {
@@ -160,63 +162,65 @@ export class CreateTripFrontPageComponent implements OnInit, DoCheck, AfterViewI
 
   }
 
-  setDomDataOnRefresh(){
+
+
+  setDomDataOnRefresh() {
     var obj = JSON.parse(sessionStorage.getItem('userObject'))
-    if(obj != null){
+    if (obj != null) {
       this.enableGoButton()
       this.onServiceItemChange(sessionStorage.getItem('service'))
-      this.goButtonClicked() 
+      this.goButtonClicked()
       this.countTravalers = obj.travallersCount
       this.countAdult = obj.adults
       this.countChild = obj.children
       this.countInfant = obj.infant
       var ser = sessionStorage.getItem('service')
-      if(ser == 'All'){
+      if (ser == 'All') {
         this.makkaCheckInDate = obj.makkahCheckinDate,
-        this.makkaCheckOutDate = obj.makkahCheckoutDate,
-        this.madeenaCheckInDate = obj.madeenaCheckinDate,
-        this.madeenaCheckOutDate = obj.madeenaCheckoutDate,
-        this.transportStartDate = obj.transportStartDate
+          this.makkaCheckOutDate = obj.makkahCheckoutDate,
+          this.madeenaCheckInDate = obj.madeenaCheckinDate,
+          this.madeenaCheckOutDate = obj.madeenaCheckoutDate,
+          this.transportStartDate = obj.transportStartDate
         this.noOfDaysInMakkah = obj.noOfDaysInMakkah
         this.noOfDaysInMadeenah = obj.noOfDaysInMadeenah
       }
-      if(ser == 'Makkah Hotel'){
+      if (ser == 'Makkah Hotel') {
         this.service = 'Makkah Hotel'
         this.makkaCheckInDate = obj.makkahCheckinDate,
-        this.makkaCheckOutDate = obj.makkahCheckoutDate,
-        this.special_code_makkah = obj.specialCodeMakkah,
-        this.subPcc_makkah = obj.subPcc_makkah,
-        this.enableSearchButton = true;
+          this.makkaCheckOutDate = obj.makkahCheckoutDate,
+          this.special_code_makkah = obj.specialCodeMakkah,
+          this.subPcc_makkah = obj.subPcc_makkah,
+          this.enableSearchButton = true;
       }
-      if(ser == 'Medina Hotel'){
+      if (ser == 'Medina Hotel') {
         this.service = 'Medina Hotel'
         this.madeenaCheckInDate = obj.madeenaCheckinDate,
-        this.madeenaCheckOutDate = obj.madeenaCheckoutDate
+          this.madeenaCheckOutDate = obj.madeenaCheckoutDate
         this.subPcc_medinah = obj.subPcc_medinah,
-        this.special_code_medinah = obj.specialCodeMedinah,
-        this.enableSearchButton = true;
+          this.special_code_medinah = obj.specialCodeMedinah,
+          this.enableSearchButton = true;
       }
-      if(ser == 'Transport'){
+      if (ser == 'Transport') {
         this.service = 'Transport'
         this.transportStartDate = obj.transportStartDate
         this.vehicleCode = obj.vehicleType,
-        this.vehicleMaxCapacity = obj.vehicleCapacity,
-        this.routetransport = obj.transportRoute
+          this.vehicleMaxCapacity = obj.vehicleCapacity,
+          this.routetransport = obj.transportRoute
         this.enableSearchButton = true;
       }
     }
   }
 
-  ngAfterViewInit(){
+  ngAfterViewInit() {
     this.getTransportRoutes();
     this.getVehicleType();
     this.listRecentBooking();
   }
-  
-   /**
-    * This method for fetching transport routes
-    * 
-    */
+
+  /**
+   * This method for fetching transport routes
+   * 
+   */
   getTransportRoutes() {
     this.commonApiService
       .getRoutes(sessionStorage.getItem("userLanguage"))
@@ -229,12 +233,12 @@ export class CreateTripFrontPageComponent implements OnInit, DoCheck, AfterViewI
     * This method for fetching vehicle type
     * 
     */
-  getVehicleType(){
+  getVehicleType() {
     this.commonApiService
-    .getVehicles(sessionStorage.getItem("userLanguage"))
-    .subscribe((data) => {
-      this.vehicleTypeList=data.vehicle_types;
-    });
+      .getVehicles(sessionStorage.getItem("userLanguage"))
+      .subscribe((data) => {
+        this.vehicleTypeList = data.vehicle_types;
+      });
   }
 
   /**
@@ -390,10 +394,10 @@ export class CreateTripFrontPageComponent implements OnInit, DoCheck, AfterViewI
     }
   }
 
-  resetDatesForRefresh(){
-    if(this.service == 'All'){this.clearPreviousDataForFreshSearch()}
-    if(this.service == 'Makkah Hotel'){this.makkaCheckInDate = null ; this.makkaCheckOutDate = null}
-    if(this.service == 'Medina Hotel'){this.madeenaCheckInDate = null;this.madeenaCheckOutDate = null }
+  resetDatesForRefresh() {
+    if (this.service == 'All') { this.clearPreviousDataForFreshSearch() }
+    if (this.service == 'Makkah Hotel') { this.makkaCheckInDate = null; this.makkaCheckOutDate = null }
+    if (this.service == 'Medina Hotel') { this.madeenaCheckInDate = null; this.madeenaCheckOutDate = null }
   }
 
   /**
@@ -419,7 +423,7 @@ export class CreateTripFrontPageComponent implements OnInit, DoCheck, AfterViewI
     this.transportmin = this.makkaCheckInDate;
     this.transportmax = this.makkaCheckOutDate;
     this.activateMakkaPromotion = true;
-    if(this.madeenaCheckInDate == null){
+    if (this.madeenaCheckInDate == null) {
       this.makkaOutDatePicker.nativeElement.click();
     }
   }
@@ -472,14 +476,14 @@ export class CreateTripFrontPageComponent implements OnInit, DoCheck, AfterViewI
   */
   searchButtonClicked() {
     this.clearSession()
-    sessionStorage.setItem('service',this.service)
+    sessionStorage.setItem('service', this.service)
     this.setNoOfMadeenaDays();
     this.appStore.showRoomAlPopup = false;
     this.userObject = {
       travallersCount: this.countTravalers,
-      adults:this.countAdult,
-      children:this.countChild,
-      infant:this.countInfant,
+      adults: this.countAdult,
+      children: this.countChild,
+      infant: this.countInfant,
       transportStartDate: this.transportStartDate,
       transportRoute: this.routetransport,
       madeenaCheckinDate: this.madeenaCheckInDate,
@@ -490,32 +494,32 @@ export class CreateTripFrontPageComponent implements OnInit, DoCheck, AfterViewI
       subPcc_makkah: this.subPcc_makkah,
       subPcc_medinah: this.subPcc_medinah,
       specialCodeMedinah: this.special_code_medinah,
-      vehicleType:this.vehicleCode,
-      vehicleCapacity:this.vehicleMaxCapacity,
-      noOfDaysInMadeenah :this.noOfDaysInMadeenah,
-      noOfDaysInMakkah:this.noOfDaysInMakkah
+      vehicleType: this.vehicleCode,
+      vehicleCapacity: this.vehicleMaxCapacity,
+      noOfDaysInMadeenah: this.noOfDaysInMadeenah,
+      noOfDaysInMakkah: this.noOfDaysInMakkah
     };
     CreateTripComponent.UserObjectData = this.userObject;
-    sessionStorage.setItem("userObject",JSON.stringify(this.userObject));
+    sessionStorage.setItem("userObject", JSON.stringify(this.userObject));
     if (this.enableMadina || this.enableMakka || this.activaleAllSearch) {
-      //  if(this.countAdult == 1){
-      //    var arr:any[] = [
-      //     {
-      //       "children": 0,
-      //       "child_ages": [],
-      //       "seq_no": "0",
-      //       "adults": 1
-      //     }
-      //   ]
-      //   sessionStorage.setItem("roomData",JSON.stringify(arr));
-      //   this.router.navigate(["subagent/createTrip"], {
-      //       queryParams: { steps: this.steps.join(",") },
-      //     });
-      //  }
-      // if(this.countAdult > 1){
+      if (this.countAdult == 1) {
+        var arr: any[] = [
+          {
+            "children": 0,
+            "child_ages": [],
+            "seq_no": "0",
+            "adults": 1
+          }
+        ]
+        sessionStorage.setItem("roomData", JSON.stringify(arr));
+        this.router.navigate(["subagent/createTrip"], {
+          queryParams: { steps: this.steps.join(",") },
+        });
+      }
+      if (this.countAdult > 1) {
         this.appStore.showRoomAlPopup = true;
         this.showRoomAllocationPopup = this.appStore.showRoomAlPopup;
-      //}
+      }
     } else {
       this.router.navigate(["subagent/createTrip"], {
         queryParams: { steps: this.steps.join(",") },
@@ -525,8 +529,8 @@ export class CreateTripFrontPageComponent implements OnInit, DoCheck, AfterViewI
     this.dataForPopUp.user = this.userObject;
   }
 
-  clearSession(){
-    sessionStorage.setItem('stage','0');
+  clearSession() {
+    sessionStorage.setItem('stage', '0');
     sessionStorage.removeItem('hotelDetailsFlag');
     sessionStorage.removeItem('mdSearchId');
     sessionStorage.removeItem('mkSearchId');
@@ -559,17 +563,17 @@ export class CreateTripFrontPageComponent implements OnInit, DoCheck, AfterViewI
    * This method for show/hide search button
    * 
    */
-  onVehicleSelect(id:any){
-    if(id != null && this.vehicleTypeList && this.vehicleTypeList.length > 0){
+  onVehicleSelect(id: any) {
+    if (id != null && this.vehicleTypeList && this.vehicleTypeList.length > 0) {
       this.vehicleTypeList.forEach(element => {
-        if(element.id == id){
+        if (element.id == id) {
           this.vehicleCode = element.code;
           this.vehicleMaxCapacity = element.max_capacity;
         }
       });
     }
   }
-  
+
 
   /**
    * This method for show/hide search button
@@ -648,14 +652,11 @@ export class CreateTripFrontPageComponent implements OnInit, DoCheck, AfterViewI
   }
 
   ngAfterViewChecked() {
-    if (this.appStore.langCode == "ar-AE") {
-      (<HTMLInputElement>document.getElementById("body")).classList.add(
-        "mirror_css"
-      );
+    this.translate.use((sessionStorage.getItem('userLanguage') === 'ar-AE') ? "ar-AE" : "en-US");
+    if (sessionStorage.getItem('userLanguage') == "ar-AE") {
+      (<HTMLInputElement>document.getElementById("body")).classList.add('mirror_css');
     } else {
-      (<HTMLInputElement>document.getElementById("body")).classList.remove(
-        "mirror_css"
-      );
+      (<HTMLInputElement>document.getElementById("body")).classList.remove('mirror_css');
     }
   }
 
@@ -682,7 +683,7 @@ export class CreateTripFrontPageComponent implements OnInit, DoCheck, AfterViewI
     }
     this.activateMadeenaPromotion = true;
     if (position == "in") {
-      if(this.madeenaCheckOutDate == null){
+      if (this.madeenaCheckOutDate == null) {
         this.madeenaOutPicker.nativeElement.click();
       }
     }
@@ -725,7 +726,7 @@ export class CreateTripFrontPageComponent implements OnInit, DoCheck, AfterViewI
 
   onServiceItemChange(value) {
     this.service = value;
-    sessionStorage.setItem('service',this.service)
+    sessionStorage.setItem('service', this.service)
     if (value == "All") {
       this.activaleAllSearch = true;
       this.enableMakka = true;
@@ -819,10 +820,10 @@ export class CreateTripFrontPageComponent implements OnInit, DoCheck, AfterViewI
     }
   }
 
-   /**
-   * navigate history page 
-   */
-  navigateHostory(){
+  /**
+  * navigate history page 
+  */
+  navigateHostory() {
     this.router.navigate(["subagent/history"]);
   }
 }

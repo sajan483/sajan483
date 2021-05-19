@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { CommonModule} from '@angular/common';
+import { CommonModule } from '@angular/common';
 import { BookingHistoryComponent } from 'src/app/components/sub-agent/booking-history/booking-history.component';
 import { RecentBookingComponent } from 'src/app/components/sub-agent/create-trip-front-page/components/recent-booking/recent-booking.component';
 import { RoomAllocationPopupComponent } from 'src/app/components/sub-agent/create-trip-front-page/components/room-allocation-popup/room-allocation-popup.component';
@@ -10,7 +10,7 @@ import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { MatStepperModule, MatInputModule, MatButtonModule, MatDatepickerModule, MatNativeDateModule, MatTabsModule, MatFormFieldModule, MatSelectModule, MatRadioModule, MatExpansionModule, MatCheckboxModule, MatProgressBarModule } from '@angular/material';
-import {MatSliderModule} from '@angular/material/slider'; 
+import { MatSliderModule } from '@angular/material/slider';
 import { NgbRatingModule, NgbCarouselModule } from '@ng-bootstrap/ng-bootstrap';
 import { TranslateModule, TranslateLoader, TranslateService } from '@ngx-translate/core';
 import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
@@ -35,6 +35,8 @@ import { HelperService } from 'src/app/common/services/helper-service';
 import { PaymentTransportComponent } from 'src/app/components/sub-agent/create-trip/components/payment-transport/payment-transport.component';
 import { SubAgentApiService } from 'src/app/Services/sub-agent-api-services';
 import { OnlyNumberDirective } from 'src/app/models/onlynumber.directive';
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+export function TranslatorFactory(httpClient: HttpClient) { return new TranslateHttpLoader(httpClient, './assets/i18n/', '.json'); }
 
 @NgModule({
   declarations: [
@@ -87,24 +89,28 @@ import { OnlyNumberDirective } from 'src/app/models/onlynumber.directive';
     MatNativeDateModule,
     CarouselModule,
     NgMultiSelectDropDownModule.forRoot(),
-    // TranslateModule.forChild({
-    //   loader: {
-    //     provide: TranslateLoader,
-    //     useFactory: TranslatorFactory,
-    //     deps: [HttpClient]
-    //   },
-    //   isolate: true
-    // })
+    TranslateModule.forChild({
+      loader: {
+        provide: TranslateLoader,
+        useFactory: TranslatorFactory,
+        deps: [HttpClient]
+      },
+      isolate: true
+    })
   ],
   exports: [
     TranslateModule,
   ],
-  providers:[SubAgentApiService,HelperService]
-  
+  providers: [SubAgentApiService, HelperService]
+
 })
 
 export class SubAgentModule {
-   //constructor(public translateService: TranslateService) {
+  //constructor(public translateService: TranslateService) {
   //   translateService.setDefaultLang('en-US'); /* Setting up the Translate Json to English - `en` */
   //}
+  constructor(public translateService: TranslateService) {
+    translateService.addLangs(["en-US", "ar-AE"]);
+    translateService.setDefaultLang('en-US'); /* Setting up the Translate Json to English - `en` */
+  }
 }

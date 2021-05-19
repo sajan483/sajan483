@@ -94,3 +94,23 @@
 .clrred {
     color: #c6392d;
 }
+
+.custom-select {
+    background: url("/assets/images/down_arrow.png") no-repeat right transparent;
+    background-size: 17px 19px;
+    color: #000000;
+    border: none;
+    font-size: 13px;
+    box-shadow: none;
+    option {
+        color: #000;
+    }
+    option:hover {
+        background-color: #027ce9;
+        color: #fff;
+    }
+}
+
+.ws100imp {
+    width: 100px !important;
+}
