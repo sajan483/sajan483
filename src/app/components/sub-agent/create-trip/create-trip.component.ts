@@ -183,7 +183,9 @@
     generalHelper : GeneralHelper;
     commonApiService : CommonApiService;
     travellersForm:FormGroup;
-
+    @ViewChild('phoneInput', { read: ElementRef, static: false })
+    phoneInput: ElementRef;
+   
   constructor(
     private router: Router,
     private formBuilder: FormBuilder,
@@ -426,6 +428,69 @@
   
   get g() { return this.travellersForm.controls; }
 
+  //Mobile Validation
+
+  onCountryChange(event) {
+    console.log(event)
+    this.validateNumber();
+    this.countryCode = event.dialCode
+  }
+
+  getNumberPlaceHolderLength(): number {
+    try {
+      let phoneInput: HTMLElement = document.getElementById("phoneInput");
+      if (phoneInput)
+        return phoneInput.attributes.getNamedItem("placeholder").value.replace(/[^0-9a-zA-Z]/g, '').length;
+    } catch (exception) {
+      console.log(exception)
+    }
+  }
+ 
+
+  inputValidation(event?) {
+
+    let defaultCountryCode: string = "+91"
+    try {
+      let mobileNumber: string = '';
+      if (event)
+        mobileNumber = event.srcElement.value;
+      else
+        mobileNumber = this.travellersForm.controls['phone_number'].value;
+      defaultCountryCode = defaultCountryCode.replace(/[^0-9]/g, '');
+      if (this.getNumberPlaceHolderLength() && mobileNumber.length >= this.getNumberPlaceHolderLength() + defaultCountryCode.length &&
+        mobileNumber.startsWith(defaultCountryCode)){
+        mobileNumber = mobileNumber.slice(defaultCountryCode.length);
+        console.log(mobileNumber)}
+      else if (mobileNumber.startsWith('0'))
+        mobileNumber = mobileNumber.slice(1);
+
+      this.travellersForm.controls['phone_number'].setValue(mobileNumber);
+      this.validateNumber();
+    } catch (exception) {
+      // this.errorLogger.Log('B2CPORTAL', 'ERROR', 'FLT', "ContactInformationComponent: inputValidation", exception.stack.toLocaleString());
+    }
+  }
+
+  validateNumber() {
+    try {
+      if (this.travellersForm && this.travellersForm.controls['phone_number'].value) {
+        let mobileNumber = this.travellersForm.controls['phone_number'].value.trim();
+        if (this.getNumberPlaceHolderLength() && this.getNumberPlaceHolderLength() != mobileNumber.length) {
+          this.travellersForm.controls['phone_number'].setErrors({ 'pattern': true });
+          this.travellersForm.controls['phone_number'].markAsTouched();
+        } else if (/\s/g.test(mobileNumber)) {
+          this.travellersForm.controls['phone_number'].setErrors({ 'pattern': true });
+          this.travellersForm.controls['phone_number'].markAsTouched();
+        } else {
+          this.travellersForm.controls['phone_number'].setErrors(null);
+          this.travellersForm.controls['phone_number'].setValue(mobileNumber)
+        }
+      }
+    } catch (exception) {
+         alert('enter mobile number')
+    }
+  }
+  //end of mobile validation //
   /**
    * Method to book trip and check availability
    */

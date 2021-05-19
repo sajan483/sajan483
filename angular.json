@@ -28,6 +28,7 @@
               "src/assets"
             ],
             "styles": [
+              "node_modules/intl-tel-input/build/css/intlTelInput.css",
               "src/custom-theme.scss",
               "node_modules/bootstrap/dist/css/bootstrap.min.css",
               "node_modules/ngx-toastr/toastr.css",
@@ -36,6 +37,7 @@
               "node_modules/font-awesome/css/font-awesome.css"
             ],
             "scripts": [
+              "node_modules/intl-tel-input/build/js/intlTelInput.min.js",
               "node_modules/jquery/dist/jquery.min.js",
               "node_modules/bootstrap/dist/js/bootstrap.min.js"
             ]
