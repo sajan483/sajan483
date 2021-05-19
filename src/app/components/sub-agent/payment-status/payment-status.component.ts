@@ -9,6 +9,7 @@ import { GeneralHelper } from 'src/app/helpers/General/general-helpers';
 import { CreateTripHelper } from 'src/app/helpers/sub-agent/create-trip-helpers';
 import { HelperService } from "src/app/common/services/helper-service";
 import { SubAgentApiService } from 'src/app/Services/sub-agent-api-services';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-payment-status',
@@ -51,13 +52,17 @@ export class PaymentStatusComponent implements OnInit {
   genHelper: GeneralHelper;
   createHelper: CreateTripHelper;
   makkahotel:boolean=false;
-  transporttoggle:boolean=false;
+  cancellationtoggle:boolean=false;
   bknStatus:any;
   noOfDaysInMakkah:any;
   noOfTravellers:any;
   noOfDaysInMedinah: any;
   invoicetoggle: boolean = false;
   vouchertoggle: boolean = false;
+  shimmer:boolean = true;
+  btnactv: boolean;
+  registerForm: FormGroup;
+  submitted = false;
 
   constructor(private route: ActivatedRoute,
     private appStore: AppStore,
@@ -65,11 +70,15 @@ export class PaymentStatusComponent implements OnInit {
     private notifyService: NotificationService,
     private router: Router, 
     private _gHelper: GeneralHelper,
+    private formBuilder: FormBuilder,
     private helperService: HelperService,) {
     this.genHelper = _gHelper;
   }
 
   ngOnInit() {
+    this.registerForm = this.formBuilder.group({
+      cancellation_text: ['', Validators.required]
+  });
     this.genHelper.checkForAccessToken();
     this.createHelper = new CreateTripHelper(this.helperService);
     this.status = this.route.snapshot.params.status;
@@ -100,7 +109,10 @@ export class PaymentStatusComponent implements OnInit {
   }
 
   getData(data) {
+    this.shimmer=false;
     this.bknStatus = data.status
+    console.log(this.bknStatus);
+    
     this.reference_no = data.reference_no;
     if (this.dataArray) {this.dataArray.unsubscribe();}
     this.tripData = data;
@@ -233,16 +245,21 @@ export class PaymentStatusComponent implements OnInit {
     link.click();
     this.vouchertoggle = false;
   }
+
+  get f() { return this.registerForm.controls; }
+
   
   checkCancellation() {
+    this.cancellationtoggle = true;
     this.common.getCheckCancellation(this.route.snapshot.params.id).subscribe((data) => {
+      this.cancellationtoggle = false;
       this.canCancel = data.can_cancel_booking;
       this.makkahCancellation = data.makkah_hotel_booking;
       this.medinahCancellation = data.medinah_hotel_booking;
       this.serviceCancellation = data.service_booking;
       this.transportCancellation = data.transport_booking;
       window.scrollTo(0, 0);
-      if (this.canCancel == true) {
+      if (data.can_cancel_booking) {
         this.cancelationPopup = true;
       } else {
         Swal.fire({
@@ -255,16 +272,21 @@ export class PaymentStatusComponent implements OnInit {
   }
   
   confirmCancellation() {
-    if ((<HTMLTextAreaElement>document.getElementById("confirmCancellationInput")).value == "") {
-    } else {
-      let body = {
-        "cancellation_reason": (<HTMLTextAreaElement>document.getElementById("confirmCancellationInput")).value
-      }
-      this.common.getConfirmCancellation(this.route.snapshot.params.id, body).subscribe((data) => {
-      });
-      window.location.reload();
-      (<HTMLElement>document.getElementById("checkCancellationBtn")).style.display = "none";
+    this.submitted = true;
+    
+    if (this.registerForm.invalid) {
+      return;
     }
+    this.btnactv = true;
+    let body = {
+      "cancellation_reason": (<HTMLTextAreaElement>document.getElementById("confirmCancellationInput")).value
+    }
+    this.common.getConfirmCancellation(this.route.snapshot.params.id, body).subscribe((data) => {
+      this.btnactv = true;
+      this.cancelationPopup = false;
+      window.location.reload();
+    });
+    
   }
 
   sendPayuRequest(payment_create_response) {

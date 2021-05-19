@@ -98,6 +98,7 @@
     cityFirst: string = "";
     citySecond: string = "";
     transportFailed: string = "";
+    bookContinue: boolean;
     toggleMeridian() {
         this.meridian = !this.meridian;
     }
@@ -199,7 +200,7 @@
     private route: ActivatedRoute,
     private helperService:HelperService,
     private genHelper: GeneralHelper,
-    private _commonApiService : CommonApiService 
+    private _commonApiService : CommonApiService
   ) {
     this.generalHelper = genHelper;
     this.commonApiService = _commonApiService;
@@ -431,6 +432,7 @@
    */
   bookTrip(){
     this.submitted = true;
+    this.bookContinue = true;
     if(this.travellersForm.invalid){return}
     let roomRef = 0+"_"+this.rooms[0].adults+"ADT_"+this.rooms[0].children+"CHD_"+this.rooms[0].child_ages.sort().join("_")+"";
     let travellers = [];
@@ -480,6 +482,7 @@
             this.createTripHelper.showSweetAlert('Price has been changed',"warning",'OK')
             this.getTripData();
           } 
+          this.bookContinue = false;
         });
     });
    }
@@ -505,6 +508,7 @@
    * Method to navigate payment success page
    */
   onSubmitButtonClicked(){
+    this.spinner.show();
      //"account_no": "SA1790941327111000000002" ,
      //"auth_code": "5NMABO6U2RH2ZR5B"
     var w = {
@@ -513,14 +517,14 @@
        "auth_code" : this.authCode,
       }
 
-      if(this.accNo && this.authCode){
-      this.spinner.show();
-      this.common.bookingPayment(w).subscribe((response)=> { 
-        this.spinner.hide();
+    if(this.accNo && this.authCode){
+      this.common.bookingPayment(w).subscribe((response)=> {
+        this.spinner.hide(); 
         if(response.status == "Success"){
           this.router.navigate(['subagent/payment/'+this.bookingId+'/success']);
         }
         else{
+          this.createTripHelper.showSweetAlert('Oops...',"please try again","payment failed");
         }
       },error=>{
         this.spinner.hide();
