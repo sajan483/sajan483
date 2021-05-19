@@ -37,6 +37,7 @@ import { SubAgentApiService } from 'src/app/Services/sub-agent-api-services';
 import { OnlyNumberDirective } from 'src/app/models/onlynumber.directive';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 export function TranslatorFactory(httpClient: HttpClient) { return new TranslateHttpLoader(httpClient, './assets/i18n/', '.json'); }
+import { PaginationComponent } from 'src/app/components/sub-agent/pagination/pagination.component';
 
 @NgModule({
   declarations: [
@@ -56,7 +57,8 @@ export function TranslatorFactory(httpClient: HttpClient) { return new Translate
     LoaderHotelPopupComponent,
     HotelImagePopupComponent,
     PaymentTransportComponent,
-    OnlyNumberDirective
+    OnlyNumberDirective,
+    PaginationComponent
   ],
 
   imports: [

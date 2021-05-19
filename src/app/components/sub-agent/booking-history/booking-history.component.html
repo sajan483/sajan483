@@ -1,4 +1,11 @@
 <div class="recenthistory container">
     <div class="pl10 pt-3 fs20 blue_text fw500 text-uppercase ">{{'Transactions' | translate}}</div>
     <app-recent-booking [recentHistory]="history"></app-recent-booking>
+    <div class="row">
+        <div class="col-lg-8 col-md-10  ml-auto mr-auto mt-2">
+            <div class="float-right">
+                <app-pagination [totalPage]="totalPage" [currentPage]="currentPage" (onPageChange)="paginateHistoryList($event)"></app-pagination>
+            </div>
+        </div>
+    </div>
 </div>
