@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { Router} from '@angular/router';
+import { Router } from '@angular/router';
 import { listHistory } from '../../../models/listHistory';
 import { NgxSpinnerService } from "ngx-spinner";
+import { TranslateService } from '@ngx-translate/core';
 import { SubAgentApiService } from 'src/app/Services/sub-agent-api-services';
 
 
@@ -12,21 +13,31 @@ import { SubAgentApiService } from 'src/app/Services/sub-agent-api-services';
 })
 
 export class BookingHistoryComponent implements OnInit {
-  activePage:number;
-  currentPage:number;
-  totalPage:number;
-  pageNo:number;
-  pageSize:number;
+  activePage: number;
+  currentPage: number;
+  totalPage: number;
+  pageNo: number;
+  pageSize: number;
   history: listHistory;
-  constructor(private paymentLoader: NgxSpinnerService,private common:SubAgentApiService,private router:Router) { }
+  constructor(private paymentLoader: NgxSpinnerService, private common: SubAgentApiService, private router: Router,
+    private translate: TranslateService,) { }
 
   /**
    * this methode is used for user is logged or not
    */
-  ngOnInit():void {
-    this.paginateHistoryList(1);   
+  ngOnInit(): void {
+    this.paginateHistoryList(1);
   }
-  
+
+  ngAfterViewChecked() {
+    this.translate.use((sessionStorage.getItem('userLanguage') === 'ar-AE') ? "ar-AE" : "en-US");
+    if (sessionStorage.getItem('userLanguage') == "ar-AE") {
+      (<HTMLInputElement>document.getElementById("body")).classList.add('mirror_css');
+    } else {
+      (<HTMLInputElement>document.getElementById("body")).classList.remove('mirror_css');
+    }
+  }
+
   /**
    * API calling for history list
    * @param activePage 
@@ -45,8 +56,8 @@ export class BookingHistoryComponent implements OnInit {
    * this methode used for navigate history view page
    * @param id 
    */
-  viewhistory(id:any){
-    this.router.navigate(["/payment",id,"history"]);
+  viewhistory(id: any) {
+    this.router.navigate(["/payment", id, "history"]);
   }
 
 }

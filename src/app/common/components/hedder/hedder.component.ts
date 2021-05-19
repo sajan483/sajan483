@@ -2,8 +2,11 @@ import { Component, OnInit, DoCheck } from "@angular/core";
 import { Router } from "@angular/router";
 import { AppStore } from "src/app/stores/app.store";
 import { CookieService } from "ngx-cookie-service";
+import { FormGroup, Validators, FormBuilder } from "@angular/forms";
 import { LandingApiService } from "src/app/Services/landing-api-services";
 import { CommonApiService } from "src/app/Services/common-api-services";
+import { TranslateService } from '@ngx-translate/core';
+
 
 
 @Component({
@@ -16,14 +19,14 @@ export class HedderComponent implements OnInit, DoCheck {
   gettype: any;
   public currentUser: any;
   superAgencyActive: boolean;
-  subAgencyActive:boolean;
+  subAgencyActive: boolean;
   branchActive: boolean;
   languageList: any;
   activeArabic: boolean = false;
   showNavBar: boolean = false;
-  commonApiService:CommonApiService;
-  
-  userType:any;
+  commonApiService: CommonApiService;
+  public languageSelect: any = "en-US";
+  userType: any;
 
 
   constructor(
@@ -31,29 +34,18 @@ export class HedderComponent implements OnInit, DoCheck {
     private appStore: AppStore,
     private common: LandingApiService,
     private cookie: CookieService,
-    private _commonSpiService:CommonApiService
+    private _commonSpiService: CommonApiService,
+    private translate: TranslateService,
+    private formBuilder: FormBuilder,
   ) {
     this.commonApiService = this._commonSpiService
   }
 
   ngOnInit() {
-    this.commonApiService.getLanguages().subscribe((data) => {
-      this.userType = this.appStore.userType;
-      this.languageList = data.results;
-      var first = sessionStorage.getItem("userLanguage")
-        ? sessionStorage.getItem("userLanguage")
-        : "en-US";
-      this.languageList.sort(function (x, y) {
-        return x == first ? -1 : y == first ? 1 : 0;
-      });
-      if (sessionStorage.getItem("userLanguage")) {
-        this.appStore.langCode = sessionStorage.getItem("userLanguage");
-      } else {
-        this.appStore.langCode = "en-US";
-      }
-    });
+    if (sessionStorage.getItem('userLanguage')) {
+      this.languageSelect = sessionStorage.getItem('userLanguage');
+    }
   }
-  
 
   logout() {
     sessionStorage.clear();
@@ -69,24 +61,15 @@ export class HedderComponent implements OnInit, DoCheck {
     this.cookie.set("password", null);
   }
 
-  changeLangValue() {
-    this.appStore.langCode = (<HTMLInputElement>(
-      document.getElementById("langConverter")
-    )).value;
-    sessionStorage.setItem(
-      "userLanguage",
-      (<HTMLInputElement>document.getElementById("langConverter")).value
-    );
+  changeLangValue(value) {
+    this.appStore.langCode = value;
+    this.translate.use((this.appStore.langCode === 'ar-AE') ? "ar-AE" : "en-US");
+    localStorage.setItem("userLanguage", value)
+    sessionStorage.setItem("userLanguage", value)
     if (this.appStore.langCode == "ar-AE") {
-      this.activeArabic = true;
-      (<HTMLInputElement>document.getElementById("body")).classList.add(
-        "mirror_css"
-      );
+      (<HTMLInputElement>document.getElementById("body")).classList.add('mirror_css');
     } else {
-      this.activeArabic = false;
-      (<HTMLInputElement>document.getElementById("body")).classList.remove(
-        "mirror_css"
-      );
+      (<HTMLInputElement>document.getElementById("body")).classList.remove('mirror_css');
     }
   }
 
@@ -106,7 +89,7 @@ export class HedderComponent implements OnInit, DoCheck {
   }
 
   navigatepage(link: any) {
-    if(link == 'superagent/createTrip'){
+    if (link == 'superagent/createTrip') {
       sessionStorage.removeItem('selector')
     }
     this.router.navigate([link]);

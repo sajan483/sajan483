@@ -1,6 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { HttpClientModule,HttpClient } from "@angular/common/http";
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+import { HttpClientModule, HttpClient } from "@angular/common/http";
 import { HttpModule } from '@angular/http'
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -9,7 +10,9 @@ import { FooterComponent } from './common/components/footer/footer.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
 import { DatePipe } from '@angular/common';
-//export function TranslatorFactory(httpClient: HttpClient) { return new TranslateHttpLoader(httpClient, './assets/i18n/', '.json'); }
+import { TranslateModule, TranslateLoader, TranslateService } from '@ngx-translate/core';
+export function TranslatorFactory(httpClient: HttpClient) { return new TranslateHttpLoader(httpClient, './assets/i18n/', '.json'); }
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { CookieService } from 'ngx-cookie-service';
 import { SliderComponent } from './common/components/slider/slider.component';
 import { LandingApiService } from './Services/landing-api-services';
@@ -17,7 +20,7 @@ import { CommonApiService } from './Services/common-api-services';
 import { BranchApiService } from 'src/app/Services/branch-api-service';
 
 @NgModule({
-  declarations: [    
+  declarations: [
     AppComponent,
     HedderComponent,
     FooterComponent,
@@ -30,25 +33,27 @@ import { BranchApiService } from 'src/app/Services/branch-api-service';
     AppRoutingModule,
     BrowserAnimationsModule,
     ToastrModule.forRoot({
-      preventDuplicates: true,maxOpened:1
+      preventDuplicates: true, maxOpened: 1
     }),
-    // TranslateModule.forRoot({
-    //   loader: {
-    //     provide: TranslateLoader,
-    //     useFactory: TranslatorFactory,
-    //     deps: [HttpClient]
-    //   },
-    //   isolate: false
-    // }),
+    FormsModule,
+    ReactiveFormsModule,
+    TranslateModule.forRoot({
+      loader: {
+        provide: TranslateLoader,
+        useFactory: TranslatorFactory,
+        deps: [HttpClient]
+      },
+      isolate: false
+    }),
   ],
-  providers: [DatePipe,CookieService,LandingApiService,CommonApiService,BranchApiService],
+  providers: [DatePipe, CookieService, LandingApiService, CommonApiService, BranchApiService],
   bootstrap: [AppComponent]
 })
 
 export class AppModule {
-  constructor(){
-    //translateService.addLangs(["en-US","ar-AE"]);
-    //translateService.setDefaultLang('en-US'); /* Setting up the Translate Json to English - `en` */
+  constructor(public translateService: TranslateService) {
+    translateService.addLangs(["en-US", "ar-AE"]);
+    translateService.setDefaultLang('en-US'); /* Setting up the Translate Json to English - `en` */
   }
-  
+
 }

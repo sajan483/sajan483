@@ -1,17 +1,18 @@
 <div class="topofcomponent">
     <div class="textform animationdiv bg_main_img">
         <div class="text-center pt50">
-            <h1 class="mb-0 fs28">{{'UMRAH PACKAGES' }}</h1>
-            <h3 class="fs18">{{'Get a great price on your Umrah Packages.' }}</h3>
+            <h1 class="mb-0 fs28">{{'UMRAH PACKAGES' | translate}}</h1>
+            <h3 class="fs18">{{'Get a great price on your Umrah Packages.' | translate}}</h3>
         </div>
         <div class="algn justifycenter container pb30 mt20">
             <div class="boxborder col-md-8 px-0 row mx-0">
                 <div class="col-md-10 row px-0 mx-0 p10">
                     <div class="col-md-6 brdr_right_d3 position-relative">
-                        <div class="cursor-pointer d-flex justify-content-between" (click)="showSelectionPopup()" #serviceDropDown>
+                        <div class="cursor-pointer d-flex justify-content-between" (click)="showSelectionPopup()"
+                            #serviceDropDown>
                             <div>
-                                <div class="fs13 clr52">SERVICE</div>
-                                <div class="fs14 ">{{ service }}</div>
+                                <div class="fs13 clr52">{{'SERVICE' | translate}}</div>
+                                <div class="fs14 ">{{ service | translate}}</div>
                             </div>
                             <i class="icns downarrow icon_h28_w15 my-auto"></i>
                         </div>
@@ -21,12 +22,17 @@
                                     <div class="pad15">
                                         <mat-radio-group class="exampleradiogroup" [(ngModel)]="service">
                                             <mat-radio-button value="All" (change)="onServiceItemChange('All')">
-                                                {{'All' }}</mat-radio-button>
-                                            <mat-radio-button value="Makkah Hotel" (change)="onServiceItemChange('Makkah Hotel')">{{ 'Makkah Hotel' }}
+                                                {{'All' | translate }}</mat-radio-button>
+                                            <mat-radio-button value="Makkah Hotel"
+                                                (change)="onServiceItemChange('Makkah Hotel')">{{ 'Makkah Hotel' |
+                                                translate }}
                                             </mat-radio-button>
-                                            <mat-radio-button value="Medina Hotel" (change)="onServiceItemChange('Medina Hotel')">{{ 'Medina Hotel' }}
+                                            <mat-radio-button value="Medina Hotel"
+                                                (change)="onServiceItemChange('Medina Hotel')">{{ 'Medina Hotel' |
+                                                translate }}
                                             </mat-radio-button>
-                                            <mat-radio-button value="Transport" (change)="onServiceItemChange('Transport')">{{ 'Transport' }}
+                                            <mat-radio-button value="Transport"
+                                                (change)="onServiceItemChange('Transport')">{{ 'Transport' | translate}}
                                             </mat-radio-button>
                                         </mat-radio-group>
                                     </div>
@@ -35,10 +41,11 @@
                         </div>
                     </div>
                     <div class="col-md-6 position-relative">
-                        <div class="d-flex justify-content-between cursor-pointer" (click)="showTravelersPopUp()" #menuIconClass>
+                        <div class="d-flex justify-content-between cursor-pointer" (click)="showTravelersPopUp()"
+                            #menuIconClass>
                             <div>
-                                <div class="fs13 clr52 text-uppercase">{{'Travellers' }}</div>
-                                <div class="fs14 ">{{countAdult + countChild + countInfant}} {{'Travellers' }}</div>
+                                <div class="fs13 clr52 text-uppercase">{{'Travellers'| translate}}</div>
+                                <div class="fs14 ">{{countAdult + countChild}} {{'Travellers' | translate}}</div>
                             </div>
                             <i class="icns downarrow icon_h28_w15 my-auto"></i>
                         </div>
@@ -46,7 +53,7 @@
                             <div class="travellersouter travellerOuter">
                                 <div class="d-flex flex-column" class="w-100">
                                     <div class="d-flex justify-content-between travellerslide">
-                                        <div class="texttraveller pt-1">{{'Adults' }}</div>
+                                        <div class="texttraveller pt-1">{{'Adults' | translate}}</div>
                                         <div class="p-1 ml-2" class="texttravellerd margnR50">
                                             {{countAdult}}
                                         </div>
@@ -58,8 +65,8 @@
                                         </div>
                                     </div>
                                     <div class="d-flex justify-content-between travellerslide">
-                                        <div class="texttraveller">{{'Children' }}
-                                            <p>2 - 12 {{'Years' }}</p>
+                                        <div class="texttraveller">{{'Children' | translate }}
+                                            <p>2 - 12 {{'Years' | translate }}</p>
                                         </div>
                                         <div class="p-1 ml-1" class="texttravellerd">
                                             {{countChild}}</div>
@@ -71,8 +78,8 @@
                                         </div>
                                     </div>
                                     <div class="d-flex justify-content-between travellerslide">
-                                        <div class="texttraveller textright">{{'Infants' }}
-                                            <p>0 - 23 {{'months' }}</p>
+                                        <div class="texttraveller textright">{{'Infants'| translate }}
+                                            <p>0 - 23 {{'months' | translate }}</p>
                                         </div>
                                         <div class="p-1" class="texttravellerd">{{countInfant}}</div>
                                         <div>
@@ -87,27 +94,31 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-2 bg_bttn_green d-flex align-content-center flex-wrap cursor-pointer" (click)="goButtonClicked()">
-                    <div class="w-100 text-center align-self-center">GO</div>
+                <div class="col-md-2 bg_bttn_green d-flex align-content-center flex-wrap cursor-pointer"
+                    (click)="goButtonClicked()">
+                    <div class="w-100 text-center align-self-center">{{'GO' | translate }}</div>
                 </div>
             </div>
         </div>
     </div>
     <div class="mt-3 maxheightAnimation" id="dateEnterDiv">
-        <div class="bg-white filterbox container p30" *ngIf="activateMakkaSearch || activateMadeenaSearch || activateTransportSearch">
+        <div class="bg-white filterbox container p30"
+            *ngIf="activateMakkaSearch || activateMadeenaSearch || activateTransportSearch">
             <div *ngIf="activateMakkaSearch" class="position-relative mb30">
                 <div class="row m-0">
                     <div class="col-md-2 mt24">
                         <div class="d-inline-flex">
                             <i class="makkahicon icon_size_35 icns"></i>
-                            <h5 class="fw500 fs22 my6mx10">{{'Makkah' }}</h5>
+                            <h5 class="fw500 fs22 my6mx10">{{'Makkah' | translate}}</h5>
                         </div>
                     </div>
                     <div class="col-md-5 row mx-0 px-0">
                         <div class="col-md-6">
                             <p class="mb-0 fs14 pl-1">Check-in</p>
                             <div [owlDateTimeTrigger]="dt3" class="position-relative" (click)="resetDatesForRefresh()">
-                                <input placeholder="Check-in date" class="owldatepicker fs14 bordrservice removeoutline" [(ngModel)]="makkaCheckInDate" [min]="makkahmin" [max]="madeenaCheckInDate" [owlDateTime]="dt3" (ngModelChange)="dataChangedFromMakkaDates($event)">
+                                <input placeholder="Check-in date" class="owldatepicker fs14 bordrservice removeoutline"
+                                    [(ngModel)]="makkaCheckInDate" [min]="makkahmin" [max]="madeenaCheckInDate"
+                                    [owlDateTime]="dt3" (ngModelChange)="dataChangedFromMakkaDates($event)">
                                 <i class="icns calendaricon icon_size_20 cursor-pointer calendarposition"></i>
                             </div>
                             <owl-date-time [pickerType]="'calendar'" #dt3></owl-date-time>
@@ -115,7 +126,10 @@
                         <div class="col-md-6">
                             <p class="mb-0 fs14 pl-1">Check-out</p>
                             <div [owlDateTimeTrigger]="dt4" class="position-relative">
-                                <input #makkaOutDatePicker placeholder="Check-out date" class="owldatepicker removeoutline fs14 bordrservice" [owlDateTime]="dt4" [(ngModel)]="makkaCheckOutDate" [min]="madeenmin" [max]="madeenaMindate" (ngModelChange)="dataChangedFromMakkaOutDates($event)">
+                                <input #makkaOutDatePicker placeholder="Check-out date"
+                                    class="owldatepicker removeoutline fs14 bordrservice" [owlDateTime]="dt4"
+                                    [(ngModel)]="makkaCheckOutDate" [min]="madeenmin" [max]="madeenaMindate"
+                                    (ngModelChange)="dataChangedFromMakkaOutDates($event)">
                                 <i class="icns calendaricon icon_size_20 cursor-pointer calendarposition"></i>
                             </div>
                             <owl-date-time [pickerType]="'calendar'" #dt4></owl-date-time>
@@ -125,13 +139,15 @@
                         <div class="col-md-6">
                             <p class="mb-0 fs14 pl-1">{{'Special Code' }}</p>
                             <div>
-                                <input name="promotion" class="subStyle" [(ngModel)]="special_code_makkah" class="owldatepicker fs14 bordrservice removeoutline">
+                                <input name="promotion" class="subStyle" [(ngModel)]="special_code_makkah"
+                                    class="owldatepicker fs14 bordrservice removeoutline">
                             </div>
                         </div>
                         <div class="col-md-6">
                             <p class="mb-0 fs14 pl-1">{{'SubPcc' }}</p>
                             <div>
-                                <input name="promotion" class="subStyle" [(ngModel)]="subPcc_makkah" class="owldatepicker fs14 bordrservice removeoutline">
+                                <input name="promotion" class="subStyle" [(ngModel)]="subPcc_makkah"
+                                    class="owldatepicker fs14 bordrservice removeoutline">
                             </div>
                         </div>
                     </div>
@@ -153,7 +169,10 @@
                         <div class="col-md-6">
                             <p class="mb-0 fs14 pl-1">Check-in</p>
                             <div [owlDateTimeTrigger]="dt1" class="position-relative" (click)="resetDatesForRefresh()">
-                                <input #madeenaInPicker placeholder="Check-in date" class="owldatepicker fs14 bordrservice removeoutline" [(ngModel)]="madeenaCheckInDate" [min]="madeenaMin" [max]="madeenaMaxdate" [owlDateTime]="dt1" (ngModelChange)="dataChangedFromMadeenaDates('in')">
+                                <input #madeenaInPicker placeholder="Check-in date"
+                                    class="owldatepicker fs14 bordrservice removeoutline"
+                                    [(ngModel)]="madeenaCheckInDate" [min]="madeenaMin" [max]="madeenaMaxdate"
+                                    [owlDateTime]="dt1" (ngModelChange)="dataChangedFromMadeenaDates('in')">
                                 <i class="icns calendaricon icon_size_20 cursor-pointer calendarposition"></i>
                             </div>
                             <owl-date-time [pickerType]="'calendar'" #dt1></owl-date-time>
@@ -161,7 +180,10 @@
                         <div class="col-md-6">
                             <p class="mb-0 fs14 pl-1">Check-out</p>
                             <div [owlDateTimeTrigger]="dt2" class="position-relative">
-                                <input #madeenaOutPicker placeholder="Check-out date" class="owldatepicker removeoutline fs14 bordrservice" [owlDateTime]="dt2" [(ngModel)]="madeenaCheckOutDate" [min]="madeenamax" (ngModelChange)="dataChangedFromMadeenaDates('out')">
+                                <input #madeenaOutPicker placeholder="Check-out date"
+                                    class="owldatepicker removeoutline fs14 bordrservice" [owlDateTime]="dt2"
+                                    [(ngModel)]="madeenaCheckOutDate" [min]="madeenamax"
+                                    (ngModelChange)="dataChangedFromMadeenaDates('out')">
                                 <i class="icns calendaricon icon_size_20 cursor-pointer calendarposition"></i>
                             </div>
                             <owl-date-time [pickerType]="'calendar'" #dt2></owl-date-time>
@@ -171,13 +193,15 @@
                         <div class="col-md-6">
                             <p class="mb-0 fs14 pl-1">{{'Special Code' }}</p>
                             <div>
-                                <input name="promotion" class="subStyle" [(ngModel)]="special_code_medinah" class="owldatepicker fs14 bordrservice removeoutline">
+                                <input name="promotion" class="subStyle" [(ngModel)]="special_code_medinah"
+                                    class="owldatepicker fs14 bordrservice removeoutline">
                             </div>
                         </div>
                         <div class="col-md-6">
                             <p class="mb-0 fs14 pl-1">{{'SubPcc' }}</p>
                             <div>
-                                <input name="promotion" class="subStyle" [(ngModel)]="subPcc_medinah" class="owldatepicker fs14 bordrservice removeoutline">
+                                <input name="promotion" class="subStyle" [(ngModel)]="subPcc_medinah"
+                                    class="owldatepicker fs14 bordrservice removeoutline">
                             </div>
                         </div>
                     </div>
@@ -198,21 +222,25 @@
                     <div class="col-md-3">
                         <p class="mb-0 fs14 pl-1">Start Date</p>
                         <div [owlDateTimeTrigger]="dt5" class="position-relative">
-                            <input placeholder="Check-in date" class="owldatepicker fs14 bordrservice removeoutline" [(ngModel)]="transportStartDate" [owlDateTime]="dt5" [min]="transportmin" (ngModelChange)="dataChangedFromTransportDate('in')">
+                            <input placeholder="Check-in date" class="owldatepicker fs14 bordrservice removeoutline"
+                                [(ngModel)]="transportStartDate" [owlDateTime]="dt5" [min]="transportmin"
+                                (ngModelChange)="dataChangedFromTransportDate('in')">
                             <i class="icns calendaricon icon_size_20 cursor-pointer calendarposition"></i>
                         </div>
                         <owl-date-time [pickerType]="'calendar'" #dt5></owl-date-time>
                     </div>
                     <div class="col-md-3">
                         <p class="mb-0 fs14 pl-1">Vehicle Type</p>
-                        <select name="rote" id="umrahVehicle" class="removeoutline bordrservice w-100 pl10 fs14" (change)="onVehicleSelect($event.target.value)">
+                        <select name="rote" id="umrahVehicle" class="removeoutline bordrservice w-100 pl10 fs14"
+                            (change)="onVehicleSelect($event.target.value)">
                             <option value="" disabled selected>Select</option>
-                            <option *ngFor="let item of vehicleTypeList" [value]="item.id" >{{item.name}}</option>
+                            <option *ngFor="let item of vehicleTypeList" [value]="item.id">{{item.name}}</option>
                         </select>
                     </div>
                     <div class="col-md-4">
                         <p class="mb-0 fs14 pl-1">Route</p>
-                        <select name="rote" id="umrahRoute" class="removeoutline bordrservice w-100 pl10 fs14" (change)="onRouteSelect($event.target.value)">
+                        <select name="rote" id="umrahRoute" class="removeoutline bordrservice w-100 pl10 fs14"
+                            (change)="onRouteSelect($event.target.value)">
                             <option value="" disabled selected>Select</option>
                             <option *ngFor="let item of routeList" [value]="item.code">{{item.name}}</option>
                         </select>
@@ -221,7 +249,8 @@
             </div>
             <div class="d-flex justify-content-end textform">
                 <div class="p-2 mrBtm" *ngIf="viewsearchbutton">
-                    <button type="submit" data-hover="SEARCH NOW" class="searchbutton " name="search-accommodation" (click)="searchButtonClicked()" [disabled]="!enableSearchButton">
+                    <button type="submit" data-hover="SEARCH NOW" class="searchbutton " name="search-accommodation"
+                        (click)="searchButtonClicked()" [disabled]="!enableSearchButton">
                         Search
                     </button>
                 </div>
@@ -230,8 +259,8 @@
     </div>
     <div class="borderbox container tablewidth mt-2 animationdiv">
         <div class="d-flex justify-content-between pt-3 px-2">
-            <h1 class="fs16 blue_text fw500 text-uppercase">Recent Booking</h1>
-            <div class="blackborderbttn" (click)="navigateHostory()">View All Bookings</div>
+            <h1 class="fs16 blue_text fw500 text-uppercase">{{'Recent Booking' | translate}}</h1>
+            <div class="blackborderbttn" (click)="navigateHostory()">{{'View All Bookings' | translate}}</div>
         </div>
         <app-recent-booking [recentHistory]="historyList"></app-recent-booking>
     </div>
