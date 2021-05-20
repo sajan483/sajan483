@@ -6,7 +6,7 @@
     <div class="container">
         <div>
             <mat-horizontal-stepper #stepper>
-                <mat-step label="{{'Makkah Hotel' }}" *ngIf="steps.includes('1')" state="apartment">
+                <mat-step label="{{'Makkah Hotel' | translate }}" *ngIf="steps.includes('1')" state="apartment">
                     <div *ngIf="showShimmer">
                         <app-loader></app-loader>
                     </div>
@@ -14,22 +14,22 @@
                         <div class="headerdiv">
                             <div class="container d-flex justify-content-between">
                                 <div class="pl4">
-                                    <h3 class="fs22 mb-0">Hotels in Makkah</h3>
+                                    <h3 class="fs22 mb-0">{{'Hotels in Makkah' | translate}}</h3>
                                     <p class="blue_text">
-                                        <span class="clr52">No of Days In Makkah </span> {{noOfDaysInMakkah}}
+                                        <span class="clr52">{{'No of Days In Makkah' | translate}} </span> {{noOfDaysInMakkah}}
                                         <span class="crossbarsamll phonehide"></span>
-                                        <span class="phonehide"><span class="clr52 ">No of Guest
+                                        <span class="phonehide"><span class="clr52 ">{{'No of Guest' | translate}}
                                             </span>{{travellersCount}}</span>
                                         <span class="crossbarsamll phonehide "></span>
-                                        <span class="phonehide"><span class="clr52 ">Start </span>{{makkahCheckInDate | date:'MMM-dd'}}
+                                        <span class="phonehide"><span class="clr52 ">{{'Start' | translate}} </span>{{makkahCheckInDate | date:'MMM-dd'}}
                                         </span>
-                                        <span class="phonehide ml-2"><span class="clr52 ">End
+                                        <span class="phonehide ml-2"><span class="clr52 ">{{'End' | translate}}
                                             </span>{{makkahCheckOutDate | date:'MMM-dd'}}</span>
                                     </p>
                                 </div>
                                 <div class="d-flex my-auto backbutton cursor-pointer" (click)="backToHomePage();">
                                     <i class="uparrow icns icon_size_20 trnsfer"></i>
-                                    <span class="blue_text fs14 phonehide">Back to Home Page</span>
+                                    <span class="blue_text fs14 phonehide">{{'Back to Home Page' | translate}}</span>
                                 </div>
                             </div>
                         </div>
@@ -37,7 +37,7 @@
                         </app-makka-hotel>
                     </div>
                 </mat-step>
-                <mat-step label="{{'Madeena Hotel' }}" *ngIf="steps.includes('2')" state="apartment">
+                <mat-step label="{{'Madeena Hotel' | translate }}" *ngIf="steps.includes('2')" state="apartment">
                     <div *ngIf="showShimmer">
                         <app-loader></app-loader>
                     </div>
@@ -45,22 +45,22 @@
                         <div class="headerdiv">
                             <div class="container d-flex justify-content-between">
                                 <div class="pl4">
-                                    <h3 class="fs22 mb-0">Hotels in Madinah</h3>
+                                    <h3 class="fs22 mb-0">{{'Hotels in Madinah' | translate }}</h3>
                                     <p class="blue_text">
-                                        <span class="clr52">No of Days In Madinah </span>{{noOfDaysInMadeena}}
+                                        <span class="clr52">{{'No of Days In Madinah' | translate}} </span>{{noOfDaysInMadeena}}
                                         <span class="crossbarsamll phonehide"></span>
-                                        <span class="phonehide"><span class="clr52 ">No of Guest
+                                        <span class="phonehide"><span class="clr52 ">{{'No of Guest' | translate}}
                                             </span>{{travellersCount}}</span>
                                         <span class="crossbarsamll phonehide "></span>
-                                        <span class="phonehide"><span class="clr52 ">Start </span>{{madeenaCheckInDate | date:'MMM-dd'}}
+                                        <span class="phonehide"><span class="clr52 ">{{'Start' | translate}} </span>{{madeenaCheckInDate | date:'MMM-dd'}}
                                         </span>
-                                        <span class="phonehide ml-2"><span class="clr52 ">End
+                                        <span class="phonehide ml-2"><span class="clr52 ">{{'End' | translate}}
                                             </span>{{madeenaCheckOutDate | date:'MMM-dd'}}</span>
                                     </p>
                                 </div>
                                 <div class="d-flex my-auto backbutton cursor-pointer" (click)="backToHomePage();">
                                     <i class="uparrow icns icon_size_20 trnsfer"></i>
-                                    <span class="blue_text fs14 phonehide">Back to Home Page</span>
+                                    <span class="blue_text fs14 phonehide">{{'Back to Home Page' | translate}}</span>
                                 </div>
                             </div>
                         </div>
@@ -109,7 +109,7 @@
                         </div>
                     </div>
                 </mat-step>
-                <mat-step label="{{'Payment' }}" state="payment">
+                <mat-step label="{{'payment' | translate }}" state="payment">
                     <form [formGroup]="paymentForm">
                         <div class="col-md-12 p-0 mt80">
                             <div class="col-md-12" *ngIf="tripMakkahHotel || tripMadeenaHotel">

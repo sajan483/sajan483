@@ -22,6 +22,7 @@
   import { CommonApiService } from "src/app/Services/common-api-services";
   import { environment } from "src/environments/environment";
   import Swal from 'sweetalert2';
+  import { TranslateService } from '@ngx-translate/core';
 
   @Component({
     selector: "app-create-trip",
@@ -202,7 +203,8 @@
     private route: ActivatedRoute,
     private helperService:HelperService,
     private genHelper: GeneralHelper,
-    private _commonApiService : CommonApiService
+    private _commonApiService : CommonApiService,
+    private translate: TranslateService
   ) {
     this.generalHelper = genHelper;
     this.commonApiService = _commonApiService;
@@ -311,6 +313,13 @@
   }
 
   ngAfterViewChecked() {
+    this.translate.use((sessionStorage.getItem('userLanguage') === 'ar-AE') ? "ar-AE" : "en-US");
+    if (sessionStorage.getItem('userLanguage') == "ar-AE") {
+      (<HTMLInputElement>document.getElementById("body")).classList.add('mirror_css');
+    } else {
+      (<HTMLInputElement>document.getElementById("body")).classList.remove('mirror_css');
+    }
+    
     this.selectedCurrency = this.appStore.currencyCode;
     this.selectedLanguage = this.appStore.langCode;
     if(this.appStore.langCode == "ar-AE"){
@@ -322,6 +331,7 @@
       let selectedResidenceText= (document.getElementById("cor").getElementsByClassName("mat-select-value-text")[0].getElementsByClassName("ng-star-inserted")[0]).innerHTML;
       this.phoneCode = this.phoneCodeList.filter(x=>x.item_text == selectedResidenceText)[0].item_id; 
     }
+        
   }
 
   /**
