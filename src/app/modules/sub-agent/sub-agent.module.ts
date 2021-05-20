@@ -36,6 +36,8 @@ import { PaymentTransportComponent } from 'src/app/components/sub-agent/create-t
 import { SubAgentApiService } from 'src/app/Services/sub-agent-api-services';
 import { OnlyNumberDirective } from 'src/app/models/onlynumber.directive';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+import {Ng2TelInputModule} from 'ng2-tel-input';
+
 export function TranslatorFactory(httpClient: HttpClient) { return new TranslateHttpLoader(httpClient, './assets/i18n/', '.json'); }
 import { PaginationComponent } from 'src/app/components/sub-agent/pagination/pagination.component';
 
@@ -90,6 +92,7 @@ import { PaginationComponent } from 'src/app/components/sub-agent/pagination/pag
     MatSliderModule,
     MatNativeDateModule,
     CarouselModule,
+    Ng2TelInputModule,
     NgMultiSelectDropDownModule.forRoot(),
     TranslateModule.forChild({
       loader: {
