@@ -412,5 +412,10 @@
     "Booked by": "حجز بواسطة",
     "Amount": "كمية",
     "Status": "حالة",
-    "Transactions": "المعاملات"
+    "Transactions": "المعاملات",
+    "Special Code": "كود خاص",
+    "Check-in": "تحقق في",
+    "Check-out": "الدفع",
+    "Start Date": "تاريخ البدء",
+    "Days": "أيام"
 }
