@@ -9,15 +9,16 @@
         <a class="navbar-brand cursor-pointer" *ngIf="subAgencyActive" (click)="navigatepage('subagent/home');"><img
                 class="logohight" src="/assets/images/agent-logo.png" alt=""></a>
         <form class="form-inline my-2 my-lg-0">
+            <div class="mr-5">
+                <select id="langConverter" class="custom-select ws100imp wdth74" [(ngModel)]="languageSelect"
+                    (change)="changeLangValue($event.target.value)" name="languageSelect">
+                    <option value="en-US">ENGLISH</option>
+                    <option value="ar-AE">عربى</option>
+                </select>
+            </div>
+
             <div class="dropdown" *ngIf="subAgencyActive">
                 <div class="d-flex cursor-pointer hidemobile mr-3">
-
-                    <select id="langConverter" class="custom-select ws100imp wdth74" [(ngModel)]="languageSelect"
-                        (change)="changeLangValue($event.target.value)" name="languageSelect">
-                        <option value="en-US">ENGLISH</option>
-                        <option value="ar-AE">عربى</option>
-                    </select>
-
                     <div class="pr-2">
                         <p class="mb-0 wlcmtext">Welcome <i class="fa fa-caret-down" aria-hidden="true"></i></p>
                         <p class="mb-0 f15">{{userType | titlecase}}</p>
