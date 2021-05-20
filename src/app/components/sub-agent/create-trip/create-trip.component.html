@@ -16,12 +16,14 @@
                                 <div class="pl4">
                                     <h3 class="fs22 mb-0">{{'Hotels in Makkah' | translate}}</h3>
                                     <p class="blue_text">
-                                        <span class="clr52">{{'No of Days In Makkah' | translate}} </span> {{noOfDaysInMakkah}}
+                                        <span class="clr52">{{'No of Days In Makkah' | translate}} </span>
+                                        {{noOfDaysInMakkah}}
                                         <span class="crossbarsamll phonehide"></span>
                                         <span class="phonehide"><span class="clr52 ">{{'No of Guest' | translate}}
                                             </span>{{travellersCount}}</span>
                                         <span class="crossbarsamll phonehide "></span>
-                                        <span class="phonehide"><span class="clr52 ">{{'Start' | translate}} </span>{{makkahCheckInDate | date:'MMM-dd'}}
+                                        <span class="phonehide"><span class="clr52 ">{{'Start' | translate}}
+                                            </span>{{makkahCheckInDate | date:'MMM-dd'}}
                                         </span>
                                         <span class="phonehide ml-2"><span class="clr52 ">{{'End' | translate}}
                                             </span>{{makkahCheckOutDate | date:'MMM-dd'}}</span>
@@ -33,7 +35,8 @@
                                 </div>
                             </div>
                         </div>
-                        <app-makka-hotel (notifyGrandparent)="createTripHandle($event)" (notifyCreateTripForChange)="moveToPaymentPage()" [hotelsList]="hotelsList">
+                        <app-makka-hotel (notifyGrandparent)="createTripHandle($event)"
+                            (notifyCreateTripForChange)="moveToPaymentPage()" [hotelsList]="hotelsList">
                         </app-makka-hotel>
                     </div>
                 </mat-step>
@@ -47,12 +50,14 @@
                                 <div class="pl4">
                                     <h3 class="fs22 mb-0">{{'Hotels in Madinah' | translate }}</h3>
                                     <p class="blue_text">
-                                        <span class="clr52">{{'No of Days In Madinah' | translate}} </span>{{noOfDaysInMadeena}}
+                                        <span class="clr52">{{'No of Days In Madinah' | translate}}
+                                        </span>{{noOfDaysInMadeena}}
                                         <span class="crossbarsamll phonehide"></span>
                                         <span class="phonehide"><span class="clr52 ">{{'No of Guest' | translate}}
                                             </span>{{travellersCount}}</span>
                                         <span class="crossbarsamll phonehide "></span>
-                                        <span class="phonehide"><span class="clr52 ">{{'Start' | translate}} </span>{{madeenaCheckInDate | date:'MMM-dd'}}
+                                        <span class="phonehide"><span class="clr52 ">{{'Start' | translate}}
+                                            </span>{{madeenaCheckInDate | date:'MMM-dd'}}
                                         </span>
                                         <span class="phonehide ml-2"><span class="clr52 ">{{'End' | translate}}
                                             </span>{{madeenaCheckOutDate | date:'MMM-dd'}}</span>
@@ -64,76 +69,88 @@
                                 </div>
                             </div>
                         </div>
-                        <app-makka-hotel (notifyGrandparent)="createTripHandle($event)" (notifyCreateTripForChange)="moveToPaymentPage()" [hotelsList]="hotelsList">
+                        <app-makka-hotel (notifyGrandparent)="createTripHandle($event)"
+                            (notifyCreateTripForChange)="moveToPaymentPage()" [hotelsList]="hotelsList">
                         </app-makka-hotel>
                     </div>
                 </mat-step>
-                <mat-step label="{{'Transport' }}" *ngIf="steps.includes('3')" state="directions_bus">
+                <mat-step label="{{'Transport' | translate}}" *ngIf="steps.includes('3')" state="directions_bus">
                     <div class="pr-0 pl-0 pt-1 mt80">
                         <div class="headerdiv">
                             <div class="container d-flex justify-content-between">
                                 <div class="pl4">
-                                    <h3 class="fs22 mb-0">Transport</h3>
+                                    <h3 class="fs22 mb-0">{{'Transport' | translate}}</h3>
                                     <p class="blue_text">
-                                        <span class="phonehide"><span class="clr52 ">No of Guest
+                                        <span class="phonehide"><span class="clr52 ">{{'No of Guest' | translate}}
                                             </span>{{travellersCount}}</span>
                                         <span class="crossbarsamll phonehide "></span>
-                                        <span class="phonehide "><span class="clr52 ">Start </span>{{transportStartDate | date:'MMM-dd'}}</span>
+                                        <span class="phonehide "><span class="clr52 ">{{'Start' | translate}}
+                                            </span>{{transportStartDate
+                                            | date:'MMM-dd'}}</span>
                                     </p>
                                 </div>
                                 <div class="d-flex my-auto backbutton cursor-pointer" (click)="backToHomePage();">
                                     <i class="uparrow icns icon_size_20 trnsfer"></i>
-                                    <span class="blue_text fs14 phonehide">Back to Home Page</span>
+                                    <span class="blue_text fs14 phonehide">{{'Back to Home Page' | translate}}</span>
                                 </div>
                             </div>
                         </div>
                         <div>
                             <div class="mt60">
-                                <div class="col-md-12  row m-0 justify-content-between filterstyle p015" *ngIf="isTransportResponseEmpty">
+                                <div class="col-md-12  row m-0 justify-content-between filterstyle p015"
+                                    *ngIf="isTransportResponseEmpty">
                                     <div id="routeSection" class="col-md-5 mb-0 pl-0">
-                                        <ng-multiselect-dropdown [placeholder]="'Route' " [data]="routeList" [settings]="dropdownSettings" (onSelect)="onRouteSelect($event)">
+                                        <ng-multiselect-dropdown [placeholder]="'Route' " [data]="routeList"
+                                            [settings]="dropdownSettings" (onSelect)="onRouteSelect($event)">
                                         </ng-multiselect-dropdown>
                                     </div>
                                     <div id="vehicleSection" class="col-md-5 mb-0 pl-0 mt3">
-                                        <ng-multiselect-dropdown [placeholder]="'Vehicle Type'" [data]="vehicleTypeList" [(ngModel)]="vehicleTypeItems" [settings]="dropdownSettings" (onSelect)="onVehicleSelect($event)">
+                                        <ng-multiselect-dropdown [placeholder]="'Vehicle Type'" [data]="vehicleTypeList"
+                                            [(ngModel)]="vehicleTypeItems" [settings]="dropdownSettings"
+                                            (onSelect)="onVehicleSelect($event)">
                                         </ng-multiselect-dropdown>
                                     </div>
                                     <div id="transportSearchSection" class="col-md-2 pr-0 pl-0 mt3 w95">
-                                        <button (click)=transportSearch() [disabled]="!disableBtn" class="searchButton searchButtonarabic" type="button">{{'Search'
-                                        }} <i class="fa fa-arrow-right" aria-hidden="true"></i>
+                                        <button (click)=transportSearch() [disabled]="!disableBtn"
+                                            class="searchButton searchButtonarabic" type="button">{{'Search'
+                                            }} <i class="fa fa-arrow-right" aria-hidden="true"></i>
                                         </button>
                                     </div>
                                 </div>
-                                <app-transport (notifyGrandparent)="createTripHandle($event)" [transportList]="transportList"></app-transport>
+                                <app-transport (notifyGrandparent)="createTripHandle($event)"
+                                    [transportList]="transportList"></app-transport>
                             </div>
                         </div>
                     </div>
                 </mat-step>
-                <mat-step label="{{'payment' | translate }}" state="payment">
+                <mat-step label="{{'Payment' | translate}}" state="payment">
                     <form [formGroup]="paymentForm">
                         <div class="col-md-12 p-0 mt80">
                             <div class="col-md-12" *ngIf="tripMakkahHotel || tripMadeenaHotel">
                                 <h3 class="fs16 fw600 Premium_blue">{{'Review your hotel details'}}</h3>
                             </div>
-                            <app-payment-hotel [tripHotel]="tripMakkahHotel" (notifyCreateTrip)="moveToCorrespondingPage($event)" [city]="cityFirst">
+                            <app-payment-hotel [tripHotel]="tripMakkahHotel"
+                                (notifyCreateTrip)="moveToCorrespondingPage($event)" [city]="cityFirst">
                             </app-payment-hotel>
-                            <app-payment-hotel [tripHotel]="tripMadeenaHotel" (notifyCreateTrip)="moveToCorrespondingPage($event)" [city]="citySecond">
+                            <app-payment-hotel [tripHotel]="tripMadeenaHotel"
+                                (notifyCreateTrip)="moveToCorrespondingPage($event)" [city]="citySecond">
                             </app-payment-hotel>
                             <div *ngIf="tripTransport">
                                 <div class="col-md-12">
-                                    <h3 class="fs16 fw600 Premium_blue">{{'Review your Transport details' }}
+                                    <h3 class="fs16 fw600 Premium_blue">{{'Review your Transport details' | translate }}
                                     </h3>
                                 </div>
                                 <div *ngIf="!makkatransport">
-                                    <app-payment-transport (notifyCreatetrip)="moveToTransportPage()" [transportFailed]="transportFailed" [tripTransport]="tripTransport">
+                                    <app-payment-transport (notifyCreatetrip)="moveToTransportPage()"
+                                        [transportFailed]="transportFailed" [tripTransport]="tripTransport">
                                     </app-payment-transport>
                                 </div>
                             </div>
                             <div class="col-md-12">
                                 <div class="d-flex justify-content-between">
-                                    <h3 class="fs16 fw600 Premium_blue">{{'Traveller Details' }}</h3>
+                                    <h3 class="fs16 fw600 Premium_blue">{{'Traveller Details' | translate}}</h3>
                                     <span class="fs12 darkyellow">{{'Please make sure you enter the Name as per your
-                                        Government photo id.' }}</span>
+                                        Government photo id.' | translate }}</span>
                                 </div>
                             </div>
                             <div class="col-md-12 pl-0 pr-0 pb-0">
@@ -143,62 +160,98 @@
                                             <div class="m-0 pl-0 pr-0 row">
                                                 <div class="col-md-12 row ">
                                                     <div class="col-md-3 pt-2">
-                                                        <label class="mb-0 fs14 clrlabel">First Name</label>
-                                                        <input class="form-control pd" formControlName="first_name" id="firstName" placeholder="Enter First Name" [ngClass]="{ 'is-invalid': submitted && g.first_name.errors }">
+                                                        <label class="mb-0 fs14 clrlabel">{{'First Name' |
+                                                            translate}}</label>
+                                                        <input class="form-control pd" formControlName="first_name"
+                                                            id="firstName" placeholder="{{'Enter First Name' |
+                                                            translate}}"
+                                                            [ngClass]="{ 'is-invalid': submitted && g.first_name.errors }">
                                                     </div>
                                                     <div class="col-md-3 pt-2">
-                                                        <label class="mb-0 fs14 clrlabel">Last Name</label>
+                                                        <label class="mb-0 fs14 clrlabel">{{'Last Name' |
+                                                            translate}}</label>
 
-                                                        <input class="form-control pd" id="lastName" placeholder="Enter Last Name" formControlName="last_name" [ngClass]="{ 'is-invalid': submitted && g.last_name.errors }">
+                                                        <input class="form-control pd" id="lastName"
+                                                            placeholder="{{'Enter Last Name' | translate}}"
+                                                            formControlName="last_name"
+                                                            [ngClass]="{ 'is-invalid': submitted && g.last_name.errors }">
 
                                                     </div>
                                                     <div class="col-md-3 pt-2">
-                                                        <label class="mb-0 fs14 clrlabel">Gender</label>
-                                                        <mat-label>Gender</mat-label>
-                                                        <mat-select class="matSlct pd form-control" placeholder="Gender" value="" id="gender" formControlName="gender" [ngClass]="{ 'is-invalid': submitted && g.gender.errors }">
-                                                            <mat-option value="MALE">MALE</mat-option>
-                                                            <mat-option value="FEMALE">FEMALE
+                                                        <label class="mb-0 fs14 clrlabel">{{'Gender' |
+                                                            translate}}</label>
+                                                        <mat-label>{{'Gender' | translate}}</mat-label>
+                                                        <mat-select class="matSlct pd form-control"
+                                                            placeholder="{{'Gender' | translate}}" value="" id="gender"
+                                                            formControlName="gender"
+                                                            [ngClass]="{ 'is-invalid': submitted && g.gender.errors }">
+                                                            <mat-option value="MALE">{{'MALE' | translate}}</mat-option>
+                                                            <mat-option value="FEMALE">{{'FEMALE' | translate}}
                                                             </mat-option>
                                                         </mat-select>
                                                     </div>
                                                     <div class="col-md-3">
-                                                        <p class="mb-0 fs14 pl-1 pdt">Date Of Birth</p>
+                                                        <p class="mb-0 fs14 pl-1 pdt">{{'Date of Birth' | translate}}
+                                                        </p>
                                                         <div [owlDateTimeTrigger]="dt11" class="position-relative">
-                                                            <input placeholder="Date of birth" class="owldatepicker form-control fs14 bordrservice removeoutline" [owlDateTime]="dt11" formControlName="dob" [ngClass]="{ 'is-invalid': submitted && g.dob.errors }">
-                                                            <i class="icns calendaricon icon_size_20 cursor-pointer calendarposition"></i>
+                                                            <input placeholder="{{'Date of Birth' | translate}}"
+                                                                class="owldatepicker form-control fs14 bordrservice removeoutline"
+                                                                [owlDateTime]="dt11" formControlName="dob"
+                                                                [ngClass]="{ 'is-invalid': submitted && g.dob.errors }">
+                                                            <i
+                                                                class="icns calendaricon icon_size_20 cursor-pointer calendarposition"></i>
                                                         </div>
                                                         <owl-date-time [pickerType]="'calendar'" #dt11></owl-date-time>
                                                     </div>
                                                 </div>
                                                 <div class="col-md-12 row">
                                                     <div class="col-md-3 pt-2">
-                                                        <label class="mb-0 fs14 clrlabel">Passport Number</label>
-                                                        <input class="form-control pd" id="passportNo" placeholder="Enter Passport Number" formControlName="passport_no" [ngClass]="{ 'is-invalid': submitted && g.passport_no.errors }">
+                                                        <label class="mb-0 fs14 clrlabel">{{'Passport Number' |
+                                                            translate}}</label>
+                                                        <input class="form-control pd" id="passportNo"
+                                                            placeholder="{{'Enter Passport Number' | translate}}"
+                                                            formControlName="passport_no"
+                                                            [ngClass]="{ 'is-invalid': submitted && g.passport_no.errors }">
                                                     </div>
                                                     <div class="col-md-3">
-                                                        <p class="mb-0 fs14 pl-1 pdt">Passport Expiry Date</p>
+                                                        <p class="mb-0 fs14 pl-1 pdt">{{'Passport Expiry Date' |
+                                                            translate}}</p>
                                                         <div [owlDateTimeTrigger]="dt10" class="position-relative">
-                                                            <input placeholder="Expiry Date" class="owldatepicker fs14 bordrservice removeoutline form-control" formControlName="passport_expiry_date" [owlDateTime]="dt10" [ngClass]="{ 'is-invalid': submitted && g.passport_expiry_date.errors }">
-                                                            <i class="icns calendaricon icon_size_20 cursor-pointer calendarposition"></i>
+                                                            <input placeholder="{{'Expiry Date' | translate}}"
+                                                                class="owldatepicker fs14 bordrservice removeoutline form-control"
+                                                                formControlName="passport_expiry_date"
+                                                                [owlDateTime]="dt10"
+                                                                [ngClass]="{ 'is-invalid': submitted && g.passport_expiry_date.errors }">
+                                                            <i
+                                                                class="icns calendaricon icon_size_20 cursor-pointer calendarposition"></i>
                                                         </div>
                                                         <owl-date-time [pickerType]="'calendar'" #dt10></owl-date-time>
                                                     </div>
                                                     <div class="col-md-3 pt-2">
-                                                        <label class="mb-0 fs14 clrlabel">Nationality</label>
-                                                        <select class="form-control pd" [ngModelOptions]="{standalone: true}" [(ngModel)]="nationality">
-                                                            <option *ngFor="let n of nationalityList" [value]="n.item_text">{{n?.item_text}}</option>
+                                                        <label class="mb-0 fs14 clrlabel">{{'Nationality' |
+                                                            translate}}</label>
+                                                        <select class="form-control pd"
+                                                            [ngModelOptions]="{standalone: true}"
+                                                            [(ngModel)]="nationality">
+                                                            <option *ngFor="let n of nationalityList"
+                                                                [value]="n.item_text">{{n?.item_text}}</option>
                                                         </select>
                                                     </div>
                                                     <div class="col-md-3 pt-2">
-                                                        <label class="mb-0 fs14 clrlabel">Country of Residence</label>
-                                                        <select class="form-control pd" [ngModelOptions]="{standalone: true}" [(ngModel)]="country_of_residence">
-                                                            <option *ngFor="let n of nationalityList" [value]="n.item_text">{{n?.item_text}}</option>
+                                                        <label class="mb-0 fs14 clrlabel">{{'Country of Residence' |
+                                                            translate}}</label>
+                                                        <select class="form-control pd"
+                                                            [ngModelOptions]="{standalone: true}"
+                                                            [(ngModel)]="country_of_residence">
+                                                            <option *ngFor="let n of nationalityList"
+                                                                [value]="n.item_text">{{n?.item_text}}</option>
                                                         </select>
                                                     </div>
                                                 </div>
                                                 <div class="col-md-12 row">
                                                     <div class="col-md-3 pt-2" style="padding-left: 13px;">
-                                                        <label id="phnnumberlbl" class="mb-0">Phone Number</label>
+                                                        <label id="phnnumberlbl" class="mb-0">{{'Phone Number' |
+                                                            translate}}</label>
                                                         <div class="form-group row pl-2">
                                                             <!-- <select name="" id="" class="form-control w20" [ngModelOptions]="{standalone: true}" [(ngModel)]="countryCode">
                                                                 <option *ngFor="let n of phoneCodeList"
@@ -206,22 +259,35 @@
                                                                 </option>
                                                             </select>
                                                             <input id="phnnumber" max="10" placeholder="Enter Phone Number" type="text" maxlength="15" formControlName="phone_number" class="form-control w80" [ngClass]="{ 'is-invalid': submitted && g.phone_number.errors }" numberOnly> -->
-                                                            <input ng2TelInput [ng2TelInputOptions]="{preferredCountries:['in','sa', 'ae','qa'], separateDialCode:true}" class="form-control" [ngClass]="{ 'is-invalid': submitted && g.phone_number.errors }"
-                                                              #phoneInput id="phoneInput" type="text"
-                                                            (countryChange)="onCountryChange($event)"  (input)="inputValidation($event)" maxlength="15"  onkeypress="if ( isNaN( String.fromCharCode(event.keyCode)) || event.keyCode==32) return false;" formControlName="phone_number"/>
+                                                            <input ng2TelInput
+                                                                [ng2TelInputOptions]="{preferredCountries:['in','sa', 'ae','qa'], separateDialCode:true}"
+                                                                class="form-control"
+                                                                [ngClass]="{ 'is-invalid': submitted && g.phone_number.errors }"
+                                                                #phoneInput id="phoneInput" type="text"
+                                                                (countryChange)="onCountryChange($event)"
+                                                                (input)="inputValidation($event)" maxlength="15"
+                                                                onkeypress="if ( isNaN( String.fromCharCode(event.keyCode)) || event.keyCode==32) return false;"
+                                                                formControlName="phone_number" />
                                                             <span *ngIf="travellersForm.controls['phone_number'].errors?.pattern &&
-                                                            travellersForm.controls['phone_number'].touched">  <p>Mobile number must be valid</p>
-                                                         </span>
+                                                            travellersForm.controls['phone_number'].touched">
+                                                                <p>Mobile number must be valid</p>
+                                                            </span>
                                                         </div>
                                                     </div>
 
                                                     <div class="col-md-3 pt-2">
-                                                        <label class="mb-0 fs14 clrlabel">Email</label>
-                                                        <input class="form-control pd" id="email" placeholder="Enter Email" formControlName="email" [ngClass]="{ 'is-invalid': submitted && g.email.errors }">
+                                                        <label class="mb-0 fs14 clrlabel">{{'Email' |
+                                                            translate}}</label>
+                                                        <input class="form-control pd" id="email" placeholder="{{'Enter Email' |
+                                                            translate}}" formControlName="email"
+                                                            [ngClass]="{ 'is-invalid': submitted && g.email.errors }">
                                                     </div>
                                                     <div class="col-md-3 pt-2">
-                                                        <label class="mb-0 fs14 clrlabel">Address</label>
-                                                        <input class="form-control pd" id="address" placeholder="Enter Address" formControlName="address" [ngClass]="{ 'is-invalid': submitted && g.address.errors }">
+                                                        <label class="mb-0 fs14 clrlabel">{{'Address' |
+                                                            translate}}</label>
+                                                        <input class="form-control pd" id="address" placeholder="{{'Enter Address' |
+                                                            translate}}" formControlName="address"
+                                                            [ngClass]="{ 'is-invalid': submitted && g.address.errors }">
                                                     </div>
                                                 </div>
                                             </div>
@@ -229,11 +295,16 @@
                                     </form>
                                 </div>
                                 <div class="d-flex flex-row mrgin mt-2 mb-2 mr-4 ml-4">
-                                    <div class="text-align-end"><button type="submit" id="payBtn" class="searchbutton" data-toggle="modal" data-target="#ibanPopup" (click)="setTimerForIbanPopup()">{{'PAY' }}</button> </div>
+                                    <div class="text-align-end"><button type="submit" id="payBtn" class="searchbutton"
+                                            data-toggle="modal" data-target="#ibanPopup"
+                                            (click)="setTimerForIbanPopup()">{{'PAY' }}</button> </div>
                                 </div>
                                 <div class="d-flex flex-row m-2">
                                     <div class="p-2 ml-auto"></div>
-                                    <div><button (click)="bookTrip()" type="submit" [class.bttnactive]="bookContinue" id="continueBooking" class="searchbutton">{{'BOOK & CONTINUE ' }}</button> </div>
+                                    <div><button (click)="bookTrip()" type="submit" [class.bttnactive]="bookContinue"
+                                            id="continueBooking" class="searchbutton">{{'BOOK & CONTINUE' |
+                                            translate}}</button>
+                                    </div>
                                     <div class="p-2"></div>
                                 </div>
                                 <div style="height: 100px;background:#eaeaea;"></div>
@@ -246,7 +317,8 @@
     </div>
 </div>
 
-<div [style.display]="additionalServiceCount ? 'block' : 'none'" class="modal" id="additionalServiceCount" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<div [style.display]="additionalServiceCount ? 'block' : 'none'" class="modal" id="additionalServiceCount" tabindex="-1"
+    role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -311,13 +383,15 @@
                     <div class="col-md-12">
                         <div class="col-md-12 pb-1"><strong style="color: red;">*</strong> {{'Authe Code' }}:
                         </div>
-                        <div class="col-md-12"><input type="text" class="form-control" id="auth_code" [(ngModel)]="authCode"></div>
+                        <div class="col-md-12"><input type="text" class="form-control" id="auth_code"
+                                [(ngModel)]="authCode"></div>
                     </div>
                 </div>
             </div>
             <div class="modal-footer">
                 <p>OTP will expire in {{timeLeft}}</p>
-                <button type="button" class="btn btn-danger" (click)="onSubmitButtonClicked()" data-dismiss="modal">{{'Submit'}}</button>
+                <button type="button" class="btn btn-danger" (click)="onSubmitButtonClicked()"
+                    data-dismiss="modal">{{'Submit'}}</button>
             </div>
         </div>
     </div>

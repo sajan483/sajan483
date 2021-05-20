@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import 'rxjs/add/observable/interval';
 import { Observable } from 'rxjs';
 import Swal from "sweetalert2";
+import { TranslateService } from '@ngx-translate/core';
 import { AppStore } from 'src/app/stores/app.store';
 import { NotificationService } from 'src/app/common/services/notification.service';
 import { GeneralHelper } from 'src/app/helpers/General/general-helpers';
@@ -51,34 +52,35 @@ export class PaymentStatusComponent implements OnInit {
   trnsprt: boolean = true;
   genHelper: GeneralHelper;
   createHelper: CreateTripHelper;
-  makkahotel:boolean=false;
-  cancellationtoggle:boolean=false;
-  bknStatus:any;
-  noOfDaysInMakkah:any;
-  noOfTravellers:any;
+  makkahotel: boolean = false;
+  cancellationtoggle: boolean = false;
+  bknStatus: any;
+  noOfDaysInMakkah: any;
+  noOfTravellers: any;
   noOfDaysInMedinah: any;
   invoicetoggle: boolean = false;
   vouchertoggle: boolean = false;
-  shimmer:boolean = true;
+  shimmer: boolean = true;
   btnactv: boolean;
   registerForm: FormGroup;
   submitted = false;
 
   constructor(private route: ActivatedRoute,
     private appStore: AppStore,
-    private common: SubAgentApiService, 
+    private common: SubAgentApiService,
     private notifyService: NotificationService,
-    private router: Router, 
+    private router: Router,
     private _gHelper: GeneralHelper,
     private formBuilder: FormBuilder,
-    private helperService: HelperService,) {
+    private helperService: HelperService,
+    private translate: TranslateService,) {
     this.genHelper = _gHelper;
   }
 
   ngOnInit() {
     this.registerForm = this.formBuilder.group({
       cancellation_text: ['', Validators.required]
-  });
+    });
     this.genHelper.checkForAccessToken();
     this.createHelper = new CreateTripHelper(this.helperService);
     this.status = this.route.snapshot.params.status;
@@ -101,7 +103,8 @@ export class PaymentStatusComponent implements OnInit {
   }
 
   ngAfterViewChecked() {
-    if (this.appStore.langCode == "ar-AE") {
+    this.translate.use((sessionStorage.getItem('userLanguage') === 'ar-AE') ? "ar-AE" : "en-US");
+    if (sessionStorage.getItem('userLanguage') == "ar-AE") {
       (<HTMLInputElement>document.getElementById("body")).classList.add('mirror_css');
     } else {
       (<HTMLInputElement>document.getElementById("body")).classList.remove('mirror_css');
@@ -109,12 +112,12 @@ export class PaymentStatusComponent implements OnInit {
   }
 
   getData(data) {
-    this.shimmer=false;
+    this.shimmer = false;
     this.bknStatus = data.status
     console.log(this.bknStatus);
-    
+
     this.reference_no = data.reference_no;
-    if (this.dataArray) {this.dataArray.unsubscribe();}
+    if (this.dataArray) { this.dataArray.unsubscribe(); }
     this.tripData = data;
     if (data.trip_flights && data.trip_flights.length > 0) {
       this.tripFlight = data.trip_flights[0];
@@ -248,7 +251,7 @@ export class PaymentStatusComponent implements OnInit {
 
   get f() { return this.registerForm.controls; }
 
-  
+
   checkCancellation() {
     this.cancellationtoggle = true;
     this.common.getCheckCancellation(this.route.snapshot.params.id).subscribe((data) => {
@@ -270,10 +273,10 @@ export class PaymentStatusComponent implements OnInit {
       }
     });
   }
-  
+
   confirmCancellation() {
     this.submitted = true;
-    
+
     if (this.registerForm.invalid) {
       return;
     }
@@ -286,7 +289,7 @@ export class PaymentStatusComponent implements OnInit {
       this.cancelationPopup = false;
       window.location.reload();
     });
-    
+
   }
 
   sendPayuRequest(payment_create_response) {
@@ -324,13 +327,13 @@ export class PaymentStatusComponent implements OnInit {
     });
   }
 
-  toggleDetails(event){
+  toggleDetails(event) {
     var element = event.target;
     var panel = element.nextElementSibling;
     if (element.style.transform) {
-      element.style.transform= null;
+      element.style.transform = null;
     } else {
-      element.style.transform= 'rotate(180deg)';
+      element.style.transform = 'rotate(180deg)';
     }
     if (panel.style.maxHeight) {
       panel.style.maxHeight = null;
@@ -339,7 +342,7 @@ export class PaymentStatusComponent implements OnInit {
     }
   }
 
-  toggleText(event){
+  toggleText(event) {
     var element = event.target;
     var panel = element.nextElementSibling;
     if (panel.style.maxHeight) {
@@ -349,7 +352,7 @@ export class PaymentStatusComponent implements OnInit {
     }
   }
 
-  navigateHomePage(){
+  navigateHomePage() {
     this.router.navigate(['subagent/home']);
   }
 }

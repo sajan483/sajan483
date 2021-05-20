@@ -6,12 +6,13 @@
                     <img class="tick_img" src="/assets/images/confirmation-tick.png" alt="">
                 </div>
                 <div>
-                    <h1 class="text-uppercase fs28 fw600 text-white">Thank You..!! </h1>
-                    <h3 class="text-white fs18">Your payment has been processed successfully</h3>
+                    <h1 class="text-uppercase fs28 fw600 text-white">{{'Thank You..!!' | translate}}</h1>
+                    <h3 class="text-white fs18">{{'Your payment has been processed successfully' | translate}}</h3>
                 </div>
             </div>
             <div class="text-white my-auto fs14">
-                <div class="cursor-pointer" (click)="navigateHomePage()"><i class="fa fa-chevron-left" aria-hidden="true"></i> Back to Home Page</div>
+                <div class="cursor-pointer" (click)="navigateHomePage()"><i class="fa fa-chevron-left"
+                        aria-hidden="true"></i> {{'Back to Home Page' | translate}}</div>
             </div>
         </div>
     </div>
@@ -22,12 +23,14 @@
                     <i class="fa fa-times-circle closeimg" aria-hidden="true"></i>
                 </div>
                 <div>
-                    <h1 class="text-uppercase fs28 fw600 text-white mb-0">Failed..!! </h1>
-                    <h3 class="text-white fs18">Your payment has been Failed</h3>
+                    <h1 class="text-uppercase fs28 fw600 text-white mb-0"> {{'Failed..!!' | translate}}
+                    </h1>
+                    <h3 class="text-white fs18">{{'Your payment has been Failed' | translate}}</h3>
                 </div>
             </div>
             <div class="text-white my-auto fs14">
-                <div class="cursor-pointer" (click)="navigateHomePage()"><i class="fa fa-chevron-left" aria-hidden="true"></i> Back to Home Page</div>
+                <div class="cursor-pointer" (click)="navigateHomePage()"><i class="fa fa-chevron-left"
+                        aria-hidden="true"></i>{{'Back to Home Page' | translate}}</div>
             </div>
         </div>
     </div>
@@ -38,12 +41,13 @@
                     <i class="fa fa-times-circle closeimg" aria-hidden="true"></i>
                 </div>
                 <div>
-                    <h1 class="text-uppercase fs28 fw600 text-white mb-0">Cancelled..!! </h1>
-                    <h3 class="text-white fs18">Booking has been Cancelled</h3>
+                    <h1 class="text-uppercase fs28 fw600 text-white mb-0">{{'Cancelled..!!' | translate}} </h1>
+                    <h3 class="text-white fs18">{{'Booking has been Cancelled' | translate}}</h3>
                 </div>
             </div>
             <div class="text-white my-auto fs14">
-                <div class="cursor-pointer" (click)="navigateHomePage()"><i class="fa fa-chevron-left" aria-hidden="true"></i> Back to Home Page</div>
+                <div class="cursor-pointer" (click)="navigateHomePage()"><i class="fa fa-chevron-left"
+                        aria-hidden="true"></i> {{'Back to Home Page' | translate}}</div>
             </div>
         </div>
     </div>
@@ -67,17 +71,20 @@
             </div>
 
             <div class="col-md-9 pl-0" *ngIf="!shimmer">
-                <h2 class="fs16 Premium_blue fw600 pt25" *ngIf="tripMakkahHotel != null">Review Makkah Hotel Details</h2>
-                <div class="border_box_shadow bg_white" [class.errorBox]="tripMakkahHotel?.status== 'failed'" *ngIf="tripMakkahHotel != null">
+                <h2 class="fs16 Premium_blue fw600 pt25" *ngIf="tripMakkahHotel != null">{{'Review Makkah Hotel Details'
+                    | translate}}
+                </h2>
+                <div class="border_box_shadow bg_white" [class.errorBox]="tripMakkahHotel?.status== 'failed'"
+                    *ngIf="tripMakkahHotel != null">
                     <div class="row m-0 p10">
                         <div class="col-md-12 p-0 brdrbottom mb10" *ngIf="tripMakkahHotel?.status=='success'">
                             <div class="d-inline-flex">
                                 <div class="d-inline-flex bookdpdng brdrR">
                                     <i class="selectedgreentickicon icns icon_size_20"></i>
-                                    <div class="fs14 fw600 success_text ml-2">BOOKED</div>
+                                    <div class="fs14 fw600 success_text ml-2">{{'BOOKED' | translate}}</div>
                                 </div>
                                 <div class="fs13 fw600 Premium_blue bookdpdng">
-                                    Reference No. (BRN) - {{tripMakkahHotel?.brn}}
+                                    {{'Reference No' | translate}}. (BRN) - {{tripMakkahHotel?.brn}}
                                 </div>
                             </div>
                             <!-- <div class="float-right list_clr textunderline fs14 mr15">Policies</div> -->
@@ -85,23 +92,24 @@
                         <div class="col-md-12 p-0 brdrbottom mb10" *ngIf="tripMakkahHotel?.status=='failed'">
                             <div class="d-inline-flex">
                                 <div class="d-inline-flex bookdpdng">
-                                    <i class="material-icons icns icon_size_20 clrrd">cancel</i>
-                                    <div class="fs14 fw600 success_text ml-2 clrrd mt2p">FAILED</div>
+                                    <i class="material-icons icns icon_size_20 clrrd">{{'Cancel' | translate}}</i>
+                                    <div class="fs14 fw600 success_text ml-2 clrrd mt2p">{{'FAILED' | translate}}</div>
                                 </div>
                             </div>
                         </div>
                         <div class="col-md-12 p-0 brdrbottom mb10" *ngIf="tripMakkahHotel?.status=='cancelled'">
                             <div class="d-inline-flex">
                                 <div class="d-inline-flex bookdpdng">
-                                    <i class="material-icons icns icon_size_20 clrrd">cancel</i>
-                                    <div class="fs14 fw600 success_text ml-2 clrrd mt2p">CANCELLED</div>
+                                    <i class="material-icons icns icon_size_20 clrrd">{{'Cancel' | translate}}</i>
+                                    <div class="fs14 fw600 success_text ml-2 clrrd mt2p">{{'CANCELLED' | translate}}
+                                    </div>
                                 </div>
                             </div>
                         </div>
                         <div class="col-md-2 col-12 pl-0 pr-0 my-auto">
                             <i class="hotelblueicon icns icon_size_30 imgposition"></i>
                             <div class="Premium_blue fs14 fw600 ">
-                                <div>MEKKAH</div>
+                                <div>{{'MEKKAH' | translate}}</div>
                                 <div>{{tripMakkahHotel?.trip_hotel?.check_in_time | date:'dd/MM/yyyy'}}</div>
                             </div>
                         </div>
@@ -109,24 +117,27 @@
                             <div class="float-left">
                                 <div class="fw600 fs16">{{tripMakkahHotel?.trip_hotel.hotel.name}}</div>
                                 <p class="linebyline clr52 fs13">
-                                    No of days on Makkah
+                                    {{'No of days on Makkah' | translate}}
                                     <span class="Premium_blue fw600">{{noOfDaysInMakkah}}</span>
                                     <span class="crossline"></span>
-                                    <span>No of Guest</span>
+                                    <span>No of Guest{{'No of Guest' | translate}}</span>
                                     <span class="Premium_blue fw600">{{noOfTravellers}}</span>
                                     <span class="crossline"></span>
-                                    <span>Rooms</span>
+                                    <span>{{'Rooms' | translate}}</span>
                                     <span class="Premium_blue fw600">{{tripMakkahHotel?.rooms?.length}}</span>
                                     <span class="crossline" *ngIf="tripMakkahHotel.trip_hotel.hotel.distance"></span>
-                                    <span *ngIf="tripMakkahHotel.trip_hotel.hotel.distance">HARAM</span>
-                                    <span class="Premium_blue fw600" *ngIf="tripMakkahHotel.trip_hotel.hotel.distance">{{tripMakkahHotel?.trip_hotel?.hotel?.distance}}</span>
+                                    <span *ngIf="tripMakkahHotel.trip_hotel.hotel.distance">{{'HARAM' |
+                                        translate}}</span>
+                                    <span class="Premium_blue fw600"
+                                        *ngIf="tripMakkahHotel.trip_hotel.hotel.distance">{{tripMakkahHotel?.trip_hotel?.hotel?.distance}}</span>
                                 </p>
                             </div>
                             <div class="float-right fs16 fw500 pt-2">
                                 {{tripData?.currency}} {{tripMakkahHotel?.total_price | number:'1.2-2'}}
                             </div>
                         </div>
-                        <div class="col-md-1 pl-0 pr-2 pt-1 m-auto text-center downarrow icns icon_size_20 arrowanimation" (click)="toggleDetails($event)">
+                        <div class="col-md-1 pl-0 pr-2 pt-1 m-auto text-center downarrow icns icon_size_20 arrowanimation"
+                            (click)="toggleDetails($event)">
                         </div>
                         <div class="row col-md-12 p-0 ml-0 mr-0 expansion">
                             <div class="mt-2 brdrtop p20 row col-md-12 p-0 ml-0 mr-0">
@@ -135,47 +146,67 @@
                                         <div>
                                             <div class="d-flex">
                                                 <i class="calendaricon icon_h18_w15 icns"></i>
-                                                <p class="pl-2 pr-2 fs13 fw500">CHECK-IN</p>
+                                                <p class="pl-2 pr-2 fs13 fw500">{{'CHECK-IN' |
+                                                    translate}}</p>
                                                 <i class="icon_h18_w11 icns downarrow"></i>
                                             </div>
-                                            <p class="fw600 fs21">{{tripMakkahHotel?.trip_hotel?.check_in_time | date:'dd/MM/yyyy'}}</p>
-                                            <p class="clr52 fs12">{{tripMakkahHotel?.trip_hotel?.check_in_time | date:'EEEE'}}</p>
+                                            <p class="fw600 fs21">{{tripMakkahHotel?.trip_hotel?.check_in_time |
+                                                date:'dd/MM/yyyy'}}</p>
+                                            <p class="clr52 fs12">{{tripMakkahHotel?.trip_hotel?.check_in_time |
+                                                date:'EEEE'}}</p>
                                         </div>
                                         <div class="text-center mt-2">
                                             <i class="nighticon icon_size_20 icns"></i>
-                                            <p class="textgrey font14">{{noOfDaysInMakkah}} Night<span *ngIf="noOfDaysInMakkah > 1">s</span></p>
+                                            <p class="textgrey font14">{{noOfDaysInMakkah}} {{'Night' |
+                                                translate}}<span *ngIf="noOfDaysInMakkah > 1">s</span></p>
                                         </div>
                                         <div class="text-left">
                                             <div class="d-flex">
                                                 <i class="calendaricon icon_h18_w15 icns"></i>
-                                                <p class="pl-2 pr-2 fs13 fw500">CHECK-OUT</p>
+                                                <p class="pl-2 pr-2 fs13 fw500">{{'CHECK-OUT' |
+                                                    translate}}</p>
                                                 <i class="icon_h18_w11 icns downarrow"></i>
                                             </div>
-                                            <p class="fw600 fs21">{{tripMakkahHotel?.trip_hotel?.check_out_time | date:'dd/MM/yyyy'}}</p>
-                                            <p class="clr52 fs12">{{tripMakkahHotel?.trip_hotel?.check_out_time | date:'EEEE'}}</p>
+                                            <p class="fw600 fs21">{{tripMakkahHotel?.trip_hotel?.check_out_time |
+                                                date:'dd/MM/yyyy'}}</p>
+                                            <p class="clr52 fs12">{{tripMakkahHotel?.trip_hotel?.check_out_time |
+                                                date:'EEEE'}}</p>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="col-md-6 pl-5 mt-4">
                                     <div class="row">
                                         <div class="col-md-12 p-0 pb-2">
-                                            <p class="fs13"><i class="fa fa-map-marker textlight pr-1 font16imp" aria-hidden="true"></i> ADDRESS</p>
-                                            <p class="pl-3 fs12 clr52">{{tripMakkahHotel?.trip_hotel?.hotel?.address}}</p>
+                                            <p class="fs13"><i class="fa fa-map-marker textlight pr-1 font16imp"
+                                                    aria-hidden="true"></i> {{'ADDRESS' | translate}}</p>
+                                            <p class="pl-3 fs12 clr52">{{tripMakkahHotel?.trip_hotel?.hotel?.address}}
+                                            </p>
                                         </div>
                                         <div class="col-md-6 p-0">
-                                            <p class="clr52 fs14"><i class="fa fa-envelope textlight pr-1 font16imp" aria-hidden="true"></i> {{tripMakkahHotel?.trip_hotel?.hotel?.email}}</p>
+                                            <p class="clr52 fs14"><i class="fa fa-envelope textlight pr-1 font16imp"
+                                                    aria-hidden="true"></i>
+                                                {{tripMakkahHotel?.trip_hotel?.hotel?.email}}</p>
                                         </div>
                                         <div class="col-md-6  p-0">
-                                            <p class="clr52 fs14"><i class="fa fa-phone textlight pr-1 font16imp" aria-hidden="true"></i>{{tripMakkahHotel?.trip_hotel?.hotel?.phone_number}} </p>
+                                            <p class="clr52 fs14"><i class="fa fa-phone textlight pr-1 font16imp"
+                                                    aria-hidden="true"></i>{{tripMakkahHotel?.trip_hotel?.hotel?.phone_number}}
+                                            </p>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="col-md-12 p-0 row m-0">
                                     <div class="col-md-12 row m-0 p-2 brdrtop">
-                                        <div class="col-md-4 col-6 fs14 clr52 fw500"><strong class="pr-1 fw600">{{noOfTravellers}}</strong>Guests</div>
-                                        <div class="col-md-2 col-6 fs12" *ngIf="tripMakkahHotel?.refundable_amount == null">Non-Refundable</div>
-                                        <div class="col-md-2 col-6 fs12" *ngIf="tripMakkahHotel?.refundable_amount != null">Refundable</div>
-                                        <div class="col-md-2 col-6 text-right fs14">{{tripData?.currency}} {{tripMakkahHotel?.total_price | number:'1.2-2'}}</div>
+                                        <div class="col-md-4 col-6 fs14 clr52 fw500"><strong
+                                                class="pr-1 fw600">{{noOfTravellers}}</strong>{{'Guests' | translate}}
+                                        </div>
+                                        <div class="col-md-2 col-6 fs12"
+                                            *ngIf="tripMakkahHotel?.refundable_amount == null">{{'Non-Refundable' |
+                                            translate}}</div>
+                                        <div class="col-md-2 col-6 fs12"
+                                            *ngIf="tripMakkahHotel?.refundable_amount != null">{{'Refundable' |
+                                            translate}}</div>
+                                        <div class="col-md-2 col-6 text-right fs14">{{tripData?.currency}}
+                                            {{tripMakkahHotel?.total_price | number:'1.2-2'}}</div>
                                     </div>
                                 </div>
                             </div>
@@ -183,14 +214,17 @@
                     </div>
                 </div>
 
-                <h2 class="fs16 Premium_blue fw600 pt25" *ngIf="tripMadeenaHotel != null">Review Madinah Hotel Details</h2>
-                <div class="border_box_shadow bg_white" [class.errorBox]="tripMadeenaHotel?.status== 'failed'" *ngIf="tripMadeenaHotel != null">
+                <h2 class="fs16 Premium_blue fw600 pt25" *ngIf="tripMadeenaHotel != null">{{'Review Madinah Hotel
+                    Details' | translate}}
+                </h2>
+                <div class="border_box_shadow bg_white" [class.errorBox]="tripMadeenaHotel?.status== 'failed'"
+                    *ngIf="tripMadeenaHotel != null">
                     <div class="row m-0 p10">
                         <div class="col-md-12 p-0 brdrbottom mb10" *ngIf="tripMadeenaHotel?.status=='success'">
                             <div class="d-inline-flex">
                                 <div class="d-inline-flex bookdpdng brdrR">
                                     <i class="selectedgreentickicon icns icon_size_20"></i>
-                                    <div class="fs14 fw600 success_text ml-2">BOOKED</div>
+                                    <div class="fs14 fw600 success_text ml-2">{{'BOOKED' | translate}}</div>
                                 </div>
                                 <div class="fs13 fw600 Premium_blue bookdpdng">
                                     {{tripMadeenaHotel?.brn}}
@@ -201,8 +235,8 @@
                         <div class="col-md-12 p-0 brdrbottom mb10" *ngIf="tripMadeenaHotel?.status=='!failed'">
                             <div class="d-inline-flex">
                                 <div class="d-inline-flex bookdpdng">
-                                    <i class="material-icons icns icon_size_20 clrrd">cancel</i>
-                                    <div class="fs14 fw600 success_text ml-2 clrrd mt2p">FAILED</div>
+                                    <i class="material-icons icns icon_size_20 clrrd">{{'Cancel' | translate}}</i>
+                                    <div class="fs14 fw600 success_text ml-2 clrrd mt2p">{{'FAILED' | translate}}</div>
                                 </div>
                             </div>
                             <!-- <div class="float-right list_clr textunderline fs14 mr15">Policies</div> -->
@@ -210,15 +244,16 @@
                         <div class="col-md-12 p-0 brdrbottom mb10" *ngIf="tripMadeenaHotel?.status=='cancelled'">
                             <div class="d-inline-flex">
                                 <div class="d-inline-flex bookdpdng">
-                                    <i class="material-icons icns icon_size_20 clrrd">cancel</i>
-                                    <div class="fs14 fw600 success_text ml-2 clrrd mt2p">CANCELLED</div>
+                                    <i class="material-icons icns icon_size_20 clrrd">{{'Cancel' | translate}}</i>
+                                    <div class="fs14 fw600 success_text ml-2 clrrd mt2p">{{'CANCELLED' | translate}}
+                                    </div>
                                 </div>
                             </div>
                         </div>
                         <div class="col-md-2 col-12 pl-0 pr-0 my-auto">
                             <i class="hotelblueicon icns icon_size_30 imgposition"></i>
                             <div class="Premium_blue fs14 fw600 ">
-                                <div>MEDINAH</div>
+                                <div>{{'MEDINAH' | translate}}</div>
                                 <div>{{tripMadeenaHotel?.trip_hotel?.check_in_time | date:'dd/MM/yyyy'}}</div>
                             </div>
                         </div>
@@ -226,24 +261,27 @@
                             <div class="float-left">
                                 <div class="fw600 fs16">{{tripMadeenaHotel?.trip_hotel.hotel.name}}</div>
                                 <p class="linebyline clr52 fs13">
-                                    No of days on Medinah
+                                    {{'No of days on Medinah' | translate}}
                                     <span class="Premium_blue fw600">{{noOfDaysInMedinah}}</span>
                                     <span class="crossline"></span>
-                                    <span>No of Guest</span>
+                                    <span>{{'No of Guest' | translate}}</span>
                                     <span class="Premium_blue fw600">{{noOfTravellers}}</span>
                                     <span class="crossline"></span>
-                                    <span>Rooms</span>
+                                    <span>{{'Rooms' | translate}}</span>
                                     <span class="Premium_blue fw600">{{tripMadeenaHotel?.rooms.length}}</span>
                                     <span *ngIf="tripMadeenaHotel.trip_hotel.hotel.distance" class="crossline"></span>
-                                    <span *ngIf="tripMadeenaHotel.trip_hotel.hotel.distance">NABAwI</span>
-                                    <span class="Premium_blue fw600" *ngIf="tripMadeenaHotel.trip_hotel.hotel.distance">{{tripMadeenaHotel?.trip_hotel?.hotel?.distance}}</span>
+                                    <span *ngIf="tripMadeenaHotel.trip_hotel.hotel.distance">{{'NABAWI' |
+                                        translate}}</span>
+                                    <span class="Premium_blue fw600"
+                                        *ngIf="tripMadeenaHotel.trip_hotel.hotel.distance">{{tripMadeenaHotel?.trip_hotel?.hotel?.distance}}</span>
                                 </p>
                             </div>
                             <div class="float-right fs16 fw500 pt-2">
                                 {{tripData?.currency}} {{tripMadeenaHotel?.total_price | number:'1.2-2'}}
                             </div>
                         </div>
-                        <div class="col-md-1 pl-0 pr-2 pt-1 m-auto text-center downarrow icns icon_size_20 arrowanimation" (click)="toggleDetails($event)">
+                        <div class="col-md-1 pl-0 pr-2 pt-1 m-auto text-center downarrow icns icon_size_20 arrowanimation"
+                            (click)="toggleDetails($event)">
                         </div>
                         <div class="row col-md-12 p-0 ml-0 mr-0 expansion">
                             <div class="mt-2 brdrtop p20 row col-md-12 p-0 ml-0 mr-0">
@@ -252,47 +290,65 @@
                                         <div>
                                             <div class="d-flex">
                                                 <i class="calendaricon icon_h18_w15 icns"></i>
-                                                <p class="pl-2 pr-2 fs13 fw500">CHECK-IN</p>
+                                                <p class="pl-2 pr-2 fs13 fw500">{{'CHECK-IN' | translate}}</p>
                                                 <i class="icon_h18_w11 icns downarrow"></i>
                                             </div>
-                                            <p class="fw600 fs21">{{tripMadeenaHotel?.trip_hotel?.check_in_time | date:'dd/MM/yyyy'}}</p>
-                                            <p class="clr52 fs12">{{tripMadeenaHotel?.trip_hotel?.check_in_time | date:'EEEE'}}</p>
+                                            <p class="fw600 fs21">{{tripMadeenaHotel?.trip_hotel?.check_in_time |
+                                                date:'dd/MM/yyyy'}}</p>
+                                            <p class="clr52 fs12">{{tripMadeenaHotel?.trip_hotel?.check_in_time |
+                                                date:'EEEE'}}</p>
                                         </div>
                                         <div class="text-center mt-2">
                                             <i class="nighticon icon_size_20 icns"></i>
-                                            <p class="textgrey font14">{{noOfDaysInMedinah}} Night<span *ngIf="noOfDaysInMedinah > 1">s</span></p>
+                                            <p class="textgrey font14">{{noOfDaysInMedinah}} {{'Night' |
+                                                translate}}<span *ngIf="noOfDaysInMedinah > 1">s</span></p>
                                         </div>
                                         <div class="text-left">
                                             <div class="d-flex">
                                                 <i class="calendaricon icon_h18_w15 icns"></i>
-                                                <p class="pl-2 pr-2 fs13 fw500">CHECK-OUT</p>
+                                                <p class="pl-2 pr-2 fs13 fw500">{{'CHECK-OUT' | translate}}</p>
                                                 <i class="icon_h18_w11 icns downarrow"></i>
                                             </div>
-                                            <p class="fw600 fs21">{{tripMadeenaHotel?.trip_hotel?.check_out_time | date:'dd/MM/yyyy'}}</p>
-                                            <p class="clr52 fs12">{{tripMadeenaHotel?.trip_hotel?.check_out_time | date:'EEEE'}}</p>
+                                            <p class="fw600 fs21">{{tripMadeenaHotel?.trip_hotel?.check_out_time |
+                                                date:'dd/MM/yyyy'}}</p>
+                                            <p class="clr52 fs12">{{tripMadeenaHotel?.trip_hotel?.check_out_time |
+                                                date:'EEEE'}}</p>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="col-md-6 pl-5 mt-4">
                                     <div class="row">
                                         <div class="col-md-12 p-0 pb-2">
-                                            <p class="fs13"><i class="fa fa-map-marker textlight pr-1 font16imp" aria-hidden="true"></i> ADDRESS</p>
-                                            <p class="pl-3 fs12 clr52">{{tripMadeenaHotel?.trip_hotel?.hotel?.address}}</p>
+                                            <p class="fs13"><i class="fa fa-map-marker textlight pr-1 font16imp"
+                                                    aria-hidden="true"></i> {{'ADDRESS' | translate}}</p>
+                                            <p class="pl-3 fs12 clr52">{{tripMadeenaHotel?.trip_hotel?.hotel?.address}}
+                                            </p>
                                         </div>
                                         <div class="col-md-6 p-0">
-                                            <p class="clr52 fs14"><i class="fa fa-envelope textlight pr-1 font16imp" aria-hidden="true"></i> {{tripMadeenaHotel?.trip_hotel?.hotel?.email}}</p>
+                                            <p class="clr52 fs14"><i class="fa fa-envelope textlight pr-1 font16imp"
+                                                    aria-hidden="true"></i>
+                                                {{tripMadeenaHotel?.trip_hotel?.hotel?.email}}</p>
                                         </div>
                                         <div class="col-md-6  p-0">
-                                            <p class="clr52 fs14"><i class="fa fa-phone textlight pr-1 font16imp" aria-hidden="true"></i>{{tripMadeenaHotel?.trip_hotel?.hotel?.phone_number}} </p>
+                                            <p class="clr52 fs14"><i class="fa fa-phone textlight pr-1 font16imp"
+                                                    aria-hidden="true"></i>{{tripMadeenaHotel?.trip_hotel?.hotel?.phone_number}}
+                                            </p>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="col-md-12 p-0 row m-0">
                                     <div class="col-md-12 row m-0 p-2 brdrtop">
-                                        <div class="col-md-4 col-6 fs14 clr52 fw500"><strong class="pr-1 fw600">{{noOfTravellers}}</strong>Guests</div>
-                                        <div class="col-md-2 col-6 fs12" *ngIf="tripMadeenaHotel?.refundable_amount == null">Non-Refundable</div>
-                                        <div class="col-md-2 col-6 fs12" *ngIf="tripMadeenaHotel?.refundable_amount != null">Refundable</div>
-                                        <div class="col-md-2 col-6 text-right fs14">{{tripData?.currency}} {{tripMadeenaHotel?.total_price | number:'1.2-2'}}</div>
+                                        <div class="col-md-4 col-6 fs14 clr52 fw500"><strong
+                                                class="pr-1 fw600">{{noOfTravellers}}</strong>{{'Guests' | translate}}
+                                        </div>
+                                        <div class="col-md-2 col-6 fs12"
+                                            *ngIf="tripMadeenaHotel?.refundable_amount == null">{{'Non-Refundable' |
+                                            translate}}</div>
+                                        <div class="col-md-2 col-6 fs12"
+                                            *ngIf="tripMadeenaHotel?.refundable_amount != null">{{'Refundable' |
+                                            translate}}</div>
+                                        <div class="col-md-2 col-6 text-right fs14">{{tripData?.currency}}
+                                            {{tripMadeenaHotel?.total_price | number:'1.2-2'}}</div>
                                     </div>
                                 </div>
                             </div>
@@ -301,14 +357,16 @@
                 </div>
 
                 <!-- transport -->
-                <h2 class="fs16 Premium_blue fw600 pt25" *ngIf="tripTransport?.total_price != null">Review Transport Details</h2>
-                <div class="border_box_shadow bg_white" [class.errorBox]="tripTransport?.status== 'failed'" *ngIf="tripTransport?.total_price != null">
+                <h2 class="fs16 Premium_blue fw600 pt25" *ngIf="tripTransport?.total_price != null">{{'Review Transport
+                    Details' | translate}}</h2>
+                <div class="border_box_shadow bg_white" [class.errorBox]="tripTransport?.status== 'failed'"
+                    *ngIf="tripTransport?.total_price != null">
                     <div class="row m-0 p10">
                         <div class="col-md-12 p-0 brdrbottom mb10" *ngIf="tripTransport?.status=='success'">
                             <div class="d-inline-flex">
                                 <div class="d-inline-flex bookdpdng brdrR">
                                     <i class="selectedgreentickicon icns icon_size_20"></i>
-                                    <div class="fs14 fw600 success_text ml-2">BOOKED</div>
+                                    <div class="fs14 fw600 success_text ml-2">{{'BOOKED' | translate}}</div>
                                 </div>
                                 <div class="fs13 fw600 Premium_blue bookdpdng">
                                     {{tripTransport?.brn}}
@@ -319,8 +377,10 @@
                         <div class="col-md-12 p-0 brdrbottom mb10" *ngIf="tripTransport?.status== 'failed'">
                             <div class="d-inline-flex">
                                 <div class="d-inline-flex bookdpdng">
-                                    <i class="material-icons icns icon_size_20 clrrd">cancel</i>
-                                    <div class="fs14 fw600 success_text ml-2 clrrd mt2p">FAILED</div>
+                                    <i class="material-icons icns icon_size_20 clrrd">{{'Cancel' |
+                                        translate}}</i>
+                                    <div class="fs14 fw600 success_text ml-2 clrrd mt2p">{{'FAILED' |
+                                        translate}}</div>
                                 </div>
                             </div>
                             <!-- <div class="float-right list_clr textunderline fs14 mr15">Policies</div> -->
@@ -328,15 +388,17 @@
                         <div class="col-md-12 p-0 brdrbottom mb10" *ngIf="tripTransport?.status=='cancelled'">
                             <div class="d-inline-flex">
                                 <div class="d-inline-flex bookdpdng">
-                                    <i class="material-icons icns icon_size_20 clrrd">cancel</i>
-                                    <div class="fs14 fw600 success_text ml-2 clrrd mt2p">CANCELLED</div>
+                                    <i class="material-icons icns icon_size_20 clrrd">{{'Cancel' |
+                                        translate}}</i>
+                                    <div class="fs14 fw600 success_text ml-2 clrrd mt2p">{{'CANCELLED' |
+                                        translate}}</div>
                                 </div>
                             </div>
                         </div>
                         <div class="col-md-2 col-12 pl-0 pr-0 my-auto">
                             <i class="transportblueicon icns icon_size_30 imgposition"></i>
                             <div class="Premium_blue fs14 fw600">
-                                <p>VEHICLE</p>
+                                <p>{{'VEHICLE' | translate}}</p>
                                 <p>{{tripTransport.trip_transportation?.vehicle_types[0].name}}</p>
                             </div>
                         </div>
@@ -344,7 +406,7 @@
                             <div class="float-left">
                                 <p class="fw600 fs16">{{tripTransport.trip_transportation?.company?.name}}</p>
                                 <p class="linebyline clr52 fs13">
-                                    <strong class="fw600">Route :</strong>
+                                    <strong class="fw600">{{'Route' | translate}} :</strong>
                                     <span>{{tripTransport?.trip_transportation?.route?.name}}</span>
                                 </p>
                             </div>
@@ -352,35 +414,53 @@
                                 {{tripData?.currency}} {{tripTransport?.total_price | number:'1.2-2'}}
                             </div>
                         </div>
-                        <div class="col-md-1 pl-0 pr-2 pt-1 m-auto text-center downarrow icns icon_size_20 arrowanimation" (click)="toggleDetails($event)">
+                        <div class="col-md-1 pl-0 pr-2 pt-1 m-auto text-center downarrow icns icon_size_20 arrowanimation"
+                            (click)="toggleDetails($event)">
                         </div>
                         <div class="col-md-12 p-0 row ml-0 mr-0  borderpading  expansion">
                             <div class="col-md-12 transportbodypdng mt-2 row brdrtop m-0">
                                 <div class="col-md-4 p-0 mb-2">
-                                    <p class="clr52 fs14"><i class="fa fa-circle pr-2 font9imp" aria-hidden="true"></i>{{tripTransport?.trip_transportation?.vehicle_types[0]?.max_capacity}} seater</p>
+                                    <p class="clr52 fs14"><i class="fa fa-circle pr-2 font9imp"
+                                            aria-hidden="true"></i>{{tripTransport?.trip_transportation?.vehicle_types[0]?.max_capacity}}
+                                        {{'seater' | translate}}</p>
                                 </div>
                                 <div class="col-md-4 p-0 mb-2">
-                                    <p class="clr52 fs14"><i class="fa fa-circle pr-2 font9imp" aria-hidden="true"></i>Pax Per Vehicle : {{tripTransport?.trip_transportation?.trip_vehicles[0]?.pax_per_vehicle}}</p>
+                                    <p class="clr52 fs14"><i class="fa fa-circle pr-2 font9imp"
+                                            aria-hidden="true"></i>{{'Pax Per Vehicle' | translate}} :
+                                        {{tripTransport?.trip_transportation?.trip_vehicles[0]?.pax_per_vehicle}}</p>
                                 </div>
                                 <div class="col-md-4 p-0 mb-2">
-                                    <p class="clr52 fs14"><i class="fa fa-circle pr-2 font9imp" aria-hidden="true"></i>Model: {{tripTransport?.trip_transportation?.selected_transportation?.vehicle_types[0]?.categories[0]?.model}}</p>
+                                    <p class="clr52 fs14"><i class="fa fa-circle pr-2 font9imp"
+                                            aria-hidden="true"></i>{{'Model' | translate}}:
+                                        {{tripTransport?.trip_transportation?.selected_transportation?.vehicle_types[0]?.categories[0]?.model}}
+                                    </p>
                                 </div>
                                 <div class="col-md-4 p-0 mb-2">
-                                    <p class="clr52 fs14"><i class="fa fa-circle pr-2 font9imp" aria-hidden="true"></i>Booked Vehicle ({{tripTransport?.trip_transportation?.trip_vehicles[0]?.booked_quantity}})</p>
+                                    <p class="clr52 fs14"><i class="fa fa-circle pr-2 font9imp"
+                                            aria-hidden="true"></i>{{'Booked Vehicle' | translate}}
+                                        ({{tripTransport?.trip_transportation?.trip_vehicles[0]?.booked_quantity}})</p>
                                 </div>
                                 <div class="col-md-4 p-0 mb-2">
-                                    <p class="clr52 fs14"><i class="fa fa-circle pr-2 font9imp" aria-hidden="true"></i>Bag Capacity : {{tripTransport?.trip_transportation?.vehicle_types[0]?.bags_capacity}}</p>
+                                    <p class="clr52 fs14"><i class="fa fa-circle pr-2 font9imp"
+                                            aria-hidden="true"></i>{{'Bag Capacity' | translate}} :
+                                        {{tripTransport?.trip_transportation?.vehicle_types[0]?.bags_capacity}}</p>
                                 </div>
                                 <div class="col-md-12 transportbodypdng row ml-0 mr-0 mt-2 p20 brdrtop">
                                     <div class="col-md-4 p-0">
-                                        <p class="fs13"><i class="fa fa-map-marker textlight pr-1 font16imp" aria-hidden="true"></i> ADDRESS</p>
-                                        <p class="pl-3 fs12 clr52">{{tripTransport?.trip_transportation?.company.address}}</p>
+                                        <p class="fs13"><i class="fa fa-map-marker textlight pr-1 font16imp"
+                                                aria-hidden="true"></i> {{'ADDRESS' | translate}}</p>
+                                        <p class="pl-3 fs12 clr52">
+                                            {{tripTransport?.trip_transportation?.company.address}}</p>
                                     </div>
                                     <div class="col-md-4">
-                                        <p class="clr52 fs14"><i class="fa fa-envelope textlight pr-1 font16imp" aria-hidden="true"></i> {{tripTransport?.trip_transportation?.company?.email}}</p>
+                                        <p class="clr52 fs14"><i class="fa fa-envelope textlight pr-1 font16imp"
+                                                aria-hidden="true"></i>
+                                            {{tripTransport?.trip_transportation?.company?.email}}</p>
                                     </div>
                                     <div class="col-md-4">
-                                        <p class="clr52 fs14"><i class="fa fa-phone textlight pr-1 font16imp" aria-hidden="true"></i> {{tripTransport?.trip_transportation?.company?.phone_number}}</p>
+                                        <p class="clr52 fs14"><i class="fa fa-phone textlight pr-1 font16imp"
+                                                aria-hidden="true"></i>
+                                            {{tripTransport?.trip_transportation?.company?.phone_number}}</p>
                                     </div>
                                 </div>
                             </div>
@@ -389,46 +469,67 @@
                 </div>
 
                 <!-- passenger -->
-                <h2 class="fs16 Premium_blue fw600 pt25" *ngIf="tripTravellers != null">Passenger Details</h2>
+                <h2 class="fs16 Premium_blue fw600 pt25" *ngIf="tripTravellers != null">{{'Passenger Details' |
+                    translate}}</h2>
                 <div class="border_box_shadow bg_white" *ngIf="tripTravellers != null">
                     <div class="row m-0 p10">
                         <div class="col-md-11 d-inline-flex brdrR">
                             <div class=" my-auto text-capitalize">
-                                <strong><p>{{tripTravellers[0]?.contactinfo?.first_name}} {{tripTravellers[0]?.contactinfo?.last_name}}</p></strong>
+                                <strong>
+                                    <p>{{tripTravellers[0]?.contactinfo?.first_name}}
+                                        {{tripTravellers[0]?.contactinfo?.last_name}}</p>
+                                </strong>
                             </div>
                             <div class="  brdrL ml-2  my-auto">
                                 <p class="ml-2"><strong>{{tripTravellers[0]?.gender}}</strong></p>
                             </div>
                         </div>
-                        <div class="col-md-1 pl-0 pr-2 pt-1 m-auto text-center downarrow icns icon_size_20 arrowanimation" (click)="toggleDetails($event)">
+                        <div class="col-md-1 pl-0 pr-2 pt-1 m-auto text-center downarrow icns icon_size_20 arrowanimation"
+                            (click)="toggleDetails($event)">
                         </div>
                         <div class="col-md-12 p-0 row ml-0 mr-0 borderpading expansion">
                             <div class="col-md-12 transportbodypdng mt-2 brdrtop row m-0">
                                 <div class="col-md-4 p-0 mb-2">
-                                    <p class="clr52 fs14"><i class="fa fa-circle pr-2 font9imp" aria-hidden="true"></i>Date of Birth : {{tripTravellers[0]?.dob}}</p>
+                                    <p class="clr52 fs14"><i class="fa fa-circle pr-2 font9imp"
+                                            aria-hidden="true"></i>{{'Date of Birth' | translate}} :
+                                        {{tripTravellers[0]?.dob}}</p>
                                 </div>
                                 <div class="col-md-4 p-0 mb-2">
-                                    <p class="clr52 fs14"><i class="fa fa-circle pr-2 font9imp" aria-hidden="true"></i>Country of Residence : {{tripTravellers[0]?.country_of_residence}}</p>
+                                    <p class="clr52 fs14"><i class="fa fa-circle pr-2 font9imp"
+                                            aria-hidden="true"></i>{{'Country of Residence' | translate}} :
+                                        {{tripTravellers[0]?.country_of_residence}}</p>
                                 </div>
                                 <div class="col-md-4 p-0 mb-2">
-                                    <p class="clr52 fs14"><i class="fa fa-circle pr-2 font9imp" aria-hidden="true"></i>Nationality: {{tripTravellers[0]?.nationality}}</p>
+                                    <p class="clr52 fs14"><i class="fa fa-circle pr-2 font9imp"
+                                            aria-hidden="true"></i>{{'Nationality' | translate}}:
+                                        {{tripTravellers[0]?.nationality}}</p>
                                 </div>
                                 <div class="col-md-4 p-0 mb-2">
-                                    <p class="clr52 fs14"><i class="fa fa-circle pr-2 font9imp" aria-hidden="true"></i>Passport Number : {{tripTravellers[0]?.passport_no}}</p>
+                                    <p class="clr52 fs14"><i class="fa fa-circle pr-2 font9imp"
+                                            aria-hidden="true"></i>{{'Passport Number' | translate}} :
+                                        {{tripTravellers[0]?.passport_no}}
+                                    </p>
                                 </div>
                                 <div class="col-md-4 p-0 mb-2">
-                                    <p class="clr52 fs14"><i class="fa fa-circle pr-2 font9imp" aria-hidden="true"></i>Passport Expiry Date: {{tripTravellers[0]?.passport_expiry_date}}</p>
+                                    <p class="clr52 fs14"><i class="fa fa-circle pr-2 font9imp"
+                                            aria-hidden="true"></i>{{'Passport Expiry Date' | translate}}:
+                                        {{tripTravellers[0]?.passport_expiry_date}}</p>
                                 </div>
                                 <div class="col-md-12 transportbodypdng row ml-0 mr-0 mt-2 p20 brdrtop">
                                     <div class="col-md-4 p-0">
-                                        <p class="fs13"><i class="fa fa-map-marker textlight pr-1 font16imp" aria-hidden="true"></i> ADDRESS</p>
+                                        <p class="fs13"><i class="fa fa-map-marker textlight pr-1 font16imp"
+                                                aria-hidden="true"></i> {{'ADDRESS' | translate}}</p>
                                         <p class="pl-3 fs12 clr52">{{tripTravellers[0]?.contactinfo?.address}}</p>
                                     </div>
                                     <div class="col-md-4">
-                                        <p class="clr52 fs14"><i class="fa fa-envelope textlight pr-1 font16imp" aria-hidden="true"></i>{{tripTravellers[0]?.contactinfo?.email}}</p>
+                                        <p class="clr52 fs14"><i class="fa fa-envelope textlight pr-1 font16imp"
+                                                aria-hidden="true"></i>{{tripTravellers[0]?.contactinfo?.email}}</p>
                                     </div>
                                     <div class="col-md-4">
-                                        <p class="clr52 fs14"><i class="fa fa-phone textlight pr-1 font16imp" aria-hidden="true"></i> {{tripTravellers[0]?.contactinfo?.phn_country_code}} {{tripTravellers[0]?.contactinfo?.phone_number}}</p>
+                                        <p class="clr52 fs14"><i class="fa fa-phone textlight pr-1 font16imp"
+                                                aria-hidden="true"></i>
+                                            {{tripTravellers[0]?.contactinfo?.phn_country_code}}
+                                            {{tripTravellers[0]?.contactinfo?.phone_number}}</p>
                                     </div>
                                 </div>
                             </div>
@@ -441,12 +542,12 @@
                     <div class="d-flex justify-content-between">
                         <div class="d-inline-flex">
                             <i class="printicon icns icon_size_30"></i>
-                            <div class="fs15 fw600 text-uppercase pl-2 my-auto">Print invoice</div>
+                            <div class="fs15 fw600 text-uppercase pl-2 my-auto">{{'Print invoice' | translate}}</div>
                         </div>
                         <div>
                             <i class="rightarrow icns icon_size_20 my-auto h-100" *ngIf="!invoicetoggle"></i>
                             <div class="spinner-border" role="status" *ngIf="invoicetoggle">
-                                <span class="sr-only">Loading...</span>
+                                <span class="sr-only">{{'Loading' | translate}}...</span>
                             </div>
                         </div>
                     </div>
@@ -455,12 +556,12 @@
                     <div class="d-flex justify-content-between">
                         <div class="d-inline-flex">
                             <i class="downloadicon icns icon_size_30"></i>
-                            <div class="fs15 fw600 text-uppercase pl-2 my-auto">Download Voucher</div>
+                            <div class="fs15 fw600 text-uppercase pl-2 my-auto">{{'Download Voucher' | translate}}</div>
                         </div>
                         <div>
                             <i class="rightarrow icns icon_size_20 my-auto h-100" *ngIf="!vouchertoggle"></i>
                             <div class="spinner-border" role="status" *ngIf="vouchertoggle">
-                                <span class="sr-only">Loading...</span>
+                                <span class="sr-only">{{'Loading' | translate}}...</span>
                             </div>
                         </div>
                     </div>
@@ -492,30 +593,31 @@
                         <div class="d-flex justify-content-between">
                             <div class="d-inline-flex">
                                 <i class="cancelicon icns icon_size_25"></i>
-                                <div class="fs15 fw600 text-uppercase pl-2 my-auto">Check cancellation</div>
+                                <div class="fs15 fw600 text-uppercase pl-2 my-auto">{{'Check cancellation' | translate}}
+                                </div>
                             </div>
                             <div>
                                 <i class="rightarrow icns icon_size_20 my-auto h-100" *ngIf="!cancellationtoggle"></i>
                                 <div class="spinner-border" role="status" *ngIf="cancellationtoggle">
-                                    <span class="sr-only">Loading...</span>
+                                    <span class="sr-only">{{'Loading' | translate}}...</span>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="mt-3">
-                    <h2 class="fs18 fw600">Fare Summary</h2>
+                    <h2 class="fs18 fw600">{{'Fare Summary' | translate}}</h2>
                     <div class="boxvouch">
                         <div class="d-flex justify-content-between" *ngIf="tripMakkahHotel?.total_price">
-                            <div>Makkah Hotel</div>
+                            <div>{{'Makkah Hotel' | translate}}</div>
                             <div>{{tripData?.currency}} {{tripMakkahHotel?.total_price | number :'1.2-2'}}</div>
                         </div>
                         <div class="d-flex justify-content-between" *ngIf="tripMadeenaHotel?.total_price">
-                            <div>Madeena Hotel</div>
+                            <div>{{'Madeena Hotel' | translate}}</div>
                             <div>{{tripData?.currency}} {{ tripMadeenaHotel?.total_price | number :'1.2-2'}}</div>
                         </div>
                         <div class="d-flex justify-content-between" *ngIf="tripTransport?.total_price">
-                            <div>Transport</div>
+                            <div>{{'Transport' | translate}}</div>
                             <div>{{tripData?.currency}} {{tripTransport?.total_price | number :'1.2-2'}}</div>
                         </div>
                         <!-- <div (click)="toggleText($event)" class="pt-1">
@@ -588,11 +690,12 @@
     </div>
 </div>
 
-<div [style.display]="cancelationPopup ? 'block' : 'none'" id="cancellationpopup" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" class="modal ticket_cancellation_popup">
+<div [style.display]="cancelationPopup ? 'block' : 'none'" id="cancellationpopup" tabindex="-1" role="dialog"
+    aria-labelledby="myModalLabel" aria-hidden="true" class="modal ticket_cancellation_popup">
     <div class="modal-dialog popupmoving">
         <div class="modal-content">
             <div class="modal-header" style="border-bottom: none;padding-bottom: 0px;">
-                <h6 class="modal-title pl-3 paddingR15">CONFIRM CANCELLATION</h6>
+                <h6 class="modal-title pl-3 paddingR15">{{'CONFIRM CANCELLATION' | translate}}</h6>
                 <button type="button" class="close cancelclose" (click)="closecancelPopup();">&times;</button>
             </div>
             <div class="modal-body mb-4">
@@ -601,55 +704,69 @@
                         <thead>
                             <tr>
                                 <!-- <th scope="col"></th> -->
-                                <th scope="col">Items</th>
-                                <th scope="col">Name</th>
-                                <th scope="col">Status</th>
-                                <th scope="col">Refund Amount</th>
+                                <th scope="col">{{'Items' | translate}}</th>
+                                <th scope="col">{{'Name' | translate}}</th>
+                                <th scope="col">{{'Status' | translate}}</th>
+                                <th scope="col">{{'Refund Amount' | translate}}</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr *ngIf="tripMakkahHotel" [class.bgcolors]="makkahCancellation?.success == false">
                                 <!-- <th><mat-checkbox [disabled]="!makkahCancellation?.success" (change)="makkahcheck();"></mat-checkbox></th> -->
-                                <td>Makkah Hotel</td>
+                                <td>{{'Makkah Hotel' | translate}}</td>
                                 <td>{{tripMakkahHotel.trip_hotel.hotel.name}}</td>
-                                <td *ngIf="!makkahCancellation?.success" style="color: red;">No Cancellation Policy Found</td>
-                                <td *ngIf="makkahCancellation?.success" style="color: green;">{{makkahCancellation?.cancellation_prices?.cancellation_status}} </td>
+                                <td *ngIf="!makkahCancellation?.success" style="color: red;">{{'Items' | translate}}
+                                </td>
+                                <td *ngIf="makkahCancellation?.success" style="color: green;">
+                                    {{makkahCancellation?.cancellation_prices?.cancellation_status}} </td>
                                 <td *ngIf="!makkahCancellation?.success">0</td>
-                                <td *ngIf="makkahCancellation?.success">{{makkahCancellation?.cancellation_prices?.total_refund}}</td>
+                                <td *ngIf="makkahCancellation?.success">
+                                    {{makkahCancellation?.cancellation_prices?.total_refund}}</td>
                             </tr>
                             <tr *ngIf="tripMadeenaHotel" [class.bgcolors]="medinahCancellation?.success == false">
                                 <!-- <th><mat-checkbox [disabled]="!medinahCancellation?.success" (change)="medinahcheck();"></mat-checkbox></th> -->
-                                <td>Medina Hotel</td>
+                                <td>{{'Medina Hotel' | translate}}</td>
                                 <td>{{tripMadeenaHotel.trip_hotel.hotel.name}}</td>
-                                <td *ngIf="!medinahCancellation?.success" style="color: red;">No Cancellation Policy Found</td>
-                                <td *ngIf="medinahCancellation?.success" style="color: green;">{{medinahCancellation?.cancellation_prices?.cancellation_status}} </td>
+                                <td *ngIf="!medinahCancellation?.success" style="color: red;">{{'No Cancellation Policy
+                                    Found' | translate}}</td>
+                                <td *ngIf="medinahCancellation?.success" style="color: green;">
+                                    {{medinahCancellation?.cancellation_prices?.cancellation_status}} </td>
                                 <td *ngIf="!medinahCancellation?.success">0</td>
-                                <td *ngIf="medinahCancellation?.success">{{medinahCancellation?.cancellation_prices?.total_refund}}</td>
+                                <td *ngIf="medinahCancellation?.success">
+                                    {{medinahCancellation?.cancellation_prices?.total_refund}}</td>
                             </tr>
-                            <tr *ngIf="tripTransport && tripTransport?.trip_transportation?.trip_vehicles && tripTransport.trip_transportation.trip_vehicles?.length > 0" [class.bgcolors]="transportCancellation?.success == false">
+                            <tr *ngIf="tripTransport && tripTransport?.trip_transportation?.trip_vehicles && tripTransport.trip_transportation.trip_vehicles?.length > 0"
+                                [class.bgcolors]="transportCancellation?.success == false">
                                 <!-- <th><mat-checkbox [disabled]="!transportCancellation?.success" (change)="transportcheck();"></mat-checkbox></th> -->
-                                <td>Transport</td>
+                                <td>{{'Transport' | translate}}</td>
                                 <td>{{tripTransport?.trip_transportation.company.name}}</td>
-                                <td *ngIf="!transportCancellation?.success" style="color: red;">No Cancellation Policy Found</td>
-                                <td *ngIf="transportCancellation?.success" style="color: green;">{{transportCancellation?.cancellation_prices?.cancellation_status}} </td>
+                                <td *ngIf="!transportCancellation?.success" style="color: red;">{{'No Cancellation
+                                    Policy Found' | translate}}</td>
+                                <td *ngIf="transportCancellation?.success" style="color: green;">
+                                    {{transportCancellation?.cancellation_prices?.cancellation_status}} </td>
                                 <td *ngIf="!transportCancellation?.success">0</td>
-                                <td *ngIf="transportCancellation?.success">{{transportCancellation?.cancellation_prices?.total_refund}}</td>
+                                <td *ngIf="transportCancellation?.success">
+                                    {{transportCancellation?.cancellation_prices?.total_refund}}</td>
                             </tr>
                         </tbody>
                     </table>
 
 
-                    <label class="remarks pt-2 floatright" for="remarks">Remarks</label>
+                    <label class="remarks pt-2 floatright" for="remarks">{{'Remarks' | translate}}</label>
                     <form [formGroup]="registerForm">
-                        <textarea name="remarks" formControlName="cancellation_text" class="form-control" type="text" id="confirmCancellationInput" placeholder="Please mention the reason for cancellation" [ngClass]="{ 'is-invalid': submitted && f.cancellation_text.errors }"></textarea>
+                        <textarea name="remarks" formControlName="cancellation_text" class="form-control" type="text"
+                            id="confirmCancellationInput" placeholder="Please mention the reason for cancellation"
+                            [ngClass]="{ 'is-invalid': submitted && f.cancellation_text.errors }"></textarea>
                         <div *ngIf="submitted && f.cancellation_text.errors" class="invalid-feedback">
-                            <div *ngIf="f.cancellation_text.errors.required">Remarks is required</div>
+                            <div *ngIf="f.cancellation_text.errors.required">{{'Remarks is required' | translate}}</div>
                         </div>
                     </form>
-                    <p class="note text_right"><i class="fa fa-info-circle pr-2" aria-hidden="true"></i>Please Note</p>
-                    <p class="note_txt text_right">Standard Terms and Conditions Apply..</p>
+                    <p class="note text_right"><i class="fa fa-info-circle pr-2" aria-hidden="true"></i>{{'Please Note'
+                        | translate}}</p>
+                    <p class="note_txt text_right">{{'Standard Terms and Conditions Apply..' | translate}}</p>
                 </div>
-                <div><button (click)="confirmCancellation()" type="submit" [class.bttnactive]="btnactv" class="searchbutton pull-right">CONFIRM CANCELLATION</button> </div>
+                <div><button (click)="confirmCancellation()" type="submit" [class.bttnactive]="btnactv"
+                        class="searchbutton pull-right">{{'CONFIRM CANCELLATION' | translate}}</button> </div>
             </div>
         </div>
     </div>

@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from "@angular/core";
+import { TranslateService } from '@ngx-translate/core';
 import { HelperService } from "src/app/common/services/helper-service";
 import { NotificationService } from "src/app/common/services/notification.service";
 import { SubAgentApiService } from "src/app/Services/sub-agent-api-services";
@@ -14,21 +15,22 @@ export class TransportComponent implements OnInit {
   @Input() transportList: any[];
   @Output() notifyGrandparent = new EventEmitter();
   vehicleName: string;
-  paxCount:number;
-  healperService:HelperService;
-  notifyService:NotificationService;
-  commonService:SubAgentApiService;
+  paxCount: number;
+  healperService: HelperService;
+  notifyService: NotificationService;
+  commonService: SubAgentApiService;
 
   constructor(
     private _healperService: HelperService,
-    private _notifyService:NotificationService,
-    private _commonService:SubAgentApiService,
-    private appStore:AppStore) {
-      this.healperService = _healperService;
-      this.notifyService = _notifyService;
-      this.commonService = _commonService;
-    }
-  
+    private _notifyService: NotificationService,
+    private _commonService: SubAgentApiService,
+    private appStore: AppStore,
+    private translate: TranslateService,) {
+    this.healperService = _healperService;
+    this.notifyService = _notifyService;
+    this.commonService = _commonService;
+  }
+
   onNotify() {
     this.notifyGrandparent.emit("notify parent");
   }
@@ -36,6 +38,16 @@ export class TransportComponent implements OnInit {
   ngOnInit() {
     this.paxCount = JSON.parse(sessionStorage.getItem('userObject')).travallersCount
   }
+
+  ngAfterViewChecked() {
+    this.translate.use((sessionStorage.getItem('userLanguage') === 'ar-AE') ? "ar-AE" : "en-US");
+    if (sessionStorage.getItem('userLanguage') == "ar-AE") {
+      (<HTMLInputElement>document.getElementById("body")).classList.add('mirror_css');
+    } else {
+      (<HTMLInputElement>document.getElementById("body")).classList.remove('mirror_css');
+    }
+  }
+
 
   /**
    * This method is for booking vehicles
@@ -45,7 +57,7 @@ export class TransportComponent implements OnInit {
     let start_date_formatted = this.healperService.dateFormaterMdy(userDetails.makkahCheckinDate)
       ? this.healperService.dateFormaterYMd(userDetails.makkahCheckinDate)
       : this.healperService.dateFormaterYMd(userDetails.transportStartDate);
-    let end_date_formatted = (sessionStorage.getItem('stage')==='2')
+    let end_date_formatted = (sessionStorage.getItem('stage') === '2')
       ? this.healperService.dateFormaterYMd(userDetails.madeenaCheckoutDate)
       : this.healperService.dateFormaterYMd(userDetails.makkahCheckoutDate);
     let arrayList = [];
@@ -65,7 +77,7 @@ export class TransportComponent implements OnInit {
           quantity: Math.ceil(travellerCount / x.categories[0].capacity),
           pax_per_vehicle: Math.ceil(
             travellerCount /
-              Math.ceil(travellerCount / x.categories[0].capacity)
+            Math.ceil(travellerCount / x.categories[0].capacity)
           ),
         };
 
@@ -93,10 +105,10 @@ export class TransportComponent implements OnInit {
           quantity: Math.ceil(travellerCount / x.categories[0].capacity),
           pax_per_vehicle: Math.ceil(
             travellerCount /
-              Math.ceil(travellerCount / x.categories[0].capacity)
+            Math.ceil(travellerCount / x.categories[0].capacity)
           ),
         };
-         secondcategory.push(category);
+        secondcategory.push(category);
         this.vehicleName = "SUV Car - (" + Math.ceil((this.appStore.adultCount + this.appStore.childCount) / x.categories[0].capacity) + ")";
       });
       const q = {
@@ -116,7 +128,7 @@ export class TransportComponent implements OnInit {
           quantity: Math.ceil(travellerCount / x.categories[0].capacity),
           pax_per_vehicle: Math.ceil(
             travellerCount /
-              Math.ceil(travellerCount / x.categories[0].capacity)
+            Math.ceil(travellerCount / x.categories[0].capacity)
           ),
         };
 
@@ -142,7 +154,7 @@ export class TransportComponent implements OnInit {
           : start_date_formatted,
         trip_transportation: {
           search: sessionStorage.getItem('transportSearchId'),
-          lang:"en-US",
+          lang: "en-US",
           company_code: company_code,
           vehicle_types: arrayList,
         },
@@ -160,7 +172,7 @@ export class TransportComponent implements OnInit {
             this.onNotify();
           }
         },
-        (error) => {}
+        (error) => { }
       );
     } else {
       let x = {
@@ -177,14 +189,14 @@ export class TransportComponent implements OnInit {
           vehicle_types: arrayList,
         },
       };
-      
+
       this.commonService.bookCustomTrip(x).subscribe(
         (data) => {
-          sessionStorage.setItem('custom_trip_id',data.id)
+          sessionStorage.setItem('custom_trip_id', data.id)
           this.setStepperIndex();
           this.onNotify();
           if (sessionStorage.getItem('custome_trip_booking_id')) {
-           this.onNotify();
+            this.onNotify();
             (<HTMLElement>(
               document.getElementById("changeTransport")
             )).style.display = "none";
@@ -193,16 +205,16 @@ export class TransportComponent implements OnInit {
             this.onNotify();
           }
         },
-        (error) => {}
+        (error) => { }
       );
     }
-    sessionStorage.setItem('stage','3')
+    sessionStorage.setItem('stage', '3')
   }
 
-  setStepperIndex(){
-    if(!this.appStore.isAvailabilityFails){
-      this.appStore.stepperIndex +=1 ;
+  setStepperIndex() {
+    if (!this.appStore.isAvailabilityFails) {
+      this.appStore.stepperIndex += 1;
     }
   }
-  
+
 }
