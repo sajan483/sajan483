@@ -7,6 +7,7 @@ import { Room } from "src/app/models/visaTypes";
 import { NotificationService } from "src/app/common/services/notification.service";
 import { AppStore } from "src/app/stores/app.store";
 import { SubAgentApiService } from "src/app/Services/sub-agent-api-services";
+import { TranslateService } from "@ngx-translate/core";
 
 @Component({
   selector: "app-hotel-details-popup",
@@ -66,10 +67,20 @@ export class HotelDetailsPopupComponent implements OnInit ,OnChanges{
     private helperService: HelperService,
     private appStore: AppStore,
     private notifyService: NotificationService,
+    private translate: TranslateService
   ) {}
 
   @Output() handleNotif = new EventEmitter();
   @Output() changeItinerary = new EventEmitter();
+
+  ngAfterViewChecked() {
+    this.translate.use((sessionStorage.getItem('userLanguage') === 'ar-AE') ? "ar-AE" : "en-US");
+    if (sessionStorage.getItem('userLanguage') == "ar-AE") {
+      (<HTMLInputElement>document.getElementById("body")).classList.add('mirror_css');
+    } else {
+      (<HTMLInputElement>document.getElementById("body")).classList.remove('mirror_css');
+    }
+  }
 
   /*
    * this method for notify parent component
