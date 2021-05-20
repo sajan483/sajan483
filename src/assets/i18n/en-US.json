@@ -411,5 +411,10 @@
     "Booked by": "Booked by",
     "Amount": "Amount",
     "Status": "Status",
-    "Transactions": "Transactions"
+    "Transactions": "Transactions",
+    "Special Code": "Special Code",
+    "Check-in": "Check-in",
+    "Check-out": "Check-out",
+    "Start Date": "Start Date",
+    "Days": "Days"
 }
