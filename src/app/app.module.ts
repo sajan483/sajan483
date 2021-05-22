@@ -18,6 +18,7 @@ import { SliderComponent } from './common/components/slider/slider.component';
 import { LandingApiService } from './Services/landing-api-services';
 import { CommonApiService } from './Services/common-api-services';
 import { BranchApiService } from 'src/app/Services/branch-api-service';
+import { BackButtonDisableModule } from 'angular-disable-browser-back-button';
 
 @NgModule({
   declarations: [
@@ -27,6 +28,7 @@ import { BranchApiService } from 'src/app/Services/branch-api-service';
     SliderComponent
   ],
   imports: [
+    BackButtonDisableModule.forRoot(),
     BrowserModule,
     HttpModule,
     HttpClientModule,
