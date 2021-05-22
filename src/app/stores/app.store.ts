@@ -13,7 +13,7 @@ export class AppStore {
   @observable totalTravellers : number;
   @observable stepperIndex : number;
   @observable currentUser : string;
-  @observable langCode: string = 'en_US';
+  @observable langCode: string = 'en-US';
   @observable stepsArray:string[];
   @observable roomArray:Room[];
   @observable userDetails:any;
