@@ -159,7 +159,7 @@
                                                         <div class="clr52 fs14 fw500 text-center" *ngFor="let item of room.board_types;let p = index;">{{item?.type}}</div>
                                                         <div class="d-flex justify-content-center mt5">
                                                             <!-- //<mat-radio-group> -->
-                                                            <mat-radio-button [checked]="room.isRoomSelectionChecked" id="p" (click)="roomSelectionCheckboxChecked(i,j)" *ngIf="room?.amount"></mat-radio-button>
+                                                            <mat-radio-button [checked]="room.isRoomSelectionChecked" id="p" (click)="isGroupedFalseRadioButtonClicked(i,j)" *ngIf="room?.amount"></mat-radio-button>
                                                             <!-- </mat-radio-group> -->
                                                         </div>
                                                         <strong class="customTooltip">
@@ -196,14 +196,14 @@
                                         </div>
                                     </div>
                                     <div *ngIf="isGrouped">
-                                        <div class="item" *ngFor="let item2 of selectedRoomGroups;let i = index ">
+                                        <div class="item" *ngFor="let roomGroup of selectedRoomGroups;let i = index ">
                                             <div class="roomInfo textright">
                                                 <label class="room">
                                                     <i class="bedicon icon_size_25 icns"></i>
                                                     {{'Room Group' | translate}}&nbsp;{{i+1}}
                                                 </label>
                                             </div>
-                                            <div class="roomTypeNPrice" *ngFor="let room of item2.rooms; let j= index;">
+                                            <div class="roomTypeNPrice" *ngFor="let room of roomGroup.rooms; let j= index;">
                                                 <ul class="roomType pr0">
                                                     <li class="roomtypeName media">
                                                         <div class="roomRibbon" *ngIf="room?.has_special_deal">
@@ -240,7 +240,7 @@
                                                     <li class="roomRate" *ngIf="j < 1">
                                                         <div class="clr52 fs14 fw500 text-center" *ngFor="let item of room.board_types">{{item?.type}}</div>
                                                         <div class="d-flex justify-content-center">
-                                                            <mat-radio-button (click)="roomSelectionCheckboxChecked(i,j)"></mat-radio-button>
+                                                            <mat-radio-button (click)="isGroupedTrueRadioButtonClicked(i,j)"></mat-radio-button>
                                                         </div>
 
                                                         <strong class="customTooltip">

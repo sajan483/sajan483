@@ -70,13 +70,11 @@ export class CreateTripHelper {
             element.adults + "ADT_" + element.children + "CHD_";
         }
       });
-
       grouped.forEach((x) => {
         x.insertedAvailableCount = x.rooms
           .map((room) => room.available_count)
           .reduce((a, b) => a + b, 0);
       });
-
       rooms.forEach((el) => {
         grouped.forEach((elmt) => {
           if (elmt.insertedAvailableCount == rooms.length) {
@@ -88,7 +86,6 @@ export class CreateTripHelper {
           }
         });
       });
-
       selectedRoomGroups.forEach((x) => {
         x.rooms.forEach((room) => {
           room.adult_number = room.pax_info
@@ -101,10 +98,10 @@ export class CreateTripHelper {
             .reduce((a, b) => a + b, 0);
         });
       });
-
       selectedRoomGroups = selectedRoomGroups.filter(
         this.helperService.onlyUnique
       );
+      
       container.roomGroups = selectedRoomGroups;
     }
     if (!isGrouped) {
