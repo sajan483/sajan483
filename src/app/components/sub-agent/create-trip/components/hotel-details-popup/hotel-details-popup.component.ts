@@ -195,7 +195,7 @@ export class HotelDetailsPopupComponent implements OnInit ,OnChanges{
   /*
    * this method for selecting room
    */
-  roomSelectionCheckboxChecked(i, j) {
+  isGroupedFalseRadioButtonClicked(i, j) {
     if (this.selectedRoomGroups[i].rooms.length > 0) {
       for (let k = 0; k < this.selectedRoomGroups[i].rooms.length; k++) {
         if (this.selectedRoomGroups[i].rooms[k].isRoomSelectionChecked) {
@@ -215,12 +215,10 @@ export class HotelDetailsPopupComponent implements OnInit ,OnChanges{
   /*
    * this method for selecting room if it is grouped
    */
-  isGroupedRadioClicked(i,j){
+  isGroupedTrueRadioButtonClicked(i,j){
     this.selectedRoomCount = 0;
     this.totalRoomPrice = 0;
-    for (let k = 0; k < this.selectedRoomGroups.length; k++) {
-      this.selectedRoomGroups[k].isRoomSelectionChecked = false;
-    }
+    this.selectedRoomGroups.forEach((el)=>{el.isRoomSelectionChecked = false})
     this.totalRoomPrice = this.selectedRoomGroups[i].rooms[j].insertedAmount;
     this.selectedRoomGroups[i].isRoomSelectionChecked = true;
     this.selectedRoomCount = this.rooms.length;
