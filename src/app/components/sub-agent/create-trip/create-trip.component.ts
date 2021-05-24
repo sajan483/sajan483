@@ -916,22 +916,39 @@ export class CreateTripComponent implements OnInit, AfterViewChecked, DoCheck {
  * this method for fetching hotel list
  */
   hotelSearch(city: string) {
+    this.hotelsList = [];
+    if (!this.appStore.showShimmer) {
+      this.appStore.showShimmer = true;
+      this.showShimmer = true;
+    }
+
     this.common.pilotHotelSearch(this.createTripAdapter.hotelSearchRequest(city, this.userDetails), this.appStore.langCode).subscribe(
       (data) => {
-        if (city === "MAKKA") {
-          this.hotelsList = data;
-          sessionStorage.setItem('mkSearchId', data.search_id)
-        };
-        if (city === "MADEENA") {
-          this.madeenaCheckInDate = JSON.parse(sessionStorage.getItem('userObject')).madeenaCheckinDate;
-          this.madeenaCheckOutDate = JSON.parse(sessionStorage.getItem('userObject')).madeenaCheckoutDate
-          this.noOfDaysInMadeena = this.helperService.noOfDaysBetweenTwoDates(this.madeenaCheckOutDate, this.madeenaCheckInDate)
-          sessionStorage.setItem('mdSearchId', data.search_id);
-        }
-        this.common.getHotelList(data.search_id, this.selectedCurrency, "en-US").subscribe(
-          (data) => {
+        if (data) {
+          if (city === "MAKKA") {
             this.hotelsList = data;
-            if (this.hotelsList.length == 0) {
+            sessionStorage.setItem('mkSearchId', data.search_id)
+          };
+          if (city === "MADEENA") {
+            this.madeenaCheckInDate = JSON.parse(sessionStorage.getItem('userObject')).madeenaCheckinDate;
+            this.madeenaCheckOutDate = JSON.parse(sessionStorage.getItem('userObject')).madeenaCheckoutDate
+            this.noOfDaysInMadeena = this.helperService.noOfDaysBetweenTwoDates(this.madeenaCheckOutDate, this.madeenaCheckInDate)
+            sessionStorage.setItem('mdSearchId', data.search_id);
+          }
+          this.common.getHotelList(data.search_id, this.selectedCurrency, "en-US").subscribe(
+            (data) => {
+              this.hotelsList = data;
+              if (this.hotelsList.length == 0) {
+                Swal.fire({
+                  icon: 'error',
+                  text: 'Something Went Wrong',
+                  confirmButtonText: 'Search Again'
+                }).then((result) => {
+                  this.router.navigate(['subagent/home']);
+                })
+              }
+            },
+            (error) => {
               Swal.fire({
                 icon: 'error',
                 text: 'Something Went Wrong',
@@ -940,17 +957,11 @@ export class CreateTripComponent implements OnInit, AfterViewChecked, DoCheck {
                 this.router.navigate(['subagent/home']);
               })
             }
-          },
-          (error) => {
-            Swal.fire({
-              icon: 'error',
-              text: 'Something Went Wrong',
-              confirmButtonText: 'Search Again'
-            }).then((result) => {
-              this.router.navigate(['subagent/home']);
-            })
-          }
-        );
+          );
+        }
+        else {
+          this.showShimmer = true;
+        }
       }),
       (error) => {
         Swal.fire({
