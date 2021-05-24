@@ -470,5 +470,16 @@
     "Enter Passport Number": "أدخل رقم جواز السفر",
     "Enter Email": "أدخل البريد الإلكتروني",
     "Enter Address": "أدخل العنوان",
-    "Expiry Date": "تاريخ الانتهاء"
+    "Expiry Date": "تاريخ الانتهاء",
+    "Welcome": "مرحبا",
+    "Create Package": "إنشاء الحزمة",
+    "My Profile": "ملفي",
+    "Logout": "تسجيل خروج",
+    "Check-in date": "تاريخ الوصول",
+    "Check-out date": "موعد انتهاء الأقامة",
+    "Success": "نجاح",
+    "Failed": "باءت بالفشل",
+    "Partially Success": "نجاح جزئي",
+    "Cancelled": "ألغيت",
+    "Nights": "ليالي"
 }

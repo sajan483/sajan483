@@ -469,5 +469,16 @@
     "Enter Passport Number": "Enter Passport Number",
     "Enter Email": "Enter Email",
     "Enter Address": "Enter Address",
-    "Expiry Date": "Expiry Date"
+    "Expiry Date": "Expiry Date",
+    "Welcome": "Welcome",
+    "Create Package": "Create Package",
+    "My Profile": "My Profile",
+    "Logout": "Logout",
+    "Check-in date": "Check-in date",
+    "Check-out date": "Check-out date",
+    "Success": "Success",
+    "Failed": "Failed",
+    "Partially Success": "Partially Success",
+    "Cancelled": "Cancelled",
+    "Nights": "Nights"
 }

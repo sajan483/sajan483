@@ -116,9 +116,10 @@
                         <div class="col-md-6">
                             <p class="mb-0 fs14 pl-1">{{'Check-in' | translate}}</p>
                             <div [owlDateTimeTrigger]="dt3" class="position-relative" (click)="resetDatesForRefresh()">
-                                <input placeholder="Check-in date" class="owldatepicker fs14 bordrservice removeoutline"
-                                    [(ngModel)]="makkaCheckInDate" [min]="makkahmin" [max]="madeenaCheckInDate"
-                                    [owlDateTime]="dt3" (ngModelChange)="dataChangedFromMakkaDates($event)">
+                                <input placeholder="{{'Check-in date' | translate}}"
+                                    class="owldatepicker fs14 bordrservice removeoutline" [(ngModel)]="makkaCheckInDate"
+                                    [min]="makkahmin" [max]="madeenaCheckInDate" [owlDateTime]="dt3"
+                                    (ngModelChange)="dataChangedFromMakkaDates($event)">
                                 <i class="icns calendaricon icon_size_20 cursor-pointer calendarposition"></i>
                             </div>
                             <owl-date-time [pickerType]="'calendar'" #dt3></owl-date-time>
@@ -126,7 +127,7 @@
                         <div class="col-md-6">
                             <p class="mb-0 fs14 pl-1">{{'Check-out' | translate}}</p>
                             <div [owlDateTimeTrigger]="dt4" class="position-relative">
-                                <input #makkaOutDatePicker placeholder="Check-out date"
+                                <input #makkaOutDatePicker placeholder="{{'Check-out date' | translate}}"
                                     class="owldatepicker removeoutline fs14 bordrservice" [owlDateTime]="dt4"
                                     [(ngModel)]="makkaCheckOutDate" [min]="madeenmin" [max]="madeenaMindate"
                                     (ngModelChange)="dataChangedFromMakkaOutDates($event)">
@@ -169,7 +170,7 @@
                         <div class="col-md-6">
                             <p class="mb-0 fs14 pl-1">{{'Check-in' | translate}}</p>
                             <div [owlDateTimeTrigger]="dt1" class="position-relative" (click)="resetDatesForRefresh()">
-                                <input #madeenaInPicker placeholder="Check-in date"
+                                <input #madeenaInPicker placeholder="{{'Check-in date' | translate}}"
                                     class="owldatepicker fs14 bordrservice removeoutline"
                                     [(ngModel)]="madeenaCheckInDate" [min]="madeenaMin" [max]="madeenaMaxdate"
                                     [owlDateTime]="dt1" (ngModelChange)="dataChangedFromMadeenaDates('in')">
@@ -180,7 +181,7 @@
                         <div class="col-md-6">
                             <p class="mb-0 fs14 pl-1">{{'Check-out' | translate}}</p>
                             <div [owlDateTimeTrigger]="dt2" class="position-relative">
-                                <input #madeenaOutPicker placeholder="Check-out date"
+                                <input #madeenaOutPicker placeholder="{{'Check-out date' | translate}}"
                                     class="owldatepicker removeoutline fs14 bordrservice" [owlDateTime]="dt2"
                                     [(ngModel)]="madeenaCheckOutDate" [min]="madeenamax"
                                     (ngModelChange)="dataChangedFromMadeenaDates('out')">
@@ -222,8 +223,9 @@
                     <div class="col-md-3">
                         <p class="mb-0 fs14 pl-1">{{'Start Date' | translate}}</p>
                         <div [owlDateTimeTrigger]="dt5" class="position-relative">
-                            <input placeholder="Check-in date" class="owldatepicker fs14 bordrservice removeoutline"
-                                [(ngModel)]="transportStartDate" [owlDateTime]="dt5" [min]="transportmin"
+                            <input placeholder="{{'Check-in date' | translate}}"
+                                class="owldatepicker fs14 bordrservice removeoutline" [(ngModel)]="transportStartDate"
+                                [owlDateTime]="dt5" [min]="transportmin"
                                 (ngModelChange)="dataChangedFromTransportDate('in')">
                             <i class="icns calendaricon icon_size_20 cursor-pointer calendarposition"></i>
                         </div>
@@ -233,7 +235,7 @@
                         <p class="mb-0 fs14 pl-1">{{'Vehicle Type' | translate}}</p>
                         <select name="rote" id="umrahVehicle" class="removeoutline bordrservice w-100 pl10 fs14"
                             (change)="onVehicleSelect($event.target.value)">
-                            <option value="" disabled selected>Select</option>
+                            <option value="" disabled selected>{{'Select' | translate}}</option>
                             <option *ngFor="let item of vehicleTypeList" [value]="item.id">{{item.name | translate}}
                             </option>
                         </select>
@@ -242,7 +244,7 @@
                         <p class="mb-0 fs14 pl-1">{{'Route' | translate}}</p>
                         <select name="rote" id="umrahRoute" class="removeoutline bordrservice w-100 pl10 fs14"
                             (change)="onRouteSelect($event.target.value)">
-                            <option value="" disabled selected>Select</option>
+                            <option value="" disabled selected>{{'Select' | translate}}</option>
                             <option *ngFor="let item of routeList" [value]="item.code">{{item.name}}</option>
                         </select>
                     </div>
@@ -252,7 +254,7 @@
                 <div class="p-2 mrBtm" *ngIf="viewsearchbutton">
                     <button type="submit" data-hover="SEARCH NOW" class="searchbutton " name="search-accommodation"
                         (click)="searchButtonClicked()" [disabled]="!enableSearchButton">
-                        Search
+                        {{'Search' | translate}}
                     </button>
                 </div>
             </div>

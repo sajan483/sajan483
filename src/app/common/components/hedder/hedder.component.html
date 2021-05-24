@@ -20,7 +20,8 @@
             <div class="dropdown" *ngIf="subAgencyActive">
                 <div class="d-flex cursor-pointer hidemobile mr-3">
                     <div class="pr-2">
-                        <p class="mb-0 wlcmtext">Welcome <i class="fa fa-caret-down" aria-hidden="true"></i></p>
+                        <p class="mb-0 wlcmtext">{{'Welcome' | translate }} <i class="fa fa-caret-down"
+                                aria-hidden="true"></i></p>
                         <p class="mb-0 f15">{{userType | titlecase}}</p>
                     </div>
                     <i class="userpic icns icon_size_40"></i>
@@ -32,28 +33,30 @@
                     <a (click)="navigatepage('subagent/home');">
                         <div class="d-flex padngover mt-2">
                             <i class="icns createpackages icon_size_25"></i>
-                            <p class="f15 my-auto pl15" [class.clrred]="router.url === 'subagent/home'">Create Package
+                            <p class="f15 my-auto pl15" [class.clrred]="router.url === 'subagent/home'">{{'Create
+                                Package' | translate }}
                             </p>
                         </div>
                     </a>
                     <a (click)="navigatepage('subagent/history');">
                         <div class="d-flex padngover">
                             <i class="icns historyicon icon_size_20"></i>
-                            <p class="f15 my-auto pl20" [class.clrred]="router.url === 'subagent/history'">Transactions
+                            <p class="f15 my-auto pl20" [class.clrred]="router.url === 'subagent/history'">
+                                {{'Transactions' | translate }}
                             </p>
                         </div>
                     </a>
                     <a (click)="navigatepage('subagent/profilepage');">
                         <div class="d-flex padngover">
                             <i class="icns myprofile icon_size_20"></i>
-                            <p class="f15 my-auto pl20" [class.clrred]="router.url === 'subagent/profilepage'">My
-                                Profile</p>
+                            <p class="f15 my-auto pl20" [class.clrred]="router.url === 'subagent/profilepage'">{{'My
+                                Profile' | translate }}</p>
                         </div>
                     </a>
                     <a class="bgred" (click)="logout();">
                         <div class="d-flex padngover">
                             <i class="icns logouticon icon_size_20"></i>
-                            <p class="f15 my-auto pl20">Logout</p>
+                            <p class="f15 my-auto pl20">{{'Logout' | translate }}</p>
                         </div>
                     </a>
                 </div>
