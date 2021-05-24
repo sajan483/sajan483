@@ -41,7 +41,7 @@
                     </div>
                 </mat-step>
                 <mat-step label="{{'Madeena Hotel' | translate }}" *ngIf="steps.includes('2')" state="apartment">
-                    <div *ngIf="showShimmer">
+                    <div *ngIf="showShimmer && hotelsList.length == 0">
                         <app-loader></app-loader>
                     </div>
                     <div *ngIf="hotelsList && hotelsList.length > 0">
