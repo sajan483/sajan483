@@ -47,6 +47,15 @@ export class HedderComponent implements OnInit, DoCheck {
     }
   }
 
+  ngAfterViewChecked() {
+    this.translate.use((sessionStorage.getItem('userLanguage') === 'ar-AE') ? "ar-AE" : "en-US");
+    if (sessionStorage.getItem('userLanguage') == "ar-AE") {
+      (<HTMLInputElement>document.getElementById("body")).classList.add('mirror_css');
+    } else {
+      (<HTMLInputElement>document.getElementById("body")).classList.remove('mirror_css');
+    }
+  }
+
   logout() {
     sessionStorage.clear();
     this.superAgencyActive = false;
