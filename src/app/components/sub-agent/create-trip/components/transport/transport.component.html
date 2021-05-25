@@ -68,7 +68,7 @@
                             <div class="fs13 fw400 clr52">({{'Per Vehicle' | translate}})</div>
                             <div>
                                 <button class="searchbutton mr-0" [disabled]="vehicle.categories[0].out_of_stock"
-                                    (click)="bookTransport(item.company_code,item.vehicle_types[index])">{{'Book' |
+                                    (click)="bookTransport(item.company_code,item.vehicle_types[index])">{{'Select' |
                                     translate}}</button>
                                 <p class="red_text fs13 fw500" *ngIf="vehicle.categories[0].out_of_stock">{{'Out Of
                                     Stock' | translate}}
