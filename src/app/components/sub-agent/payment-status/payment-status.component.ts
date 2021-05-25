@@ -158,6 +158,7 @@ export class PaymentStatusComponent implements OnInit {
   }
 
   invoiceClick(item: any) {
+    if(this.bknStatus == 'success'){
     this.invoicetoggle = true;
     if (item == "View") {
       this.invoiceClickHtml()
@@ -165,9 +166,11 @@ export class PaymentStatusComponent implements OnInit {
     if (item == "Download") {
       this.invoiceClickPdf()
     }
+    }
   }
 
   voucherClick(item: any) {
+    if(this.bknStatus == 'success'){
     this.vouchertoggle = true;
     if (item == "View") {
       this.voucherClickHtml()
@@ -175,6 +178,7 @@ export class PaymentStatusComponent implements OnInit {
     if (item == "Download") {
       this.voucherClickPdf()
     }
+  }
   }
 
   invoiceClickHtml() {

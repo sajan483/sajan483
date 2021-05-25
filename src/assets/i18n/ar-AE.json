@@ -481,5 +481,7 @@
     "Failed": "باءت بالفشل",
     "Partially Success": "نجاح جزئي",
     "Cancelled": "ألغيت",
-    "Nights": "ليالي"
+    "Nights": "ليالي",
+    "Something Went Wrong..!!":"هناك خطأ ما..!!",
+    "Please Contact Customer care":"يرجى الاتصال بخدمة العملاء"
 }
