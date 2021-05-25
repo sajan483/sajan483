@@ -480,5 +480,7 @@
     "Failed": "Failed",
     "Partially Success": "Partially Success",
     "Cancelled": "Cancelled",
-    "Nights": "Nights"
+    "Nights": "Nights",
+    "Something Went Wrong..!!":"Something Went Wrong..!!",
+    "Please Contact Customer care":"Please Contact Customer care"
 }
