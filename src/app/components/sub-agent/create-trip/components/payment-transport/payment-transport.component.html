@@ -29,8 +29,7 @@
                 </div>
             </div>
             <div class="float-right fs16 fw500 pt-2 customTooltip">
-                {{tripTransport?.trip_vehicles[0]?.currency}} {{tripTransport?.prices_summary?.total_price +
-                tripTransport?.prices_summary?.gds_fee + tripTransport?.prices_summary?.ota_fee | number:'.2-2'}}
+                {{tripTransport?.trip_vehicles[0]?.currency}} {{tripTransport?.prices_summary?.total_price | number:'.2-2'}}
                 <span class="customtooltiptext">
                     <div class="container mb-2">
                         <p class="pt-2 fare_summary_heading">{{'Fare Summary'
@@ -44,7 +43,7 @@
                             </div>
                         </div>
                         <p class=" pt-2 pr-5 hotel_price_total">{{'You Pay'}}
-                            {{tripTransport?.prices_summary?.total_price}}
+                            {{tripTransport?.prices_summary?.total_price | number:'.2-2'}}
                         </p>
                     </div>
                 </span>
