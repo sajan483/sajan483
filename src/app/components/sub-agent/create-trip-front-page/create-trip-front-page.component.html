@@ -236,7 +236,7 @@
                         <select name="rote" id="umrahVehicle" class="removeoutline bordrservice w-100 pl10 fs14"
                             (change)="onVehicleSelect($event.target.value)">
                             <option value="" disabled selected>{{'Select' | translate}}</option>
-                            <option *ngFor="let item of vehicleTypeList" [value]="item.id">{{item.name | translate}}
+                            <option *ngFor="let item of getVehicleList()" [value]="item.id">{{item.name | translate}}
                             </option>
                         </select>
                     </div>

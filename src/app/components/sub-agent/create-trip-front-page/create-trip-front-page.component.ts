@@ -238,7 +238,24 @@ export class CreateTripFrontPageComponent implements OnInit, DoCheck, AfterViewI
       .getVehicles(sessionStorage.getItem("userLanguage"))
       .subscribe((data) => {
         this.vehicleTypeList = data.vehicle_types;
+        this.processVehicleTypeListResponse();
       });
+  }
+
+  processVehicleTypeListResponse() {
+    if (this.vehicleTypeList && this.vehicleTypeList.length > 0)
+      this.vehicleTypeList.forEach(lst => {
+        if (this.appStore.totalTravellers <= lst.max_capacity)
+          lst.Status = true;
+        else
+          lst.Status = false;
+      });
+  }
+
+  getVehicleList() {
+    this.processVehicleTypeListResponse();
+    if (this.vehicleTypeList && this.vehicleTypeList.length > 0)
+      return this.vehicleTypeList.filter(lst => lst.Status && lst.Status == true);
   }
 
   /**
@@ -249,6 +266,10 @@ export class CreateTripFrontPageComponent implements OnInit, DoCheck, AfterViewI
     this.displayTabtravel = !this.displayTabtravel;
   }
 
+  countTotalTravellers() {
+    this.appStore.totalTravellers = this.appStore.adultCount + this.appStore.childCount + this.appStore.infantCount;
+  }
+
   /**
    * This method for adding adult count at the traveller popup
    * 
@@ -256,6 +277,7 @@ export class CreateTripFrontPageComponent implements OnInit, DoCheck, AfterViewI
   addAdult() {
     this.countAdult = this.countAdult + 1;
     this.appStore.adultCount = this.countAdult;
+    this.countTotalTravellers();
   }
 
   /**
@@ -266,6 +288,7 @@ export class CreateTripFrontPageComponent implements OnInit, DoCheck, AfterViewI
     if (this.countAdult > 1) {
       this.countAdult = this.countAdult - 1;
       this.appStore.adultCount = this.countAdult;
+      this.countTotalTravellers();
     }
   }
 
@@ -276,6 +299,7 @@ export class CreateTripFrontPageComponent implements OnInit, DoCheck, AfterViewI
   addChild() {
     this.countChild = this.countChild + 1;
     this.appStore.childCount = this.countChild;
+    this.countTotalTravellers();
   }
 
   /**
@@ -286,6 +310,7 @@ export class CreateTripFrontPageComponent implements OnInit, DoCheck, AfterViewI
     if (this.countChild > 1) {
       this.countChild = this.countChild - 1;
       this.appStore.childCount = this.countChild;
+      this.countTotalTravellers();
     }
   }
 
@@ -297,6 +322,7 @@ export class CreateTripFrontPageComponent implements OnInit, DoCheck, AfterViewI
     if (this.countInfant > 0) {
       this.countInfant = this.countInfant - 1;
       this.appStore.infantCount = this.countInfant;
+      this.countTotalTravellers();
     }
   }
 
@@ -307,6 +333,7 @@ export class CreateTripFrontPageComponent implements OnInit, DoCheck, AfterViewI
   addInfant() {
     this.countInfant = this.countInfant + 1;
     this.appStore.infantCount = this.countInfant;
+    this.countTotalTravellers();
   }
 
   /**
