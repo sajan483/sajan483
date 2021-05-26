@@ -67,6 +67,14 @@ export class HelperService {
         d.setDate(d.getDate() + days);
         return d;
     }
+/*
+    * this method for increase month by number
+    */
+    incrimentmonth(date,months){
+        var y = new Date(date);
+        var z = y.setMonth(y.getMonth() + months)
+        return new Date(z);
+    }
 
     /**
      * convert timeStamp to date
