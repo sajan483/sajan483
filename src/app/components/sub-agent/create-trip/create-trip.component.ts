@@ -100,6 +100,7 @@ export class CreateTripComponent implements OnInit, AfterViewChecked, DoCheck {
   citySecond: string = "";
   transportFailed: string = "";
   bookContinue: boolean;
+  minpassportExpDate: any;
   toggleMeridian() {
     this.meridian = !this.meridian;
   }
@@ -619,6 +620,7 @@ export class CreateTripComponent implements OnInit, AfterViewChecked, DoCheck {
   }
 
   ngOnInit() {
+    this.calculatePed();
     sessionStorage.setItem('steps', JSON.stringify(this.steps))
     this.stage = sessionStorage.getItem('stage')
     this.moveStep()
@@ -650,6 +652,21 @@ export class CreateTripComponent implements OnInit, AfterViewChecked, DoCheck {
       this.travellersForm.controls.phone_number.setValue(data.contactinfo.phone_number)
       this.travellersForm.controls.address.setValue(data.contactinfo.address)
       this.travellersForm.controls.email.setValue(data.contactinfo.email)
+    }
+  }
+
+  calculatePed(){
+    if(sessionStorage.getItem('service') == 'All' || sessionStorage.getItem('service') == 'Makkah Hotel'){
+      var tripStartDate = JSON.parse(sessionStorage.getItem('userObject')).transportStartDate;
+      this.minpassportExpDate = this.helper.incrimentmonth(tripStartDate,6);
+    }
+    if(sessionStorage.getItem('service') == 'Transport'){
+      var tripStartDate = JSON.parse(sessionStorage.getItem('userObject')).transportStartDate;
+      this.minpassportExpDate = this.helper.incrimentmonth(tripStartDate,6);
+    }
+    if(sessionStorage.getItem('service') == 'Transport'){
+      var tripStartDate = JSON.parse(sessionStorage.getItem('userObject')).transportStartDate;
+      this.minpassportExpDate = this.helper.incrimentmonth(tripStartDate,6);
     }
   }
 
