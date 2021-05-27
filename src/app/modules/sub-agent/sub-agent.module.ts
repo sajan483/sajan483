@@ -36,7 +36,8 @@ import { PaymentTransportComponent } from 'src/app/components/sub-agent/create-t
 import { SubAgentApiService } from 'src/app/Services/sub-agent-api-services';
 import { OnlyNumberDirective } from 'src/app/models/onlynumber.directive';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
-import {Ng2TelInputModule} from 'ng2-tel-input';
+import { Ng2TelInputModule } from 'ng2-tel-input';
+import { SubAgentStateService } from '../../Services/sub-agent-state.service';
 
 export function TranslatorFactory(httpClient: HttpClient) { return new TranslateHttpLoader(httpClient, './assets/i18n/', '.json'); }
 import { PaginationComponent } from 'src/app/components/sub-agent/pagination/pagination.component';
@@ -106,7 +107,7 @@ import { PaginationComponent } from 'src/app/components/sub-agent/pagination/pag
   exports: [
     TranslateModule,
   ],
-  providers: [SubAgentApiService, HelperService]
+  providers: [SubAgentApiService, HelperService,SubAgentStateService]
 
 })
 
