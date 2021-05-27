@@ -33,12 +33,19 @@
                     </span>
                 </div>
             </div>
-            <!-- <div class="col-md-2 my-auto" (click)="moreFilter()">
+            <div class="col-md-2 my-auto" (click)="moreFilter()">
                 <div class="cursor-pointer">
-                    <span class="pr-2 fs14">More Filters</span>
-                    <span><i class="fa fa-angle-down"></i></span>
+                    <span class="pr-2 fs14">{{'More Filters' | translate}}</span>
+                    <span class="fliter-arrow">
+                        <div *ngIf="!moreFilterArrow">
+                            <button><i class="fa fa-angle-down"></i></button>
+                        </div>
+                        <div *ngIf="moreFilterArrow">
+                            <button ><i class="fa fa-angle-up"></i></button>
+                        </div>
+                    </span>
                 </div>
-            </div> -->
+            </div>
             <div class="col-md-3 text-right ml-auto pr-0">
                 <input class="haram_filter fs13 mt5" type="text" name="search" [(ngModel)]="userFilter.name" autocomplete="off" placeholder="{{'Search By Hotel Name' | translate}}">
             </div>
@@ -49,35 +56,17 @@
                         <div>
                             <span class="example-list-section">
                                 <ul>
-                                    <li>
-                                        <mat-checkbox>
-                                            <ngb-rating [rate]="5" [readonly]="readonly" [max]=5>
+                                    <li  *ngFor="let item of getAllRatings(); let i = index">
+                                        <mat-checkbox [checked]="item.Tounched" (change)="addFilterModel(item.Type,'starRating',$event)">
+                                            <ngb-rating [rate]="item.Type" [readonly]="readonly" [max]=5>
                                                 <ng-template let-fill="fill" let-index="index">
                                                     <span class="star" [class.filled]="fill === 100"
                                                         [class.bad]="index < 2">&#9733;</span>
-                            </ng-template>
-                            </ngb-rating> (3)
-                            </mat-checkbox>
-                            </li>
-                            <li>
-                                <mat-checkbox>
-                                    <ngb-rating [rate]="4" [readonly]="readonly" [max]=5>
-                                        <ng-template let-fill="fill" let-index="index">
-                                            <span class="star" [class.filled]="fill === 100" [class.bad]="index < 2">&#9733;</span>
-                                        </ng-template>
-                                    </ngb-rating> (5)
-                                </mat-checkbox>
-                            </li>
-                            <li>
-                                <mat-checkbox>
-                                    <ngb-rating [rate]="3" [readonly]="readonly" [max]=5>
-                                        <ng-template let-fill="fill" let-index="index">
-                                            <span class="star" [class.filled]="fill === 100" [class.bad]="index < 2">&#9733;</span>
-                                        </ng-template>
-                                    </ngb-rating> (4)
-                                </mat-checkbox>
-                            </li>
-                            </ul>
+                                                    </ng-template>
+                                                </ngb-rating> ({{item.Type}})
+                                            </mat-checkbox>
+                                    </li>
+                                    </ul>
                             </span>
                         </div>
                     </div>
@@ -87,39 +76,37 @@
                             <span class="pr-2 fs13 clr52">{{'Upto' | translate}}</span>
                             <span>
                                 <mat-slider thumbLabel [displayWith]="formatLabel" tickInterval="1000" min="300"
-                                    max="10000"></mat-slider>
+                                    max="10000" [(ngModel)]= "hotelPriceRange" (input)="onInputPriceRangeFilter($event)"></mat-slider>
                             </span>
                         </div>
                     </div>
                     <div class="col-md-4 mt20">
                         <div>
                             <h4 class="fs14">{{'AMENITIES' | translate}}</h4>
-                            <span class="example-list-section">
+                            <span class="example-list-section amen-scroll">
                                 <ul>
-                                <li>
-                                    <mat-checkbox>
-                                            Free WIFI
-                                    </mat-checkbox>
-                                </li>
-                                <li>
-                                    <mat-checkbox>
-                                        Bathrobe
-                                    </mat-checkbox>
-                                </li>
-                                <li>
-                                    <mat-checkbox>
-                                        Refrigerator
-                                    </mat-checkbox>
-                                </li>
+                                     <li  *ngFor="let item of getAllAmenities(); let i = index">
+                                        <mat-checkbox [checked]="item.Tounched" (change)="addFilterModel(item.Name,'amenities',$event)">  {{item.Name}} </mat-checkbox>
+                                    </li>
                                 </ul>
                             </span>
                         </div>
-
+                    </div>
+                </div>
+                <div class="col-md-12 col-12 row m-0 pl-0 pr-0 filter-group-btn-section">
+                    <div class="col-md-6 col-6"></div>
+                    <div class="col-md-6 col-6 textRight mirrTextLeft">
+                        <span>
+                            <button class="cancel-filter" type="button" (click)="closeFilterPoup()" >{{'Cancel' | translate}}</button>
+                        </span>
+                        <span>
+                            <button class="apply-fliter" type="button" (click)=applyFilter()>{{'Apply' | translate}}</button>
+                        </span>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="padding_hotel1" *ngFor="let item of hotelsList | filterBy: userFilter;let i = index">
+        <div class="padding_hotel1" *ngFor="let item of getAllActiveHotelList() | filterBy: userFilter;let i = index">
             <div class="uitk-card uitk-grid border_box_shadow">
                 <div class="link-container uitk-grid">
                     <div class="row w-100 m-0">

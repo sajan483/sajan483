@@ -10,6 +10,9 @@ import { AppStore } from "src/app/stores/app.store";
 import { GeneralHelper } from "src/app/helpers/General/general-helpers";
 import { SubAgentApiService } from "src/app/Services/sub-agent-api-services";
 import { TranslateService } from '@ngx-translate/core';
+import { SubAgentStateService } from '../../../../../Services/sub-agent-state.service';
+import { HotelFilterModel, HotelFilterModelStarRating, HotelFilterModelAmenities } from '../../../../../models/hotel_filter_model';
+import { SubAgentGeneralHelper } from '../../../../../helpers/sub-agent/general-helper';
 
 @Component({
   selector: "app-makka-hotel",
@@ -48,12 +51,19 @@ export class MakkaHotelComponent implements OnInit,DoCheck{
   showHotelDetailsShimmer: boolean;
   private createTripAdapter: CreateTripAdapter = new CreateTripAdapter(this.helperService,this.appStore);
   private createTripSupport: CreateTripHelper = new CreateTripHelper(this.helperService);
+  private subagentHelper: SubAgentGeneralHelper = new SubAgentGeneralHelper(this.subagentState);
+
   search: string = "";
   hotelData: any;
   showDetailsShimmer: boolean;
   generalHelper:GeneralHelper;
   stage:number;
   steps: any[];
+  moreFilterArrow: boolean = false;
+  uncheckAmenities = false;
+  amenitiesList = [];
+  filterAmenities = [];
+  hotelPriceRange: number = 10000;
   
   constructor(
     private commonService: SubAgentApiService,
@@ -63,7 +73,8 @@ export class MakkaHotelComponent implements OnInit,DoCheck{
     private router: Router,
     private helperService: HelperService,
     private genHelper:GeneralHelper,
-    private translate: TranslateService
+    private translate: TranslateService,
+    private subagentState: SubAgentStateService
   ) {
     this.generalHelper = genHelper;
   }
@@ -81,6 +92,7 @@ export class MakkaHotelComponent implements OnInit,DoCheck{
   }
 
   ngOnInit() {
+    this.setInitialValues();
     if(this.hotelsList[0].city == "Makkah"){
       this.stage  = 0
       sessionStorage.setItem('stage',JSON.stringify(this.stage))
@@ -91,7 +103,13 @@ export class MakkaHotelComponent implements OnInit,DoCheck{
     }
 
     this.checkDetailsOpen()
+    this.processHotelListResponse();
+  }
 
+  setInitialValues() {
+    this.subagentState.FilterModel = {} as HotelFilterModel;
+    this.subagentState.FilterModel.Amenities = [];
+    this.subagentState.FilterModel.StarRating = [];
   }
 
 
@@ -201,7 +219,8 @@ export class MakkaHotelComponent implements OnInit,DoCheck{
     (<HTMLElement>document.getElementById("readMoreBttn"+i)).style.display = "inline-block";
     event.target.previousElementSibling.previousElementSibling.style.maxHeight = null;
   }
-  moreFilter(){
+  moreFilter() {
+    this.moreFilterArrow = !this.moreFilterArrow;
     if((<HTMLElement>document.getElementById("moreFilterDown")).style.maxHeight){
       (<HTMLElement>document.getElementById("moreFilterDown")).style.maxHeight = null;
     }else{
@@ -238,6 +257,148 @@ export class MakkaHotelComponent implements OnInit,DoCheck{
       this.showHotelDetails=false
       sessionStorage.removeItem('hotelData')
     }
+  }
+
+  //function to process the HotelLisr Response
+    // 1. setting FilterStatus;
+    // 2. setting Amenities in subagent state variable
+    // 3. setting StarRating in subagent state variable
+  processHotelListResponse() {
+    if (this.hotelsList && this.hotelsList.length > 0) {
+      this.hotelsList.forEach(list => {
+        list.FilterStatus = true;
+
+        //setting Amenities in State variable
+        if (list.amenities && list.amenities.length > 0) {
+          list.amenities.forEach(amenities => {
+            if (this.subagentState && this.subagentState.FilterModel && this.subagentState.FilterModel.Amenities && this.subagentState.FilterModel.Amenities.length > 0) {
+              if ((this.subagentState.FilterModel.Amenities.filter(am => am.Name == amenities.name)).length == 0) {
+                let obj= {} as HotelFilterModelAmenities;
+                obj.Name = amenities.name;
+                obj.Tounched = false;
+                this.subagentState.FilterModel.Amenities.push(obj);
+              }
+            }
+            else {
+              let obj= {} as HotelFilterModelAmenities;
+              obj.Name = amenities.name;
+              obj.Tounched = false;
+              this.subagentState.FilterModel.Amenities.push(obj);
+            }
+          });
+        }
+        
+        //setting StarRating in State variables
+        let obj2= {} as HotelFilterModelStarRating;
+        if (list.rating) {
+          if (this.subagentState && this.subagentState.FilterModel && this.subagentState.FilterModel.StarRating && this.subagentState.FilterModel.StarRating.length > 0) {
+            if ((this.subagentState.FilterModel.StarRating.filter(ele => ele.Type == list.rating)).length == 0) {
+              obj2.Type = list.rating;
+              obj2.Tounched = false;
+              this.subagentState.FilterModel.StarRating.push(obj2);
+            }
+          }
+          else {
+            obj2.Type = list.rating;
+            obj2.Tounched = false;
+            this.subagentState.FilterModel.StarRating.push(obj2);
+          }
+          //sort
+          if (this.subagentState && this.subagentState.FilterModel && this.subagentState.FilterModel.StarRating && this.subagentState.FilterModel.StarRating.length > 0) {
+            this.subagentState.FilterModel.StarRating.sort((a, b) => b.Type - a.Type);
+          }
+        }
+      });
+    }
+  }
+
+  //function to fetch all hotelList with FilterStatus true
+  getAllActiveHotelList() {
+    //Resetting hotelList when no filter is applied
+    if (this.subagentState && this.subagentState.FilterModel) {
+      if (!this.subagentState.FilterModel.FilterApplied) {
+        this.resetHotelList();
+      }
+    }
+
+    if (this.hotelsList && this.hotelsList.length > 0) {
+      return this.hotelsList.filter(lst => lst.FilterStatus && lst.FilterStatus == true);
+    }
+  }
+
+  //function to fetch all amenities
+  getAllAmenities() {
+    if (this.subagentState && this.subagentState.FilterModel && this.subagentState.FilterModel.Amenities && this.subagentState.FilterModel.Amenities.length > 0)
+      return this.subagentState.FilterModel.Amenities;
+  }
+
+  //function to fetch all ratings
+  getAllRatings() {
+    if (this.subagentState && this.subagentState.FilterModel && this.subagentState.FilterModel.StarRating && this.subagentState.FilterModel.StarRating.length > 0)
+      return this.subagentState.FilterModel.StarRating;
+  }
+
+  //function to set amenities & starrating tounched
+  addFilterModel(item: any, flag: string, event) {
+    
+      if (this.subagentState && this.subagentState.FilterModel) {
+        if (flag == "amenities") {
+          if (this.subagentState.FilterModel.Amenities && this.subagentState.FilterModel.Amenities.length > 0) {
+            this.subagentState.FilterModel.Amenities.forEach(amenities => {
+              if (amenities.Name == item) {
+                if (event.checked)
+                  amenities.Tounched = true;
+                else
+                amenities.Tounched = false;
+              }
+               
+            });
+          }
+        }
+        if (flag = "starRating") {
+          if (this.subagentState.FilterModel.StarRating && this.subagentState.FilterModel.StarRating.length > 0) {
+            this.subagentState.FilterModel.StarRating.forEach(rating => {
+              if (rating.Type == item) {
+                if (event.checked)
+                  rating.Tounched = true;
+                else
+                  rating.Tounched = false;
+              }
+            });
+          }
+         
+        }
+      }
+    
+  }
+
+  //function to process filter
+  applyFilter() {
+    this.resetHotelList();
+    this.hotelsList = this.subagentHelper.processHotelFilter(this.hotelsList);
+  }
+
+  //function to close Filter PopUp
+  closeFilterPoup() {
+    this.subagentHelper.resetFilterModel();
+    this.resetHotelList();
+    this.moreFilter();
+  }
+
+  //function to set all FilterStatus true for HotelList
+  resetHotelList() {
+    if (this.hotelsList && this.hotelsList.length > 0) {
+      this.hotelsList.forEach(list => {
+        list.FilterStatus = true;
+      });
+    }
+  }
+
+  //function to filter priceRange
+  onInputPriceRangeFilter(event) {
+    this.hotelPriceRange = event.value;
+    this.subagentState.FilterModel.PriceRange = this.hotelPriceRange;
+    this.hotelsList = this.subagentHelper.filterHotelListWithPriceRange(this.hotelsList);
   }
 
 }

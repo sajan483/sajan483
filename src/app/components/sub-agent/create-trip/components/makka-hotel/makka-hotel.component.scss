@@ -1,3 +1,4 @@
+$primary_blue:#027ce9;
 @media only screen and (max-width: 768px) {
     .hotel_name {
         white-space: normal !important;
@@ -218,4 +219,74 @@
     max-height: 0;
     overflow: hidden;
     transition: max-height 0.2s ease-out;
+}
+
+.filter-group-btn-section {
+    padding: 14px 0 14px 0;
+    border-top: 1px solid #ccc;
+}
+
+.apply-fliter {
+    padding: 11px 45px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 12px;
+    font-weight: 500;
+    line-height: 1;
+    margin: 4px 2px;
+    transition-duration: 0.4s;
+    cursor: pointer;
+    background-image: linear-gradient(to right, #017ce6, #03bff0);
+    color: #ffffff;
+    border-radius: 21px;
+    border: none;
+    outline: none;
+}
+.cancel-filter {
+    outline: none;
+    padding: 11px 45px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 12px;
+    font-weight: 500;
+    line-height: 1;
+    margin: 4px 2px;
+    transition-duration: 0.4s;
+    cursor: pointer;
+    background-color: #ffffff;
+    color: $primary_blue;
+    border-radius: 21px;
+    border: solid 1px $primary_blue;
+    margin-left: 230px;
+}
+.reset-filter {
+    color: $primary_blue;
+    border: none;
+    outline: none;
+    background: none;
+}
+.more_filter {
+    font-size: 14px;
+}
+.fliter-arrow {
+    div {
+        display: inline;
+    }
+    button {
+        border: none;
+        background: none;
+        outline: none;
+        i {
+            color: $primary_blue;
+        }
+    }
+}
+.textright {
+    text-align: right;
+}
+.amen-scroll{
+    height: 200px;
+    overflow: auto;
 }
