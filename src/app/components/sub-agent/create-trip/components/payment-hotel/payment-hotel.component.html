@@ -207,7 +207,7 @@
                 <div class="col-md-12 row m-0 p-2 brdrtop" *ngFor="let room of tripHotel?.room_variations">
                     <div class="col-md-4 col-6 clr52 fs14 fw600">{{room?.title}}</div>
                     <div class="col-md-4 col-6 fs14 clr52 fw500"><strong
-                            class="pr-1 fw600">{{room?.max_guests}}</strong>Guests</div>
+                            class="pr-1 fw600">{{room?.max_guests}}</strong>{{'Guests' | translate}}</div>
                     <div class="col-md-2 col-6 fs12">{{room?.room?.is_refundable}}</div>
                     <!-- <div class="col-md-2 col-6 text-right fs14">{{room?.currency}} {{room?.room?.amount}}</div> -->
                 </div>

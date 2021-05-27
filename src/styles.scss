@@ -553,6 +553,11 @@ body {
     .w150 {
         width: 150px !important;
     }
+    .calendarposition {
+        position: absolute;
+        top: 12px;
+        right: 83% !important;
+    }
 }
 
 ::ng-deep.tag {
