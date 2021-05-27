@@ -71,7 +71,7 @@
             </div>
 
             <div class="col-md-9 pl-0" *ngIf="!shimmer">
-                <h2 class="fs16 Premium_blue fw600 pt25" *ngIf="tripMakkahHotel != null">{{'Review Makkah Hotel Details'
+                <h2 class="fs16 Premium_blue fw600 pt25" *ngIf="tripMakkahHotel != null">{{'Makkah Hotel Details'
                     | translate}}
                 </h2>
                 <div class="border_box_shadow bg_white" [class.errorBox]="tripMakkahHotel?.status== 'failed'"
@@ -214,7 +214,7 @@
                     </div>
                 </div>
 
-                <h2 class="fs16 Premium_blue fw600 pt25" *ngIf="tripMadeenaHotel != null">{{'Review Madinah Hotel
+                <h2 class="fs16 Premium_blue fw600 pt25" *ngIf="tripMadeenaHotel != null">{{'Madinah Hotel
                     Details' | translate}}
                 </h2>
                 <div class="border_box_shadow bg_white" [class.errorBox]="tripMadeenaHotel?.status== 'failed'"
@@ -357,7 +357,7 @@
                 </div>
 
                 <!-- transport -->
-                <h2 class="fs16 Premium_blue fw600 pt25" *ngIf="tripTransport?.total_price != null">{{'Review Transport
+                <h2 class="fs16 Premium_blue fw600 pt25" *ngIf="tripTransport?.total_price != null">{{'Transport
                     Details' | translate}}</h2>
                 <div class="border_box_shadow bg_white" [class.errorBox]="tripTransport?.status== 'failed'"
                     *ngIf="tripTransport?.total_price != null">
