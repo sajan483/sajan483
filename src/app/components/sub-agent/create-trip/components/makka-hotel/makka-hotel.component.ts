@@ -259,10 +259,12 @@ export class MakkaHotelComponent implements OnInit,DoCheck{
     }
   }
 
-  //function to process the HotelLisr Response
-    // 1. setting FilterStatus;
-    // 2. setting Amenities in subagent state variable
-    // 3. setting StarRating in subagent state variable
+   /**
+   * function to process the HotelLisr Response
+   *  1. setting FilterStatus;
+   *  2. setting Amenities in subagent state variable
+   *  3. setting StarRating in subagent state variable
+   */
   processHotelListResponse() {
     if (this.hotelsList && this.hotelsList.length > 0) {
       this.hotelsList.forEach(list => {
@@ -312,7 +314,10 @@ export class MakkaHotelComponent implements OnInit,DoCheck{
     }
   }
 
-  //function to fetch all hotelList with FilterStatus true
+  /**
+   * function to fetch all hotelList with FilterStatus true
+   * @returns HotelList
+   */
   getAllActiveHotelList() {
     //Resetting hotelList when no filter is applied
     if (this.subagentState && this.subagentState.FilterModel) {
@@ -326,19 +331,30 @@ export class MakkaHotelComponent implements OnInit,DoCheck{
     }
   }
 
-  //function to fetch all amenities
+  /**
+   * function to fetch all amenities 
+   * @returns Amenities
+   */
   getAllAmenities() {
     if (this.subagentState && this.subagentState.FilterModel && this.subagentState.FilterModel.Amenities && this.subagentState.FilterModel.Amenities.length > 0)
       return this.subagentState.FilterModel.Amenities;
   }
 
-  //function to fetch all ratings
+  /**
+   * function to fetch all ratings 
+   * @returns StarRatings
+   */
   getAllRatings() {
     if (this.subagentState && this.subagentState.FilterModel && this.subagentState.FilterModel.StarRating && this.subagentState.FilterModel.StarRating.length > 0)
       return this.subagentState.FilterModel.StarRating;
   }
 
-  //function to set amenities & starrating tounched
+  /**
+   * function to set amenities & starrating tounched
+   * @param item indicated the amenity & starRating
+   * @param flag to indicate whether it is amenity or starrating
+   * @param event to indicate whether checked or unchecked event
+   */
   addFilterModel(item: any, flag: string, event) {
     
       if (this.subagentState && this.subagentState.FilterModel) {
@@ -372,20 +388,26 @@ export class MakkaHotelComponent implements OnInit,DoCheck{
     
   }
 
-  //function to process filter
+  /**
+   * function to process filter
+   */
   applyFilter() {
     this.resetHotelList();
     this.hotelsList = this.subagentHelper.processHotelFilter(this.hotelsList);
   }
 
-  //function to close Filter PopUp
+  /**
+   * function to close Filter PopUp
+   */
   closeFilterPoup() {
     this.subagentHelper.resetFilterModel();
     this.resetHotelList();
     this.moreFilter();
   }
 
-  //function to set all FilterStatus true for HotelList
+  /**
+   * function to set all FilterStatus true for HotelList
+   */
   resetHotelList() {
     if (this.hotelsList && this.hotelsList.length > 0) {
       this.hotelsList.forEach(list => {
@@ -394,7 +416,9 @@ export class MakkaHotelComponent implements OnInit,DoCheck{
     }
   }
 
-  //function to filter priceRange
+  /**
+   * function to filter priceRange
+   */
   onInputPriceRangeFilter(event) {
     this.hotelPriceRange = event.value;
     this.subagentState.FilterModel.PriceRange = this.hotelPriceRange;
