@@ -30,7 +30,7 @@ export class HotelDetailsPopupComponent implements OnInit ,OnChanges{
   moreimages: boolean;
   imageshow: number;
   isGrouped: boolean;
-  rooms: Room[];
+  rooms: any[];
   showHotelDetails: boolean = false;
   makkaSelectActivate: boolean;
   totalRoomPrice: number = 0;
@@ -99,7 +99,8 @@ export class HotelDetailsPopupComponent implements OnInit ,OnChanges{
    ngOnInit() {
     this.totalTravellers = JSON.parse(sessionStorage.getItem('userObject')).travallersCount;
     this.rooms = JSON.parse(sessionStorage.getItem('roomData'));
-    /*
+    this.selectedRoomCount = this.rooms.length
+     /*
      * this method for fetching selected hotel details
      */
     if(sessionStorage.getItem('hotelData') != null){
@@ -216,7 +217,7 @@ export class HotelDetailsPopupComponent implements OnInit ,OnChanges{
    * this method for selecting room if it is grouped
    */
   isGroupedTrueRadioButtonClicked(i,j){
-    this.selectedRoomCount = 0;
+   // this.selectedRoomCount = 0;
     this.totalRoomPrice = 0;
     this.selectedRoomGroups.forEach((el)=>{el.isRoomSelectionChecked = false})
     this.totalRoomPrice = this.selectedRoomGroups[i].rooms[j].insertedAmount;

@@ -80,8 +80,8 @@
                             </div>
                             <div class="p-2 roomsGuests mt-2">
                                 <label>{{'ROOMS & GUESTS' | translate}}</label>
-                                <h6 class="date">{{selectedRoomCount}}
-                                    <span class="fs16 clr52 fw500">{{'room' | translate }} </span> {{totalTravellers}}
+                                <h6 class="date">
+                                    {{selectedRoomCount}}<span class="fs16 clr52 fw500">{{'room' | translate }} </span> {{totalTravellers}}
                                     <span class="fs16 clr52 fw500">{{'Guest' | translate}} </span>
                                 </h6>
                             </div>
@@ -176,7 +176,7 @@
                                                         <div class="d-flex justify-content-center mt5">
                                                             <!-- //<mat-radio-group> -->
                                                             <mat-radio-button [checked]="room.isRoomSelectionChecked"
-                                                                id="p" (click)="isGroupedFalseRadioButtonClicked(i,j)"
+                                                                 (click)="isGroupedFalseRadioButtonClicked(i,j)"
                                                                 *ngIf="room?.amount"></mat-radio-button>
                                                             <!-- </mat-radio-group> -->
                                                         </div>
