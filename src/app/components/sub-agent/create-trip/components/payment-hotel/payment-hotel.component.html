@@ -133,8 +133,7 @@
                 </div>
             </div>
             <div class="float-right fs16 fw500 pt-2 customTooltip">
-                {{tripHotel?.room_variations[0]?.currency}} {{tripHotel?.prices_summary?.total_price +
-                tripHotel?.prices_summary?.gds_fee + tripHotel?.prices_summary?.ota_fee | number:'.2-2'}}
+                {{tripHotel?.room_variations[0]?.currency}} {{tripHotel?.prices_summary?.total_price | number:'.2-2'}}
                 <span class="customtooltiptext">
                     <div class="container mb-2">
                         <p class="pt-2 fare_summary_heading"> {{'Fare Summary'| translate}}</p>
