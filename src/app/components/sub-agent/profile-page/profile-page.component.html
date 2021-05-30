@@ -1,26 +1,26 @@
 <div class="container-fluid" id="top">
-    <div class="container">
+    <div class="container mirr_text_right">
         <h4 class="text-center text-uppercase text-white">{{details?.agency?.name}}</h4>
         <div class="d-flex justify-content-center">
             <table class="table table-striped bg-light mt-3" style="width: 65%;">
                 <tbody>
                     <tr>
-                        <td>IBAN Number</td>
+                        <td>{{'IBAN Number' | translate}}</td>
                         <td>:</td>
                         <td>{{details?.agency?.iban}}</td>
                     </tr>
                     <tr>
-                        <td>Licence Number</td>
+                        <td>{{'Licence Number' | translate}}</td>
                         <td>:</td>
                         <td>{{details?.agency?.licence_no}}</td>
                     </tr>
                     <tr>
-                        <td>Phone Number</td>
+                        <td>{{'Phone Number' | translate}}</td>
                         <td>:</td>
                         <td>{{details?.agency?.phone_number}}</td>
                     </tr>
                     <tr>
-                        <td>Address</td>
+                        <td>{{'Address' | translate}}</td>
                         <td>:</td>
                         <td>{{details?.agency?.address}}</td>
                     </tr>
@@ -32,23 +32,23 @@
                 </tbody>
             </table>
         </div>
-        <h6 class="mt-5 text-center text-white">Staff Details</h6>
+        <h6 class="mt-5 text-center text-white">{{'Staff Details' | translate}}</h6>
         <div class="d-flex justify-content-center">
             <table class="table table-striped bg-light" style="width: 65%;">
                 <tbody>
                     <tr>
-                        <td>Name</td>
+                        <td>{{'Name' | translate}}</td>
                         <td>:</td>
                         <td>{{details?.name}}</td>
                     </tr>
 
                     <tr>
-                        <td>Phone Number</td>
+                        <td>{{'Phone Number' | translate}}</td>
                         <td>:</td>
                         <td>{{details?.phone_number}}</td>
                     </tr>
                     <tr>
-                        <td>Email</td>
+                        <td>{{'Email' | translate}}</td>
                         <td>:</td>
                         <td>{{details?.email}}</td>
                     </tr>

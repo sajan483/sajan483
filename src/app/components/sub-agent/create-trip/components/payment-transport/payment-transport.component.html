@@ -3,32 +3,32 @@
         <div class="col-md-12 p-0 brdrbottom mb10" *ngIf="showTransportNotAvailable">
             <div class="d-inline-flex">
                 <div><i class="sadicon icns icon_size_25"></i></div>
-                <div class="sadred fs14 fw600 oopstext">{{'Ooops !!! Some Error Occured, Please select another hotel.' |
-                    translate}}</div>
-                <div class="textunderline list_clr cursor-pointer pl-3" (click)="changeTransport()">{{'Modify' |
-                    translate}}</div>
+                <div class="sadred fs14 fw600 oopstext mpr10">{{'Ooops !!! Some Error Occured, Please select another hotel.' | translate}}
+                </div>
+                <div class="textunderline list_clr cursor-pointer pl10 mpl0 mpr10" (click)="changeTransport()">{{'Modify' | translate}}
+                </div>
             </div>
         </div>
         <div class="col-md-2 col-12 pl-0 pr-0 my-auto">
-            <i class="transportblueicon icns icon_size_30 imgposition"></i>
+            <i class="transportblueicon icns icon_size_30 imgposition mirr_float_right"></i>
             <div class="Premium_blue fs14 fw600">
-                <p>VEHICLE</p>
-                <p class="text-uppercase">{{tripTransport?.vehicle_types[0]?.name}}</p>
+                <p>{{'VEHICLE' | translate}}</p>
+                <p class="text-uppercase">{{tripTransport?.vehicle_types[0]?.name | translate}}</p>
             </div>
         </div>
         <div class="col-md-9 col-12 brdrR brdrL my-auto">
-            <div class="float-left">
+            <div class="float_left mirr_float_right">
                 <p class="fw600 fs16">{{tripTransport?.company?.name}}</p>
                 <div class="linebyline clr52 fs13">
                     <strong class="fw600">{{'Route' | translate}} :</strong>
                     <span>{{tripTransport?.route?.name}}</span>
-                    <span class="textunderline list_clr cursor-pointer pl-3" (click)="changeTransport()">{{'Modify' |
+                    <span class="textunderline list_clr cursor-pointer pl10 mpl0 mpr10" (click)="changeTransport()">{{'Modify' |
                         translate}}</span>
-                    <span class="textunderline list_clr cursor-pointer pl-3">{{'Policy' | translate}}</span>
+                    <span class="textunderline list_clr cursor-pointer pl10 mpl0 mpr10">{{'Policy' | translate}}</span>
 
                 </div>
             </div>
-            <div class="float-right fs16 fw500 pt-2 customTooltip">
+            <div class="float_right mirr_float_left fs16 fw500 pt-2 customTooltip">
                 {{tripTransport?.trip_vehicles[0]?.currency}} {{tripTransport?.prices_summary?.total_price | number:'.2-2'}}
                 <span class="customtooltiptext">
                     <div class="container mb-2">
@@ -38,78 +38,68 @@
                             <div class="col-md-12 textAlign ">
                                 <span>{{'GDS Fee' }} :
                                     {{tripTransport?.prices_summary?.gds_fee}}</span><br>
-                                <span>{{'OTA Fee' }} :
+                <span>{{'OTA Fee' }} :
                                     {{tripTransport?.prices_summary?.ota_fee}}</span>
-                            </div>
-                        </div>
-                        <p class=" pt-2 pr-5 hotel_price_total">{{'You Pay'}}
-                            {{tripTransport?.prices_summary?.total_price | number:'.2-2'}}
-                        </p>
-                    </div>
-                </span>
             </div>
         </div>
-        <div class="col-md-1 pl-0 pr-2 pt-1 m-auto text-center" (click)="transporttoggle = !transporttoggle">
-            <i *ngIf="transporttoggle" class="downarrow icon_size_20 icns cursor-pointer"></i>
-            <i *ngIf="!transporttoggle" class="uparrow icon_size_20 icns cursor-pointer"></i>
+        <p class=" pt-2 pr-5 hotel_price_total">{{'You Pay'}} {{tripTransport?.prices_summary?.total_price | number:'.2-2'}}
+        </p>
+    </div>
+    </span>
+</div>
+</div>
+<div class="col-md-1 pl-0 pr-2 pt-1 m-auto text-center" (click)="transporttoggle = !transporttoggle">
+    <i *ngIf="transporttoggle" class="downarrow icon_size_20 icns cursor-pointer"></i>
+    <i *ngIf="!transporttoggle" class="uparrow icon_size_20 icns cursor-pointer"></i>
+</div>
+<div class="col-md-12 p-0 row ml-0 mr-0 mt-2 borderpading brdrtop" *ngIf="!transporttoggle">
+    <div class="col-md-12 transportbodypdng row m-0">
+        <div class="col-md-4 p-0 mb-2">
+            <p class="clr52 fs14">
+                <i class="fa fa-circle pr10 mpr0 mpl10 font9imp" aria-hidden="true"></i> {{tripTransport?.selected_transportation?.vehicle_types[0]?.categories[0]?.capacity}} {{'seater(s)' | translate}}
+            </p>
         </div>
-        <div class="col-md-12 p-0 row ml-0 mr-0 mt-2 borderpading brdrtop" *ngIf="!transporttoggle">
-            <div class="col-md-12 transportbodypdng row m-0">
-                <div class="col-md-4 p-0 mb-2">
-                    <p class="clr52 fs14">
-                        <i class="fa fa-circle pr-2 font9imp" aria-hidden="true"></i>
-                        {{tripTransport?.selected_transportation?.vehicle_types[0]?.categories[0]?.capacity}}
-                        {{'seater(s)' | translate}}
-                    </p>
-                </div>
-                <div class="col-md-4 p-0 mb-2">
-                    <p class="clr52 fs14">
-                        <i class="fa fa-circle pr-2 font9imp" aria-hidden="true"></i>{{'Pax Count' | translate}} :
-                        {{tripTransport?.trip_vehicles[0]?.pax_per_vehicle}}
-                    </p>
-                </div>
-                <div class="col-md-4 p-0 mb-2">
-                    <p class="clr52 fs14">
-                        <i class="fa fa-circle pr-2 font9imp" aria-hidden="true"></i>{{'Model' | translate}}:
-                        {{tripTransport?.selected_transportation?.vehicle_types[0]?.categories[0]?.model}}
-                    </p>
-                </div>
-                <div class="col-md-4 p-0 mb-2">
-                    <p class="clr52 fs14">
-                        <i class="fa fa-circle pr-2 font9imp" aria-hidden="true"></i>{{'Booked Vehicle' | translate}}
-                        ({{tripTransport?.trip_vehicles[0]?.booked_quantity}})
-                    </p>
-                </div>
-                <div class="col-md-4 p-0 mb-2">
-                    <p class="clr52 fs14">
-                        <i class="fa fa-circle pr-2 font9imp" aria-hidden="true"></i>{{'Available Vehicle' |
-                        translate}}:
-                        {{tripTransport?.selected_transportation?.vehicle_types[0]?.categories[0]?.available_quantity}}
-                    </p>
-                </div>
-                <div class="col-md-4 p-0 mb-2">
-                    <p class="clr52 fs14">
-                        <i class="fa fa-circle pr-2 font9imp" aria-hidden="true"></i>{{'Bag Capacity'| translate}} :
-                        {{tripTransport?.vehicle_types[0]?.bags_capacity}}
-                    </p>
-                </div>
-            </div>
-            <div class="col-md-12 transportbodypdng row ml-0 mr-0 mt-2 p20 brdrtop">
-                <div class="col-md-4 p-0">
-                    <p class="fs13"><i class="fa fa-map-marker textlight pr-1 font16imp" aria-hidden="true"></i>
-                        {{'ADDRESS' | translate}}
-                    </p>
-                    <p class="pl-3 fs12 clr52">{{tripTransport?.company?.address}}</p>
-                </div>
-                <div class="col-md-4">
-                    <p class="clr52 fs14"><i class="fa fa-envelope textlight pr-1 font16imp" aria-hidden="true"></i>
-                        {{tripTransport?.company?.email}}</p>
-                </div>
-                <div class="col-md-4">
-                    <p class="clr52 fs14"><i class="fa fa-phone textlight pr-1 font16imp" aria-hidden="true"></i>
-                        {{tripTransport?.company?.phone_number}}</p>
-                </div>
-            </div>
+        <div class="col-md-4 p-0 mb-2">
+            <p class="clr52 fs14">
+                <i class="fa fa-circle pr10 mpr0 mpl10 font9imp" aria-hidden="true"></i>{{'Pax Count' | translate}} : {{tripTransport?.trip_vehicles[0]?.pax_per_vehicle}}
+            </p>
+        </div>
+        <div class="col-md-4 p-0 mb-2">
+            <p class="clr52 fs14">
+                <i class="fa fa-circle pr10 mpr0 mpl10 font9imp" aria-hidden="true"></i>{{'Model' | translate}}: {{tripTransport?.selected_transportation?.vehicle_types[0]?.categories[0]?.model}}
+            </p>
+        </div>
+        <div class="col-md-4 p-0 mb-2">
+            <p class="clr52 fs14">
+                <i class="fa fa-circle pr10 mpr0 mpl10 font9imp" aria-hidden="true"></i>{{'Booked Vehicle' | translate}} ({{tripTransport?.trip_vehicles[0]?.booked_quantity}})
+            </p>
+        </div>
+        <div class="col-md-4 p-0 mb-2">
+            <p class="clr52 fs14">
+                <i class="fa fa-circle pr10 mpr0 mpl10 font9imp" aria-hidden="true"></i>{{'Available Vehicle' | translate}}: {{tripTransport?.selected_transportation?.vehicle_types[0]?.categories[0]?.available_quantity}}
+            </p>
+        </div>
+        <div class="col-md-4 p-0 mb-2">
+            <p class="clr52 fs14">
+                <i class="fa fa-circle pr10 mpr0 mpl10 font9imp" aria-hidden="true"></i>{{'Bag Capacity'| translate}} : {{tripTransport?.vehicle_types[0]?.bags_capacity}}
+            </p>
         </div>
     </div>
+    <div class="col-md-12 transportbodypdng row ml-0 mr-0 mt-2 p20 brdrtop">
+        <div class="col-md-4 p-0">
+            <p class="fs13"><i class="fa fa-map-marker textlight pr5 mpr0 mpl5 font16imp" aria-hidden="true"></i> {{'ADDRESS' | translate}}
+            </p>
+            <p class="pl15 mpl0 mpr15 fs12 clr52">{{tripTransport?.company?.address}}</p>
+        </div>
+        <div class="col-md-4">
+            <p class="clr52 fs14"><i class="fa fa-envelope textlight pr5 mpr0 mpl5 font16imp" aria-hidden="true"></i> {{tripTransport?.company?.email}}
+            </p>
+        </div>
+        <div class="col-md-4">
+            <p class="clr52 fs14"><i class="fa fa-phone textlight pr5 mpr0 mpl5 font16imp" aria-hidden="true"></i> {{tripTransport?.company?.phone_number}}
+            </p>
+        </div>
+    </div>
+</div>
+</div>
 </div>

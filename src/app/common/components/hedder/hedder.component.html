@@ -1,17 +1,11 @@
-<nav class="navbar navbar-expand-lg navbar-light positionfixed"
-    *ngIf="router.url !== '/login' && router.url !== '/signup'">
+<nav class="navbar navbar-expand-lg navbar-light positionfixed" *ngIf="router.url !== '/login' && router.url !== '/signup'">
     <div class="collapse navbar-collapse container">
-        <a class="navbar-brand cursor-pointer" *ngIf="branchActive" (click)="navigatepage('branch/packages');"><img
-                class="logohight" src="/assets/images/agent-logo.png" alt=""></a>
-        <a class="navbar-brand cursor-pointer" *ngIf="superAgencyActive"
-            (click)="navigatepage('superagent/dashboard');"><img class="logohight" src="/assets/images/agent-logo.png"
-                alt=""></a>
-        <a class="navbar-brand cursor-pointer" *ngIf="subAgencyActive" (click)="navigatepage('subagent/home');"><img
-                class="logohight" src="/assets/images/agent-logo.png" alt=""></a>
+        <a class="navbar-brand cursor-pointer" *ngIf="branchActive" (click)="navigatepage('branch/packages');"><img class="logohight" src="/assets/images/agent-logo.png" alt=""></a>
+        <a class="navbar-brand cursor-pointer" *ngIf="superAgencyActive" (click)="navigatepage('superagent/dashboard');"><img class="logohight" src="/assets/images/agent-logo.png" alt=""></a>
+        <a class="navbar-brand cursor-pointer" *ngIf="subAgencyActive" (click)="navigatepage('subagent/home');"><img class="logohight" src="/assets/images/agent-logo.png" alt=""></a>
         <form class="form-inline my-2 my-lg-0">
             <div class="mr-5">
-                <select id="langConverter" class="custom-select ws100imp wdth74" [(ngModel)]="languageSelect"
-                    (change)="changeLangValue($event.target.value)" name="languageSelect">
+                <select id="langConverter" class="custom-select ws100imp wdth74" [(ngModel)]="languageSelect" (change)="changeLangValue($event.target.value)" name="languageSelect">
                     <option value="en-US">ENGLISH</option>
                     <option value="ar-AE">عربى</option>
                 </select>
@@ -19,9 +13,8 @@
 
             <div class="dropdown" *ngIf="subAgencyActive">
                 <div class="d-flex cursor-pointer hidemobile mr-3">
-                    <div class="pr-2">
-                        <p class="mb-0 wlcmtext">{{'Welcome' | translate }} <i class="fa fa-caret-down"
-                                aria-hidden="true"></i></p>
+                    <div class="pr-2 mpl10">
+                        <p class="mb-0 wlcmtext">{{'Welcome' | translate }} <i class="fa fa-caret-down" aria-hidden="true"></i></p>
                         <p class="mb-0 f15">{{userType | titlecase}}</p>
                     </div>
                     <i class="userpic icns icon_size_40"></i>
@@ -33,15 +26,14 @@
                     <a (click)="navigatepage('subagent/home');">
                         <div class="d-flex padngover mt-2">
                             <i class="icns createpackages icon_size_25"></i>
-                            <p class="f15 my-auto pl15" [class.clrred]="router.url === 'subagent/home'">{{'Create
-                                Package' | translate }}
+                            <p class="f15 my-auto pl15 mpl0 mpr15" [class.clrred]="router.url === 'subagent/home'">{{'Create Package' | translate }}
                             </p>
                         </div>
                     </a>
                     <a (click)="navigatepage('subagent/history');">
                         <div class="d-flex padngover">
                             <i class="icns historyicon icon_size_20"></i>
-                            <p class="f15 my-auto pl20" [class.clrred]="router.url === 'subagent/history'">
+                            <p class="f15 my-auto pl20 mpl0 mpr15" [class.clrred]="router.url === 'subagent/history'">
                                 {{'Transactions' | translate }}
                             </p>
                         </div>
@@ -49,14 +41,13 @@
                     <a (click)="navigatepage('subagent/profilepage');">
                         <div class="d-flex padngover">
                             <i class="icns myprofile icon_size_20"></i>
-                            <p class="f15 my-auto pl20" [class.clrred]="router.url === 'subagent/profilepage'">{{'My
-                                Profile' | translate }}</p>
+                            <p class="f15 my-auto pl20 mpl0 mpr15" [class.clrred]="router.url === 'subagent/profilepage'">{{'My Profile' | translate }}</p>
                         </div>
                     </a>
                     <a class="bgred" (click)="logout();">
                         <div class="d-flex padngover">
                             <i class="icns logouticon icon_size_20"></i>
-                            <p class="f15 my-auto pl20">{{'Logout' | translate }}</p>
+                            <p class="f15 my-auto pl20 mpl0 mpr15">{{'Logout' | translate }}</p>
                         </div>
                     </a>
                 </div>
@@ -84,8 +75,7 @@
                     <a class="" (click)="navigatepage('superagent/createTrip');">
                         <div class="d-flex padngover mt-2">
                             <i class="icns createpackages icon_size_25"></i>
-                            <p class="f15 my-auto pl15" [class.clrred]="router.url === '/superagent/createTrip'">Create
-                                New Package</p>
+                            <p class="f15 my-auto pl15" [class.clrred]="router.url === '/superagent/createTrip'">Create New Package</p>
                         </div>
                     </a>
                     <a (click)="navigatepage('/superagent/branch_list');">
@@ -98,15 +88,15 @@
                     <a (click)="navigatepage('/superagent/staff_list');">
                         <div class="d-flex padngover">
                             <i class="icns staffmanagment icon_size_20"></i>
-                            <p class="f15 my-auto pl20" [class.clrred]="router.url === '/superagent/staff_list'">Staff
-                                Mangement</p>
+                            <p class="f15 my-auto pl20" [class.clrred]="router.url === '/superagent/staff_list'">Staff Mangement
+                            </p>
                         </div>
                     </a>
                     <a (click)="navigatepage('/superagent/view_package');">
                         <div class="d-flex padngover">
                             <i class="icns view_list_icon icon_size_20"></i>
-                            <p class="f15 my-auto pl20" [class.clrred]="router.url === '/superagent/view_package'">View
-                                Packages</p>
+                            <p class="f15 my-auto pl20" [class.clrred]="router.url === '/superagent/view_package'">View Packages
+                            </p>
                         </div>
                     </a>
                     <a (click)="navigatepage('/superagent/account_details');">
@@ -119,8 +109,8 @@
                     <a (click)="navigateagencyprofile();">
                         <div class="d-flex padngover">
                             <i class="icns myprofile icon_size_20"></i>
-                            <p class="f15 my-auto pl20" [class.clrred]="router.url === '/superagent/profile/1'">My
-                                Profile</p>
+                            <p class="f15 my-auto pl20" [class.clrred]="router.url === '/superagent/profile/1'">My Profile
+                            </p>
                         </div>
                     </a>
                     <a class="bgred" (click)="logout();">

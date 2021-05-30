@@ -12,6 +12,7 @@
 @import "../src/assets/css/shimmer";
 @import '~ngx-owl-carousel-o/lib/styles/scss/owl.carousel';
 @import '~ngx-owl-carousel-o/lib/styles/scss/owl.theme.default';
+@import '../src/assets/css/mirror_css';
 @mixin styleStepLine($index) {
     .mat-horizontal-stepper-header {
         &+.mat-stepper-horizontal-line:nth-child(#{$index}) {
@@ -368,198 +369,6 @@ body {
     }
 }
 
-.mirror_css {
-    direction: rtl;
-    overflow-x: hidden;
-    .modal {
-        overflow-x: hidden;
-        .popupwindowforroomselection {
-            margin-right: 15%;
-        }
-    }
-    .hotelCard {
-        text-align: right;
-    }
-    .section-one .overall {
-        text-align: right;
-    }
-    .headlink {
-        width: 100px;
-    }
-    .floatright {
-        float: right !important;
-    }
-    .floatleft {
-        float: left !important;
-    }
-    .floatnone {
-        float: none !important;
-    }
-    .textright {
-        text-align: right !important;
-    }
-    .paymentpage_policies {
-        .table thead th,
-        .table tbody td {
-            text-align: right;
-        }
-    }
-    .modal-header .cancelclose {
-        margin: -20px 0 0 0;
-    }
-    .paddingR15 {
-        padding-right: 15px;
-    }
-    .people_count_in_room {
-        float: left;
-    }
-    .detailsgeader {
-        border-right: 1px dotted gray;
-    }
-    .bttnfrst {
-        border-radius: 0 7px 7px 0 !important;
-    }
-    .bttnscnd {
-        border-radius: 7px 0 0 7px !important;
-    }
-    .margnR50 {
-        margin-right: 50px;
-    }
-    .mat-radio-label-content {
-        padding-right: 8px;
-    }
-    .mlpr20 {
-        margin-left: 20px;
-        margin-right: 0 !important;
-        padding-right: 20px;
-    }
-    .pl20 {
-        padding-left: 20px !important;
-    }
-    .pr10 {
-        padding-right: 10px;
-    }
-    #routeListing .multiselect-dropdown .dropdown-btn {
-        text-align: right;
-    }
-    .ml10 {
-        margin-left: 10px;
-    }
-    .travellerpopup {
-        right: 539px !important;
-    }
-    .brdrarbic {
-        margin-left: 0 !important;
-        margin-right: 11px !important;
-    }
-    .dep {
-        padding-left: 0;
-        padding-right: 15px;
-    }
-    .hotelround img {
-        left: 16px !important;
-    }
-    .backarrow {
-        position: absolute;
-        right: 175px;
-    }
-    .pr26 {
-        padding-right: 26px;
-    }
-    .pl8 {
-        padding-left: 8px;
-    }
-    .mr5ml2 {
-        margin: 0 5px 0 2px;
-    }
-    .mr27 {
-        margin-right: 27px;
-    }
-    .pr36 {
-        padding-right: 36px;
-    }
-    .backsearchhotel {
-        position: absolute;
-        right: 116px;
-    }
-    .mr30ml0 {
-        margin-left: 30px !important;
-        margin-right: 0 !important;
-    }
-    .ml1{
-          padding-right: 25px !important;
-    }
-    .ml5 {
-        margin-left: 5px;
-    }
-    .mr11 {
-        margin-right: 11px !important;
-    }
-    .mr15 {
-        margin-right: 15px;
-    }
-    .pr0 {
-        padding-right: 0 !important;
-    }
-    .pr20 {
-        padding-right: 20 !important;
-    }
-    .m0p0 {
-        margin: 0 !important;
-        padding: 0 !important;
-    }
-    .searchButtonarabic {
-        margin-right: 10px !important;
-        width: 95% !important;
-    }
-    .backbttn {
-        position: absolute;
-        margin-right: 20px !important;
-    }
-    .mat-form-field-appearance-legacy .mat-form-field-infix {
-        text-align: right !important;
-    }
-    .mat-form-field-appearance-outline .mat-form-field-infix {
-        text-align: right !important;
-    }
-    .mat-option-text {
-        text-align: right !important;
-    }
-    #childAgeHotelSelect {
-        text-align: right;
-        .mat-form-field-outline-start,
-        .mat-form-field-outline-gap,
-        .mat-form-field-outline-end {
-            border: 1px solid #1d23e8;
-            background: #fff;
-        }
-        .mat-form-field-outline-start {
-            border-left-style: none;
-            border-radius: 0 5px 5px 0;
-        }
-        .mat-form-field-outline-gap {
-            border-top-color: transparent;
-            border-right-style: none;
-            border-left-style: none;
-        }
-        .mat-form-field-outline-end {
-            border-right-style: none;
-            border-radius: 5px 0 0 5px;
-        }
-        .mat-form-field-appearance-outline .mat-form-field-flex {
-            width: 90px !important;
-        }
-    }
-    .w150 {
-        width: 150px !important;
-    }
-    .calendarposition {
-        position: absolute;
-        top: 12px;
-        right: 83% !important;
-    }
-}
-
 ::ng-deep.tag {
     display: flex;
     flex-direction: row;
@@ -777,8 +586,12 @@ body {
 
 // commen
 .crossbarsamll {
-    border: 1px solid #bfbdbd;
+    border-right: 1px solid #bfbdbd;
     margin: 0 5px;
+}
+
+.mirr_display {
+    display: none;
 }
 
 .hotelRibbon {
@@ -826,6 +639,10 @@ body {
 
 .pl20 {
     padding-left: 20px;
+}
+
+.pl0 {
+    padding-left: 0;
 }
 
 .pl15 {
@@ -1157,6 +974,18 @@ body {
 
 .p30 {
     padding: 30px;
+}
+
+.pr5 {
+    padding-right: 5px;
+}
+
+.pr10 {
+    padding-right: 10px;
+}
+
+.pr15 {
+    padding-right: 15px;
 }
 
 .pt25 {
@@ -1494,4 +1323,20 @@ body {
 
 .text_right {
     text-align: right;
+}
+
+.text_left {
+    text-align: left;
+}
+
+.ml_auto {
+    margin-left: auto;
+}
+
+.float_right {
+    float: right;
+}
+
+.float_left {
+    float: left;
 }
