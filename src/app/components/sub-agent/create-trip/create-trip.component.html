@@ -1,6 +1,6 @@
 <div class="container-fluid topofcomponent position-relative pl-0 pr-0" id="subAgencyCreateTrip">
     <div class="bgbluestepper"></div>
-    <div class="container">
+    <div class="container mirr_text_right">
         <div>
             <mat-horizontal-stepper #stepper>
                 <mat-step label="{{'Makkah Hotel' | translate }}" *ngIf="steps.includes('1')" state="apartment">
@@ -26,8 +26,9 @@
                                     </p>
                                 </div>
                                 <div class="d-flex my-auto backbutton cursor-pointer" (click)="backToHomePage();">
-                                    <i class="uparrow icns icon_size_20 trnsfer"></i>
-                                    <span class="blue_text fs14 phonehide">{{'Back to Home Page' | translate}}</span>
+                                    <div class="mirr_hide"><i class="uparrow icns icon_size_20 trnsfer"></i></div>
+                                    <div class="blue_text fs14 phonehide">{{'Back to Home Page' | translate}}</div>
+                                    <div class="mirr_display"><i class="uparrow icns icon_size_20 trnsfer"></i></div>
                                 </div>
                             </div>
                         </div>
@@ -59,8 +60,9 @@
                                     </p>
                                 </div>
                                 <div class="d-flex my-auto backbutton cursor-pointer" (click)="backToHomePage();">
-                                    <i class="uparrow icns icon_size_20 trnsfer"></i>
-                                    <span class="blue_text fs14 phonehide">{{'Back to Home Page' | translate}}</span>
+                                    <div class="mirr_hide"><i class="uparrow icns icon_size_20 trnsfer"></i></div>
+                                    <div class="blue_text fs14 phonehide">{{'Back to Home Page' | translate}}</div>
+                                    <div class="mirr_display"><i class="uparrow icns icon_size_20 trnsfer"></i></div>
                                 </div>
                             </div>
                         </div>
@@ -83,8 +85,9 @@
                                     </p>
                                 </div>
                                 <div class="d-flex my-auto backbutton cursor-pointer" (click)="backToHomePage();">
-                                    <i class="uparrow icns icon_size_20 trnsfer"></i>
-                                    <span class="blue_text fs14 phonehide">{{'Back to Home Page' | translate}}</span>
+                                    <div class="mirr_hide"><i class="uparrow icns icon_size_20 trnsfer"></i></div>
+                                    <div class="blue_text fs14 phonehide">{{'Back to Home Page' | translate}}</div>
+                                    <div class="mirr_display"><i class="uparrow icns icon_size_20 trnsfer"></i></div>
                                 </div>
                             </div>
                         </div>
@@ -133,8 +136,7 @@
                             <div class="col-md-12">
                                 <div class="d-flex justify-content-between">
                                     <h3 class="fs16 fw600 Premium_blue">{{'Traveller Details' | translate}}</h3>
-                                    <span class="fs12 darkyellow">{{'Please make sure you enter the Name as per your
-                                        Government photo id.' | translate }}</span>
+                                    <span class="fs12 darkyellow">{{'Please make sure you enter the Name as per your Government photo id.' | translate }}</span>
                                 </div>
                             </div>
                             <div class="col-md-12 pl-0 pr-0 pb-0">
@@ -169,7 +171,7 @@
                                                         </p>
                                                         <div [owlDateTimeTrigger]="dt11" class="position-relative">
                                                             <input placeholder="{{'Date of Birth' | translate}}" class="owldatepicker form-control fs14 bordrservice removeoutline" [owlDateTime]="dt11" formControlName="dob" [ngClass]="{ 'is-invalid': submitted && g.dob.errors }">
-                                                            <i class="icns calendaricon icon_size_20 cursor-pointer calendarposition"></i>
+                                                            <i class="icns calendaricon icon_size_20 cursor-pointer calendarposition mirr_clndr_icon"></i>
                                                         </div>
                                                         <owl-date-time [pickerType]="'calendar'" #dt11></owl-date-time>
                                                     </div>
@@ -183,17 +185,17 @@
                                                     <div class="col-md-3">
                                                         <div class="mb-0 fs14 pl-1 pdt d-flex">
                                                             <div>{{'Passport Expiry Date' | translate}}</div>
-                                                            <div class="errortooltip cursor-pointer pl-2">
+                                                            <div class="errortooltip cursor-pointer pl10 mpl0 mpr10">
                                                                 <i class="fa fa-info-circle sadred" aria-hidden="true"></i>
                                                                 <div class="errortooltiptext top102 left27m">
-                                                                    Minimum 6 Months Validity
+                                                                    {{'Minimum 6 Months Validity' | translate}}
                                                                 </div>
                                                             </div>
                                                         </div>
                                                         <div [owlDateTimeTrigger]="dt10" class="position-relative">
                                                             <input placeholder="{{'Expiry Date' | translate}}" class="owldatepicker fs14 bordrservice removeoutline form-control" formControlName="passport_expiry_date" [owlDateTime]="dt10" [ngClass]="{ 'is-invalid': submitted && g.passport_expiry_date.errors }"
                                                                 [min]="minpassportExpDate">
-                                                            <i class="icns calendaricon icon_size_20 cursor-pointer calendarposition"></i>
+                                                            <i class="icns calendaricon icon_size_20 cursor-pointer calendarposition mirr_clndr_icon"></i>
                                                         </div>
                                                         <owl-date-time [pickerType]="'calendar'" #dt10></owl-date-time>
                                                     </div>
@@ -322,27 +324,27 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title">{{'IBAN Payment' }}</h4>
+                <h4 class="modal-title">{{'IBAN Payment' | translate}}</h4>
                 <button id="ibanClose" type="button" class="close" data-dismiss="modal">&times;</button>
             </div>
             <div class="modal-body">
                 <div class="modal-body" style="font-size: 12px;">
                     <div class="col-md-12">
-                        <div class="col-md-12 pb-1"><strong style="color: red;">*</strong> {{'IBAN Accound Number' }}:
+                        <div class="col-md-12 pb-1"><strong style="color: red;">*</strong> {{'IBAN Accound Number' | translate}}:
                         </div>
                         <div class="col-md-12"><input type="text" class="form-control" id="acc_no" [(ngModel)]="accNo">
                         </div>
                     </div>
                     <div class="col-md-12">
-                        <div class="col-md-12 pb-1"><strong style="color: red;">*</strong> {{'Authe Code' }}:
+                        <div class="col-md-12 pb-1"><strong style="color: red;">*</strong> {{'Authe Code' | translate}}:
                         </div>
                         <div class="col-md-12"><input type="text" class="form-control" id="auth_code" [(ngModel)]="authCode"></div>
                     </div>
                 </div>
             </div>
             <div class="modal-footer">
-                <p>OTP will expire in {{timeLeft}}</p>
-                <button type="button" class="btn btn-danger" (click)="onSubmitButtonClicked()" data-dismiss="modal">{{'Submit'}}</button>
+                <p>{{'OTP will expire in' | translate}} {{timeLeft}}</p>
+                <button type="button" class="btn btn-danger" (click)="onSubmitButtonClicked()" data-dismiss="modal">{{'Submit' | translate}}</button>
             </div>
         </div>
     </div>

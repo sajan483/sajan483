@@ -3,33 +3,31 @@
         <div class="col-md-12 p-0 brdrbottom mb10" *ngIf="showMakkah">
             <div class="d-inline-flex">
                 <div><i class="sadicon icns icon_size_25"></i></div>
-                <div class="sadred fs14 fw600 oopstext">{{'Ooops !!! Some Error Occured, Please select another hotel' |
-                    translate}}.</div>
-                <div class="textunderline list_clr cursor-pointer pl-3" (click)="goToHotelStepper('makkah')">{{'Modify'
-                    | translate}}</div>
+                <div class="sadred fs14 fw600 oopstext mpr10">{{'Ooops !!! Some Error Occured, Please select another hotel' | translate}}.
+                </div>
+                <div class="textunderline list_clr cursor-pointer pl10 mpl0 mpr10" (click)="goToHotelStepper('makkah')">{{'Modify' | translate}}</div>
             </div>
         </div>
-        <div class="col-md-12 p-0 brdrbottom mb10" *ngIf="showMadinah">
+        <div class="col-md-12 p-0 brdrbottom mb10 mpr10" *ngIf="showMadinah">
             <div class="d-inline-flex">
                 <div><i class="sadicon icns icon_size_25"></i></div>
-                <div class="sadred fs14 fw600 oopstext">{{'Ooops !!! Some Error Occured, Please select another hotel' |
-                    translate}}.</div>
-                <div class="textunderline list_clr cursor-pointer pl-3" (click)="goToHotelStepper('madinah')">{{'Modify'
-                    | translate}}</div>
+                <div class="sadred fs14 fw600 oopstext">{{'Ooops !!! Some Error Occured, Please select another hotel' | translate}}.
+                </div>
+                <div class="textunderline list_clr cursor-pointer pl10 mpl0 mpr10" (click)="goToHotelStepper('madinah')">{{'Modify' | translate}}</div>
             </div>
         </div>
         <div class="col-md-2 col-12 pl-0 pr-0 my-auto">
-            <i class="hotelblueicon icns icon_size_30 imgposition"></i>
+            <i class="hotelblueicon icns icon_size_30 imgposition mirr_float_right"></i>
             <div class="Premium_blue fs14 fw600 ">
-                <div class="text-uppercase">{{tripHotel?.location}}</div>
+                <div class="text-uppercase">{{tripHotel?.location | translate}}</div>
                 <div>{{tripHotel?.check_in_time | date: 'shortDate'}}</div>
             </div>
         </div>
         <div class="col-md-9 col-12 brdrR brdrL my-auto">
-            <div class="float-left">
+            <div class="float_left mirr_float_right">
                 <div class="d-inline-flex">
                     <div class="fw600 fs16">{{tripHotel?.hotel?.name | titlecase}}</div>
-                    <div class="pl10">
+                    <div class="pl10 mpl0 mpr10">
                         <ngb-rating [(rate)]="tripHotel.hotel.user_review" [readonly]="readonly" [max]=5>
                             <ng-template let-fill="fill" let-index="index">
                                 <span class="star" [class.filled]="fill === 100" [class.bad]="index < 2">&#9733;</span>
@@ -46,12 +44,9 @@
                     <span class="crossline"></span>
                     <span>{{'Rooms' | translate}}</span>
                     <span class="Premium_blue fw600">{{tripHotel?.room_variations?.length}}</span>
-                    <span class="textunderline list_clr cursor-pointer pl-3" (click)="goToHotelStepper('makkah')"
-                        *ngIf="tripHotel.location == 'makkah'">{{'Modify' | translate}}</span>
-                    <span class="textunderline list_clr cursor-pointer pl-3" (click)="goToHotelStepper('madinah')"
-                        *ngIf="tripHotel.location == 'medinah'">{{'Modify' | translate}}</span>
-                    <span class="textunderline list_clr cursor-pointer pl-3" data-toggle="modal"
-                        [attr.data-target]="'#hotelPolicy'+ tripHotel.hotel.id">{{'Policy' | translate}}</span>
+                    <span class="textunderline list_clr cursor-pointer pl-3 mpr10" (click)="goToHotelStepper('makkah')" *ngIf="tripHotel.location == 'makkah'">{{'Modify' | translate}}</span>
+                    <span class="textunderline list_clr cursor-pointer pl-3 mpr10" (click)="goToHotelStepper('madinah')" *ngIf="tripHotel.location == 'medinah'">{{'Modify' | translate}}</span>
+                    <span class="textunderline list_clr cursor-pointer pl-3" data-toggle="modal" [attr.data-target]="'#hotelPolicy'+ tripHotel.hotel.id">{{'Policy' | translate}}</span>
                     <div class="modal" id="hotelPolicy{{tripHotel.hotel.id}}">
                         <div class="modal-dialog">
                             <div class="modal-content">
@@ -59,16 +54,14 @@
                                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                                 </div>
                                 <div class="modal-body mb-4">
-                                    <div
-                                        *ngIf="tripHotel?.room_variations[0]?.room?.cancellation_policy?.rules.length < 1  && !tripHotel?.cancellation_policy?.description">
+                                    <div *ngIf="tripHotel?.room_variations[0]?.room?.cancellation_policy?.rules.length < 1  && !tripHotel?.cancellation_policy?.description">
                                         {{'No Policies Found' | translate}}
                                     </div>
                                     <div *ngIf="tripHotel?.hotel?.policies?.length > 0">
                                         <h6 class="mt-1 ml-3" style="margin-left: 10px;">
                                             {{'Policies' | translate }}</h6>
                                         <div class="col-md-12 row m-0 mb-1">
-                                            <div class="col-md-12 pl-0 m-0"
-                                                *ngFor="let item of tripHotel.hotel.policies">
+                                            <div class="col-md-12 pl-0 m-0" *ngFor="let item of tripHotel.hotel.policies">
                                                 <div class="col-md-12 p-0   mb-1">
                                                     <h6>{{item?.policy_type}}</h6>
                                                     <div>
@@ -85,16 +78,14 @@
                                                 <h6 class=" pt-2">
                                                     {{item?.room?.cancellation_policy?.title}}
                                                 </h6>
-                                                <p *ngIf="!tripHotel?.room_variations[0]?.room?.cancellation_policy?.is_refundable"
-                                                    style="color: #d33a2f;padding-left: 10px;padding-top: 10px;">
+                                                <p *ngIf="!tripHotel?.room_variations[0]?.room?.cancellation_policy?.is_refundable" style="color: #d33a2f;padding-left: 10px;padding-top: 10px;">
                                                     {{'Non Refundable' | translate}} </p>
                                             </div>
                                             <div class="pb-2 m-0">
                                                 <p>{{item?.room?.cancellation_policy?.description}}
                                                 </p>
                                             </div>
-                                            <div class="col-md-12 pl-0 m-0"
-                                                *ngFor="let item1 of item.room?.cancellation_policy?.rules;let i = index">
+                                            <div class="col-md-12 pl-0 m-0" *ngFor="let item1 of item.room?.cancellation_policy?.rules;let i = index">
                                                 <div class="col-md-12 p-0  pb-1">
                                                     <div>
                                                         <li style="font-size: 12px;" [innerHTML]="item1?.description">
@@ -115,8 +106,7 @@
                                                 <p>{{tripHotel?.cancellation_policy?.description}}
                                                 </p>
                                             </div>
-                                            <div class="col-md-12 pl-0 m-0"
-                                                *ngFor="let item1 of tripHotel?.cancellation_policy?.rules;">
+                                            <div class="col-md-12 pl-0 m-0" *ngFor="let item1 of tripHotel?.cancellation_policy?.rules;">
                                                 <div class="col-md-12 p-0  pb-1">
                                                     <div>
                                                         <li style="font-size: 12px;" [innerHTML]="item1?.description">
@@ -132,7 +122,7 @@
                     </div>
                 </div>
             </div>
-            <div class="float-right fs16 fw500 pt-2 customTooltip">
+            <div class="float_right mirr_float_left fs16 fw500 pt-2 customTooltip">
                 {{tripHotel?.room_variations[0]?.currency}} {{tripHotel?.prices_summary?.total_price | number:'.2-2'}}
                 <span class="customtooltiptext">
                     <div class="container mb-2">
@@ -141,76 +131,82 @@
                             <div class="col-md-12 textAlign ">
                                 <span>{{'GDS Fee' | translate}} :
                                     {{tripHotel?.prices_summary?.gds_fee}}</span><br>
-                                <span>{{'OTA Fee' | translate}} :
+                <span>{{'OTA Fee' | translate}} :
                                     {{tripHotel?.prices_summary?.ota_fee}}</span>
-                            </div>
-                        </div>
-                        <p class=" pt-2 pr-5 hotel_price_total">{{'You Pay'| translate}}
-                            {{tripHotel?.prices_summary?.total_price | number:'.2-2'}}
-                        </p>
-                    </div>
-                </span>
             </div>
         </div>
-        <div class="col-md-1 pl-0 pr-2 pt-1 m-auto text-center" (click)="makkahotel = !makkahotel">
-            <i *ngIf="makkahotel" class="downarrow icon_size_20 icns cursor-pointer"></i>
-            <i *ngIf="!makkahotel" class="uparrow icon_size_20 icns cursor-pointer"></i>
-        </div>
-        <div class="row col-md-12 p-0 ml-0 mr-0 mt-2 p20 brdrtop" *ngIf="!makkahotel">
-            <div class="col-md-6 p-0">
-                <div class="flexaround mrgndetails">
-                    <div>
-                        <div class="d-flex">
-                            <i class="calendaricon icon_h18_w15 icns"></i>
-                            <p class="pl-2 pr-2 fs13 fw500">{{'CHECK-IN'| translate}}</p>
-                            <i class="icon_h18_w11 icns downarrow"></i>
-                        </div>
-                        <p class="fw600 fs21">{{tripHotel?.check_in_time | date: 'mediumDate'}}</p>
-                        <p class="clr52 fs12">{{tripHotel?.check_in_time | date: 'EEEE'}}</p>
-                    </div>
-                    <div class="text-center mt-2">
-                        <i class="nighticon icon_size_20 icns"></i>
-                        <p class="textgrey font14">4 {{'Nights'| translate}}</p>
-                    </div>
-                    <div class="text-left">
-                        <div class="d-flex">
-                            <i class="calendaricon icon_h18_w15 icns"></i>
-                            <p class="pl-2 pr-2 fs13 fw500">{{'CHECK-OUT'| translate}}</p>
-                            <i class="icon_h18_w11 icns downarrow"></i>
-                        </div>
-                        <p class="fw600 fs21">{{tripHotel?.check_out_time | date: 'mediumDate'}}</p>
-                        <p class="clr52 fs12">{{tripHotel?.check_out_time | date: 'EEEE'}}</p>
-                    </div>
+        <p class=" pt-2 pr-5 hotel_price_total">{{'You Pay'| translate}} {{tripHotel?.prices_summary?.total_price | number:'.2-2'}}
+        </p>
+    </div>
+    </span>
+</div>
+</div>
+<div class="col-md-1 pl-0 pr-2 pt-1 m-auto text-center" (click)="makkahotel = !makkahotel">
+    <i *ngIf="makkahotel" class="downarrow icon_size_20 icns cursor-pointer"></i>
+    <i *ngIf="!makkahotel" class="uparrow icon_size_20 icns cursor-pointer"></i>
+</div>
+<div class="row col-md-12 p-0 ml-0 mr-0 mt-2 p20 brdrtop" *ngIf="!makkahotel">
+    <div class="col-md-6 p-0">
+        <div class="flexaround mrgndetails">
+            <div>
+                <div class="d-flex">
+                    <i class="calendaricon icon_h18_w15 icns"></i>
+                    <p class="pl-2 pr-2 fs13 fw500">{{'CHECK-IN'| translate}}</p>
+                    <i class="icon_h18_w11 icns downarrow"></i>
                 </div>
+                <p class="fw600 fs21">{{tripHotel?.check_in_time | date: 'mediumDate'}}</p>
+                <p class="clr52 fs12">{{tripHotel?.check_in_time | date: 'EEEE'}}</p>
             </div>
-            <div class="col-md-6 p-0">
-                <div class="p20">
-                    <div *ngIf="tripHotel.hotel.address">
-                        <div class="d-inline-flex">
-                            <i class="locationicon icns icon_size_20"></i>
-                            <div class="clr52 fs14">{{'ADDRESS'| translate}}</div>
-                        </div>
-                        <div class="fs12 clr52 pl-2">{{tripHotel?.hotel?.address}}</div>
-                    </div>
-                    <div class="d-inline-flex mt-2" *ngIf="tripHotel.hotel.email">
-                        <i class="mailicon icns icon_size_20"></i>
-                        <div class="clr52 fs14 pl-2">{{tripHotel?.hotel?.email}}</div>
-                    </div>
-                    <div class="d-inline-flex ml-3" *ngIf="tripHotel.hotel.phone_number">
-                        <i class="Phoneicon icns icon_size_20"></i>
-                        <div class="clr52 fs14 pl-2">{{tripHotel?.hotel?.phone_number}}</div>
-                    </div>
+            <div class="text-center mt-2">
+                <i class="nighticon icon_size_20 icns"></i>
+                <p class="textgrey font14">4 {{'Nights'| translate}}</p>
+            </div>
+            <div class="text_left mirr_text_right">
+                <div class="d-flex">
+                    <i class="calendaricon icon_h18_w15 icns"></i>
+                    <p class="pl-2 pr-2 fs13 fw500">{{'CHECK-OUT'| translate}}</p>
+                    <i class="icon_h18_w11 icns downarrow"></i>
                 </div>
+                <p class="fw600 fs21">{{tripHotel?.check_out_time | date: 'mediumDate'}}</p>
+                <p class="clr52 fs12">{{tripHotel?.check_out_time | date: 'EEEE'}}</p>
             </div>
-            <div class="col-md-12 p-0 row m-0">
+            <<<<<<< HEAD <div class="col-md-12 p-0 row m-0">
                 <div class="col-md-12 row m-0 p-2 brdrtop" *ngFor="let room of tripHotel?.room_variations">
                     <div class="col-md-4 col-6 clr52 fs14 fw600">{{room?.title}}</div>
-                    <div class="col-md-4 col-6 fs14 clr52 fw500"><strong
-                            class="pr-1 fw600">{{room?.max_guests}}</strong>{{'Guests' | translate}}</div>
+                    <div class="col-md-4 col-6 fs14 clr52 fw500"><strong class="pr-1 fw600">{{room?.max_guests}}</strong>{{'Guests' | translate}}</div>
                     <div class="col-md-2 col-6 fs12">{{room?.room?.is_refundable}}</div>
                     <!-- <div class="col-md-2 col-6 text-right fs14">{{room?.currency}} {{room?.room?.amount}}</div> -->
+                    =======
                 </div>
+        </div>
+        <div class="col-md-6 p-0">
+            <div class="p20">
+                <div *ngIf="tripHotel.hotel.address">
+                    <div class="d-inline-flex">
+                        <i class="locationicon icns icon_size_20"></i>
+                        <div class="clr52 fs14">{{'ADDRESS'| translate}}</div>
+                        >>>>>>> b2btransilate
+                    </div>
+                    <div class="fs12 clr52 pl10 mpl0 mpr10">{{tripHotel?.hotel?.address}}</div>
+                </div>
+                <div class="d-inline-flex mt-2" *ngIf="tripHotel.hotel.email">
+                    <i class="mailicon icns icon_size_20"></i>
+                    <div class="clr52 fs14 pl10 mpl0 mpr10">{{tripHotel?.hotel?.email}}</div>
+                </div>
+                <div class="d-inline-flex ml-3" *ngIf="tripHotel.hotel.phone_number">
+                    <i class="Phoneicon icns icon_size_20"></i>
+                    <div class="clr52 fs14 pl10 mpl0 mpr10">{{tripHotel?.hotel?.phone_number}}</div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-12 p-0 row m-0">
+            <div class="col-md-12 row m-0 p-2 brdrtop" *ngFor="let room of tripHotel?.room_variations">
+                <div class="col-md-4 col-6 clr52 fs14 fw600">{{room?.title}}</div>
+                <div class="col-md-4 col-6 fs14 clr52 fw500"><strong class="pr-1 fw600">{{room?.max_guests}}</strong>Guests</div>
+                <div class="col-md-2 col-6 fs12">{{room?.room?.is_refundable}}</div>
+                <!-- <div class="col-md-2 col-6 text-right fs14">{{room?.currency}} {{room?.room?.amount}}</div> -->
             </div>
         </div>
     </div>
+</div>
 </div>

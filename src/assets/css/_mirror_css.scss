@@ -1,0 +1,147 @@
+.mirror_css {
+    direction: rtl;
+    overflow-x: hidden;
+    .mirr_hide {
+        display: none;
+    }
+    .mirr_display {
+        display: block !important;
+    }
+    .mpl0 {
+        padding-left: 0 !important;
+    }
+    .mpl5 {
+        padding-left: 5px !important;
+    }
+    .mpr0 {
+        padding-right: 0 !important;
+    }
+    .mpr15 {
+        padding-right: 15px !important;
+    }
+    .mpr5 {
+        padding-right: 5px !important;
+    }
+    .mpr10 {
+        padding-right: 10px !important;
+    }
+    .mpl10 {
+        padding-left: 10px !important;
+    }
+    .mpl15 {
+        padding-left: 15px !important;
+    }
+    .mpl30 {
+        padding-left: 30px !important;
+    }
+    .mmr30 {
+        margin-right: 30px !important;
+    }
+    .mmr10 {
+        margin-right: 10px !important;
+    }
+    .mml20 {
+        margin-left: 20px !important;
+    }
+    .mml10 {
+        margin-left: 10px !important;
+    }
+    .mml5 {
+        margin-left: 5px !important;
+    }
+    #recentHistory {
+        .thead-light th {
+            text-align: right !important;
+        }
+    }
+    #recentHistory td {
+        text-align: right !important;
+    }
+    .mirr_brdr_right_none {
+        border-right: none !important;
+    }
+    .mirr_brdr_left_none {
+        border-left: none !important;
+    }
+    .mirr_brdr_left {
+        border-left: 1px solid #d3d3d3 !important;
+    }
+    .mirr_brdr_right {
+        border-right: 1px solid #d3d3d3 !important;
+    }
+    .mirr_text_right {
+        text-align: right !important;
+    }
+    .mirr_right_0 {
+        right: 0 !important;
+    }
+    .mat-radio-label-content {
+        padding-right: 8px !important;
+        padding-left: 0 !important;
+    }
+    .btn-group .firstbttn {
+        border-radius: 0 7px 7px 0 !important;
+    }
+    .btn-group .secondbttn {
+        border-radius: 7px 0 0 7px !important;
+    }
+    .modalroom {
+        .secondbttn {
+            border-radius: 4px 0 0 4px !important;
+        }
+        .firstbttn {
+            border-radius: 0 4px 4px 0 !important;
+        }
+    }
+    .mirr_clndr_icon {
+        left: 10px !important;
+        right: unset !important;
+    }
+    .owldatepicker {
+        padding-left: 0 !important;
+        padding-right: 10px !important;
+    }
+    .mat-horizontal-stepper-header .mat-step-icon {
+        margin-right: 0 !important;
+        margin-left: 8px !important;
+    }
+    .hotelRibbon .hotelRibbon3 {
+        right: 103px !important;
+        left: unset !important;
+    }
+    .mirr_float_left {
+        float: left !important;
+    }
+    .mirr_float_right {
+        float: right !important;
+    }
+    #selectRoom {
+        .roomInfo-title {
+            width: 26% !important;
+        }
+        .roomTypeNPrice-title {
+            width: 51% !important;
+        }
+    }
+    .customtooltiptext {
+        div,
+        p {
+            text-align: right;
+        }
+    }
+    .modal-header .close {
+        margin-left: unset;
+    }
+    .iti--allow-dropdown .iti__flag-container,
+    .iti--separate-dial-code .iti__flag-container {
+        right: 0 !important;
+        left: auto !important;
+    }
+    .iti--separate-dial-code input[type=text] {
+        padding-left: 6px !important;
+        padding-right: 81px !important;
+    }
+    .mirr_rotate_180 {
+        transform: rotate(180deg);
+    }
+}
