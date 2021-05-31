@@ -496,5 +496,9 @@
     "Authe Code": "رمز الدخول",
     "IBAN Number": "رقم الآيبان",
     "Licence Number": "رقم الرخصة",
-    "Staff Details": "تفاصيل طاقم العمل"
+    "Staff Details": "تفاصيل طاقم العمل",
+    "Booking Date": "تاريخ الحجز",
+    "BRN Details": "تفاصيل BRN",
+    "Hotel in Makkah": "فندق في مكة",
+    "Hotel in Madinah": "فندق في المدينة المنورة"
 }
