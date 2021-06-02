@@ -42,7 +42,8 @@ import { SubAgentStateService } from '../../Services/sub-agent-state.service';
 export function TranslatorFactory(httpClient: HttpClient) { return new TranslateHttpLoader(httpClient, './assets/i18n/', '.json'); }
 import { PaginationComponent } from 'src/app/components/sub-agent/pagination/pagination.component';
 import { ItineraryViewComponent } from 'src/app/components/sub-agent/itinerary-view/itinerary-view.component';
-
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { SubAgentInterceptor } from 'src/app/core/sub-agent/sub-agent.interceptor'
 @NgModule({
   declarations: [
     BookingHistoryComponent,
@@ -109,7 +110,12 @@ import { ItineraryViewComponent } from 'src/app/components/sub-agent/itinerary-v
   exports: [
     TranslateModule,
   ],
-  providers: [SubAgentApiService, HelperService,SubAgentStateService]
+  providers: [SubAgentApiService, HelperService,SubAgentStateService,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: SubAgentInterceptor,
+      multi: true,
+    }]
 
 })
 
