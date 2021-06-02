@@ -1,0 +1,185 @@
+.closeimg {
+    font-size: 55px;
+    color: white;
+    margin-right: 30px;
+}
+
+.pdngerror {
+    padding: 15px 30px 13px;
+}
+
+.bg {
+    background-color: rgb(253, 81, 81);
+}
+
+.imagepdng {
+    padding: 7px 30px 0 0;
+}
+
+.pdngsucess {
+    padding: 15px 30px 5px;
+}
+
+.top_section {
+    background-color: #1d851d;
+}
+
+.tick_img {
+    padding-bottom: 20px;
+}
+
+.boxvouch {
+    border-radius: 5.5px;
+    box-shadow: 0 0 9px 0 rgba(0, 0, 0, 0.1);
+    border: solid 1px rgba(156, 170, 179, 0.28);
+    background-color: #ffffff;
+    padding: 12px;
+}
+
+.animationarrow {
+    transform: rotate(180deg);
+}
+
+.arrowanimation {
+    transition: transform 0.2s ease-out;
+    transform: rotate(0deg);
+}
+
+p {
+    margin-bottom: 0;
+}
+
+.imgposition {
+    margin: 5px;
+    float: left;
+}
+
+.brdrR {
+    border-right: 1px solid #c9c9cc;
+}
+
+.brdrL {
+    border-left: 1px solid #c9c9cc;
+    ;
+}
+
+.brdrtop {
+    border-top: 1px solid #c9c9cc;
+}
+
+.brdrbottom {
+    border-bottom: 1px solid #c9c9cc;
+}
+
+.linebyline {
+    span {
+        margin-left: 8px;
+        font-size: 13px;
+    }
+    .crossline {
+        border-right: 1px solid;
+    }
+}
+
+.mapheight {
+    height: 66px;
+    width: 50%;
+}
+
+.font9imp {
+    font-size: 9px !important;
+}
+
+.borderpading {
+    padding: 15px 15px 0 15px;
+}
+
+.font16imp {
+    font-size: 16px !important;
+}
+
+.bookdpdng {
+    padding: 0 15px;
+}
+
+.mrgndetails {
+    margin: 30px 0;
+}
+
+.transportbodypdng {
+    padding: 10px 20px 0px;
+}
+
+.expansion {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.2s ease-out;
+}
+
+.det-text {
+    color: #535353;
+    font-size: 14px;
+    line-height: 40px;
+}
+
+.arrowanimation {
+    transition: transform 0.2s ease-out;
+    transform: rotate(0deg);
+    cursor: pointer;
+}
+
+.mt2p {
+    margin-top: 2px;
+}
+
+.clrrd {
+    color: red !important;
+}
+
+.errorBox {
+    border: 1px solid rgb(246 99 99 / 28%) !important;
+    box-shadow: 0 0 9px 0 rgb(253 2 2 / 31%) !important;
+    background-color: #fff2f2!important;
+}
+
+.ticket_cancellation_popup {
+    background-color: #00000082;
+    .modal-title {
+        color: #d32f2f;
+    }
+    .modal-dialog {
+        max-width: 1000px;
+    }
+    .remarks {
+        font-size: 14px;
+        font-weight: 500;
+    }
+    .note {
+        font-size: 13px;
+        font-weight: 500;
+        color: #d32f2f;
+    }
+    .note_txt {
+        color: #777;
+    }
+}
+
+.paymentpage_policies {
+    .fa {
+        color: #ea1a1abf;
+    }
+    .centerText {
+        padding: 20px;
+        text-align: center;
+        font-size: 16px;
+        color: red;
+    }
+}
+
+#confirmCancellationInput {
+    width: 100%;
+    outline: none;
+    border-radius: 4px;
+    min-height: 50px;
+    padding: 10px 10px;
+}

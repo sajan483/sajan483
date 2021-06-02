@@ -5,6 +5,7 @@ import { CreateTripFrontPageComponent } from 'src/app/components/sub-agent/creat
 import { PaymentStatusComponent } from 'src/app/components/sub-agent/payment-status/payment-status.component';
 import { ProfilePageComponent } from 'src/app/components/sub-agent/profile-page/profile-page.component';
 import { CreateTripComponent } from 'src/app/components/sub-agent/create-trip/create-trip.component';
+import { ItineraryViewComponent } from 'src/app/components/sub-agent/itinerary-view/itinerary-view.component';
 
 const myPath: Routes = [
   {
@@ -30,6 +31,10 @@ const myPath: Routes = [
   {
     path: "bookings/:id/details",
     component: PaymentStatusComponent,
+  },
+  {
+    path: "bookings/:id/itinerary",
+    component: ItineraryViewComponent,
   },
 ];
 

@@ -1,65 +1,4 @@
 <div class="container-fluid pl-0 pr-0 mt60 pb-60 mirr_text_right">
-    <div class="top_section" *ngIf="bknStatus == 'success'">
-        <div class="container d-flex justify-content-between">
-            <div class="d-inline-flex pdngsucess">
-                <div class="imagepdng mpr0 mpl30">
-                    <img class="tick_img" src="/assets/images/confirmation-tick.png" alt="">
-                </div>
-                <div>
-                    <h1 class="text-uppercase fs28 fw600 text-white">{{'Thank You..!!' | translate}}</h1>
-                    <h3 class="text-white fs18">{{'Your payment has been processed successfully' | translate}}</h3>
-                </div>
-            </div>
-            <div class="text-white my-auto fs14">
-                <div class="cursor-pointer d-flex" (click)="navigateHomePage()">
-                    <div class="my-auto mirr_hide"><i class="fa fa-chevron-left " aria-hidden="true"></i></div>
-                    <div class="px-2">{{'Back to Home Page' | translate}}</div>
-                    <div class="my-auto mirr_display"><i class="fa fa-chevron-left " aria-hidden="true"></i></div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="bg" *ngIf="bknStatus == 'failed'">
-        <div class="container d-flex justify-content-between">
-            <div class="d-inline-flex pdngerror">
-                <div class="">
-                    <i class="fa fa-times-circle closeimg mpr0 mpl30" aria-hidden="true"></i>
-                </div>
-                <div>
-                    <h1 class="text-uppercase fs28 fw600 text-white mb-0"> {{'Something Went Wrong..!!' | translate}}
-                    </h1>
-                    <h3 class="text-white fs18">{{'Your payment has been Failed' | translate}}, {{'Please Contact Customer care' | translate}} : 42008 05505</h3>
-                </div>
-            </div>
-            <div class="text-white my-auto fs14">
-                <div class="cursor-pointer d-flex" (click)="navigateHomePage()">
-                    <div class="my-auto mirr_hide"><i class="fa fa-chevron-left " aria-hidden="true"></i></div>
-                    <div class="px-2">{{'Back to Home Page' | translate}}</div>
-                    <div class="my-auto mirr_display"><i class="fa fa-chevron-left " aria-hidden="true"></i></div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="bg" *ngIf="bknStatus == 'cancelled'">
-        <div class="container d-flex justify-content-between">
-            <div class="d-inline-flex pdngerror">
-                <div class="">
-                    <i class="fa fa-times-circle closeimg mpr0 mpl30" aria-hidden="true"></i>
-                </div>
-                <div>
-                    <h1 class="text-uppercase fs28 fw600 text-white mb-0">{{'Cancelled..!!' | translate}} </h1>
-                    <h3 class="text-white fs18">{{'Booking has been Cancelled' | translate}}</h3>
-                </div>
-            </div>
-            <div class="text-white my-auto fs14">
-                <div class="cursor-pointer d-flex" (click)="navigateHomePage()">
-                    <div class="my-auto mirr_hide"><i class="fa fa-chevron-left " aria-hidden="true"></i></div>
-                    <div class="px-2">{{'Back to Home Page' | translate}}</div>
-                    <div class="my-auto mirr_display"><i class="fa fa-chevron-left " aria-hidden="true"></i></div>
-                </div>
-            </div>
-        </div>
-    </div>
     <div class="container px-0">
         <div class="row m-0">
             <div class="col-md-9 pl0 mpl15 mpr0" *ngIf="shimmer">
@@ -546,6 +485,23 @@
                         </div>
                     </div>
                 </div> -->
+                <div *ngIf="bknStatus != 'cancelled'">
+                    <div class="boxvouch cursor-pointer mt-3" (click)="checkCancellation()">
+                        <div class="d-flex justify-content-between">
+                            <div class="d-inline-flex">
+                                <i class="cancelicon icns icon_size_25"></i>
+                                <div class="fs15 fw600 text-uppercase pl10 mpl0 mpr10 my-auto">{{'Check cancellation' | translate}}
+                                </div>
+                            </div>
+                            <div>
+                                <i class="rightarrow icns icon_size_20 my-auto h-100 mirr_rotate_180" *ngIf="!cancellationtoggle"></i>
+                                <div class="spinner-border" role="status" *ngIf="cancellationtoggle">
+                                    <span class="sr-only">{{'Loading' | translate}}...</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
                 <div class="mt-3">
                     <h2 class="fs18 fw600">{{'Fare Summary' | translate}}</h2>
                     <div class="boxvouch">
@@ -626,6 +582,80 @@
                         </div> -->
                     </div>
                 </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div [style.display]="cancelationPopup ? 'block' : 'none'" id="cancellationpopup" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" class="modal ticket_cancellation_popup">
+    <div class="modal-dialog popupmoving">
+        <div class="modal-content">
+            <div class="modal-header" style="border-bottom: none;padding-bottom: 0px;">
+                <h6 class="modal-title pl-3 paddingR15">{{'CONFIRM CANCELLATION' | translate}}</h6>
+                <button type="button" class="close cancelclose" (click)="closecancelPopup();">&times;</button>
+            </div>
+            <div class="modal-body mb-4">
+                <div class="container p-3 paymentpage_policies mirr_text_right">
+                    <table class="table " style="border: 1px solid #dee2e6;">
+                        <thead>
+                            <tr>
+                                <!-- <th scope="col"></th> -->
+                                <th scope="col">{{'Items' | translate}}</th>
+                                <th scope="col">{{'Name' | translate}}</th>
+                                <th scope="col">{{'Status' | translate}}</th>
+                                <th scope="col">{{'Refund Amount' | translate}}</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngIf="tripMakkahHotel" [class.bgcolors]="makkahCancellation?.success == false">
+                                <!-- <th><mat-checkbox [disabled]="!makkahCancellation?.success" (change)="makkahcheck();"></mat-checkbox></th> -->
+                                <td>{{'Makkah Hotel' | translate}}</td>
+                                <td>{{tripMakkahHotel.trip_hotel.hotel.name}}</td>
+                                <td *ngIf="!makkahCancellation?.success" style="color: red;">{{'Items' | translate}}
+                                </td>
+                                <td *ngIf="makkahCancellation?.success" style="color: green;">
+                                    {{makkahCancellation?.cancellation_prices?.cancellation_status}} </td>
+                                <td *ngIf="!makkahCancellation?.success">0</td>
+                                <td *ngIf="makkahCancellation?.success">
+                                    {{makkahCancellation?.cancellation_prices?.total_refund}}</td>
+                            </tr>
+                            <tr *ngIf="tripMadeenaHotel" [class.bgcolors]="medinahCancellation?.success == false">
+                                <!-- <th><mat-checkbox [disabled]="!medinahCancellation?.success" (change)="medinahcheck();"></mat-checkbox></th> -->
+                                <td>{{'Medina Hotel' | translate}}</td>
+                                <td>{{tripMadeenaHotel.trip_hotel.hotel.name}}</td>
+                                <td *ngIf="!medinahCancellation?.success" style="color: red;">{{'No Cancellation Policy Found' | translate}}</td>
+                                <td *ngIf="medinahCancellation?.success" style="color: green;">
+                                    {{medinahCancellation?.cancellation_prices?.cancellation_status}} </td>
+                                <td *ngIf="!medinahCancellation?.success">0</td>
+                                <td *ngIf="medinahCancellation?.success">
+                                    {{medinahCancellation?.cancellation_prices?.total_refund}}</td>
+                            </tr>
+                            <tr *ngIf="tripTransport && tripTransport?.trip_transportation?.trip_vehicles && tripTransport.trip_transportation.trip_vehicles?.length > 0" [class.bgcolors]="transportCancellation?.success == false">
+                                <!-- <th><mat-checkbox [disabled]="!transportCancellation?.success" (change)="transportcheck();"></mat-checkbox></th> -->
+                                <td>{{'Transport' | translate}}</td>
+                                <td>{{tripTransport?.trip_transportation.company.name}}</td>
+                                <td *ngIf="!transportCancellation?.success" style="color: red;">{{'No Cancellation Policy Found' | translate}}</td>
+                                <td *ngIf="transportCancellation?.success" style="color: green;">
+                                    {{transportCancellation?.cancellation_prices?.cancellation_status}} </td>
+                                <td *ngIf="!transportCancellation?.success">0</td>
+                                <td *ngIf="transportCancellation?.success">
+                                    {{transportCancellation?.cancellation_prices?.total_refund}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+
+                    <label class="remarks pt-2 floatright" for="remarks">{{'Remarks' | translate}}</label>
+                    <form [formGroup]="registerForm">
+                        <textarea name="remarks" formControlName="cancellation_text" class="form-control" type="text" id="confirmCancellationInput" placeholder="{{'Please mention the reason for cancellation' | translate}}" [ngClass]="{ 'is-invalid': submitted && f.cancellation_text.errors }"></textarea>
+                        <div *ngIf="submitted && f.cancellation_text.errors" class="invalid-feedback">
+                            <div *ngIf="f.cancellation_text.errors.required">{{'Remarks is required' | translate}}</div>
+                        </div>
+                    </form>
+                    <p class="note text_right"><i class="fa fa-info-circle pr-2" aria-hidden="true"></i>{{'Please Note' | translate}}</p>
+                    <p class="note_txt text_right">{{'Standard Terms and Conditions Apply..' | translate}}</p>
+                </div>
+                <div><button (click)="confirmCancellation()" type="submit" [class.bttnactive]="btnactv" class="searchbutton float_right mirr_float_left">{{'CONFIRM CANCELLATION' | translate}}</button> </div>
             </div>
         </div>
     </div>

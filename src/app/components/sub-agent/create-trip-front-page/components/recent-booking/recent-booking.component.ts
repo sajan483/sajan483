@@ -34,7 +34,7 @@ export class RecentBookingComponent implements OnInit {
    * this method for navigate details page
    */
   viewhistory(id: any) {
-    this.router.navigate(["subagent/payment", id, "history"]);
+    this.router.navigate(["subagent/bookings", id, "itinerary"]);
   }
 
   /**
