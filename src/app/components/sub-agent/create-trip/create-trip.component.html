@@ -93,21 +93,9 @@
                         </div>
                         <div>
                             <div class="mt60">
-                                <div class="col-md-12  row m-0 justify-content-between filterstyle p015" *ngIf="isTransportResponseEmpty">
-                                    <div id="routeSection" class="col-md-5 mb-0 pl-0">
-                                        <ng-multiselect-dropdown [placeholder]="'Route' " [data]="routeList" [settings]="dropdownSettings" (onSelect)="onRouteSelect($event)">
-                                        </ng-multiselect-dropdown>
-                                    </div>
-                                    <div id="vehicleSection" class="col-md-5 mb-0 pl-0 mt3">
-                                        <ng-multiselect-dropdown [placeholder]="'Vehicle Type'" [data]="vehicleTypeList" [(ngModel)]="vehicleTypeItems" [settings]="dropdownSettings" (onSelect)="onVehicleSelect($event)">
-                                        </ng-multiselect-dropdown>
-                                    </div>
-                                    <div id="transportSearchSection" class="col-md-2 pr-0 pl-0 mt3 w95">
-                                        <button (click)=transportSearch() [disabled]="!disableBtn" class="searchButton searchButtonarabic" type="button">{{'Search'
-                                            }} <i class="fa fa-arrow-right" aria-hidden="true"></i>
-                                        </button>
-                                    </div>
-                                </div>
+                                <!-- <div class="col-md-12 " *ngIf="isTransportResponseEmpty">
+                                    
+                                </div> -->
                                 <app-transport (notifyGrandparent)="createTripHandle($event)" [transportList]="transportList"></app-transport>
                             </div>
                         </div>

@@ -41,6 +41,7 @@ import { SubAgentStateService } from '../../Services/sub-agent-state.service';
 
 export function TranslatorFactory(httpClient: HttpClient) { return new TranslateHttpLoader(httpClient, './assets/i18n/', '.json'); }
 import { PaginationComponent } from 'src/app/components/sub-agent/pagination/pagination.component';
+import { ItineraryViewComponent } from 'src/app/components/sub-agent/itinerary-view/itinerary-view.component';
 
 @NgModule({
   declarations: [
@@ -61,7 +62,8 @@ import { PaginationComponent } from 'src/app/components/sub-agent/pagination/pag
     HotelImagePopupComponent,
     PaymentTransportComponent,
     OnlyNumberDirective,
-    PaginationComponent
+    PaginationComponent,
+    ItineraryViewComponent
   ],
 
   imports: [

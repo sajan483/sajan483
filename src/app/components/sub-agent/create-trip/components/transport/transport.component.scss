@@ -1,23 +1,29 @@
- .transportcard{
-  margin: 10px;
-}
-.transportimage{
-  height: 200px;
-  width: 100%;
-  img{
-    padding: 10px;
-    height: 100%;
-    width: 100%;
-  }
-}
-.pdngdetailbox{
-  padding: 15px 10px;
-}
-.dgride{
-  display: grid;
-}
-.bookdiv{
-  padding: 30px 30px 10px 0;
-  display: flex;
-  justify-content: flex-end;
-}
+ .transportcard {
+     margin: 10px;
+ }
+ 
+ .transportimage {
+     height: 200px;
+     width: 100%;
+     padding: 10px;
+     img {
+         height: 100%;
+         width: 100%;
+         background-image: url(/assets/images/no_image.jpg);
+         background-size: 100% 100%;
+     }
+ }
+ 
+ .pdngdetailbox {
+     padding: 15px 10px;
+ }
+ 
+ .dgride {
+     display: grid;
+ }
+ 
+ .bookdiv {
+     padding: 30px 30px 10px 0;
+     display: flex;
+     justify-content: flex-end;
+ }
