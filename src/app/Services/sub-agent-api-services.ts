@@ -1,296 +1,180 @@
 import { Injectable } from "@angular/core";
 import "rxjs/add/operator/map";
-import {
-  Http,
-  Response,
-  Headers,
-  RequestOptions,
-  URLSearchParams,
-  ResponseContentType,
-} from "@angular/http";
 import { Router } from "@angular/router";
 import "rxjs/add/operator/toPromise";
-import { HttpClient, HttpHeaders } from "@angular/common/http";
-import { environment } from "src/environments/environment";
+import { HttpClient } from "@angular/common/http";
 import { Observable } from "rxjs/internal/Observable";
 import { listAirport } from "../models/listAirport";
 
-var access = sessionStorage.getItem("accesstoken");
 
 @Injectable()
 export class SubAgentApiService {
-  BASE_URL: any = environment.baseUrl;
-  BASE_URL2: any = environment.baseUrl2;
   
-  httpOptions = {
-    headers: new HttpHeaders({
-      "Content-Type": "application/json",
-      Authorization: "Bearer " + access,
-    }),
-  };
-
-  options = {
-    headers: new Headers({
-      "Content-Type": "application/json",
-      Authorization: "Bearer " + access,
-    }),
-  };
-
-  optionsForForm = {
-    headers: new Headers({
-      Authorization: "Bearer " + access,
-    }),
-  };
-
   constructor(
-    private http: Http,
-    private _httpClient: HttpClient,
     private router: Router,
-    private https: HttpClient
+    private http: HttpClient
   ) {}
 
-  getStaffDetails() {
-    return this.http
-      .get(this.BASE_URL + "staff/profile/", this.options)
-      .map((res) => res.json());
+  getStaffDetails(): Observable<any> {
+    return this.http.get( "staff/profile/")
   }
   
-  getSelectedHotelInfo(data, currency, lang) {
+  getSelectedHotelInfo(data, currency, lang): Observable<any> {
     return this.http
-      .post(
-        this.BASE_URL +
-          "hotels/details/?currency=" +
-          currency +
-          "&lang=" +
-          lang,
-        data,
-        this.options
-      )
-      .map((res) => res.json());
+      .post( "hotels/details/?currency=" + currency + "&lang=" + lang, data)
   }
 
-  saveSelectedHotel(data) {
+  saveSelectedHotel(data): Observable<any> {
     return this.http
-      .post(this.BASE_URL + "custom_trips/", data, this.options)
-      .map((res) => res.json());
+      .post( "custom_trips/", data)
   }
 
 
-  getVoucherPdf(id){
-    const bookingOptions = {
-      responseType: ResponseContentType.Blob,
-      headers: new Headers({
-        "Authorization": "Bearer Guest",
-      }),
-      
-    };
+  getVoucherPdf(id): Observable<any>{
     return this.http
-    .get(this.BASE_URL + "bookings/"+id+"/voucher/", bookingOptions)
-    .map((res) =>
-    {
-      return new Blob([res.blob()], { type: 'application/pdf' })
-    });
+    .get("bookings/"+id+"/voucher/",{responseType:'blob'})
   }
 
-  getLanguages() {
+  getLanguages(): Observable<any> {
     return this.http
-      .get(this.BASE_URL + "languages/", this.options)
-      .map((res) => res.json());
+      .get( "languages/")
   }
   
-  updateCustomTrip(id,data){
+  updateCustomTrip(id,data): Observable<any>{
     return this.http
-    .put(this.BASE_URL + "custom_trips/"+id+"/",data, this.options)
-    .map((res) => res.json());
+    .put("custom_trips/"+id+"/",data)
   }
 
-  bookCustomTrip(data) {
+  bookCustomTrip(data): Observable<any> {
     return this.http
-      .post(this.BASE_URL + "custom_trips/", data, this.options)
-      .map((res) => res.json());
+      .post( "custom_trips/", data)
   }
 
-  getPaymentDetails(id){
+  getPaymentDetails(id): Observable<any>{
     return this.http
-      .get(this.BASE_URL + "bookings/"+id+"/", this.options)
-      .map((res) => res.json());
+      .get("bookings/"+id+"/")
   }
 
-  getVisaDetails(id){
+  getVisaDetails(id): Observable<any>{
     return this.http
-    .get(this.BASE_URL + "custom_trip_booking/"+id+"/update_mutamer_info/", this.options)
-    .map((res) => res.json());
+    .get("custom_trip_booking/"+id+"/update_mutamer_info/")
   }
 
-  getInvoice(id){
-    const bookingOptions = {
-      responseType: ResponseContentType.Blob,
-      headers: new Headers({
-        "Authorization": "Bearer Guest",
-      }),
-      
-    };
+  getInvoice(id): Observable<any>{
     return this.http
-    .get(this.BASE_URL + "bookings/"+id+"/invoice_template/", bookingOptions)
-    .map((res) =>
-    {
-      return new Blob([res.blob()], { type: 'text/html' })
-    });
+    .get("bookings/"+id+"/invoice_template/",{responseType:'blob'})
   }
     
-  getConfirmCancellation(id,data){
+  getConfirmCancellation(id,data): Observable<any>{
     return this.http
-    .post(this.BASE_URL + "b2b_trip_booking/"+id+"/confirm_cancellation/",data, this.options)
-    .map((res) => res.json());
+    .post("b2b_trip_booking/"+id+"/confirm_cancellation/",data)
   }
 
-  getCheckCancellation(id){
+  getCheckCancellation(id): Observable<any>{
     return this.http
-    .get(this.BASE_URL + "b2b_trip_booking/"+id+"/check_cancellation/", this.options)
-    .map((res) => res.json());
-  }
-
-
-  getVoucher(id){
-    const bookingOptions = {
-      responseType: ResponseContentType.Blob,
-      headers: new Headers({
-        "Authorization": "Bearer Guest",
-      }),
-    };
-    return this.http
-    .get(this.BASE_URL2 + "bookings/"+id+"/voucher_template/", bookingOptions)
-    .map((res) =>
-    {
-      return new Blob([res.blob()], { type: 'text/html' })
-    });
-  }
-
-  getInvoicePdf(id){
-    const bookingOptions = {
-      responseType: ResponseContentType.Blob,
-      headers: new Headers({
-        "Authorization": "Bearer Guest",
-      }),
-      
-    };
-    return this.http
-    .get(this.BASE_URL + "bookings/"+id+"/invoice/", bookingOptions)
-    .map((res) =>
-    {
-      return new Blob([res.blob()], { type: 'application/pdf' })
-    });
+    .get("b2b_trip_booking/"+id+"/check_cancellation/")
   }
 
 
-  sendNotification(id:any) {
+  getVoucher(id): Observable<any>{
     return this.http
-      .get(this.BASE_URL + "bookings/"+id+"/resend_notification/", this.options)
-      .map((res) => res.json());
+    .get("bookings/"+id+"/voucher_template/",{responseType:'blob'})
+  }
+
+  getInvoicePdf(id): Observable<any>{
+    return this.http
+    .get("bookings/"+id+"/invoice/",{responseType:'blob'})
   }
 
 
-  bookTrip(data,id){
+  sendNotification(id:any): Observable<any> {
     return this.http
-    .post(this.BASE_URL + "custom_trips/" + id + "/booking/",data, this.options)
-    .map((res) => res.json());
+      .get( "bookings/"+id+"/resend_notification/")
   }
 
 
-  searchTransport(data) {
+  bookTrip(data,id): Observable<any>{
     return this.http
-      .post(this.BASE_URL + "ground_transports/search/", data, this.options)
-      .map((res) => res.json());
+    .post( "custom_trips/" + id + "/booking/",data)
+  }
+
+
+  searchTransport(data): Observable<any> {
+    return this.http
+      .post( "ground_transports/search/", data)
   }
 
     
-  searchTransportList(id,currency,lang) {
+  searchTransportList(id,currency,lang): Observable<any> {
     return this.http
-      .get(this.BASE_URL + "ground_transports/?search_id=" + id + "&currency=" + currency + "&lang=" + lang, this.options)
-      .map((res) => res.json());
+      .get("ground_transports/?search_id=" + id + "&currency=" + currency + "&lang=" + lang)
   }
 
 
-  getTrip(id){
+  getTrip(id): Observable<any>{
     return this.http
-    .get(this.BASE_URL + "custom_trips/" + id + "/", this.options)
-    .map((res) => res.json());
+    .get("custom_trips/" + id + "/")
   }
 
 
-  checkAvailability(id){
+  checkAvailability(id): Observable<any>{
     return this.http
-    .get(this.BASE_URL + "b2b_trip_booking/"+id+"/check_availability/", this.options)
-    .map((res) => res.json());
+    .get("b2b_trip_booking/"+id+"/check_availability/")
   }
 
-  bookingPayment(data){
+  bookingPayment(data): Observable<any>{
     return this.http
-    .post(this.BASE_URL + "payments/",data, this.options)
-    .map((res) => res.json());
+    .post( "payments/",data)
   }
   
-  getCategories(lang) {
+  getCategories(lang): Observable<any> {
     return this.http
-      .get(this.BASE_URL + "ground_transports/categories/?lang=" + lang , this.options)
-      .map((res) => res.json());
+      .get( "ground_transports/categories/?lang=" + lang)
   }
 
-  getAdditionalServices(lang) {
+  getAdditionalServices(lang): Observable<any> {
     return this.http
-      .get(this.BASE_URL + "ground_transports/additional_services/?lang=" + lang , this.options)
-      .map((res) => res.json());
+      .get(+ "ground_transports/additional_services/?lang=" + lang )
   }
 
-  getserviceAdditionalServices() {
+  getserviceAdditionalServices(): Observable<any> {
     return this.http
-      .get(this.BASE_URL + "ground_services/additional_services/" , this.options)
-      .map((res) => res.json());
+      .get("ground_services/additional_services/")
   }
 
 
-  pilotHotelSearch(data: any, lang: any) {
+  pilotHotelSearch(data: any, lang: any): Observable<any> {
     return this.http
-      .post(this.BASE_URL + "b2capis/hotels/search/?lang=" + lang, data, this.options)
-      .map((res) => res.json());
+      .post( "b2capis/hotels/search/?lang=" + lang, data)
   }
 
 
-  getHotelList(id: any,currency: any, lang: any) {
+  getHotelList(id: any,currency: any, lang: any): Observable<any> {
     return this.http
-      .get(this.BASE_URL + "hotels/?search_id=" + id + "&currency=" + currency + "&lang=" + lang, this.options)
-      .map((res) => res.json());
+      .get("hotels/?search_id=" + id + "&currency=" + currency + "&lang=" + lang)
   }
 
-  getPaginatedhistoryList(pageNumber: number) {
-    return this.http.get(this.BASE_URL + 'bookings/?page=' + pageNumber, this.options).map(res => res.json());
+  getPaginatedhistoryList(pageNumber: number): Observable<any> {
+    return this.http.get( 'bookings/?page=' + pageNumber)
   }
 
 
   getAirportListSrc(airport: String): Observable<any> {
-    return this.https.get<listAirport[]>(
-      this.BASE_URL + "airports/autocomplete/?airport_type=DESTINATION&airport_type=BOARDING&search=" + airport,
-      this.httpOptions
-    );
+    return this.http.get<listAirport[]>( "airports/autocomplete/?airport_type=DESTINATION&airport_type=BOARDING&search=" + airport);
   }
 
   getairlineslist(airline: String): Observable<any> {
-    return this.https.get(
-      this.BASE_URL + "airlines/autocomplete/?search=" + airline,
-      this.httpOptions
-    );
+    return this.http.get("airlines/autocomplete/?search=" + airline);
   }
 
-  getRoutes(lang) {
+  getRoutes(lang): Observable<any> {
     return this.http
-      .get(this.BASE_URL + "ground_transports/routes/?lang=" + 'en-US' , this.options)
-      .map((res) => res.json());
+      .get("ground_transports/routes/?lang=" + 'en-US')
   }
 
-  getVehicles(lang) {
+  getVehicles(lang): Observable<any> {
     return this.http
-      .get(this.BASE_URL + "ground_transports/vehicle_types/?lang=" + 'en-US' , this.options)
-      .map((res) => res.json());
+      .get("ground_transports/vehicle_types/?lang=" + 'en-US')
   }
 
 }
