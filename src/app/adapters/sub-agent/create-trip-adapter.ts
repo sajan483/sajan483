@@ -89,7 +89,7 @@ export class CreateTripAdapter {
   /**
    *Method for creating  hotel booking request
    */
-  bookHotelRequest(isGrouped: boolean,selectedRoomGroups: any[],selectedHotel: any,selectedHotelInfo: any) {
+  bookHotelRequest(isGrouped: boolean,selectedRoomGroups: any[],selectedHotel: any,selectedHotelInfo: any,numberOfDays:number) {
     var roomVariations: any = {};
     var roomVariationArray: any[] = [];
     if (!isGrouped) {
@@ -223,6 +223,7 @@ export class CreateTripAdapter {
           check_in_time: selectedHotel.check_in_time,
           check_out_time: selectedHotel.check_out_time,
           other_data: selectedHotel.other_data,
+          num_of_days: numberOfDays,
         },
       };
     }
@@ -280,6 +281,7 @@ export class CreateTripAdapter {
           check_in_time: selectedHotel.check_in_time,
           check_out_time: selectedHotel.check_out_time,
           other_data: selectedHotel.other_data,
+          num_of_days: numberOfDays,
         },
       };
     }
