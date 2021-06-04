@@ -171,7 +171,7 @@ export class HotelDetailsPopupComponent implements OnInit ,OnChanges{
       this.appStore.stepperIndex += 1;
     }
     if(!sessionStorage.getItem('custom_trip_id')){
-      this.commonService.saveSelectedHotel(this.createTripAdapter.bookHotelRequest(this.isGrouped,this.selectedRoomGroups,this.hotelData,this.hotelInfo)).subscribe((data) => {
+      this.commonService.saveSelectedHotel(this.createTripAdapter.bookHotelRequest(this.isGrouped,this.selectedRoomGroups,this.hotelData,this.hotelInfo,this.numberOfDays)).subscribe((data) => {
         this.activeBttn = true;
         sessionStorage.setItem('custom_trip_id',data.id);
         sessionStorage.setItem('stage','1')
@@ -179,7 +179,7 @@ export class HotelDetailsPopupComponent implements OnInit ,OnChanges{
       });
     }
     if(sessionStorage.getItem('custom_trip_id')){
-      this.commonService.updateCustomTrip(sessionStorage.getItem('custom_trip_id'),this.createTripAdapter.bookHotelRequest(this.isGrouped,this.selectedRoomGroups,this.hotelData,this.hotelInfo)).subscribe((data) => {
+      this.commonService.updateCustomTrip(sessionStorage.getItem('custom_trip_id'),this.createTripAdapter.bookHotelRequest(this.isGrouped,this.selectedRoomGroups,this.hotelData,this.hotelInfo,this.numberOfDays)).subscribe((data) => {
         this.activeBttn = true;
           if(JSON.parse(sessionStorage.getItem('steps')).length == 1){
             sessionStorage.setItem('stage','1')
