@@ -954,7 +954,7 @@ export class CreateTripComponent implements OnInit, AfterViewChecked, DoCheck {
           }
           this.common.getHotelList(data.search_id, this.selectedCurrency, "en-US").subscribe(
             (data) => {
-              this.hotelsList = data.sort((a,b)=>(a.amount) - (b.amount));
+              this.hotelsList = data;
               if (this.hotelsList.length == 0) {
                 Swal.fire({
                   icon: 'error',
