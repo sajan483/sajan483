@@ -56,7 +56,7 @@ export class CreateTripHelper {
           grouped.push(element);
         }
       });
-
+      grouped[0].isRoomSelectionChecked = true;
       rooms.forEach((element) => {
         if (element.child_ages) {
           element.pax_info_str =
