@@ -259,7 +259,7 @@
                                                     <li class="roomRate" *ngIf="j < 1">
                                                         <div class="clr52 fs14 fw500 text-center" *ngFor="let item of room.board_types">{{item?.type}}</div>
                                                         <div class="d-flex justify-content-center">
-                                                            <mat-radio-button (click)="isGroupedTrueRadioButtonClicked(i,j)">
+                                                            <mat-radio-button [checked]="roomGroup.isRoomSelectionChecked" (click)="isGroupedTrueRadioButtonClicked(i,j)">
                                                             </mat-radio-button>
                                                         </div>
 

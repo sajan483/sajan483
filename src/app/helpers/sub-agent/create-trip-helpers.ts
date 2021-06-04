@@ -56,7 +56,8 @@ export class CreateTripHelper {
           grouped.push(element);
         }
       });
-
+      grouped[0].isRoomSelectionChecked = true;
+      totalRoomPrice = grouped[0].amount;
       rooms.forEach((element) => {
         if (element.child_ages) {
           element.pax_info_str =
@@ -101,7 +102,8 @@ export class CreateTripHelper {
       selectedRoomGroups = selectedRoomGroups.filter(
         this.helperService.onlyUnique
       );
-      
+
+      container.roomPrice = totalRoomPrice;
       container.roomGroups = selectedRoomGroups;
     }
     if (!isGrouped) {
