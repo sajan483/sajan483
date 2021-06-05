@@ -656,13 +656,26 @@ export class CreateTripComponent implements OnInit, AfterViewChecked, DoCheck {
   }
 
   calculatePed(){
-    if(sessionStorage.getItem('service') == 'All' || sessionStorage.getItem('service') == 'Makkah Hotel'){
-      var tripStartDate = JSON.parse(sessionStorage.getItem('userObject')).transportStartDate;
+    if(sessionStorage.getItem('service') == 'All'){
+      var tripStartDate = JSON.parse(sessionStorage.getItem('userObject')).makkahCheckinDate;
+      var tripendDate = JSON.parse(sessionStorage.getItem('userObject')).madeenaCheckoutDate;
       this.minpassportExpDate = this.helper.incrimentmonth(tripStartDate,6);
+      var noOfDays = this.helper.daysofTwoDate(tripStartDate,tripendDate);
+      sessionStorage.setItem("noOfTripDays",noOfDays.toString())
     }
-    if(sessionStorage.getItem('service') == 'Transport'){
-      var tripStartDate = JSON.parse(sessionStorage.getItem('userObject')).transportStartDate;
+    if(sessionStorage.getItem('service') == 'Makkah Hotel'){
+      var tripStartDate = JSON.parse(sessionStorage.getItem('userObject')).makkahCheckinDate;
+      var tripendDate = JSON.parse(sessionStorage.getItem('userObject')).makkahCheckoutDate;
       this.minpassportExpDate = this.helper.incrimentmonth(tripStartDate,6);
+      var noOfDays = this.helper.daysofTwoDate(tripStartDate,tripendDate);
+      sessionStorage.setItem("noOfTripDays",noOfDays.toString())
+    }
+    if(sessionStorage.getItem('service') == 'Medina Hotel'){
+      var tripStartDate = JSON.parse(sessionStorage.getItem('userObject')).madeenaCheckinDate;
+      var tripendDate = JSON.parse(sessionStorage.getItem('userObject')).madeenaCheckoutDate;
+      this.minpassportExpDate = this.helper.incrimentmonth(tripStartDate,6);
+      var noOfDays = this.helper.daysofTwoDate(tripStartDate,tripendDate);
+      sessionStorage.setItem("noOfTripDays",noOfDays.toString())
     }
     if(sessionStorage.getItem('service') == 'Transport'){
       var tripStartDate = JSON.parse(sessionStorage.getItem('userObject')).transportStartDate;
