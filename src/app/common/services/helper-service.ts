@@ -83,4 +83,11 @@ export class HelperService {
         let d = new Date(s*1000) 
         return this.dateFormaterMdy(d)
     }
+
+    daysofTwoDate(dt1,dt2){
+      var date1 = new Date(dt1);
+      var date2 = new Date(dt2);
+      var Difference_In_Time = date2.getTime() - date1.getTime();
+      return  Difference_In_Time / (1000 * 3600 * 24);
+    }
 }

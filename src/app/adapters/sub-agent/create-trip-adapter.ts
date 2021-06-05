@@ -189,6 +189,7 @@ export class CreateTripAdapter {
         children: this.appStore.childCount,
         country_of_residence: "IN",
         nationality: "IN",
+        num_of_days: + sessionStorage.getItem("noOfTripDays"),
         makkah_trip_hotel: {
           search: sessionStorage.getItem('mkSearchId'),
           lang: "en-US",
@@ -247,6 +248,7 @@ export class CreateTripAdapter {
         children: this.appStore.childCount,
         country_of_residence: "IN",
         nationality: "IN",
+        num_of_days: + sessionStorage.getItem("noOfTripDays"),
         medinah_trip_hotel: {
           search:sessionStorage.getItem('mdSearchId'),
           lang: "en-US",
