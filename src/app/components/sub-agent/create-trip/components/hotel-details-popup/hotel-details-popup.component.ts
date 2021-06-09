@@ -98,7 +98,8 @@ export class HotelDetailsPopupComponent implements OnInit ,OnChanges{
   }
 
    ngOnInit() {
-    this.totalTravellers = JSON.parse(sessionStorage.getItem('userObject')).travallersCount;
+    var obj = JSON.parse(sessionStorage.getItem('userObject'))
+    this.totalTravellers = obj.adults + obj.children;
     this.rooms = JSON.parse(sessionStorage.getItem('roomData'));
     this.selectedRoomCount = this.rooms.length
      /*

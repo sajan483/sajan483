@@ -47,6 +47,7 @@
                                         <div>
                                             <div><strong>{{'From' | translate}} : </strong> {{rule?.from_date_time | date:'medium'}}</div>
                                             <div><strong>{{'To' | translate}} : </strong> {{rule?.to_date_time | date:'medium'}}</div>
+                                            <div><p class="mb-0">{{rule?.description}}</p></div>
                                             <div class="fs13 clr52 fw400" *ngIf="!rule?.is_noshow">( NOTE: Not applicable in No-Show )</div>
                                         </div>
                                     </div>

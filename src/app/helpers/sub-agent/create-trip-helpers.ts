@@ -107,10 +107,10 @@ export class CreateTripHelper {
     }
     if (!isGrouped) {
       container.isSelectBtnActive = true;
-      var roomGroups: any[] = [];
+      selectedRoomGroups = [];
       for (let i = 0; i < selectedHotel.room_groups.length; i++) {
         if (!selectedHotel.room_groups[i].is_grouped) {
-          roomGroups.push(selectedHotel.room_groups[i]);
+          selectedRoomGroups.push(selectedHotel.room_groups[i]);
         }
       }
       for (let i = 0; i < rooms.length; i++) {
@@ -126,13 +126,14 @@ export class CreateTripHelper {
             rooms[i].adults + "ADT_" + rooms[i].children + "CHD_";
         }
       }
-      for (let i = 0; i < rooms.length; i++) {
-        for (let j = 0; j < roomGroups.length; j++) {
-          if (rooms[i].pax_info_str == roomGroups[j].pax_info_str) {
-            selectedRoomGroups.push(roomGroups[j]);
-          }
-        }
-      }
+
+      // for (let i = 0; i < rooms.length; i++) {
+      //   for (let j = 0; j < roomGroups.length; j++) {
+      //     if (rooms[i].pax_info_str == roomGroups[j].pax_info_str) {
+      //       selectedRoomGroups.push(roomGroups[j]);
+      //     }
+      //   }
+      // }
       for (let i = 0; i < selectedRoomGroups.length; i++) {
         for (let j = 0; j < selectedRoomGroups[i].rooms.length; j++) {
           selectedRoomGroups[i].rooms[0].isRoomSelectionChecked = true;
