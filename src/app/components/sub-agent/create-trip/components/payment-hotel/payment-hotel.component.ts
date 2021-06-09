@@ -20,7 +20,8 @@ export class PaymentHotelComponent implements OnInit, OnChanges {
   constructor(private appStore: AppStore, private translate: TranslateService,) { }
 
   ngOnInit() {
-    this.travelCount = this.appStore.totalTravellers;
+    var obj = JSON.parse(sessionStorage.getItem('userObject'))
+    this.travelCount = obj.adults + obj.children;
   }
 
   ngOnChanges() {
