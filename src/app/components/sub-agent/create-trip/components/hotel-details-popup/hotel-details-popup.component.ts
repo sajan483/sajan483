@@ -16,6 +16,7 @@ import { TranslateService } from "@ngx-translate/core";
 })
 
 export class HotelDetailsPopupComponent implements OnInit ,OnChanges{
+  static roomMoreDetails : boolean;
   selectedCurrency: any;
   selectedLanguage: any;
   readonly = true;
@@ -230,7 +231,7 @@ export class HotelDetailsPopupComponent implements OnInit ,OnChanges{
    */
   showRoomDetailsPopUp(room) {
     this.selectedRoomInfo = room;
-    this.selectedRoomDetails = !this.selectedRoomDetails;
+    HotelDetailsPopupComponent.roomMoreDetails = true;
   }
 
   /*
@@ -238,5 +239,9 @@ export class HotelDetailsPopupComponent implements OnInit ,OnChanges{
    */
   viewAllImagePopup(){
     this.roomImageGallery = !this.roomImageGallery;
+  }
+
+  ngDoCheck(){
+    this.selectedRoomDetails = HotelDetailsPopupComponent.roomMoreDetails;
   }
 }
