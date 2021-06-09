@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
+import { HotelDetailsPopupComponent } from '../hotel-details-popup/hotel-details-popup.component';
 
 @Component({
   selector: 'app-room-details-popup',
@@ -13,7 +14,7 @@ export class RoomDetailsPopupComponent implements OnInit {
   @Input() setViewData:any;
 
   ngOnInit() {
-    this.selectedRoomDetails = true;
+    
   }
 
   ngAfterViewChecked() {
@@ -28,7 +29,7 @@ export class RoomDetailsPopupComponent implements OnInit {
  * this method for hide room details popup
  */
   hideRoomDetailsPopUp(){
-    this.selectedRoomDetails = false;
+    HotelDetailsPopupComponent.roomMoreDetails = false;
   }
 
 }

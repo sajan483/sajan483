@@ -11,6 +11,8 @@ import { CreateTripHelper } from 'src/app/helpers/sub-agent/create-trip-helpers'
 import { HelperService } from "src/app/common/services/helper-service";
 import { SubAgentApiService } from 'src/app/Services/sub-agent-api-services';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { LooseObject } from "src/app/models/visaTypes";
+import { CancelationPopupComponent } from '../cancelation-popup/cancelation-popup.component';
 
 @Component({
   selector: 'app-itinerary-view',
@@ -61,8 +63,9 @@ export class ItineraryViewComponent implements OnInit {
   vouchertoggle: boolean = false;
   shimmer: boolean = true;
   btnactv: boolean;
-  registerForm: FormGroup;
+  
   submitted = false;
+  checkCancelData: LooseObject = {};
 
   constructor(private route: ActivatedRoute,
     private appStore: AppStore,
@@ -77,9 +80,6 @@ export class ItineraryViewComponent implements OnInit {
     }
 
   ngOnInit() {
-    this.registerForm = this.formBuilder.group({
-      cancellation_text: ['', Validators.required]
-    });
     this.genHelper.checkForAccessToken();
     this.createHelper = new CreateTripHelper(this.helperService);
     this.status = this.route.snapshot.params.status;
@@ -113,11 +113,10 @@ export class ItineraryViewComponent implements OnInit {
   getData(data) {
     this.shimmer = false;
     this.bknStatus = data.status
-    console.log(this.bknStatus);
-
     this.reference_no = data.reference_no;
     if (this.dataArray) { this.dataArray.unsubscribe(); }
     this.tripData = data;
+    this.checkCancelData.details = this.tripData;
     if (data.trip_flights && data.trip_flights.length > 0) {
       this.tripFlight = data.trip_flights[0];
     }
@@ -252,20 +251,16 @@ export class ItineraryViewComponent implements OnInit {
     this.vouchertoggle = false;
   }
 
-  get f() { return this.registerForm.controls; }
+  
 
   checkCancellation() {
     this.cancellationtoggle = true;
     this.common.getCheckCancellation(this.route.snapshot.params.id).subscribe((data) => {
       this.cancellationtoggle = false;
-      this.canCancel = data.can_cancel_booking;
-      this.makkahCancellation = data.makkah_hotel_booking;
-      this.medinahCancellation = data.medinah_hotel_booking;
-      this.serviceCancellation = data.service_booking;
-      this.transportCancellation = data.transport_booking;
+      this.checkCancelData.cancel = data;
       window.scrollTo(0, 0);
       if (data.can_cancel_booking) {
-        this.cancelationPopup = true;
+        CancelationPopupComponent.cancellationPopup = true;
       } else {
         Swal.fire({
           text: 'Sorry, No Cancellation Available',
@@ -276,32 +271,16 @@ export class ItineraryViewComponent implements OnInit {
     });
   }
 
-  confirmCancellation() {
-    this.submitted = true;
-
-    if (this.registerForm.invalid) {
-      return;
-    }
-    this.btnactv = true;
-    let body = {
-      "cancellation_reason": (<HTMLTextAreaElement>document.getElementById("confirmCancellationInput")).value
-    }
-    this.common.getConfirmCancellation(this.route.snapshot.params.id, body).subscribe((data) => {
-      this.btnactv = true;
-      this.cancelationPopup = false;
-      window.location.reload();
-    });
-
+  ngDoCheck(){
+    this.cancelationPopup = CancelationPopupComponent.cancellationPopup;
   }
+
+  
 
   sendPayuRequest(payment_create_response) {
     var form = this.createHelper.createPayuRequestForm(payment_create_response);
     document.body.appendChild(form);
     form.submit();
-  }
-
-  closecancelPopup() {
-    this.cancelationPopup = false;
   }
 
   makkahcheck() {

@@ -94,6 +94,51 @@
                                     {{'Reference No' | translate}}. (BRN) - {{tripMakkahHotel?.brn}}
                                 </div>
                             </div>
+                            <div class="float_right fs14 list_clr textunderline cursor-pointer mirr_float_left" data-toggle="modal" data-target="#makkahPolicy">{{'Cancellation Policy' | translate}}</div>
+                            <div class="modal fade" id="makkahPolicy" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog maxwdth700" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="exampleModalLabel">{{'Cancellation Policy' | translate}}</h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                      </button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <div class="mb-3" *ngFor="let item of tripMakkahHotel.trip_hotel.room_variations">
+                                                <div *ngFor="let data of item.room">
+                                                    <div class="d-inline-flex">
+                                                        <div>{{data?.name}}</div>
+                                                        <div class="mx-2">-</div>
+                                                        <div class="green_text" *ngIf="data?.cancellation_policy?.is_refundable">{{'Refundable' | translate}}</div>
+                                                        <div class="red_text" *ngIf="!data?.cancellation_policy?.is_refundable">{{'non_refundable' | translate}}</div>
+                                                    </div>
+                                                    <div class="mt-2 borderbox" *ngIf="data?.cancellation_policy?.is_refundable">
+                                                        <div class="d-flex justify-content-between p10 brdr_btm_d3 fs15" *ngFor="let rule of data.cancellation_policy.rules">
+                                                            <div class="d-inline-flex">
+                                                                <div class="my-auto pr10 mpr0 mpl10"><i class="calendaricon icns icon_size_20"></i></div>
+                                                                <div>
+                                                                    <div><strong>{{'From' | translate}} : </strong> {{rule?.from_date_time | date:'medium'}}</div>
+                                                                    <div><strong>{{'To' | translate}} : </strong> {{rule?.to_date_time | date:'medium'}}</div>
+                                                                    <div class="fs13 clr52 fw400" *ngIf="!rule?.is_noshow">( NOTE: Not applicable in No-Show )</div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="fw600">
+                                                                <div class="text-capitalize">{{'Cancellation Charge' | translate}}</div>
+                                                                <div>{{item?.currency}} {{rule?.charge?.chargeAmount}}</div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="mt-2 clr52 fs13" *ngIf="data?.cancellation_policy?.description">
+                                                        <div class="fw600">{{'Description' | translate}}:</div>
+                                                        <p>{{data?.cancellation_policy?.description}}</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                         <div class="col-md-12 p-0 brdrbottom mb10" *ngIf="tripMakkahHotel?.status=='failed'">
                             <div class="d-inline-flex">
@@ -224,7 +269,51 @@
                                     {{'Reference No' | translate}}. (BRN) - {{tripMadeenaHotel?.brn}}
                                 </div>
                             </div>
-                            <!-- <div class="float-right list_clr textunderline fs14 mr15">Policies</div> -->
+                            <div class="float_right fs14 list_clr textunderline cursor-pointer mirr_float_left" data-toggle="modal" data-target="#madeenaPolicy">{{'Cancellation Policy' | translate}}</div>
+                            <div class="modal fade" id="madeenaPolicy" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog maxwdth700" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="exampleModalLabel">{{'Cancellation Policy' | translate}}</h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                      </button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <div class="mb-3" *ngFor="let item of tripMadeenaHotel.trip_hotel.room_variations">
+                                                <div *ngFor="let data of item.room">
+                                                    <div class="d-inline-flex">
+                                                        <div>{{data?.name}}</div>
+                                                        <div class="mx-2">-</div>
+                                                        <div class="green_text" *ngIf="data?.cancellation_policy?.is_refundable">{{'Refundable' | translate}}</div>
+                                                        <div class="red_text" *ngIf="!data?.cancellation_policy?.is_refundable">{{'non_refundable' | translate}}</div>
+                                                    </div>
+                                                    <div class="mt-2 borderbox" *ngIf="data?.cancellation_policy?.is_refundable">
+                                                        <div class="d-flex justify-content-between p10 brdr_btm_d3 fs15" *ngFor="let rule of data.cancellation_policy.rules">
+                                                            <div class="d-inline-flex">
+                                                                <div class="my-auto pr10 mpr0 mpl10"><i class="calendaricon icns icon_size_20"></i></div>
+                                                                <div>
+                                                                    <div><strong>{{'From' | translate}} : </strong> {{rule?.from_date_time | date:'medium'}}</div>
+                                                                    <div><strong>{{'To' | translate}} : </strong> {{rule?.to_date_time | date:'medium'}}</div>
+                                                                    <div class="fs13 clr52 fw400" *ngIf="!rule?.is_noshow">( NOTE: Not applicable in No-Show )</div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="fw600">
+                                                                <div class="text-capitalize">{{'Cancellation Charge' | translate}}</div>
+                                                                <div>{{item?.currency}} {{rule?.charge?.chargeAmount}}</div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="mt-2 clr52 fs13" *ngIf="data?.cancellation_policy?.description">
+                                                        <div class="fw600">{{'Description' | translate}}:</div>
+                                                        <p>{{data?.cancellation_policy?.description}}</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                         <div class="col-md-12 p-0 brdrbottom mb10" *ngIf="tripMadeenaHotel?.status == 'failed'">
                             <div class="d-inline-flex">
@@ -233,7 +322,6 @@
                                     <div class="fs14 fw600 success_text ml10 mmr10 clrrd mt2p">{{'FAILED' | translate}}</div>
                                 </div>
                             </div>
-                            <!-- <div class="float-right list_clr textunderline fs14 mr15">Policies</div> -->
                         </div>
                         <div class="col-md-12 p-0 brdrbottom mb10" *ngIf="tripMadeenaHotel?.status == 'cancelled'">
                             <div class="d-inline-flex">
@@ -354,7 +442,50 @@
                                     {{'Reference No' | translate}}. (BRN) - {{tripTransport?.brn}}
                                 </div>
                             </div>
-                            <!-- <div class="float-right list_clr textunderline fs14 mr15">Policies</div> -->
+                            <div class="float_right fs14 list_clr textunderline cursor-pointer mirr_float_left" data-toggle="modal" data-target="#transportPolicy">{{'Cancellation Policy' | translate}}</div>
+                            <div class="modal fade" id="transportPolicy" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog maxwdth700" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="exampleModalLabel">{{'Cancellation Policy' | translate}}</h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                      </button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <div class="mb-3">
+                                                <div>
+                                                    <div class="">
+                                                        <div>{{selectedTransport?.company_name}}</div>
+                                                        <div class="green_text" *ngIf="selectedTransport?.cancellation_policy?.is_refundable">{{'Refundable' | translate}}</div>
+                                                        <div class="red_text" *ngIf="!selectedTransport?.cancellation_policy?.is_refundable">{{'non_refundable' | translate}}</div>
+                                                    </div>
+                                                    <div class="mt-2 borderbox" *ngIf="selectedTransport?.cancellation_policy?.is_refundable">
+                                                        <div class="d-flex justify-content-between p10 brdr_btm_d3 fs15" *ngFor="let rule of selectedTransport.cancellation_policy.rules">
+                                                            <div class="d-inline-flex">
+                                                                <div class="my-auto pr10 mpr0 mpl10"><i class="calendaricon icns icon_size_20"></i></div>
+                                                                <div>
+                                                                    <div><strong>{{'From' | translate}} : </strong> {{rule?.from_date_time | date:'medium'}}</div>
+                                                                    <div><strong>{{'To' | translate}} : </strong> {{rule?.to_date_time | date:'medium'}}</div>
+                                                                    <div class="fs13 clr52 fw400" *ngIf="!rule?.is_noshow">( NOTE: Not applicable in No-Show )</div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="fw600">
+                                                                <div class="text-capitalize">{{'Cancellation Charge' | translate}}</div>
+                                                                <div>{{tripData?.currency}} {{rule?.charge?.chargeAmount}}</div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="mt-2 clr52 fs13" *ngIf="selectedTransport?.cancellation_policy?.description">
+                                                        <div class="fw600">{{'Description' | translate}}:</div>
+                                                        <p>{{selectedTransport?.cancellation_policy?.description}}</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                         <div class="col-md-12 p-0 brdrbottom mb10" *ngIf="tripTransport?.status== 'failed'">
                             <div class="d-inline-flex">
@@ -524,6 +655,23 @@
                         </div>
                     </div>
                 </div>
+                <div *ngIf="bknStatus != 'cancelled'">
+                    <div class="boxvouch cursor-pointer mt-3" (click)="checkCancellation()">
+                        <div class="d-flex justify-content-between">
+                            <div class="d-inline-flex">
+                                <i class="cancelicon icns icon_size_25"></i>
+                                <div class="fs15 fw600 text-uppercase pl10 mpl0 mpr10 my-auto">{{'Check cancellation' | translate}}
+                                </div>
+                            </div>
+                            <div>
+                                <i class="rightarrow icns icon_size_20 my-auto h-100 mirr_rotate_180" *ngIf="!cancellationtoggle"></i>
+                                <div class="spinner-border" role="status" *ngIf="cancellationtoggle">
+                                    <span class="sr-only">{{'Loading' | translate}}...</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
                 <!-- <div class="boxvouch cursor-pointer mt-3" (click)="sentItenaryButtonClicked()">
                     <div class="d-flex justify-content-between">
                         <div class="d-inline-flex">
@@ -629,4 +777,8 @@
             </div>
         </div>
     </div>
+</div>
+
+<div *ngIf="cancelationPopup">
+    <app-cancelation-popup [checkCancel]="checkCancelData"></app-cancelation-popup>
 </div>

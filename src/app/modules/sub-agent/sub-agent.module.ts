@@ -44,6 +44,7 @@ import { PaginationComponent } from 'src/app/components/sub-agent/pagination/pag
 import { ItineraryViewComponent } from 'src/app/components/sub-agent/itinerary-view/itinerary-view.component';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { SubAgentInterceptor } from 'src/app/core/sub-agent/sub-agent.interceptor'
+import { CancelationPopupComponent } from 'src/app/components/sub-agent/cancelation-popup/cancelation-popup.component';
 @NgModule({
   declarations: [
     BookingHistoryComponent,
@@ -64,7 +65,8 @@ import { SubAgentInterceptor } from 'src/app/core/sub-agent/sub-agent.intercepto
     PaymentTransportComponent,
     OnlyNumberDirective,
     PaginationComponent,
-    ItineraryViewComponent
+    ItineraryViewComponent,
+    CancelationPopupComponent
   ],
 
   imports: [

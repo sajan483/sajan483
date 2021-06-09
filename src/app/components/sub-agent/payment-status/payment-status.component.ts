@@ -10,6 +10,8 @@ import { GeneralHelper } from 'src/app/helpers/General/general-helpers';
 import { CreateTripHelper } from 'src/app/helpers/sub-agent/create-trip-helpers';
 import { HelperService } from "src/app/common/services/helper-service";
 import { SubAgentApiService } from 'src/app/Services/sub-agent-api-services';
+import { CancelationPopupComponent } from '../cancelation-popup/cancelation-popup.component';
+import { LooseObject } from "src/app/models/visaTypes";
 
 @Component({
   selector: 'app-payment-status',
@@ -62,6 +64,7 @@ export class PaymentStatusComponent implements OnInit {
   shimmer: boolean = true;
   btnactv: boolean;
   submitted = false;
+  checkCancelData: LooseObject = {};
 
   constructor(private route: ActivatedRoute,
     private appStore: AppStore,
@@ -108,11 +111,10 @@ export class PaymentStatusComponent implements OnInit {
   getData(data) {
     this.shimmer = false;
     this.bknStatus = data.status
-    console.log(this.bknStatus);
-
     this.reference_no = data.reference_no;
     if (this.dataArray) { this.dataArray.unsubscribe(); }
     this.tripData = data;
+    this.checkCancelData.details = this.tripData;
     if (data.trip_flights && data.trip_flights.length > 0) {
       this.tripFlight = data.trip_flights[0];
     }
@@ -309,5 +311,27 @@ export class PaymentStatusComponent implements OnInit {
 
   navigateHomePage() {
     this.router.navigate(['subagent/home']);
+  }
+
+  checkCancellation() {
+    this.cancellationtoggle = true;
+    this.common.getCheckCancellation(this.route.snapshot.params.id).subscribe((data) => {
+      this.cancellationtoggle = false;
+      this.checkCancelData.cancel = data;
+      window.scrollTo(0, 0);
+      if (data.can_cancel_booking) {
+        CancelationPopupComponent.cancellationPopup = true;
+      } else {
+        Swal.fire({
+          text: 'Sorry, No Cancellation Available',
+          icon: "warning",
+          confirmButtonText: "ok",
+        });
+      }
+    });
+  }
+
+  ngDoCheck(){
+    this.cancelationPopup = CancelationPopupComponent.cancellationPopup;
   }
 }
