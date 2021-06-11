@@ -81,7 +81,7 @@
                             <div class="p-2 roomsGuests mt-2">
                                 <label>{{'ROOMS & GUESTS' | translate}}</label>
                                 <h6 class="date">
-                                    {{selectedRoomCount}}<span class="fs16 clr52 fw500">{{'room' | translate }} </span> {{totalTravellers}}
+                                    {{selectedRoomCount}}<span class="fs16 clr52 fw500 pl-1">{{'room' | translate }} </span> {{totalTravellers}}
                                     <span class="fs16 clr52 fw500">{{'Guest' | translate}} </span>
                                 </h6>
                             </div>
@@ -119,7 +119,8 @@
                                 <div class="roomInfoWrap">
                                     <div class="roomInfo-title mirr_text_right">{{'Occupancy' | translate }}</div>
                                     <div class="roomTypeNPrice-title mirr_text_right">{{'Room Type' | translate }}</div>
-                                    <div class="roomPriceWrap-title mirr_text_right">{{'PRICE' | translate }}</div>
+                                    <div class="roomPriceWrap-title mirr_text_right">{{'Price' | translate }}</div>
+                                    <div class="roomNoWrap-title mirr_text_right">{{'No Of Rooms' | translate }}</div>
                                     <div *ngIf="!isGrouped">
                                         <div class="item" *ngFor="let item2 of selectedRoomGroups;let i = index ">
                                             <div class="roomInfo textright">
@@ -164,14 +165,12 @@
                                                             </div>
                                                         </div>
                                                     </li>
-                                                    <li class="roomRate">
+                                                    <li class="roomRate" style="border-right: 1px solid #e1e1e1">
                                                         <div class="clr52 fs14 fw500 text-center" *ngFor="let item of room.board_types;let p = index;">
                                                             {{item?.type}}</div>
-                                                        <div class="d-flex justify-content-center mt5">
-                                                            <!-- //<mat-radio-group> -->
+                                                        <!-- <div class="d-flex justify-content-center mt5">
                                                             <mat-radio-button [checked]="room.isRoomSelectionChecked" id="p" (click)="isGroupedFalseRadioButtonClicked(i,j)" *ngIf="room?.amount"></mat-radio-button>
-                                                            <!-- </mat-radio-group> -->
-                                                        </div>
+                                                        </div> -->
                                                         <strong class="customTooltip">
                                                             <span class="cursortext-dark-pointer text-dark fw600"
                                                                 data-room-price="139">{{room?.fare_summary[0]?.currency}}
@@ -206,12 +205,18 @@
                                                             <span *ngIf="room.is_refundable == 'Non-Refundable'" class="red_text">{{room?.is_refundable}}</span>
                                                         </div>
                                                     </li>
-
+                                                    <li class="drop">
+                                                        <div>
+                                                            <select class="dropH" name="" id="roomDrop{{i}}" (change)="selecteRoomForGrupedFalse($event.target.value,i,j)">
+                                                                <option *ngFor="let k of [].constructor(room.insertedRoomCount); let p = index;" value ="{{p}}" >{{p}}</option>
+                                                            </select>
+                                                        </div>
+                                                    </li>
                                                 </ul>
                                             </div>
                                         </div>
                                     </div>
-                                    <div *ngIf="isGrouped">
+                                    <!-- <div *ngIf="isGrouped">
                                         <div class="item" *ngFor="let roomGroup of selectedRoomGroups;let i = index ">
                                             <div class="roomInfo textright">
                                                 <label class="room">
@@ -300,7 +305,7 @@
                                                 </ul>
                                             </div>
                                         </div>
-                                    </div>
+                                    </div> -->
                                 </div>
                                 <aside class="roomPriceWrap">
                                     <div class="roominfo-title mirr_text_right">
@@ -322,7 +327,7 @@
                                             {{selectedRoomCount}} {{'room for' | translate}} {{numberOfDays}} {{'nights' | translate}}
                                         </div>
 
-                                        <button class="searchbutton mt10" [class.bttnactive]="activeBttn" (click)="bookHotel()">{{'Select' |
+                                        <button class="searchbutton mt10" [class.bttnactive]="activeBttn" [disabled]='activateSearchBtn' (click)="bookHotel()">{{'Select' |
                                             translate}}</button>
 
                                     </div>

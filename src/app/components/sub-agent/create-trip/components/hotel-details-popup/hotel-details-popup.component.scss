@@ -387,4 +387,17 @@ small.nonRefundable {
     overflow: hidden;
     outline: 0;
 }
+.drop{
+  min-height: 98px;
+  position: relative;
+  text-align: center;
+  width: 18%;
+  display: inline-block;
+}
+.dropH{
+  width:50px;
+  height:35px;
+  outline: none;
+  border-radius:4px;
+}
 

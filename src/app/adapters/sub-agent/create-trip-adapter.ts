@@ -115,7 +115,7 @@ export class CreateTripAdapter {
             }
             (roomVariations.currency = selectedHotel.currency),
               (roomVariations.available_rooms =
-                selectedRoomGroups[i].rooms[j].available_count);
+                selectedRoomGroups[i].rooms[j].insertedSelectedRoomCount);
             (roomVariations.total_rooms =
               selectedRoomGroups[i].rooms[j].max_rooms),
               (roomVariations.max_guests =
