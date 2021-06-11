@@ -18,18 +18,15 @@ export class CreateTripHelper {
     var selectedRoomGroups = [];
     var container: TripRoom = new TripRoom();
     var totalRoomPrice = 0;
+    var customRoomCount = JSON.parse(sessionStorage.getItem("roomData")).length
     sessionStorage.setItem("noOfDays",JSON.stringify(this.helperService.noOfDaysBetweenTwoDates(selectedHotel.check_in_time, selectedHotel.check_out_time))) 
     for (let i = 0; i < selectedHotel.room_groups.length; ++i) {
       for (let j = 0; j < selectedHotel.room_groups[i].rooms.length; ++j) {
         selectedHotel.room_groups[i].rooms[j].insertedState =
           selectedHotelInfo.city == "Makkah" ? "MAKKA" : "MADEENA";
-        selectedHotel.room_groups[i].rooms[
-          j
-        ].isRoomSelectionChecked = false;
+        selectedHotel.room_groups[i].rooms[j].isRoomSelectionChecked = false;
         selectedHotel.room_groups[i].rooms[j].insertedAmount =
-          selectedHotel.room_groups[i].amount
-            ? selectedHotel.room_groups[i].amount
-            : 0;
+          selectedHotel.room_groups[i].amount ? selectedHotel.room_groups[i].amount : 0;
       }
     }
 
@@ -37,7 +34,7 @@ export class CreateTripHelper {
     selectedHotel.meta_data.images.forEach(el => { hotelPics.push(el.image_url) });
     container.hotelPics = hotelPics;
 
-    if (!selectedHotel.room_groups[0].is_grouped) {
+    if (!selectedHotel.room_groups[0].is_grouped || selectedHotel.room_groups[0].is_grouped) {
       container.isGrouped = false;
       isGrouped = false;
     }
@@ -126,17 +123,10 @@ export class CreateTripHelper {
             rooms[i].adults + "ADT_" + rooms[i].children + "CHD_";
         }
       }
-
-      // for (let i = 0; i < rooms.length; i++) {
-      //   for (let j = 0; j < roomGroups.length; j++) {
-      //     if (rooms[i].pax_info_str == roomGroups[j].pax_info_str) {
-      //       selectedRoomGroups.push(roomGroups[j]);
-      //     }
-      //   }
-      // }
       for (let i = 0; i < selectedRoomGroups.length; i++) {
         for (let j = 0; j < selectedRoomGroups[i].rooms.length; j++) {
-          selectedRoomGroups[i].rooms[0].isRoomSelectionChecked = true;
+          selectedRoomGroups[i].rooms[j].insertedRoomCount = customRoomCount + 1;
+          selectedRoomGroups[i].rooms[j].insertedSelectedRoomCount = 0;
         }
       }
       for (let i = 0; i < selectedRoomGroups.length; i++) {
@@ -164,7 +154,8 @@ export class CreateTripHelper {
       });
       container.roomGroups = selectedRoomGroups;
     }
-    return container;
+    console.log("roomgroup",container.roomGroups)
+   return container;
   }
   
   cancelbuttondisable(makkahCancellation, medinahCancellation, transportCancellation, makkahchecked, medinahchecked, transportchecked): boolean {

@@ -103,6 +103,7 @@ $primaryWhite: #ffffff;
         .roomPriceWrap-title,
         .roomInfo,
         .roomTypeNPrice,
+        .roomNoWrap,
         .roomtypeName,
         .roomRate {
             width: 100% !important;
@@ -4925,16 +4926,21 @@ input[type="radio"]:checked:after {
     }
     .roomTypeNPrice-title {
         display: inline-block;
-        width: 54%;
+        width: 50%;
     }
     .roomPriceWrap-title {
-        width: 23%;
+        width: 13%;
+        display: inline-block;
+    }
+    .roomNoWrap-title {
+        width: 14%;
         display: inline-block;
     }
     .roomInfo-title,
     .roomTypeNPrice-title,
     .roomPrice-title,
     .roomPriceWrap-title,
+    .roomNoWrap-title,
     .roominfo-title {
         border-bottom: solid 1px #e1e1e1;
         font-weight: 700;
@@ -4999,7 +5005,7 @@ input[type="radio"]:checked:after {
         border-top: solid 1px #e1e1e1;
         min-height: 118px;
         margin-top: 0;
-        width: 70%;
+        width: 65%;
         float: left;
         display: inline-block;
         border-right: solid 1px #e1e1e1;
@@ -5052,7 +5058,7 @@ input[type="radio"]:checked:after {
         min-height: 115px;
         position: relative;
         text-align: center;
-        width: 30%;
+        width: 17%;
         display: inline-block;
         padding: 15px 0;
     }

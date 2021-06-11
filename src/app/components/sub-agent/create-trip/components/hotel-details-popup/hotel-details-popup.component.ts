@@ -3,7 +3,6 @@ import { CreateTripAdapter } from "src/app/adapters/sub-agent/create-trip-adapte
 import { HelperService } from "src/app/common/services/helper-service";
 import { CreateTripHelper } from "src/app/helpers/sub-agent/create-trip-helpers";
 import { SelectedHotel } from "src/app/models/selected_hotel";
-import { Room } from "src/app/models/visaTypes";
 import { NotificationService } from "src/app/common/services/notification.service";
 import { AppStore } from "src/app/stores/app.store";
 import { SubAgentApiService } from "src/app/Services/sub-agent-api-services";
@@ -35,7 +34,7 @@ export class HotelDetailsPopupComponent implements OnInit ,OnChanges{
   showHotelDetails: boolean = false;
   makkaSelectActivate: boolean;
   totalRoomPrice: number = 0;
-  selectedRoomCount: number;
+  selectedRoomCount: number = 0;
   selectedHotelInfo: SelectedHotel;
   showhotelDetails: boolean;
   makkahticked: boolean;
@@ -60,8 +59,10 @@ export class HotelDetailsPopupComponent implements OnInit ,OnChanges{
   noOfImages: number;
   hotelData:any;
   hotelInfo:any;
+  isRoomLimitEceeded : boolean = false;
   activeBttn:boolean = false;
   @Output() detailsFlag = new EventEmitter();
+  activateSearchBtn: boolean = true;
    
   constructor(
     private commonService: SubAgentApiService,
@@ -101,7 +102,7 @@ export class HotelDetailsPopupComponent implements OnInit ,OnChanges{
     var obj = JSON.parse(sessionStorage.getItem('userObject'))
     this.totalTravellers = obj.adults + obj.children;
     this.rooms = JSON.parse(sessionStorage.getItem('roomData'));
-    this.selectedRoomCount = this.rooms.length
+    //this.selectedRoomCount = this.rooms.length
      /*
      * this method for fetching selected hotel details
      */
@@ -114,18 +115,6 @@ export class HotelDetailsPopupComponent implements OnInit ,OnChanges{
   } 
 
   ngOnChanges() {
-    // //this.showHotelDetails = true
-    // this.totalTravellers = JSON.parse(sessionStorage.getItem('userObject')).travallersCount;
-    // this.selectedHotel = this.hotelData;
-    // this.rooms = JSON.parse(sessionStorage.getItem('roomData'));
-    
-    // /*
-    //  * this method for fetching selected hotel details
-    //  */
-    // if(sessionStorage.getItem('hotelData') != null){
-    //   this.hotelData = JSON.parse(sessionStorage.getItem('hotelData'))
-    //   this.setData()
-    // }
   }
 
   /*
@@ -213,6 +202,47 @@ export class HotelDetailsPopupComponent implements OnInit ,OnChanges{
         this.totalRoomPrice = this.totalRoomPrice + this.selectedRoomGroups[i].rooms[j].amount;
         this.makkaSelectActivate = true;
     }
+  }
+
+  selecteRoomForGrupedFalse(roomCount,i,j){
+    var customRoomCount = JSON.parse(sessionStorage.getItem("roomData")).length
+    this.selectedRoomCount = 0;
+    var selectedRoomCount : number = 0;
+
+    this.selectedRoomGroups.forEach((element)=>{
+      element.rooms.forEach((room) => {
+        selectedRoomCount = selectedRoomCount + room.insertedSelectedRoomCount
+      })
+    })
+  
+    if(customRoomCount < ( selectedRoomCount + parseInt(roomCount) )){
+      roomCount = this.selectedRoomGroups[i].rooms[j].insertedSelectedRoomCount;
+      var element:HTMLSelectElement;    
+      element = <HTMLSelectElement>document.getElementById('roomDrop'+i+j);
+      element.selectedIndex = this.selectedRoomGroups[i].rooms[j].insertedSelectedRoomCount;
+      this.notifyService.showWarning("Room Limit Reached")
+    }
+    
+
+    if(this.selectedRoomGroups[i].rooms[j].insertedSelectedRoomCount > 0){
+      this.totalRoomPrice = this.totalRoomPrice - (this.selectedRoomGroups[i].rooms[j].amount * this.selectedRoomGroups[i].rooms[j].insertedSelectedRoomCount  );
+    }
+
+    this.selectedRoomGroups[i].rooms[j].insertedSelectedRoomCount = parseInt(roomCount);
+    this.totalRoomPrice = this.totalRoomPrice + (this.selectedRoomGroups[i].rooms[j].amount * parseInt(roomCount) );
+
+    this.selectedRoomGroups.forEach((element)=>{
+      element.rooms.forEach((room) => {
+        this.selectedRoomCount = this.selectedRoomCount + room.insertedSelectedRoomCount
+      })
+    })
+
+    if(this.selectedRoomCount == customRoomCount)
+    { this.activateSearchBtn = false}
+    else{
+      this.activateSearchBtn = true;
+    }
+
   }
 
   /*
