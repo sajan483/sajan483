@@ -207,7 +207,7 @@
                                                     </li>
                                                     <li class="drop">
                                                         <div>
-                                                            <select class="dropH" name="" id="roomDrop{{i}}" (change)="selecteRoomForGrupedFalse($event.target.value,i,j)">
+                                                            <select class="dropH" name="" id="roomDrop{{i}}{{j}}" (change)="selecteRoomForGrupedFalse($event.target.value,i,j)">
                                                                 <option *ngFor="let k of [].constructor(room.insertedRoomCount); let p = index;" value ="{{p}}" >{{p}}</option>
                                                             </select>
                                                         </div>
