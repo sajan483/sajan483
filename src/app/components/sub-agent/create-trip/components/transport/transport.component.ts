@@ -19,6 +19,7 @@ export class TransportComponent implements OnInit {
   healperService: HelperService;
   notifyService: NotificationService;
   commonService: SubAgentApiService;
+  noOfVehicle: any;
 
   constructor(
     private _healperService: HelperService,
@@ -36,7 +37,8 @@ export class TransportComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.paxCount = JSON.parse(sessionStorage.getItem('userObject')).adults
+    this.paxCount = +JSON.parse(sessionStorage.getItem('userObject')).travallersCount;
+    this.noOfVehicle = JSON.parse(sessionStorage.getItem('userObject')).vehicleCounts;
   }
 
   ngAfterViewChecked() {
