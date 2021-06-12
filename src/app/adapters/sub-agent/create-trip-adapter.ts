@@ -113,62 +113,24 @@ export class CreateTripAdapter {
             ) {
               name = selectedRoomGroups[i].rooms[j].name;
             }
-            (roomVariations.currency = selectedHotel.currency),
-              (roomVariations.available_rooms =
-                selectedRoomGroups[i].rooms[j].insertedSelectedRoomCount);
-            (roomVariations.total_rooms =
-              selectedRoomGroups[i].rooms[j].max_rooms),
-              (roomVariations.max_guests =
-                selectedRoomGroups[i].rooms[j].pax_info[0].quantity),
+              (roomVariations.currency = selectedHotel.currency),
+              (roomVariations.available_rooms = selectedRoomGroups[i].rooms[j].max_rooms)
+              (roomVariations.total_rooms = selectedRoomGroups[i].rooms[j].insertedSelectedRoomCount),
+              (roomVariations.max_guests = selectedRoomGroups[i].rooms[j].pax_info[0].quantity),
               (roomVariations.title = name),
-              (roomVariations.per_room_price =
-                selectedRoomGroups[i].rooms[j].amount),
+              (roomVariations.per_room_price = selectedRoomGroups[i].rooms[j].amount),
               (roomVariations.custom_pax_info = selectedRoomGroups[i].pax_info_str);
-            (roomVariations.room_type =
-              selectedRoomGroups[i].rooms[j].room_type),
-              (roomVariations.description =
-                selectedRoomGroups[i].rooms[j].description),
-              (roomVariations.room_group_id =
-                selectedRoomGroups[i].rooms[j].room_group_id),
+              (roomVariations.room_type = selectedRoomGroups[i].rooms[j].room_type),
+              (roomVariations.description = selectedRoomGroups[i].rooms[j].description),
+              (roomVariations.room_group_id = selectedRoomGroups[i].rooms[j].room_group_id),
               (roomVariations.room_id = selectedRoomGroups[i].rooms[j].room_id),
-              (roomVariations.room_group_obj =
-                selectedRoomGroups[i].rooms[j].room_group_obj);
+              (roomVariations.room_group_obj = selectedRoomGroups[i].rooms[j].room_group_obj);
             roomVariationArray.push(roomVariations);
           }
         }
       }
     }
-
-    if (isGrouped) {
-      for (let i = 0; i < selectedRoomGroups.length; i++) {
-        if (selectedRoomGroups[i].isRoomSelectionChecked) {
-          for (let j = 0; j < selectedRoomGroups[i].rooms.length; j++) {
-            roomVariations = {};let name = "";
-            if (selectedRoomGroups[i].rooms[j].name == null) {name = "sample";}
-            if (selectedRoomGroups[i].rooms[j].name && selectedRoomGroups[i].rooms[j].name.length > 24) {
-              name = selectedHotel.name.substring(0, 20);
-            }
-            if (selectedRoomGroups[i].rooms[j].name && selectedRoomGroups[i].rooms[j].name.length < 24) {
-              name = selectedRoomGroups[i].rooms[j].name;
-            }
-            (roomVariations.currency = selectedHotel.currency),
-            (roomVariations.available_rooms = selectedRoomGroups[i].rooms[j].available_count);
-            (roomVariations.total_rooms = selectedRoomGroups[i].rooms[j].max_rooms),
-            (roomVariations.max_guests = selectedRoomGroups[i].rooms[j].pax_info[0].quantity),
-            (roomVariations.title = name),
-            (roomVariations.per_room_price = selectedRoomGroups[i].rooms[j].amount),
-            (roomVariations.custom_pax_info = selectedRoomGroups[i].rooms[j].pax_info_str);
-            (roomVariations.room_type = selectedRoomGroups[i].rooms[j].room_type),
-            (roomVariations.description = selectedRoomGroups[i].rooms[j].description),
-            (roomVariations.room_group_id = selectedRoomGroups[i].rooms[j].room_group_id),
-            (roomVariations.room_id = selectedRoomGroups[i].rooms[j].room_id),
-            (roomVariations.room_group_obj = selectedRoomGroups[i].rooms[j].room_group_obj);
-            roomVariationArray.push(roomVariations);
-          }
-        }
-      }
-    }
-
+   
     var latitude: number = +selectedHotel.meta_data.latitude;
     var longitute: number = +selectedHotel.meta_data.longitude;
     var name = "";
