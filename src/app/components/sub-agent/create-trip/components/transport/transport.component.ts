@@ -74,7 +74,8 @@ export class TransportComponent implements OnInit {
           additional_services: x.categories[0].additional_services
             .filter((a) => a.selected == true)
             .map((a) => a.additional_service_code),
-          quantity: Math.ceil(travellerCount / x.categories[0].capacity),
+          //quantity: Math.ceil(travellerCount / x.categories[0].capacity),
+          quantity: userDetails.vehicleCounts,
           pax_per_vehicle: Math.ceil(
             travellerCount /
             Math.ceil(travellerCount / x.categories[0].capacity)
@@ -102,7 +103,8 @@ export class TransportComponent implements OnInit {
           additional_services: x.categories[0].additional_services
             .filter((a) => a.selected == true)
             .map((a) => a.additional_service_code),
-          quantity: Math.ceil(travellerCount / x.categories[0].capacity),
+          //quantity: Math.ceil(travellerCount / x.categories[0].capacity),
+          quantity: userDetails.vehicleCounts,
           pax_per_vehicle: Math.ceil(
             travellerCount /
             Math.ceil(travellerCount / x.categories[0].capacity)
@@ -125,7 +127,8 @@ export class TransportComponent implements OnInit {
           additional_services: x.categories[0].additional_services
             .filter((a) => a.selected == true)
             .map((a) => a.additional_service_code),
-          quantity: Math.ceil(travellerCount / x.categories[0].capacity),
+         // quantity: Math.ceil(travellerCount / x.categories[0].capacity),
+          quantity: userDetails.vehicleCounts,
           pax_per_vehicle: Math.ceil(
             travellerCount /
             Math.ceil(travellerCount / x.categories[0].capacity)
