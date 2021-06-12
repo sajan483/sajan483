@@ -180,14 +180,28 @@
                                     </div>
                                 </div>
                                 <div class="col-md-12 p-0 row m-0">
-                                    <div class="col-md-12 row m-0 p-2 brdrtop">
-                                        <div class="w-100" *ngFor="let item of tripMakkahHotel.trip_hotel.room_variations">
-                                            <div class="d-flex justify-content-between brdr_btm_d3 p8 fs14" *ngFor="let data of item.room">
-                                                <div>{{data?.name}}</div>
-                                                <div><strong>{{data?.pax_info[0]?.quantity + data?.pax_info[1]?.quantity}}</strong> Guests</div>
-                                                <div class="green_text" *ngIf="data?.cancellation_policy?.is_refundable">{{'Refundable' | translate}}</div>
-                                                <div class="red_text" *ngIf="!data?.cancellation_policy?.is_refundable">{{'non_refundable' | translate}}</div>
+                                    <div class="col-md-12 px-0 mx-0 row" *ngFor="let rooms of tripMakkahHotel.trip_hotel.room_variations">
+                                        <div class="col-md-12 row m-0 p-2 brdrtop" *ngFor="let item of rooms.room">
+                                            <div class="col-md-4 col-6 clr52 fs14 fw600">{{item?.name}}</div>
+                                            <div class="col-md-4 col-6 fs14 clr52 fw500">
+                                                <span *ngFor="let pax of item.pax_info">
+                                                    <span *ngIf="pax.type == 'ADT'">
+                                                        <strong class="fw600">{{pax.quantity}}</strong> {{'Adult' | translate}}
+                                                    </span>
+                                                <span *ngIf="pax.type == 'CHD'">
+                                                        <span *ngIf="pax.quantity > 0">, <strong class="fw600">{{pax?.quantity}}</strong> {{'Child' | translate}}</span>
+                                                </span>
+                                                </span>
                                             </div>
+                                            <div class="col-md-2 col-6 fs12">
+                                                <span class="green_text" *ngIf="item.cancellation_policy.is_refundable">{{'Refundable' | translate}}</span>
+                                                <span class="red_text" *ngIf="!item.cancellation_policy.is_refundable">{{'non_refundable' | translate}}</span>
+                                            </div>
+                                            <!-- <div class="col-md-2 col-6 text-right fs14">
+                                                <span *ngFor="let price of item.fare_summary">
+                                                    <span *ngIf="price.name == 'Total Amount'">{{price?.currency}} {{price?.amount}}</span>
+                                                </span>
+                                            </div> -->
                                         </div>
                                     </div>
                                 </div>
@@ -354,14 +368,28 @@
                                     </div>
                                 </div>
                                 <div class="col-md-12 p-0 row m-0">
-                                    <div class="col-md-12 row m-0 p-2 brdrtop">
-                                        <div class="w-100" *ngFor="let item of tripMadeenaHotel.trip_hotel.room_variations">
-                                            <div class="d-flex justify-content-between brdr_btm_d3 p8 fs14" *ngFor="let data of item.room">
-                                                <div>{{data?.name}}</div>
-                                                <div><strong>{{data?.pax_info[0]?.quantity + data?.pax_info[1]?.quantity}}</strong> Guests</div>
-                                                <div class="green_text" *ngIf="data?.cancellation_policy?.is_refundable">{{'Refundable' | translate}}</div>
-                                                <div class="red_text" *ngIf="!data?.cancellation_policy?.is_refundable">{{'non_refundable' | translate}}</div>
+                                    <div class="col-md-12 px-0 mx-0 row" *ngFor="let rooms of tripMadeenaHotel.trip_hotel.room_variations">
+                                        <div class="col-md-12 row m-0 p-2 brdrtop" *ngFor="let item of rooms.room">
+                                            <div class="col-md-4 col-6 clr52 fs14 fw600">{{item?.name}}</div>
+                                            <div class="col-md-4 col-6 fs14 clr52 fw500">
+                                                <span *ngFor="let pax of item.pax_info">
+                                                    <span *ngIf="pax.type == 'ADT'">
+                                                        <strong class="fw600">{{pax.quantity}}</strong> {{'Adult' | translate}}
+                                                    </span>
+                                                <span *ngIf="pax.type == 'CHD'">
+                                                        <span *ngIf="pax.quantity > 0">, <strong class="fw600">{{pax?.quantity}}</strong> {{'Child' | translate}}</span>
+                                                </span>
+                                                </span>
                                             </div>
+                                            <div class="col-md-2 col-6 fs12">
+                                                <span class="green_text" *ngIf="item.cancellation_policy.is_refundable">{{'Refundable' | translate}}</span>
+                                                <span class="red_text" *ngIf="!item.cancellation_policy.is_refundable">{{'non_refundable' | translate}}</span>
+                                            </div>
+                                            <!-- <div class="col-md-2 col-6 text-right fs14">
+                                                <span *ngFor="let price of item.fare_summary">
+                                                    <span *ngIf="price.name == 'Total Amount'">{{price?.currency}} {{price?.amount}}</span>
+                                                </span>
+                                            </div> -->
                                         </div>
                                     </div>
                                 </div>
@@ -471,7 +499,7 @@
                         <div class="col-md-12 p-0 row ml-0 mr-0  borderpading  expansion">
                             <div class="col-md-12 transportbodypdng mt-2 row brdrtop m-0">
                                 <div class="col-md-4 p-0 mb-2">
-                                    <p class="clr52 fs14"><i class="fa fa-circle pr10 mpr0 mpl10 font9imp" aria-hidden="true"></i>{{tripTransport?.trip_transportation?.vehicle_types[0]?.max_capacity}} {{'seater' | translate}}</p>
+                                    <p class="clr52 fs14"><i class="fa fa-circle pr10 mpr0 mpl10 font9imp" aria-hidden="true"></i>{{tripTransport?.trip_transportation?.vehicle_types[0]?.max_capacity}} {{'Seater(s)' | translate}}</p>
                                 </div>
                                 <div class="col-md-4 p-0 mb-2">
                                     <p class="clr52 fs14"><i class="fa fa-circle pr10 mpr0 mpl10 font9imp" aria-hidden="true"></i>{{'Pax Per Vehicle' | translate}} : {{tripTransport?.trip_transportation?.trip_vehicles[0]?.pax_per_vehicle}}

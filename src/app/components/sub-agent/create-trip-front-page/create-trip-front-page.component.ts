@@ -270,6 +270,7 @@ export class CreateTripFrontPageComponent implements OnInit, DoCheck, AfterViewI
 
   countTotalTravellers() {
     this.appStore.totalTravellers = this.appStore.adultCount + this.appStore.childCount + this.appStore.infantCount;
+    this.countTravalers = this.countAdult+this.countChild+this.countInfant;
   }
 
   /**

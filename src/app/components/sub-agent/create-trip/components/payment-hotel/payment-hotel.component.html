@@ -192,11 +192,29 @@
         </div>
     </div>
     <div class="col-md-12 p-0 row m-0">
-        <div class="col-md-12 row m-0 p-2 brdrtop" *ngFor="let room of tripHotel?.room_variations">
-            <div class="col-md-4 col-6 clr52 fs14 fw600">{{room?.title}}</div>
-            <div class="col-md-4 col-6 fs14 clr52 fw500"><strong class="pr-1 fw600">{{room?.max_guests}}</strong>Guests</div>
-            <div class="col-md-2 col-6 fs12">{{room?.room?.is_refundable}}</div>
-            <!-- <div class="col-md-2 col-6 text-right fs14">{{room?.currency}} {{room?.room?.amount}}</div> -->
+        <div class="col-md-12 px-0 mx-0 row" *ngFor="let rooms of tripHotel?.room_variations">
+            <div class="col-md-12 row m-0 p-2 brdrtop" *ngFor="let item of rooms.room">
+                <div class="col-md-4 col-6 clr52 fs14 fw600">{{item?.name}}</div>
+                <div class="col-md-4 col-6 fs14 clr52 fw500">
+                    <span *ngFor="let pax of item.pax_info">
+                        <span *ngIf="pax.type == 'ADT'">
+                            <strong class="fw600">{{pax.quantity}}</strong> {{'Adult' | translate}}
+                        </span>
+                    <span *ngIf="pax.type == 'CHD'">
+                            <span *ngIf="pax.quantity > 0">, <strong class="fw600">{{pax?.quantity}}</strong> {{'Child' | translate}}</span>
+                    </span>
+                    </span>
+                </div>
+                <div class="col-md-2 col-6 fs12">
+                    <span class="green_text" *ngIf="item.cancellation_policy.is_refundable">{{'Refundable' | translate}}</span>
+                    <span class="red_text" *ngIf="!item.cancellation_policy.is_refundable">{{'non_refundable' | translate}}</span>
+                </div>
+                <!-- <div class="col-md-2 col-6 text-right fs14">
+                    <span *ngFor="let price of item.fare_summary">
+                        <span *ngIf="price.name == 'Total Amount'">{{price?.currency}} {{price?.amount}}</span>
+                    </span>
+                </div> -->
+            </div>
         </div>
     </div>
 </div>
