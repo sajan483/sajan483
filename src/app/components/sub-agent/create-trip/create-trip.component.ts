@@ -152,7 +152,7 @@ export class CreateTripComponent implements OnInit, AfterViewChecked, DoCheck {
   displayTab: boolean;
   changeButton: boolean;
   submitted = false;
-  vehicleCount: any;
+  vehicleCount: number;
   today = new Date().toJSON().split("T")[0];
   roomCount: number = 0;
   countadult: number = 1;
@@ -340,7 +340,6 @@ export class CreateTripComponent implements OnInit, AfterViewChecked, DoCheck {
  * Method to fetch transport list
  */
   transportSearch() {
-    this.vehicleCount = Math.ceil((this.userDetails.travallersCount) / this.vehicleMax);
     const date = this.helperService.dateFormaterMdy(this.userDetails.transportStartDate);
     const filrerData = {
       "search_id": this.searchTransportId,
@@ -349,7 +348,7 @@ export class CreateTripComponent implements OnInit, AfterViewChecked, DoCheck {
       "vehicle_type": this.vehicleId,
       "category": this.categoryId,
       "no_of_travellers": this.countadult + this.countchild,
-      "quantity": Math.ceil((this.countadult + this.countchild) / this.vehicleMax),
+      "quantity": this.vehicleCount,
       "travel_date": date.split("/")[2] + "-" + date.split("/")[0] + "-" + date.split("/")[1]
     }
     this.common.searchTransport(filrerData).subscribe((data) => {
@@ -699,6 +698,7 @@ export class CreateTripComponent implements OnInit, AfterViewChecked, DoCheck {
       this.vehicleId = this.userDetails.vehicleType;
       this.vehicleMax = this.userDetails.vehicleCapacity;
       this.routeId = this.userDetails.transportRoute;
+      this.vehicleCount = this.userDetails.vehicleCounts;
     }
   }
 
