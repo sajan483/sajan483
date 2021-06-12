@@ -100,6 +100,8 @@ export class CreateTripFrontPageComponent implements OnInit, DoCheck, AfterViewI
   vehicleMaxCapacity: number;
   madeenaMaxdate: Date;
   madeenaMindate: any;
+  vehicleCount: number = 1;
+  countArray:number[] = [1];
   constructor(
     private commonApiService: SubAgentApiService,
     private subAgentApiService: SubAgentApiService,
@@ -271,6 +273,18 @@ export class CreateTripFrontPageComponent implements OnInit, DoCheck, AfterViewI
   }
 
   /**
+   * This method for remove select vehicle type
+   * 
+   */
+  removeVehicleType(){
+    let elemet = <HTMLSelectElement>document.getElementById("umrahVehicle")
+    elemet.selectedIndex = 0;
+    this.vehicleCode = "";
+    this.vehicleCount = 1;
+    this.countArray = [1];
+  }
+
+  /**
    * This method for adding adult count at the traveller popup
    * 
    */
@@ -278,6 +292,7 @@ export class CreateTripFrontPageComponent implements OnInit, DoCheck, AfterViewI
     this.countAdult = this.countAdult + 1;
     this.appStore.adultCount = this.countAdult;
     this.countTotalTravellers();
+    this.removeVehicleType();
   }
 
   /**
@@ -289,6 +304,7 @@ export class CreateTripFrontPageComponent implements OnInit, DoCheck, AfterViewI
       this.countAdult = this.countAdult - 1;
       this.appStore.adultCount = this.countAdult;
       this.countTotalTravellers();
+      this.removeVehicleType();
     }
   }
 
@@ -300,6 +316,7 @@ export class CreateTripFrontPageComponent implements OnInit, DoCheck, AfterViewI
     this.countChild = this.countChild + 1;
     this.appStore.childCount = this.countChild;
     this.countTotalTravellers();
+    this.removeVehicleType();
   }
 
   /**
@@ -311,6 +328,7 @@ export class CreateTripFrontPageComponent implements OnInit, DoCheck, AfterViewI
       this.countChild = this.countChild - 1;
       this.appStore.childCount = this.countChild;
       this.countTotalTravellers();
+      this.removeVehicleType();
     }
   }
 
@@ -323,6 +341,7 @@ export class CreateTripFrontPageComponent implements OnInit, DoCheck, AfterViewI
       this.countInfant = this.countInfant - 1;
       this.appStore.infantCount = this.countInfant;
       this.countTotalTravellers();
+      this.removeVehicleType();
     }
   }
 
@@ -334,6 +353,7 @@ export class CreateTripFrontPageComponent implements OnInit, DoCheck, AfterViewI
     this.countInfant = this.countInfant + 1;
     this.appStore.infantCount = this.countInfant;
     this.countTotalTravellers();
+    this.removeVehicleType();
   }
 
   /**
@@ -524,7 +544,8 @@ export class CreateTripFrontPageComponent implements OnInit, DoCheck, AfterViewI
       vehicleType: this.vehicleCode,
       vehicleCapacity: this.vehicleMaxCapacity,
       noOfDaysInMadeenah: this.noOfDaysInMadeenah,
-      noOfDaysInMakkah: this.noOfDaysInMakkah
+      noOfDaysInMakkah: this.noOfDaysInMakkah,
+      vehicleCounts:this.vehicleCount
     };
     CreateTripComponent.UserObjectData = this.userObject;
     sessionStorage.setItem("userObject", JSON.stringify(this.userObject));
@@ -599,8 +620,25 @@ export class CreateTripFrontPageComponent implements OnInit, DoCheck, AfterViewI
         }
       });
     }
+    var totalTra = this.countAdult+this.countChild+this.countInfant
+    var count:number = totalTra / this.vehicleMaxCapacity;
+    if(totalTra % this.vehicleMaxCapacity != 0){
+      count = count+1
+    }
+    count = Math.floor(count);
+    if(count <= this.countAdult){
+      this.countArray = Array(this.countAdult - count + 1).fill(count + 1).map((_, idx) => count + idx)
+      this.vehicleCount = this.countArray[0];
+    }else{
+      this.notifyService.showWarning("passenger limit exceeded please select heigher vehicle");
+      this.removeVehicleType();
+    }
+    
   }
 
+  vehicleCountSelect(value){
+    this.vehicleCount = value;
+  }
 
   /**
    * This method for show/hide search button
@@ -853,4 +891,6 @@ export class CreateTripFrontPageComponent implements OnInit, DoCheck, AfterViewI
   navigateHostory() {
     this.router.navigate(["subagent/history"]);
   }
+
+  
 }
