@@ -36,7 +36,7 @@ export class TransportComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.paxCount = JSON.parse(sessionStorage.getItem('userObject')).travallersCount
+    this.paxCount = JSON.parse(sessionStorage.getItem('userObject')).adults
   }
 
   ngAfterViewChecked() {
