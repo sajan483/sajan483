@@ -248,9 +248,9 @@
                                                     <span *ngIf="pax.type == 'ADT'">
                                                         <strong class="fw600">{{pax.quantity}}</strong> {{'Adult' | translate}}
                                                     </span>
-                                                <span *ngIf="pax.type == 'CHD'">
-                                                        <span *ngIf="pax.quantity > 0">, <strong class="fw600">{{pax?.quantity}}</strong> {{'Child' | translate}}</span>
                                                 </span>
+                                                <span *ngIf="item.pax_info.length > 1">
+                                                    , <strong>{{item.pax_info.length - 1}}</strong> {{'Child' | translate}}
                                                 </span>
                                             </div>
                                             <div class="col-md-2 col-6 fs12">
@@ -436,9 +436,9 @@
                                                     <span *ngIf="pax.type == 'ADT'">
                                                         <strong class="fw600">{{pax.quantity}}</strong> {{'Adult' | translate}}
                                                     </span>
-                                                <span *ngIf="pax.type == 'CHD'">
-                                                        <span *ngIf="pax.quantity > 0">, <strong class="fw600">{{pax?.quantity}}</strong> {{'Child' | translate}}</span>
                                                 </span>
+                                                <span *ngIf="item.pax_info.length > 1">
+                                                    , <strong>{{item.pax_info.length - 1}}</strong> {{'Child' | translate}}
                                                 </span>
                                             </div>
                                             <div class="col-md-2 col-6 fs12">
