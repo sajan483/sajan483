@@ -267,8 +267,13 @@
                             <div class="inner-policy_div textright" *ngFor="let policy of selectedHotel?.policies">
                                 <p>{{policy?.description}}</p>
                             </div>
-                            <div class="noDataPresent" *ngIf="selectedHotel?.policies && selectedHotel?.policies.length == 0">
+                            <div class="noDataPresent" *ngIf="selectedHotel?.policies && selectedHotel?.policies.length == 0
+                             || selectedHotel?.meta_data && selectedHotel?.meta_data.child_policy && selectedHotel?.meta_data.child_policy.length == 0">
                                 {{'No Policies Found' | translate }}
+                            </div>
+                            <div class="inner-policy_div textright" *ngIf="selectedHotel?.meta_data?.child_policy">
+                                <p>{{selectedHotel?.meta_data?.name}}</p>
+                                <p>{{selectedHotel?.meta_data?.description}}</p>
                             </div>
                         </div>
                     </mat-tab>
