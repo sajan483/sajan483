@@ -971,7 +971,7 @@ export class CreateTripComponent implements OnInit, AfterViewChecked, DoCheck {
               if (this.hotelsList.length == 0) {
                 Swal.fire({
                   icon: 'error',
-                  text: 'Something Went Wrong',
+                  text: 'Hotels Not Available',
                   confirmButtonText: 'Search Again'
                 }).then((result) => {
                   this.router.navigate(['subagent/home']);
@@ -981,7 +981,7 @@ export class CreateTripComponent implements OnInit, AfterViewChecked, DoCheck {
             (error) => {
               Swal.fire({
                 icon: 'error',
-                text: 'Something Went Wrong',
+                text: 'Hotels Not Available',
                 confirmButtonText: 'Search Again'
               }).then((result) => {
                 this.router.navigate(['subagent/home']);
