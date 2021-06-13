@@ -188,9 +188,9 @@
                                                     <span *ngIf="pax.type == 'ADT'">
                                                         <strong class="fw600">{{pax.quantity}}</strong> {{'Adult' | translate}}
                                                     </span>
-                                                <span *ngIf="pax.type == 'CHD'">
-                                                        <span *ngIf="pax.quantity > 0">, <strong class="fw600">{{pax?.quantity}}</strong> {{'Child' | translate}}</span>
                                                 </span>
+                                                <span *ngIf="item.pax_info.length > 1">
+                                                    , <strong>{{item.pax_info.length - 1}}</strong> {{'Child' | translate}}
                                                 </span>
                                             </div>
                                             <div class="col-md-2 col-6 fs12">
@@ -376,9 +376,9 @@
                                                     <span *ngIf="pax.type == 'ADT'">
                                                         <strong class="fw600">{{pax.quantity}}</strong> {{'Adult' | translate}}
                                                     </span>
-                                                <span *ngIf="pax.type == 'CHD'">
-                                                        <span *ngIf="pax.quantity > 0">, <strong class="fw600">{{pax?.quantity}}</strong> {{'Child' | translate}}</span>
                                                 </span>
+                                                <span *ngIf="item.pax_info.length > 1">
+                                                    , <strong>{{item.pax_info.length - 1}}</strong> {{'Child' | translate}}
                                                 </span>
                                             </div>
                                             <div class="col-md-2 col-6 fs12">
@@ -426,7 +426,6 @@
                                             <div class="mb-3">
                                                 <div>
                                                     <div class="">
-                                                        <div>{{selectedTransport?.company_name}}</div>
                                                         <div class="green_text" *ngIf="selectedTransport?.cancellation_policy?.is_refundable">{{'Refundable' | translate}}</div>
                                                         <div class="red_text" *ngIf="!selectedTransport?.cancellation_policy?.is_refundable">{{'non_refundable' | translate}}</div>
                                                     </div>

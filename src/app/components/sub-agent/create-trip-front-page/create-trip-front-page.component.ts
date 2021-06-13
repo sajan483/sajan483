@@ -102,6 +102,7 @@ export class CreateTripFrontPageComponent implements OnInit, DoCheck, AfterViewI
   madeenaMindate: any;
   vehicleCount: number = 1;
   countArray:number[] = [1];
+  setBoolean:boolean = false;
   constructor(
     private commonApiService: SubAgentApiService,
     private subAgentApiService: SubAgentApiService,
@@ -278,11 +279,15 @@ export class CreateTripFrontPageComponent implements OnInit, DoCheck, AfterViewI
    * 
    */
   removeVehicleType(){
-    let elemet = <HTMLSelectElement>document.getElementById("umrahVehicle")
-    elemet.selectedIndex = 0;
-    this.vehicleCode = "";
-    this.vehicleCount = 1;
-    this.countArray = [1];
+    if(this.setBoolean){
+      let elemet = <HTMLSelectElement>document.getElementById("umrahVehicle")
+      elemet.selectedIndex = 0;
+      this.vehicleCode = "";
+      this.vehicleCount = 1;
+      this.countArray = [1];
+      this.setBoolean = false;
+    }
+    
   }
 
   /**
@@ -325,7 +330,7 @@ export class CreateTripFrontPageComponent implements OnInit, DoCheck, AfterViewI
    * 
    */
   minusChild() {
-    if (this.countChild > 1) {
+    if (this.countChild > 0) {
       this.countChild = this.countChild - 1;
       this.appStore.childCount = this.countChild;
       this.countTotalTravellers();
@@ -621,12 +626,10 @@ export class CreateTripFrontPageComponent implements OnInit, DoCheck, AfterViewI
         }
       });
     }
-    var totalTra = this.countAdult+this.countChild+this.countInfant
+    this.setBoolean = true;
+    var totalTra = this.countAdult+this.countChild;
     var count:number = totalTra / this.vehicleMaxCapacity;
-    if(totalTra % this.vehicleMaxCapacity != 0){
-      count = count+1
-    }
-    count = Math.floor(count);
+    count = Math.ceil(count);
     if(count <= this.countAdult){
       this.countArray = Array(this.countAdult - count + 1).fill(count + 1).map((_, idx) => count + idx)
       this.vehicleCount = this.countArray[0];
