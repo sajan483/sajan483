@@ -168,14 +168,14 @@
             <div class="col-md-12 row m-0 p-2 brdrtop" *ngFor="let item of rooms.room">
                 <div class="col-md-4 col-6 clr52 fs14 fw600">{{item?.name}}</div>
                 <div class="col-md-4 col-6 fs14 clr52 fw500">
-                    <span *ngFor="let pax of item.pax_info">
+                    <!-- <span *ngFor="let pax of item.pax_info">
                         <span *ngIf="pax.type == 'ADT'">
                             <strong class="fw600">{{pax.quantity}}</strong> {{'Adult' | translate}}
                         </span>
                     </span>
                     <span *ngIf="item.pax_info.length > 1">
                         , <strong>{{item.pax_info.length - 1}}</strong> {{'Child' | translate}}
-                    </span>
+                    </span> -->
                 </div>
                 <div class="col-md-2 col-6 fs12">
                     <span class="green_text" *ngIf="item.cancellation_policy.is_refundable">{{'Refundable' | translate}}</span>
