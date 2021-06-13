@@ -24,8 +24,52 @@
                     <span>{{tripTransport?.route?.name}}</span>
                     <span class="textunderline list_clr cursor-pointer pl10 mpl0 mpr10" (click)="changeTransport()">{{'Modify' |
                         translate}}</span>
-                    <span class="textunderline list_clr cursor-pointer pl10 mpl0 mpr10">{{'Policy' | translate}}</span>
-
+                    <span class="textunderline list_clr cursor-pointer pl10 mpl0 mpr10" data-toggle="modal" data-target="#transportPolicy">{{'Policy' | translate}}</span>
+                    <div class="modal fade" id="transportPolicy" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel">{{'Policies' | translate}}</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true" class="crossbttn">&times;</span>
+                              </button>
+                                </div>
+                                <div class="modal-body">
+                                    <div *ngIf="tripTransport?.selected_transportation?.cancellation_policy">
+                                        <h6 class="textunderline">{{'Cancellation Policy' | translate}}</h6>
+                                        <div class="green_text" *ngIf="tripTransport?.selected_transportation?.cancellation_policy?.is_refundable">{{'Refundable' | translate}}</div>
+                                        <div class="red_text" *ngIf="!tripTransport?.selected_transportation?.cancellation_policy?.is_refundable">{{'non_refundable' | translate}}</div>
+                                        <div class="mt-2 borderbox" *ngIf="tripTransport?.selected_transportation?.cancellation_policy?.is_refundable">
+                                            <div class="d-flex justify-content-between p10 brdr_btm_d3 fs15" *ngFor="let rule of tripTransport.selected_transportation.cancellation_policy.rules">
+                                                <div class="d-inline-flex">
+                                                    <div class="my-auto pr10 mpr0 mpl10"><i class="calendaricon icns icon_size_20"></i></div>
+                                                    <div>
+                                                        <div><strong>{{'From' | translate}} : </strong> {{rule?.from_date_time | date:'medium'}}</div>
+                                                        <div><strong>{{'To' | translate}} : </strong> {{rule?.to_date_time | date:'medium'}}</div>
+                                                        <div class="fs13 clr52 fw400" *ngIf="!rule?.is_noshow">( NOTE: Not applicable in No-Show )</div>
+                                                    </div>
+                                                </div>
+                                                <div class="fw600">
+                                                    <div class="text-capitalize">{{'Cancellation Charge' | translate}}</div>
+                                                    <div>{{tripData?.currency}} {{rule?.charge?.chargeAmount}}</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="mt-2 clr52 fs13" *ngIf="tripTransport?.selected_transportation?.cancellation_policy?.description">
+                                            <div class="fw600">{{'Description' | translate}}:</div>
+                                            <p>{{tripTransport?.selected_transportation?.cancellation_policy?.description}}</p>
+                                        </div>
+                                    </div>
+                                    <div class="" *ngIf="tripTransport?.selected_transportation?.policies.length > 0">
+                                        <div class="mt-3" *ngFor="let item of tripTransport?.selected_transportation?.policies">
+                                            <h6 class="textunderline">{{item?.name}}</h6>
+                                            <div>{{item?.description}}</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
             <div class="float_right mirr_float_left fs16 fw500 pt-2 customTooltip">

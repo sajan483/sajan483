@@ -340,6 +340,11 @@ export class CreateTripComponent implements OnInit, AfterViewChecked, DoCheck {
  * Method to fetch transport list
  */
   transportSearch() {
+    var obj = JSON.parse(sessionStorage.getItem("userObject"));
+    this.travellersCount = obj.adults + obj.children;
+
+    console.log(this.travellersCount,"sdasd");
+    
     const date = this.helperService.dateFormaterMdy(this.userDetails.transportStartDate);
     const filrerData = {
       "search_id": this.searchTransportId,
@@ -347,7 +352,7 @@ export class CreateTripComponent implements OnInit, AfterViewChecked, DoCheck {
       "route": this.routeId,
       "vehicle_type": this.vehicleId,
       "category": this.categoryId,
-      "no_of_travellers": this.countadult + this.countchild,
+      "no_of_travellers": this.travellersCount,
       "quantity": this.vehicleCount,
       "travel_date": date.split("/")[2] + "-" + date.split("/")[0] + "-" + date.split("/")[1]
     }
@@ -442,7 +447,6 @@ export class CreateTripComponent implements OnInit, AfterViewChecked, DoCheck {
   //Mobile Validation
 
   onCountryChange(event) {
-    console.log(event)
     this.validateNumber();
     this.countryCode = event.dialCode
   }
@@ -453,7 +457,6 @@ export class CreateTripComponent implements OnInit, AfterViewChecked, DoCheck {
       if (phoneInput)
         return phoneInput.attributes.getNamedItem("placeholder").value.replace(/[^0-9a-zA-Z]/g, '').length;
     } catch (exception) {
-      console.log(exception)
     }
   }
 
@@ -471,7 +474,6 @@ export class CreateTripComponent implements OnInit, AfterViewChecked, DoCheck {
       if (this.getNumberPlaceHolderLength() && mobileNumber.length >= this.getNumberPlaceHolderLength() + defaultCountryCode.length &&
         mobileNumber.startsWith(defaultCountryCode)) {
         mobileNumber = mobileNumber.slice(defaultCountryCode.length);
-        console.log(mobileNumber)
       }
       else if (mobileNumber.startsWith('0'))
         mobileNumber = mobileNumber.slice(1);
@@ -628,7 +630,7 @@ export class CreateTripComponent implements OnInit, AfterViewChecked, DoCheck {
       this.appStore.showShimmer = true, this.showShimmer = true
     }
     this.setUserDetails()
-    this.travellersCount = this.appStore.totalTravellers;
+    this.travellersCount = JSON.parse(sessionStorage.getItem("userObject")).travallersCount;
     this.rooms = JSON.parse(sessionStorage.getItem('roomData'))
     this.selectedCurrency = "SAR";
     this.multiSelectDropDownSettings()
