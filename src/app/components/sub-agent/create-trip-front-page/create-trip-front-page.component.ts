@@ -556,7 +556,7 @@ export class CreateTripFrontPageComponent implements OnInit, DoCheck, AfterViewI
     CreateTripComponent.UserObjectData = this.userObject;
     sessionStorage.setItem("userObject", JSON.stringify(this.userObject));
     if (this.enableMadina || this.enableMakka || this.activaleAllSearch) {
-      if (this.countAdult == 1) {
+      if (this.countAdult == 1 && this.countChild == 0 && this.countInfant == 0) {
         var arr: any[] = [
           {
             "children": 0,
@@ -570,7 +570,7 @@ export class CreateTripFrontPageComponent implements OnInit, DoCheck, AfterViewI
           queryParams: { steps: this.steps.join(",") },
         });
       }
-      if (this.countAdult > 1) {
+      if (this.countAdult > 1 || this.countChild > 0 || this.countInfant > 0) {
         this.appStore.showRoomAlPopup = true;
         this.showRoomAllocationPopup = this.appStore.showRoomAlPopup;
       }
