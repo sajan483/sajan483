@@ -117,10 +117,10 @@
                         <div id="selectRoom">
                             <section class="roomSelectWrap">
                                 <div class="roomInfoWrap">
-                                    <div class="roomInfo-title mirr_text_right">{{'Occupancy' | translate }}</div>
-                                    <div class="roomTypeNPrice-title mirr_text_right">{{'Room Type' | translate }}</div>
-                                    <div class="roomPriceWrap-title mirr_text_right">{{'Price' | translate }}</div>
-                                    <div class="roomNoWrap-title mirr_text_right">{{'No Of Rooms' | translate }}</div>
+                                    <div class="roomInfo-title mirr_text_right mirr_hide">{{'Occupancy' | translate }}</div>
+                                    <div class="roomTypeNPrice-title mirr_text_right mirr_hide">{{'Room Type' | translate }}</div>
+                                    <div class="roomPriceWrap-title mirr_text_right mirr_hide">{{'price' | translate }}</div>
+                                    <div class="roomNoWrap-title mirr_text_right mirr_hide">{{'No Of Rooms' | translate }}</div>
                                     <div *ngIf="!isGrouped">
                                         <div class="item" *ngFor="let item2 of selectedRoomGroups;let i = index ">
                                             <div class="roomInfo textright">

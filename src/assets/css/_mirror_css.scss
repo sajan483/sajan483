@@ -2,7 +2,7 @@
     direction: rtl;
     overflow-x: hidden;
     .mirr_hide {
-        display: none;
+        display: none !important;
     }
     .mirr_display {
         display: block !important;
