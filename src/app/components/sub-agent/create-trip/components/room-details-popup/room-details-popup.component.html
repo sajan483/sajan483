@@ -9,7 +9,7 @@
             </div>
             <div class="modal-body">
                 <div class="row">
-                    <div class="col-md-6 col-12 mb-3" *ngIf="setViewData.images.length > 0">
+                    <div class="col-md-6 col-12 mb30" *ngIf="setViewData.images.length > 0">
                         <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
                             <ol class="carousel-indicators">
                                 <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
@@ -35,11 +35,11 @@
                             </a>
                         </div>
                     </div>
-                    <div *ngIf="setViewData?.description" class=" col-md-12">
+                    <div *ngIf="setViewData?.description" class="mb30 col-md-12">
                         <h6>{{'Description' | translate}}:</h6>
                         <p class="pl15">{{setViewData?.description}}</p>
                     </div>
-                    <div *ngIf="setViewData.features.length > 0" class="textright pr10 col-md-12 mt30">
+                    <div *ngIf="setViewData.features.length > 0" class="textright pr10 col-md-12 mb30">
                         <h6>{{'Amenities & Info' | translate}}</h6>
                         <div class="col-12 row mx-0">
                             <div class="col-3" style="list-style-type: square;" *ngFor="let item of setViewData.features">
@@ -47,7 +47,7 @@
                             </div>
                         </div>
                     </div>
-                    <div *ngIf="setViewData.boardTypes.length > 0" class="textright pr10 col-md-12 mt30">
+                    <div *ngIf="setViewData.boardTypes.length > 0" class="textright pr10 col-md-12 mb30">
                         <h6>{{'INCLUSIONS' | translate}}</h6>
                         <div class="col-12 row mx-0">
                             <div class="col-3" *ngFor="let item of setViewData.boardTypes">
@@ -55,7 +55,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-12 mt30">
+                    <div class="col-md-12 mb30">
                         <div class="" *ngFor="let item of setViewData.cancellation_policy">
                             <h6>{{item?.title}}</h6>
                             <div class="green_text" *ngIf="item?.is_refundable">{{'Refundable' | translate}}</div>

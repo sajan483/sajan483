@@ -5992,7 +5992,7 @@ input[type="radio"]:checked:after {
         overflow-y: auto;
     }
     .modal-content {
-        height: 500px;
+        max-height: 800px;
     }
 }
 
