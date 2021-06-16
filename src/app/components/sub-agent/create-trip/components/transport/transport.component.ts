@@ -20,6 +20,7 @@ export class TransportComponent implements OnInit {
   notifyService: NotificationService;
   commonService: SubAgentApiService;
   noOfVehicle: any;
+  aditionalService:any[] = [];
 
   constructor(
     private _healperService: HelperService,
@@ -51,6 +52,30 @@ export class TransportComponent implements OnInit {
     }
   }
 
+  getCheckboxValues(ev, data:number){
+    if(ev.checked){
+      this.aditionalService.push(data);
+    }else{
+      let removeIndex = this.aditionalService.findIndex(itm => itm===data);
+      if(removeIndex !== -1){
+        this.aditionalService.splice(removeIndex,1);
+      }
+    }
+    console.log(this.aditionalService);
+    
+    // let obj = {
+    //   "additional_service_code" : data
+    // }
+    // if(ev.checked){
+    //   this.aditionalService.push(obj);
+    // }else{
+    //   let removeIndex = this.aditionalService.findIndex(itm => itm.additional_service_code===data);
+    //   if(removeIndex !== -1)
+    //     this.aditionalService.splice(removeIndex,1);
+    // }
+    
+  }
+
 
   /**
    * This method is for booking vehicles
@@ -66,89 +91,28 @@ export class TransportComponent implements OnInit {
     let arrayList = [];
     let travellerCount = this.paxCount
     let firstcategory = [];
-    let secondcategory = [];
-    let thirdcategory = [];
     let code = vehicle.vehicle_type_code[0];
-    if (code == "1") {
-      let x = [vehicle];
-      x.forEach((x, index) => {
-        let category = {
-          code: x.categories[0].category_code,
-          additional_services: x.categories[0].additional_services
-            .filter((a) => a.selected == true)
-            .map((a) => a.additional_service_code),
-          quantity: userDetails.vehicleCounts,
-          pax_per_vehicle: Math.ceil(
-            travellerCount /
-            Math.ceil(travellerCount / x.categories[0].capacity)
-          ),
-        };
+    let x = [vehicle];
+    x.forEach((x, index) => {
+      let category = {
+        code: x.categories[0].category_code,
+        additional_services: this.aditionalService,
+        quantity: userDetails.vehicleCounts,
+        pax_per_vehicle: Math.ceil(
+          travellerCount / Math.ceil(travellerCount / x.categories[0].capacity)
+        ),
+      };
 
-        firstcategory.push(category);
-        this.vehicleName =
-          "Sedan Car - (" +
-          Math.ceil(travellerCount / x.categories[0].capacity) +
-          ")";
-      });
-      const q = {
-        code: "1",
-        categories: firstcategory,
-      };
-      arrayList.push(q);
-      this.vehicleName = "Sedan Car - (" + Math.ceil((this.appStore.adultCount + this.appStore.childCount) / this.appStore.vehicleMax) + ")";
-    }
-    if (code == "2") {
-      let x = [vehicle];
-      x.forEach((x, index) => {
-        let category = {
-          code: x.categories[0].category_code,
-          additional_services: x.categories[0].additional_services
-            .filter((a) => a.selected == true)
-            .map((a) => a.additional_service_code),
-          quantity: userDetails.vehicleCounts,
-          pax_per_vehicle: Math.ceil(
-            travellerCount /
-            Math.ceil(travellerCount / x.categories[0].capacity)
-          ),
-        };
-        secondcategory.push(category);
-        this.vehicleName = "SUV Car - (" + Math.ceil((this.appStore.adultCount + this.appStore.childCount) / x.categories[0].capacity) + ")";
-      });
-      const q = {
-        code: "2",
-        categories: secondcategory,
-      };
-      arrayList.push(q);
-    }
-    if (code == "3") {
-      let x = [vehicle];
-      x.forEach((x, index) => {
-        let category = {
-          code: x.categories[0].category_code,
-          additional_services: x.categories[0].additional_services
-            .filter((a) => a.selected == true)
-            .map((a) => a.additional_service_code),
-          quantity: userDetails.vehicleCounts,
-          pax_per_vehicle: Math.ceil(
-            travellerCount /
-            Math.ceil(travellerCount / x.categories[0].capacity)
-          ),
-        };
+      firstcategory.push(category);
+      this.vehicleName = x.vehicle_type_name[0] 
+    });
+    const q = {
+      code: code,
+      categories: firstcategory,
+    };
+    arrayList.push(q);
 
-        thirdcategory.push(category);
-        this.vehicleName =
-          "Bus - (" +
-          Math.ceil(
-            (this.appStore.adultCount + this.appStore.childCount) / x.categories[0].capacity
-          ) +
-          ")";
-      });
-      const q = {
-        code: "3",
-        categories: thirdcategory,
-      };
-      arrayList.push(q);
-    }
+
     if (sessionStorage.getItem('custom_trip_id')) {
       let x = {
         start_date: start_date_formatted,

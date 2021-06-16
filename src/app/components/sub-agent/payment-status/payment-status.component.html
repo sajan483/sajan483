@@ -577,20 +577,26 @@
                                     <p class="clr52 fs14"><i class="fa fa-circle pr10 mpr0 mpl10 font9imp" aria-hidden="true"></i>{{'Bag Capacity' | translate}} : {{tripTransport?.trip_transportation?.vehicle_types[0]?.bags_capacity}}
                                     </p>
                                 </div>
-                                <div class="col-md-12 transportbodypdng row ml-0 mr-0 mt-2 p20 brdrtop">
-                                    <div class="col-md-5 p-0">
-                                        <p class="fs13"><i class="fa fa-map-marker textlight pr-1 font16imp" aria-hidden="true"></i> {{'ADDRESS' | translate}}</p>
-                                        <p class="pl-3 fs12 clr52">
-                                            {{tripTransport?.trip_transportation?.company.address}}</p>
-                                    </div>
-                                    <div class="col-md-5">
-                                        <p class="clr52 fs14"><i class="fa fa-envelope textlight pr5 mpr0 mpl5 font16imp" aria-hidden="true"></i> {{tripTransport?.trip_transportation?.company?.email}}
-                                        </p>
-                                    </div>
-                                    <div class="col-md-2">
-                                        <p class="clr52 fs14"><i class="fa fa-phone textlight pr5 mpr0 mpl5 font16imp" aria-hidden="true"></i> {{tripTransport?.trip_transportation?.company?.phone_number}}
-                                        </p>
-                                    </div>
+                            </div>
+                            <div class="col-md-12 transportbodypdng row m-0 fs14" *ngIf="tripTransport?.trip_transportation?.additional_services.length > 0">
+                                <div class="fw600 textunderline px-0 col-md-12">{{'Additional Services' | translate}}</div>
+                                <div class="col-md-6 pt-1" *ngFor="let service of tripTransport.trip_transportation.additional_services">
+                                    <i class="fa fa-check green_text pr10 mpr0 mpl10" aria-hidden="true"></i> {{service?.name}}
+                                </div>
+                            </div>
+                            <div class="col-md-12 transportbodypdng row ml-0 mr-0 mt-2 p20 brdrtop">
+                                <div class="col-md-5 p-0">
+                                    <p class="fs13"><i class="fa fa-map-marker textlight pr-1 font16imp" aria-hidden="true"></i> {{'ADDRESS' | translate}}</p>
+                                    <p class="pl-3 fs12 clr52">
+                                        {{tripTransport?.trip_transportation?.company.address}}</p>
+                                </div>
+                                <div class="col-md-5">
+                                    <p class="clr52 fs14"><i class="fa fa-envelope textlight pr5 mpr0 mpl5 font16imp" aria-hidden="true"></i> {{tripTransport?.trip_transportation?.company?.email}}
+                                    </p>
+                                </div>
+                                <div class="col-md-2">
+                                    <p class="clr52 fs14"><i class="fa fa-phone textlight pr5 mpr0 mpl5 font16imp" aria-hidden="true"></i> {{tripTransport?.trip_transportation?.company?.phone_number}}
+                                    </p>
                                 </div>
                             </div>
                         </div>
