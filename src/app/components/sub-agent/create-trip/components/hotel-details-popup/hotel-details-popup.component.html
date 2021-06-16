@@ -220,7 +220,7 @@
                                     </div>
                                     <div class="stickyPrice text-center">
                                         <div>
-                                            <div class="d-inline-flex mt15">
+                                            <div *ngIf="selectedRoomCount > 0" class="d-inline-flex mt15">
                                                 <i class="selectedgreentickicon icns icon_size_20 mr10 mmr0 mml10"></i>
                                                 <div class="green_text fs14 fw600">{{selectedRoomCount}} {{'Room Selected' | translate}}</div>
                                             </div>
