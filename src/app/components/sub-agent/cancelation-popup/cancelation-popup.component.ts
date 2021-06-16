@@ -44,13 +44,18 @@ export class CancelationPopupComponent implements OnInit {
       this.btnactv = true;
       window.location.reload();
       CancelationPopupComponent.cancellationPopup = false;
-    },(error)=>{
-      Swal.fire({
-        icon: 'error',
-        text: error.error,
-        confirmButtonText: 'Ok'
-      })
+    },(err)=>{
+      this.showAlert(err.error.error)
+      console.log(err.error.error)
     });
+  }
+
+  showAlert(err){
+    Swal.fire({
+      icon: 'error',
+      text: err,
+      confirmButtonText: 'Ok'
+    })
   }
 
   closecancelPopup(){
