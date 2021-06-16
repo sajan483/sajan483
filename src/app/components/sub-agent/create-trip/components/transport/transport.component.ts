@@ -61,19 +61,6 @@ export class TransportComponent implements OnInit {
         this.aditionalService.splice(removeIndex,1);
       }
     }
-    console.log(this.aditionalService);
-    
-    // let obj = {
-    //   "additional_service_code" : data
-    // }
-    // if(ev.checked){
-    //   this.aditionalService.push(obj);
-    // }else{
-    //   let removeIndex = this.aditionalService.findIndex(itm => itm.additional_service_code===data);
-    //   if(removeIndex !== -1)
-    //     this.aditionalService.splice(removeIndex,1);
-    // }
-    
   }
 
 
