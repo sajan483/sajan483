@@ -35,7 +35,27 @@
                             </a>
                         </div>
                     </div>
-                    <div class="col-md-12">
+                    <div *ngIf="setViewData?.description" class=" col-md-12">
+                        <h6>{{'Description' | translate}}:</h6>
+                        <p class="pl15">{{setViewData?.description}}</p>
+                    </div>
+                    <div *ngIf="setViewData.features.length > 0" class="textright pr10 col-md-12 mt30">
+                        <h6>{{'Amenities & Info' | translate}}</h6>
+                        <div class="col-12 row mx-0">
+                            <div class="col-3" style="list-style-type: square;" *ngFor="let item of setViewData.features">
+                                <i class="fa fa-check green_text" aria-hidden="true"></i> {{item?.name}}
+                            </div>
+                        </div>
+                    </div>
+                    <div *ngIf="setViewData.boardTypes.length > 0" class="textright pr10 col-md-12 mt30">
+                        <h6>{{'INCLUSIONS' | translate}}</h6>
+                        <div class="col-12 row mx-0">
+                            <div class="col-3" *ngFor="let item of setViewData.boardTypes">
+                                <span>{{item?.type}}</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-12 mt30">
                         <div class="" *ngFor="let item of setViewData.cancellation_policy">
                             <h6>{{item?.title}}</h6>
                             <div class="green_text" *ngIf="item?.is_refundable">{{'Refundable' | translate}}</div>
@@ -47,7 +67,9 @@
                                         <div>
                                             <div><strong>{{'From' | translate}} : </strong> {{rule?.from_date_time | date:'medium'}}</div>
                                             <div><strong>{{'To' | translate}} : </strong> {{rule?.to_date_time | date:'medium'}}</div>
-                                            <div><p class="mb-0">{{rule?.description}}</p></div>
+                                            <div>
+                                                <p class="mb-0">{{rule?.description}}</p>
+                                            </div>
                                             <div class="fs13 clr52 fw400" *ngIf="!rule?.is_noshow">( NOTE: Not applicable in No-Show )</div>
                                         </div>
                                     </div>
@@ -62,26 +84,6 @@
                                 <p>{{item?.description}}</p>
                             </div>
                         </div>
-                    </div>
-                    <div *ngIf="setViewData.boardTypes.length > 0" class="textright pr10 col-md-12 mt30">
-                        <h6>{{'INCLUSIONS' | translate}}</h6>
-                        <div class="col-12 row mx-0">
-                            <div class="col-3" *ngFor="let item of setViewData.boardTypes">
-                                <span>{{item?.type}}</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div *ngIf="setViewData.features.length > 0" class="textright pr10 col-md-12 mt30">
-                        <h6>{{'Amenities & Info' | translate}}</h6>
-                        <div class="col-12 row mx-0">
-                            <div class="col-3" style="list-style-type: square;" *ngFor="let item of setViewData.features">
-                                <i class="fa fa-check green_text" aria-hidden="true"></i> {{item?.name}}
-                            </div>
-                        </div>
-                    </div>
-                    <div *ngIf="setViewData?.description" class="mt30 col-md-12">
-                        <h6>{{'Description' | translate}}:</h6>
-                        <p class="pl15">{{setViewData?.description}}</p>
                     </div>
                 </div>
             </div>
