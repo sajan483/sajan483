@@ -2,6 +2,7 @@ import { Component, OnInit,Input } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { SubAgentApiService } from 'src/app/Services/sub-agent-api-services';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-cancelation-popup',
@@ -43,8 +44,18 @@ export class CancelationPopupComponent implements OnInit {
       this.btnactv = true;
       window.location.reload();
       CancelationPopupComponent.cancellationPopup = false;
+    },(err)=>{
+      this.showAlert(err.error.error)
+      console.log(err.error.error)
     });
+  }
 
+  showAlert(err){
+    Swal.fire({
+      icon: 'error',
+      text: err,
+      confirmButtonText: 'Ok'
+    })
   }
 
   closecancelPopup(){
