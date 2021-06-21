@@ -101,6 +101,7 @@ export class CreateTripComponent implements OnInit, AfterViewChecked, DoCheck {
   transportFailed: string = "";
   bookContinue: boolean;
   minpassportExpDate: any;
+  showIbanPopup: boolean = false;
   toggleMeridian() {
     this.meridian = !this.meridian;
   }
@@ -448,7 +449,7 @@ export class CreateTripComponent implements OnInit, AfterViewChecked, DoCheck {
     this.cityFirst = "";
     this.citySecond = "";
     this.transportFailed = "";
-    (<HTMLInputElement>document.getElementById("payBtn")).style.display = "none";
+    //(<HTMLInputElement>document.getElementById("payBtn")).style.display = "none";
     (<HTMLInputElement>document.getElementById("continueBooking")).style.display = "block";
   }
 
@@ -557,12 +558,13 @@ export class CreateTripComponent implements OnInit, AfterViewChecked, DoCheck {
           (response.medinah_trip_hotel && response.medinah_trip_hotel.success == false) ||
           (response.trip_transportation && response.trip_transportation.success == false) ||
           response.refetch_trip == true) {
-          (<HTMLInputElement>document.getElementById("payBtn")).style.display = "none";
+          //(<HTMLInputElement>document.getElementById("payBtn")).style.display = "none";
           (<HTMLInputElement>document.getElementById("continueBooking")).style.display = "block";
         }
         else {
-          (<HTMLInputElement>document.getElementById("payBtn")).style.display = "block";
-          (<HTMLInputElement>document.getElementById("continueBooking")).style.display = "none";
+          this.showIbanPopup = true;
+          //(<HTMLInputElement>document.getElementById("payBtn")).style.display = "block";
+          (<HTMLInputElement>document.getElementById("continueBooking")).style.display = "block";
         }
 
         if (response.refetch_trip == true) {
@@ -609,6 +611,7 @@ export class CreateTripComponent implements OnInit, AfterViewChecked, DoCheck {
         this.spinner.hide();
         if (response.status == "Success") {
           this.router.navigate(['subagent/payment/' + this.bookingId + '/success']);
+          sessionStorage.setItem("timerStatus","start");
         }
         else {
           this.createTripHelper.showSweetAlert('Oops...', "please try again", "payment failed");
@@ -1048,6 +1051,10 @@ export class CreateTripComponent implements OnInit, AfterViewChecked, DoCheck {
    */
   clearAppStore() {
     this.appStore.isAvailabilityFails = false;
+  }
+
+  closeIbanPopUp(){
+    this.showIbanPopup = false;
   }
 
 }
