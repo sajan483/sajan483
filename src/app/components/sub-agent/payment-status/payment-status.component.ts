@@ -65,9 +65,8 @@ export class PaymentStatusComponent implements OnInit {
   btnactv: boolean;
   submitted = false;
   checkCancelData: LooseObject = {};
-  timeLeft: number = 30;
   interval;
-  timerStatus : boolean = false;
+  timerStatus: boolean = false;
 
   constructor(private route: ActivatedRoute,
     private appStore: AppStore,
@@ -86,26 +85,19 @@ export class PaymentStatusComponent implements OnInit {
     this.createHelper = new CreateTripHelper(this.helperService);
     this.status = this.route.snapshot.params.status;
     this.getList();
-    if(sessionStorage && sessionStorage.getItem("timerStatus") && sessionStorage.getItem("timerStatus") == "stop"){this.timerStatus = true}
-    this.setTimerForCancellationTimeOut()
   }
 
   setTimerForCancellationTimeOut() {
-    //if(sessionStorage.getItem("timerStatus") == "start"){
-      this.interval = setInterval(() => {
-        if (this.timeLeft > 0) {
-          this.timeLeft--;
-        }
-        else if (this.timeLeft == 0) {
-          sessionStorage.setItem("timerStatus","stop");
-          this.timerStatus = true;
-          this.timeLeft = 30;
-          console.log("time",this.timeLeft);
-          
-          clearInterval(this.interval);
-        }
-      }, 1000)
-    //}
+    var timeleft = 5*60;
+    var timer = setInterval(()=>{
+    if(timeleft <= 0){
+      clearInterval(timer);
+      sessionStorage.setItem("timerStatus","stop");
+      //this.timerStatus = true;
+    }
+      console.log(timeleft);
+      timeleft -= 1;
+    }, 1000);
   }
 
   getList() {
@@ -339,7 +331,7 @@ export class PaymentStatusComponent implements OnInit {
   }
 
   checkCancellation() {
-    if(this.timerStatus){
+   // if(this.timerStatus){
       this.cancellationtoggle = true;
       this.common.getCheckCancellation(this.route.snapshot.params.id).subscribe((data) => {
         this.cancellationtoggle = false;
@@ -355,7 +347,9 @@ export class PaymentStatusComponent implements OnInit {
           });
         }
       });
-    }
+    // }else{
+    //   this.notifyService.showWarning("You can cancel a booking only after 5 minuts")
+    // }
   }
 
   ngDoCheck(){
