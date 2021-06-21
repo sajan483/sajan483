@@ -413,12 +413,22 @@ export class CreateTripComponent implements OnInit, AfterViewChecked, DoCheck {
       this.tripData = data;
       if (this.tripData) {
         if (this.tripData.makkah_trip_hotel) {
+          var roomCount = 0;
           this.tripMakkahHotel = this.tripData.makkah_trip_hotel;
+          this.tripMakkahHotel.room_variations.forEach((data)=>{
+               roomCount = roomCount + data.total_rooms
+          })
+          this.tripMakkahHotel.total_room_count = roomCount
           this.hotelMakkahFare = this.tripData.makkah_trip_hotel.room_variations.map(x => x.room.amount).reduce((a, b) => a + b, 0);
           this.tripMakkahHotelrating = this.tripData.makkah_trip_hotel.hotel.user_review / 2;
         }
         if (this.tripData.medinah_trip_hotel) {
+          var roomCount = 0;
           this.tripMadeenaHotel = this.tripData.medinah_trip_hotel;
+          this.tripMadeenaHotel.room_variations.forEach((data)=>{
+            roomCount = roomCount + data.total_rooms
+       })
+       this.tripMadeenaHotel.total_room_count = roomCount
           this.hotelMadeenaFare = this.tripData.medinah_trip_hotel.room_variations.map(x => x.room.amount).reduce((a, b) => a + b, 0);
         }
         if (this.tripData.trip_transportation) {

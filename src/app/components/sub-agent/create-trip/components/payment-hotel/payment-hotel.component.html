@@ -36,14 +36,14 @@
                     </div>
                 </div>
                 <div class="linebyline clr52 fs13">
-                    {{'No of days on Makkah' | translate}}
+                    {{'No of days ' | translate}}
                     <span class="Premium_blue fw600">{{tripHotel?.num_of_days}}</span>
                     <span class="crossline"></span>
                     <span>{{'No of Guest' | translate}}</span>
                     <span class="Premium_blue fw600">{{travelCount}}</span>
                     <span class="crossline"></span>
                     <span>{{'Rooms' | translate}}</span>
-                    <span class="Premium_blue fw600">{{tripHotel?.room_variations?.length}}</span>
+                    <span class="Premium_blue fw600">{{tripHotel?.total_room_count}}</span>
                     <span class="textunderline list_clr cursor-pointer pl-3 mpr10" (click)="goToHotelStepper('makkah')" *ngIf="tripHotel.location == 'makkah'">{{'Modify' | translate}}</span>
                     <span class="textunderline list_clr cursor-pointer pl-3 mpr10" (click)="goToHotelStepper('madinah')" *ngIf="tripHotel.location == 'medinah'">{{'Modify' | translate}}</span>
                     <span class="textunderline list_clr cursor-pointer pl-3" data-toggle="modal" data-target="#hotelPolicy">{{'Policy' | translate}}</span>
