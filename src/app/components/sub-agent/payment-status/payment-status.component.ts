@@ -109,6 +109,7 @@ export class PaymentStatusComponent implements OnInit {
   }
 
   getData(data) {
+    var obj = JSON.parse(sessionStorage.getItem('userObject'))
     this.shimmer = false;
     this.bknStatus = data.status
     this.reference_no = data.reference_no;
@@ -141,7 +142,7 @@ export class PaymentStatusComponent implements OnInit {
     }
     if (data.travellers) {
       this.tripTravellers = data.travellers;
-      this.noOfTravellers = this.tripTravellers.length
+      this.noOfTravellers = obj.travallersCount
     }
   }
 
