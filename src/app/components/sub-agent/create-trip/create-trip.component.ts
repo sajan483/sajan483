@@ -114,7 +114,7 @@ export class CreateTripComponent implements OnInit, AfterViewChecked, DoCheck {
   }
   private createTripAdapter: CreateTripAdapter = new CreateTripAdapter(this.helperService, this.appStore);
   returnDate: any;
-  private createTripHelper: CreateTripHelper = new CreateTripHelper(this.helperService);
+  private createTripHelper: CreateTripHelper = new CreateTripHelper(this.helperService,this.translate);
   private helper: HelperService = new HelperService(null, null);
   retDate: any;
   routeId: any;
@@ -343,13 +343,11 @@ export class CreateTripComponent implements OnInit, AfterViewChecked, DoCheck {
   transportSearch() {
     var obj = JSON.parse(sessionStorage.getItem("userObject"));
     this.travellersCount = obj.adults + obj.children;
-
-    console.log(this.travellersCount,"sdasd");
     
     const date = this.helperService.dateFormaterMdy(this.userDetails.transportStartDate);
     const filrerData = {
       "search_id": this.searchTransportId,
-      "lang": this.selectedLanguage,
+      "lang": sessionStorage.getItem('userLanguage'),
       "route": this.routeId,
       "vehicle_type": this.vehicleId,
       "category": this.categoryId,
@@ -362,7 +360,7 @@ export class CreateTripComponent implements OnInit, AfterViewChecked, DoCheck {
       this.steps = JSON.parse(sessionStorage.getItem('steps'))
       if (this.steps && this.steps.length > 2) { this.stage = 2 }
       sessionStorage.setItem("transportSearchId", data.search_id);
-      this.common.searchTransportList(this.searchTransportId, this.selectedCurrency, this.selectedLanguage).subscribe((response) => {
+      this.common.searchTransportList(this.searchTransportId, this.selectedCurrency,sessionStorage.getItem('userLanguage')).subscribe((response) => {
         if ((response && response.transportations && response.transportations.length == 0) || (response && response.transportations && response.transportations.filter(x => x.vehicle_types.length > 0) == 0)) {
           this.isTransportResponseEmpty = true;
           this.createTripHelper.showSweetAlert('Sorry, we could not find transport for this route', "warning", 'Modify search and try again');
@@ -410,7 +408,7 @@ export class CreateTripComponent implements OnInit, AfterViewChecked, DoCheck {
  */
   getTripData() {
     // this.setPaymentPageAfterItineraryModified();
-    this.common.getTrip(sessionStorage.getItem('custom_trip_id')).subscribe((data) => {
+    this.common.getTrip(sessionStorage.getItem('custom_trip_id'),sessionStorage.getItem('userLanguage')).subscribe((data) => {
       this.tripData = data;
       if (this.tripData) {
         if (this.tripData.makkah_trip_hotel) {
@@ -528,7 +526,7 @@ export class CreateTripComponent implements OnInit, AfterViewChecked, DoCheck {
     travellers.push(this.createTripAdapter.createTripBookingRequest(this.travellersForm, this.countryCode, roomRef, this.nationality, this.country_of_residence))
     const body = { travellers }
     sessionStorage.setItem('bookingData', JSON.stringify(body))
-    this.common.bookTrip(body, sessionStorage.getItem('custom_trip_id')).subscribe((data) => {
+    this.common.bookTrip(body, sessionStorage.getItem('custom_trip_id'),sessionStorage.getItem('userLanguage')).subscribe((data) => {
       this.bookingId = data.id;
       sessionStorage.setItem("reference_no", data.reference_no)
       this.common.checkAvailability(data.id).subscribe((response) => {
@@ -614,11 +612,11 @@ export class CreateTripComponent implements OnInit, AfterViewChecked, DoCheck {
           sessionStorage.setItem("timerStatus","start");
         }
         else {
-          this.createTripHelper.showSweetAlert('Oops...', "please try again", "payment failed");
+          this.createTripHelper.titleSweetAlert("error",'payment failed', "please try again","ok");
         }
       }, error => {
         this.spinner.hide();
-        this.createTripHelper.showSweetAlert('Oops...', "error", 'Account Does Not Exist');
+        this.createTripHelper.showSweetAlert('Account Does Not Exist', "error", 'ok');
       });
     } else {
     }
@@ -752,10 +750,10 @@ export class CreateTripComponent implements OnInit, AfterViewChecked, DoCheck {
    * Method to call all the apis for Payment page 
    */
   fetchNessoryApisForPaymentPage() {
-    this.commonApiService.getCountry("", this.selectedLanguage).subscribe((data) => {
+    this.commonApiService.getCountry("",sessionStorage.getItem('userLanguage')).subscribe((data) => {
       this.nationalityList = data.map(x => ({ item_text: x.name, item_id: x.short_iso_code }));
     });
-    this.commonApiService.getNationality("", this.selectedLanguage).subscribe((data) => {
+    this.commonApiService.getNationality("",sessionStorage.getItem('userLanguage')).subscribe((data) => {
       this.phoneCodeList = data.map(x => ({ item_text: x.name, item_id: x.code }));
     });
   }
@@ -764,7 +762,7 @@ export class CreateTripComponent implements OnInit, AfterViewChecked, DoCheck {
    * Method to call all the apis for transport search 
    */
   fetchNessoryApisForTransport() {
-    this.selectedLanguage = this.appStore.langCode
+    this.selectedLanguage = sessionStorage.getItem('userLanguage')
     this.common.getVehicles(this.selectedLanguage).subscribe((data) => {
       this.vehicleTypeList = data.vehicle_types.map(x => ({ item_text: x.name, item_id: x.code }));
     });
@@ -986,8 +984,8 @@ export class CreateTripComponent implements OnInit, AfterViewChecked, DoCheck {
               if (this.hotelsList.length == 0) {
                 Swal.fire({
                   icon: 'error',
-                  text: 'Hotels Not Available',
-                  confirmButtonText: 'Search Again'
+                  text: this.translate.instant('Hotels Not Available'),
+                  confirmButtonText: this.translate.instant('Search Again')
                 }).then((result) => {
                   this.router.navigate(['subagent/home']);
                 })
@@ -996,8 +994,8 @@ export class CreateTripComponent implements OnInit, AfterViewChecked, DoCheck {
             (error) => {
               Swal.fire({
                 icon: 'error',
-                text: 'Hotels Not Available',
-                confirmButtonText: 'Search Again'
+                text: this.translate.instant('Hotels Not Available'),
+                confirmButtonText: this.translate.instant('Search Again')
               }).then((result) => {
                 this.router.navigate(['subagent/home']);
               })
@@ -1011,8 +1009,8 @@ export class CreateTripComponent implements OnInit, AfterViewChecked, DoCheck {
       (error) => {
         Swal.fire({
           icon: 'error',
-          text: 'Something Went Wrong',
-          confirmButtonText: 'Search Again'
+          text: this.translate.instant('Something Went Wrong'),
+          confirmButtonText: this.translate.instant('Search Again')
         }).then((result) => {
           this.router.navigate(['subagent/home']);
         })

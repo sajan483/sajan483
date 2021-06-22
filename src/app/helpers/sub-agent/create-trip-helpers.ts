@@ -1,9 +1,10 @@
 import { HelperService } from "src/app/common/services/helper-service";
 import { TripRoom } from "src/app/models/custome_trip";
 import Swal from "sweetalert2";
+import { TranslateService } from '@ngx-translate/core';
 
 export class CreateTripHelper {
-  constructor(private helperService: HelperService) { }
+  constructor(private helperService: HelperService,private translate: TranslateService) { }
 
   /**
    * Method for setting hotel details  to details popup
@@ -274,10 +275,19 @@ export class CreateTripHelper {
   
   showSweetAlert(text,status,btnText):any {
     Swal.fire({
-      text:text,
+      text:this.translate.instant(text),
       icon: status,
-      confirmButtonText:btnText,
+      confirmButtonText:this.translate.instant(btnText),
     });
+  }
+
+  titleSweetAlert(icon,title,text,btnText){
+    Swal.fire({
+      icon: icon,
+      title: this.translate.instant(title),
+      text: this.translate.instant(text),
+      confirmButtonText:this.translate.instant(btnText),
+    })
   }
 
 }

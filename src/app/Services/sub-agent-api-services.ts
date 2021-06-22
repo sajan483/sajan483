@@ -24,9 +24,9 @@ export class SubAgentApiService {
       .post( "hotels/details/?currency=" + currency + "&lang=" + lang, data)
   }
 
-  saveSelectedHotel(data): Observable<any> {
+  saveSelectedHotel(data,lang): Observable<any> {
     return this.http
-      .post( "custom_trips/", data)
+      .post( "custom_trips/"+"?lang=" + lang, data)
   }
 
 
@@ -40,9 +40,9 @@ export class SubAgentApiService {
       .get( "languages/")
   }
   
-  updateCustomTrip(id,data): Observable<any>{
+  updateCustomTrip(id,data,lang): Observable<any>{
     return this.http
-    .put("custom_trips/"+id+"/",data)
+    .put("custom_trips/"+id+"/?lang=" + lang,data)
   }
 
   bookCustomTrip(data): Observable<any> {
@@ -50,14 +50,14 @@ export class SubAgentApiService {
       .post( "custom_trips/", data)
   }
 
-  getPaymentDetails(id): Observable<any>{
+  getPaymentDetails(id,lang): Observable<any>{
     return this.http
-      .get("bookings/"+id+"/")
+      .get("bookings/"+id+"/?lang=" + lang)
   }
 
-  getVisaDetails(id): Observable<any>{
+  getVisaDetails(id,lang): Observable<any>{
     return this.http
-    .get("custom_trip_booking/"+id+"/update_mutamer_info/")
+    .get("custom_trip_booking/"+id+"/update_mutamer_info/?lang=" + lang)
   }
 
   getInvoice(id): Observable<any>{
@@ -70,9 +70,9 @@ export class SubAgentApiService {
     .post("b2b_trip_booking/"+id+"/confirm_cancellation/",data)
   }
 
-  getCheckCancellation(id): Observable<any>{
+  getCheckCancellation(id,lang): Observable<any>{
     return this.http
-    .get("b2b_trip_booking/"+id+"/check_cancellation/")
+    .get("b2b_trip_booking/"+id+"/check_cancellation/?lang=" + lang)
   }
 
 
@@ -93,9 +93,9 @@ export class SubAgentApiService {
   }
 
 
-  bookTrip(data,id): Observable<any>{
+  bookTrip(data,id,lang): Observable<any>{
     return this.http
-    .post( "custom_trips/" + id + "/booking/",data)
+    .post( "custom_trips/" + id + "/booking/?lang=" + lang,data)
   }
 
 
@@ -111,9 +111,9 @@ export class SubAgentApiService {
   }
 
 
-  getTrip(id): Observable<any>{
+  getTrip(id,lang): Observable<any>{
     return this.http
-    .get("custom_trips/" + id + "/")
+    .get("custom_trips/" + id + "/"+ "?lang=" + lang)
   }
 
 

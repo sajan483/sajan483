@@ -82,7 +82,7 @@ export class PaymentStatusComponent implements OnInit {
 
   ngOnInit() {
     this.genHelper.checkForAccessToken();
-    this.createHelper = new CreateTripHelper(this.helperService);
+    this.createHelper = new CreateTripHelper(this.helperService,this.translate);
     this.status = this.route.snapshot.params.status;
     this.getList();
   }
@@ -101,7 +101,7 @@ export class PaymentStatusComponent implements OnInit {
   }
 
   getList() {
-    this.common.getPaymentDetails(this.route.snapshot.params.id).subscribe((data) => {
+    this.common.getPaymentDetails(this.route.snapshot.params.id,sessionStorage.getItem('userLanguage')).subscribe((data) => {
       if (data.message && data.message == "Request is processing" && this.counter < 10) {
         this.dataArray = Observable
           .interval(10 * 1000)
@@ -163,7 +163,7 @@ export class PaymentStatusComponent implements OnInit {
   }
 
   bookVisa() {
-    this.common.getVisaDetails(this.route.snapshot.params.id).subscribe((data) => {
+    this.common.getVisaDetails(this.route.snapshot.params.id,sessionStorage.getItem('userLanguage')).subscribe((data) => {
       if (data.success) {
         this.sendPayuRequest(data.visa_requests[0]);
       }
@@ -333,7 +333,7 @@ export class PaymentStatusComponent implements OnInit {
   checkCancellation() {
    // if(this.timerStatus){
       this.cancellationtoggle = true;
-      this.common.getCheckCancellation(this.route.snapshot.params.id).subscribe((data) => {
+      this.common.getCheckCancellation(this.route.snapshot.params.id,sessionStorage.getItem('userLanguage')).subscribe((data) => {
         this.cancellationtoggle = false;
         this.checkCancelData.cancel = data;
         window.scrollTo(0, 0);
@@ -341,15 +341,16 @@ export class PaymentStatusComponent implements OnInit {
           CancelationPopupComponent.cancellationPopup = true;
         } else {
           Swal.fire({
-            text: 'Sorry, No Cancellation Available',
+            text: this.translate.instant('Sorry, No Cancellation Available'),
             icon: "warning",
-            confirmButtonText: "ok",
+            confirmButtonText: this.translate.instant("ok"),
           });
         }
       });
     // }else{
     //   this.notifyService.showWarning("You can cancel a booking only after 5 minuts")
     // }
+    
   }
 
   ngDoCheck(){

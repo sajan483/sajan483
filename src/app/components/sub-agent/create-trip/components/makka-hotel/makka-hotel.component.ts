@@ -50,7 +50,7 @@ export class MakkaHotelComponent implements OnInit,DoCheck{
   showShimmer: boolean;
   showHotelDetailsShimmer: boolean;
   private createTripAdapter: CreateTripAdapter = new CreateTripAdapter(this.helperService,this.appStore);
-  private createTripSupport: CreateTripHelper = new CreateTripHelper(this.helperService);
+  private createTripSupport: CreateTripHelper = new CreateTripHelper(this.helperService,this.translate);
   private subagentHelper: SubAgentGeneralHelper = new SubAgentGeneralHelper(this.subagentState);
 
   search: string = "";

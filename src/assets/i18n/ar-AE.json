@@ -499,5 +499,15 @@
     "Vehicle Count": "عدد المركبات",
     "No Of Rooms": "عدد الغرف",
     "No of days": "لا أيام",
-    "Click here for booking": "انقر هنا للحجز"
+    "Click here for booking": "انقر هنا للحجز",
+    "Passenger limit exceeded. Please select heavy vehicle.": "تم تجاوز حد الركاب. الرجاء تحديد مركبة ثقيلة.",
+    "Copied Booking Reference Number": "رقم مرجع الحجز المنسوخ",
+    "OK": "نعم",
+    "ok": "نعم",
+    "please try again": "حاول مرة اخرى",
+    "Hotels Not Available": "الفنادق غير متوفرة",
+    "Search Again": "ابحث ثانيا",
+    "Room Limit Reached": "تم الوصول إلى الحد الأقصى المسموح به للغرفة",
+    "Sorry, No Cancellation Available": "عذرا ، لا يوجد إلغاء!",
+    "Email has been sent": "تم إرسال البريد الإلكتروني إلى عنوان البريد الإلكتروني المشار إليه."
 }
