@@ -154,8 +154,8 @@ export class SubAgentApiService {
       .get("hotels/?search_id=" + id + "&currency=" + currency + "&lang=" + lang)
   }
 
-  getPaginatedhistoryList(pageNumber: number): Observable<any> {
-    return this.http.get( 'bookings/?page=' + pageNumber)
+  getPaginatedhistoryList(pageNumber: number,lang): Observable<any> {
+    return this.http.get( 'bookings/?page=' + pageNumber + "&lang=" + lang)
   }
 
 
@@ -169,12 +169,12 @@ export class SubAgentApiService {
 
   getRoutes(lang): Observable<any> {
     return this.http
-      .get("ground_transports/routes/?lang=" + 'en-US')
+      .get("ground_transports/routes/?lang=" + lang)
   }
 
   getVehicles(lang): Observable<any> {
     return this.http
-      .get("ground_transports/vehicle_types/?lang=" + 'en-US')
+      .get("ground_transports/vehicle_types/?lang=" + lang)
   }
 
 }

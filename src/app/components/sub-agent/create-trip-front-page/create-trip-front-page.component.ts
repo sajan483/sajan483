@@ -873,7 +873,7 @@ export class CreateTripFrontPageComponent implements OnInit, DoCheck, AfterViewI
    */
 
   listRecentBooking() {
-    this.subAgentApiService.getPaginatedhistoryList(1).subscribe((data) => {
+    this.subAgentApiService.getPaginatedhistoryList(1,sessionStorage.getItem('userLanguage')).subscribe((data) => {
       this.historyList = data.results;
     })
   }

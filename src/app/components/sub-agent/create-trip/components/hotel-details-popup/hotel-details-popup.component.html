@@ -166,8 +166,6 @@
                                                         </div>
                                                     </li>
                                                     <li class="roomRate" style="border-right: 1px solid #e1e1e1">
-                                                        <div class="clr52 fs14 fw500 text-center" *ngFor="let item of room.board_types;let p = index;">
-                                                            {{item?.type}}</div>
                                                         <strong class="customTooltip">
                                                             <span class="cursortext-dark-pointer text-dark fw600"
                                                                 data-room-price="139">{{room?.fare_summary[0]?.currency}}
@@ -197,9 +195,13 @@
                                                             </span>
                                                         </strong>
 
-                                                        <div class="nonRefundable">
-                                                            <span *ngIf="room.is_refundable == 'Refundable'" class="green_text">{{room?.is_refundable}}</span>
-                                                            <span *ngIf="room.is_refundable == 'Non-Refundable'" class="red_text">{{room?.is_refundable}}</span>
+                                                        <div class="clr52 fs14 fw500 mt-2 text-center" *ngFor="let item of room.boardTypes;let p = index;">
+                                                            {{item?.type}}
+                                                        </div>
+
+                                                        <div class="mt-2">
+                                                            <span *ngIf="room?.cancellation_policy[0]?.is_refundable" class="green_text">{{'Refundable' | translate}}</span>
+                                                            <span *ngIf="!room?.cancellation_policy[0]?.is_refundable" class="red_text">{{'non_refundable' | translate}}</span>
                                                         </div>
                                                     </li>
                                                     <li class="drop">
