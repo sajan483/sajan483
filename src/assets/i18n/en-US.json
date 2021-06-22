@@ -518,5 +518,6 @@
     "Search Again": "Search Again",
     "Room Limit Reached": "Room Limit Reached",
     "Sorry, No Cancellation Available": "Sorry, No Cancellation Available",
-    "Email has been sent": "Email has been sent"
+    "Email has been sent": "Email has been sent",
+    "Last Name must be at least 3 characters": "Last Name must be at least 3 characters"
 }

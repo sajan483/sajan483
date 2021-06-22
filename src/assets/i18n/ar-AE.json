@@ -509,5 +509,6 @@
     "Search Again": "ابحث ثانيا",
     "Room Limit Reached": "تم الوصول إلى الحد الأقصى المسموح به للغرفة",
     "Sorry, No Cancellation Available": "عذرا ، لا يوجد إلغاء!",
-    "Email has been sent": "تم إرسال البريد الإلكتروني إلى عنوان البريد الإلكتروني المشار إليه."
+    "Email has been sent": "تم إرسال البريد الإلكتروني إلى عنوان البريد الإلكتروني المشار إليه.",
+    "Last Name must be at least 3 characters": "يجب ألا يقل اسم العائلة عن 3 أحرف"
 }

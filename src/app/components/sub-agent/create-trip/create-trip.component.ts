@@ -102,6 +102,7 @@ export class CreateTripComponent implements OnInit, AfterViewChecked, DoCheck {
   bookContinue: boolean;
   minpassportExpDate: any;
   showIbanPopup: boolean = false;
+  disablePayBttn: boolean = false;
   toggleMeridian() {
     this.meridian = !this.meridian;
   }
@@ -519,8 +520,10 @@ export class CreateTripComponent implements OnInit, AfterViewChecked, DoCheck {
    */
   bookTrip() {
     this.submitted = true;
-    this.bookContinue = true;
     if (this.travellersForm.invalid) { return }
+    this.bookContinue = true;
+    this.disablePayBttn = true;
+    this.travellersForm.disable()
     let roomRef = 0 + "_" + this.rooms[0].adults + "ADT_" + this.rooms[0].children + "CHD_" + this.rooms[0].child_ages.sort().join("_") + "";
     let travellers = [];
     travellers.push(this.createTripAdapter.createTripBookingRequest(this.travellersForm, this.countryCode, roomRef, this.nationality, this.country_of_residence))
@@ -568,6 +571,9 @@ export class CreateTripComponent implements OnInit, AfterViewChecked, DoCheck {
         if (response.refetch_trip == true) {
           this.createTripHelper.showSweetAlert('Price has been changed', "warning", 'OK')
           this.getTripData();
+          this.bookContinue = false;
+          this.disablePayBttn = false;
+          this.travellersForm.enable()
         }
         this.bookContinue = false;
       });
@@ -1053,6 +1059,15 @@ export class CreateTripComponent implements OnInit, AfterViewChecked, DoCheck {
 
   closeIbanPopUp(){
     this.showIbanPopup = false;
+    this.bookContinue = false;
+    this.disablePayBttn = false;
+    this.travellersForm.enable()
   }
+
+  omit_special_char(event){   
+    var k;  
+    k = event.charCode;  //         k = event.keyCode;  (Both can be used)
+    return((k > 64 && k < 91) || (k > 96 && k < 123) || k == 8 || k == 32 ); 
+   }
 
 }
