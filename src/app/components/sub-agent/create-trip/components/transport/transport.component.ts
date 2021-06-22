@@ -113,7 +113,7 @@ export class TransportComponent implements OnInit {
           vehicle_types: arrayList,
         },
       };
-      this.commonService.updateCustomTrip(sessionStorage.getItem('custom_trip_id'), x).subscribe(
+      this.commonService.updateCustomTrip(sessionStorage.getItem('custom_trip_id'), x,sessionStorage.getItem('userLanguage')).subscribe(
         (data) => {
           if (sessionStorage.getItem('custome_trip_booking_id')) {
             this.setStepperIndex();

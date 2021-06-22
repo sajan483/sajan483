@@ -60,7 +60,7 @@ export class RecentBookingComponent implements OnInit {
     selBox.select();
     document.execCommand('copy');
     document.body.removeChild(selBox);
-    this.notifyService.showSuccess("copied BRN");
+    this.notifyService.showSuccess(this.translate.instant("Copied Booking Reference Number"));
   }
 
 }

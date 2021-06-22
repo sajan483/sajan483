@@ -52,7 +52,7 @@ export class HotelDetailsPopupComponent implements OnInit ,OnChanges{
   selectedRoomDetails: boolean = false;
   selectedRoomInfo: any;
   private createTripAdapter: CreateTripAdapter = new CreateTripAdapter(this.helperService,this.appStore);
-  private createTripSupport: CreateTripHelper = new CreateTripHelper(this.helperService);
+  private createTripSupport: CreateTripHelper = new CreateTripHelper(this.helperService,this.translate);
   showHotelDetailsShimmer: boolean;
   roomImageGallery: boolean;
   totalTravellers : number;
@@ -162,7 +162,7 @@ export class HotelDetailsPopupComponent implements OnInit ,OnChanges{
       this.appStore.stepperIndex += 1;
     }
     if(!sessionStorage.getItem('custom_trip_id')){
-      this.commonService.saveSelectedHotel(this.createTripAdapter.bookHotelRequest(this.isGrouped,this.selectedRoomGroups,this.hotelData,this.hotelInfo,this.numberOfDays)).subscribe((data) => {
+      this.commonService.saveSelectedHotel(this.createTripAdapter.bookHotelRequest(this.isGrouped,this.selectedRoomGroups,this.hotelData,this.hotelInfo,this.numberOfDays),sessionStorage.getItem('userLanguage')).subscribe((data) => {
         this.activeBttn = true;
         sessionStorage.setItem('custom_trip_id',data.id);
         sessionStorage.setItem('stage','1')
@@ -170,7 +170,7 @@ export class HotelDetailsPopupComponent implements OnInit ,OnChanges{
       });
     }
     if(sessionStorage.getItem('custom_trip_id')){
-      this.commonService.updateCustomTrip(sessionStorage.getItem('custom_trip_id'),this.createTripAdapter.bookHotelRequest(this.isGrouped,this.selectedRoomGroups,this.hotelData,this.hotelInfo,this.numberOfDays)).subscribe((data) => {
+      this.commonService.updateCustomTrip(sessionStorage.getItem('custom_trip_id'),this.createTripAdapter.bookHotelRequest(this.isGrouped,this.selectedRoomGroups,this.hotelData,this.hotelInfo,this.numberOfDays),sessionStorage.getItem('userLanguage')).subscribe((data) => {
         this.activeBttn = true;
           if(JSON.parse(sessionStorage.getItem('steps')).length == 1){
             sessionStorage.setItem('stage','1')
@@ -206,7 +206,7 @@ export class HotelDetailsPopupComponent implements OnInit ,OnChanges{
       var element:HTMLSelectElement;    
       element = <HTMLSelectElement>document.getElementById('roomDrop'+i+j);
       element.selectedIndex = this.selectedRoomGroups[i].rooms[j].insertedSelectedRoomCount;
-      this.notifyService.showWarning("Room Limit Reached")
+      this.notifyService.showWarning(this.translate.instant("Room Limit Reached"))
     }
     
 

@@ -156,7 +156,7 @@ export class CreateTripFrontPageComponent implements OnInit, DoCheck, AfterViewI
    * This method for checking the availability of the access token
    * 
    */
-    this.crTripHelper = new CreateTripHelper(this.helperService);
+    this.crTripHelper = new CreateTripHelper(this.helperService,this.translate);
     this.genHelper.checkForAccessToken();
     this.appStore.adultCount = 1;
     this.appStore.childCount = 0;
@@ -634,7 +634,7 @@ export class CreateTripFrontPageComponent implements OnInit, DoCheck, AfterViewI
       this.countArray = Array(this.countAdult - count + 1).fill(count + 1).map((_, idx) => count + idx)
       this.vehicleCount = this.countArray[0];
     }else{
-      this.notifyService.showWarning("passenger limit exceeded please select heigher vehicle");
+      this.notifyService.showWarning(this.translate.instant("Passenger limit exceeded. Please select heavy vehicle."));
       this.removeVehicleType();
     }
     

@@ -54,7 +54,7 @@ export class CancelationPopupComponent implements OnInit {
     Swal.fire({
       icon: 'error',
       text: err,
-      confirmButtonText: 'Ok'
+      confirmButtonText: this.translate.instant('OK')
     })
   }
 
