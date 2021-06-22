@@ -66,6 +66,7 @@ export class ItineraryViewComponent implements OnInit {
   
   submitted = false;
   checkCancelData: LooseObject = {};
+  timerStatus: boolean;
 
   constructor(private route: ActivatedRoute,
     private appStore: AppStore,
@@ -83,7 +84,21 @@ export class ItineraryViewComponent implements OnInit {
     this.genHelper.checkForAccessToken();
     this.createHelper = new CreateTripHelper(this.helperService);
     this.status = this.route.snapshot.params.status;
+    // if(sessionStorage && sessionStorage.getItem("timerStatus") && sessionStorage.getItem("timerStatus") == "stop"){this.timerStatus = true}
+    // this.setTimerForCancellationTimeOut()
     this.getList();
+  }
+  
+  setTimerForCancellationTimeOut() {
+    var timeleft = 5*60;
+    var timer = setInterval(()=>{
+    if(timeleft <= 0){
+      clearInterval(timer);
+      sessionStorage.setItem("timerStatus","stop");
+      this.timerStatus = true;
+    }
+      timeleft -= 1;
+    }, 1000);
   }
 
   getList() {
@@ -254,6 +269,7 @@ export class ItineraryViewComponent implements OnInit {
   
 
   checkCancellation() {
+   // if(this.timerStatus){ 
     this.cancellationtoggle = true;
     this.common.getCheckCancellation(this.route.snapshot.params.id).subscribe((data) => {
       this.cancellationtoggle = false;
@@ -269,6 +285,9 @@ export class ItineraryViewComponent implements OnInit {
         });
       }
     });
+  // }else{
+  //   this.notifyService.showWarning("You can cancel a booking only after 5 minuts")
+  // }
   }
 
   ngDoCheck(){

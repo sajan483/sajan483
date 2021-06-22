@@ -65,6 +65,8 @@ export class PaymentStatusComponent implements OnInit {
   btnactv: boolean;
   submitted = false;
   checkCancelData: LooseObject = {};
+  interval;
+  timerStatus: boolean = false;
 
   constructor(private route: ActivatedRoute,
     private appStore: AppStore,
@@ -75,6 +77,7 @@ export class PaymentStatusComponent implements OnInit {
     private helperService: HelperService,
     private translate: TranslateService,) {
     this.genHelper = _gHelper;
+   
   }
 
   ngOnInit() {
@@ -82,6 +85,19 @@ export class PaymentStatusComponent implements OnInit {
     this.createHelper = new CreateTripHelper(this.helperService);
     this.status = this.route.snapshot.params.status;
     this.getList();
+  }
+
+  setTimerForCancellationTimeOut() {
+    var timeleft = 5*60;
+    var timer = setInterval(()=>{
+    if(timeleft <= 0){
+      clearInterval(timer);
+      sessionStorage.setItem("timerStatus","stop");
+      //this.timerStatus = true;
+    }
+      console.log(timeleft);
+      timeleft -= 1;
+    }, 1000);
   }
 
   getList() {
@@ -315,21 +331,25 @@ export class PaymentStatusComponent implements OnInit {
   }
 
   checkCancellation() {
-    this.cancellationtoggle = true;
-    this.common.getCheckCancellation(this.route.snapshot.params.id).subscribe((data) => {
-      this.cancellationtoggle = false;
-      this.checkCancelData.cancel = data;
-      window.scrollTo(0, 0);
-      if (data.can_cancel_booking) {
-        CancelationPopupComponent.cancellationPopup = true;
-      } else {
-        Swal.fire({
-          text: 'Sorry, No Cancellation Available',
-          icon: "warning",
-          confirmButtonText: "ok",
-        });
-      }
-    });
+   // if(this.timerStatus){
+      this.cancellationtoggle = true;
+      this.common.getCheckCancellation(this.route.snapshot.params.id).subscribe((data) => {
+        this.cancellationtoggle = false;
+        this.checkCancelData.cancel = data;
+        window.scrollTo(0, 0);
+        if (data.can_cancel_booking) {
+          CancelationPopupComponent.cancellationPopup = true;
+        } else {
+          Swal.fire({
+            text: 'Sorry, No Cancellation Available',
+            icon: "warning",
+            confirmButtonText: "ok",
+          });
+        }
+      });
+    // }else{
+    //   this.notifyService.showWarning("You can cancel a booking only after 5 minuts")
+    // }
   }
 
   ngDoCheck(){
