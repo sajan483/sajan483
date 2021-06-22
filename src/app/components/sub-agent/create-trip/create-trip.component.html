@@ -134,17 +134,20 @@
                                             <div class="m-0 pl-0 pr-0 row">
                                                 <div class="col-md-12 row ">
                                                     <div class="col-md-3 pt-2">
-                                                        <label class="mb-0 fs14 clrlabel">{{'First Name' |
-                                                            translate}}</label>
+                                                        <label class="mb-0 fs14 clrlabel">{{'First Name' | translate}}</label>
                                                         <input class="form-control pd" formControlName="first_name" id="firstName" placeholder="{{'Enter First Name' |
-                                                            translate}}" [ngClass]="{ 'is-invalid': submitted && g.first_name.errors }">
+                                                            translate}}" [ngClass]="{ 'is-invalid': submitted && g.first_name.errors }" (keypress)="omit_special_char($event)">
+                                                        <div *ngIf="submitted && g.first_name.errors" class="invalid-feedback">
+                                                            <div *ngIf="g.first_name.errors.minlength">{{'First Name must be at least 3 characters' | translate}}</div>
+                                                        </div>
                                                     </div>
                                                     <div class="col-md-3 pt-2">
-                                                        <label class="mb-0 fs14 clrlabel">{{'Last Name' |
-                                                            translate}}</label>
+                                                        <label class="mb-0 fs14 clrlabel">{{'Last Name' | translate}}</label>
 
-                                                        <input class="form-control pd" id="lastName" placeholder="{{'Enter Last Name' | translate}}" formControlName="last_name" [ngClass]="{ 'is-invalid': submitted && g.last_name.errors }">
-
+                                                        <input class="form-control pd" id="lastName" placeholder="{{'Enter Last Name' | translate}}" formControlName="last_name" [ngClass]="{ 'is-invalid': submitted && g.last_name.errors }" (keypress)="omit_special_char($event)">
+                                                        <div *ngIf="submitted && g.last_name.errors" class="invalid-feedback">
+                                                            <div *ngIf="g.last_name.errors.minlength">{{'Last Name must be at least 3 characters' | translate}}</div>
+                                                        </div>
                                                     </div>
                                                     <div class="col-md-3 pt-2">
                                                         <label class="mb-0 fs14 clrlabel">{{'Gender' | translate}}</label>
@@ -190,7 +193,7 @@
                                                     <div class="col-md-3 pt-2">
                                                         <label class="mb-0 fs14 clrlabel">{{'Nationality' |
                                                             translate}}</label>
-                                                        <select class="form-control pd" [ngModelOptions]="{standalone: true}" [(ngModel)]="nationality">
+                                                        <select class="form-control pd" [ngModelOptions]="{standalone: true}" [(ngModel)]="nationality" [disabled]="disablePayBttn">
                                                             <option *ngFor="let n of nationalityList"
                                                                 [value]="n.item_text">{{n?.item_text}}</option>
                                                         </select>
@@ -198,7 +201,7 @@
                                                     <div class="col-md-3 pt-2">
                                                         <label class="mb-0 fs14 clrlabel">{{'Country of Residence' |
                                                             translate}}</label>
-                                                        <select class="form-control pd" [ngModelOptions]="{standalone: true}" [(ngModel)]="country_of_residence">
+                                                        <select class="form-control pd" [ngModelOptions]="{standalone: true}" [(ngModel)]="country_of_residence" [disabled]="disablePayBttn">
                                                             <option *ngFor="let n of nationalityList"
                                                                 [value]="n.item_text">{{n?.item_text}}</option>
                                                         </select>
@@ -241,12 +244,12 @@
                                         </div>
                                     </form>
                                 </div>
-                              <!--  <div class="d-flex flex-row mrgin mt-2 mb-2 mr-4 ml-4">
+                                <!--  <div class="d-flex flex-row mrgin mt-2 mb-2 mr-4 ml-4">
                                     <div class="text-align-end"><button type="submit" id="payBtn" class="searchbutton" data-toggle="modal" data-target="#ibanPopup" (click)="setTimerForIbanPopup()">{{'PAY' }}</button> </div>
                                 </div>-->
                                 <div class="d-flex flex-row m-2">
                                     <div class="p-2 ml-auto"></div>
-                                    <div><button (click)="bookTrip()" type="submit" [class.bttnactive]="bookContinue" id="continueBooking" class="searchbutton">{{'Click here for booking' |
+                                    <div><button (click)="bookTrip()" [disabled]="disablePayBttn" type="submit" [class.bttnactive]="bookContinue" id="continueBooking" class="searchbutton">{{'Click here for booking' |
                                             translate}}</button>
                                     </div>
                                     <div class="p-2"></div>

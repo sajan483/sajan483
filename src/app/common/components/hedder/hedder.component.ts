@@ -44,6 +44,8 @@ export class HedderComponent implements OnInit, DoCheck {
   ngOnInit() {
     if (sessionStorage.getItem('userLanguage')) {
       this.languageSelect = sessionStorage.getItem('userLanguage');
+    }else{
+      sessionStorage.setItem('userLanguage',this.languageSelect)
     }
   }
 
