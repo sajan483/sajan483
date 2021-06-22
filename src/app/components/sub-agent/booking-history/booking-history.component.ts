@@ -43,7 +43,7 @@ export class BookingHistoryComponent implements OnInit {
    * @param activePage 
    */
   paginateHistoryList(activePage: number) {
-    this.common.getPaginatedhistoryList(activePage).subscribe(response => {
+    this.common.getPaginatedhistoryList(activePage,sessionStorage.getItem('getPaginatedhistoryList')).subscribe(response => {
       this.pageNo = response.page;
       this.pageSize = response.page_size;
       this.history = response.results;
