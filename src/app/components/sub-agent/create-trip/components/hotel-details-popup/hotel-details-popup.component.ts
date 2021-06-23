@@ -189,6 +189,12 @@ export class HotelDetailsPopupComponent implements OnInit ,OnChanges{
     this.selectedRoomCount = 0;
     var selectedRoomCount : number = 0;
 
+    if(roomCount == 0 && this.selectedRoomGroups[i].rooms[j].isRoomSelectionChecked ){
+      this.totalRoomPrice = this.totalRoomPrice - (this.selectedRoomGroups[i].rooms[j].amount * this.selectedRoomGroups[i].rooms[j].insertedSelectedRoomCount  );
+      this.selectedRoomGroups[i].rooms[j].isRoomSelectionChecked = false;
+      this.selectedRoomGroups[i].rooms[j].insertedSelectedRoomCount = 0;
+    }
+
     if( this.selectedRoomGroups[i].rooms[j].isRoomSelectionChecked ){
       this.totalRoomPrice = this.totalRoomPrice - (this.selectedRoomGroups[i].rooms[j].amount * this.selectedRoomGroups[i].rooms[j].insertedSelectedRoomCount  );
       this.selectedRoomGroups[i].rooms[j].isRoomSelectionChecked = false;

@@ -573,6 +573,7 @@ export class CreateTripComponent implements OnInit, AfterViewChecked, DoCheck {
         }
         else {
           this.showIbanPopup = true;
+          this.setTimerForIbanPopup();
           //(<HTMLInputElement>document.getElementById("payBtn")).style.display = "block";
           (<HTMLInputElement>document.getElementById("continueBooking")).style.display = "block";
         }
@@ -623,6 +624,7 @@ export class CreateTripComponent implements OnInit, AfterViewChecked, DoCheck {
       this.common.bookingPayment(w).subscribe((response) => {
         this.spinner.hide();
         if (response.status == "Success") {
+          (<HTMLInputElement>document.getElementById("ibanClose")).click();
           this.router.navigate(['subagent/payment/' + this.bookingId + '/success']);
           sessionStorage.setItem("timerStatus","start");
         }
