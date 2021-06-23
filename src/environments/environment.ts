@@ -8,10 +8,10 @@ export const environment = {
   countryCodeCommen : '91',
   timeLeft : 0,
   selectedCountryCommen : 'India',
-  baseUrl:'https://b2b.betatest.akbarumrah.com/apis/',
-  baseUrl2:'https://b2b.betatest.akbarumrah.com/apis/b2b/'
-  // baseUrl:'https://testb2b.akbarumrah.com/apis/',
-  // baseUrl2:'https://testb2b.akbarumrah.com/apis/b2b/'
+  // baseUrl:'https://b2b.betatest.akbarumrah.com/apis/',
+  // baseUrl2:'https://b2b.betatest.akbarumrah.com/apis/b2b/'
+  baseUrl:'https://testb2b.akbarumrah.com/apis/',
+  baseUrl2:'https://testb2b.akbarumrah.com/apis/b2b/'
   
    //New Test Server
    // baseUrl:'http://192.168.10.79:8000/',

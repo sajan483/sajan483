@@ -119,12 +119,13 @@ export class CreateTripAdapter {
               (roomVariations.max_guests = selectedRoomGroups[i].rooms[j].pax_info[0].quantity),
               (roomVariations.title = name),
               (roomVariations.per_room_price = selectedRoomGroups[i].rooms[j].amount),
-              (roomVariations.custom_pax_info = selectedRoomGroups[i].pax_info_str);
               (roomVariations.room_type = selectedRoomGroups[i].rooms[j].room_type),
               (roomVariations.description = selectedRoomGroups[i].rooms[j].description),
               (roomVariations.room_group_id = selectedRoomGroups[i].rooms[j].room_group_id),
               (roomVariations.room_id = selectedRoomGroups[i].rooms[j].room_id),
-              (roomVariations.room_group_obj = selectedRoomGroups[i].rooms[j].room_group_obj);
+              (roomVariations.room_group_obj = selectedRoomGroups[i].rooms[j].room_group_obj),
+              (roomVariations.custom_pax_info = (selectedRoomGroups[i].pax_info_str == null) ?
+              selectedRoomGroups[i].rooms[j].amount : selectedRoomGroups[i].pax_info_str),
             roomVariationArray.push(roomVariations);
           }
         }
