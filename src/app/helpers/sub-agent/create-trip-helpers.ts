@@ -34,82 +34,12 @@ export class CreateTripHelper {
     var hotelPics = [];
     selectedHotel.meta_data.images.forEach(el => { hotelPics.push(el.image_url) });
     container.hotelPics = hotelPics;
-
-    if (!selectedHotel.room_groups[0].is_grouped || selectedHotel.room_groups[0].is_grouped) {
-      container.isGrouped = false;
-      isGrouped = false;
-    }
-
-    if (selectedHotel.room_groups[0].is_grouped) {
-      container.isGrouped = true;
-      isGrouped = true;
-    }
-
-    if (isGrouped) {
-      var grouped: any[] = [];
-
-      selectedHotel.room_groups.forEach((element) => {
-        if (element.is_grouped) {
-          element.isRoomSelectionChecked = false;
-          grouped.push(element);
-        }
-      });
-      grouped[0].isRoomSelectionChecked = true;
-      totalRoomPrice = grouped[0].amount;
-      rooms.forEach((element) => {
-        if (element.child_ages) {
-          element.pax_info_str =
-            element.adults +
-            "ADT_" +
-            element.children +
-            "CHD_" +
-            element.child_ages.sort().join("_");
-        } else {
-          element.pax_info_str =
-            element.adults + "ADT_" + element.children + "CHD_";
-        }
-      });
-      grouped.forEach((x) => {
-        x.insertedAvailableCount = x.rooms
-          .map((room) => room.available_count)
-          .reduce((a, b) => a + b, 0);
-      });
-      rooms.forEach((el) => {
-        grouped.forEach((elmt) => {
-          if (elmt.insertedAvailableCount == rooms.length) {
-            elmt.rooms.forEach((element) => {
-              if (el.pax_info_str == element.pax_info_str) {
-                selectedRoomGroups.push(elmt);
-              }
-            });
-          }
-        });
-      });
-      selectedRoomGroups.forEach((x) => {
-        x.rooms.forEach((room) => {
-          room.adult_number = room.pax_info
-            .filter((x) => x.type == "ADT")
-            .map((a) => a.quantity)
-            .reduce((a, b) => a + b, 0);
-          room.child_number = room.pax_info
-            .filter((x) => x.type == "CHD")
-            .map((a) => a.quantity)
-            .reduce((a, b) => a + b, 0);
-        });
-      });
-      selectedRoomGroups = selectedRoomGroups.filter(
-        this.helperService.onlyUnique
-      );
-      container.roomPrice = totalRoomPrice;
-      container.roomGroups = selectedRoomGroups;
-    }
+    isGrouped = false;
     if (!isGrouped) {
       container.isSelectBtnActive = true;
       selectedRoomGroups = [];
       for (let i = 0; i < selectedHotel.room_groups.length; i++) {
-        if (!selectedHotel.room_groups[i].is_grouped) {
           selectedRoomGroups.push(selectedHotel.room_groups[i]);
-        }
       }
       for (let i = 0; i < rooms.length; i++) {
         if (rooms[i].child_ages) {
