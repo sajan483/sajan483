@@ -66,8 +66,8 @@ export class PaymentStatusComponent implements OnInit {
   submitted = false;
   checkCancelData: LooseObject = {};
   interval;
-  timerStatus: boolean = false;
-
+  allowUserToCancellBooking: boolean;
+  
   constructor(private route: ActivatedRoute,
     private appStore: AppStore,
     private common: SubAgentApiService,
@@ -160,6 +160,18 @@ export class PaymentStatusComponent implements OnInit {
       this.tripTravellers = data.travellers;
       this.noOfTravellers = obj.travallersCount
     }
+  }
+  
+  checkTimeStamp(){
+    if(this.tripData && this.tripData.booking_timestamp != null){
+      var current = Math.round(new Date().getTime()/1000) ;
+      var stamp = Math.round(this.tripData.booking_timestamp);
+      var timeDiff = 0;
+      if(current > 0 && stamp > 0){
+        timeDiff = current - stamp;
+        (timeDiff > 300) ? this.allowUserToCancellBooking = true : this.allowUserToCancellBooking = false;
+        }
+      }
   }
 
   bookVisa() {
@@ -331,7 +343,8 @@ export class PaymentStatusComponent implements OnInit {
   }
 
   checkCancellation() {
-   // if(this.timerStatus){
+    this.checkTimeStamp();
+    if(this.allowUserToCancellBooking){
       this.cancellationtoggle = true;
       this.common.getCheckCancellation(this.route.snapshot.params.id,sessionStorage.getItem('userLanguage')).subscribe((data) => {
         this.cancellationtoggle = false;
@@ -347,9 +360,9 @@ export class PaymentStatusComponent implements OnInit {
           });
         }
       });
-    // }else{
-    //   this.notifyService.showWarning("You can cancel a booking only after 5 minuts")
-    // }
+    }else{
+      this.notifyService.showWarning("You can cancel a booking only after 5 minuts")
+    }
     
   }
 

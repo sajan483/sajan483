@@ -67,6 +67,7 @@ export class ItineraryViewComponent implements OnInit {
   submitted = false;
   checkCancelData: LooseObject = {};
   timerStatus: boolean;
+  allowUserToCancellBooking: boolean;
 
   constructor(private route: ActivatedRoute,
     private appStore: AppStore,
@@ -269,7 +270,8 @@ export class ItineraryViewComponent implements OnInit {
   
 
   checkCancellation() {
-   // if(this.timerStatus){ 
+    this.checkTimeStamp();
+    if(this.allowUserToCancellBooking){ 
     this.cancellationtoggle = true;
     this.common.getCheckCancellation(this.route.snapshot.params.id,sessionStorage.getItem('userLanguage')).subscribe((data) => {
       this.cancellationtoggle = false;
@@ -285,9 +287,21 @@ export class ItineraryViewComponent implements OnInit {
         });
       }
     });
-  // }else{
-  //   this.notifyService.showWarning("You can cancel a booking only after 5 minuts")
-  // }
+    }else{
+      this.notifyService.showWarning("You can cancel a booking only after 5 minuts")
+    }
+  }
+
+  checkTimeStamp(){
+    if(this.tripData && this.tripData.booking_timestamp != null){
+      var current = Math.round(new Date().getTime()/1000) ;
+      var stamp = Math.round(this.tripData.booking_timestamp);
+      var timeDiff = 0;
+      if(current > 0 && stamp > 0){
+        timeDiff = current - stamp;
+        (timeDiff > 300) ? this.allowUserToCancellBooking = true : this.allowUserToCancellBooking = false;
+        }
+      }      
   }
 
   ngDoCheck(){
