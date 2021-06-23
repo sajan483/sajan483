@@ -137,7 +137,7 @@
                                                         <label class="mb-0 fs14 clrlabel">{{'First Name' | translate}}</label>
                                                         <input class="form-control pd" formControlName="first_name" id="firstName" placeholder="{{'Enter First Name' |
                                                             translate}}" [ngClass]="{ 'is-invalid': submitted && g.first_name.errors }" (keypress)="omit_special_char($event)">
-                                                        <div *ngIf="submitted && g.first_name.errors" class="invalid-feedback">
+                                                        <div *ngIf="submitted && g.first_name.errors" class="invalid-feedback fs11">
                                                             <div *ngIf="g.first_name.errors.minlength">{{'First Name must be at least 3 characters' | translate}}</div>
                                                         </div>
                                                     </div>
@@ -145,7 +145,7 @@
                                                         <label class="mb-0 fs14 clrlabel">{{'Last Name' | translate}}</label>
 
                                                         <input class="form-control pd" id="lastName" placeholder="{{'Enter Last Name' | translate}}" formControlName="last_name" [ngClass]="{ 'is-invalid': submitted && g.last_name.errors }" (keypress)="omit_special_char($event)">
-                                                        <div *ngIf="submitted && g.last_name.errors" class="invalid-feedback">
+                                                        <div *ngIf="submitted && g.last_name.errors" class="invalid-feedback fs11">
                                                             <div *ngIf="g.last_name.errors.minlength">{{'Last Name must be at least 3 characters' | translate}}</div>
                                                         </div>
                                                     </div>
