@@ -539,6 +539,9 @@ export class CreateTripComponent implements OnInit, AfterViewChecked, DoCheck {
           if (response.makkah_trip_hotel.success == false) {
             this.cityFirst = "makkah";
             this.appStore.isAvailabilityFails = true;
+            this.bookContinue = false;
+            this.disablePayBttn = false;
+            this.travellersForm.enable()
           }
         }
         if (response.medinah_trip_hotel) {
@@ -546,6 +549,9 @@ export class CreateTripComponent implements OnInit, AfterViewChecked, DoCheck {
           if (response.medinah_trip_hotel.success == false) {
             this.citySecond = "madinah";
             this.appStore.isAvailabilityFails = true;
+            this.bookContinue = false;
+            this.disablePayBttn = false;
+            this.travellersForm.enable()
           }
         }
         if (response.trip_transportation) {
@@ -553,6 +559,9 @@ export class CreateTripComponent implements OnInit, AfterViewChecked, DoCheck {
           if (response.trip_transportation.success == false) {
             this.transportFailed = "transportFailed";
             this.appStore.isAvailabilityFails = true;
+            this.bookContinue = false;
+            this.disablePayBttn = false;
+            this.travellersForm.enable()
           }
         }
         if ((response.makkah_trip_hotel && response.makkah_trip_hotel.success == false) ||
