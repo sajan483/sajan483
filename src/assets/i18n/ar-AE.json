@@ -180,7 +180,7 @@
     "Includes": "يشمل",
     "Not available now. Please change": "غير متوفر الآن. الرجاء تغيير التفاصيل التي تم إدخالها!",
     "select Age": " حدد العمر ",
-    "Children's Age": "عمر الأطفال",
+    "Childrens Age": "عمر الأطفال",
     "Child": "طفل",
     "Has special deal": "لديه صفقات خاصة",
     "Description": "وصف",
@@ -512,5 +512,6 @@
     "Email has been sent": "تم إرسال البريد الإلكتروني إلى عنوان البريد الإلكتروني المشار إليه.",
     "Last Name must be at least 3 characters": "يجب ألا يقل اسم العائلة عن 3 أحرف",
     "Total Price": "السعر الكلي",
-    "Meal Plan": "خطة الوجبة"
+    "Meal Plan": "خطة الوجبة",
+    "Book Your Hotel": "احجز وسيلة النقل البري الخاصة بك"
 }
