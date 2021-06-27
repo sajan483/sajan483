@@ -513,5 +513,6 @@
     "Last Name must be at least 3 characters": "يجب ألا يقل اسم العائلة عن 3 أحرف",
     "Total Price": "السعر الكلي",
     "Meal Plan": "خطة الوجبة",
-    "Book Your Hotel": "احجز وسيلة النقل البري الخاصة بك"
+    "Book Your Hotel": "احجز وسيلة النقل البري الخاصة بك",
+    "Till": "حتى"
 }
