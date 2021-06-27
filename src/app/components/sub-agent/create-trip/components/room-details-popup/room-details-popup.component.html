@@ -37,7 +37,7 @@
                     </div>
                     <div *ngIf="setViewData?.description" class="mb30 col-md-12">
                         <h6>{{'Description' | translate}}:</h6>
-                        <p class="pl15">{{setViewData?.description}}</p>
+                        <p class="ml30 mr30">{{setViewData?.description}}</p>
                     </div>
                     <div *ngIf="setViewData.features.length > 0" class="textright pr10 col-md-12 mb30">
                         <h6>{{'Amenities & Info' | translate}}</h6>
@@ -48,7 +48,7 @@
                         </div>
                     </div>
                     <div *ngIf="setViewData.boardTypes.length > 0" class="textright pr10 col-md-12 mb30">
-                        <h6>{{'INCLUSIONS' | translate}}</h6>
+                        <h6>{{'Meal Plan' | translate}}</h6>
                         <div class="col-12 row mx-0">
                             <div class="col-3" *ngFor="let item of setViewData.boardTypes">
                                 <span>{{item?.type}}</span>
@@ -58,9 +58,9 @@
                     <div class="col-md-12 mb30">
                         <div class="" *ngFor="let item of setViewData.cancellation_policy">
                             <h6>{{item?.title}}</h6>
-                            <div class="green_text" *ngIf="item?.is_refundable">{{'Refundable' | translate}}</div>
-                            <div class="red_text" *ngIf="!item?.is_refundable">{{'non_refundable' | translate}}</div>
-                            <div class="mt-2 borderbox" *ngIf="item?.is_refundable">
+                            <div class="green_text pl30" *ngIf="item?.is_refundable">{{'Refundable' | translate}}</div>
+                            <div class="red_text pl30" *ngIf="!item?.is_refundable">{{'non_refundable' | translate}}</div>
+                            <div class="mt-2 borderbox ml30 mr30" *ngIf="item?.is_refundable">
                                 <div class="d-flex justify-content-between p10 brdr_btm_d3 fs15" *ngFor="let rule of item.rules">
                                     <div class="d-inline-flex">
                                         <div class="my-auto pr10 mpr0 mpl10"><i class="calendaricon icns icon_size_20"></i></div>

@@ -511,5 +511,6 @@
     "Sorry, No Cancellation Available": "عذرا ، لا يوجد إلغاء!",
     "Email has been sent": "تم إرسال البريد الإلكتروني إلى عنوان البريد الإلكتروني المشار إليه.",
     "Last Name must be at least 3 characters": "يجب ألا يقل اسم العائلة عن 3 أحرف",
-    "Total Price": "السعر الكلي"
+    "Total Price": "السعر الكلي",
+    "Meal Plan": "خطة الوجبة"
 }
