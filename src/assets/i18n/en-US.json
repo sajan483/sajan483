@@ -188,7 +188,7 @@
     "Includes": "Includes",
     "Not available now. Please change": "Not available right now. Please change details entered!",
     "select Age": "Select Age",
-    "Children's Age": "Age of Children",
+    "Childrens Age": "Child Age",
     "Child": "Child",
     "Has special deal": "Has special deals",
     "Description": "Description",
@@ -521,5 +521,6 @@
     "Email has been sent": "Email has been sent",
     "Last Name must be at least 3 characters": "Last Name must be at least 3 characters",
     "Total Price": "Total Price",
-    "Meal Plan": "Meal Plan"
+    "Meal Plan": "Meal Plan",
+    "Book Your Hotel": "Book Your Hotel"
 }

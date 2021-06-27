@@ -4,7 +4,7 @@
         <div class="backgrdimgpopuproom mirr_text_right">
             <div class="d-flex justify-content-between borderdoen">
                 <div class="serchhead">
-                    <h5 class="fw500">{{'Search Hotels' | translate}}</h5>
+                    <h5 class="fw500">{{'Book Your Hotel' | translate}}</h5>
                 </div>
                 <div>
                     <span class="fli-arrow arrow-down-icon cursor-pointer" data-dismiss="modal" (click)="hideRoomAllocationPopup()"></span>
@@ -16,10 +16,10 @@
 
                 <div class="row col-md-12 mt-2">
                     <div class="col-md-3 col-12 pl-2 mrrtravlrcunt">
-                        <div class="fw500 text-uppercase">{{'No of Adults' | translate}} : {{countAdult}}</div>
+                        <div class="fw500 text-capitalize">{{'No of Adults' | translate}} : {{countAdult}}</div>
                     </div>
                     <div class="col-md-3 col-12 pl-2 mrrtravlrcunt" *ngIf="countChild+countInfant != 0">
-                        <div class="fw500 text-uppercase">{{'No of Children' | translate}} : {{countChild + countInfant}}</div>
+                        <div class="fw500 text-capitalize">{{'No of Children' | translate}} : {{countChild + countInfant}}</div>
                     </div>
                 </div>
 
@@ -86,7 +86,7 @@
 
 
 
-
+                                                <div *ngIf="room.children != 0" class="fw500 mb-2 pl10 mpr10">{{'Childrens Age' | translate}}</div>
                                                 <div class="row childrowmargin" *ngIf="room.children != 0">
                                                     <section *ngFor="let k of [].constructor(room.children); let j = index;" class="col-6 col-md-2">
                                                         <div>
