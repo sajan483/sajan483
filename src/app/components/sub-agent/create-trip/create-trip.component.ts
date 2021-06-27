@@ -344,7 +344,6 @@ export class CreateTripComponent implements OnInit, AfterViewChecked, DoCheck {
   transportSearch() {
     var obj = JSON.parse(sessionStorage.getItem("userObject"));
     this.travellersCount = obj.adults + obj.children;
-    
     const date = this.helperService.dateFormaterMdy(this.userDetails.transportStartDate);
     const filrerData = {
       "search_id": this.searchTransportId,
@@ -362,11 +361,13 @@ export class CreateTripComponent implements OnInit, AfterViewChecked, DoCheck {
       if (this.steps && this.steps.length > 2) { this.stage = 2 }
       sessionStorage.setItem("transportSearchId", data.search_id);
       this.common.searchTransportList(this.searchTransportId, this.selectedCurrency,sessionStorage.getItem('userLanguage')).subscribe((response) => {
-        if ((response && response.transportations && response.transportations.length == 0) || (response && response.transportations && response.transportations.filter(x => x.vehicle_types.length > 0) == 0)) {
+        if ((response && response.transportations && response.transportations.length == 0) || (response && response.transportations && response.transportations.filter(x => x.vehicle_types.length > 0) == 0 || response && response.message == "Request is processing")) {
           this.isTransportResponseEmpty = true;
           this.createTripHelper.showSweetAlert('Sorry, we could not find transport for this route', "warning", 'Modify search and try again');
         } else {
           this.transportList = response.transportations.sort((n1, n2) => n1.vehicle_types.map(x => x.categories[0].fare_summary[2].amount) - n2.vehicle_types.map(x => x.categories[0].fare_summary[2].amount));
+          this.transportList.forEach((vt)=>{vt.vehicle_types.forEach((ct)=>{ct.categories.forEach((fs)=>{fs.fare_summary.forEach((amt)=>{if(amt.is_total) {amt.display_price = amt.amount;}})})})})
+          console.log(this.transportList)
           this.transportListData = response.transportations.sort((n1, n2) => n1.vehicle_types.map(x => x.categories[0].fare_summary[2].amount) - n2.vehicle_types.map(x => x.categories[0].fare_summary[2].amount));
         }
         for (let i = 0; i < this.transportList.length; i++) {

@@ -42,7 +42,7 @@
                         <div class="mt-2 fs14" *ngIf="vehicle.categories[0].additional_services.length > 0">
                             <div class="fw600 textunderline">{{'Additional Services' | translate}}</div>
                             <div *ngFor="let item of vehicle.categories[0].additional_services" class="mt-1 clr52">
-                                <mat-checkbox (change)="getCheckboxValues($event,item.additional_service_code)">{{item?.description}} - <span *ngFor="let price of item.fare_summary"><strong *ngIf="price?.is_total">{{price?.currency}} {{price?.amount}}</strong></span>
+                                <mat-checkbox (change)="getCheckboxValues($event,item,i,index)">{{item?.description}} - <span *ngFor="let price of item.fare_summary"><strong *ngIf="price?.is_total">{{price?.currency}} {{price?.amount}}</strong></span>
                                 </mat-checkbox>
                             </div>
                         </div>
@@ -50,7 +50,7 @@
                     <div class="col-md-3 bookdiv mpr0 mpl30">
                         <div class="text-center">
                             <div class="customTooltip fs21 fw600">
-                                {{vehicle?.categories[0]?.fare_summary[2]?.currency}} {{(vehicle?.categories[0]?.fare_summary[2]?.amount + vehicle?.transport_amount) | number:'1.2-2'}}
+                                {{vehicle?.categories[0]?.fare_summary[2]?.currency}} {{(vehicle?.categories[0]?.fare_summary[2]?.display_price + vehicle?.transport_amount) | number:'1.2-2'}}
                                 <span class="customtooltiptext">
                                     <div class="container mb-2">
                                         <p class="pt-2 fare_summary_heading  textright">
@@ -60,9 +60,7 @@
                                                 <div class="col-md-12 p-0 m-0 row pb-2 ">
                                                     <div class="col-md-12 textAlign textright"
                                                         *ngFor="let price of vehicle.categories[0].fare_summary">
-                                                        <span>{{price?.name | translate}} :
-                                                        </span><span>{{price?.currency}}
-                                                            {{price?.amount | number:'.2-2'}}</span>
+                                                        <span>{{price.name}} :  </span><span *ngIf="price.is_total">{{price.currency}} {{price.display_price  | number:'.2-2'}}</span> <span *ngIf="!price.is_total">{{price.currency}} {{price.amount  | number:'.2-2'}}</span>
                             </div>
                         </div>
                     </div>
