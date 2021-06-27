@@ -21,6 +21,7 @@ export class TransportComponent implements OnInit {
   commonService: SubAgentApiService;
   noOfVehicle: any;
   aditionalService:any[] = [];
+  addSrvicePrice: number = 0;
 
   constructor(
     private _healperService: HelperService,
@@ -52,12 +53,24 @@ export class TransportComponent implements OnInit {
     }
   }
 
-  getCheckboxValues(ev, data:number){
+  getCheckboxValues(ev, data:any,i,j){
     if(ev.checked){
       this.aditionalService.push(data);
+      var obj:any = {};
+   this.aditionalService.push(data.additional_service_code);
+    data.fare_summary.forEach(element => {if(element.is_total){this.addSrvicePrice = element.amount;}})
+    if(this.addSrvicePrice > 0){
+      obj.name = "Service Price ";
+      obj.currency = "SAR";
+      obj.amount = this.addSrvicePrice;
+    }
+    this.transportList[i].vehicle_types[j].categories.forEach((fs)=>{fs.fare_summary.push(obj)});
+    this.transportList[i].vehicle_types[j].categories.forEach((fs)=>{fs.fare_summary.forEach((amt)=>{if(amt.is_total) {amt.display_price = amt.display_price + this.addSrvicePrice ;}})})
     }else{
-      let removeIndex = this.aditionalService.findIndex(itm => itm===data);
+      let removeIndex = this.aditionalService.findIndex(itm => itm === data.additional_service_code);
       if(removeIndex !== -1){
+        this.transportList[i].vehicle_types[j].categories.forEach((fs)=>{fs.fare_summary.forEach((amt)=>{if(amt.is_total) {amt.display_price = amt.display_price - this.addSrvicePrice ;}})})
+        if(this.addSrvicePrice > 0){this.transportList[i].vehicle_types[j].categories.forEach((fs)=>{fs.fare_summary.splice((fs.fare_summary.length -1),1)});}
         this.aditionalService.splice(removeIndex,1);
       }
     }

@@ -5,6 +5,7 @@ export interface FareSummary {
     currency: string;
     actual_amount: number;
     actual_currency: string;
+    display_price:number;
 }
 
 export interface Category {
