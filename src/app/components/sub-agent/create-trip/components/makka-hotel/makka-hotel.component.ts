@@ -64,6 +64,7 @@ export class MakkaHotelComponent implements OnInit,DoCheck{
   amenitiesList = [];
   filterAmenities = [];
   hotelPriceRange: number = 10000;
+  dummyHotellist: any[] = [];
   
   constructor(
     private commonService: SubAgentApiService,
@@ -126,7 +127,6 @@ export class MakkaHotelComponent implements OnInit,DoCheck{
   showHotelDetailsPopUp(item) {
       this.showDetailsShimmer=true;
       sessionStorage.setItem('hotelInfo',JSON.stringify(item))
-      //this.appStore.showHotelDetails = true;
       this.appStore.showHotelDetailsShimmer = true;
       this.showHotelDetailsShimmer = true;
       this.selectedRoomCount = 0;
@@ -243,13 +243,27 @@ export class MakkaHotelComponent implements OnInit,DoCheck{
   }
 
   haramdistancefilter(){
-    if(this.isHotelListSortedByHaramDistance == false){
-      this.hotelsList.sort((a, b) => (a.haram_distance) - (b.haram_distance));
-      this.isHotelListSortedByHaramDistance = true;
-    }else{
-      this.hotelsList.reverse();
-      this.isHotelListSortedByHaramDistance = false;
-    }
+      if(this.hotelsList[0].city == "Makkah"){
+       this.hotelsList = this.hotelsList.filter(x=>x.haram_distance )
+       if(this.isHotelListSortedByHaramDistance == false){
+        this.hotelsList.sort((a, b) => (a.haram_distance) - (b.haram_distance));
+        this.isHotelListSortedByHaramDistance = true;
+      }else{
+        this.hotelsList.reverse();
+        this.isHotelListSortedByHaramDistance = false;
+      }
+      }else{ this.hotelsList = this.hotelsList.filter(x=>x.nabawi_distance != null)
+        if(this.isHotelListSortedByHaramDistance == false){
+          this.hotelsList.sort((a, b) => (a.nabawi_distance) - (b.nabawi_distance));
+          this.isHotelListSortedByHaramDistance = true;
+        }else{
+          this.hotelsList.reverse();
+          this.isHotelListSortedByHaramDistance = false;
+        }}
+  }
+
+  resetAllFilter(){
+   this.hotelsList = JSON.parse(sessionStorage.getItem('htlList'))
   }
 
   getDetailsPopupFlag($event){

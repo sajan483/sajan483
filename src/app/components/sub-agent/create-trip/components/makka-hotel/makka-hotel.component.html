@@ -1,13 +1,12 @@
 <div class="animationdiv">
     <div class="mt140 mb-5 smallmt">
         <div class="hotel_filter_section filterbox col-md-12 row mrhntopphone mx-auto animationdiv">
-            <div class="col-md-2 pl-0 pr-0 pt-1 ml-0 mr-0 fliter-arrow my-auto">
+            <div class="col-md-1 pl-0 pr-0 pt-1 ml-0 mr-0 fliter-arrow my-auto">
                 <div class="">
-                    <!-- <i class="filtericon icon_size_15 icns filterdiv"></i> -->
                     <div class="">{{'Filters' | translate }}</div>
                 </div>
             </div>
-            <div class="col-md-3 col-8  my-auto ">
+            <div class="col-md-2 col-8  my-auto ">
                 <div (click)="haramdistancefilter()" class="cursor-pointer">
                     <span class="pr-2 fs14">{{'Haram Distance' |translate  }}</span>
                     <span class="fliter-arrow">
@@ -44,6 +43,11 @@
                             <button ><i class="fa fa-angle-up"></i></button>
                         </div>
                     </span>
+                </div>
+            </div>
+            <div class="col-md-2 my-auto" (click)="resetAllFilter()">
+                <div class="cursor-pointer">
+                    <span class="pr-2 fs14">{{'Reset All' | translate}}</span>
                 </div>
             </div>
             <div class="col-md-3 text-right ml-auto pr-0">
@@ -148,14 +152,18 @@
                                                 </ngb-rating>
                                             </div>
                                         </div>
-                                        <div class="d-inline-flex pb5" *ngIf="item.haram_distance">
+                                        <div class="d-inline-flex pb5" *ngIf="item.haram_distance != null">
                                             <div class="pr10 mpl10 mpr0"><i class="makkahharam icns icon_size_15"></i></div>
-                                            <div class="fs13 clr52 fw400"><strong class="clr01 fs14 fw500">{{'HARAM' | translate}}</strong> {{item?.haram_distance}} km
+                                            <div *ngIf="item?.haram_distance < 1000" class="fs13 clr52 fw400"><strong class="clr01 fs14 fw500">{{'HARAM' | translate}}</strong> {{item?.haram_distance}} Meters
+                                            </div>
+                                            <div *ngIf="item?.haram_distance > 1000" class="fs13 clr52 fw400"><strong class="clr01 fs14 fw500">{{'HARAM' | translate}}</strong> {{item?.haram_distance /1000}} Km
                                             </div>
                                         </div>
-                                        <div class="d-inline-flex pb5" *ngIf="item.nabawi_distance">
+                                        <div class="d-inline-flex pb5" *ngIf="item.nabawi_distance != null">
                                             <div class="pr10 mpl10 mpr0"><i class="madeenanabawi icns icon_size_15"></i></div>
-                                            <div class="fs13 clr52 fw400"><strong class="clr01 fs14 fw500">NABAWI</strong> {{item?.nabawi_distance}} km
+                                            <div *ngIf="item.nabawi_distance < 999" class="fs13 clr52 fw400"><strong class="clr01 fs14 fw500">NABAWI</strong> {{item?.nabawi_distance}} Meters
+                                            </div>
+                                            <div *ngIf="item.nabawi_distance > 999" class="fs13 clr52 fw400"><strong class="clr01 fs14 fw500">NABAWI</strong> {{item?.nabawi_distance / 1000}} Km
                                             </div>
                                         </div>
                                         <div class="d-inline-flex pb5" *ngIf="item.address">
