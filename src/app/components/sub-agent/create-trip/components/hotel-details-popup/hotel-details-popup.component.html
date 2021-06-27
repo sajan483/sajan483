@@ -143,6 +143,9 @@
                                                                 <span
                                                                     class="pl-0 clr_blue_18 fs16 fw500">{{room?.name}}</span>
                                                             </strong>
+                                                            <div *ngIf="room?.boardTypes.length > 0">
+                                                                <div class="mealplanclass">{{'Meal Plan' | translate}} : <span *ngFor="let item of room.boardTypes" class="px-2">{{item?.type}}</span></div>
+                                                            </div>
                                                             <div class="d-inline-flex">
                                                                 <i class="hotelbedicon icon_size_20 icns mr10 mmr0 mml10"></i>
                                                                 <p class="clr52 fs14 fw400">1 {{'room for' | translate}} {{room?.adult_number}} {{'Adult(s)' |translate }}
@@ -195,13 +198,10 @@
                                                             </span>
                                                         </strong>
 
-                                                        <div class="clr52 fs14 fw500 mt-2 text-center" *ngFor="let item of room.boardTypes;let p = index;">
-                                                            {{item?.type}}
-                                                        </div>
 
-                                                        <div class="mt-2">
-                                                            <span *ngIf="room?.cancellation_policy[0]?.is_refundable" class="green_text">{{'Refundable' | translate}}</span>
-                                                            <span *ngIf="!room?.cancellation_policy[0]?.is_refundable" class="red_text">{{'non_refundable' | translate}}</span>
+                                                        <div class="mt-2" (click)="showRoomDetailsPopUp(room)">
+                                                            <span *ngIf="room?.cancellation_policy[0]?.is_refundable" class="green_text cursor-pointer">{{'Refundable' | translate}}</span>
+                                                            <span *ngIf="!room?.cancellation_policy[0]?.is_refundable" class="red_text cursor-pointer">{{'non_refundable' | translate}}</span>
                                                         </div>
                                                     </li>
                                                     <li class="drop">
