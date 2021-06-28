@@ -9,7 +9,7 @@
             <div *ngIf="!isHotelListSortedByHaramDistance " class="col-md-2 col-8  my-auto ">
                 <div  (click)="haramdistancefilterUp()" class="cursor-pointer">
                     <span *ngIf="this.hotelsList[0].city == 'Makkah'" class="pr-2 fs14">{{'Haram Distance' |translate  }}</span>
-                    <span *ngIf="this.hotelsList[0].city != 'Makkah'" class="pr-2 fs14">{{'Nabavi Distance' |translate  }}</span>
+                    <span *ngIf="this.hotelsList[0].city != 'Makkah'" class="pr-2 fs14">{{'Nabawi Distance' |translate  }}</span>
                     <span class="fliter-arrow">
                         <div >
                             <button><i class="fa fa-angle-up"></i></button>
@@ -20,7 +20,7 @@
             <div *ngIf="isHotelListSortedByHaramDistance" class="col-md-2 col-8  my-auto ">
                 <div (click)="haramdistancefilterDown()" class="cursor-pointer">
                     <span *ngIf="this.hotelsList[0].city == 'Makkah'" class="pr-2 fs14">{{'Haram Distance' |translate  }}</span>
-                    <span *ngIf="this.hotelsList[0].city != 'Makkah'" class="pr-2 fs14">{{'Nabavi Distance' |translate  }}</span>
+                    <span *ngIf="this.hotelsList[0].city != 'Makkah'" class="pr-2 fs14">{{'Nabawi Distance' |translate  }}</span>
                     <span class="fliter-arrow">
                         <div>
                             <button><i class="fa fa-angle-down"></i></button>
