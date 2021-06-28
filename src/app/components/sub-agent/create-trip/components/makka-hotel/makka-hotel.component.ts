@@ -26,7 +26,7 @@ export class MakkaHotelComponent implements OnInit,DoCheck{
   selectedCurrency: any = this.appStore.currencyCode;
   selectedLanguage: any;
   isHotelsSortedByPrice: boolean = false;
-  isHotelListSortedByHaramDistance: boolean;
+  isHotelListSortedByHaramDistance: boolean = false;
   selectedRoomCount: number;
   selectedTravellersCount: number;
   totalRoomPrice: number;
@@ -242,24 +242,39 @@ export class MakkaHotelComponent implements OnInit,DoCheck{
     }
   }
 
-  haramdistancefilter(){
-      if(this.hotelsList[0].city == "Makkah"){
-       this.hotelsList = this.hotelsList.filter(x=>x.haram_distance )
-       if(this.isHotelListSortedByHaramDistance == false){
-        this.hotelsList.sort((a, b) => (a.haram_distance) - (b.haram_distance));
-        this.isHotelListSortedByHaramDistance = true;
-      }else{
-        this.hotelsList.reverse();
-        this.isHotelListSortedByHaramDistance = false;
-      }
-      }else{ this.hotelsList = this.hotelsList.filter(x=>x.nabawi_distance != null)
-        if(this.isHotelListSortedByHaramDistance == false){
-          this.hotelsList.sort((a, b) => (a.nabawi_distance) - (b.nabawi_distance));
-          this.isHotelListSortedByHaramDistance = true;
-        }else{
-          this.hotelsList.reverse();
-          this.isHotelListSortedByHaramDistance = false;
-        }}
+  haramdistancefilterUp(){
+    this.hotelsList = JSON.parse(sessionStorage.getItem('htlList'))
+    if(this.hotelsList[0].city == "Makkah"){
+      var nullList = this.hotelsList.filter(x=>x.haram_distance == null)
+      this.hotelsList = this.hotelsList.filter(x=>x.haram_distance )
+      this.hotelsList.sort((a, b) => (a.haram_distance) - (b.haram_distance));
+      this.hotelsList = this.hotelsList.concat(nullList);
+      this.isHotelListSortedByHaramDistance = !this.isHotelListSortedByHaramDistance;
+    }else{
+      var nullList = this.hotelsList.filter(x=>x.nabawi_distance == null)
+      this.hotelsList = this.hotelsList.filter(x=>x.nabawi_distance )
+      this.hotelsList.sort((a, b) => (a.nabawi_distance) - (b.nabawi_distance));
+      this.hotelsList = this.hotelsList.concat(nullList);
+      this.isHotelListSortedByHaramDistance = !this.isHotelListSortedByHaramDistance;
+
+    }
+  }
+
+  haramdistancefilterDown(){
+    this.hotelsList = JSON.parse(sessionStorage.getItem('htlList'))
+    if(this.hotelsList[0].city == "Makkah"){
+      var nullList = this.hotelsList.filter(x=>x.haram_distance == null)
+      this.hotelsList = this.hotelsList.filter(x=>x.haram_distance )
+      this.hotelsList.sort((a, b) => (b.haram_distance) - (a.haram_distance));
+      this.hotelsList = this.hotelsList.concat(nullList);
+      this.isHotelListSortedByHaramDistance = !this.isHotelListSortedByHaramDistance;
+    }else{
+      var nullList = this.hotelsList.filter(x=>x.nabawi_distance == null)
+      this.hotelsList = this.hotelsList.filter(x=>x.nabawi_distance )
+      this.hotelsList.sort((a, b) => (b.nabawi_distance) - (a.nabawi_distance));
+      this.hotelsList = this.hotelsList.concat(nullList);
+      this.isHotelListSortedByHaramDistance = !this.isHotelListSortedByHaramDistance;
+    }
   }
 
   resetAllFilter(){
