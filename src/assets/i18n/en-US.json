@@ -274,8 +274,8 @@
     "PRICE RANGE": "PRICE RANGE",
     "New Price": "New Price",
     "Selected Price": "Selected Price",
-    "GDS Fee": "Global Distribution System Fee",
-    "OTA Fee": "Online Travel Agent Fee",
+    "GDS Fee": "GDS Fee",
+    "OTA Fee": "OTA Fee",
     "Total Room": "Total Number of Rooms",
     "No. of vehicle": "Number of vehicles",
     "Error in": "Error in",
@@ -524,5 +524,5 @@
     "Meal Plan": "Meal Plan",
     "Book Your Hotel": "Book Your Hotel",
     "Till": "Till",
-    "Nabawi Distance":"Nabawi Distance"
+    "Nabawi Distance": "Nabawi Distance"
 }
