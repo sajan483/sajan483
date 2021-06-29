@@ -144,7 +144,7 @@
                     </p>
                 </div>
             </div>
-            <div class="col-md-12 transportbodypdng row m-0 fs14" *ngIf="additionalService != 0">
+            <div class="col-md-12 transportbodypdng row m-0 fs14" *ngIf="additionalService.length != 0">
                 <div class="fw600 textunderline px-0 col-md-12">{{'Additional Services' | translate}}</div>
                 <div class="col-md-6 pt-1" *ngFor="let service of additionalService">
                     <i class="fa fa-check green_text pr10 mpr0 mpl10" aria-hidden="true"></i> {{service?.description}}
