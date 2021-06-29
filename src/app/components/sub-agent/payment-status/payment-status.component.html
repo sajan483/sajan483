@@ -161,7 +161,7 @@
                             <i class="hotelblueicon icns icon_size_30 imgposition mirr_float_right"></i>
                             <div class="Premium_blue fs14 fw600 ">
                                 <div>{{'MEKKAH' | translate}}</div>
-                                <div>{{tripMakkahHotel?.trip_hotel?.check_in_time | date:'dd/MM/yyyy'}}</div>
+                                <div>{{tripMakkahHotel?.trip_hotel?.check_in_time | date:'mediumDate'}}</div>
                             </div>
                         </div>
                         <div class="col-md-9 col-12 brdrR brdrL my-auto">
@@ -199,7 +199,7 @@
                                                 </p>
                                                 <i class="icon_h18_w11 icns downarrow"></i>
                                             </div>
-                                            <p class="fw600 fs21">{{tripMakkahHotel?.trip_hotel?.check_in_time | date:'dd/MM/yyyy'}}
+                                            <p class="fw600 fs21">{{tripMakkahHotel?.trip_hotel?.check_in_time | date:'mediumDate'}}
                                             </p>
                                             <p class="clr52 fs12">{{tripMakkahHotel?.trip_hotel?.check_in_time | date:'EEEE'}}
                                             </p>
@@ -216,7 +216,7 @@
                                                 </p>
                                                 <i class="icon_h18_w11 icns downarrow"></i>
                                             </div>
-                                            <p class="fw600 fs21">{{tripMakkahHotel?.trip_hotel?.check_out_time | date:'dd/MM/yyyy'}}
+                                            <p class="fw600 fs21">{{tripMakkahHotel?.trip_hotel?.check_out_time | date:'mediumDate'}}
                                             </p>
                                             <p class="clr52 fs12">{{tripMakkahHotel?.trip_hotel?.check_out_time | date:'EEEE'}}
                                             </p>
@@ -351,7 +351,7 @@
                             <i class="hotelblueicon icns icon_size_30 imgposition mirr_float_right"></i>
                             <div class="Premium_blue fs14 fw600 ">
                                 <div>{{'MEDINAH' | translate}}</div>
-                                <div>{{tripMadeenaHotel?.trip_hotel?.check_in_time | date:'dd/MM/yyyy'}}</div>
+                                <div>{{tripMadeenaHotel?.trip_hotel?.check_in_time | date:'mediumDate'}}</div>
                             </div>
                         </div>
                         <div class="col-md-9 col-12 brdrR brdrL my-auto">
@@ -388,7 +388,7 @@
                                                 <p class="pl-2 pr-2 fs13 fw500">{{'Check-in' | translate}}</p>
                                                 <i class="icon_h18_w11 icns downarrow"></i>
                                             </div>
-                                            <p class="fw600 fs21">{{tripMadeenaHotel?.trip_hotel?.check_in_time | date:'dd/MM/yyyy'}}
+                                            <p class="fw600 fs21">{{tripMadeenaHotel?.trip_hotel?.check_in_time | date:'mediumDate'}}
                                             </p>
                                             <p class="clr52 fs12">{{tripMadeenaHotel?.trip_hotel?.check_in_time | date:'EEEE'}}
                                             </p>
@@ -404,7 +404,7 @@
                                                 <p class="pl-2 pr-2 fs13 fw500">{{'Check-out' | translate}}</p>
                                                 <i class="icon_h18_w11 icns downarrow"></i>
                                             </div>
-                                            <p class="fw600 fs21">{{tripMadeenaHotel?.trip_hotel?.check_out_time | date:'dd/MM/yyyy'}}
+                                            <p class="fw600 fs21">{{tripMadeenaHotel?.trip_hotel?.check_out_time | date:'mediumDate'}}
                                             </p>
                                             <p class="clr52 fs12">{{tripMadeenaHotel?.trip_hotel?.check_out_time | date:'EEEE'}}
                                             </p>
@@ -624,7 +624,7 @@
                         <div class="col-md-12 p-0 row ml-0 mr-0 borderpading expansion">
                             <div class="col-md-12 transportbodypdng mt-2 brdrtop row m-0">
                                 <div class="col-md-4 p-0 mb-2">
-                                    <p class="clr52 fs14"><i class="fa fa-circle pr10 mpr0 mpl10 font9imp" aria-hidden="true"></i>{{'Date of Birth' | translate}} : {{tripTravellers[0]?.dob}}
+                                    <p class="clr52 fs14"><i class="fa fa-circle pr10 mpr0 mpl10 font9imp" aria-hidden="true"></i>{{'Date of Birth' | translate}} : {{tripTravellers[0]?.dob | date:'mediumDate'}}
                                     </p>
                                 </div>
                                 <div class="col-md-4 p-0 mb-2">
@@ -640,7 +640,7 @@
                                     </p>
                                 </div>
                                 <div class="col-md-4 p-0 mb-2">
-                                    <p class="clr52 fs14"><i class="fa fa-circle pr10 mpr0 mpl10 font9imp" aria-hidden="true"></i>{{'Passport Expiry Date' | translate}}: {{tripTravellers[0]?.passport_expiry_date}}
+                                    <p class="clr52 fs14"><i class="fa fa-circle pr10 mpr0 mpl10 font9imp" aria-hidden="true"></i>{{'Passport Expiry Date' | translate}}: {{tripTravellers[0]?.passport_expiry_date | date:'mediumDate'}}
                                     </p>
                                 </div>
                                 <div class="col-md-12 transportbodypdng row ml-0 mr-0 mt-2 p20 brdrtop">
