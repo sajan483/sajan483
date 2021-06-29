@@ -132,8 +132,8 @@ export class CreateTripAdapter {
       }
     }
    
-    var latitude: number = +selectedHotel.meta_data.latitude;
-    var longitute: number = +selectedHotel.meta_data.longitude;
+    // var latitude: number = +selectedHotel.meta_data.latitude;
+    // var longitute: number = +selectedHotel.meta_data.longitude;
     var name = "";
     if (selectedHotel.name.length > 24) {
       name = selectedHotel.name.substring(0, 24);
@@ -160,8 +160,8 @@ export class CreateTripAdapter {
             name: name ? name : "sample",
             description: selectedHotel.description,
             address: selectedHotel.meta_data.address,
-            longitute: longitute.toFixed(6),
-            latitude: latitude.toFixed(6),
+            // longitute: longitute.toFixed(6),
+            // latitude: latitude.toFixed(6),
             phone_number: selectedHotel.meta_data.phone
               ? selectedHotel.meta_data.phone
               : "1232323232",
@@ -219,8 +219,8 @@ export class CreateTripAdapter {
             name: name ? name : "sample",
             description: selectedHotel.description,
             address: selectedHotel.meta_data.address,
-            longitute: longitute.toFixed(6),
-            latitude: latitude.toFixed(6),
+            // longitute: longitute.toFixed(6),
+            // latitude: latitude.toFixed(6),
             phone_number: selectedHotel.meta_data.phone
               ? selectedHotel.meta_data.phone
               : "1232323232",
