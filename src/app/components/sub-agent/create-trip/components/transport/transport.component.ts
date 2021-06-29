@@ -55,12 +55,11 @@ export class TransportComponent implements OnInit {
 
   getCheckboxValues(ev, data:any,i,j){
     if(ev.checked){
-      this.aditionalService.push(data);
       var obj:any = {};
    this.aditionalService.push(data.additional_service_code);
     data.fare_summary.forEach(element => {if(element.is_total){this.addSrvicePrice = element.amount;}})
     if(this.addSrvicePrice > 0){
-      obj.name = "Service Price ";
+      obj.name = "Additional Services";
       obj.currency = "SAR";
       obj.amount = this.addSrvicePrice;
     }

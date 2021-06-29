@@ -691,9 +691,6 @@ body {
     border-radius: 6px;
     padding: 5px 0;
     position: absolute;
-    bottom: 125%;
-    left: 37px;
-    margin-left: -60px;
     opacity: 0;
     transition: opacity 0.3s;
 }
@@ -722,23 +719,23 @@ body {
         color: #000;
         border-bottom: 1px solid #e6e6e6;
     }
-    .hotel_price_total {
-        font-size: 12px;
-        text-align: left;
-        color: #000;
-        font-weight: 500;
-    }
     .container {
         padding-left: 10px;
         padding-right: 10px;
     }
-    .textAlign {
-        span {
-            color: #666;
-            font-size: 12px;
-            line-height: 1;
-        }
-    }
+}
+
+.hotelFare {
+    right: 85px;
+    top: -35px;
+}
+
+.transportFare {
+    right: 140px;
+}
+
+.transportPayment {
+    right: 100px;
 }
 
 .fw600 {

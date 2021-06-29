@@ -96,79 +96,95 @@
             </div>
             <div class="float_right mirr_float_left fs16 fw500 pt-2 customTooltip">
                 {{tripHotel?.room_variations[0]?.currency}} {{tripHotel?.prices_summary?.total_price | number:'.2-2'}}
-                <span class="customtooltiptext">
-                    <div class="container mb-2">
-                        <p class="pt-2 fare_summary_heading"> {{'Fare Summary'| translate}}</p>
-                        <div class="col-md-12 p-0 m-0 row pb-2">
-                            <div class="col-md-12 textAlign ">
-                                <span>{{'GDS Fee' | translate}} :
-                                    {{tripHotel?.prices_summary?.gds_fee}}</span><br>
-                <span>{{'OTA Fee' | translate}} :
-                                    {{tripHotel?.prices_summary?.ota_fee}}</span>
+                <span class="customtooltiptext transportPayment">
+                    <div class="container mb-2 fs12">
+                        <div class="pt-2 fare_summary_heading">{{'Fare Summary' | translate}}</div>
+                        <div>
+                            <div class="d-flex justify-content-between fw400 pt-1" *ngIf="baseFareAmount != 0">
+                                <div>{{'Base Price' | translate}} :</div><div>{{tripHotel?.room_variations[0]?.currency}} {{baseFareAmount | number:'.2-2'}}</div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="d-flex justify-content-between fw400 pt-1" *ngIf="taxAmount != 0">
+                                <div>{{'TAX' | translate}} :</div><div>{{tripHotel?.room_variations[0]?.currency}} {{taxAmount | number:'.2-2'}}</div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="d-flex justify-content-between fw400 pt-1" *ngIf="tripHotel?.prices_summary?.gds_fee != 0">
+                                <div>{{'GDS Fee' | translate}} :</div><div>{{tripHotel?.prices_summary?.currency}} {{tripHotel?.prices_summary?.gds_fee | number:'.2-2'}}</div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="d-flex justify-content-between fw400 pt-1" *ngIf="tripHotel?.prices_summary?.ota_fee != 0">
+                                <div>{{'OTA Fee' | translate}} :</div><div>{{tripHotel?.prices_summary?.currency}} {{tripHotel?.prices_summary?.ota_fee | number:'.2-2'}}</div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="d-flex justify-content-between fw500 pt-2" *ngIf="tripHotel?.prices_summary?.total_price != 0">
+                                <div>{{'Total Price' | translate}} :</div><div>{{tripHotel?.prices_summary?.currency}} {{tripHotel?.prices_summary?.total_price | number:'.2-2'}}</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                </span>
             </div>
         </div>
-        <p class=" pt-2 pr-5 hotel_price_total">{{'You Pay'| translate}} {{tripHotel?.prices_summary?.total_price | number:'.2-2'}}
-        </p>
-    </div>
-    </span>
-</div>
-</div>
-<div class="col-md-1 pl-0 pr-2 pt-1 m-auto text-center" (click)="makkahotel = !makkahotel">
-    <i *ngIf="makkahotel" class="downarrow icon_size_20 icns cursor-pointer"></i>
-    <i *ngIf="!makkahotel" class="uparrow icon_size_20 icns cursor-pointer"></i>
-</div>
-<div class="row col-md-12 p-0 ml-0 mr-0 mt-2 p20 brdrtop" *ngIf="!makkahotel">
-    <div class="col-md-6 p-0">
-        <div class="flexaround mrgndetails">
-            <div>
-                <div class="d-flex">
-                    <i class="calendaricon icon_h18_w15 icns"></i>
-                    <p class="pl-2 pr-2 fs13 fw500">{{'CHECK-IN'| translate}}</p>
-                    <i class="icon_h18_w11 icns downarrow"></i>
-                </div>
-                <p class="fw600 fs21">{{tripHotel?.check_in_time | date: 'mediumDate'}}</p>
-                <p class="clr52 fs12">{{tripHotel?.check_in_time | date: 'EEEE'}}</p>
-            </div>
-            <div class="text-center mt-2">
-                <i class="nighticon icon_size_20 icns"></i>
-                <p class="textgrey font14">{{tripHotel?.num_of_days}} {{'Nights'| translate}}</p>
-            </div>
-            <div class="text_left mirr_text_right">
-                <div class="d-flex">
-                    <i class="calendaricon icon_h18_w15 icns"></i>
-                    <p class="pl-2 pr-2 fs13 fw500">{{'CHECK-OUT'| translate}}</p>
-                    <i class="icon_h18_w11 icns downarrow"></i>
-                </div>
-                <p class="fw600 fs21">{{tripHotel?.check_out_time | date: 'mediumDate'}}</p>
-                <p class="clr52 fs12">{{tripHotel?.check_out_time | date: 'EEEE'}}</p>
-            </div>
+        <div class="col-md-1 pl-0 pr-2 pt-1 m-auto text-center" (click)="makkahotel = !makkahotel">
+            <i *ngIf="makkahotel" class="downarrow icon_size_20 icns cursor-pointer"></i>
+            <i *ngIf="!makkahotel" class="uparrow icon_size_20 icns cursor-pointer"></i>
         </div>
-    </div>
-    <div class="col-md-6 p-0">
-        <div class="p20">
-            <div *ngIf="tripHotel.hotel.address">
-                <div class="d-inline-flex">
-                    <i class="locationicon icns icon_size_20"></i>
-                    <div class="clr52 fs14">{{'ADDRESS'| translate}}</div>
+        <div class="row col-md-12 p-0 ml-0 mr-0 mt-2 p20 brdrtop" *ngIf="!makkahotel">
+            <div class="col-md-6 p-0">
+                <div class="flexaround mrgndetails">
+                    <div>
+                        <div class="d-flex">
+                            <i class="calendaricon icon_h18_w15 icns"></i>
+                            <p class="pl-2 pr-2 fs13 fw500">{{'CHECK-IN'| translate}}</p>
+                            <i class="icon_h18_w11 icns downarrow"></i>
+                        </div>
+                        <p class="fw600 fs21">{{tripHotel?.check_in_time | date: 'mediumDate'}}</p>
+                        <p class="clr52 fs12">{{tripHotel?.check_in_time | date: 'EEEE'}}</p>
+                    </div>
+                    <div class="text-center mt-2">
+                        <i class="nighticon icon_size_20 icns"></i>
+                        <p class="textgrey font14">{{tripHotel?.num_of_days}} {{'Nights'| translate}}</p>
+                    </div>
+                    <div class="text_left mirr_text_right">
+                        <div class="d-flex">
+                            <i class="calendaricon icon_h18_w15 icns"></i>
+                            <p class="pl-2 pr-2 fs13 fw500">{{'CHECK-OUT'| translate}}</p>
+                            <i class="icon_h18_w11 icns downarrow"></i>
+                        </div>
+                        <p class="fw600 fs21">{{tripHotel?.check_out_time | date: 'mediumDate'}}</p>
+                        <p class="clr52 fs12">{{tripHotel?.check_out_time | date: 'EEEE'}}</p>
+                    </div>
                 </div>
-                <div class="fs12 clr52 pl10 mpl0 mpr10">{{tripHotel?.hotel?.address}}</div>
             </div>
-            <div class="d-inline-flex mt-2" *ngIf="tripHotel.hotel.email">
-                <i class="mailicon icns icon_size_20"></i>
-                <div class="clr52 fs14 pl10 mpl0 mpr10">{{tripHotel?.hotel?.email}}</div>
+            <div class="col-md-6 p-0">
+                <div class="p20">
+                    <div *ngIf="tripHotel.hotel.address">
+                        <div class="d-inline-flex">
+                            <i class="locationicon icns icon_size_20"></i>
+                            <div class="clr52 fs14">{{'ADDRESS'| translate}}</div>
+                        </div>
+                        <div class="fs12 clr52 pl10 mpl0 mpr10">{{tripHotel?.hotel?.address}}</div>
+                    </div>
+                    <div class="d-inline-flex mt-2" *ngIf="tripHotel.hotel.email">
+                        <i class="mailicon icns icon_size_20"></i>
+                        <div class="clr52 fs14 pl10 mpl0 mpr10">{{tripHotel?.hotel?.email}}</div>
+                    </div>
+                    <div class="d-inline-flex ml-3" *ngIf="tripHotel.hotel.phone_number">
+                        <i class="Phoneicon icns icon_size_20"></i>
+                        <div class="clr52 fs14 pl10 mpl0 mpr10">{{tripHotel?.hotel?.phone_number}}</div>
+                    </div>
+                </div>
             </div>
-            <div class="d-inline-flex ml-3" *ngIf="tripHotel.hotel.phone_number">
-                <i class="Phoneicon icns icon_size_20"></i>
-                <div class="clr52 fs14 pl10 mpl0 mpr10">{{tripHotel?.hotel?.phone_number}}</div>
-            </div>
-        </div>
-    </div>
-    <div class="col-md-12 p-0 row m-0">
-        <div class="col-md-12 px-0 mx-0 row" *ngFor="let rooms of tripHotel?.room_variations">
-            <div class="col-md-12 row m-0 p-2 brdrtop" *ngFor="let item of rooms.room">
-                <div class="col-md-4 col-6 clr52 fs14 fw600">{{item?.name}}</div>
-                <div class="col-md-4 col-6 fs14 clr52 fw500">
-                    <!-- <span *ngFor="let pax of item.pax_info">
+            <div class="col-md-12 p-0 row m-0">
+                <div class="col-md-12 px-0 mx-0 row" *ngFor="let rooms of tripHotel?.room_variations">
+                    <div class="col-md-12 row m-0 p-2 brdrtop" *ngFor="let item of rooms.room">
+                        <div class="col-md-4 col-6 clr52 fs14 fw600">{{item?.name}}</div>
+                        <div class="col-md-4 col-6 fs14 clr52 fw500">
+                            <!-- <span *ngFor="let pax of item.pax_info">
                         <span *ngIf="pax.type == 'ADT'">
                             <strong class="fw600">{{pax.quantity}}</strong> {{'Adult' | translate}}
                         </span>
@@ -176,19 +192,19 @@
                     <span *ngIf="item.pax_info.length > 1">
                         , <strong>{{item.pax_info.length - 1}}</strong> {{'Child' | translate}}
                     </span> -->
-                </div>
-                <div class="col-md-2 col-6 fs12">
-                    <span class="green_text" *ngIf="item.cancellation_policy.is_refundable">{{'Refundable' | translate}}</span>
-                    <span class="red_text" *ngIf="!item.cancellation_policy.is_refundable">{{'non_refundable' | translate}}</span>
-                </div>
-                <!-- <div class="col-md-2 col-6 text-right fs14">
+                        </div>
+                        <div class="col-md-2 col-6 fs12">
+                            <span class="green_text" *ngIf="item.cancellation_policy.is_refundable">{{'Refundable' | translate}}</span>
+                            <span class="red_text" *ngIf="!item.cancellation_policy.is_refundable">{{'non_refundable' | translate}}</span>
+                        </div>
+                        <!-- <div class="col-md-2 col-6 text-right fs14">
                     <span *ngFor="let price of item.fare_summary">
                         <span *ngIf="price.name == 'Total Amount'">{{price?.currency}} {{price?.amount}}</span>
                     </span>
                 </div> -->
+                    </div>
+                </div>
             </div>
         </div>
     </div>
-</div>
-</div>
 </div>
