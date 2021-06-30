@@ -93,14 +93,29 @@
                         </div>
                         <div>
                             <div class="mt60">
-                                <!-- <div class="col-md-12 " *ngIf="isTransportResponseEmpty">
-                                    
-                                </div> -->
-                                <app-transport (notifyGrandparent)="createTripHandle($event)" [transportList]="transportList"></app-transport>
+                                <div class="animationdiv" *ngIf="transportList && transportList.length == 0">
+                                    <div *ngFor="let item of freeArray">
+                                        <div  class="displyflex box border_box_shadow">
+                                            <div class="photo m-2 shine wdth100"></div>
+                                            <div>
+                                                <div class="lines shine m-1 width40 wdth100"></div><br>
+                                                <div class="lines shine m-1 width40 wdth100"></div><br>
+                                                <div class="lines shine m-1 width40 wdth100"></div><br>
+                                                <div class="lines shine m-1 width40 wdth100"></div>
+                                            </div>
+                                            <div class="ml-auto phonenone">
+                                                <div class="lines shine m-1 width21"></div><br>
+                                                <div class="lines shine m-1 width21"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            <app-transport (notifyGrandparent)="createTripHandle($event)" [transportList]="transportList"></app-transport>
                             </div>
                         </div>
                     </div>
                 </mat-step>
+                
                 <mat-step label="{{'Payment' | translate}}" state="payment">
                     <form [formGroup]="paymentForm">
                         <div class="col-md-12 p-0 mt80">

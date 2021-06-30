@@ -103,6 +103,7 @@ export class CreateTripComponent implements OnInit, AfterViewChecked, DoCheck {
   minpassportExpDate: any;
   showIbanPopup: boolean = false;
   disablePayBttn: boolean = false;
+  transportCount: number = 0;
   toggleMeridian() {
     this.meridian = !this.meridian;
   }
@@ -190,6 +191,8 @@ export class CreateTripComponent implements OnInit, AfterViewChecked, DoCheck {
   travellersForm: FormGroup;
   @ViewChild('phoneInput', { read: ElementRef, static: false })
   phoneInput: ElementRef;
+  showTransportShimmer:boolean = true;
+  freeArray = ["1","2","3","4"];
 
   constructor(
     private router: Router,
@@ -360,38 +363,72 @@ export class CreateTripComponent implements OnInit, AfterViewChecked, DoCheck {
       this.steps = JSON.parse(sessionStorage.getItem('steps'))
       if (this.steps && this.steps.length > 2) { this.stage = 2 }
       sessionStorage.setItem("transportSearchId", data.search_id);
-      this.common.searchTransportList(this.searchTransportId, this.selectedCurrency,sessionStorage.getItem('userLanguage')).subscribe((response) => {
-        if ((response && response.transportations && response.transportations.length == 0) || (response && response.transportations && response.transportations.filter(x => x.vehicle_types.length > 0) == 0 || response && response.message == "Request is processing")) {
-          this.isTransportResponseEmpty = true;
-          this.createTripHelper.showSweetAlert('Sorry, we could not find transport for this route', "warning", 'Modify search and try again');
-        } else {
-          this.transportList = response.transportations.sort((n1, n2) => n1.vehicle_types.map(x => x.categories[0].fare_summary[2].amount) - n2.vehicle_types.map(x => x.categories[0].fare_summary[2].amount));
-          this.transportList.forEach((vt)=>{vt.vehicle_types.forEach((ct)=>{ct.categories.forEach((fs)=>{fs.fare_summary.forEach((amt)=>{if(amt.is_total) {amt.display_price = amt.amount;}})})})})
-          console.log(this.transportList)
-          this.transportListData = response.transportations.sort((n1, n2) => n1.vehicle_types.map(x => x.categories[0].fare_summary[2].amount) - n2.vehicle_types.map(x => x.categories[0].fare_summary[2].amount));
-        }
-        for (let i = 0; i < this.transportList.length; i++) {
-          for (let j = 0; j < this.transportList[i].vehicle_types.length; j++) {
-            this.transportList[i].vehicle_types[j].toggle = false;
-            this.transportList[i].vehicle_types[j].count = 1;
-            this.transportList[i].totalCount = 1;
-            this.transportList[i].vehicle_types[j].transport_amount = 0;
-            this.transportList[i].vehicle_types[j].vehicleCapacityCount = Math.ceil((this.countadult + this.countchild) / this.transportList[i].vehicle_types[j].categories[0].capacity)
-            this.transportList[i].vehicle_types[j].vehiclePaxCount = Math.ceil((this.countadult + this.countchild) / (Math.ceil((this.countadult + this.countchild) / this.transportList[i].vehicle_types[j].categories[0].capacity)))
-          }
-        }
-        for (let i = 0; i < this.transportList.length; i++) {
-          for (let j = 0; j < this.transportList[i].vehicle_types.length; j++) {
-            const totalCount = this.countadult + this.countchild + this.countinfa;
-            const vehicle = this.transportList[i].vehicle_types[j].vehicle_type_code[0];
-            this.transportList[i].vehicle_types[j].toggle_vehicle = false;
-            this.transportList[i].totalCount = 1;
-          }
-        }
-      });
+      this.callTransportList()
     }
     );
   }
+
+  callTransportList(){
+    this.common.searchTransportList(this.searchTransportId, this.selectedCurrency,sessionStorage.getItem('userLanguage')).subscribe((response) => {
+      if ((response && response.transportations && response.transportations.length == 0) || (response && response.transportations && response.transportations.filter(x => x.vehicle_types.length > 0) == 0 || response && response.status_code == 202)) {
+        this.isTransportResponseEmpty = true;
+        if(this.transportCount < 5){ 
+          this.setTimerForTransportSearch()
+          this.transportCount = this.transportCount + 1
+        }else{
+          Swal.fire({
+            text: this.translate.instant('Sorry,we could not  find transport for this root'),
+            icon: "warning",
+            confirmButtonText: this.translate.instant('Back To Search'),
+          }).then((willDelete) => {
+            if(willDelete.value){
+              this.router.navigate(['subagent/home']);
+            }
+        });
+        }
+      } else {
+        this.transportList = response.transportations.sort((n1, n2) => n1.vehicle_types.map(x => x.categories[0].fare_summary[2].amount) - n2.vehicle_types.map(x => x.categories[0].fare_summary[2].amount));
+        this.transportList.forEach((vt)=>{vt.vehicle_types.forEach((ct)=>{ct.categories.forEach((fs)=>{fs.fare_summary.forEach((amt)=>{if(amt.is_total) {amt.display_price = amt.amount;}})})})})
+        console.log(this.transportList)
+        this.transportListData = response.transportations.sort((n1, n2) => n1.vehicle_types.map(x => x.categories[0].fare_summary[2].amount) - n2.vehicle_types.map(x => x.categories[0].fare_summary[2].amount));
+      }
+      for (let i = 0; i < this.transportList.length; i++) {
+        for (let j = 0; j < this.transportList[i].vehicle_types.length; j++) {
+          this.transportList[i].vehicle_types[j].toggle = false;
+          this.transportList[i].vehicle_types[j].count = 1;
+          this.transportList[i].totalCount = 1;
+          this.transportList[i].vehicle_types[j].transport_amount = 0;
+          this.transportList[i].vehicle_types[j].vehicleCapacityCount = Math.ceil((this.countadult + this.countchild) / this.transportList[i].vehicle_types[j].categories[0].capacity)
+          this.transportList[i].vehicle_types[j].vehiclePaxCount = Math.ceil((this.countadult + this.countchild) / (Math.ceil((this.countadult + this.countchild) / this.transportList[i].vehicle_types[j].categories[0].capacity)))
+        }
+      }
+      for (let i = 0; i < this.transportList.length; i++) {
+        for (let j = 0; j < this.transportList[i].vehicle_types.length; j++) {
+          const totalCount = this.countadult + this.countchild + this.countinfa;
+          const vehicle = this.transportList[i].vehicle_types[j].vehicle_type_code[0];
+          this.transportList[i].vehicle_types[j].toggle_vehicle = false;
+          this.transportList[i].totalCount = 1;
+        }
+      }
+    },(error)=>{
+      Swal.fire({
+        text: this.translate.instant('Sorry,we could not  find transport for this root'),
+        icon: "warning",
+        confirmButtonText: this.translate.instant('Back To Search'),
+      }).then((willDelete) => {
+        if(willDelete.value){
+          this.router.navigate(['subagent/home']);  
+        }
+    });
+    });
+  }
+
+  setTimerForTransportSearch() {
+    setTimeout(()=>{
+     this.callTransportList()
+    }, 5000);
+   }
+
 
   /**
  * Method to set main traveller
