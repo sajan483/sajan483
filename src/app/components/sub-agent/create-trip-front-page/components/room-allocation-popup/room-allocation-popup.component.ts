@@ -4,6 +4,7 @@ import { Room } from 'src/app/models/visaTypes';
 import { NotificationService } from 'src/app/common/services/notification.service';
 import { AppStore } from 'src/app/stores/app.store';
 import { CreateTripComponent } from '../../../create-trip/create-trip.component';
+import {TranslateService} from '@ngx-translate/core';
 
 
 @Component({
@@ -26,7 +27,7 @@ export class RoomAllocationPopupComponent implements OnInit {
 
   constructor(private appStore:AppStore,
     private notifyService:NotificationService,
-    private router:Router) { }
+    private router:Router,private transilate:TranslateService) { }
   
   ngOnInit() {
   this.showRoomAllocationPopup = true;
@@ -143,10 +144,27 @@ export class RoomAllocationPopupComponent implements OnInit {
         a.push("0")
       }
     }
-    if(a.includes("0")){
-      (<HTMLButtonElement>document.getElementById("roomSelectBttn")).disabled = true;
+    // if(a.includes("0")){
+    //   this.notifyService.showWarning(this.transilate.instant('Please fill the age of each child'))
+    // }
+    var childCount = this.countChild + this.countInfant;
+    var addChildCount = 0;
+    var addAdultCount = 0;
+    var countAge = 0;
+    this.rooms.forEach((data)=>{
+      addChildCount = addChildCount + data.children;
+      addAdultCount = addAdultCount + data.adults;
+      countAge = countAge + data.child_ages.length;
+    })
+
+
+    if(addAdultCount != this.countAdult){
+      this.notifyService.showWarning(this.transilate.instant('Please Add Remaining Adult to Rooms'));
+    }else if(addChildCount != childCount){
+      this.notifyService.showWarning(this.transilate.instant('Please Add Remaining Children to Rooms'));
+    }else if(countAge != childCount){
+        this.notifyService.showWarning(this.transilate.instant('Please fill the age of each child'))
     }else{
-      (<HTMLButtonElement>document.getElementById("roomSelectBttn")).disabled = false;
       this.router.navigate(['subagent/createTrip'], { queryParams: { steps: this.dataFromPopUp.steps.join(",")} });
       this.appStore.showRoomAlPopup = false;
     }
@@ -235,7 +253,7 @@ export class RoomAllocationPopupComponent implements OnInit {
       }
       total += value.children;
     });
-    if (i != -1 && total < this.countChild) {
+    if (i != -1 && total < this.countChild + this.countInfant) {
       this.userRooms[i].children = this.userRooms[i].children + 1;
     } else {
     }
