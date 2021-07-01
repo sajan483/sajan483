@@ -652,13 +652,17 @@ export class CreateTripComponent implements OnInit, AfterViewChecked, DoCheck {
     this.spinner.show();
     //"account_no": "SA1790941327111000000002" ,
     //"auth_code": "5NMABO6U2RH2ZR5B"
+    this.accNo = (<HTMLInputElement>document.getElementById("acc_no")).value;
+    this.authCode = (<HTMLInputElement>document.getElementById("auth_code")).value;
     var w = {
       "booking_id": this.bookingId,
       "account_no": this.accNo,
       "auth_code": this.authCode,
     }
-
+    console.log(w);
+    
     if (this.accNo && this.authCode) {
+      console.log(w);
       this.common.bookingPayment(w).subscribe((response) => {
         this.spinner.hide();
         if (response.status == "Success") {
