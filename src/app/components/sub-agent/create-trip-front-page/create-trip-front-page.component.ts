@@ -144,6 +144,7 @@ export class CreateTripFrontPageComponent implements OnInit, DoCheck, AfterViewI
   }
 
   ngOnInit() {
+    sessionStorage.removeItem('modify')
     this.enableSearchButton = false;
     this.service = "All";
     this.activaleAllSearch = true;
@@ -192,24 +193,21 @@ export class CreateTripFrontPageComponent implements OnInit, DoCheck, AfterViewI
         this.makkaCheckInDate = obj.makkahCheckinDate,
           this.makkaCheckOutDate = obj.makkahCheckoutDate,
           this.special_code_makkah = obj.specialCodeMakkah,
-          this.subPcc_makkah = obj.subPcc_makkah,
-          this.enableSearchButton = true;
+          this.subPcc_makkah = obj.subPcc_makkah;
       }
       if (ser == 'Medina Hotel') {
         this.service = 'Medina Hotel'
         this.madeenaCheckInDate = obj.madeenaCheckinDate,
           this.madeenaCheckOutDate = obj.madeenaCheckoutDate
         this.subPcc_medinah = obj.subPcc_medinah,
-          this.special_code_medinah = obj.specialCodeMedinah,
-          this.enableSearchButton = true;
+          this.special_code_medinah = obj.specialCodeMedinah;
       }
       if (ser == 'Transport') {
         this.service = 'Transport'
         this.transportStartDate = obj.transportStartDate
         this.vehicleCode = obj.vehicleType,
           this.vehicleMaxCapacity = obj.vehicleCapacity,
-          this.routetransport = obj.transportRoute
-        this.enableSearchButton = true;
+          this.routetransport = obj.transportRoute;
       }
     }
   }
@@ -280,6 +278,7 @@ export class CreateTripFrontPageComponent implements OnInit, DoCheck, AfterViewI
    */
   removeVehicleType(){
     if(this.setBoolean){
+      this.enableSearchButton = false;
       let elemet = <HTMLSelectElement>document.getElementById("umrahVehicle")
       elemet.selectedIndex = 0;
       this.vehicleCode = "";
@@ -375,6 +374,7 @@ export class CreateTripFrontPageComponent implements OnInit, DoCheck, AfterViewI
    * 
    */
   goButtonClicked() {
+    this.showSearchbttn();
     this.resetBooleans();
     (<HTMLElement>document.getElementById("dateEnterDiv")).style.maxHeight = "456px";
     this.appStore.adultCount = this.countAdult;
@@ -443,7 +443,6 @@ export class CreateTripFrontPageComponent implements OnInit, DoCheck, AfterViewI
       this.enableTransport = false;
       this.activaleAllSearch = false;
       this.hidebttn = false;
-      this.enableSearchButton = false;
       this.routeready = false;
     }
   }
@@ -469,12 +468,6 @@ export class CreateTripFrontPageComponent implements OnInit, DoCheck, AfterViewI
 
     this.madeenaMin = this.makkaCheckOutDate;
     this.transportStartDate = this.makkaCheckInDate;
-    if (!this.activaleAllSearch) {
-      if (this.makkaCheckInDate != null && this.makkaCheckOutDate != null) {
-        this.showSearchbttn();
-      }
-    }
-    this.enableSearchButtonIfAllSelected();
     this.madeenmin = new Date(
       this.makkaCheckInDate.getTime() + 2 * (1000 * 60 * 60 * 24)
     );
@@ -484,6 +477,7 @@ export class CreateTripFrontPageComponent implements OnInit, DoCheck, AfterViewI
     if (this.madeenaCheckInDate == null) {
       this.makkaOutDatePicker.nativeElement.click();
     }
+    this.showSearchbttn();
   }
 
   /**
@@ -499,12 +493,7 @@ export class CreateTripFrontPageComponent implements OnInit, DoCheck, AfterViewI
     this.madeenamax = new Date(
       this.madeenaCheckInDate.getTime() + 1000 * 60 * 60 * 24
     );
-    if (!this.activaleAllSearch) {
-      if (this.makkaCheckInDate != null && this.makkaCheckOutDate != null) {
-        this.showSearchbttn();
-      }
-    }
-    this.enableSearchButtonIfAllSelected();
+    this.showSearchbttn();
     if (this.activateMadeenaSearch && this.madeenaCheckOutDate == null) {
       this.madeenaOutPicker.nativeElement.click();
     }
@@ -522,12 +511,7 @@ export class CreateTripFrontPageComponent implements OnInit, DoCheck, AfterViewI
    * 
    */
   dataChangedFromTransportDate($event) {
-    this.enableSearchButtonIfAllSelected();
-    if (!this.activaleAllSearch) {
-      if (this.routeready) {
-        this.showSearchbttn();
-      }
-    }
+    this.showSearchbttn();
   }
 
   /**
@@ -611,13 +595,7 @@ export class CreateTripFrontPageComponent implements OnInit, DoCheck, AfterViewI
   */
   onRouteSelect(item: any) {
     this.routetransport = item;
-    if (item != null) {
-      this.routeready = true;
-    }
-    if (!this.activaleAllSearch) {
-      this.showSearchbttn();
-    }
-    this.enableSearchButtonIfAllSelected();
+    this.showSearchbttn();
   }
 
   /**
@@ -640,11 +618,11 @@ export class CreateTripFrontPageComponent implements OnInit, DoCheck, AfterViewI
     if(count <= this.countAdult){
       this.countArray = Array(this.countAdult - count + 1).fill(count + 1).map((_, idx) => count + idx)
       this.vehicleCount = this.countArray[0];
+      this.showSearchbttn();
     }else{
       this.notifyService.showWarning(this.translate.instant("Passenger limit exceeded. Please select heavy vehicle."));
       this.removeVehicleType();
     }
-    
   }
 
   vehicleCountSelect(value){
@@ -656,72 +634,50 @@ export class CreateTripFrontPageComponent implements OnInit, DoCheck, AfterViewI
    * 
    */
   showSearchbttn() {
-    if (this.activaleAllSearch) {
+    if (this.service == 'All') {
       if (
         this.makkaCheckInDate &&
         this.makkaCheckOutDate &&
         this.madeenaCheckInDate &&
         this.madeenaCheckOutDate &&
-        this.activaleAllSearch &&
-        this.routeready
+        this.routetransport &&
+        this.transportStartDate && 
+        this.vehicleCode
       ) {
         this.enableSearchButton = true;
-        this.roomaloctionpopup = true;
-        this.activateMakkaPromotion = true;
-        this.activateMadeenaPromotion = true;
         return;
-      }
-    }
-    if (this.enableMakka && this.enableMadina) {
-      if (
-        this.makkaCheckInDate &&
-        this.makkaCheckOutDate &&
-        this.madeenaCheckInDate &&
-        this.madeenaCheckOutDate
-      ) {
-        this.enableSearchButton = true;
-        this.roomaloctionpopup = true;
-        this.activateMakkaPromotion = true;
-        this.activateMadeenaPromotion = true;
+      }else{
+        this.enableSearchButton = false;
         return;
       }
     }
 
-    if (this.enableMakka && this.enableTransport) {
-      if (
-        this.makkaCheckInDate &&
-        this.makkaCheckOutDate &&
-        this.enableTransport &&
-        this.routeready
-      ) {
-        this.enableSearchButton = true;
-        this.roomaloctionpopup = true;
-        this.activateMakkaPromotion = true;
-        return;
-      }
-    }
-
-    if (this.enableMakka) {
+    if (this.service == 'Makkah Hotel') {
       if (this.makkaCheckInDate && this.makkaCheckOutDate) {
         this.enableSearchButton = true;
-        this.roomaloctionpopup = true;
-        this.activateMakkaPromotion = true;
+        return;
+      }else{
+        this.enableSearchButton = false;
         return;
       }
     }
 
-    if (this.enableMadina) {
+    if (this.service == 'Medina Hotel') {
       if (this.madeenaCheckInDate && this.madeenaCheckOutDate) {
         this.enableSearchButton = true;
-        this.roomaloctionpopup = true;
-        this.activateMadeenaPromotion = true;
+        return;
+      }else{
+        this.enableSearchButton = false;
         return;
       }
     }
 
-    if (this.enableTransport) {
-      if (this.transportStartDate && this.routeready) {
+    if (this.service == 'Transport') {
+      if (this.transportStartDate && this.routetransport && this.vehicleCode) {
         this.enableSearchButton = true;
+        return;
+      }else{
+        this.enableSearchButton = false;
         return;
       }
     }
@@ -751,12 +707,6 @@ export class CreateTripFrontPageComponent implements OnInit, DoCheck, AfterViewI
     this.madeenamax = new Date(
       this.madeenaCheckInDate.getTime() + 1000 * 60 * 60 * 24
     );
-    this.enableSearchButtonIfAllSelected();
-    if (!this.activaleAllSearch) {
-      if ((this.madeenaCheckInDate && this.madeenaCheckOutDate) != null) {
-        this.showSearchbttn();
-      }
-    }
     this.activateMadeenaPromotion = true;
     if (position == "in") {
       this.madeenaCheckOutDate = null;
@@ -764,6 +714,7 @@ export class CreateTripFrontPageComponent implements OnInit, DoCheck, AfterViewI
         this.madeenaOutPicker.nativeElement.click();
       }
     }
+    this.showSearchbttn();
   }
 
 
@@ -778,24 +729,7 @@ export class CreateTripFrontPageComponent implements OnInit, DoCheck, AfterViewI
     }
   }
 
-  /**
-  * This method for enable the search button if all input selected
-  * 
-  */
-  enableSearchButtonIfAllSelected() {
-    if (this.activaleAllSearch) {
-      if (
-        this.madeenaCheckInDate &&
-        this.madeenaCheckOutDate &&
-        this.makkaCheckInDate &&
-        this.makkaCheckOutDate &&
-        this.transportStartDate &&
-        this.routeready
-      ) {
-        this.showSearchbttn();
-      }
-    }
-  }
+  
 
   /**
    * This method for resetting selected values if service input changes
@@ -810,28 +744,24 @@ export class CreateTripFrontPageComponent implements OnInit, DoCheck, AfterViewI
       this.enableMakka = true;
       this.enableMadina = true;
       this.enableTransport = true;
-      this.enableSearchButton = false;
       this.goButtonEnable = false;
     }
     if (value == "Makkah Hotel") {
       this.enableMakka = true;
       this.enableMadina = false;
       this.enableTransport = false;
-      this.enableSearchButton = false;
       this.goButtonEnable = false;
     }
     if (value == "Medina Hotel") {
       this.enableMadina = true;
       this.enableMakka = false;
       this.enableTransport = false;
-      this.enableSearchButton = false;
       this.goButtonEnable = false;
     }
     if (value == "Transport") {
       this.enableTransport = true;
       this.enableMakka = false;
       this.enableMadina = false;
-      this.enableSearchButton = false;
       this.goButtonEnable = false;
     }
   }
