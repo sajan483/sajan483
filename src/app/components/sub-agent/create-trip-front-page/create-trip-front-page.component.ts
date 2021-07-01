@@ -403,6 +403,7 @@ export class CreateTripFrontPageComponent implements OnInit, DoCheck, AfterViewI
       this.activateTransportSearch = true;
       this.steps.push("3");
       this.appStore.stepsArray = this.steps;
+      this.transportmin = new Date(this.today.getTime() - 1000 * 60 * 60 * 24);;
     }
     if (this.activaleAllSearch) {
       this.activateMadeenaSearch = true;
@@ -744,7 +745,6 @@ export class CreateTripFrontPageComponent implements OnInit, DoCheck, AfterViewI
   * 
   */
   dataChangedFromMadeenaDates(position: string) {
-    this.madeenaCheckOutDate = null;
     this.madeenaMindate = this.madeenaCheckInDate;
     this.madeenaMaxdate = this.madeenaCheckOutDate;
     this.setNoOfMadeenaDays()
@@ -759,6 +759,7 @@ export class CreateTripFrontPageComponent implements OnInit, DoCheck, AfterViewI
     }
     this.activateMadeenaPromotion = true;
     if (position == "in") {
+      this.madeenaCheckOutDate = null;
       if (this.madeenaCheckOutDate == null) {
         this.madeenaOutPicker.nativeElement.click();
       }
