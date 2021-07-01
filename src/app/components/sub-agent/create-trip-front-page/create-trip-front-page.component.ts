@@ -453,11 +453,15 @@ export class CreateTripFrontPageComponent implements OnInit, DoCheck, AfterViewI
     if (this.service == 'Medina Hotel') { this.madeenaCheckInDate = null; this.madeenaCheckOutDate = null }
   }
 
+
   /**
    * This method for show serch button when makkah date input changes
    * 
    */
   dataChangedFromMakkaDates($event) {
+    this.makkaCheckOutDate = null;
+    this.madeenaCheckInDate = null;
+    this.madeenaCheckOutDate = null; 
     if (this.makkaCheckOutDate && this.makkaCheckInDate) {
       this.noOfDaysInMakkah = this.helperService.noOfDaysBetweenTwoDates(this.makkaCheckInDate, this.makkaCheckOutDate)
     }
@@ -486,6 +490,8 @@ export class CreateTripFrontPageComponent implements OnInit, DoCheck, AfterViewI
    * 
    */
   dataChangedFromMakkaOutDates($event) {
+    this.madeenaCheckInDate = null;
+    this.madeenaCheckOutDate = null;
     this.setNoOfMakkaDays();
     this.madeenaMin = this.makkaCheckOutDate;
     this.madeenaCheckInDate = this.makkaCheckOutDate;
@@ -738,6 +744,7 @@ export class CreateTripFrontPageComponent implements OnInit, DoCheck, AfterViewI
   * 
   */
   dataChangedFromMadeenaDates(position: string) {
+    this.madeenaCheckOutDate = null;
     this.madeenaMindate = this.madeenaCheckInDate;
     this.madeenaMaxdate = this.madeenaCheckOutDate;
     this.setNoOfMadeenaDays()
@@ -757,6 +764,7 @@ export class CreateTripFrontPageComponent implements OnInit, DoCheck, AfterViewI
       }
     }
   }
+
 
   /**
    * This method for calculate madeena days
