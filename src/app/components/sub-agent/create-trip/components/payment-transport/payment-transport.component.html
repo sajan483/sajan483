@@ -73,7 +73,13 @@
                 </div>
             </div>
             <div class="float_right mirr_float_left fs16 fw500 pt-2 customTooltip">
-                {{tripTransport?.trip_vehicles[0]?.currency}} {{tripTransport?.prices_summary?.total_price | number:'.2-2'}}
+                <span>
+                    {{tripTransport?.trip_vehicles[0]?.currency}} {{tripTransport?.prices_summary?.total_price | number:'.2-2'}}
+                </span>
+                <span *ngIf="tripTransport.prices_summary.price_update" style="color:grey">(Old Price
+                    {{tripTransport?.trip_vehicles[0]?.currency}} {{tripTransport?.prices_summary?.price_updates?.amount | number:'.2-2'}})
+                </span>
+               
                 <span class="customtooltiptext transportPayment">
                     <div class="container mb-2 fs12">
                         <div class="pt-2 fare_summary_heading">{{'Fare Summary' | translate}}</div>
