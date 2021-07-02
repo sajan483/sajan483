@@ -691,6 +691,8 @@ export class CreateTripComponent implements OnInit, AfterViewChecked, DoCheck {
   }
 
   ngOnInit() {
+    window.scroll(0,0);
+    this.showShimmer = true;
     this.calculatePed();
     sessionStorage.setItem('steps', JSON.stringify(this.steps))
     this.stage = sessionStorage.getItem('stage')

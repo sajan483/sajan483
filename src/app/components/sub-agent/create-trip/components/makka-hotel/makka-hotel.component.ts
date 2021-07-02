@@ -94,12 +94,17 @@ export class MakkaHotelComponent implements OnInit,DoCheck{
 
   ngOnInit() {
     this.setInitialValues();
-    if(this.hotelsList[0].city == "Makkah"){
+    if(sessionStorage.getItem('service') == 'All'){
+      if(this.hotelsList[0].city == "Makkah"){
+        this.stage  = 0
+        sessionStorage.setItem('stage',JSON.stringify(this.stage))
+      }
+      else{
+        this.stage  = 1
+        sessionStorage.setItem('stage',JSON.stringify(this.stage))
+      }
+    }else{
       this.stage  = 0
-      sessionStorage.setItem('stage',JSON.stringify(this.stage))
-    }
-    else{
-      this.stage  = 1
       sessionStorage.setItem('stage',JSON.stringify(this.stage))
     }
 

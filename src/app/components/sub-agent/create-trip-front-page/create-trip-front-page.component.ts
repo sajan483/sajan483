@@ -198,17 +198,16 @@ export class CreateTripFrontPageComponent implements OnInit, DoCheck, AfterViewI
       if (ser == 'Medina Hotel') {
         this.service = 'Medina Hotel'
         this.madeenaCheckInDate = obj.madeenaCheckinDate,
-          this.madeenaCheckOutDate = obj.madeenaCheckoutDate
+        this.madeenaCheckOutDate = obj.madeenaCheckoutDate
         this.subPcc_medinah = obj.subPcc_medinah,
-          this.special_code_medinah = obj.specialCodeMedinah;
+        this.special_code_medinah = obj.specialCodeMedinah;
       }
       if (ser == 'Transport') {
         this.service = 'Transport'
-        this.transportStartDate = obj.transportStartDate
-        this.vehicleCode = obj.vehicleType,
-          this.vehicleMaxCapacity = obj.vehicleCapacity,
-          this.routetransport = obj.transportRoute;
+        this.transportStartDate = obj.transportStartDate;
+        this.vehicleMaxCapacity = obj.vehicleCapacity;
       }
+      this.showSearchbttn();
     }
   }
 
