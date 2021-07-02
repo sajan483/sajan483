@@ -177,6 +177,7 @@ export class MakkaHotelComponent implements OnInit,DoCheck{
         if(flag === '0' || flag === '1'){
           sessionStorage.setItem('hotelDetailsFlag','open')
         }
+        window.scroll(0,0);
       },
       (error) => {
         this.showDetailsShimmer = false;
