@@ -125,7 +125,7 @@ export class CreateTripAdapter {
               (roomVariations.room_id = selectedRoomGroups[i].rooms[j].room_id),
               (roomVariations.room_group_obj = selectedRoomGroups[i].rooms[j].room_group_obj),
               (roomVariations.custom_pax_info = (selectedRoomGroups[i].pax_info_str == null) ?
-              selectedRoomGroups[i].rooms[j].amount : selectedRoomGroups[i].pax_info_str),
+              selectedRoomGroups[i].rooms[j].pax_info_str : selectedRoomGroups[i].pax_info_str),
             roomVariationArray.push(roomVariations);
           }
         }
