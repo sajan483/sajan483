@@ -237,7 +237,7 @@
                                                                 (input)="inputValidation($event)" maxlength="15" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode)) || event.keyCode==32) return false;" formControlName="phone_number" />
                                                             <span *ngIf="travellersForm.controls['phone_number'].errors?.pattern &&
                                                             travellersForm.controls['phone_number'].touched">
-                                                                <p>Mobile number must be valid</p>
+                                                                <p class="red_text">{{'Mobile number must be valid' | translate}}</p>
                                                             </span>
                                                         </div>
                                                     </div>
