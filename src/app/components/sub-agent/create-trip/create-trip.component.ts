@@ -1041,7 +1041,6 @@ export class CreateTripComponent implements OnInit, AfterViewChecked, DoCheck {
             (data) => {
               this.hotelsList = data.sort((a,b)=>(a.amount) - (b.amount));
               this.hotelsList.forEach(x=>x.providers.sort((a,b)=>(a.amount) - (b.amount)))
-              console.log(this.hotelsList)
               sessionStorage.setItem('htlList', JSON.stringify(this.hotelsList));
               if (this.hotelsList.length == 0) {
                 Swal.fire({
