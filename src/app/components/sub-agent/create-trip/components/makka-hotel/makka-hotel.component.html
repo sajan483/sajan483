@@ -149,9 +149,8 @@
                                 <div class="result-details-left col-md-8 col-12">
                                     <div class="d-flex flex-column ">
                                         <div class="d-inline-flex">
-                                            <div>
-                                                <h3 class="hotel_name" title="{{item?.name}}">
-                                                    {{item?.name | titlecase }}</h3>
+                                            <div class="d-flex">
+                                                <h3 class="hotel_name" title="{{item?.name}}">{{item?.name | titlecase }}</h3><span style="color:white">({{item?.providers[0]?.provider?.charAt(0)}})</span>
                                             </div>
                                             <div class="pl-1 mpr5">
                                                 <ngb-rating [(rate)]="item.rating" [readonly]="readonly" [max]=5>
