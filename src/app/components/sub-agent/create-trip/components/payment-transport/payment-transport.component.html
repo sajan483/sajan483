@@ -79,7 +79,7 @@
                 <span *ngIf="tripTransport.prices_summary.price_update" style="color:grey">(Old Price
                     {{tripTransport?.trip_vehicles[0]?.currency}} {{tripTransport?.prices_summary?.price_updates?.amount | number:'.2-2'}})
                 </span>
-               
+
                 <span class="customtooltiptext transportPayment">
                     <div class="container mb-2 fs12">
                         <div class="pt-2 fare_summary_heading">{{'Fare Summary' | translate}}</div>
@@ -140,9 +140,10 @@
                     </p>
                 </div>
                 <div class="col-md-4 p-0 mb-2">
-                    <p class="clr52 fs14">
-                        <i class="fa fa-circle pr10 mpr0 mpl10 font9imp" aria-hidden="true"></i>{{'Available Vehicle' | translate}}: {{tripTransport?.selected_transportation?.vehicle_types[0]?.categories[0]?.available_quantity}}
-                    </p>
+                    <p class="clr52 fs14"><i class="fa fa-circle pr10 mpr0 mpl10 font9imp" aria-hidden="true"></i>{{'Start Date' | translate}} : {{tripTransport?.selected_transportation?.start_date | date:'mediumDate'}}</p>
+                </div>
+                <div class="col-md-4 p-0 mb-2">
+                    <p class="clr52 fs14"><i class="fa fa-circle pr10 mpr0 mpl10 font9imp" aria-hidden="true"></i>{{'Category' | translate}} : {{tripTransport?.categories[0]?.name}}</p>
                 </div>
                 <div class="col-md-4 p-0 mb-2">
                     <p class="clr52 fs14">

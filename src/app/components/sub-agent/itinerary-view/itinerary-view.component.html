@@ -97,6 +97,13 @@
                                 </div>
                             </div>
                         </div>
+                        <div class="col-md-12 p-0 brdrbottom mb10" *ngIf="tripMakkahHotel?.status=='processing' || tripMakkahHotel?.status=='available'">
+                            <div class="d-inline-flex">
+                                <div class="d-inline-flex bookdpdng">
+                                    <div class="fs14 fw600 ml10 mmr10 clrOrng mt2p">{{'UNDER PROCESSING - Please Contact Customer care' | translate}} : 42008 05505</div>
+                                </div>
+                            </div>
+                        </div>
                         <div class="col-md-2 col-12 pl-0 pr-0 my-auto">
                             <i class="hotelblueicon icns icon_size_30 imgposition mirr_float_right"></i>
                             <div class="Premium_blue fs14 fw600 ">
@@ -287,6 +294,13 @@
                                 </div>
                             </div>
                         </div>
+                        <div class="col-md-12 p-0 brdrbottom mb10" *ngIf="tripMadeenaHotel?.status=='processing' || tripMadeenaHotel?.status=='available'">
+                            <div class="d-inline-flex">
+                                <div class="d-inline-flex bookdpdng">
+                                    <div class="fs14 fw600 ml10 mmr10 clrOrng mt2p">{{'UNDER PROCESSING - Please Contact Customer care' | translate}} : 42008 05505</div>
+                                </div>
+                            </div>
+                        </div>
                         <div class="col-md-2 col-12 pl-0 pr-0 my-auto">
                             <i class="hotelblueicon icns icon_size_30 imgposition mirr_float_right"></i>
                             <div class="Premium_blue fs14 fw600 ">
@@ -474,6 +488,13 @@
                                 </div>
                             </div>
                         </div>
+                        <div class="col-md-12 p-0 brdrbottom mb10" *ngIf="tripTransport?.status=='processing' || tripTransport?.status=='available'">
+                            <div class="d-inline-flex">
+                                <div class="d-inline-flex bookdpdng">
+                                    <div class="fs14 fw600 ml10 mmr10 clrOrng mt2p">{{'UNDER PROCESSING - Please Contact Customer care' | translate}} : 42008 05505</div>
+                                </div>
+                            </div>
+                        </div>
                         <div class="col-md-2 col-12 pl-0 pr-0 my-auto">
                             <i class="transportblueicon icns icon_size_30 imgposition mirr_float_right"></i>
                             <div class="Premium_blue fs14 fw600">
@@ -498,7 +519,10 @@
                         <div class="col-md-12 p-0 row ml-0 mr-0  borderpading  expansion">
                             <div class="col-md-12 transportbodypdng mt-2 row brdrtop m-0">
                                 <div class="col-md-4 p-0 mb-2">
-                                    <p class="clr52 fs14"><i class="fa fa-circle pr10 mpr0 mpl10 font9imp" aria-hidden="true"></i>{{tripTransport?.trip_transportation?.vehicle_types[0]?.max_capacity}} {{'Seater(s)' | translate}}</p>
+                                    <p class="clr52 fs14"><i class="fa fa-circle pr10 mpr0 mpl10 font9imp" aria-hidden="true"></i>{{'Start Date' | translate}} : {{tripTransport?.trip_transportation?.selected_transportation?.start_date | date:'mediumDate'}}</p>
+                                </div>
+                                <div class="col-md-4 p-0 mb-2">
+                                    <p class="clr52 fs14"><i class="fa fa-circle pr10 mpr0 mpl10 font9imp" aria-hidden="true"></i>{{'Category' | translate}} : {{tripTransport?.trip_transportation?.categories[0]?.name}}</p>
                                 </div>
                                 <div class="col-md-4 p-0 mb-2">
                                     <p class="clr52 fs14"><i class="fa fa-circle pr10 mpr0 mpl10 font9imp" aria-hidden="true"></i>{{'Pax Per Vehicle' | translate}} : {{tripTransport?.trip_transportation?.trip_vehicles[0]?.pax_per_vehicle}}

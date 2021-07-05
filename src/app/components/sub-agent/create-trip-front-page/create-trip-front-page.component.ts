@@ -103,6 +103,7 @@ export class CreateTripFrontPageComponent implements OnInit, DoCheck, AfterViewI
   vehicleCount: number = 1;
   countArray:number[] = [1];
   setBoolean:boolean = false;
+  goBttnHide:boolean = true;
   constructor(
     private commonApiService: SubAgentApiService,
     private subAgentApiService: SubAgentApiService,

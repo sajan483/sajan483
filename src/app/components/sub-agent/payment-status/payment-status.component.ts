@@ -68,7 +68,7 @@ export class PaymentStatusComponent implements OnInit {
   interval;
   allowUserToCancellBooking: boolean;
   setBooleanToCheckTheBrnStatus: boolean = false;
-  processing: boolean;
+  processing: boolean = true;
   
   constructor(private route: ActivatedRoute,
     private appStore: AppStore,
@@ -395,7 +395,7 @@ export class PaymentStatusComponent implements OnInit {
         }
       });
     }else{
-      this.notifyService.showWarning("You can cancel a booking only after 5 minuts")
+      this.notifyService.showWarning("You can cancel a booking only after 5 minutes")
     }
     
   }
