@@ -97,7 +97,7 @@
         <div class="bg-white filterbox container p30 mirr_text_right" *ngIf="activateMakkaSearch || activateMadeenaSearch || activateTransportSearch">
             <div *ngIf="activateMakkaSearch" class="position-relative mb30">
                 <div class="row m-0">
-                    <div class="col-md-2 mt24">
+                    <div class="col-md-2 mt32">
                         <div class="d-inline-flex">
                             <i class="makkahicon icon_size_35 icns"></i>
                             <h5 class="fw500 fs22 my6mx10">{{'Makkah' | translate}}</h5>
@@ -105,7 +105,7 @@
                     </div>
                     <div class="col-md-5 row mx-0 px-0 mmt21">
                         <div class="col-md-6">
-                            <p class="mb-0 fs14 pl-1">{{'Check-in' | translate}}</p>
+                            <p class="mb-0 fs14 pl-1">{{'Check-in' | translate}}<span class="mdtryStrr">*</span></p>
                             <div [owlDateTimeTrigger]="dt3" class="position-relative">
                                 <input placeholder="{{'Check-in date' | translate}}" class="owldatepicker fs14 bordrservice removeoutline" [(ngModel)]="makkaCheckInDate" [min]="makkahmin" [owlDateTime]="dt3" (ngModelChange)="dataChangedFromMakkaDates($event)">
                                 <i class="icns calendaricon icon_size_20 cursor-pointer calendarposition mirr_clndr_icon"></i>
@@ -113,7 +113,7 @@
                             <owl-date-time [pickerType]="'calendar'" #dt3></owl-date-time>
                         </div>
                         <div class="col-md-6">
-                            <p class="mb-0 fs14 pl-1">{{'Check-out' | translate}}</p>
+                            <p class="mb-0 fs14 pl-1">{{'Check-out' | translate}}<span class="mdtryStrr">*</span></p>
                             <div [owlDateTimeTrigger]="dt4" class="position-relative">
                                 <input #makkaOutDatePicker placeholder="{{'Check-out date' | translate}}" class="owldatepicker removeoutline fs14 bordrservice" [owlDateTime]="dt4" [(ngModel)]="makkaCheckOutDate" [min]="madeenmin" (ngModelChange)="dataChangedFromMakkaOutDates($event)">
                                 <i class="icns calendaricon icon_size_20 cursor-pointer calendarposition mirr_clndr_icon"></i>
@@ -123,13 +123,13 @@
                     </div>
                     <div class="col-md-4 row mx-0 px-0">
                         <div class="col-md-6">
-                            <p class="mb-0 fs14 pl-1">{{'Special Code' | translate}}</p>
+                            <p class="mb-0 fs14 pl-1 mt8">{{'Special Code' | translate}}</p>
                             <div>
                                 <input name="promotion" class="subStyle" [(ngModel)]="special_code_makkah" class="owldatepicker fs14 bordrservice removeoutline">
                             </div>
                         </div>
                         <div class="col-md-6">
-                            <p class="mb-0 fs14 pl-1">{{'SubPcc' | translate}}</p>
+                            <p class="mb-0 fs14 pl-1 mt8">{{'SubPcc' | translate}}</p>
                             <div>
                                 <input name="promotion" class="subStyle" [(ngModel)]="subPcc_makkah" class="owldatepicker fs14 bordrservice removeoutline">
                             </div>
@@ -143,7 +143,7 @@
             </div>
             <div *ngIf="activateMadeenaSearch" class="position-relative mb30">
                 <div class="row m-0">
-                    <div class="col-md-2 mt24">
+                    <div class="col-md-2 mt32">
                         <div class="d-inline-flex">
                             <i class="madeenaicon icon_size_35 icns"></i>
                             <h5 class="fw500 fs22 my6mx10">{{'Medinah' | translate}}</h5>
@@ -151,7 +151,7 @@
                     </div>
                     <div class="col-md-5 row mx-0 px-0 mmt21">
                         <div class="col-md-6">
-                            <p class="mb-0 fs14 pl-1">{{'Check-in' | translate}}</p>
+                            <p class="mb-0 fs14 pl-1">{{'Check-in' | translate}}<span class="mdtryStrr">*</span></p>
                             <div [owlDateTimeTrigger]="dt1" class="position-relative">
                                 <input #madeenaInPicker placeholder="{{'Check-in date' | translate}}" class="owldatepicker fs14 bordrservice removeoutline" [(ngModel)]="madeenaCheckInDate" [min]="madeenaMin" [owlDateTime]="dt1" (ngModelChange)="dataChangedFromMadeenaDates('in')">
                                 <i class="icns calendaricon icon_size_20 cursor-pointer calendarposition mirr_clndr_icon"></i>
@@ -159,7 +159,7 @@
                             <owl-date-time [pickerType]="'calendar'" #dt1></owl-date-time>
                         </div>
                         <div class="col-md-6">
-                            <p class="mb-0 fs14 pl-1">{{'Check-out' | translate}}</p>
+                            <p class="mb-0 fs14 pl-1">{{'Check-out' | translate}}<span class="mdtryStrr">*</span></p>
                             <div [owlDateTimeTrigger]="dt2" class="position-relative">
                                 <input #madeenaOutPicker placeholder="{{'Check-out date' | translate}}" class="owldatepicker removeoutline fs14 bordrservice" [owlDateTime]="dt2" [(ngModel)]="madeenaCheckOutDate" [min]="madeenamax" (ngModelChange)="dataChangedFromMadeenaDates('out')">
                                 <i class="icns calendaricon icon_size_20 cursor-pointer calendarposition mirr_clndr_icon"></i>
@@ -169,13 +169,13 @@
                     </div>
                     <div class="col-md-4 row mx-0 px-0">
                         <div class="col-md-6">
-                            <p class="mb-0 fs14 pl-1">{{'Special Code' | translate}}</p>
+                            <p class="mb-0 fs14 pl-1 mt8">{{'Special Code' | translate}}</p>
                             <div>
                                 <input name="promotion" class="subStyle" [(ngModel)]="special_code_medinah" class="owldatepicker fs14 bordrservice removeoutline">
                             </div>
                         </div>
                         <div class="col-md-6">
-                            <p class="mb-0 fs14 pl-1">{{'SubPcc' | translate}}</p>
+                            <p class="mb-0 fs14 pl-1 mt8">{{'SubPcc' | translate}}</p>
                             <div>
                                 <input name="promotion" class="subStyle" [(ngModel)]="subPcc_medinah" class="owldatepicker fs14 bordrservice removeoutline">
                             </div>
@@ -189,14 +189,14 @@
             </div>
             <div *ngIf="activateTransportSearch" class="position-relative mb30">
                 <div class="row m-0">
-                    <div class="col-md-2 mt24">
+                    <div class="col-md-2 mt32">
                         <div class="d-inline-flex">
                             <i class="transportationicon icon_size_35 icns"></i>
                             <h5 class="fw500 fs22 my6mx10">{{'Transport' | translate}}</h5>
                         </div>
                     </div>
                     <div class="col-md-2">
-                        <p class="mb-0 fs14 pl-1">{{'Start Date' | translate}}</p>
+                        <p class="mb-0 fs14 pl-1">{{'Start Date' | translate}}<span class="mdtryStrr">*</span></p>
                         <div [owlDateTimeTrigger]="dt5" class="position-relative">
                             <input placeholder="{{'Check-in date' | translate}}" class="owldatepicker fs14 bordrservice removeoutline" [(ngModel)]="transportStartDate" [owlDateTime]="dt5" [min]="transportmin" (ngModelChange)="dataChangedFromTransportDate('in')">
                             <i class="icns calendaricon icon_size_20 cursor-pointer calendarposition mirr_clndr_icon"></i>
@@ -204,7 +204,7 @@
                         <owl-date-time [pickerType]="'calendar'" #dt5></owl-date-time>
                     </div>
                     <div class="col-md-2">
-                        <p class="mb-0 fs14 pl-1">{{'Vehicle Type' | translate}}</p>
+                        <p class="mb-0 fs14 pl-1">{{'Vehicle Type' | translate}}<span class="mdtryStrr">*</span></p>
                         <select name="rote" id="umrahVehicle" class="removeoutline bordrservice w-100 pl10 fs14" (change)="onVehicleSelect($event.target.value)">
                             <option value="" disabled selected>{{'Select' | translate}}</option>
                             <option *ngFor="let item of vehicleTypeList" [value]="item.id">{{item.name}}
@@ -212,14 +212,14 @@
                         </select>
                     </div>
                     <div class="col-md-2">
-                        <p class="mb-0 fs14 pl-1">{{'Vehicle Count' | translate}}</p>
+                        <p class="mb-0 fs14 pl-1">{{'Vehicle Count' | translate}}<span class="mdtryStrr">*</span></p>
                         <select name="rote" id="vehicleCount" [(ngModel)]="vehicleCount" class="removeoutline bordrservice w-100 pl10 fs14" (change)="vehicleCountSelect($event.target.value)">
                             <option value="" disabled selected>{{'Select' | translate}}</option>
                             <option *ngFor="let k of countArray" [value]="k">{{k}}</option>
                         </select>
                     </div>
                     <div class="col-md-4">
-                        <p class="mb-0 fs14 pl-1">{{'Route' | translate}}</p>
+                        <p class="mb-0 fs14 pl-1">{{'Route' | translate}}<span class="mdtryStrr">*</span></p>
                         <select name="rote" id="umrahRoute" class="removeoutline bordrservice w-100 pl10 fs14" (change)="onRouteSelect($event.target.value)">
                             <option value="" disabled selected>{{'Select' | translate}}</option>
                             <option *ngFor="let item of routeList" [value]="item.code">{{item.name}}</option>

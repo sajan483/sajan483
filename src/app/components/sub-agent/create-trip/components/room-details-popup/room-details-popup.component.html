@@ -57,7 +57,7 @@
                     </div>
                     <div class="col-md-12 mb30">
                         <div class="" *ngFor="let item of setViewData.cancellation_policy">
-                            <h6>{{item?.title}}</h6>
+                            <h6>{{item?.title.replace('WB','')}}</h6>
                             <div class="green_text pl30" *ngIf="item?.is_refundable">{{'Refundable' | translate}}</div>
                             <div class="red_text pl30" *ngIf="!item?.is_refundable">{{'non_refundable' | translate}}</div>
                             <div class="mt-2 borderbox ml30 mr30" *ngIf="item?.is_refundable">
@@ -81,7 +81,7 @@
                             </div>
                             <div class="mt-2 clr52 fs13" *ngIf="item?.description">
                                 <div class="fw600">{{'Description' | translate}}:</div>
-                                <p>{{item?.description}}</p>
+                                <p>{{item?.description.replace('WB','')}}</p>
                             </div>
                         </div>
                     </div>
