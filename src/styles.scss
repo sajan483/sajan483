@@ -972,10 +972,10 @@ body {
 .mt24 {
     margin-top: 24px;
 }
+
 .mt32 {
     margin-top: 32px;
 }
-
 
 .mt10 {
     margin-top: 10px;
@@ -1222,6 +1222,8 @@ body {
 
 .searchbutton:disabled {
     background-color: #d3d3d3;
+    cursor: no-drop;
+    color: white;
 }
 
 .searchbutton:active,

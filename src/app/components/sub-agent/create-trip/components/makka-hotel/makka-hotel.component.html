@@ -7,7 +7,7 @@
                 </div>
             </div>
             <div *ngIf="!isHotelListSortedByHaramDistance " class="col-md-2 col-8  my-auto ">
-                <div  (click)="haramdistancefilterUp()" class="cursor-pointer">
+                <div (click)="haramdistancefilterUp()" class="cursor-pointer">
                     <span *ngIf="this.hotelsList[0].city == 'Makkah'" class="pr-2 fs14">{{'Haram Distance' |translate  }}</span>
                     <span *ngIf="this.hotelsList[0].city != 'Makkah'" class="pr-2 fs14">{{'Nabawi Distance' |translate  }}</span>
                     <span class="fliter-arrow">
@@ -65,7 +65,7 @@
             <div class="col-md-12 p-0 maxhght0" id="moreFilterDown">
                 <div class="mt8 row ml-0 mr-0 brdr_top_d3">
                     <div class="col-md-4 mt20">
-                        <h4 class="fs14">{{'STAR RATING' | translate}}</h4>
+                        <h4 class="fs14">{{'STAR CATEGORY' | translate}}</h4>
                         <div>
                             <span class="example-list-section">
                                 <ul>
