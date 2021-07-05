@@ -259,7 +259,8 @@
     "Review your Ground Service details": " راجع تفاصيل الخدمة الأرضية الخاصة بك ",
     "Traveller Details": " تفاصيل المسافر ",
     "BOOK & CONTINUE": "انقر فوقي للحجز",
-    "Phone No": " رقم الهاتف ",
+    "Phone No": "رقم التلفون ",
+    "traveller contact number": "رقم التلفون ",
     "Policies": "سياسات",
     "Apply": "تطبيق",
     "GUESTS": "زائر",
@@ -523,5 +524,7 @@
     "Please Add Remaining Children to Rooms": "الرجاء إضافة الأطفال المتبقين إلى الغرف",
     "Please fill the age of each child": "يرجى ملء عمر كل طفل",
     "Partially Cancelled": "مُلغى جزئيًا",
-    "Mobile number must be valid": "يجب أن يكون رقم الهاتف المحمول صالحًا"
+    "Mobile number must be valid": "يجب أن يكون رقم الهاتف المحمول صالحًا",
+    "PROCESSING": "يتم المعالجة",
+    "UNDER PROCESSING - Please Contact Customer care": "قيد المعالجة - يرجى الاتصال بخدمة العملاء"
 }

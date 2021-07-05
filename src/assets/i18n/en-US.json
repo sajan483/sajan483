@@ -268,6 +268,7 @@
     "Traveller Details": "Traveler Details",
     "BOOK & CONTINUE": "CLICK ME FOR BOOKING",
     "Phone No": "Phone Number",
+    "traveller contact number": "Traveller Contact Number",
     "Policies": "Policies",
     "POLICY": "POLICY",
     "GUESTS": "GUESTS",
@@ -532,5 +533,7 @@
     "Please Add Remaining Children to Rooms": "Please Add Remaining Children to Rooms",
     "Please fill the age of each child": "Please fill the age of each child",
     "Partially Cancelled": "Partially Cancelled",
-    "Mobile number must be valid": "Mobile number must be valid"
+    "Mobile number must be valid": "Mobile number must be valid",
+    "PROCESSING": "PROCESSING",
+    "UNDER PROCESSING - Please Contact Customer care": "UNDER PROCESSING - Please Contact Customer care"
 }
