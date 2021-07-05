@@ -140,8 +140,7 @@ export class PaymentStatusComponent implements OnInit {
   getData(data) {
     var obj = JSON.parse(sessionStorage.getItem('userObject'))
     this.shimmer = false;
-    //this.bknStatus = data.status
-    this.bknStatus = "processing"
+    this.bknStatus = data.status
     this.reference_no = data.reference_no;
     if (this.dataArray) { this.dataArray.unsubscribe(); }
     this.tripData = data;
@@ -172,10 +171,8 @@ export class PaymentStatusComponent implements OnInit {
     }
     if (data && data.travellers) {
       this.tripTravellers = data.travellers;
-      //this.noOfTravellers = obj.travallersCount
-      this.noOfTravellers = 2
+      this.noOfTravellers = obj.travallersCount
     }
-    data.status = "su"
     if(data.status != "success" && !this.setBooleanToCheckTheBrnStatus){
      this.processing = true;
      this.counter = 0
