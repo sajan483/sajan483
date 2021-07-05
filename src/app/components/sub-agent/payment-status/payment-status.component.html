@@ -1,5 +1,5 @@
 <div class="container-fluid pl-0 pr-0 mt60 pb-60 mirr_text_right">
-    <div class="top_section" *ngIf="bknStatus == 'success'">
+    <div class="top_section" *ngIf="bknStatus == 'processing' || bknStatus == 'success'">
         <div class="container d-flex justify-content-between">
             <div class="d-inline-flex pdngsucess">
                 <div class="imagepdng mpr0 mpl30">
@@ -743,6 +743,10 @@
                         <div class="d-flex justify-content-between" *ngIf="tripTransport?.total_price">
                             <div>{{'Transport' | translate}}</div>
                             <div>{{tripData?.currency}} {{tripTransport?.total_price | number :'1.2-2'}}</div>
+                        </div>
+                        <div class="d-flex justify-content-between">
+                            <div class="fntwt600">{{'Total Amount' | translate}}</div>
+                            <div>{{tripData?.currency}} {{tripTransport?.total_price + tripMakkahHotel?.total_price +  tripMadeenaHotel?.total_price | number :'1.2-2'}}</div>
                         </div>
                         <!-- <div (click)="toggleText($event)" class="pt-1">
                             <div class="d-inline-flex">
