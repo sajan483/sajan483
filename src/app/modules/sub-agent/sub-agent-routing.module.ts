@@ -6,6 +6,7 @@ import { PaymentStatusComponent } from 'src/app/components/sub-agent/payment-sta
 import { ProfilePageComponent } from 'src/app/components/sub-agent/profile-page/profile-page.component';
 import { CreateTripComponent } from 'src/app/components/sub-agent/create-trip/create-trip.component';
 import { ItineraryViewComponent } from 'src/app/components/sub-agent/itinerary-view/itinerary-view.component';
+import { IBANAccountDetailsComponent } from 'src/app/components/sub-agent/iban-account-details/iban-account-details.component';
 
 const myPath: Routes = [
   {
@@ -23,6 +24,10 @@ const myPath: Routes = [
   {
     path: "history",
     component: BookingHistoryComponent,
+  },
+  {
+    path: "IBAN/details",
+    component: IBANAccountDetailsComponent,
   },
   {
     path: "payment/:id/:status",

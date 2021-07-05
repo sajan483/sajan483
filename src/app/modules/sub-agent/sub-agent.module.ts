@@ -45,6 +45,8 @@ import { ItineraryViewComponent } from 'src/app/components/sub-agent/itinerary-v
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { SubAgentInterceptor } from 'src/app/core/sub-agent/sub-agent.interceptor'
 import { CancelationPopupComponent } from 'src/app/components/sub-agent/cancelation-popup/cancelation-popup.component';
+import { IBANAccountDetailsComponent } from 'src/app/components/sub-agent/iban-account-details/iban-account-details.component';
+import { DateRangePickerModule } from '@syncfusion/ej2-angular-calendars';
 @NgModule({
   declarations: [
     BookingHistoryComponent,
@@ -66,7 +68,8 @@ import { CancelationPopupComponent } from 'src/app/components/sub-agent/cancelat
     OnlyNumberDirective,
     PaginationComponent,
     ItineraryViewComponent,
-    CancelationPopupComponent
+    CancelationPopupComponent,
+    IBANAccountDetailsComponent
   ],
 
   imports: [
@@ -99,6 +102,7 @@ import { CancelationPopupComponent } from 'src/app/components/sub-agent/cancelat
     MatNativeDateModule,
     CarouselModule,
     Ng2TelInputModule,
+    DateRangePickerModule,
     NgMultiSelectDropDownModule.forRoot(),
     TranslateModule.forChild({
       loader: {

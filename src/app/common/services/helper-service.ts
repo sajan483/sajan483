@@ -76,6 +76,12 @@ export class HelperService {
         return new Date(z);
     }
 
+    dicrimentMonth(date,months){
+        var y = new Date(date);
+        var z = y.setMonth(y.getMonth() - months)
+        return new Date(z);
+    }
+
     /**
      * convert timeStamp to date
      */
