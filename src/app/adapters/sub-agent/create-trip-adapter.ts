@@ -131,9 +131,7 @@ export class CreateTripAdapter {
         }
       }
     }
-   
-    // var latitude: number = +selectedHotel.meta_data.latitude;
-    // var longitute: number = +selectedHotel.meta_data.longitude;
+    roomVariationArray = roomVariationArray.filter(x=>x.total_rooms > 0)
     var name = "";
     if (selectedHotel.name.length > 24) {
       name = selectedHotel.name.substring(0, 24);
