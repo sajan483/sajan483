@@ -158,6 +158,13 @@ export class SubAgentApiService {
     return this.http.get( 'bookings/?page=' + pageNumber + "&lang=" + lang)
   }
 
+  getIbanDetails(lang): Observable<any> {
+    return this.http.get( 'account/balance_enquiry/?lang=' + lang)
+  }
+
+  getIbanHistory(from,to,lang): Observable<any> {
+    return this.http.get( 'account/account_statement/?from_date='+from+'&to_date='+to+'&lang=' + lang)
+  }
 
   getAirportListSrc(airport: String): Observable<any> {
     return this.http.get<listAirport[]>( "airports/autocomplete/?airport_type=DESTINATION&airport_type=BOARDING&search=" + airport);

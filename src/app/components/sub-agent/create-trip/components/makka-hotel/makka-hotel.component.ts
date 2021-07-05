@@ -94,12 +94,17 @@ export class MakkaHotelComponent implements OnInit,DoCheck{
 
   ngOnInit() {
     this.setInitialValues();
-    if(this.hotelsList[0].city == "Makkah"){
+    if(sessionStorage.getItem('service') == 'All'){
+      if(this.hotelsList[0].city == "Makkah"){
+        this.stage  = 0
+        sessionStorage.setItem('stage',JSON.stringify(this.stage))
+      }
+      else{
+        this.stage  = 1
+        sessionStorage.setItem('stage',JSON.stringify(this.stage))
+      }
+    }else{
       this.stage  = 0
-      sessionStorage.setItem('stage',JSON.stringify(this.stage))
-    }
-    else{
-      this.stage  = 1
       sessionStorage.setItem('stage',JSON.stringify(this.stage))
     }
 
@@ -172,6 +177,7 @@ export class MakkaHotelComponent implements OnInit,DoCheck{
         if(flag === '0' || flag === '1'){
           sessionStorage.setItem('hotelDetailsFlag','open')
         }
+        window.scroll(0,0);
       },
       (error) => {
         this.showDetailsShimmer = false;

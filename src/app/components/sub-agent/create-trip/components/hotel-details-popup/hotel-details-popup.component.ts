@@ -167,6 +167,7 @@ export class HotelDetailsPopupComponent implements OnInit ,OnChanges{
         sessionStorage.setItem('custom_trip_id',data.id);
         sessionStorage.setItem('stage','1')
         this.onNotify();
+        window.scroll(0,0);
       });
     }
     if(sessionStorage.getItem('custom_trip_id')){
@@ -178,6 +179,7 @@ export class HotelDetailsPopupComponent implements OnInit ,OnChanges{
             sessionStorage.setItem('stage','2')
           }
           this.onNotify();
+          window.scroll(0,0);
       });
     }
     sessionStorage.setItem('hotelDetailsFlag','close')

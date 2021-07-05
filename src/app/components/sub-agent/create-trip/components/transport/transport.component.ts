@@ -174,7 +174,8 @@ export class TransportComponent implements OnInit {
         (error) => { }
       );
     }
-    sessionStorage.setItem('stage', '3')
+    sessionStorage.setItem('stage', '3');
+    window.scroll(0,0);
   }
 
   setStepperIndex() {

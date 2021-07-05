@@ -22,8 +22,7 @@
                                 <!-- <th><mat-checkbox [disabled]="!makkahCancellation?.success" (change)="makkahcheck();"></mat-checkbox></th> -->
                                 <td>{{'Makkah Hotel' | translate}}</td>
                                 <td>{{details?.makka_hotel_booking?.trip_hotel?.hotel?.name}}</td>
-                                <td *ngIf="!cancel?.makkah_hotel_booking?.success" style="color: red;">{{'Items' | translate}}
-                                </td>
+                                <td *ngIf="!cancel?.makkah_hotel_booking?.success" style="color: red;">{{'No Cancellation Policy Found' | translate}}</td>
                                 <td *ngIf="cancel?.makkah_hotel_booking?.success" style="color: green;">
                                     {{cancel?.makkah_hotel_booking?.cancellation_prices?.cancellation_status}} </td>
                                 <td *ngIf="!cancel?.makkah_hotel_booking?.success">0</td>
