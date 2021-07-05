@@ -85,7 +85,6 @@ export class CreateTripHelper {
       });
       container.roomGroups = selectedRoomGroups;
     }
-    console.log("roomgroup",container.roomGroups)
    return container;
   }
   
