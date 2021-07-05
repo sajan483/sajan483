@@ -128,7 +128,7 @@ export class PaymentStatusComponent implements OnInit {
     var obj = JSON.parse(sessionStorage.getItem('userObject'))
     this.shimmer = false;
     //this.bknStatus = data.status
-    this.bknStatus = 'processing'
+    this.bknStatus = 'success'
     this.reference_no = data.reference_no;
     if (this.dataArray) { this.dataArray.unsubscribe(); }
     this.tripData = data;

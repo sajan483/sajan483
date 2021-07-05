@@ -1,5 +1,5 @@
 <div class="container-fluid pl-0 pr-0 mt60 pb-60 mirr_text_right">
-    <div class="top_section" *ngIf="bknStatus == 'success'">
+    <div class="top_section" *ngIf="bknStatus == 'processing' || bknStatus == 'success'">
         <div class="container d-flex justify-content-between">
             <div class="d-inline-flex pdngsucess">
                 <div class="imagepdng mpr0 mpl30">
@@ -49,27 +49,6 @@
                 <div>
                     <h1 class="text-uppercase fs28 fw600 text-white mb-0">{{'Cancelled..!!' | translate}} </h1>
                     <h3 class="text-white fs18">{{'Booking has been Cancelled' | translate}}</h3>
-                </div>
-            </div>
-            <div class="text-white my-auto fs14">
-                <div class="cursor-pointer d-flex" (click)="navigateHomePage()">
-                    <div class="my-auto mirr_hide"><i class="fa fa-chevron-left " aria-hidden="true"></i></div>
-                    <div class="px-2">{{'Back to Home Page' | translate}}</div>
-                    <div class="my-auto mirr_display"><i class="fa fa-chevron-left " aria-hidden="true"></i></div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="bgOrng" *ngIf="bknStatus == 'processing'">
-        <div class="container d-flex justify-content-between">
-            <div class="d-inline-flex pdngerror">
-                <div class="">
-                    <i class="fa fa-spinner spnrStl" aria-hidden="true"></i>
-                    <!-- <i class="fa fa-times-circle closeimg mpr0 mpl30" aria-hidden="true"></i> -->
-                </div>
-                <div>
-                    <h1 class="text-uppercase fs28 fw600 text-white mb-0">{{'Inprogress..!!' | translate}} </h1>
-                    <h3 class="text-white fs18">{{'Your booking is in progress' | translate}}</h3>
                 </div>
             </div>
             <div class="text-white my-auto fs14">
@@ -765,8 +744,8 @@
                             <div>{{'Transport' | translate}}</div>
                             <div>{{tripData?.currency}} {{tripTransport?.total_price | number :'1.2-2'}}</div>
                         </div>
-                        <div class="d-flex justify-content-between" *ngIf="tripTransport?.total_price">
-                            <div>{{'Total Amount' | translate}}</div>
+                        <div class="d-flex justify-content-between">
+                            <div class="fntwt600">{{'Total Amount' | translate}}</div>
                             <div>{{tripData?.currency}} {{tripTransport?.total_price + tripMakkahHotel?.total_price +  tripMadeenaHotel?.total_price | number :'1.2-2'}}</div>
                         </div>
                         <!-- <div (click)="toggleText($event)" class="pt-1">
