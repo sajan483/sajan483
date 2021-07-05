@@ -84,7 +84,7 @@
                 </h2>
                 <div class="border_box_shadow bg_white" [class.errorBox]="tripMakkahHotel?.status== 'failed' || tripMakkahHotel?.status=='cancelled'" *ngIf="tripMakkahHotel != null">
                     <div class="row m-0 p10">
-                        <div class="col-md-12 p-0 brdrbottom mb10" *ngIf="tripMakkahHotel?.status=='success'">
+                        <div class="col-md-12 p-0 brdrbottom mb10" *ngIf="tripMakkahHotel?.status=='success'"> 
                             <div class="d-inline-flex">
                                 <div class="d-inline-flex bookdpdng brdrR mirr_brdr_right_none mirr_brdr_left">
                                     <i class="selectedgreentickicon icns icon_size_20"></i>
@@ -145,6 +145,14 @@
                                 <div class="d-inline-flex bookdpdng">
                                     <i class="material-icons icns icon_size_20 clrrd">cancel</i>
                                     <div class="fs14 fw600 success_text ml10 mmr10 clrrd mt2p">{{'FAILED' | translate}}</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-12 p-0 brdrbottom mb10"  *ngIf="processing">
+                            <div class="d-inline-flex">
+                                <div class="d-inline-flex bookdpdng">
+                                        <i class="fa fa-spinner fa-spin icon_size_20 clrOrng" style="height: 12px;" ></i>
+                                   <div class="fs14 fw600 success_text ml10 mmr10 clrOrng">{{'INPROGRESS' | translate}}</div>
                                 </div>
                             </div>
                         </div>
@@ -347,6 +355,14 @@
                                 </div>
                             </div>
                         </div>
+                        <div class="col-md-12 p-0 brdrbottom mb10" *ngIf="processing">
+                            <div class="d-inline-flex">
+                                <div class="d-inline-flex bookdpdng">
+                                        <i class="fa fa-spinner fa-spin icon_size_20 clrOrng" style="height: 12px;" ></i>
+                                   <div class="fs14 fw600 success_text ml10 mmr10 clrOrng">{{'INPROGRESS' | translate}}</div>
+                                </div>
+                            </div>
+                        </div>
                         <div class="col-md-2 col-12 pl-0 pr-0 my-auto">
                             <i class="hotelblueicon icns icon_size_30 imgposition mirr_float_right"></i>
                             <div class="Premium_blue fs14 fw600 ">
@@ -532,6 +548,14 @@
                                     <i class="material-icons icns icon_size_20 clrrd">cancel</i>
                                     <div class="fs14 fw600 success_text ml10 mmr10 clrrd mt2p">{{'CANCELLED' | translate}}
                                     </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-12 p-0 brdrbottom mb10" *ngIf="processing">
+                            <div class="d-inline-flex">
+                                <div class="d-inline-flex bookdpdng">
+                                        <i class="fa fa-spinner fa-spin icon_size_20 clrOrng" style="height: 12px;" ></i>
+                                   <div class="fs14 fw600 success_text ml10 mmr10 clrOrng">{{'INPROGRESS' | translate}}</div>
                                 </div>
                             </div>
                         </div>

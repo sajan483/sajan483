@@ -67,6 +67,8 @@ export class PaymentStatusComponent implements OnInit {
   checkCancelData: LooseObject = {};
   interval;
   allowUserToCancellBooking: boolean;
+  setBooleanToCheckTheBrnStatus: boolean = false;
+  processing: boolean;
   
   constructor(private route: ActivatedRoute,
     private appStore: AppStore,
@@ -102,18 +104,29 @@ export class PaymentStatusComponent implements OnInit {
 
   getList() {
     this.common.getPaymentDetails(this.route.snapshot.params.id,sessionStorage.getItem('userLanguage')).subscribe((data) => {
-      if (data.message && data.message == "Request is processing" && this.counter < 10) {
-        this.dataArray = Observable
-          .interval(10 * 1000)
-          .subscribe(data => {
-            this.getList();
-            this.counter = this.counter + 1;
-          });
-      } else {
-        this.getData(data);
+     if(data && data.message == "Request is processing"){
+      if(this.counter < 10){
+        this.setTimerForGetList();
+        this.counter = this.counter + 1;
+      }else
+      { 
+        Swal.fire({
+          text: this.translate.instant('Server is busy now, please try after some time'),
+          icon: "warning",
+          confirmButtonText: this.translate.instant("ok"),
+        });
       }
+    }else{
+      this.getData(data);
+    } 
     });
   }
+
+  setTimerForGetList() {
+    setTimeout(()=>{
+      this.getList();
+    }, 5000);
+   }
 
   ngAfterViewChecked() {
     this.translate.use((sessionStorage.getItem('userLanguage') === 'ar-AE') ? "ar-AE" : "en-US");
@@ -127,7 +140,8 @@ export class PaymentStatusComponent implements OnInit {
   getData(data) {
     var obj = JSON.parse(sessionStorage.getItem('userObject'))
     this.shimmer = false;
-    this.bknStatus = data.status
+    //this.bknStatus = data.status
+    this.bknStatus = "processing"
     this.reference_no = data.reference_no;
     if (this.dataArray) { this.dataArray.unsubscribe(); }
     this.tripData = data;
@@ -156,11 +170,34 @@ export class PaymentStatusComponent implements OnInit {
     if (data.trip_visa) {
       this.tripVisaData = data.trip_visa[0];
     }
-    if (data.travellers) {
+    if (data && data.travellers) {
       this.tripTravellers = data.travellers;
-      this.noOfTravellers = obj.travallersCount
+      //this.noOfTravellers = obj.travallersCount
+      this.noOfTravellers = 2
+    }
+    data.status = "su"
+    if(data.status != "success" && !this.setBooleanToCheckTheBrnStatus){
+     this.processing = true;
+     this.counter = 0
+     this.setBooleanToCheckTheBrnStatus = true
+     this.setTimerForGetListStatus()
     }
   }
+
+  setTimerForGetListStatus() {
+    setTimeout(()=>{
+      this.callGetListForStstus();
+    }, 10000);
+   }
+
+  callGetListForStstus(){
+    this.common.getPaymentDetails(this.route.snapshot.params.id,sessionStorage.getItem('userLanguage')).subscribe(
+      (data) => {
+        this.processing = false;
+        this.getData(data)
+      })
+  }
+
   
   checkTimeStamp(){
     if(this.tripData && this.tripData.booking_timestamp != null){
