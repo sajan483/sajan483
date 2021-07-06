@@ -168,7 +168,7 @@
                                                             </div>
                                                         </div>
                                                     </li>
-                                                    <li class="roomRate" style="border-right: 1px solid #e1e1e1">
+                                                    <li class="roomRate mirr_brdr_right_none brder_right_e1 mirr_brdr_left">
                                                         <strong class="customTooltip">
                                                             <span class="cursortext-dark-pointer text-dark fw600"
                                                                 data-room-price="139">{{room?.fare_summary[0]?.currency}}
@@ -221,14 +221,16 @@
                                                 <div class="green_text fs14 fw600">{{selectedRoomCount}} {{'Room Selected' | translate}}</div>
                                             </div>
                                         </div>
-                                        <strong class="mt10">
+                                        <strong class="mt10" *ngIf="selectedRoomCount > 0">
                                             <span class="fw500 fs24 text-dark">{{selectedHotel?.currency }}
                                                 {{totalRoomPrice | number:'.2-2'}} </span>
                                         </strong>
-                                        <div class="clr52 fs12 fw500 mt10">
+                                        <div class="clr52 fs12 fw500 mt10" *ngIf="selectedRoomCount > 0">
                                             {{selectedRoomCount}} {{'room for' | translate}} {{numberOfDays}} {{'nights' | translate}}
                                         </div>
-
+                                        <div class="green_text fs14 fw600 mt10" *ngIf="selectedRoomCount == 0">
+                                            {{'Please select room(s)' | translate}}
+                                        </div>
                                         <button class="searchbutton mt10" [class.bttnactive]="activeBttn" [disabled]='activateSearchBtn' (click)="bookHotel()">{{'Select' |
                                             translate}}</button>
 

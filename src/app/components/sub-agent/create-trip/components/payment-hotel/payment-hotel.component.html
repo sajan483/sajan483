@@ -95,13 +95,13 @@
                 </div>
             </div>
             <div class="float_right mirr_float_left fs16 fw500 pt-2 customTooltip">
-             <span>
+                <span>
                 {{tripHotel?.room_variations[0]?.currency}} {{tripHotel?.prices_summary?.total_price | number:'.2-2'}}
              </span>
-             <span *ngIf="tripHotel.prices_summary.price_update" style="color:grey">( Old Price
+                <span *ngIf="tripHotel.prices_summary.price_update" style="color:grey">( Old Price
                 {{tripHotel?.room_variations[0]?.currency}} {{tripHotel?.prices_summary?.price_updates?.amount | number:'.2-2'}})
              </span>
-               <span class="customtooltiptext transportPayment">
+                <span class="customtooltiptext transportPayment">
                     <div class="container mb-2 fs12">
                         <div class="pt-2 fare_summary_heading">{{'Fare Summary' | translate}}</div>
                         <div>
@@ -152,7 +152,7 @@
                     </div>
                     <div class="text-center mt-2">
                         <i class="nighticon icon_size_20 icns"></i>
-                        <p class="textgrey font14">{{tripHotel?.num_of_days}} {{'Nights'| translate}}</p>
+                        <p class="textgrey font14">{{tripHotel?.num_of_days}} {{'Night(s)'| translate}}</p>
                     </div>
                     <div class="text_left mirr_text_right">
                         <div class="d-flex">

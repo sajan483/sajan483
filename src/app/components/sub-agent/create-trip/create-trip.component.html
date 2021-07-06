@@ -13,16 +13,16 @@
                                 <div class="pl4">
                                     <h3 class="fs22 mb-0">{{'Hotels in Makkah' | translate}}</h3>
                                     <p class="blue_text">
-                                        <span class="clr52">{{'No of Days In Makkah' | translate}} </span> {{noOfDaysInMakkah}}
+                                        <span class="clr52">{{'No of Days In Makkah' | translate}} </span><span class="clr_blue_18 fw600 px-1">{{noOfDaysInMakkah}}</span>
                                         <span class="crossbarsamll phonehide"></span>
                                         <span class="phonehide"><span class="clr52 ">{{'No of Guest' | translate}}
-                                            </span>{{travellersCount}}</span>
+                                            </span ><span class="clr_blue_18 fw600 px-1">{{travellersCount}}</span></span>
                                         <span class="crossbarsamll phonehide "></span>
                                         <span class="phonehide"><span class="clr52 ">{{'Start' | translate}}
-                                            </span>{{makkahCheckInDate | date:'MMM-dd'}}
+                                            </span><span class="clr_blue_18 fw600 px-1">{{makkahCheckInDate | date:'mediumDate'}}</span>
                                         </span>
                                         <span class="phonehide ml-2"><span class="clr52 ">{{'End' | translate}}
-                                            </span>{{makkahCheckOutDate | date:'MMM-dd'}}</span>
+                                            </span><span class="clr_blue_18 fw600 px-1">{{makkahCheckOutDate | date:'mediumDate'}}</span></span>
                                     </p>
                                 </div>
                                 <div class="d-flex my-auto backbutton cursor-pointer" (click)="backToHomePage();">
@@ -47,16 +47,16 @@
                                     <h3 class="fs22 mb-0">{{'Hotels in Madinah' | translate }}</h3>
                                     <p class="blue_text">
                                         <span class="clr52">{{'No of Days In Madinah' | translate}}
-                                        </span>{{noOfDaysInMadeena}}
+                                        </span><span class="clr_blue_18 fw600 px-1">{{noOfDaysInMadeena}}</span>
                                         <span class="crossbarsamll phonehide"></span>
                                         <span class="phonehide"><span class="clr52 ">{{'No of Guest' | translate}}
-                                            </span>{{travellersCount}}</span>
+                                            </span><span class="clr_blue_18 fw600 px-1">{{travellersCount}}</span></span>
                                         <span class="crossbarsamll phonehide "></span>
                                         <span class="phonehide"><span class="clr52 ">{{'Start' | translate}}
-                                            </span>{{madeenaCheckInDate | date:'MMM-dd'}}
+                                            </span><span class="clr_blue_18 fw600 px-1">{{madeenaCheckInDate | date:'mediumDate'}}</span>
                                         </span>
                                         <span class="phonehide ml-2"><span class="clr52 ">{{'End' | translate}}
-                                            </span>{{madeenaCheckOutDate | date:'MMM-dd'}}</span>
+                                            </span><span class="clr_blue_18 fw600 px-1">{{madeenaCheckOutDate | date:'mediumDate'}}</span></span>
                                     </p>
                                 </div>
                                 <div class="d-flex my-auto backbutton cursor-pointer" (click)="backToHomePage();">
@@ -78,10 +78,10 @@
                                     <h3 class="fs22 mb-0">{{'Transport' | translate}}</h3>
                                     <p class="blue_text">
                                         <span class="phonehide"><span class="clr52 ">{{'No of Guest' | translate}}
-                                            </span>{{travellersCount}}</span>
+                                            </span><span class="clr_blue_18 fw600 px-1">{{travellersCount}}</span></span>
                                         <span class="crossbarsamll phonehide "></span>
                                         <span class="phonehide "><span class="clr52 ">{{'Start' | translate}}
-                                            </span>{{transportStartDate | date:'MMM-dd'}}</span>
+                                            </span><span class="clr_blue_18 fw600 px-1">{{transportStartDate | date:'mediumDate'}}</span></span>
                                     </p>
                                 </div>
                                 <div class="d-flex my-auto backbutton cursor-pointer" (click)="backToHomePage();">
@@ -119,11 +119,11 @@
                 <mat-step label="{{'Payment' | translate}}" state="payment">
                     <form [formGroup]="paymentForm">
                         <div class="mt80 prcStrip">
-                               <div class="d-flex container justify-content-between">
-                                   <p class="priceStl fw600 Premium_blue">{{'Preview & Payment' | translate}}</p>
-                                   <p class="ml-auto priceStl fw600 Premium_blue" style="padding-bottom: 20px;"><span>{{'Total Amount' | translate}}</span><span class="ml-2">SAR  {{tripData?.total_price | number:'.2-2'}}</span></p>
-                               </div>
-                           </div>
+                            <div class="d-flex container justify-content-between">
+                                <p class="priceStl fw600 Premium_blue">{{'Preview & Payment' | translate}}</p>
+                                <p class="ml-auto priceStl fw600 Premium_blue" style="padding-bottom: 20px;"><span>{{'Total Amount' | translate}}</span><span class="ml-2">SAR  {{tripData?.total_price | number:'.2-2'}}</span></p>
+                            </div>
+                        </div>
                         <div class="col-md-12 p-0 mt150">
                             <div class="col-md-12" *ngIf="tripMakkahHotel || tripMadeenaHotel">
                                 <h3 class="fs16 fw600 Premium_blue">{{'Hotel details'| translate}}</h3>
@@ -268,12 +268,9 @@
                                 <!--  <div class="d-flex flex-row mrgin mt-2 mb-2 mr-4 ml-4">
                                     <div class="text-align-end"><button type="submit" id="payBtn" class="searchbutton" data-toggle="modal" data-target="#ibanPopup" (click)="setTimerForIbanPopup()">{{'PAY' }}</button> </div>
                                 </div>-->
-                                <div class="d-flex flex-row m-2">
-                                    <div class="p-2 ml-auto"></div>
-                                    <div><button (click)="bookTrip()" [disabled]="disablePayBttn" type="submit" [class.bttnactive]="bookContinue" id="continueBooking" class="searchbutton">{{'Click here for booking' |
-                                            translate}}</button>
-                                    </div>
-                                    <div class="p-2"></div>
+                                <div class="d-flex justify-content-end">
+                                    <button (click)="bookTrip()" [disabled]="disablePayBttn" type="submit" [class.bttnactive]="bookContinue" id="continueBooking" class="searchbutton mr-0">{{'Click here for booking' |
+                                        translate}}</button>
                                 </div>
                                 <div style="height: 100px;background:#eaeaea;"></div>
                             </div>

@@ -498,8 +498,8 @@
                         <div class="col-md-2 col-12 pl-0 pr-0 my-auto">
                             <i class="transportblueicon icns icon_size_30 imgposition mirr_float_right"></i>
                             <div class="Premium_blue fs14 fw600">
-                                <p>{{'VEHICLE' | translate}}</p>
                                 <p>{{tripTransport.trip_transportation?.vehicle_types[0].name}}</p>
+                                <p>{{tripTransport?.trip_transportation?.selected_transportation?.start_date | date:'mediumDate'}}</p>
                             </div>
                         </div>
                         <div class="col-md-9 col-12 brdrR brdrL my-auto">
@@ -518,9 +518,6 @@
                         </div>
                         <div class="col-md-12 p-0 row ml-0 mr-0  borderpading  expansion">
                             <div class="col-md-12 transportbodypdng mt-2 row brdrtop m-0">
-                                <div class="col-md-4 p-0 mb-2">
-                                    <p class="clr52 fs14"><i class="fa fa-circle pr10 mpr0 mpl10 font9imp" aria-hidden="true"></i>{{'Start Date' | translate}} : {{tripTransport?.trip_transportation?.selected_transportation?.start_date | date:'mediumDate'}}</p>
-                                </div>
                                 <div class="col-md-4 p-0 mb-2">
                                     <p class="clr52 fs14"><i class="fa fa-circle pr10 mpr0 mpl10 font9imp" aria-hidden="true"></i>{{'Category' | translate}} : {{tripTransport?.trip_transportation?.categories[0]?.name}}</p>
                                 </div>
@@ -694,18 +691,22 @@
                 </div>
                 <div class="mt-3">
                     <h2 class="fs18 fw600">{{'Fare Summary' | translate}}</h2>
-                    <div class="boxvouch">
-                        <div class="d-flex justify-content-between" *ngIf="tripMakkahHotel?.total_price">
+                    <div class="boxvouch clr52 fs14">
+                        <div class="d-flex justify-content-between pb-2" *ngIf="tripMakkahHotel?.total_price">
                             <div>{{'Makkah Hotel' | translate}}</div>
                             <div>{{tripData?.currency}} {{tripMakkahHotel?.total_price | number :'1.2-2'}}</div>
                         </div>
-                        <div class="d-flex justify-content-between" *ngIf="tripMadeenaHotel?.total_price">
+                        <div class="d-flex justify-content-between pb-2" *ngIf="tripMadeenaHotel?.total_price">
                             <div>{{'Madeena Hotel' | translate}}</div>
                             <div>{{tripData?.currency}} {{ tripMadeenaHotel?.total_price | number :'1.2-2'}}</div>
                         </div>
-                        <div class="d-flex justify-content-between" *ngIf="tripTransport?.total_price">
+                        <div class="d-flex justify-content-between pb-2" *ngIf="tripTransport?.total_price">
                             <div>{{'Transport' | translate}}</div>
                             <div>{{tripData?.currency}} {{tripTransport?.total_price | number :'1.2-2'}}</div>
+                        </div>
+                        <div class="d-flex justify-content-between brdr_top_d3 pt-2 fw600 clr_blue_18">
+                            <div>{{'Total Amount' | translate}}</div>
+                            <div>{{tripData?.currency}} {{tripTransport?.total_price + tripMakkahHotel?.total_price + tripMadeenaHotel?.total_price | number :'1.2-2'}}</div>
                         </div>
                         <!-- <div (click)="toggleText($event)" class="pt-1">
                             <div class="d-inline-flex">

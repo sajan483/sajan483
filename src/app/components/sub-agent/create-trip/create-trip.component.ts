@@ -765,7 +765,7 @@ export class CreateTripComponent implements OnInit, AfterViewChecked, DoCheck {
     if (typeof (this.userDetails) == 'undefined') { this.router.navigate(['subagent/home']) }
     if (this.userDetails) {
       this.totalTravellers = this.userDetails.travallersCount;
-      this.noOfDaysInMakkah = this.appStore.noOfDaysInMakkah;
+      this.noOfDaysInMakkah = this.userDetails.noOfDaysInMakkah;
       this.makkahCheckInDate = this.userDetails.makkahCheckinDate;
       this.makkahCheckOutDate = this.userDetails.makkahCheckoutDate;
       this.transportStartDate = this.userDetails.transportStartDate;
