@@ -526,5 +526,6 @@
     "Partially Cancelled": "مُلغى جزئيًا",
     "Mobile number must be valid": "يجب أن يكون رقم الهاتف المحمول صالحًا",
     "PROCESSING": "يتم المعالجة",
-    "UNDER PROCESSING - Please Contact Customer care": "قيد المعالجة - يرجى الاتصال بخدمة العملاء"
+    "UNDER PROCESSING - Please Contact Customer care": "قيد المعالجة - يرجى الاتصال بخدمة العملاء",
+    "Preview & Payment":"المعاينة والدفع"
 }
