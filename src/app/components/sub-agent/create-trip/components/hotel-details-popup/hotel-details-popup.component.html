@@ -27,7 +27,7 @@
                 <div class="row container filterbox mx-auto bg-white mt-2 pl-0 pr-0">
                     <div class="col-md-7 col-12 row">
                         <div *ngIf="selectedHotel?.has_special_deal" class="hotelRibbon">
-                            <span class="hotelRibbon3">
+                            <span class="hotelRibbon3 hotelDetails">
                                 {{'Has special deal' | translate}}
                             </span>
                         </div>
@@ -134,10 +134,10 @@
                                                     <li class="roomtypeName media">
                                                         <div class="roomRibbon" *ngIf="room?.has_special_deal">
                                                             <span class="roomRibbon6">
-                                                                <p>{{'Special Deal' | translate}}</p>
-                                                                <p>{{room?.deal_description}}</p>
+                                                                <p>{{'Special Deal' | translate}} : {{room?.deal_description}}</p>
                                                             </span>
                                                         </div>
+                                                        <p class="pt25" *ngIf="room?.has_special_deal"></p>
                                                         <div class="media-body divAmenities textright pr10">
                                                             <strong>
                                                                 <span
