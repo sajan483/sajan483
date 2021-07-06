@@ -6241,3 +6241,19 @@ input[type="radio"]:checked:after {
         background-position: 468px 0;
     }
 }
+
+.priceStl{
+    font-size: 17px;
+    margin-top: 15px;
+  }
+  .prcStrip{
+    min-height: 60p !important;
+    background-color: #f3f3f3;
+    position:absolute;
+    left: 0;   
+    top: -4px;
+    width: 100%;
+  }
+  .mt150{
+    margin-top: 151px;
+  }
