@@ -103,7 +103,7 @@ export class CreateTripFrontPageComponent implements OnInit, DoCheck, AfterViewI
   vehicleCount: number = 1;
   countArray:number[] = [1];
   setBoolean:boolean = false;
-  goBttnHide:boolean = true;
+  disableGoBttn:boolean = false;
   constructor(
     private commonApiService: SubAgentApiService,
     private subAgentApiService: SubAgentApiService,
@@ -172,8 +172,9 @@ export class CreateTripFrontPageComponent implements OnInit, DoCheck, AfterViewI
   setDomDataOnRefresh() {
     var obj = JSON.parse(sessionStorage.getItem('userObject'))
     if (obj != null) {
+      this.disableGoBttn = true;
       this.enableGoButton()
-      this.onServiceItemChange(sessionStorage.getItem('service'))
+      this.onServiceItemChange(sessionStorage.getItem('service'),false)
       this.goButtonClicked()
       this.countTravalers = obj.travallersCount
       this.countAdult = obj.adults
@@ -374,6 +375,7 @@ export class CreateTripFrontPageComponent implements OnInit, DoCheck, AfterViewI
    * 
    */
   goButtonClicked() {
+    this.disableGoBttn = true;
     this.showSearchbttn();
     this.resetBooleans();
     (<HTMLElement>document.getElementById("dateEnterDiv")).style.maxHeight = "456px";
@@ -417,6 +419,8 @@ export class CreateTripFrontPageComponent implements OnInit, DoCheck, AfterViewI
     }
 
     this.hidebttn = true;
+    
+    
   }
 
   /**
@@ -736,7 +740,7 @@ export class CreateTripFrontPageComponent implements OnInit, DoCheck, AfterViewI
    * 
    */
 
-  onServiceItemChange(value) {
+  onServiceItemChange(value,check:boolean) {
     this.service = value;
     sessionStorage.setItem('service', this.service)
     if (value == "All") {
@@ -763,6 +767,9 @@ export class CreateTripFrontPageComponent implements OnInit, DoCheck, AfterViewI
       this.enableMakka = false;
       this.enableMadina = false;
       this.goButtonEnable = false;
+    }
+    if(check){
+      this.disableGoBttn = false;
     }
   }
 

@@ -60,6 +60,7 @@
                         <span class="darkyellow" *ngIf="item?.status == 'partial_success'">{{'Partially Success' | translate}}</span>
                         <span class="red_text" *ngIf="item?.status == 'cancelled'">{{'Cancelled' | translate}}</span>
                         <span class="red_gray" *ngIf="item?.status == 'partial_cancellation'">{{'Partially Cancelled' | translate}}</span>
+                        <span class="red_gray text-uppercase" *ngIf="item?.status == 'processing'">{{'processing' | translate}}</span>
                     </td>
                     <td>
                         <div title="{{item?.custom_trip?.adults+item?.custom_trip?.children+item?.custom_trip?.infants}} traveller">
