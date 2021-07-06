@@ -200,10 +200,19 @@
     background-color: white;
     border-radius: 4px;
 }
-.mdtryStrr{
-    color:red;
-    font-size:20px
+
+.mdtryStrr {
+    color: red;
+    font-size: 20px
 }
-.mt8{
-    margin-top:8px;
+
+.mt8 {
+    margin-top: 8px;
+}
+
+.disableGoBttn {
+    background-color: #5252 !important;
+    border: 1px solid #c7c7c7 !important;
+    color: white !important;
+    cursor: alias !important;
 }
