@@ -214,7 +214,7 @@
                                                     <div class="col-md-3 pt-2">
                                                         <label class="mb-0 fs14 clrlabel">{{'Nationality' |
                                                             translate}}</label>
-                                                        <select class="form-control pd" [ngModelOptions]="{standalone: true}" [(ngModel)]="nationality" [disabled]="disablePayBttn">
+                                                        <select class="form-control pd" [ngModelOptions]="{standalone: true}" [(ngModel)]="nationality">
                                                             <option *ngFor="let n of nationalityList"
                                                                 [value]="n.item_text">{{n?.item_text}}</option>
                                                         </select>
@@ -222,7 +222,7 @@
                                                     <div class="col-md-3 pt-2">
                                                         <label class="mb-0 fs14 clrlabel">{{'Country of Residence' |
                                                             translate}}</label>
-                                                        <select class="form-control pd" [ngModelOptions]="{standalone: true}" [(ngModel)]="country_of_residence" [disabled]="disablePayBttn">
+                                                        <select class="form-control pd" [ngModelOptions]="{standalone: true}" [(ngModel)]="country_of_residence">
                                                             <option *ngFor="let n of nationalityList"
                                                                 [value]="n.item_text">{{n?.item_text}}</option>
                                                         </select>
@@ -265,11 +265,17 @@
                                         </div>
                                     </form>
                                 </div>
-                                <!--  <div class="d-flex flex-row mrgin mt-2 mb-2 mr-4 ml-4">
-                                    <div class="text-align-end"><button type="submit" id="payBtn" class="searchbutton" data-toggle="modal" data-target="#ibanPopup" (click)="setTimerForIbanPopup()">{{'PAY' }}</button> </div>
-                                </div>-->
+                                <div class="d-flex p10 cursor-pointer">
+                                    <div class="custom-control custom-checkbox">
+                                        <input type="checkbox" class="custom-control-input" id="defaultUnchecked" (change)="policyCheck($event)">
+                                        <label class="custom-control-label" for="defaultUnchecked">{{'I accept the' | translate}}</label>
+                                    </div>
+                                    <div class="ml-2 textunderline clr_blue_18" (click)="termsandcondition()">
+                                        {{'Terms & Conditions' | translate}}
+                                    </div>
+                                </div>
                                 <div class="d-flex justify-content-end">
-                                    <button (click)="bookTrip()" [disabled]="disablePayBttn" type="submit" [class.bttnactive]="bookContinue" id="continueBooking" class="searchbutton mr-0">{{'Click here for booking' |
+                                    <button (click)="bookTrip()" [disabled]="disablePayBttn" type="submit" [class.bttnactive]="bookContinue" id="continueBooking" class="searchbutton mr-0 mt-0">{{'Click here for booking' |
                                         translate}}</button>
                                 </div>
                                 <div style="height: 100px;background:#eaeaea;"></div>
@@ -282,53 +288,7 @@
     </div>
 </div>
 
-<div [style.display]="additionalServiceCount ? 'block' : 'none'" class="modal" id="additionalServiceCount" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel"></h5>
-                <button type="button" class="close">
-                    <i class="fa fa-times" aria-hidden="true"></i>
-                </button>
-            </div>
-            <div class="modal-body">
-                <div class="container">
-                    <div class="row">
-                        <div *ngIf="setDataForAddServiceCountPopUP?.additional_service_code == '1'">
-                            <h6>{{'No of Umrah Guidance Needed' }} :</h6>
-                        </div>
-                        <div *ngIf="setDataForAddServiceCountPopUP?.additional_service_code == '2'">
-                            <h6>{{'No of Wheel Chair Needed' }} :</h6>
-                        </div>
-                        <div *ngIf="setDataForAddServiceCountPopUP?.additional_service_code == '3'">
-                            <h6>{{'No of Wheel Chair with Assistant Needed' }} :</h6>
-                        </div>
-                        <div *ngIf="setDataForAddServiceCountPopUP?.additional_service_code == '4'">
-                            <h6>{{'No of Male Companion Needed' }} :</h6>
-                        </div>
-                        <div *ngIf="setDataForAddServiceCountPopUP?.additional_service_code == '5'">
-                            <h6>{{'No of Female Companion Needed' }} :</h6>
-                        </div>
-                        <div *ngIf="setDataForAddServiceCountPopUP?.additional_service_code == '6'">
-                            <h6>{{'No of Baby Sitter Needed' }} :</h6>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <mat-form-field>
-                            <mat-label>{{'Select' }}</mat-label>
-                            <select matNativeControl [(ngModel)]="addSrvCount" name="service">
-                                <option
-                                    *ngFor="let k of [].constructor(setDataForAddServiceCountPopUP?.quantity) | slice:0:50; let p = index;"
-                                    value="{{p+1}}">{{p+1}}</option>
-                            </select>
-                        </mat-form-field>
-                        <button class="okbutton">{{'Submit'}}</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
+
 <div [style.display]="showIbanPopup ? 'block' : 'none'" class="modal" id="ibanPopup" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -363,3 +323,5 @@
         <img class="spinnerImg" src="assets/images/paymentLoader.gif" alt="">
     </div>
 </ngx-spinner>
+
+<app-terms-and-condition *ngIf="policy"></app-terms-and-condition>

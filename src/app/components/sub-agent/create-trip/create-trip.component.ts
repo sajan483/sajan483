@@ -38,13 +38,14 @@ import { TranslateService } from '@ngx-translate/core';
 })
 
 export class CreateTripComponent implements OnInit, AfterViewChecked, DoCheck {
+  static termsCondtion: boolean;
+  policy:boolean = false;
   countryCode: any = environment.countryCodeCommen;
   showtransportsearch: boolean = true;
   static UserObjectData: any;
   static RoomData: any;
   userDetails: any;
   roomDetails: any;
-  additionalServiceCount: boolean = false;
   roomdetails: boolean = false;
   paymentForm: FormGroup;
   step = 0;
@@ -102,7 +103,7 @@ export class CreateTripComponent implements OnInit, AfterViewChecked, DoCheck {
   bookContinue: boolean;
   minpassportExpDate: any;
   showIbanPopup: boolean = false;
-  disablePayBttn: boolean = false;
+  disablePayBttn: boolean = true;
   transportCount: number = 0;
   toggleMeridian() {
     this.meridian = !this.meridian;
@@ -1084,6 +1085,7 @@ export class CreateTripComponent implements OnInit, AfterViewChecked, DoCheck {
  * this method for for polling loader status
  */
   ngDoCheck() {
+    this.policy = CreateTripComponent.termsCondtion;
     this.generalHelper.checkForAccessToken();
     if (!this.appStore.showShimmer) { this.showShimmer = false; }
   }
@@ -1125,6 +1127,18 @@ export class CreateTripComponent implements OnInit, AfterViewChecked, DoCheck {
     var k;  
     k = event.charCode;  //         k = event.keyCode;  (Both can be used)
     return((k > 64 && k < 91) || (k > 96 && k < 123) || k == 8 || k == 32 ); 
+   }
+
+   termsandcondition(){
+    CreateTripComponent.termsCondtion = true;
+   }
+   
+   policyCheck(e){
+    if (e.target.checked){
+      this.disablePayBttn = false;
+    }else{
+      this.disablePayBttn = true;
+    }
    }
 
 }
