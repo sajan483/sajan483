@@ -134,6 +134,7 @@ export class HotelDetailsPopupComponent implements OnInit ,OnChanges{
       this.noOfImages = this.hotelPics.length;
       if(x.roomPrice > 0){ this.totalRoomPrice = x.roomPrice }
       this.numberOfDays = JSON.parse(sessionStorage.getItem('noOfDays'))
+      if(this.isGrouped){this.selectedRoomCount = 0}
     }
     
   }
@@ -303,14 +304,14 @@ export class HotelDetailsPopupComponent implements OnInit ,OnChanges{
    */
   isGroupedRadioClicked(i,j){
     this.selectedRoomCount = 0;
-    this.totalRoomPrice = 0;
-    for (let k = 0; k < this.selectedRoomGroups.length; k++) {
+    this.totalRoomPrice = 0 ;
+    for(let k=0;k<this.selectedRoomGroups.length;k++){
       this.selectedRoomGroups[k].isRoomSelectionChecked = false;
-    }
+    } 
     this.totalRoomPrice = this.selectedRoomGroups[i].rooms[j].insertedAmount;
     this.selectedRoomGroups[i].isRoomSelectionChecked = true;
     this.selectedRoomCount = this.rooms.length;
-    this.makkaSelectActivate = true;
+    this.makkaSelectActivate = false;
   }
 
   /*

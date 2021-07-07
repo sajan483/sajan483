@@ -176,6 +176,7 @@ export class CreateTripHelper {
             .reduce((a, b) => a + b, 0);
         });
       });
+      container.isSelectBtnActive = true;
       selectedRoomGroups = selectedRoomGroups.filter(this.helperService.onlyUnique);
       container.roomGroups = selectedRoomGroups;
     }
