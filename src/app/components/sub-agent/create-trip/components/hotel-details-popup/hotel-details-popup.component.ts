@@ -248,6 +248,42 @@ export class HotelDetailsPopupComponent implements OnInit ,OnChanges{
     HotelDetailsPopupComponent.roomMoreDetails = true;
   }
 
+  roomSelectionCheckboxChecked(i, j) {
+    if (this.selectedRoomGroups[i].rooms.length > 0) {
+      for (let k = 0; k < this.selectedRoomGroups[i].rooms.length; k++) {
+        if (this.selectedRoomGroups[i].rooms[k].isRoomSelectionChecked) {
+          this.selectedRoomGroups[i].rooms[k].isRoomSelectionChecked = !this
+            .selectedRoomGroups[i].rooms[k].isRoomSelectionChecked;
+          this.totalRoomPrice =
+            this.totalRoomPrice - this.selectedRoomGroups[i].rooms[k].amount;
+        }
+      }
+    }
+
+    if (!this.selectedRoomGroups[i].rooms[j].isRoomSelectionChecked) {
+      this.selectedRoomGroups[i].rooms[j].isRoomSelectionChecked = !this
+        .selectedRoomGroups[i].rooms[j].isRoomSelectionChecked;
+      this.totalRoomPrice =
+        this.totalRoomPrice + this.selectedRoomGroups[i].rooms[j].amount;
+        this.makkaSelectActivate = true;
+    }
+  }
+
+  /*
+   * this method for selecting room if it is grouped
+   */
+  isGroupedRadioClicked(i,j){
+    this.selectedRoomCount = 0;
+    this.totalRoomPrice = 0;
+    for (let k = 0; k < this.selectedRoomGroups.length; k++) {
+      this.selectedRoomGroups[k].isRoomSelectionChecked = false;
+    }
+    this.totalRoomPrice = this.selectedRoomGroups[i].rooms[j].insertedAmount;
+    this.selectedRoomGroups[i].isRoomSelectionChecked = true;
+    this.selectedRoomCount = this.rooms.length;
+    this.makkaSelectActivate = true;
+  }
+
   /*
    * this method to show all images at room details popup
    */
