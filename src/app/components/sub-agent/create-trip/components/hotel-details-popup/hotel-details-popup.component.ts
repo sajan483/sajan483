@@ -152,6 +152,37 @@ export class HotelDetailsPopupComponent implements OnInit ,OnChanges{
   /*
    * this method for booking hotel
    */
+  // bookHotel() {
+  //   this.activeBttn = true;
+  //   this.makkahticked = true;
+  //   this.makkahticked = true;
+  //   this.madeendetailshow = true;
+  //   this.showHotelDetailsShimmer = false;
+  //   if(!this.appStore.isAvailabilityFails){
+  //     this.appStore.stepperIndex += 1;
+  //   }
+  //   if(!sessionStorage.getItem('custom_trip_id')){
+  //     this.commonService.saveSelectedHotel(this.createTripAdapter.bookHotelRequest(this.isGrouped,this.selectedRoomGroups,this.hotelData,this.hotelInfo,this.numberOfDays),sessionStorage.getItem('userLanguage')).subscribe((data) => {
+  //       this.activeBttn = true;
+  //       sessionStorage.setItem('custom_trip_id',data.id);
+  //       sessionStorage.setItem('stage','1')
+  //       this.onNotify();
+  //     });
+  //   }
+  //   if(sessionStorage.getItem('custom_trip_id')){
+  //     this.commonService.updateCustomTrip(sessionStorage.getItem('custom_trip_id'),this.createTripAdapter.bookHotelRequest(this.isGrouped,this.selectedRoomGroups,this.hotelData,this.hotelInfo,this.numberOfDays),sessionStorage.getItem('userLanguage')).subscribe((data) => {
+  //       this.activeBttn = true;
+  //         if(JSON.parse(sessionStorage.getItem('steps')).length == 1){
+  //           sessionStorage.setItem('stage','1')
+  //         }else {
+  //           sessionStorage.setItem('stage','2')
+  //         }
+  //         this.onNotify();
+  //     });
+  //   }
+  //   sessionStorage.setItem('hotelDetailsFlag','close')
+  //   this.appStore.showShimmer = !this.appStore.showShimmer
+  // }
   bookHotel() {
     this.activeBttn = true;
     this.makkahticked = true;
