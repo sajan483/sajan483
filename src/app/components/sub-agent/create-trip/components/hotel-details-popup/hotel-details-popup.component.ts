@@ -102,7 +102,7 @@ export class HotelDetailsPopupComponent implements OnInit ,OnChanges{
     var obj = JSON.parse(sessionStorage.getItem('userObject'))
     this.totalTravellers = obj.adults + obj.children;
     this.rooms = JSON.parse(sessionStorage.getItem('roomData'));
-    //this.selectedRoomCount = this.rooms.length
+    this.selectedRoomCount = this.rooms.length
      /*
      * this method for fetching selected hotel details
      */
@@ -217,60 +217,60 @@ export class HotelDetailsPopupComponent implements OnInit ,OnChanges{
     this.appStore.showShimmer = !this.appStore.showShimmer
   }
 
-  selecteRoomForGrupedFalse(roomCount,i,j){
-    var customRoomCount = JSON.parse(sessionStorage.getItem("roomData")).length
-    this.selectedRoomCount = 0;
-    var selectedRoomCount : number = 0;
+  // selecteRoomForGrupedFalse(roomCount,i,j){
+  //   var customRoomCount = JSON.parse(sessionStorage.getItem("roomData")).length
+  //   this.selectedRoomCount = 0;
+  //   var selectedRoomCount : number = 0;
 
-    if(roomCount == 0 && this.selectedRoomGroups[i].rooms[j].isRoomSelectionChecked ){
-      this.totalRoomPrice = this.totalRoomPrice - (this.selectedRoomGroups[i].rooms[j].amount * this.selectedRoomGroups[i].rooms[j].insertedSelectedRoomCount  );
-      this.selectedRoomGroups[i].rooms[j].isRoomSelectionChecked = false;
-      this.selectedRoomGroups[i].rooms[j].insertedSelectedRoomCount = 0;
-    }
+  //   if(roomCount == 0 && this.selectedRoomGroups[i].rooms[j].isRoomSelectionChecked ){
+  //     this.totalRoomPrice = this.totalRoomPrice - (this.selectedRoomGroups[i].rooms[j].amount * this.selectedRoomGroups[i].rooms[j].insertedSelectedRoomCount  );
+  //     this.selectedRoomGroups[i].rooms[j].isRoomSelectionChecked = false;
+  //     this.selectedRoomGroups[i].rooms[j].insertedSelectedRoomCount = 0;
+  //   }
 
-    if( this.selectedRoomGroups[i].rooms[j].isRoomSelectionChecked ){
-      this.totalRoomPrice = this.totalRoomPrice - (this.selectedRoomGroups[i].rooms[j].amount * this.selectedRoomGroups[i].rooms[j].insertedSelectedRoomCount  );
-      this.selectedRoomGroups[i].rooms[j].isRoomSelectionChecked = false;
-      this.selectedRoomGroups[i].rooms[j].insertedSelectedRoomCount = 0;
-    }
+  //   if( this.selectedRoomGroups[i].rooms[j].isRoomSelectionChecked ){
+  //     this.totalRoomPrice = this.totalRoomPrice - (this.selectedRoomGroups[i].rooms[j].amount * this.selectedRoomGroups[i].rooms[j].insertedSelectedRoomCount  );
+  //     this.selectedRoomGroups[i].rooms[j].isRoomSelectionChecked = false;
+  //     this.selectedRoomGroups[i].rooms[j].insertedSelectedRoomCount = 0;
+  //   }
 
-    this.selectedRoomGroups.forEach((element)=>{
-      element.rooms.forEach((room) => {
-        selectedRoomCount = selectedRoomCount + room.insertedSelectedRoomCount
-      })
-    })
+  //   this.selectedRoomGroups.forEach((element)=>{
+  //     element.rooms.forEach((room) => {
+  //       selectedRoomCount = selectedRoomCount + room.insertedSelectedRoomCount
+  //     })
+  //   })
   
-    if(customRoomCount < ( selectedRoomCount + parseInt(roomCount) )){
-      roomCount = this.selectedRoomGroups[i].rooms[j].insertedSelectedRoomCount;
-      var element:HTMLSelectElement;    
-      element = <HTMLSelectElement>document.getElementById('roomDrop'+i+j);
-      element.selectedIndex = this.selectedRoomGroups[i].rooms[j].insertedSelectedRoomCount;
-      this.notifyService.showWarning(this.translate.instant("Room Limit Reached"))
-    }
+  //   if(customRoomCount < ( selectedRoomCount + parseInt(roomCount) )){
+  //     roomCount = this.selectedRoomGroups[i].rooms[j].insertedSelectedRoomCount;
+  //     var element:HTMLSelectElement;    
+  //     element = <HTMLSelectElement>document.getElementById('roomDrop'+i+j);
+  //     element.selectedIndex = this.selectedRoomGroups[i].rooms[j].insertedSelectedRoomCount;
+  //     this.notifyService.showWarning(this.translate.instant("Room Limit Reached"))
+  //   }
     
 
-    if( this.selectedRoomGroups[i].rooms[j].insertedSelectedRoomCount > 0 ){
-      this.totalRoomPrice = this.totalRoomPrice - (this.selectedRoomGroups[i].rooms[j].amount * this.selectedRoomGroups[i].rooms[j].insertedSelectedRoomCount  );
-      this.selectedRoomGroups[i].rooms[j].isRoomSelectionChecked = false;
-    }
+  //   if( this.selectedRoomGroups[i].rooms[j].insertedSelectedRoomCount > 0 ){
+  //     this.totalRoomPrice = this.totalRoomPrice - (this.selectedRoomGroups[i].rooms[j].amount * this.selectedRoomGroups[i].rooms[j].insertedSelectedRoomCount  );
+  //     this.selectedRoomGroups[i].rooms[j].isRoomSelectionChecked = false;
+  //   }
 
-    this.selectedRoomGroups[i].rooms[j].isRoomSelectionChecked = true;
-    this.selectedRoomGroups[i].rooms[j].insertedSelectedRoomCount = parseInt(roomCount);
-    this.totalRoomPrice = this.totalRoomPrice + (this.selectedRoomGroups[i].rooms[j].amount * parseInt(roomCount) );
+  //   this.selectedRoomGroups[i].rooms[j].isRoomSelectionChecked = true;
+  //   this.selectedRoomGroups[i].rooms[j].insertedSelectedRoomCount = parseInt(roomCount);
+  //   this.totalRoomPrice = this.totalRoomPrice + (this.selectedRoomGroups[i].rooms[j].amount * parseInt(roomCount) );
 
-    this.selectedRoomGroups.forEach((element)=>{
-      element.rooms.forEach((room) => {
-        this.selectedRoomCount = this.selectedRoomCount + room.insertedSelectedRoomCount
-      })
-    })
+  //   this.selectedRoomGroups.forEach((element)=>{
+  //     element.rooms.forEach((room) => {
+  //       this.selectedRoomCount = this.selectedRoomCount + room.insertedSelectedRoomCount
+  //     })
+  //   })
 
-    if(this.selectedRoomCount == customRoomCount)
-    { this.activateSearchBtn = false}
-    else{
-      this.activateSearchBtn = true;
-    }
+  //   if(this.selectedRoomCount == customRoomCount)
+  //   { this.activateSearchBtn = false}
+  //   else{
+  //     this.activateSearchBtn = true;
+  //   }
 
-  }
+  // }
   /*
    * this method for show room details popup
    */
@@ -279,14 +279,13 @@ export class HotelDetailsPopupComponent implements OnInit ,OnChanges{
     HotelDetailsPopupComponent.roomMoreDetails = true;
   }
 
-  roomSelectionCheckboxChecked(i, j) {
+  isGroupedFalseRadioClicked(i, j) {
     if (this.selectedRoomGroups[i].rooms.length > 0) {
       for (let k = 0; k < this.selectedRoomGroups[i].rooms.length; k++) {
         if (this.selectedRoomGroups[i].rooms[k].isRoomSelectionChecked) {
           this.selectedRoomGroups[i].rooms[k].isRoomSelectionChecked = !this
             .selectedRoomGroups[i].rooms[k].isRoomSelectionChecked;
-          this.totalRoomPrice =
-            this.totalRoomPrice - this.selectedRoomGroups[i].rooms[k].amount;
+          this.totalRoomPrice = this.totalRoomPrice - this.selectedRoomGroups[i].rooms[k].amount;
         }
       }
     }
@@ -294,9 +293,8 @@ export class HotelDetailsPopupComponent implements OnInit ,OnChanges{
     if (!this.selectedRoomGroups[i].rooms[j].isRoomSelectionChecked) {
       this.selectedRoomGroups[i].rooms[j].isRoomSelectionChecked = !this
         .selectedRoomGroups[i].rooms[j].isRoomSelectionChecked;
-      this.totalRoomPrice =
-        this.totalRoomPrice + this.selectedRoomGroups[i].rooms[j].amount;
-        this.makkaSelectActivate = true;
+      this.totalRoomPrice = this.totalRoomPrice + this.selectedRoomGroups[i].rooms[j].amount;
+        //this.makkaSelectActivate = true;
     }
   }
 

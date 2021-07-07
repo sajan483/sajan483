@@ -315,7 +315,7 @@
                             <div class="forthimg position-relative" *ngIf="hotelPics && hotelPics[3]">
                                 <div class="allimagesgallery">
                                     <i class="galleryplusicon icon_size_20 icns"></i>
-                                    <div class="text-white">View All ({{noOfImages}})</div>
+                                    <div class="text-white">{{'View All' | translate}} ({{noOfImages}})</div>
                                 </div>
                                 <img [src]='hotelPics[3]' alt="">
                             </div>
@@ -364,14 +364,14 @@
                                 </div>
                                 <div>
                                     <div class="mt-2 d-inline-flex">
-                                        <div *ngIf="selectedHotel.meta_data.phone" class="d-inline-flex pr-3">
+                                        <!-- <div *ngIf="selectedHotel.meta_data.phone" class="d-inline-flex pr-3">
                                             <div class="pr-2"><i class="Phoneicon icns icon_size_15"></i></div>
                                             <div class="fs12 clr52">{{selectedHotel?.meta_data?.phone}}</div>
                                         </div>
                                         <div *ngIf="selectedHotel.meta_data.email" class="d-inline-flex">
                                             <div class="pr-2"><i class="mailicon icns icon_size_15"></i></div>
                                             <div class="fs12 clr52">{{selectedHotel?.meta_data?.email}}</div>
-                                        </div>
+                                        </div> -->
                                     </div>
                                 </div>
 
@@ -430,27 +430,29 @@
                                                     </li>
                                                     <li class="roomRate">
                                                         <div class="clr52 fs14 fw500 text-center" *ngFor="let item of room.board_types">{{item?.type}}</div>
-                                                        <div class="d-flex justify-content-center mt5">
-                                                            <mat-radio-button [checked]="room.isRoomSelectionChecked" (click)="roomSelectionCheckboxChecked(i,j)" *ngIf="room?.amount"></mat-radio-button>
+                                                        <div class="d-flex justify-content-center mt5 mb-3">
+                                                            <!-- <mat-radio-button [checked]="room.isRoomSelectionChecked" (click)="roomSelectionCheckboxChecked(i,j)" *ngIf="room?.amount"></mat-radio-button> -->
+                                                            <div class="rdbtnB" *ngIf="room.isRoomSelectionChecked" (click)="isGroupedFalseRadioClicked(i,j)"></div>
+                                                            <div class="rdbtnW" *ngIf="!room.isRoomSelectionChecked" (click)="isGroupedFalseRadioClicked(i,j)"></div>
                                                         </div>
                                                         <strong class="customTooltip">
-                                                            <span class="cursortext-dark-pointer text-dark fw600" data-room-price="139">{{room?.fare_summary[0].currency}} {{room?.amount | number:'.2-2'}}
-                                                                <span class="customtooltiptext">
-                                                                    <div class="container mb-2">
-                                                                        <p class="pt-2 fare_summary_heading textright">
-                                                                            {{'Fare Summary' | translate}} </p>
-                                                                        <div *ngFor="let item of selectedRoomGroups">
-                                                                            <div *ngFor="let room of item.rooms">
-                                                                                <div class="col-md-12 p-0 m-0 row pb-2" *ngIf="room.insertedRmCount > 0">
-                                                                                    <div class="col-md-12 textAlign textright" *ngFor="let fare of room.fare_summary">
-                                                                                        <span>{{fare?.name}} : </span>
-                                                                                        <span>{{fare?.amount}}</span>
-                                                                                    </div>
-                                                                                </div>
+                                                            <span class="cursortext-dark-pointer text-dark fw600"
+                                                                data-room-price="139">{{room?.fare_summary[0]?.currency}}
+                                                                {{room?.amount | number:'.2-2'}}
+                                                                <span class="customtooltiptext hotelFare">
+                                                                    <div class="container mb-2 fs12">
+                                                                        <div class="pt-2 fare_summary_heading">{{'Fare Summary' | translate}}</div>
+                                                                        <div *ngFor="let item of room.fare_summary[0]">
+                                                                            <div class="d-flex justify-content-between fw400 pt-1" *ngIf="!item.is_total && item?.amount != 0">
+                                                                                <div>{{item?.name}} :</div><div>{{item?.currency}} {{item?.amount | number:'.2-2'}}</div>
                                                                             </div>
                                                                         </div>
-                                                                        <p class=" pt-2 pr-5 hotel_price_total textright">
-                                                                            {{'You Pay' | translate}} {{totalRoomPrice | number:'.2-2'}}</p>
+                                                                        <div class="d-flex justify-content-between fw400 pt-1" *ngIf="room.ota_fee != 0">
+                                                                            <div>{{'OTA Fee' | translate}} :</div><div>{{room?.fare_summary[0][2]?.currency}} {{room.ota_fee | number:'.2-2'}}</div>
+                                                                        </div>
+                                                                        <div class="d-flex justify-content-between pt-2">
+                                                                            <div>{{'Total Price' | translate}} :</div><div>{{room?.fare_summary[0][2]?.currency}} {{room.amount | number:'.2-2'}}</div>
+                                                                        </div>
                                                                     </div>
                                                                 </span>
                                                             </span>
@@ -511,30 +513,29 @@
                                                     <li class="roomRate" *ngIf="j < 1">
                                                         <div class="clr52 fs14 fw500 text-center" *ngFor="let item of room.board_types">{{item?.type}}</div>
                                                         <div class="d-flex justify-content-center">
-                                                            <mat-radio-button (click)="roomSelectionCheckboxChecked(i,j)"></mat-radio-button>
+                                                            <!-- <mat-radio-button (click)="roomSelectionCheckboxChecked(i,j)"></mat-radio-button> -->
+                                                            <div class="rdbtnB" *ngIf="room.isRoomSelectionChecked" (click)="isGroupedRadioClicked(i,j)"></div>
+                                                            <div class="rdbtnW" *ngIf="!room.isRoomSelectionChecked" (click)="isGroupedRadioClicked(i,j)"></div>
                                                         </div>
 
                                                         <strong class="customTooltip">
-                                                            <span class="cursortext-dark-pointer text-dark fw600">{{selectedHotel?.currency}} {{room?.insertedAmount}}
-                                                                <span class="customtooltiptext">
-                                                                    <div class="container mb-2">
-                                                                        <p class="pt-2 fare_summary_heading textright">
-                                                                            {{'Fare Summary' | translate}} </p>
-                                                                        <div *ngFor="let item of selectedRoomGroups">
-                                                                            <div *ngFor="let room of item.rooms">
-                                                                                <div class="col-md-12 p-0 m-0 row pb-2"
-                                                                                    *ngIf="room.insertedRmCount > 0">
-                                                                                    <div class="col-md-12 textAlign textright"
-                                                                                        *ngFor="let fare of room.fare_summary">
-                                                                                        <span>{{fare?.name}} : </span>
-                                                                                        <span>{{fare?.amount |
-                                                                                            number:'.2-2'}}</span>
-                                                                                    </div>
-                                                                                </div>
+                                                            <span class="cursortext-dark-pointer text-dark fw600"
+                                                                data-room-price="139">{{room?.fare_summary[0]?.currency}}
+                                                                {{room?.amount | number:'.2-2'}}
+                                                                <span class="customtooltiptext hotelFare">
+                                                                    <div class="container mb-2 fs12">
+                                                                        <div class="pt-2 fare_summary_heading">{{'Fare Summary' | translate}}</div>
+                                                                        <div *ngFor="let item of room.fare_summary[0]">
+                                                                            <div class="d-flex justify-content-between fw400 pt-1" *ngIf="!item.is_total && item?.amount != 0">
+                                                                                <div>{{item?.name}} :</div><div>{{item?.currency}} {{item?.amount | number:'.2-2'}}</div>
                                                                             </div>
                                                                         </div>
-                                                                        <p class=" pt-2 pr-5 hotel_price_total textright">
-                                                                            {{'You Pay' | translate}} {{totalRoomPrice | number:'.2-2'}}</p>
+                                                                        <div class="d-flex justify-content-between fw400 pt-1" *ngIf="room.ota_fee != 0">
+                                                                            <div>{{'OTA Fee' | translate}} :</div><div>{{room?.fare_summary[0][2]?.currency}} {{room.ota_fee | number:'.2-2'}}</div>
+                                                                        </div>
+                                                                        <div class="d-flex justify-content-between pt-2">
+                                                                            <div>{{'Total Price' | translate}} :</div><div>{{room?.fare_summary[0][2]?.currency}} {{room.amount | number:'.2-2'}}</div>
+                                                                        </div>
                                                                     </div>
                                                                 </span>
                                                             </span>
@@ -550,24 +551,28 @@
                                     </div>
                                 </div>
                                 <aside class="roomPriceWrap">
-                                    <div class="roominfo-title">
-                                        {{'Price for' | translate}} {{selectedRoomCount}} {{'Room for' | translate}} {{numberOfDays}} nights
+                                    <div class="roominfo-title text-center">
+                                        {{'Total Price' | translate}}
                                     </div>
                                     <div class="stickyPrice text-center">
                                         <div>
-                                            <div class="d-inline-flex mt15">
-                                                <i class="selectedgreentickicon icns icon_size_20 mr-2"></i>
-                                                <div class="green_text fs14 fw600">{{selectedRoomCount}} {{'Room Selected' | translate}}</div>
+                                            <div *ngIf="selectedRoomCount > 0" class="d-inline-flex mt15">
+                                                <i class="selectedgreentickicon icns icon_size_20 mr10 mmr0 mml10"></i>
+                                                <div class="green_text fs14 fw600">{{selectedRoomCount}} {{'Room(s) Selected' | translate}}</div>
                                             </div>
                                         </div>
-                                        <strong class="mt10">
-                                            <span class="fw500 fs24 text-dark">{{selectedHotel?.currency }} {{totalRoomPrice | number:'.2-2'}} </span>
+                                        <strong class="mt10" *ngIf="selectedRoomCount > 0">
+                                            <span class="fw500 fs24 text-dark">{{selectedHotel?.currency }}
+                                                {{totalRoomPrice | number:'.2-2'}} </span>
                                         </strong>
-                                        <div class="clr52 fs12 fw500 mt10">
-                                            {{'Price for' | translate}} {{selectedRoomCount}} {{'Room for' | translate}} {{numberOfDays}} {{'Nights' | translate}}
+                                        <div class="clr52 fs12 fw500 mt10" *ngIf="selectedRoomCount > 0">
+                                            {{selectedRoomCount}} {{'room(s) for' | translate}} {{numberOfDays}} {{'night(s)' | translate}}
                                         </div>
-                                        <div class="clr52 fs14 fw500 mt10">{{'VAT & Taxes Included' | translate}}</div>
-                                        <button class="searchbutton mt10" (click)="bookHotel()" [disabled]="!makkaSelectActivate">{{'Select' | translate}}</button>
+                                        <div class="green_text fs14 fw600 mt10" *ngIf="selectedRoomCount == 0">
+                                            {{'Please select room(s)' | translate}}
+                                        </div>
+                                        <button class="searchbutton mt10" [class.bttnactive]="activeBttn" [disabled]='makkaSelectActivate' (click)="bookHotel()">{{'Select' |
+                                            translate}}</button>
 
                                     </div>
                                 </aside>

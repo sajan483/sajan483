@@ -176,14 +176,11 @@ export class CreateTripHelper {
             .reduce((a, b) => a + b, 0);
         });
       });
-
-      selectedRoomGroups = selectedRoomGroups.filter(
-        this.helperService.onlyUnique
-      );
+      selectedRoomGroups = selectedRoomGroups.filter(this.helperService.onlyUnique);
       container.roomGroups = selectedRoomGroups;
     }
     if (!isGrouped) {
-      container.isSelectBtnActive = true;
+      container.isSelectBtnActive = false;
       var roomGroups: any[] = [];
       for (let i = 0; i < selectedHotel.room_groups.length; i++) {
         if (!selectedHotel.room_groups[i].is_grouped) {
@@ -203,6 +200,7 @@ export class CreateTripHelper {
             rooms[i].adults + "ADT_" + rooms[i].children + "CHD_";
         }
       }
+      console.log("rp0",roomGroups)
       for (let i = 0; i < rooms.length; i++) {
         for (let j = 0; j < roomGroups.length; j++) {
           if (rooms[i].pax_info_str == roomGroups[j].pax_info_str) {
@@ -210,6 +208,7 @@ export class CreateTripHelper {
           }
         }
       }
+      selectedRoomGroups = selectedRoomGroups.filter(this.helperService.onlyUnique);
       for (let i = 0; i < selectedRoomGroups.length; i++) {
         for (let j = 0; j < selectedRoomGroups[i].rooms.length; j++) {
           selectedRoomGroups[i].rooms[0].isRoomSelectionChecked = true;
@@ -218,9 +217,7 @@ export class CreateTripHelper {
       for (let i = 0; i < selectedRoomGroups.length; i++) {
         for (let j = 0; j < selectedRoomGroups[i].rooms.length; j++) {
           if (selectedRoomGroups[i].rooms[j].isRoomSelectionChecked) {
-            totalRoomPrice =
-              totalRoomPrice +
-              selectedRoomGroups[i].rooms[j].amount;
+            totalRoomPrice = totalRoomPrice +selectedRoomGroups[i].rooms[j].amount;
           }
         }
       }
