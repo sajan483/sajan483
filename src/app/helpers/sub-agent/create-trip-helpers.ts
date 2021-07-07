@@ -209,13 +209,11 @@ export class CreateTripHelper {
         }
       }
       selectedRoomGroups = selectedRoomGroups.filter(this.helperService.onlyUnique);
-      console.log("rp1",selectedRoomGroups)
       for (let i = 0; i < selectedRoomGroups.length; i++) {
         for (let j = 0; j < selectedRoomGroups[i].rooms.length; j++) {
           selectedRoomGroups[i].rooms[0].isRoomSelectionChecked = true;
         }
       }
-      console.log("rp2",selectedRoomGroups)
       for (let i = 0; i < selectedRoomGroups.length; i++) {
         for (let j = 0; j < selectedRoomGroups[i].rooms.length; j++) {
           if (selectedRoomGroups[i].rooms[j].isRoomSelectionChecked) {
@@ -223,8 +221,6 @@ export class CreateTripHelper {
           }
         }
       }
-      console.log("rp3",selectedRoomGroups)
-      console.log("price",totalRoomPrice)
       container.roomCount = rooms.length;
       container.roomPrice = totalRoomPrice;
       selectedRoomGroups.forEach((x) => {
