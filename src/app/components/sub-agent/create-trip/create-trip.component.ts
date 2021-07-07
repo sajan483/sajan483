@@ -663,7 +663,6 @@ export class CreateTripComponent implements OnInit, AfterViewChecked, DoCheck {
     console.log(w);
     
     if (this.accNo && this.authCode) {
-      console.log(w);
       this.common.bookingPayment(w).subscribe((response) => {
         this.spinner.hide();
         if (response.status == "Success") {
