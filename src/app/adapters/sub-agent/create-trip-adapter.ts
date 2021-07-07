@@ -89,7 +89,175 @@ export class CreateTripAdapter {
   /**
    *Method for creating  hotel booking request
    */
-  bookHotelRequest(isGrouped: boolean,selectedRoomGroups: any[],selectedHotel: any,selectedHotelInfo: any,numberOfDays:number) {
+  // bookHotelRequest(isGrouped: boolean,selectedRoomGroups: any[],selectedHotel: any,selectedHotelInfo: any,numberOfDays:number) {
+  //   var roomVariations: any = {};
+  //   var roomVariationArray: any[] = [];
+  //   if (!isGrouped) {
+  //     for (let i = 0; i < selectedRoomGroups.length; i++) {
+  //       for (let j = 0; j < selectedRoomGroups[i].rooms.length; j++) {
+  //         if (selectedRoomGroups[i].rooms[j].isRoomSelectionChecked) {
+  //           roomVariations = {};
+  //           let name = "";
+  //           if (selectedRoomGroups[i].rooms[j].name == null) {
+  //             name = "sample";
+  //           }
+  //           if (
+  //             selectedRoomGroups[i].rooms[j].name &&
+  //             selectedRoomGroups[i].rooms[j].name.length > 24
+  //           ) {
+  //             name = selectedHotel.name.substring(0, 20);
+  //           }
+  //           if (
+  //             selectedRoomGroups[i].rooms[j].name &&
+  //             selectedRoomGroups[i].rooms[j].name.length < 24
+  //           ) {
+  //             name = selectedRoomGroups[i].rooms[j].name;
+  //           }
+  //             (roomVariations.currency = selectedHotel.currency),
+  //             (roomVariations.available_rooms = selectedRoomGroups[i].rooms[j].max_rooms),
+  //             (roomVariations.total_rooms = selectedRoomGroups[i].rooms[j].insertedSelectedRoomCount),
+  //             (roomVariations.max_guests = selectedRoomGroups[i].rooms[j].pax_info[0].quantity),
+  //             (roomVariations.title = name),
+  //             (roomVariations.per_room_price = selectedRoomGroups[i].rooms[j].amount),
+  //             (roomVariations.room_type = selectedRoomGroups[i].rooms[j].room_type),
+  //             (roomVariations.description = selectedRoomGroups[i].rooms[j].description),
+  //             (roomVariations.room_group_id = selectedRoomGroups[i].rooms[j].room_group_id),
+  //             (roomVariations.room_id = selectedRoomGroups[i].rooms[j].room_id),
+  //             (roomVariations.room_group_obj = selectedRoomGroups[i].rooms[j].room_group_obj),
+  //             (roomVariations.custom_pax_info = (selectedRoomGroups[i].pax_info_str == null) ?
+  //             selectedRoomGroups[i].rooms[j].pax_info_str : selectedRoomGroups[i].pax_info_str),
+  //           roomVariationArray.push(roomVariations);
+  //         }
+  //       }
+  //     }
+  //   }
+  //   roomVariationArray = roomVariationArray.filter(x=>x.total_rooms > 0)
+  //   var name = "";
+  //   if (selectedHotel.name.length > 24) {
+  //     name = selectedHotel.name.substring(0, 24);
+  //   }
+
+  //   if (selectedHotel.name.length < 24) {
+  //     name = selectedHotel.name;
+  //   }
+  //   var body = {};
+  //   if (selectedHotelInfo.city == "Makkah") {
+  //     body = {
+  //       start_date: this.helperService.dateFormaterYMd(selectedHotel.check_in_time),
+  //       end_date: this.helperService.dateFormaterYMd(selectedHotel.check_out_time),
+  //       arr_date_time_stamp: this.helperService.dateTimeStringToTimeStampConverter(selectedHotel.check_in_time),
+  //       adults: this.appStore.adultCount,
+  //       children: this.appStore.childCount,
+  //       country_of_residence: "IN",
+  //       nationality: "IN",
+  //       num_of_days: + sessionStorage.getItem("noOfTripDays"),
+  //       makkah_trip_hotel: {
+  //         search: sessionStorage.getItem('mkSearchId'),
+  //         lang: "en-US",
+  //         hotel: {
+  //           name: name ? name : "sample",
+  //           description: selectedHotel.description,
+  //           address: selectedHotel.meta_data.address,
+  //           // longitute: longitute.toFixed(6),
+  //           // latitude: latitude.toFixed(6),
+  //           phone_number: selectedHotel.meta_data.phone
+  //             ? selectedHotel.meta_data.phone
+  //             : "1232323232",
+  //           email: selectedHotel.meta_data.email,
+  //           state: selectedHotel.meta_data.state
+  //             ? selectedHotel.meta_data.state
+  //             : "MAKKA",
+  //           city: selectedHotel.meta_data.city,
+  //           instructions: "",
+  //           distance: selectedHotel.haram_distance,
+  //           user_review: selectedHotel.meta_data.rating
+  //             ? selectedHotel.meta_data.rating
+  //             : 3.4,
+  //           provider: selectedHotel.provider,
+  //           vendor: selectedHotel.vendor,
+  //           code: selectedHotel.code,
+  //           umrah_code: selectedHotel.umrah_hotel_code,
+  //           images: selectedHotel.meta_data.images,
+  //           amenities: selectedHotel.meta_data.amenities,
+  //           policies: selectedHotel.policies,
+  //         },
+  //         room_variations: roomVariationArray,
+  //         check_in_time: selectedHotel.check_in_time,
+  //         check_out_time: selectedHotel.check_out_time,
+  //         other_data: selectedHotel.other_data,
+  //         num_of_days: numberOfDays,
+  //       },
+  //     };
+  //   }
+
+  //   if (
+  //     selectedHotelInfo.city == "Madina" ||
+  //     selectedHotelInfo.city == "Madinah" ||
+  //     selectedHotelInfo.city == "Medina"
+  //   ) {
+  //     body = {
+  //       start_date: this.helperService.dateFormaterYMd(
+  //         selectedHotel.check_in_time
+  //       ),
+  //       end_date: this.helperService.dateFormaterYMd(
+  //         selectedHotel.check_out_time
+  //       ),
+  //       arr_date_time_stamp: this.helperService.dateTimeStringToTimeStampConverter(
+  //         selectedHotel.check_in_time
+  //       ),
+  //       adults: this.appStore.adultCount,
+  //       children: this.appStore.childCount,
+  //       country_of_residence: "IN",
+  //       nationality: "IN",
+  //       num_of_days: + sessionStorage.getItem("noOfTripDays"),
+  //       medinah_trip_hotel: {
+  //         search:sessionStorage.getItem('mdSearchId'),
+  //         lang: "en-US",
+  //         hotel: {
+  //           name: name ? name : "sample",
+  //           description: selectedHotel.description,
+  //           address: selectedHotel.meta_data.address,
+  //           // longitute: longitute.toFixed(6),
+  //           // latitude: latitude.toFixed(6),
+  //           phone_number: selectedHotel.meta_data.phone
+  //             ? selectedHotel.meta_data.phone
+  //             : "1232323232",
+  //           email: selectedHotel.meta_data.email,
+  //           state: selectedHotel.meta_data.state
+  //             ? selectedHotel.meta_data.state
+  //             : "MADEENA",
+  //           city: selectedHotel.meta_data.city,
+  //           instructions: "",
+  //           distance: selectedHotel.haram_distance,
+  //           user_review: selectedHotel.meta_data.rating
+  //             ? selectedHotel.meta_data.rating
+  //             : 3.4,
+  //           provider: selectedHotel.provider,
+  //           vendor: selectedHotel.vendor,
+  //           code: selectedHotel.code,
+  //           umrah_code: selectedHotel.umrah_hotel_code,
+  //           images: selectedHotel.meta_data.images,
+  //           amenities: selectedHotel.meta_data.amenities,
+  //           policies: selectedHotel.policies,
+  //         },
+  //         room_variations: roomVariationArray,
+  //         check_in_time: selectedHotel.check_in_time,
+  //         check_out_time: selectedHotel.check_out_time,
+  //         other_data: selectedHotel.other_data,
+  //         num_of_days: numberOfDays,
+  //       },
+  //     };
+  //   }
+  //   return body;
+  // }
+
+  bookHotelRequest(
+    isGrouped: boolean,
+    selectedRoomGroups: any[],
+    selectedHotel: any,
+    selectedHotelInfo: any,
+    numberOfDays:number
+  ) {
     var roomVariations: any = {};
     var roomVariationArray: any[] = [];
     if (!isGrouped) {
@@ -113,25 +281,83 @@ export class CreateTripAdapter {
             ) {
               name = selectedRoomGroups[i].rooms[j].name;
             }
-              (roomVariations.currency = selectedHotel.currency),
-              (roomVariations.available_rooms = selectedRoomGroups[i].rooms[j].max_rooms),
-              (roomVariations.total_rooms = selectedRoomGroups[i].rooms[j].insertedSelectedRoomCount),
-              (roomVariations.max_guests = selectedRoomGroups[i].rooms[j].pax_info[0].quantity),
+            (roomVariations.currency = selectedHotel.currency),
+              (roomVariations.available_rooms =
+                selectedRoomGroups[i].rooms[j].available_count);
+            (roomVariations.total_rooms =
+              selectedRoomGroups[i].rooms[j].max_rooms),
+              (roomVariations.max_guests =
+                selectedRoomGroups[i].rooms[j].pax_info[0].quantity),
               (roomVariations.title = name),
-              (roomVariations.per_room_price = selectedRoomGroups[i].rooms[j].amount),
-              (roomVariations.room_type = selectedRoomGroups[i].rooms[j].room_type),
-              (roomVariations.description = selectedRoomGroups[i].rooms[j].description),
-              (roomVariations.room_group_id = selectedRoomGroups[i].rooms[j].room_group_id),
+              (roomVariations.per_room_price =
+                selectedRoomGroups[i].rooms[j].amount),
+              (roomVariations.custom_pax_info =
+                selectedRoomGroups[i].pax_info_str);
+            (roomVariations.room_type =
+              selectedRoomGroups[i].rooms[j].room_type),
+              (roomVariations.description =
+                selectedRoomGroups[i].rooms[j].description),
+              (roomVariations.room_group_id =
+                selectedRoomGroups[i].rooms[j].room_group_id),
               (roomVariations.room_id = selectedRoomGroups[i].rooms[j].room_id),
-              (roomVariations.room_group_obj = selectedRoomGroups[i].rooms[j].room_group_obj),
-              (roomVariations.custom_pax_info = (selectedRoomGroups[i].pax_info_str == null) ?
-              selectedRoomGroups[i].rooms[j].pax_info_str : selectedRoomGroups[i].pax_info_str),
+              (roomVariations.room_group_obj =
+                selectedRoomGroups[i].rooms[j].room_group_obj);
             roomVariationArray.push(roomVariations);
           }
         }
       }
     }
-    roomVariationArray = roomVariationArray.filter(x=>x.total_rooms > 0)
+
+    if (isGrouped) {
+      for (let i = 0; i < selectedRoomGroups.length; i++) {
+        if (selectedRoomGroups[i].isRoomSelectionChecked) {
+          for (let j = 0; j < selectedRoomGroups[i].rooms.length; j++) {
+            roomVariations = {};
+            let name = "";
+            if (selectedRoomGroups[i].rooms[j].name == null) {
+              name = "sample";
+            }
+            if (
+              selectedRoomGroups[i].rooms[j].name &&
+              selectedRoomGroups[i].rooms[j].name.length > 24
+            ) {
+              name = selectedHotel.name.substring(0, 20);
+            }
+            if (
+              selectedRoomGroups[i].rooms[j].name &&
+              selectedRoomGroups[i].rooms[j].name.length < 24
+            ) {
+              name = selectedRoomGroups[i].rooms[j].name;
+            }
+            (roomVariations.currency = selectedHotel.currency),
+              (roomVariations.available_rooms =
+                selectedRoomGroups[i].rooms[j].available_count);
+            (roomVariations.total_rooms =
+              selectedRoomGroups[i].rooms[j].max_rooms),
+              (roomVariations.max_guests =
+                selectedRoomGroups[i].rooms[j].pax_info[0].quantity),
+              (roomVariations.title = name),
+              (roomVariations.per_room_price =
+                selectedRoomGroups[i].rooms[j].amount),
+              (roomVariations.custom_pax_info =
+                selectedRoomGroups[i].rooms[j].pax_info_str);
+            (roomVariations.room_type =
+              selectedRoomGroups[i].rooms[j].room_type),
+              (roomVariations.description =
+                selectedRoomGroups[i].rooms[j].description),
+              (roomVariations.room_group_id =
+                selectedRoomGroups[i].rooms[j].room_group_id),
+              (roomVariations.room_id = selectedRoomGroups[i].rooms[j].room_id),
+              (roomVariations.room_group_obj =
+                selectedRoomGroups[i].rooms[j].room_group_obj);
+            roomVariationArray.push(roomVariations);
+          }
+        }
+      }
+    }
+
+    var latitude: number = +selectedHotel.meta_data.latitude;
+    var longitute: number = +selectedHotel.meta_data.longitude;
     var name = "";
     if (selectedHotel.name.length > 24) {
       name = selectedHotel.name.substring(0, 24);
@@ -143,23 +369,28 @@ export class CreateTripAdapter {
     var body = {};
     if (selectedHotelInfo.city == "Makkah") {
       body = {
-        start_date: this.helperService.dateFormaterYMd(selectedHotel.check_in_time),
-        end_date: this.helperService.dateFormaterYMd(selectedHotel.check_out_time),
-        arr_date_time_stamp: this.helperService.dateTimeStringToTimeStampConverter(selectedHotel.check_in_time),
+        start_date: this.helperService.dateFormaterYMd(
+          selectedHotel.check_in_time
+        ),
+        end_date: this.helperService.dateFormaterYMd(
+          selectedHotel.check_out_time
+        ),
+        arr_date_time_stamp: this.helperService.dateTimeStringToTimeStampConverter(
+          selectedHotel.check_in_time
+        ),
         adults: this.appStore.adultCount,
         children: this.appStore.childCount,
         country_of_residence: "IN",
         nationality: "IN",
-        num_of_days: + sessionStorage.getItem("noOfTripDays"),
         makkah_trip_hotel: {
-          search: sessionStorage.getItem('mkSearchId'),
+          search: this.appStore.makkahSearchId,
           lang: "en-US",
           hotel: {
             name: name ? name : "sample",
             description: selectedHotel.description,
             address: selectedHotel.meta_data.address,
-            // longitute: longitute.toFixed(6),
-            // latitude: latitude.toFixed(6),
+            longitute: longitute.toFixed(6),
+            latitude: latitude.toFixed(6),
             phone_number: selectedHotel.meta_data.phone
               ? selectedHotel.meta_data.phone
               : "1232323232",
@@ -185,7 +416,7 @@ export class CreateTripAdapter {
           check_in_time: selectedHotel.check_in_time,
           check_out_time: selectedHotel.check_out_time,
           other_data: selectedHotel.other_data,
-          num_of_days: numberOfDays,
+          num_of_days: numberOfDays
         },
       };
     }
@@ -209,16 +440,15 @@ export class CreateTripAdapter {
         children: this.appStore.childCount,
         country_of_residence: "IN",
         nationality: "IN",
-        num_of_days: + sessionStorage.getItem("noOfTripDays"),
         medinah_trip_hotel: {
-          search:sessionStorage.getItem('mdSearchId'),
+          search: this.appStore.madinahSearchId,
           lang: "en-US",
           hotel: {
             name: name ? name : "sample",
             description: selectedHotel.description,
             address: selectedHotel.meta_data.address,
-            // longitute: longitute.toFixed(6),
-            // latitude: latitude.toFixed(6),
+            longitute: longitute.toFixed(6),
+            latitude: latitude.toFixed(6),
             phone_number: selectedHotel.meta_data.phone
               ? selectedHotel.meta_data.phone
               : "1232323232",
@@ -244,10 +474,11 @@ export class CreateTripAdapter {
           check_in_time: selectedHotel.check_in_time,
           check_out_time: selectedHotel.check_out_time,
           other_data: selectedHotel.other_data,
-          num_of_days: numberOfDays,
+          num_of_days: numberOfDays
         },
       };
     }
+
     return body;
   }
 
