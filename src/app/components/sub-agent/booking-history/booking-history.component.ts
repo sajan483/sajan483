@@ -26,7 +26,8 @@ export class BookingHistoryComponent implements OnInit {
    * this methode is used for user is logged or not
    */
   ngOnInit(): void {
-    this.paginateHistoryList(1);
+    var pageno = sessionStorage.getItem('bookingPageNumber')?sessionStorage.getItem('bookingPageNumber'):1;
+    this.paginateHistoryList(+pageno);
   }
 
   ngAfterViewChecked() {
@@ -43,6 +44,8 @@ export class BookingHistoryComponent implements OnInit {
    * @param activePage 
    */
   paginateHistoryList(activePage: number) {
+    var page:any = activePage;
+    sessionStorage.setItem('bookingPageNumber',page)
     this.common.getPaginatedhistoryList(activePage,sessionStorage.getItem('userLanguage')).subscribe(response => {
       this.pageNo = response.page;
       this.pageSize = response.page_size;

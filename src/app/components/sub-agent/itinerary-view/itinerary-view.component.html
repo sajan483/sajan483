@@ -19,6 +19,7 @@
             </div>
 
             <div class="col-md-9 pl0 mpl15 mpr0" *ngIf="!shimmer">
+                <div class="text_right mirr_text_left fw600 fs16 success_text">{{'Akbar Transaction Id' | translate}} - {{tripData?.reference_no}}</div>
                 <h2 class="fs16 Premium_blue fw600 pt25" *ngIf="tripMakkahHotel != null">{{'Makkah Hotel Details' | translate}}
                 </h2>
                 <div class="border_box_shadow bg_white" [class.errorBox]="tripMakkahHotel?.status== 'failed' || tripMakkahHotel?.status=='cancelled'" *ngIf="tripMakkahHotel != null">
@@ -100,7 +101,7 @@
                         <div class="col-md-12 p-0 brdrbottom mb10" *ngIf="tripMakkahHotel?.status=='processing' || tripMakkahHotel?.status=='available'">
                             <div class="d-flex justify-content-between w-100 bookdpdng">
                                 <div class="fs14 fw600 clrOrng mt2p">{{'UNDER PROCESSING - Please Contact Customer care' | translate}} : 42008 05505</div>
-                                <div class="fs12 sadred">Error Code : {{tripMakkahHotel?.gds_response?.code}}</div>
+
                             </div>
                         </div>
                         <div class="col-md-2 col-12 pl-0 pr-0 my-auto">
@@ -284,7 +285,7 @@
                         <div class="col-md-12 p-0 brdrbottom mb10" *ngIf="tripMadeenaHotel?.status=='processing' || tripMadeenaHotel?.status=='available'">
                             <div class="d-flex justify-content-between w-100 bookdpdng">
                                 <div class="fs14 fw600 clrOrng mt2p">{{'UNDER PROCESSING - Please Contact Customer care' | translate}} : 42008 05505</div>
-                                <div class="fs12 sadred">Error Code : {{tripMadeenaHotel?.gds_response?.code}}</div>
+
                             </div>
                         </div>
                         <div class="col-md-2 col-12 pl-0 pr-0 my-auto">
@@ -465,7 +466,7 @@
                         <div class="col-md-12 p-0 brdrbottom mb10" *ngIf="tripTransport?.status=='processing' || tripTransport?.status=='available'">
                             <div class="d-flex justify-content-between w-100 bookdpdng">
                                 <div class="fs14 fw600 clrOrng mt2p">{{'UNDER PROCESSING - Please Contact Customer care' | translate}} : 42008 05505</div>
-                                <div class="fs12 sadred">Error Code : {{tripTransport?.gds_response?.code}}</div>
+
                             </div>
                         </div>
                         <div class="col-md-2 col-12 pl-0 pr-0 my-auto">
