@@ -93,18 +93,13 @@ export class CreateTripHelper {
     var selectedRoomGroups = [];
     var container: TripRoom = new TripRoom();
     var totalRoomPrice = 0;
+    console.log("grp",selectedRoomGroups)
     sessionStorage.setItem("noOfDays",JSON.stringify(this.helperService.noOfDaysBetweenTwoDates(selectedHotel.check_in_time, selectedHotel.check_out_time))) 
     for (let i = 0; i < selectedHotel.room_groups.length; ++i) {
       for (let j = 0; j < selectedHotel.room_groups[i].rooms.length; ++j) {
-        selectedHotel.room_groups[i].rooms[j].insertedState =
-          selectedHotelInfo.city == "Makkah" ? "MAKKA" : "MADEENA";
-        selectedHotel.room_groups[i].rooms[
-          j
-        ].isRoomSelectionChecked = false;
-        selectedHotel.room_groups[i].rooms[j].insertedAmount =
-          selectedHotel.room_groups[i].amount
-            ? selectedHotel.room_groups[i].amount
-            : 0;
+        selectedHotel.room_groups[i].rooms[j].insertedState = selectedHotelInfo.city == "Makkah" ? "MAKKA" : "MADEENA";
+        selectedHotel.room_groups[i].rooms[j].isRoomSelectionChecked = false;
+        selectedHotel.room_groups[i].rooms[j].insertedAmount = selectedHotel.room_groups[i].amount ? selectedHotel.room_groups[i].amount : 0;
       }
     }
 
@@ -123,6 +118,13 @@ export class CreateTripHelper {
     }
 
     if (isGrouped) {
+      for (let i = 0; i < selectedHotel.room_groups.length; ++i) {
+        for (let j = 0; j < selectedHotel.room_groups[i].rooms.length; ++j) {
+          selectedHotel.room_groups[i].rooms[j].insertedState = selectedHotelInfo.city == "Makkah" ? "MAKKA" : "MADEENA";
+          selectedHotel.room_groups[i].rooms[j].isRoomSelectionChecked = false;
+          selectedHotel.room_groups[i].rooms[j].insertedAmount = selectedHotel.room_groups[i].rooms[0].amount;
+        }
+      }
       var grouped: any[] = [];
 
       selectedHotel.room_groups.forEach((element) => {
