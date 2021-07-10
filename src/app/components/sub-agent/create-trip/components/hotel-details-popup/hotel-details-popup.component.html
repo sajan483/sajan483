@@ -462,8 +462,10 @@
                                                         <div class="clr52 fs14 fw500 text-center" *ngFor="let item of room.board_types">{{item?.type}}</div>
                                                         <div class="d-flex justify-content-center mt5 mb-3">
                                                             <!-- <mat-radio-button [checked]="room.isRoomSelectionChecked" (click)="roomSelectionCheckboxChecked(i,j)" *ngIf="room?.amount"></mat-radio-button> -->
-                                                            <div class="rdbtnB" *ngIf="room.isRoomSelectionChecked" (click)="isGroupedFalseRadioClicked(i,j)"></div>
-                                                            <div class="rdbtnW" *ngIf="!room.isRoomSelectionChecked" (click)="isGroupedFalseRadioClicked(i,j)"></div>
+                                                            <div class="chk" *ngIf="room.isRoomSelectionChecked" (click)="isGroupedFalseRadioClicked(i,j)"><i class="fa fa-check" style="color:white"></i></div>
+                                                            <!-- <div class="rdbtnB" *ngIf="room.isRoomSelectionChecked" (click)="isGroupedFalseRadioClicked(i,j)"></div> -->
+                                                            <div class="chkN" *ngIf="!room.isRoomSelectionChecked" (click)="isGroupedFalseRadioClicked(i,j)"><i class="fa fa-check" style="color:black"></i></div>
+                                                            <!-- <div class="rdbtnW" *ngIf="!room.isRoomSelectionChecked" (click)="isGroupedFalseRadioClicked(i,j)"></div> -->
                                                         </div>
                                                         <strong class="customTooltip">
                                                             <span class="cursortext-dark-pointer text-dark fw600"
@@ -551,8 +553,10 @@
                                                         <div class="clr52 fs14 fw500 text-center" *ngFor="let item of room.board_types">{{item?.type}}</div>
                                                         <div class="d-flex justify-content-center mb-3">
                                                             <!-- <mat-radio-button (click)="roomSelectionCheckboxChecked(i,j)"></mat-radio-button> -->
-                                                            <div class="rdbtnB" *ngIf="item2.isRoomSelectionChecked" (click)="isGroupedRadioClicked(i,j)"></div>
-                                                            <div class="rdbtnW" *ngIf="!item2.isRoomSelectionChecked" (click)="isGroupedRadioClicked(i,j)"></div>
+                                                            <!-- <div class="rdbtnB" *ngIf="item2.isRoomSelectionChecked" (click)="isGroupedRadioClicked(i,j)"></div>
+                                                            <div class="rdbtnW" *ngIf="!item2.isRoomSelectionChecked" (click)="isGroupedRadioClicked(i,j)"></div> -->
+                                                            <div class="chk"  *ngIf="item2.isRoomSelectionChecked" (click)="isGroupedRadioClicked(i,j)" ><i class="fa fa-check" style="color:white"></i></div>
+                                                            <div class="chkN"  *ngIf="!item2.isRoomSelectionChecked" (click)="isGroupedRadioClicked(i,j)" ><i class="fa fa-check" style="color:black"></i></div>
                                                         </div>
 
                                                         <strong class="customTooltip">
