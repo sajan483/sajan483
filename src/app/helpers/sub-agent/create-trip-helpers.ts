@@ -93,7 +93,6 @@ export class CreateTripHelper {
     var selectedRoomGroups = [];
     var container: TripRoom = new TripRoom();
     var totalRoomPrice = 0;
-    console.log("grp",selectedRoomGroups)
     sessionStorage.setItem("noOfDays",JSON.stringify(this.helperService.noOfDaysBetweenTwoDates(selectedHotel.check_in_time, selectedHotel.check_out_time))) 
     for (let i = 0; i < selectedHotel.room_groups.length; ++i) {
       for (let j = 0; j < selectedHotel.room_groups[i].rooms.length; ++j) {
@@ -183,11 +182,11 @@ export class CreateTripHelper {
       container.roomGroups = selectedRoomGroups;
     }
     if (!isGrouped) {
+      selectedRoomGroups = []
       container.isSelectBtnActive = false;
-      var roomGroups: any[] = [];
       for (let i = 0; i < selectedHotel.room_groups.length; i++) {
         if (!selectedHotel.room_groups[i].is_grouped) {
-          roomGroups.push(selectedHotel.room_groups[i]);
+          selectedRoomGroups.push(selectedHotel.room_groups[i]);
         }
       }
       for (let i = 0; i < rooms.length; i++) {
@@ -203,14 +202,6 @@ export class CreateTripHelper {
             rooms[i].adults + "ADT_" + rooms[i].children + "CHD_";
         }
       }
-      console.log("rp0",roomGroups)
-      for (let i = 0; i < rooms.length; i++) {
-        for (let j = 0; j < roomGroups.length; j++) {
-          if (rooms[i].pax_info_str == roomGroups[j].pax_info_str) {
-            selectedRoomGroups.push(roomGroups[j]);
-          }
-        }
-      }
       selectedRoomGroups = selectedRoomGroups.filter(this.helperService.onlyUnique);
       for (let i = 0; i < selectedRoomGroups.length; i++) {
         for (let j = 0; j < selectedRoomGroups[i].rooms.length; j++) {
@@ -220,7 +211,7 @@ export class CreateTripHelper {
       for (let i = 0; i < selectedRoomGroups.length; i++) {
         for (let j = 0; j < selectedRoomGroups[i].rooms.length; j++) {
           if (selectedRoomGroups[i].rooms[j].isRoomSelectionChecked) {
-            totalRoomPrice = totalRoomPrice +selectedRoomGroups[i].rooms[j].amount;
+            totalRoomPrice = totalRoomPrice + (selectedRoomGroups[i].rooms[j].amount * selectedRoomGroups[i].rooms[j].quantity);
           }
         }
       }

@@ -639,7 +639,9 @@ export class CreateTripComponent implements OnInit, AfterViewChecked, DoCheck {
         this.timeLeft--;
       }
       else if (this.timeLeft == 0) {
-        (<HTMLInputElement>document.getElementById("ibanClose")).click();
+        if((<HTMLInputElement>document.getElementById("ibanClose")) != null) {
+          (<HTMLInputElement>document.getElementById("ibanClose")).click();
+        }
         this.timeLeft = 30;
         clearInterval(this.interval);
       }

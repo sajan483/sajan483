@@ -180,7 +180,7 @@
                 <div class="col-md-12 px-0 mx-0 row" *ngFor="let rooms of tripHotel?.room_variations">
                     <div class="col-md-12 row m-0 p-2 brdrtop" *ngFor="let item of rooms.room">
                         <div class="d-flex justify-content-between w-100">
-                            <div class="clr52 fs14 fw600">{{item?.name.split('-')[0]}}</div>
+                            <div class="clr52 fs14 fw600">{{item?.name.split('-')[0]}} <span *ngIf="item.quantity > 1">x {{item?.quantity}} </span></div>
                             <div class="clr52 fs14 fw500" *ngIf="rooms?.meal_title">{{'Meal Plan' | translate}} : {{rooms?.meal_title}}</div>
                             <div class="fs12 ">
                                 <span class="green_text" *ngIf="item.cancellation_policy.is_refundable">{{'Refundable' | translate}}</span>
