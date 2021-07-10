@@ -428,8 +428,8 @@
                                                         <p class="pt25" *ngIf="room?.has_special_deal"></p>
                                                         <div class="media-body divAmenities textright pr10">
                                                             <strong>
-                                                                <span
-                                                                    class="pl-0 clr_blue_18 fs16 fw500">{{room?.name}}</span>
+                                                                <span class="pl-0 clr_blue_18 fs16 fw500">{{room?.name}}</span>
+                                                                <span *ngIf="room.quantity > 1" class="pl-2 clr_blue_18 fs16 fw500">x {{room?.quantity}}</span>
                                                             </strong>
                                                             <div *ngIf="room?.boardTypes.length > 0">
                                                                 <div class="mealplanclass">{{'Meal Plan' | translate}} : <span *ngFor="let item of room.boardTypes" class="px-2">{{item?.type}}</span></div>
@@ -438,7 +438,9 @@
                                                                 <i class="hotelbedicon icon_size_20 icns mr10 mmr0 mml10"></i>
                                                                 <p class="clr52 fs14 fw400">1 {{'room for' | translate}} {{room?.adult_number}} {{'Adult(s)' |translate }}
                                                                 </p>
-                                                                <p class="pl-1 clr52 fs14 fw400" *ngIf="room.child_number > 0">& {{room?.child_number}} {{'Child(s)' | translate }}
+                                                                <p class="pl-1 clr52 fs14 fw400" *ngIf="room.child_number == 1">& {{room?.child_number}} {{'Child' | translate }}
+                                                                </p>
+                                                                <p class="pl-1 clr52 fs14 fw400" *ngIf="room.child_number > 1">& {{room?.child_number}} {{'Children' | translate }}
                                                                 </p>
                                                             </div>
                                                             <div>
@@ -466,7 +468,7 @@
                                                         <strong class="customTooltip">
                                                             <span class="cursortext-dark-pointer text-dark fw600"
                                                                 data-room-price="139">{{room?.fare_summary[0]?.currency}}
-                                                                {{room?.amount | number:'.2-2'}}
+                                                                {{room?.amount * room?.quantity | number:'.2-2'}}
                                                                 <span class="customtooltiptext hotelFare">
                                                                     <div class="container mb-2 fs12">
                                                                         <div class="pt-2 fare_summary_heading">{{'Fare Summary' | translate}}</div>
@@ -525,7 +527,9 @@
                                                                 <i class="hotelbedicon icon_size_20 icns mr10 mmr0 mml10"></i>
                                                                 <p class="clr52 fs14 fw400">1 {{'room for' | translate}} {{room?.adult_number}} {{'Adult(s)' |translate }}
                                                                 </p>
-                                                                <p class="pl-1 clr52 fs14 fw400" *ngIf="room.child_number > 0">& {{room?.child_number}} {{'Child(s)' | translate }}
+                                                                <p class="pl-1 clr52 fs14 fw400" *ngIf="room.child_number == 1">& {{room?.child_number}} {{'Child' | translate }}
+                                                                </p>
+                                                                <p class="pl-1 clr52 fs14 fw400" *ngIf="room.child_number > 1">& {{room?.child_number}} {{'Children' | translate }}
                                                                 </p>
                                                             </div>
                                                             <div>
