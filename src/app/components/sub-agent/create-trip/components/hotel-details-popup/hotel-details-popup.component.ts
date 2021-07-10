@@ -286,7 +286,7 @@ export class HotelDetailsPopupComponent implements OnInit ,OnChanges{
         if (this.selectedRoomGroups[i].rooms[k].isRoomSelectionChecked) {
           this.selectedRoomGroups[i].rooms[k].isRoomSelectionChecked = !this
             .selectedRoomGroups[i].rooms[k].isRoomSelectionChecked;
-          this.totalRoomPrice = this.totalRoomPrice - this.selectedRoomGroups[i].rooms[k].amount;
+          this.totalRoomPrice = this.totalRoomPrice - (this.selectedRoomGroups[i].rooms[k].amount * this.selectedRoomGroups[i].rooms[k].quantity);
         }
       }
     }
@@ -294,8 +294,7 @@ export class HotelDetailsPopupComponent implements OnInit ,OnChanges{
     if (!this.selectedRoomGroups[i].rooms[j].isRoomSelectionChecked) {
       this.selectedRoomGroups[i].rooms[j].isRoomSelectionChecked = !this
         .selectedRoomGroups[i].rooms[j].isRoomSelectionChecked;
-      this.totalRoomPrice = this.totalRoomPrice + this.selectedRoomGroups[i].rooms[j].amount;
-        //this.makkaSelectActivate = true;
+      this.totalRoomPrice = this.totalRoomPrice + (this.selectedRoomGroups[i].rooms[j].amount * this.selectedRoomGroups[i].rooms[j].quantity);
     }
   }
 
