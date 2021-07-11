@@ -113,7 +113,16 @@
                         </div>
                         <div class="col-md-9 col-12 brdrR brdrL my-auto">
                             <div class="float_left mirr_float_right">
-                                <div class="fw600 fs16">{{tripMakkahHotel?.trip_hotel.hotel.name}}</div>
+                                <div class="d-inline-flex">
+                                    <div class="fw600 fs16">{{tripMakkahHotel?.trip_hotel.hotel.name}}</div>
+                                    <div class="pl10 mpl0 mpr10">
+                                        <ngb-rating [(rate)]="tripMakkahHotel.trip_hotel.rating" [readonly]="readonly" [max]=5>
+                                            <ng-template let-fill="fill" let-index="index">
+                                                <span class="star" [class.filled]="fill === 100" [class.bad]="index < 2">&#9733;</span>
+                                            </ng-template>
+                                        </ngb-rating>
+                                    </div>
+                                </div>
                                 <p class="linebyline clr52 fs13">
                                     {{'No of days on Makkah' | translate}}
                                     <span class="Premium_blue fw600">{{noOfDaysInMakkah}}</span>
@@ -189,11 +198,17 @@
                                 <div class="col-md-12 p-0 row m-0">
                                     <div class="col-md-12 px-0 mx-0 row" *ngFor="let rooms of tripMakkahHotel.trip_hotel.room_variations">
                                         <div class="col-md-12 row m-0 p-2 brdrtop" *ngFor="let item of rooms.room">
-                                            <div class="d-flex justify-content-between w-100">
+                                            <div class="col-md-5">
                                                 <div class="clr52 fs14 fw600">{{item?.name.split('-')[0]}}</div>
-                                                <div class="clr52 fs14 fw500" *ngIf="rooms?.meal_title">{{'Meal Plan' | translate}} : {{rooms?.meal_title}}</div>
-                                                <div class="fs12 ">
-                                                    <span class="green_text" *ngIf="item.cancellation_policy.is_refundable">{{'Refundable' | translate}}</span>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="clr52 fs14 fw500" *ngIf="rooms?.meal_title">
+                                                    {{'Meal Plan' | translate}} : {{rooms?.meal_title}}
+                                                </div>
+                                            </div>
+                                            <div class="col-md-3 text-right">
+                                                <div class="fs14">
+                                                    <span class="success_text" *ngIf="item.cancellation_policy.is_refundable">{{'Refundable' | translate}}</span>
                                                     <span class="red_text" *ngIf="!item.cancellation_policy.is_refundable">{{'non_refundable' | translate}}</span>
                                                 </div>
                                             </div>
@@ -297,7 +312,16 @@
                         </div>
                         <div class="col-md-9 col-12 brdrR brdrL my-auto">
                             <div class="float_left mirr_float_right">
-                                <div class="fw600 fs16">{{tripMadeenaHotel?.trip_hotel.hotel.name}}</div>
+                                <div class="d-inline-flex">
+                                    <div class="fw600 fs16">{{tripMadeenaHotel?.trip_hotel.hotel.name}}</div>
+                                    <div class="pl10 mpl0 mpr10">
+                                        <ngb-rating [(rate)]="tripMadeenaHotel.trip_hotel.rating" [readonly]="readonly" [max]=5>
+                                            <ng-template let-fill="fill" let-index="index">
+                                                <span class="star" [class.filled]="fill === 100" [class.bad]="index < 2">&#9733;</span>
+                                            </ng-template>
+                                        </ngb-rating>
+                                    </div>
+                                </div>
                                 <p class="linebyline clr52 fs13">
                                     {{'No of days on Medinah' | translate}}
                                     <span class="Premium_blue fw600">{{noOfDaysInMedinah}}</span>
@@ -371,11 +395,17 @@
                                 <div class="col-md-12 p-0 row m-0">
                                     <div class="col-md-12 px-0 mx-0 row" *ngFor="let rooms of tripMadeenaHotel.trip_hotel.room_variations">
                                         <div class="col-md-12 row m-0 p-2 brdrtop" *ngFor="let item of rooms.room">
-                                            <div class="d-flex justify-content-between w-100">
+                                            <div class="col-md-5">
                                                 <div class="clr52 fs14 fw600">{{item?.name.split('-')[0]}}</div>
-                                                <div class="clr52 fs14 fw500" *ngIf="rooms?.meal_title">{{'Meal Plan' | translate}} : {{rooms?.meal_title}}</div>
-                                                <div class="fs12 ">
-                                                    <span class="green_text" *ngIf="item.cancellation_policy.is_refundable">{{'Refundable' | translate}}</span>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="clr52 fs14 fw500" *ngIf="rooms?.meal_title">
+                                                    {{'Meal Plan' | translate}} : {{rooms?.meal_title}}
+                                                </div>
+                                            </div>
+                                            <div class="col-md-3 text-right">
+                                                <div class="fs14">
+                                                    <span class="success_text" *ngIf="item.cancellation_policy.is_refundable">{{'Refundable' | translate}}</span>
                                                     <span class="red_text" *ngIf="!item.cancellation_policy.is_refundable">{{'non_refundable' | translate}}</span>
                                                 </div>
                                             </div>
@@ -596,7 +626,7 @@
                 </div>
             </div>
             <div class="col-md-3 pr-0 mt-3 ml1">
-                <div class="boxvouch cursor-pointer" (click)="invoiceClick('Download')">
+                <div class="boxvouch cursor-pointer" (click)="invoiceClick('Download')" [class.hideVoucher]="!downloadShow">
                     <div class="d-flex justify-content-between">
                         <div class="d-inline-flex">
                             <i class="printicon icns icon_size_30"></i>
@@ -604,13 +634,13 @@
                         </div>
                         <div>
                             <i class="rightarrow icns icon_size_20 my-auto h-100 mirr_rotate_180" *ngIf="!invoicetoggle"></i>
-                            <div class="spinner-border" role="status" *ngIf="invoicetoggle">
-                                <span class="sr-only">{{'Loading' | translate}}...</span>
+                            <div class="spinner-border height_loader" role="status" *ngIf="invoicetoggle">
+                                <span class="sr-only">Loading...</span>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="boxvouch cursor-pointer mt-3" (click)="voucherClick('Download')">
+                <div class="boxvouch cursor-pointer mt-3" (click)="voucherClick('Download')" [class.hideVoucher]="!downloadShow">
                     <div class="d-flex justify-content-between">
                         <div class="d-inline-flex">
                             <i class="downloadicon icns icon_size_30"></i>
@@ -618,8 +648,8 @@
                         </div>
                         <div>
                             <i class="rightarrow icns icon_size_20 my-auto h-100 mirr_rotate_180" *ngIf="!vouchertoggle"></i>
-                            <div class="spinner-border" role="status" *ngIf="vouchertoggle">
-                                <span class="sr-only">{{'Loading' | translate}}...</span>
+                            <div class="spinner-border height_loader" role="status" *ngIf="vouchertoggle">
+                                <span class="sr-only">Loading...</span>
                             </div>
                         </div>
                     </div>
@@ -647,7 +677,7 @@
                     </div>
                 </div> -->
                 <div *ngIf="bknStatus != 'cancelled'">
-                    <div class="boxvouch cursor-pointer mt-3" (click)="checkCancellation()">
+                    <div class="boxvouch cursor-pointer mt-3" (click)="checkCancellation()" [class.hideVoucher]="!downloadShow">
                         <div class="d-flex justify-content-between">
                             <div class="d-inline-flex">
                                 <i class="cancelicon icns icon_size_25"></i>
@@ -656,8 +686,8 @@
                             </div>
                             <div>
                                 <i class="rightarrow icns icon_size_20 my-auto h-100 mirr_rotate_180" *ngIf="!cancellationtoggle"></i>
-                                <div class="spinner-border" role="status" *ngIf="cancellationtoggle">
-                                    <span class="sr-only">{{'Loading' | translate}}...</span>
+                                <div class="spinner-border height_loader" role="status" *ngIf="cancellationtoggle">
+                                    <span class="sr-only">Loading...</span>
                                 </div>
                             </div>
                         </div>

@@ -63,11 +63,12 @@ export class ItineraryViewComponent implements OnInit {
   vouchertoggle: boolean = false;
   shimmer: boolean = true;
   btnactv: boolean;
-  
+  readonly:boolean = true;
   submitted = false;
   checkCancelData: LooseObject = {};
   timerStatus: boolean;
   allowUserToCancellBooking: boolean;
+  downloadShow: boolean = false;
 
   constructor(private route: ActivatedRoute,
     private appStore: AppStore,
@@ -132,6 +133,9 @@ export class ItineraryViewComponent implements OnInit {
     this.reference_no = data.reference_no;
     if (this.dataArray) { this.dataArray.unsubscribe(); }
     this.tripData = data;
+    if(this.tripData.status == 'success' || this.tripData.status == 'partial_success'){
+      this.downloadShow = true;
+    }
     this.checkCancelData.details = this.tripData;
     if (data.trip_flights && data.trip_flights.length > 0) {
       this.tripFlight = data.trip_flights[0];
@@ -172,7 +176,7 @@ export class ItineraryViewComponent implements OnInit {
   }
 
   invoiceClick(item: any) {
-    if(this.bknStatus == 'success'){
+    if(this.downloadShow){
     this.invoicetoggle = true;
     if (item == "View") {
       this.invoiceClickHtml()
@@ -184,7 +188,7 @@ export class ItineraryViewComponent implements OnInit {
   }
 
   voucherClick(item: any) {
-    if(this.bknStatus == 'success'){
+    if(this.downloadShow){
     this.vouchertoggle = true;
     if (item == "View") {
       this.voucherClickHtml()
@@ -270,6 +274,9 @@ export class ItineraryViewComponent implements OnInit {
   
 
   checkCancellation() {
+    if(!this.downloadShow){
+      return;
+    }
     this.checkTimeStamp();
     if(this.allowUserToCancellBooking){ 
     this.cancellationtoggle = true;

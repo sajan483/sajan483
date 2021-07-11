@@ -28,7 +28,7 @@
                 <div class="d-inline-flex">
                     <div class="fw600 fs16">{{tripHotel?.hotel?.name | titlecase}}</div>
                     <div class="pl10 mpl0 mpr10">
-                        <ngb-rating [(rate)]="tripHotel.hotel.user_review" [readonly]="readonly" [max]=5>
+                        <ngb-rating [(rate)]="tripHotel.rating" [readonly]="readonly" [max]=5>
                             <ng-template let-fill="fill" let-index="index">
                                 <span class="star" [class.filled]="fill === 100" [class.bad]="index < 2">&#9733;</span>
                             </ng-template>
@@ -179,11 +179,17 @@
             <div class="col-md-12 p-0 row m-0">
                 <div class="col-md-12 px-0 mx-0 row" *ngFor="let rooms of tripHotel?.room_variations">
                     <div class="col-md-12 row m-0 p-2 brdrtop" *ngFor="let item of rooms.room">
-                        <div class="d-flex justify-content-between w-100">
-                            <div class="clr52 fs14 fw600">{{item?.name.split('-')[0]}} <span *ngIf="item.quantity > 1">x {{item?.quantity}} </span></div>
-                            <div class="clr52 fs14 fw500" *ngIf="rooms?.meal_title">{{'Meal Plan' | translate}} : {{rooms?.meal_title}}</div>
-                            <div class="fs12 ">
-                                <span class="green_text" *ngIf="item.cancellation_policy.is_refundable">{{'Refundable' | translate}}</span>
+                        <div class="col-md-5">
+                            <div class="clr52 fs14 fw600">{{item?.name.split('-')[0]}}</div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="clr52 fs14 fw500" *ngIf="rooms?.meal_title">
+                                {{'Meal Plan' | translate}} : {{rooms?.meal_title}}
+                            </div>
+                        </div>
+                        <div class="col-md-3 text-right">
+                            <div class="fs14">
+                                <span class="success_text" *ngIf="item.cancellation_policy.is_refundable">{{'Refundable' | translate}}</span>
                                 <span class="red_text" *ngIf="!item.cancellation_policy.is_refundable">{{'non_refundable' | translate}}</span>
                             </div>
                         </div>
