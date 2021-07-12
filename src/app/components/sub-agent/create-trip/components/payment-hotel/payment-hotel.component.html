@@ -180,7 +180,10 @@
                 <div class="col-md-12 px-0 mx-0 row" *ngFor="let rooms of tripHotel?.room_variations">
                     <div class="col-md-12 row m-0 p-2 brdrtop" *ngFor="let item of rooms.room">
                         <div class="col-md-5">
-                            <div class="clr52 fs14 fw600">{{item?.name.split('-')[0]}}</div>
+                            <div class="clr52 fs14 fw600">
+                                <span>{{item?.name.split('-')[0]}}</span> 
+                                <span class="pl-2" *ngIf="item.quantity > 1">x  {{item?.quantity}}</span>
+                            </div>
                         </div>
                         <div class="col-md-4">
                             <div class="clr52 fs14 fw500" *ngIf="rooms?.meal_title">
