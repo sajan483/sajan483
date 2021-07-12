@@ -128,10 +128,10 @@
                                     <span class="Premium_blue fw600">{{noOfDaysInMakkah}}</span>
                                     <span class="crossline"></span>
                                     <span>{{'No of Guest' | translate}}</span>
-                                    <span class="Premium_blue fw600">{{noOfTravellers}}</span>
+                                    <span class="Premium_blue fw600">{{passngrCount}}</span>
                                     <span class="crossline"></span>
                                     <span>{{'Rooms' | translate}}</span>
-                                    <span class="Premium_blue fw600">{{tripMakkahHotel?.rooms?.length}}</span>
+                                    <span class="Premium_blue fw600">{{roomQunty}}</span>
                                     <span class="crossline" *ngIf="tripMakkahHotel.trip_hotel.hotel.distance"></span>
                                     <span *ngIf="tripMakkahHotel.trip_hotel.hotel.distance">{{'HARAM' |
                                         translate}}</span>
@@ -199,7 +199,10 @@
                                     <div class="col-md-12 px-0 mx-0 row" *ngFor="let rooms of tripMakkahHotel.trip_hotel.room_variations">
                                         <div class="col-md-12 row m-0 p-2 brdrtop" *ngFor="let item of rooms.room">
                                             <div class="col-md-5">
-                                                <div class="clr52 fs14 fw600">{{item?.name.split('-')[0]}}</div>
+                                                <div class="d-flex clr52 fs14 fw600">
+                                                    <div>{{item?.name.split('-')[0]}}</div>
+                                                    <div class="px-2" *ngIf="item?.quantity > 1">X {{item?.quantity}}</div>
+                                                </div>
                                             </div>
                                             <div class="col-md-4">
                                                 <div class="clr52 fs14 fw500" *ngIf="rooms?.meal_title">
@@ -327,10 +330,10 @@
                                     <span class="Premium_blue fw600">{{noOfDaysInMedinah}}</span>
                                     <span class="crossline"></span>
                                     <span>{{'No of Guest' | translate}}</span>
-                                    <span class="Premium_blue fw600">{{noOfTravellers}}</span>
+                                    <span class="Premium_blue fw600">{{passngrCount}}</span>
                                     <span class="crossline"></span>
                                     <span>{{'Rooms' | translate}}</span>
-                                    <span class="Premium_blue fw600">{{tripMadeenaHotel?.rooms.length}}</span>
+                                    <span class="Premium_blue fw600">{{roomQunty}}</span>
                                     <span *ngIf="tripMadeenaHotel.trip_hotel.hotel.distance" class="crossline"></span>
                                     <span *ngIf="tripMadeenaHotel.trip_hotel.hotel.distance">{{'NABAWI' |
                                         translate}}</span>
@@ -396,7 +399,10 @@
                                     <div class="col-md-12 px-0 mx-0 row" *ngFor="let rooms of tripMadeenaHotel.trip_hotel.room_variations">
                                         <div class="col-md-12 row m-0 p-2 brdrtop" *ngFor="let item of rooms.room">
                                             <div class="col-md-5">
-                                                <div class="clr52 fs14 fw600">{{item?.name.split('-')[0]}}</div>
+                                                <div class="d-flex clr52 fs14 fw600">
+                                                    <div>{{item?.name.split('-')[0]}}</div>
+                                                    <div class="px-2" *ngIf="item?.quantity > 1">X {{item?.quantity}}</div>
+                                                </div>
                                             </div>
                                             <div class="col-md-4">
                                                 <div class="clr52 fs14 fw500" *ngIf="rooms?.meal_title">

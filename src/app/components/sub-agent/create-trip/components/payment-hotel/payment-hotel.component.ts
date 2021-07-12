@@ -35,10 +35,10 @@ export class PaymentHotelComponent implements OnInit, OnChanges {
       element.room.forEach(room => {
         room.fare_summary.forEach(payment => {
           if(payment.name == 'Base Price'){
-            basefare = basefare + payment.amount;
+            basefare = basefare + (payment.amount * room.quantity);
           }
           if(payment.name == 'TAX'){
-            tax = tax + payment.amount;
+            tax = tax + (payment.amount * room.quantity);
           }
         });
       });

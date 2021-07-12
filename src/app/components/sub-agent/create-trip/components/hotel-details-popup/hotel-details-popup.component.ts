@@ -307,7 +307,7 @@ export class HotelDetailsPopupComponent implements OnInit ,OnChanges{
     for(let k=0;k<this.selectedRoomGroups.length;k++){
       this.selectedRoomGroups[k].isRoomSelectionChecked = false;
     } 
-    this.totalRoomPrice = this.selectedRoomGroups[i].rooms[j].insertedAmount;
+    this.totalRoomPrice = this.selectedRoomGroups[i].amount;
     this.selectedRoomGroups[i].isRoomSelectionChecked = true;
     this.selectedRoomCount = this.rooms.length;
     this.makkaSelectActivate = false;
