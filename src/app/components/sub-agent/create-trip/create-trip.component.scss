@@ -5001,7 +5001,7 @@ input[type="radio"]:checked:after {
         margin-top: 0;
     }
     li.roomtypeName {
-        padding: 14px 15px 0 15px;
+        padding: 14px 15px 5px 15px;
         border-top: solid 1px #e1e1e1;
         min-height: 118px;
         margin-top: 0;
@@ -6242,18 +6242,20 @@ input[type="radio"]:checked:after {
     }
 }
 
-.priceStl{
+.priceStl {
     font-size: 17px;
     margin-top: 15px;
-  }
-  .prcStrip{
+}
+
+.prcStrip {
     min-height: 60p !important;
     background-color: #f3f3f3;
-    position:absolute;
-    left: 0;   
+    position: absolute;
+    left: 0;
     top: -4px;
     width: 100%;
-  }
-  .mt150{
+}
+
+.mt150 {
     margin-top: 151px;
-  }
+}

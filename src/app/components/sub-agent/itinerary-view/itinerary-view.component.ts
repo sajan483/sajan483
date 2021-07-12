@@ -69,6 +69,8 @@ export class ItineraryViewComponent implements OnInit {
   timerStatus: boolean;
   allowUserToCancellBooking: boolean;
   downloadShow: boolean = false;
+  roomQunty: number;
+  passngrCount: number;
 
   constructor(private route: ActivatedRoute,
     private appStore: AppStore,
@@ -114,6 +116,7 @@ export class ItineraryViewComponent implements OnInit {
           });
       } else {
         this.getData(data);
+        this.roomCountPaxCount(data);
       }
     });
   }
@@ -375,5 +378,28 @@ export class ItineraryViewComponent implements OnInit {
 
   navigateHomePage() {
     this.router.navigate(['subagent/home']);
+  }
+
+  roomCountPaxCount(data){
+    var roomData:any;
+    var paxCount = 0;
+    var roomQty = 0;
+    if(data.makka_hotel_booking != null){
+      roomData = data.makka_hotel_booking;
+    }else if(data.madina_hotel_booking != null){
+      roomData = data.madina_hotel_booking;
+    }
+    roomData.trip_hotel.room_variations.forEach(element => {
+      element.room.forEach(item => {
+        var paxPer = 0;
+        item.pax_info.forEach(pax => {
+          paxPer = paxPer + pax.quantity;
+        });
+        paxCount = paxCount + (paxPer * item.quantity);
+        roomQty = roomQty + item.quantity
+      });
+    });
+    this.roomQunty = roomQty;
+    this.passngrCount = paxCount;
   }
 }

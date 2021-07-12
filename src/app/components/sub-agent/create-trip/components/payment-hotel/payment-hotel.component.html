@@ -116,17 +116,17 @@
                         </div>
                         <div>
                             <div class="d-flex justify-content-between fw400 pt-1" *ngIf="tripHotel?.prices_summary?.gds_fee != 0">
-                                <div>{{'GDS Fee' | translate}} :</div><div>{{tripHotel?.prices_summary?.currency}} {{tripHotel?.prices_summary?.gds_fee | number:'.2-2'}}</div>
+                                <div>{{'GDS Fee' | translate}} :</div><div>{{tripHotel?.room_variations[0]?.currency}} {{tripHotel?.prices_summary?.gds_fee | number:'.2-2'}}</div>
                             </div>
                         </div>
                         <div>
                             <div class="d-flex justify-content-between fw400 pt-1" *ngIf="tripHotel?.prices_summary?.ota_fee != 0">
-                                <div>{{'OTA Fee' | translate}} :</div><div>{{tripHotel?.prices_summary?.currency}} {{tripHotel?.prices_summary?.ota_fee | number:'.2-2'}}</div>
+                                <div>{{'OTA Fee' | translate}} :</div><div>{{tripHotel?.room_variations[0]?.currency}} {{tripHotel?.prices_summary?.ota_fee | number:'.2-2'}}</div>
                             </div>
                         </div>
                         <div>
                             <div class="d-flex justify-content-between fw500 pt-2" *ngIf="tripHotel?.prices_summary?.total_price != 0">
-                                <div>{{'Total Price' | translate}} :</div><div>{{tripHotel?.prices_summary?.currency}} {{tripHotel?.prices_summary?.total_price | number:'.2-2'}}</div>
+                                <div>{{'Total Price' | translate}} :</div><div>{{tripHotel?.room_variations[0]?.currency}} {{tripHotel?.prices_summary?.total_price | number:'.2-2'}}</div>
                             </div>
                         </div>
                     </div>
@@ -181,7 +181,7 @@
                     <div class="col-md-12 row m-0 p-2 brdrtop" *ngFor="let item of rooms.room">
                         <div class="col-md-5">
                             <div class="clr52 fs14 fw600">
-                                <span>{{item?.name.split('-')[0]}}</span> 
+                                <span>{{item?.name.split('-')[0]}}</span>
                                 <span class="pl-2" *ngIf="item.quantity > 1">x  {{item?.quantity}}</span>
                             </div>
                         </div>
