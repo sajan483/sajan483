@@ -26,7 +26,7 @@
                     <div class="col-md-7 col-12 row">
                         <div *ngIf="selectedHotel?.has_special_deal" class="hotelRibbon">
                             <span class="hotelRibbon3 hotelDetails">
-                                {{'Has special deal' | translate}}
+                                {{'Special Deal' | translate}}
                             </span>
                         </div>
                         <div class="hotel_photo_gallery cursor-pointer" (click)="viewAllImagePopup()">
@@ -123,7 +123,7 @@
                                                     <li class="roomtypeName media">
                                                         <div class="roomRibbon" *ngIf="room?.has_special_deal">
                                                             <span class="roomRibbon6">
-                                                                <p>{{'Special Deal' | translate}} : {{room?.deal_description}}</p>
+                                                                <p>{{'Special Deal' | translate}} : <span class="text-capitalize">{{room?.deal_description}}</span></p>
                                                             </span>
                                                         </div>
                                                         <p class="pt25" *ngIf="room?.has_special_deal"></p>
@@ -173,7 +173,7 @@
                                                                     <div class="container mb-2 fs12">
                                                                         <div class="pt-2 fare_summary_heading">{{'Fare Summary' | translate}}</div>
                                                                         <div *ngFor="let item of room.fare_summary[0]">
-                                                                            <div class="d-flex justify-content-between fw400 pt-1" *ngIf="!item.is_total && item?.amount != 0">
+                                                                            <div class="d-flex justify-content-between fw400 pt-1" *ngIf="!item.is_total && item?.amount != 0 && item?.name != 'CommissionAmount'">
                                                                                 <div>{{item?.name}} :</div><div>{{item?.currency}} {{item?.amount * room?.quantity | number:'.2-2'}}</div>
                                                                             </div>
                                                                         </div>
@@ -211,7 +211,7 @@
                                                     <li class="roomtypeName media border_bottm">
                                                         <div class="roomRibbon" *ngIf="room?.has_special_deal">
                                                             <span class="roomRibbon6">
-                                                                <p>{{'Special Deal' | translate}} : {{room?.deal_description}}</p>
+                                                                <p>{{'Special Deal' | translate}} : <span class="text-capitalize">{{room?.deal_description}}</span></p>
                                                             </span>
                                                         </div>
                                                         <p class="pt25" *ngIf="room?.has_special_deal"></p>
@@ -262,7 +262,7 @@
                                                                     <div class="container mb-2 fs12">
                                                                         <div class="pt-2 fare_summary_heading">{{'Fare Summary' | translate}}</div>
                                                                         <div *ngFor="let item of room.fare_summary[0]">
-                                                                            <div class="d-flex justify-content-between fw400 pt-1" *ngIf="!item.is_total && item?.amount != 0">
+                                                                            <div class="d-flex justify-content-between fw400 pt-1" *ngIf="!item.is_total && item?.amount != 0 && item?.name != 'CommissionAmount'">
                                                                                 <div>{{item?.name}} :</div><div>{{item?.currency}} {{item?.amount | number:'.2-2'}}</div>
                                                                             </div>
                                                                         </div>
