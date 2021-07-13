@@ -25,30 +25,25 @@ export class PaymentHotelComponent implements OnInit, OnChanges {
     var obj = JSON.parse(sessionStorage.getItem('userObject'))
     this.travelCount = obj.adults + obj.children;
 
-    this.getHotelPriceSummery()
   }
 
-  getHotelPriceSummery(){
-    var basefare = 0;
-    var tax = 0;
+  
+
+  fareSplitAmount(name:string){
+    let amt:number = 0;
     this.tripHotel.room_variations.forEach(element => {
       element.room.forEach(room => {
         room.fare_summary.forEach(payment => {
-          if(payment.name == 'Base Price'){
-            basefare = basefare + (payment.amount * room.quantity);
-          }
-          if(payment.name == 'TAX'){
-            tax = tax + (payment.amount * room.quantity);
+          if(payment.name == name){
+            amt = amt + (payment.amount * room.quantity)
           }
         });
       });
     });
-    this.baseFareAmount = basefare;
-    this.taxAmount = tax;
+    return amt;
   }
 
   ngOnChanges() {
-    this.getHotelPriceSummery()
     if (this.city == "makkah") { this.showMakkah = true } else { this.showMakkah = false }
     if (this.city == "madinah") { this.showMadinah = true } else { this.showMadinah = false }
   }

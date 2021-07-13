@@ -104,19 +104,9 @@
                 <span class="customtooltiptext transportPayment">
                     <div class="container mb-2 fs12">
                         <div class="pt-2 fare_summary_heading">{{'Fare Summary' | translate}}</div>
-                        <div>
-                            <div class="d-flex justify-content-between fw400 pt-1" *ngIf="baseFareAmount != 0">
-                                <div>{{'Base Price' | translate}} :</div><div>{{tripHotel?.room_variations[0]?.currency}} {{baseFareAmount | number:'.2-2'}}</div>
-                            </div>
-                        </div>
-                        <div>
-                            <div class="d-flex justify-content-between fw400 pt-1" *ngIf="taxAmount != 0">
-                                <div>{{'TAX' | translate}} :</div><div>{{tripHotel?.room_variations[0]?.currency}} {{taxAmount | number:'.2-2'}}</div>
-                            </div>
-                        </div>
-                        <div>
-                            <div class="d-flex justify-content-between fw400 pt-1" *ngIf="tripHotel?.prices_summary?.gds_fee != 0">
-                                <div>{{'GDS Fee' | translate}} :</div><div>{{tripHotel?.room_variations[0]?.currency}} {{tripHotel?.prices_summary?.gds_fee | number:'.2-2'}}</div>
+                        <div *ngFor="let fare of tripHotel.room_variations[0].room[0].fare_summary">
+                            <div class="d-flex justify-content-between fw400 pt-1" *ngIf="fare.amount != 0 && fare.name != 'CommissionAmount' && fare.name != 'Total Amount'">
+                                <div>{{fare?.name}} :</div><div>{{tripHotel?.room_variations[0]?.currency}} {{fareSplitAmount(fare.name) | number:'.2-2'}}</div>
                             </div>
                         </div>
                         <div>
