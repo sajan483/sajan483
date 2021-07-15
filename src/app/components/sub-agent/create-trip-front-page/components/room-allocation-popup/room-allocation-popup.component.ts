@@ -44,14 +44,14 @@ export class RoomAllocationPopupComponent implements OnInit {
   setRoomAllocation() {
       var obj = JSON.parse(sessionStorage.getItem('userObject'))
       this.userRooms = [];
-      let adultsPerRoom = 5;
+      let adultsPerRoom = 4;
       this.countAdult = obj.adults;
       this.countChild = obj.children;
       this.countInfant = obj.infant
       var adult = this.countAdult;
       var child = this.countChild + this.countInfant;
       let nofrooms = Math.ceil(adult/ adultsPerRoom);
-      let childrenperroom = 4;
+      let childrenperroom = 2;
       let extrachildrenroom = child % nofrooms;
       let index = 0;
       while (nofrooms > 0) {
@@ -220,7 +220,7 @@ export class RoomAllocationPopupComponent implements OnInit {
     var i = -1;
     var total = 0;
     this.userRooms.forEach((value, index) => {
-      if (value.id == id && value.adults < 6) {
+      if (value.id == id && value.adults < 4) {
         i = index;
       }
       total += value.adults;
@@ -248,7 +248,7 @@ export class RoomAllocationPopupComponent implements OnInit {
     var i = -1;
     var total = 0;
     this.userRooms.forEach((value, index) => {
-      if (value.id == id && value.children < 4) {
+      if (value.id == id && value.children < 2) {
         i = index;
       }
       total += value.children;

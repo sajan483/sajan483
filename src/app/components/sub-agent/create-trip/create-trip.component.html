@@ -182,7 +182,7 @@
                                                         <p class="mb-0 fs14 pl-1 pdt">{{'Date of Birth' | translate}}
                                                         </p>
                                                         <div [owlDateTimeTrigger]="dt11" class="position-relative">
-                                                            <input placeholder="{{'Date of Birth' | translate}}" class="owldatepicker form-control fs14 bordrservice removeoutline" [owlDateTime]="dt11" formControlName="dob" [ngClass]="{ 'is-invalid': submitted && g.dob.errors }">
+                                                            <input placeholder="{{'Date of Birth' | translate}}" class="owldatepicker form-control fs14 bordrservice removeoutline" [owlDateTime]="dt11" formControlName="dob" [ngClass]="{ 'is-invalid': submitted && g.dob.errors }" [max]="today">
                                                             <i class="icns calendaricon icon_size_20 cursor-pointer calendarposition mirr_clndr_icon"></i>
                                                         </div>
                                                         <owl-date-time [pickerType]="'calendar'" #dt11></owl-date-time>
