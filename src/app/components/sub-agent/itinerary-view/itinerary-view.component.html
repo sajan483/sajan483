@@ -514,7 +514,7 @@
                         </div>
                         <div class="col-md-9 col-12 brdrR brdrL my-auto">
                             <div class="float_left mirr_float_right">
-                                <p class="fw600 fs16">{{tripTransport.trip_transportation?.company?.name}}</p>
+                                <p class="fw600 fs16">{{tripTransport.trip_transportation?.company?.name}} <span class="Premium_blue fs14 pl10 mpr10">- {{tripTransport?.trip_transportation?.categories[0]?.name}}</span></p>
                                 <p class="linebyline clr52 fs13">
                                     <strong class="fw600">{{'Route' | translate}} :</strong>
                                     <span>{{tripTransport?.trip_transportation?.route?.name}}</span>
@@ -528,9 +528,6 @@
                         </div>
                         <div class="col-md-12 p-0 row ml-0 mr-0  borderpading  expansion">
                             <div class="col-md-12 transportbodypdng mt-2 row brdrtop m-0">
-                                <div class="col-md-4 p-0 mb-2">
-                                    <p class="clr52 fs14"><i class="fa fa-circle pr10 mpr0 mpl10 font9imp" aria-hidden="true"></i>{{'Category' | translate}} : {{tripTransport?.trip_transportation?.categories[0]?.name}}</p>
-                                </div>
                                 <div class="col-md-4 p-0 mb-2">
                                     <p class="clr52 fs14"><i class="fa fa-circle pr10 mpr0 mpl10 font9imp" aria-hidden="true"></i>{{'Pax Per Vehicle' | translate}} : {{tripTransport?.trip_transportation?.trip_vehicles[0]?.pax_per_vehicle}}
                                     </p>

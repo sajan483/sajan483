@@ -12,13 +12,13 @@
         <div class="col-md-2 col-12 pl-0 pr-0 my-auto">
             <i class="transportblueicon icns icon_size_30 imgposition mirr_float_right"></i>
             <div class="Premium_blue fs14 fw600">
-                <p>{{'VEHICLE' | translate}}</p>
                 <p class="text-uppercase">{{tripTransport?.vehicle_types[0]?.name | translate}}</p>
+                <p>{{tripTransport?.selected_transportation?.start_date | date:'mediumDate'}}</p>
             </div>
         </div>
         <div class="col-md-9 col-12 brdrR brdrL my-auto">
             <div class="float_left mirr_float_right">
-                <p class="fw600 fs16">{{tripTransport?.company?.name}}</p>
+                <p class="fw600 fs16">{{tripTransport?.company?.name}} <span class="Premium_blue fs14 pl10 mpr10">- {{tripTransport?.categories[0]?.name}}</span></p>
                 <div class="linebyline clr52 fs13">
                     <strong class="fw600">{{'Route' | translate}} :</strong>
                     <span>{{tripTransport?.route?.name}}</span>
@@ -138,12 +138,6 @@
                     <p class="clr52 fs14">
                         <i class="fa fa-circle pr10 mpr0 mpl10 font9imp" aria-hidden="true"></i>{{'Booked Vehicle' | translate}} ({{tripTransport?.trip_vehicles[0]?.booked_quantity}})
                     </p>
-                </div>
-                <div class="col-md-4 p-0 mb-2">
-                    <p class="clr52 fs14"><i class="fa fa-circle pr10 mpr0 mpl10 font9imp" aria-hidden="true"></i>{{'Start Date' | translate}} : {{tripTransport?.selected_transportation?.start_date | date:'mediumDate'}}</p>
-                </div>
-                <div class="col-md-4 p-0 mb-2">
-                    <p class="clr52 fs14"><i class="fa fa-circle pr10 mpr0 mpl10 font9imp" aria-hidden="true"></i>{{'Category' | translate}} : {{tripTransport?.categories[0]?.name}}</p>
                 </div>
                 <div class="col-md-4 p-0 mb-2">
                     <p class="clr52 fs14">
