@@ -52,7 +52,7 @@ export class HotelDetailsPopupComponent implements OnInit ,OnChanges{
   selectedRoomDetails: boolean = false;
   selectedRoomInfo: any;
   private createTripAdapter: CreateTripAdapter = new CreateTripAdapter(this.helperService,this.appStore);
-  private createTripSupport: CreateTripHelper = new CreateTripHelper(this.helperService,this.translate);
+  private createTripHelper: CreateTripHelper = new CreateTripHelper(this.helperService,this.translate);
   showHotelDetailsShimmer: boolean;
   roomImageGallery: boolean;
   totalTravellers : number;
@@ -122,7 +122,7 @@ export class HotelDetailsPopupComponent implements OnInit ,OnChanges{
      */
   setData(){
     this.hotelInfo = JSON.parse(sessionStorage.getItem('hotelInfo'))
-    const x = this.createTripSupport.setDataForHotelDeatils(this.hotelData,this.hotelInfo,this.rooms);
+    const x = this.createTripHelper.setDataForHotelDeatils(this.hotelData,this.hotelInfo,this.rooms);
     if(x && x.roomGroups.length > 0){
       this.appStore.showHotelDetailsShimmer = false;
       this.showHotelDetailsShimmer = false;
