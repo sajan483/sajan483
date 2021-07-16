@@ -780,6 +780,29 @@
                         </div> -->
                     </div>
                 </div>
+                <div class="mt-3" *ngIf="tripMakkahHotel?.status == 'cancelled' ||
+                                         tripMadeenaHotel?.status == 'cancelled' ||
+                                         tripTransport?.status == 'cancelled' ">
+                    <h2 class="fs18 fw600">{{'Cancellation Summary' | translate}}</h2>
+                    <div class="boxvouch clr52 fs14">
+                        <div class="d-flex justify-content-between pb-2" *ngIf="tripMakkahHotel?.cancellation_obj?.total_refund > 0">
+                            <div>{{'Makkah Hotel' | translate}}</div>
+                            <div>{{tripData?.currency}} {{tripMakkahHotel?.cancellation_obj?.total_refund | number :'1.2-2'}}</div>
+                        </div>
+                        <div class="d-flex justify-content-between pb-2" *ngIf="tripMadeenaHotel?.cancellation_obj?.total_refund > 0">
+                            <div>{{'Madeena Hotel' | translate}}</div>
+                            <div>{{tripData?.currency}} {{ tripMadeenaHotel?.cancellation_obj?.total_refund | number :'1.2-2'}}</div>
+                        </div>
+                        <div class="d-flex justify-content-between pb-2" *ngIf="tripTransport?.cancellation_obj?.total_refund > 0">
+                            <div>{{'Transport' | translate}}</div>
+                            <div>{{tripData?.currency}} {{ tripTransport?.cancellation_obj?.total_refund | number :'1.2-2'}}</div>
+                        </div>
+                        <div class="d-flex justify-content-between brdr_top_d3 pt-2 fw600 clr_blue_18">
+                            <div>{{'Cancellation Amount' | translate}}</div>
+                            <div>{{tripData?.currency}} {{tripTransport?.cancellation_obj?.total_refund + tripMakkahHotel?.cancellation_obj?.total_refund + tripMadeenaHotel?.cancellation_obj?.total_refund | number :'1.2-2'}}</div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

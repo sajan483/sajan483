@@ -41,7 +41,6 @@
                                     {{cancel?.medinah_hotel_booking?.cancellation_prices?.total_refund}}</td>
                             </tr>
                             <tr *ngIf="cancel?.transport_booking" [class.bgcolors]="cancel?.transport_booking?.success == false">
-                                <!-- <th><mat-checkbox [disabled]="!cancel?.transport_booking?.success" (change)="transportcheck();"></mat-checkbox></th> -->
                                 <td>{{'Transport' | translate}}</td>
                                 <td>{{details?.transport_booking?.trip_transportation?.company.name}}</td>
                                 <td *ngIf="!cancel?.transport_booking?.success" style="color: red;">{{'No Cancellation Policy Found' | translate}}</td>
@@ -50,6 +49,14 @@
                                 <td *ngIf="!cancel?.transport_booking?.success">0</td>
                                 <td *ngIf="cancel?.transport_booking?.success">
                                     {{cancel?.transport_booking?.cancellation_prices?.total_refund}}</td>
+                            </tr>
+                            <tr >
+                                <td></td>
+                                <td></td>
+                                <td class="rfTxt">{{'Total Refundable Amount' | translate}}</td>
+                                <td class="rfTxt">{{cancel?.transport_booking?.cancellation_prices?.total_refund 
+                                    + cancel?.medinah_hotel_booking?.cancellation_prices?.total_refund 
+                                    + cancel?.makkah_hotel_booking?.cancellation_prices?.total_refund}}</td>
                             </tr>
                         </tbody>
                     </table>
