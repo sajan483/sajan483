@@ -1032,7 +1032,7 @@ export class CreateTripComponent implements OnInit, AfterViewChecked, DoCheck {
       (data) => {
         if (data) {
           if (city === "MAKKA") {
-            this.hotelsList = data;
+           // this.hotelsList = data;
             sessionStorage.setItem('mkSearchId', data.search_id)
           };
           if (city === "MADEENA") {
@@ -1083,7 +1083,7 @@ export class CreateTripComponent implements OnInit, AfterViewChecked, DoCheck {
   }
 
   /*
- * this method for for polling loader status
+ * this method for polling loader status
  */
   ngDoCheck() {
     this.policy = CreateTripComponent.termsCondtion;

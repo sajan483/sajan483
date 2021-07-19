@@ -300,6 +300,7 @@ export class CreateTripAdapter {
               (roomVariations.room_group_id =
                 selectedRoomGroups[i].rooms[j].room_group_id),
               (roomVariations.room_id = selectedRoomGroups[i].rooms[j].room_id),
+              (roomVariations.meal_title = selectedRoomGroups[i].rooms[j].meal_title),
               (roomVariations.room_group_obj =
                 selectedRoomGroups[i].rooms[j].room_group_obj);
             roomVariationArray.push(roomVariations);
