@@ -300,7 +300,7 @@ export class CreateTripAdapter {
               (roomVariations.room_group_id =
                 selectedRoomGroups[i].rooms[j].room_group_id),
               (roomVariations.room_id = selectedRoomGroups[i].rooms[j].room_id),
-              (roomVariations.meal_title = selectedRoomGroups[i].rooms[j].meal_title),
+              ( roomVariations.meal_title = selectedRoomGroups[i].rooms[j].meal_title),
               (roomVariations.room_group_obj =
                 selectedRoomGroups[i].rooms[j].room_group_obj);
             roomVariationArray.push(roomVariations);
@@ -309,7 +309,7 @@ export class CreateTripAdapter {
       }
     }
 
-    if (isGrouped) {
+    if (isGrouped) {  
       for (let i = 0; i < selectedRoomGroups.length; i++) {
         if (selectedRoomGroups[i].isRoomSelectionChecked) {
           for (let j = 0; j < selectedRoomGroups[i].rooms.length; j++) {
@@ -349,6 +349,7 @@ export class CreateTripAdapter {
               (roomVariations.room_group_id =
                 selectedRoomGroups[i].rooms[j].room_group_id),
               (roomVariations.room_id = selectedRoomGroups[i].rooms[j].room_id),
+              ( roomVariations.meal_title = selectedRoomGroups[i].rooms[j].meal_title),
               (roomVariations.room_group_obj =
                 selectedRoomGroups[i].rooms[j].room_group_obj);
             roomVariationArray.push(roomVariations);
