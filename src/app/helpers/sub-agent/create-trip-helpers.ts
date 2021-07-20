@@ -124,15 +124,13 @@ export class CreateTripHelper {
           selectedHotel.room_groups[i].rooms[j].insertedAmount = selectedHotel.room_groups[i].rooms[0].amount;
         }
       }
-      var grouped: any[] = [];
-
+      selectedRoomGroups = [];
       selectedHotel.room_groups.forEach((element) => {
         if (element.is_grouped) {
           element.isRoomSelectionChecked = false;
-          grouped.push(element);
+          selectedRoomGroups.push(element);
         }
       });
-
       rooms.forEach((element) => {
         if (element.child_ages) {
           element.pax_info_str =
@@ -146,25 +144,12 @@ export class CreateTripHelper {
             element.adults + "ADT_" + element.children + "CHD_";
         }
       });
-
-      grouped.forEach((x) => {
+      selectedRoomGroups.forEach((x) => {
         x.insertedAvailableCount = x.rooms
           .map((room) => room.available_count)
           .reduce((a, b) => a + b, 0);
       });
-
-      rooms.forEach((el) => {
-        grouped.forEach((elmt) => {
-          if (elmt.insertedAvailableCount == rooms.length) {
-            elmt.rooms.forEach((element) => {
-              if (el.pax_info_str == element.pax_info_str) {
-                selectedRoomGroups.push(elmt);
-              }
-            });
-          }
-        });
-      });
-
+      
       selectedRoomGroups.forEach((x) => {
         x.rooms.forEach((room) => {
           room.adult_number = room.pax_info
