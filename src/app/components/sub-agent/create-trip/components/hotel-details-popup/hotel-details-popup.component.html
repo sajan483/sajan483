@@ -6,6 +6,7 @@
                     <div *ngIf="selectedHotel?.meta_data">
                         <h2 class="fs22 mb-0">
                             {{selectedHotel?.name | titlecase}}
+                            <span class="prd">({{selectedHotel?.provider.charAt(0)}})</span>
                             <span class="pl-1">
                                 <ngb-rating [(rate)]="selectedHotel.meta_data.rating" [readonly]="readonly" [max]=5>
                                     <ng-template let-fill="fill" let-index="index">

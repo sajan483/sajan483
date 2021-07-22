@@ -4,10 +4,10 @@
             <div class="border_box_shadow bg-white">
                 <div class="row m-0">
                     <div class="col-md-3 p-0">
-                        <div class="transportimage" *ngIf="!vehicle.image">
+                        <div class="transportimage" *ngIf="vehicle.image[0] == null">
                             <img src="/assets/images/transpoertsImgage.png">
                         </div>
-                        <div class="transportimage" *ngIf="vehicle.image">
+                        <div class="transportimage" *ngIf="vehicle.image[0] != null">
                             <img src="{{vehicle.image}}">
                         </div>
                     </div>
