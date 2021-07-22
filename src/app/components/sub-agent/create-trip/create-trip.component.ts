@@ -1131,7 +1131,7 @@ export class CreateTripComponent implements OnInit, AfterViewChecked, DoCheck {
    }
 
    termsandcondition(){
-    CreateTripComponent.termsCondtion = true;
+     if(this.selectedLanguage == "en-US"){ CreateTripComponent.termsCondtion = true;}
    }
    
    policyCheck(e){
