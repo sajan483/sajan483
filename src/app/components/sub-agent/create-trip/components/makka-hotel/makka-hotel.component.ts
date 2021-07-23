@@ -167,10 +167,12 @@ export class MakkaHotelComponent implements OnInit,DoCheck{
    */
 
   fetchSelectedHotelInfo(item) {
+    sessionStorage.setItem('selectedHotelInfo',JSON.stringify(item));
     this.setDefaultLangAndCurrency();
     this.commonService.getSelectedHotelInfo(this.createTripAdapter.selectedHotelInfoRequest(this.selectedLanguage,item,this.search), this.selectedCurrency,this.selectedLanguage).subscribe(
       (data) => {
-        sessionStorage.setItem('hotelData',JSON.stringify(data))
+        //sessionStorage.setItem('hotelData',JSON.stringify(data))
+        this.hotelData = data;
         this.showDetailsShimmer = false;
         this.showHotelDetails = true
         var flag = sessionStorage.getItem('stage')

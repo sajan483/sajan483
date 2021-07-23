@@ -74,6 +74,7 @@ export class HotelDetailsPopupComponent implements OnInit ,OnChanges{
 
   @Output() handleNotif = new EventEmitter();
   @Output() changeItinerary = new EventEmitter();
+  @Input() hotelDetailsData : any;
 
   ngAfterViewChecked() {
     this.translate.use((sessionStorage.getItem('userLanguage') === 'ar-AE') ? "ar-AE" : "en-US");
@@ -99,6 +100,7 @@ export class HotelDetailsPopupComponent implements OnInit ,OnChanges{
   }
 
    ngOnInit() {
+    this.setDefaultLangAndCurrency()
     var obj = JSON.parse(sessionStorage.getItem('userObject'))
     this.totalTravellers = obj.adults + obj.children;
     this.rooms = JSON.parse(sessionStorage.getItem('roomData'));
@@ -106,15 +108,32 @@ export class HotelDetailsPopupComponent implements OnInit ,OnChanges{
      /*
      * this method for fetching selected hotel details
      */
-    if(sessionStorage.getItem('hotelData') != null){
-      this.hotelData = JSON.parse(sessionStorage.getItem('hotelData'))
-      this.selectedHotel = this.hotelData;
+    if(this.hotelDetailsData != null){
+      this.selectedHotel = this.hotelDetailsData;
       this.setData()
-    }
-
-  } 
+    }else{
+      this.fetchSelectedHotelInfoAfterRefresh()
+      }
+    } 
 
   ngOnChanges() {
+  }
+
+  fetchSelectedHotelInfoAfterRefresh(){
+    this.commonService.getSelectedHotelInfo(this.createTripAdapter.selectedHotelInfoRequest(this.selectedLanguage,JSON.parse(sessionStorage.getItem('selectedHotelInfo')),this.search), this.selectedCurrency,this.selectedLanguage).subscribe(
+      (data) => {
+        this.selectedHotel = data;
+        this.setData()
+      });
+  }
+
+  setDefaultLangAndCurrency(){
+    if (typeof this.selectedCurrency == "undefined") {
+      this.selectedCurrency = this.appStore.currencyCode;
+    } 
+    if (typeof this.selectedLanguage == "undefined") {
+      var lang: any = this.selectedLanguage =  "en-US" ;
+    }
   }
 
   /*
@@ -122,7 +141,7 @@ export class HotelDetailsPopupComponent implements OnInit ,OnChanges{
      */
   setData(){
     this.hotelInfo = JSON.parse(sessionStorage.getItem('hotelInfo'))
-    const x = this.createTripHelper.setDataForHotelDeatils(this.hotelData,this.hotelInfo,this.rooms);
+    const x = this.createTripHelper.setDataForHotelDeatils(this.selectedHotel,this.hotelInfo,this.rooms);
     if(x && x.roomGroups.length > 0){
       this.appStore.showHotelDetailsShimmer = false;
       this.showHotelDetailsShimmer = false;
@@ -150,40 +169,6 @@ export class HotelDetailsPopupComponent implements OnInit ,OnChanges{
     this.detailsFlag.emit('hide')
   }
 
-  /*
-   * this method for booking hotel
-   */
-  // bookHotel() {
-  //   this.activeBttn = true;
-  //   this.makkahticked = true;
-  //   this.makkahticked = true;
-  //   this.madeendetailshow = true;
-  //   this.showHotelDetailsShimmer = false;
-  //   if(!this.appStore.isAvailabilityFails){
-  //     this.appStore.stepperIndex += 1;
-  //   }
-  //   if(!sessionStorage.getItem('custom_trip_id')){
-  //     this.commonService.saveSelectedHotel(this.createTripAdapter.bookHotelRequest(this.isGrouped,this.selectedRoomGroups,this.hotelData,this.hotelInfo,this.numberOfDays),sessionStorage.getItem('userLanguage')).subscribe((data) => {
-  //       this.activeBttn = true;
-  //       sessionStorage.setItem('custom_trip_id',data.id);
-  //       sessionStorage.setItem('stage','1')
-  //       this.onNotify();
-  //     });
-  //   }
-  //   if(sessionStorage.getItem('custom_trip_id')){
-  //     this.commonService.updateCustomTrip(sessionStorage.getItem('custom_trip_id'),this.createTripAdapter.bookHotelRequest(this.isGrouped,this.selectedRoomGroups,this.hotelData,this.hotelInfo,this.numberOfDays),sessionStorage.getItem('userLanguage')).subscribe((data) => {
-  //       this.activeBttn = true;
-  //         if(JSON.parse(sessionStorage.getItem('steps')).length == 1){
-  //           sessionStorage.setItem('stage','1')
-  //         }else {
-  //           sessionStorage.setItem('stage','2')
-  //         }
-  //         this.onNotify();
-  //     });
-  //   }
-  //   sessionStorage.setItem('hotelDetailsFlag','close')
-  //   this.appStore.showShimmer = !this.appStore.showShimmer
-  // }
   bookHotel() {
     this.activeBttn = true;
     this.makkahticked = true;
@@ -194,7 +179,7 @@ export class HotelDetailsPopupComponent implements OnInit ,OnChanges{
       this.appStore.stepperIndex += 1;
     }
     if(!sessionStorage.getItem('custom_trip_id')){
-      this.commonService.saveSelectedHotel(this.createTripAdapter.bookHotelRequest(this.isGrouped,this.selectedRoomGroups,this.hotelData,this.hotelInfo,this.numberOfDays),sessionStorage.getItem('userLanguage')).subscribe((data) => {
+      this.commonService.saveSelectedHotel(this.createTripAdapter.bookHotelRequest(this.isGrouped,this.selectedRoomGroups,this.selectedHotel,this.hotelInfo,this.numberOfDays),sessionStorage.getItem('userLanguage')).subscribe((data) => {
         this.activeBttn = true;
         sessionStorage.setItem('custom_trip_id',data.id);
         sessionStorage.setItem('stage','1')
@@ -203,7 +188,7 @@ export class HotelDetailsPopupComponent implements OnInit ,OnChanges{
       });
     }
     if(sessionStorage.getItem('custom_trip_id')){
-      this.commonService.updateCustomTrip(sessionStorage.getItem('custom_trip_id'),this.createTripAdapter.bookHotelRequest(this.isGrouped,this.selectedRoomGroups,this.hotelData,this.hotelInfo,this.numberOfDays),sessionStorage.getItem('userLanguage')).subscribe((data) => {
+      this.commonService.updateCustomTrip(sessionStorage.getItem('custom_trip_id'),this.createTripAdapter.bookHotelRequest(this.isGrouped,this.selectedRoomGroups,this.selectedHotel,this.hotelInfo,this.numberOfDays),sessionStorage.getItem('userLanguage')).subscribe((data) => {
         this.activeBttn = true;
           if(JSON.parse(sessionStorage.getItem('steps')).length == 1){
             sessionStorage.setItem('stage','1')
@@ -217,61 +202,7 @@ export class HotelDetailsPopupComponent implements OnInit ,OnChanges{
     sessionStorage.setItem('hotelDetailsFlag','close')
     this.appStore.showShimmer = !this.appStore.showShimmer
   }
-
-  // selecteRoomForGrupedFalse(roomCount,i,j){
-  //   var customRoomCount = JSON.parse(sessionStorage.getItem("roomData")).length
-  //   this.selectedRoomCount = 0;
-  //   var selectedRoomCount : number = 0;
-
-  //   if(roomCount == 0 && this.selectedRoomGroups[i].rooms[j].isRoomSelectionChecked ){
-  //     this.totalRoomPrice = this.totalRoomPrice - (this.selectedRoomGroups[i].rooms[j].amount * this.selectedRoomGroups[i].rooms[j].insertedSelectedRoomCount  );
-  //     this.selectedRoomGroups[i].rooms[j].isRoomSelectionChecked = false;
-  //     this.selectedRoomGroups[i].rooms[j].insertedSelectedRoomCount = 0;
-  //   }
-
-  //   if( this.selectedRoomGroups[i].rooms[j].isRoomSelectionChecked ){
-  //     this.totalRoomPrice = this.totalRoomPrice - (this.selectedRoomGroups[i].rooms[j].amount * this.selectedRoomGroups[i].rooms[j].insertedSelectedRoomCount  );
-  //     this.selectedRoomGroups[i].rooms[j].isRoomSelectionChecked = false;
-  //     this.selectedRoomGroups[i].rooms[j].insertedSelectedRoomCount = 0;
-  //   }
-
-  //   this.selectedRoomGroups.forEach((element)=>{
-  //     element.rooms.forEach((room) => {
-  //       selectedRoomCount = selectedRoomCount + room.insertedSelectedRoomCount
-  //     })
-  //   })
   
-  //   if(customRoomCount < ( selectedRoomCount + parseInt(roomCount) )){
-  //     roomCount = this.selectedRoomGroups[i].rooms[j].insertedSelectedRoomCount;
-  //     var element:HTMLSelectElement;    
-  //     element = <HTMLSelectElement>document.getElementById('roomDrop'+i+j);
-  //     element.selectedIndex = this.selectedRoomGroups[i].rooms[j].insertedSelectedRoomCount;
-  //     this.notifyService.showWarning(this.translate.instant("Room Limit Reached"))
-  //   }
-    
-
-  //   if( this.selectedRoomGroups[i].rooms[j].insertedSelectedRoomCount > 0 ){
-  //     this.totalRoomPrice = this.totalRoomPrice - (this.selectedRoomGroups[i].rooms[j].amount * this.selectedRoomGroups[i].rooms[j].insertedSelectedRoomCount  );
-  //     this.selectedRoomGroups[i].rooms[j].isRoomSelectionChecked = false;
-  //   }
-
-  //   this.selectedRoomGroups[i].rooms[j].isRoomSelectionChecked = true;
-  //   this.selectedRoomGroups[i].rooms[j].insertedSelectedRoomCount = parseInt(roomCount);
-  //   this.totalRoomPrice = this.totalRoomPrice + (this.selectedRoomGroups[i].rooms[j].amount * parseInt(roomCount) );
-
-  //   this.selectedRoomGroups.forEach((element)=>{
-  //     element.rooms.forEach((room) => {
-  //       this.selectedRoomCount = this.selectedRoomCount + room.insertedSelectedRoomCount
-  //     })
-  //   })
-
-  //   if(this.selectedRoomCount == customRoomCount)
-  //   { this.activateSearchBtn = false}
-  //   else{
-  //     this.activateSearchBtn = true;
-  //   }
-
-  // }
   /*
    * this method for show room details popup
    */
