@@ -1034,7 +1034,6 @@ export class CreateTripComponent implements OnInit, AfterViewChecked, DoCheck {
           this.hotelsList = []
           this.hotelsList = data.results;
           if(this.hotelsList.length > 0) { this.hotelsList.forEach(x=>x.fromCache = true)}
-          console.log("list",this.hotelsList)
           if (city === "MAKKA") { sessionStorage.setItem('mkSearchId', data.search_id)};
           if (city === "MADEENA") {
             this.madeenaCheckInDate = JSON.parse(sessionStorage.getItem('userObject')).madeenaCheckinDate;
