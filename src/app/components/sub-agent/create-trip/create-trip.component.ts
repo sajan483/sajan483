@@ -1031,10 +1031,11 @@ export class CreateTripComponent implements OnInit, AfterViewChecked, DoCheck {
     this.common.pilotHotelSearch(this.createTripAdapter.hotelSearchRequest(city, this.userDetails), this.appStore.langCode).subscribe(
       (data) => {
         if (data) {
-          if (city === "MAKKA") {
-           // this.hotelsList = data;
-            sessionStorage.setItem('mkSearchId', data.search_id)
-          };
+          this.hotelsList = []
+          this.hotelsList = data.results;
+          if(this.hotelsList.length > 0) { this.hotelsList.forEach(x=>x.fromCache = true)}
+          console.log("list",this.hotelsList)
+          if (city === "MAKKA") { sessionStorage.setItem('mkSearchId', data.search_id)};
           if (city === "MADEENA") {
             this.madeenaCheckInDate = JSON.parse(sessionStorage.getItem('userObject')).madeenaCheckinDate;
             this.madeenaCheckOutDate = JSON.parse(sessionStorage.getItem('userObject')).madeenaCheckoutDate
@@ -1044,6 +1045,7 @@ export class CreateTripComponent implements OnInit, AfterViewChecked, DoCheck {
           this.common.getHotelList(data.search_id, this.selectedCurrency, "en-US").subscribe(
             (data) => {
               this.hotelsList = data.sort((a,b)=>(a.amount) - (b.amount));
+              if(this.hotelsList.length > 0) { this.hotelsList.forEach(x=>x.fromCache = false)}
               this.hotelsList.forEach(x=>x.providers.sort((a,b)=>(a.amount) - (b.amount)))
               sessionStorage.setItem('htlList', JSON.stringify(this.hotelsList));
               if (this.hotelsList.length == 0) {

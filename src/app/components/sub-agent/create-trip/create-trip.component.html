@@ -233,12 +233,6 @@
                                                         <label id="phnnumberlbl" class="mb-0">{{'traveller contact number' |
                                                             translate}}</label>
                                                         <div class="form-group row pl-2">
-                                                            <!-- <select name="" id="" class="form-control w20" [ngModelOptions]="{standalone: true}" [(ngModel)]="countryCode">
-                                                                <option *ngFor="let n of phoneCodeList"
-                                                                    [value]="n.item_id">{{n.item_id}}
-                                                                </option>
-                                                            </select>
-                                                            <input id="phnnumber" max="10" placeholder="Enter Phone Number" type="text" maxlength="15" formControlName="phone_number" class="form-control w80" [ngClass]="{ 'is-invalid': submitted && g.phone_number.errors }" numberOnly> -->
                                                             <input ng2TelInput [ng2TelInputOptions]="{preferredCountries:['in','sa', 'ae','qa'], separateDialCode:true}" class="form-control" [ngClass]="{ 'is-invalid': submitted && g.phone_number.errors }" #phoneInput id="phoneInput" type="text" (countryChange)="onCountryChange($event)"
                                                                 (input)="inputValidation($event)" maxlength="15" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode)) || event.keyCode==32) return false;" formControlName="phone_number" />
                                                             <span *ngIf="travellersForm.controls['phone_number'].errors?.pattern &&
