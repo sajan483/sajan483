@@ -839,22 +839,53 @@ export class CreateTripComponent implements OnInit, AfterViewChecked, DoCheck {
    */
   fetchNessoryApisForTransport() {
     this.selectedLanguage = sessionStorage.getItem('userLanguage')
-    this.common.getVehicles(this.selectedLanguage).subscribe((data) => {
-      this.vehicleTypeList = data.vehicle_types.map(x => ({ item_text: x.name, item_id: x.code }));
-    });
-    this.common.getRoutes(this.selectedLanguage).subscribe((data) => {
+    if(sessionStorage.getItem('vehicleTypeList')){
+      this.vehicleTypeList = JSON.parse(sessionStorage.getItem('vehicleTypeList'))
+    }else{
+      this.common.getVehicles(this.selectedLanguage).subscribe((data) => {
+        this.vehicleTypeList = data.vehicle_types.map(x => ({ item_text: x.name, item_id: x.code }));
+        sessionStorage.setItem('vehicleTypeList', JSON.stringify(this.vehicleTypeList));
+      });
+    }
+
+    if(sessionStorage.getItem('routeList')){
+      this.routeList = JSON.parse(sessionStorage.getItem('routeList'))
+    }else{
+      this.common.getRoutes(this.selectedLanguage).subscribe((data) => {
       this.routeList = data.routes.map(x => ({ item_text: x.name, item_id: x.code }));
+      sessionStorage.setItem('routeList', JSON.stringify(this.routeList));
     });
+   }
+
+   if(sessionStorage.getItem('dropdownList')){
+    this.dropdownList = JSON.parse(sessionStorage.getItem('dropdownList'))
+   }else{
     this.common.getCategories(this.selectedLanguage).subscribe((data) => {
       this.dropdownList = data.categories.map(x => ({ item_text: x.name, item_id: x.code }));
+      sessionStorage.setItem('dropdownList', JSON.stringify(this.dropdownList));
     });
-    this.common.getAdditionalServices(this.selectedLanguage).subscribe((data) => {
-      this.data = data.additional_services.map(x => ({ item_text: x.name, item_id: x.code }));
-    });
+   }
+    if(sessionStorage.getItem('additionalServiceData')){
+      this.data = JSON.parse(sessionStorage.getItem('additionalServiceData'))
+    }else{
+      this.common.getAdditionalServices(this.selectedLanguage).subscribe((data) => {
+        this.data = data.additional_services.map(x => ({ item_text: x.name, item_id: x.code }));
+        sessionStorage.setItem('additionalServiceData', JSON.stringify(this.data));
+      });
+    }
+   
+   if(sessionStorage.getItem('companyList')){
+    let data = JSON.parse(sessionStorage.getItem('companyList'))
+    this.companyList = data.companies.map(x => ({ item_text: x.name, item_id: x.code }));
+    this.companylistall = data.companies;
+   }else{
     this.commonApiService.getCompanies(this.selectedLanguage).subscribe((data) => {
       this.companyList = data.companies.map(x => ({ item_text: x.name, item_id: x.code }));
       this.companylistall = data.companies;
+      sessionStorage.setItem('companyList', JSON.stringify(data));
     });
+   }
+   
   }
 
   transportSearchDatas(){
@@ -1096,7 +1127,7 @@ export class CreateTripComponent implements OnInit, AfterViewChecked, DoCheck {
               this.hotelsList = data.sort((a,b)=>(a.amount) - (b.amount));
               if(this.hotelsList.length > 0) { this.hotelsList.forEach(x=>x.fromCache = false)}
               this.hotelsList.forEach(x=>x.providers.sort((a,b)=>(a.amount) - (b.amount)))
-              sessionStorage.setItem('htlList', JSON.stringify(this.hotelsList));
+              //sessionStorage.setItem('htlList', JSON.stringify(this.hotelsList));
               if (this.hotelsList.length == 0) {
                 Swal.fire({
                   icon: 'error',
