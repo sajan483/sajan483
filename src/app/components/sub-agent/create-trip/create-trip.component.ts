@@ -105,6 +105,8 @@ export class CreateTripComponent implements OnInit, AfterViewChecked, DoCheck {
   showIbanPopup: boolean = false;
   disablePayBttn: boolean = true;
   transportCount: number = 0;
+  modifySearchTransportPopup: boolean;
+  vehicleTypes: any;
   toggleMeridian() {
     this.meridian = !this.meridian;
   }
@@ -194,6 +196,7 @@ export class CreateTripComponent implements OnInit, AfterViewChecked, DoCheck {
   phoneInput: ElementRef;
   showTransportShimmer:boolean = true;
   freeArray = ["1","2","3","4"];
+  countArray:number[] = [1];
 
   constructor(
     private router: Router,
@@ -342,10 +345,19 @@ export class CreateTripComponent implements OnInit, AfterViewChecked, DoCheck {
 
   }
 
+  modfyTransportSearch(){
+    this.modifySearchTransportPopup=false;
+    this.transportSearch();
+  }
+
+  transportSearchPop(){
+    this.modifySearchTransportPopup = true;
+  }
   /**
  * Method to fetch transport list
  */
   transportSearch() {
+    this.transportSearchDatas();
     var obj = JSON.parse(sessionStorage.getItem("userObject"));
     this.travellersCount = obj.adults + obj.children;
     const date = this.helperService.dateFormaterMdy(this.userDetails.transportStartDate);
@@ -380,10 +392,11 @@ export class CreateTripComponent implements OnInit, AfterViewChecked, DoCheck {
           Swal.fire({
             text: this.translate.instant('Sorry,we could not  find transport for this route'),
             icon: "warning",
-            confirmButtonText: this.translate.instant('Back To Search'),
+            confirmButtonText: this.translate.instant('Modify Search'),
+            showCloseButton: true,
           }).then((willDelete) => {
-            if(willDelete.value){
-              this.router.navigate(['subagent/home']);
+            if(willDelete.isConfirmed){
+              this.modifySearchTransportPopup = true;
             }
         });
         }
@@ -844,6 +857,43 @@ export class CreateTripComponent implements OnInit, AfterViewChecked, DoCheck {
     });
   }
 
+  transportSearchDatas(){
+    this.selectedLanguage = sessionStorage.getItem('userLanguage');
+    this.common.getVehicles(this.selectedLanguage).subscribe((data) => {
+      this.vehicleTypeList = data.vehicle_types.map(x => ({ item_text: x.name, item_id: x.code }));
+      this.vehicleTypes = data.vehicle_types;
+    });
+    this.common.getRoutes(this.selectedLanguage).subscribe((data) => {
+      this.routeList = data.routes.map(x => ({ item_text: x.name, item_id: x.code }));
+    });
+  }
+
+  onVehicleSelectArray(id: any){
+    var obj = JSON.parse(sessionStorage.getItem("userObject"));
+    this.travellersCount = obj.adults + obj.children;
+    var vehicleMaxCapacity;
+    var vehicleCode;
+    console.log(this.vehicleTypes);
+    if (id != null && this.vehicleTypes && this.vehicleTypes.length > 0) {
+      this.vehicleTypes.forEach(element => {
+        if (element.code == id) {
+          vehicleCode = element.code;
+          vehicleMaxCapacity = element.max_capacity;
+        }
+      });
+    }
+    var totalTra = this.travellersCount;
+    var count:number = totalTra / vehicleMaxCapacity;
+    console.log(count,vehicleMaxCapacity);
+    
+    count = Math.ceil(count);
+    if(count <= obj.adults){
+      this.countArray = Array(obj.adults - count + 1).fill(count + 1).map((_, idx) => count + idx);
+    }else{
+      this.notifyService.showWarning(this.translate.instant("Passenger limit exceeded. Please select heavy vehicle."));
+    }
+  }
+
   /**
    * Method to call corresponding steppers according to user selection  
    */
@@ -1141,6 +1191,10 @@ export class CreateTripComponent implements OnInit, AfterViewChecked, DoCheck {
     }else{
       this.disablePayBttn = true;
     }
+   }
+
+   closemodifySearchTransportPopup(){
+     this.modifySearchTransportPopup = false;
    }
 
 }
