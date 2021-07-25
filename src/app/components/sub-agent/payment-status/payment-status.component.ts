@@ -73,6 +73,7 @@ export class PaymentStatusComponent implements OnInit {
   downloadShow: boolean = false;
   roomQunty: number;
   passngrCount: number;
+  statusCounter: number = 0;
   
   constructor(private route: ActivatedRoute,
     private appStore: AppStore,
@@ -180,12 +181,20 @@ export class PaymentStatusComponent implements OnInit {
       this.tripTravellers = data.travellers;
       this.noOfTravellers = this.tripTravellers.length;
     }
-    console.log("1",this.setBooleanToCheckTheBrnStatus);
-    if(data.status != "success" && !this.setBooleanToCheckTheBrnStatus){
+   
+    if(data.status != "success"){
      this.processing = true;
      this.counter = 0
-     this.setBooleanToCheckTheBrnStatus = true
-     this.setTimerForGetListStatus()
+    
+     if(this.statusCounter < 3){
+      this.setTimerForGetListStatus()
+      this.statusCounter += 1;
+     }else{
+      this.processing = false;
+     }
+     
+    }else{
+      this.processing = false;
     }
   }
 
@@ -198,7 +207,6 @@ export class PaymentStatusComponent implements OnInit {
   callGetListForStstus(){
     this.common.getPaymentDetails(this.route.snapshot.params.id,sessionStorage.getItem('userLanguage')).subscribe(
       (data) => {
-        this.processing = false;
         this.getData(data)
       })
   }
