@@ -390,7 +390,7 @@ export class CreateTripComponent implements OnInit, AfterViewChecked, DoCheck {
           this.transportCount = this.transportCount + 1
         }else{
           Swal.fire({
-            text: this.translate.instant('Sorry,we could not  find transport for this route'),
+            text: this.translate.instant('Sorry,we could not  find transport service from Maqam GDS'),
             icon: "warning",
             confirmButtonText: this.translate.instant('Modify Search'),
             showCloseButton: true,

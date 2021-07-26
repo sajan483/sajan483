@@ -131,18 +131,18 @@
                                                         <div class="media-body divAmenities textright pr10">
                                                             <strong>
                                                                 <span class="pl-0 clr_blue_18 fs16 fw500">{{room?.name}}</span>
-                                                                <span *ngIf="room.quantity > 1" class="pl-2 pnkPr fs16 fw500">x {{room?.quantity}}</span>
+                                                                <!-- <span *ngIf="room.quantity > 1" class="pl-2 pnkPr fs16 fw500">x {{room?.quantity}}</span> -->
                                                             </strong>
                                                             <div *ngIf="room?.boardTypes.length > 0">
                                                                 <div class="mealplanclass">{{'Meal Plan' | translate}} : <span *ngFor="let item of room.boardTypes" class="px-2">{{item?.type}}</span></div>
                                                             </div>
                                                             <div class="d-inline-flex">
                                                                 <i class="hotelbedicon icon_size_20 icns mr10 mmr0 mml10"></i>
-                                                                <p class="clr52 fs14 fw400">1 {{'room for' | translate}} {{room?.adult_number}} {{'Adult(s)' |translate }}
+                                                                <p class="clr52 fs14 fw400">{{room.quantity}} {{'room(s) for' | translate}} {{room?.adult_number * room.quantity}} {{'Adult(s)' |translate }}
                                                                 </p>
-                                                                <p class="pl-1 clr52 fs14 fw400" *ngIf="room.child_number == 1">& {{room?.child_number}} {{'Child' | translate }}
+                                                                <p class="pl-1 clr52 fs14 fw400" *ngIf="room.child_number == 1">& {{room?.child_number * room.quantity}} {{'Child' | translate }}
                                                                 </p>
-                                                                <p class="pl-1 clr52 fs14 fw400" *ngIf="room.child_number > 1">& {{room?.child_number}} {{'Children' | translate }}
+                                                                <p class="pl-1 clr52 fs14 fw400" *ngIf="room.child_number > 1">& {{room?.child_number * room.quantity}} {{'Children' | translate }}
                                                                 </p>
                                                             </div>
                                                             <div>
@@ -219,18 +219,18 @@
                                                         <div class="media-body divAmenities textright pr10">
                                                             <strong>
                                                                 <span class="pl-0 clr_blue_18 fs16 fw500">{{room?.name}}</span>
-                                                                <span class="pl-2 pnkPr fs16 fw500" *ngIf="room?.quantity > 1">x {{room?.quantity}}</span>
+                                                                <!-- <span class="pl-2 pnkPr fs16 fw500" *ngIf="room?.quantity > 1">x {{room?.quantity}}</span> -->
                                                             </strong>
                                                             <div *ngIf="room?.boardTypes.length > 0">
                                                                 <div class="mealplanclass">{{'Meal Plan' | translate}} : <span *ngFor="let item of room.boardTypes" class="px-2">{{item?.type}}</span></div>
                                                             </div>
                                                             <div class="d-inline-flex">
                                                                 <i class="hotelbedicon icon_size_20 icns mr10 mmr0 mml10"></i>
-                                                                <p class="clr52 fs14 fw400">1 {{'room for' | translate}} {{room?.adult_number}} {{'Adult(s)' |translate }}
+                                                                <p class="clr52 fs14 fw400">{{room?.quantity}} {{'room(s) for' | translate}} {{room?.adult_number * room?.quantity}} {{'Adult(s)' |translate }}
                                                                 </p>
-                                                                <p class="pl-1 clr52 fs14 fw400" *ngIf="room.child_number == 1">& {{room?.child_number}} {{'Child' | translate }}
+                                                                <p class="pl-1 clr52 fs14 fw400" *ngIf="room.child_number == 1">& {{room?.child_number * room?.quantity}} {{'Child' | translate }}
                                                                 </p>
-                                                                <p class="pl-1 clr52 fs14 fw400" *ngIf="room.child_number > 1">& {{room?.child_number}} {{'Children' | translate }}
+                                                                <p class="pl-1 clr52 fs14 fw400" *ngIf="room.child_number > 1">& {{room?.child_number * room?.quantity}} {{'Children' | translate }}
                                                                 </p>
                                                             </div>
                                                             <div>
