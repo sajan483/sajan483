@@ -131,7 +131,7 @@
                                                         <div class="media-body divAmenities textright pr10">
                                                             <strong>
                                                                 <span class="pl-0 clr_blue_18 fs16 fw500">{{room?.name}}</span>
-                                                                <!-- <span *ngIf="room.quantity > 1" class="pl-2 pnkPr fs16 fw500">x {{room?.quantity}}</span> -->
+                                                                <span *ngIf="room.quantity > 1" class="pl-2 pnkPr fs16 fw500">x {{room?.quantity}}</span>
                                                             </strong>
                                                             <div *ngIf="room?.boardTypes.length > 0">
                                                                 <div class="mealplanclass">{{'Meal Plan' | translate}} : <span *ngFor="let item of room.boardTypes" class="px-2">{{item?.type}}</span></div>
@@ -219,7 +219,7 @@
                                                         <div class="media-body divAmenities textright pr10">
                                                             <strong>
                                                                 <span class="pl-0 clr_blue_18 fs16 fw500">{{room?.name}}</span>
-                                                                <!-- <span class="pl-2 pnkPr fs16 fw500" *ngIf="room?.quantity > 1">x {{room?.quantity}}</span> -->
+                                                                <span class="pl-2 pnkPr fs16 fw500" *ngIf="room?.quantity > 1">x {{room?.quantity}}</span>
                                                             </strong>
                                                             <div *ngIf="room?.boardTypes.length > 0">
                                                                 <div class="mealplanclass">{{'Meal Plan' | translate}} : <span *ngFor="let item of room.boardTypes" class="px-2">{{item?.type}}</span></div>
