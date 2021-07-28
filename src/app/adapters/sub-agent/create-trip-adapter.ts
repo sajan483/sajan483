@@ -33,7 +33,7 @@ export class CreateTripAdapter {
         check_out_date: this.helperService.dateFormaterMdy(
           userDetails.makkahCheckoutDate
         ),
-        sub_pcc_code: userDetails.subPcc_makkah,
+        subpcc_code: userDetails.subPcc_makkah,
         special_code: userDetails.specialCodeMakkah,
         rooms: rooms,
         location: city,
@@ -47,7 +47,7 @@ export class CreateTripAdapter {
         check_out_date: this.helperService.dateFormaterMdy(
           userDetails.madeenaCheckoutDate
         ),
-        sub_pcc_code: userDetails.subPcc_medinah,
+        subpcc_code: userDetails.subPcc_medinah,
         special_code: userDetails.specialCodeMedinah,
         rooms: rooms,
         location: city,
