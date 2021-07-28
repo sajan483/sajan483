@@ -1130,7 +1130,7 @@ export class CreateTripComponent implements OnInit, AfterViewChecked, DoCheck {
             this.noOfDaysInMadeena = this.helperService.noOfDaysBetweenTwoDates(this.madeenaCheckOutDate, this.madeenaCheckInDate)
             sessionStorage.setItem('mdSearchId', data.search_id);
           }
-          this.common.getHotelList(data.search_id, this.selectedCurrency, "en-US").subscribe(
+          this.common.getHotelList(data.search_id, this.selectedCurrency,sessionStorage.getItem('userLanguage')).subscribe(
             (data) => {
               this.hotelsList = data.sort((a,b)=>(a.amount) - (b.amount));
               if(this.hotelsList.length > 0) { this.hotelsList.forEach(x=>x.fromCache = false)}

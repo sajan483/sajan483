@@ -106,7 +106,7 @@
             </div>
             <div class="container mt-3">
                 <mat-tab-group>
-                    <mat-tab label="Room Type">
+                    <mat-tab label="{{'Room Type' | translate}}">
                         <div id="selectRoom">
                             <section class="roomSelectWrap">
                                 <div class="roomInfoWrap">
@@ -325,28 +325,57 @@
                             </section>
                         </div>
                     </mat-tab>
-                    <mat-tab label="More Details">
+                    <mat-tab label="{{'More Details' | translate}}">
                         <div class="borderbox mb80 p20">
-                            <h1 class="fs24">{{'Details' | translate}}</h1>
-                            <p>{{selectedHotel?.meta_data?.description}}</p>
-                            <h1 *ngIf="selectedHotel?.extensions?.length > 0" class="amntStyle">Extensions</h1>
-                            <p *ngFor="let extension of selectedHotel?.extensions">{{extension?.value}}</p>
-                            <h1 *ngIf="selectedHotel?.meta_data?.remark" class="amntStyle">{{'Remarks' | translate}}</h1>
-                            <div style="font-size: 12px;" [innerHTML]="selectedHotel?.meta_data?.remark"></div>
-                            <div *ngIf="selectedHotel?.meta_data.amenities.length == 0">
-                                {{'No Amenities' | translate}}
+                            <div *ngIf="selectedHotel?.meta_data?.description" class="mb-3">
+                                <div class="text-capitalize fs16 fw500">{{'Description' | translate}}</div>
+                                <div class="p10">
+                                    <p>{{selectedHotel?.meta_data?.description}}</p>
+                                </div>
                             </div>
-                            <div class="row ml-0 mr-0 mt10">
-                                <div class="col-md-3 p-0" *ngFor="let item of selectedHotel?.meta_data.amenities">
-                                    <i class="fa fa-star" aria-hidden="true"></i>{{item?.name}}
+                            <div *ngIf="selectedHotel.meta_data.child_policy.length > 0" class="mb-3">
+                                <div class="text-capitalize fs16 fw500">{{'child policies' | translate}}</div>
+                                <div class="p10">
+                                    <div class="mb-2" *ngFor="let item of selectedHotel.meta_data.child_policy">
+                                        <div class="fw500 text-capitalize textunderline">{{item?.name}}</div>
+                                        <div [innerHTML]="item?.description"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div *ngIf="selectedHotel?.meta_data?.remark" class="mb-3">
+                                <div class="text-capitalize fs16 fw500">{{'Remarks' | translate}}</div>
+                                <div class="p10">
+                                    <div style="font-size: 12px;" [innerHTML]="selectedHotel?.meta_data?.remark"></div>
+                                </div>
+                            </div>
+                            <div *ngIf="selectedHotel?.meta_data.amenities.length > 0" class="mb-3">
+                                <div class="text-capitalize fs16 fw500">{{'Amenities' | translate}}</div>
+                                <div class="p10">
+                                    <div class="row ml-0 mr-0">
+                                        <div class="col-md-3 p-0" *ngFor="let item of selectedHotel?.meta_data.amenities">
+                                            <i class="fa fa-star" aria-hidden="true"></i>{{item?.name}}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div *ngIf="selectedHotel?.meta_data.amenities.length == 0 && selectedHotel?.meta_data?.remark == null && selectedHotel.meta_data.child_policy.length == 0 && selectedHotel?.meta_data?.description == null">
+                                <div class="p10 text-center">
+                                    {{'No Details' | translate}}
                                 </div>
                             </div>
                         </div>
                     </mat-tab>
-                    <mat-tab label="Policy">
+                    <mat-tab label="{{'Policy' | translate}}">
                         <div class="borderbox mb80 p20">
-                            <div class="inner-policy_div textright" *ngFor="let policy of selectedHotel?.policies">
-                                <p>{{policy?.description}}</p>
+                            <div *ngIf="selectedHotel?.policies.length > 0" class="mb-3">
+                                <div>
+                                    <div class="mb-2" *ngFor="let item of selectedHotel.policies">
+                                        <div class="fw500 fs15 text-capitalize mb-1">{{item?.name}}</div>
+                                        <div class="pl10 mpr10">
+                                            <div [innerHTML]="item?.description"></div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                             <div class="noDataPresent" *ngIf="selectedHotel?.policies && selectedHotel?.policies.length == 0">
                                 {{'No Policies Found' | translate}}
