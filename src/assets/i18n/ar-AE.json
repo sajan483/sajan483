@@ -520,5 +520,11 @@
     "I accept the": "أقبل",
     "Terms & Conditions": "الأحكام والشروط",
     "Total Refundable Amount": "المبلغ الإجمالي المسترد",
-    "Cancellation Summary": "ملخص الإلغاء"
+    "Cancellation Summary": "ملخص الإلغاء",
+    "IBAN contains illegal characters": "يحتوي IBAN على أحرف غير قانونية",
+    "Invalid IBAN structure": "بنية IBAN غير صالحة",
+    "Invalid IBAN check digits": "أرقام التحقق من IBAN غير صحيحة",
+    "Invalid country code - Saudi IBANs must begin with 'SA'": "رمز البلد غير صالح - يجب أن تبدأ أرقام IBAN السعودية بـ 'SA'",
+    "Invalid length - Saudi IBANs must be '24' characters long": "الطول غير صالح - يجب أن يتكون رقم الحساب المصرفي الدولي (IBAN) السعودي من 24 حرفًا",
+    "Incorrect IBAN check digits": "أرقام التحقق من IBAN غير صحيحة"
 }
