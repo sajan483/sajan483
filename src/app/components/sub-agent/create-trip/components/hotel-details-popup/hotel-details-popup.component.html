@@ -333,15 +333,6 @@
                                     <p>{{selectedHotel?.meta_data?.description}}</p>
                                 </div>
                             </div>
-                            <div *ngIf="selectedHotel.meta_data.child_policy.length > 0" class="mb-3">
-                                <div class="text-capitalize fs16 fw500">{{'child policies' | translate}}</div>
-                                <div class="p10">
-                                    <div class="mb-2" *ngFor="let item of selectedHotel.meta_data.child_policy">
-                                        <div class="fw500 text-capitalize textunderline">{{item?.name}}</div>
-                                        <div [innerHTML]="item?.description"></div>
-                                    </div>
-                                </div>
-                            </div>
                             <div *ngIf="selectedHotel?.meta_data?.remark" class="mb-3">
                                 <div class="text-capitalize fs16 fw500">{{'Remarks' | translate}}</div>
                                 <div class="p10">
@@ -358,7 +349,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div *ngIf="selectedHotel?.meta_data.amenities.length == 0 && selectedHotel?.meta_data?.remark == null && selectedHotel.meta_data.child_policy.length == 0 && selectedHotel?.meta_data?.description == null">
+                            <div *ngIf="selectedHotel?.meta_data.amenities.length == 0 && selectedHotel?.meta_data?.remark == null && selectedHotel?.meta_data?.description == null">
                                 <div class="p10 text-center">
                                     {{'No Details' | translate}}
                                 </div>
