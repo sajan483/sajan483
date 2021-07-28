@@ -540,5 +540,11 @@
     "I accept the": "I accept the",
     "Terms & Conditions": "Terms & Conditions",
     "Total Refundable Amount": "Total Refundable Amount",
-    "Cancellation Summary": "Cancellation Summary"
+    "Cancellation Summary": "Cancellation Summary",
+    "IBAN contains illegal characters": "IBAN contains illegal characters",
+    "Invalid IBAN structure": "Invalid IBAN structure",
+    "Invalid IBAN check digits": "Invalid IBAN check digits",
+    "Invalid country code - Saudi IBANs must begin with 'SA'": "Invalid country code - Saudi IBANs must begin with 'SA'",
+    "Invalid length - Saudi IBANs must be '24' characters long": "Invalid length - Saudi IBANs must be '24' characters long",
+    "Incorrect IBAN check digits": "Incorrect IBAN check digits"
 }
