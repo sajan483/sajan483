@@ -473,7 +473,7 @@ export class CreateTripFrontPageComponent implements OnInit, DoCheck, AfterViewI
     this.madeenaMin = this.makkaCheckOutDate;
     this.transportStartDate = this.makkaCheckInDate;
     this.madeenmin = new Date(
-      this.makkaCheckInDate.getTime() + 2 * (1000 * 60 * 60 * 24)
+      this.makkaCheckInDate.getTime() + 1000 * 60 * 60 * 24
     );
     this.transportmin = this.makkaCheckInDate;
     this.transportmax = this.makkaCheckOutDate;

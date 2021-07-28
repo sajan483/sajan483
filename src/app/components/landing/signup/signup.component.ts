@@ -8,6 +8,7 @@ import { signupAdapter } from 'src/app/adapters/Landing/signupAdapter';
 import { environment } from '../../../../environments/environment';
 import { LandingApiService } from 'src/app/Services/landing-api-services';
 import { CommonApiService } from 'src/app/Services/common-api-services';
+import { SubAgentGeneralHelper } from 'src/app/helpers/sub-agent/general-helper';
 
 @Component({
   selector: 'app-signup',
@@ -27,6 +28,9 @@ export class SignupComponent implements OnInit {
   countrycode1 : any = environment.countryCodeCommen;
   signupAdapter : signupAdapter;
   commonApiService : CommonApiService;
+  ibanValidation: boolean;
+  ibanMessge: string;
+  private subagentHelper: SubAgentGeneralHelper = new SubAgentGeneralHelper(null);
 
   constructor(private common: LandingApiService,
     private router: Router,private formBuilder: FormBuilder
@@ -72,16 +76,15 @@ export class SignupComponent implements OnInit {
         this.spinner.hide();
         return;
       }
-      if((<HTMLInputElement>document.getElementById("iban")).value == ""){
-        Swal.fire({
-          icon: 'error',
-          title: 'Oops...',
-          text: 'Please enter IBAN Number',
-        })
+      this.ibanValidation = false;
+      var iban = (<HTMLInputElement>document.getElementById("iban")).value;
+      var test = this.subagentHelper.ibanTextValidation(iban)
+      if(test != 'true'){
+        this.ibanValidation = true;
+        this.ibanMessge = test;
         this.spinner.hide();
         return;
       }
-      
     }
     if(this.signupForm.value.password != this.signupForm.value.cnfrmpasswrd){
       this.spinner.hide();
@@ -232,4 +235,5 @@ export class SignupComponent implements OnInit {
    return((k > 64 && k < 91) || (k > 96 && k < 123) || k == 8 || k == 32 || (k >= 48 && k <= 57)); 
    
   }
+
 }
