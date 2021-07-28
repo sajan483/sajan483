@@ -635,7 +635,7 @@ export class CreateTripComponent implements OnInit, AfterViewChecked, DoCheck {
         }
 
         if (response.refetch_trip == true) {
-          this.createTripHelper.showSweetAlert('Price has been changed', "warning", 'OK')
+         // this.createTripHelper.showSweetAlert('Price has been changed', "warning", 'OK')
           this.getTripData();
           this.bookContinue = false;
           this.disablePayBttn = false;
