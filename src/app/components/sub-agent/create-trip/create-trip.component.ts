@@ -23,6 +23,7 @@ import { CommonApiService } from "src/app/Services/common-api-services";
 import { environment } from "src/environments/environment";
 import Swal from 'sweetalert2';
 import { TranslateService } from '@ngx-translate/core';
+import { SubAgentGeneralHelper } from 'src/app/helpers/sub-agent/general-helper';
 
 @Component({
   selector: "app-create-trip",
@@ -107,6 +108,8 @@ export class CreateTripComponent implements OnInit, AfterViewChecked, DoCheck {
   transportCount: number = 0;
   modifySearchTransportPopup: boolean;
   vehicleTypes: any;
+  ibanValidation: boolean;
+  ibanMessge: string;
   toggleMeridian() {
     this.meridian = !this.meridian;
   }
@@ -197,6 +200,7 @@ export class CreateTripComponent implements OnInit, AfterViewChecked, DoCheck {
   showTransportShimmer:boolean = true;
   freeArray = ["1","2","3","4"];
   countArray:number[] = [1];
+  private subagentHelper: SubAgentGeneralHelper = new SubAgentGeneralHelper(null);
 
   constructor(
     private router: Router,
@@ -665,16 +669,20 @@ export class CreateTripComponent implements OnInit, AfterViewChecked, DoCheck {
   * Method to navigate payment success page
   */
   onSubmitButtonClicked() {
-    this.spinner.show();
-    //"account_no": "SA1790941327111000000002" ,
-    //"auth_code": "5NMABO6U2RH2ZR5B"
     this.accNo = (<HTMLInputElement>document.getElementById("acc_no")).value;
     this.authCode = (<HTMLInputElement>document.getElementById("auth_code")).value;
+    var test = this.subagentHelper.ibanTextValidation(this.accNo)
+    if(test != 'true'){
+      this.ibanValidation = true;
+      this.ibanMessge = test;
+      return;
+    }
     var w = {
       "booking_id": this.bookingId,
       "account_no": this.accNo,
       "auth_code": this.authCode,
     }
+    this.spinner.show();
     console.log(w);
     
     if (this.accNo && this.authCode) {

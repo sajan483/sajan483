@@ -295,10 +295,14 @@
                     <div class="col-md-12">
                         <div class="col-md-12 pb-1"><strong style="color: red;">*</strong> {{'IBAN Accound Number' | translate}}:
                         </div>
-                        <div class="col-md-12"><input type="text" class="form-control" id="acc_no" [(ngModel)]="accNo">
+                        <div class="col-md-12">
+                            <input type="text" class="form-control" id="acc_no" [(ngModel)]="accNo" oninput="this.value = this.value.toUpperCase()" [ngClass]="{ 'is-invalid': ibanValidation }">
+                            <div *ngIf="ibanValidation" class="invalid-feedback">
+                                <div>{{ibanMessge}}</div>
+                            </div>
                         </div>
                     </div>
-                    <div class="col-md-12">
+                    <div class="col-md-12 mt-2">
                         <div class="col-md-12 pb-1"><strong style="color: red;">*</strong> {{'Authe Code' | translate}}:
                         </div>
                         <div class="col-md-12"><input type="text" class="form-control" id="auth_code" [(ngModel)]="authCode"></div>

@@ -95,4 +95,86 @@ export class SubAgentGeneralHelper {
     }
     return hotelList;
   }
+
+  /**
+   * this methode used check iban number is valid
+   */
+  ibanTextValidation(iban){
+    var letter = new Array (
+      "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M",
+      "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z");
+    var digits = new Array (
+      "10","11","12","13","14","15","16","17","18","19","20","21","22",
+      "23","24","25","26","27","28","29","30","31","32","33","34","35");
+
+    var sa_ilen = 24;  
+    var sa_ctry = "SA";  
+    var sa_bban: RegExp = /\d{2}[A-Za-z0-9]{18}/;
+
+    // IBAN must consist entirely of characters a-z, A-Z, 0-9
+    let chartr: RegExp = /\W|_/;
+    if (chartr.test(iban)){
+      return "IBAN contains illegal characters"; 
+    }
+
+    // First four characters must be letter-letter-digit-digit
+    let letterDigit: RegExp = /^\D\D\d\d.+/;
+    if(letterDigit.test(iban) == false){
+      return "Invalid IBAN structure";
+    }
+
+    // Check digits cannot be 00, 01 or 99
+    let digit: RegExp = /^\D\D00.+|^\D\D01.+|^\D\D99.+/;
+    if(digit.test(iban)){
+      return "Invalid IBAN check digits";
+    }
+
+    // Validate country code
+    var city = iban.substr(0, 2);
+    if(city != sa_ctry){
+      return "Invalid country code - Saudi IBANs must begin with '"+sa_ctry+"'";
+    }
+
+    // Validate length
+    if(iban.length != sa_ilen){
+      return "Invalid length - Saudi IBANs must be '"+sa_ilen+"' characters long";
+    }
+
+    // Validate BBAN structure
+    if (sa_bban.test(iban.substr(4, sa_ilen - 4)) == false){
+      return "Invalid IBAN structure";
+    }
+
+    // Convert to upper case
+    iban = iban.toUpperCase();
+
+    // Move country and check digits to the end
+    iban = iban.substr(4, 24 - 4) + iban.substr(0, 4);
+
+    // Replace letters with digits
+    for (let i = 0; i <= 25; i++)
+    {
+        while (iban.search(letter[i])!= -1)
+        {
+            iban = iban.replace(letter[i], digits[i]);
+        }
+    }
+
+    // Calculate modulo 97 remainder
+    let coss = Math.ceil(iban.length / 7);
+    let rmndr = "";
+    for (let i = 1; i <= coss; i++)
+    {
+        rmndr = String(parseFloat(rmndr + iban.substr((i - 1) * 7, 7)) % 97);
+    }
+
+    // Remainder must be 1
+    if (rmndr != "1")
+    {
+      return "Incorrect IBAN check digits";
+    } 
+
+    return "true";
+    
+  }
 }

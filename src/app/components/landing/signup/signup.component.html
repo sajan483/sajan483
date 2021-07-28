@@ -142,13 +142,16 @@
                 <div class="col-md-6 pl-3 pr-3" *ngIf="licensefield">
                     <div class="form-group mb-0 fs15">
                         <label id="Licenseilbl">License number of the Ministry of Hajj and Umrah</label>
-                        <input id="license" placeholder="Enter License number" type="text" (keypress)="omit_special_char($event)" class="form-control text-uppercase" formControlName="license">
+                        <input id="license" placeholder="Enter License number" type="text" (keypress)="omit_special_char($event)" class="form-control" formControlName="license">
                     </div>
                 </div>
                 <div class="col-md-6 pl-3 pr-3" *ngIf="licensefield">
                     <div class="form-group mb-0 fs15">
                         <label id="ibanlbl">IBAN</label>
-                        <input id="iban" formControlName="iban" placeholder="Enter IBAN Number" type="text" class="form-control text-uppercase" (keypress)="omit_special_char($event)">
+                        <input id="iban" formControlName="iban" placeholder="Enter IBAN Number" type="text" class="form-control" (keypress)="omit_special_char($event)" oninput="this.value = this.value.toUpperCase()" [ngClass]="{ 'is-invalid': ibanValidation }">
+                        <div *ngIf="ibanValidation" class="invalid-feedback">
+                            <div>{{ibanMessge}}</div>
+                        </div>
                     </div>
                 </div>
 
