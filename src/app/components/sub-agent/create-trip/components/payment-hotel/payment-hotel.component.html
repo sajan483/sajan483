@@ -88,6 +88,14 @@
                                             </div>
                                         </div>
                                     </div>
+                                    <div *ngIf="tripHotel.hotel.policies.length > 0">
+                                        <div class="mb-3" *ngFor="let item of tripHotel.hotel.policies">
+                                            <h6 class="textunderline">{{item?.name}}</h6>
+                                            <div>
+                                                <div [innerHTML]="item?.description"></div>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
