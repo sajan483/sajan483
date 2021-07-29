@@ -589,13 +589,6 @@ export class CreateTripComponent implements OnInit, AfterViewChecked, DoCheck {
       this.bookingId = data.id;
       sessionStorage.setItem("reference_no", data.reference_no)
       this.common.checkAvailability(data.id).subscribe((response) => {
-        response = {
-          "refetch_trip": true,
-          "trip_transportation": {
-            "success": true,
-            "message": "price_changed"
-          }
-        }
         this.appStore.isAvailabilityFails = false;
         if (response.makkah_trip_hotel) {
           this.cityFirst = "";
