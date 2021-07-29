@@ -430,7 +430,7 @@ export class CreateTripComponent implements OnInit, AfterViewChecked, DoCheck {
       }
     },(error)=>{
       Swal.fire({
-        text: this.translate.instant('Sorry,we could not  find transport for this root'),
+        text: this.translate.instant("Sorry,We couldn't find transport on this route"),
         icon: "warning",
         confirmButtonText: this.translate.instant('Back To Search'),
       }).then((willDelete) => {
