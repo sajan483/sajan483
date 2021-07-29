@@ -633,9 +633,17 @@ export class CreateTripComponent implements OnInit, AfterViewChecked, DoCheck {
           //(<HTMLInputElement>document.getElementById("payBtn")).style.display = "block";
           (<HTMLInputElement>document.getElementById("continueBooking")).style.display = "block";
         }
-
+        
         if (response.refetch_trip == true) {
-         // this.createTripHelper.showSweetAlert('Price has been changed', "warning", 'OK')
+          if(response.makkah_trip_hotel){
+            this.createTripHelper.showSweetAlert(response.makkah_trip_hotel.message, "warning", 'OK')
+          }
+          if(response.medinah_trip_hotel){
+            this.createTripHelper.showSweetAlert(response.medinah_trip_hotel.message, "warning", 'OK')
+          }
+          if(response.trip_transportation){
+            this.createTripHelper.showSweetAlert(response.trip_transportation.message, "warning", 'OK')
+          }
           this.getTripData();
           this.bookContinue = false;
           this.disablePayBttn = false;
