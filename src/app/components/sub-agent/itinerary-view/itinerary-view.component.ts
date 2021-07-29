@@ -85,11 +85,13 @@ export class ItineraryViewComponent implements OnInit {
     }
 
   ngOnInit() {
-    this.genHelper.checkForAccessToken();
+    if (sessionStorage && sessionStorage.getItem('accesstoken')) {
+      return sessionStorage.getItem('accesstoken');
+    }else{
+      this.router.navigate(["/login"]);
+    }
     this.createHelper = new CreateTripHelper(this.helperService,this.translate);
     this.status = this.route.snapshot.params.status;
-    // if(sessionStorage && sessionStorage.getItem("timerStatus") && sessionStorage.getItem("timerStatus") == "stop"){this.timerStatus = true}
-    // this.setTimerForCancellationTimeOut()
     this.getList();
   }
   
