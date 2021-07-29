@@ -5,9 +5,9 @@
                 <div class="imagepdng mpr0 mpl30">
                     <img class="tick_img" src="/assets/images/confirmation-tick.png" alt="">
                 </div>
-                <div>
+                <div class="my-auto">
                     <h1 class="text-uppercase fs28 fw600 text-white">{{'Thank You..!!' | translate}}</h1>
-                    <h3 class="text-white fs18">{{'Your payment has been processed successfully' | translate}}</h3>
+                    <h3 class="text-white fs18" *ngIf="bknStatus == 'success'">{{'Your payment has been processed successfully' | translate}}</h3>
                 </div>
             </div>
             <div class="text-white my-auto fs14">
@@ -27,7 +27,7 @@
                 <div>
                     <h1 class="text-uppercase fs28 fw600 text-white mb-0"> {{'Something Went Wrong..!!' | translate}}
                     </h1>
-                    <h3 class="text-white fs18">{{'Your payment has been Failed' | translate}}, {{'Please Contact Customer care' | translate}} : 42008 05505</h3>
+                    <h3 class="text-white fs18">{{'Your payment has been Failed' | translate}}, {{'Please Contact Customer care' | translate}} : +91 9321116965</h3>
                 </div>
             </div>
             <div class="text-white my-auto fs14">
@@ -157,7 +157,7 @@
                             </div>
                             <div class="col-md-12 p-0 brdrbottom mb10" *ngIf="tripMakkahHotel?.status=='processing' || tripMakkahHotel?.status=='available'">
                                 <div class="d-flex justify-content-between w-100 bookdpdng">
-                                    <div class="fs14 fw600 clrOrng mt2p">{{'UNDER PROCESSING - Please Contact Customer care' | translate}} : 42008 05505</div>
+                                    <div class="fs14 fw600 clrOrng mt2p">{{'UNDER PROCESSING - Please Contact Customer care' | translate}} : +91 9321116965</div>
 
                                 </div>
                             </div>
@@ -379,7 +379,7 @@
                             </div>
                             <div class="col-md-12 p-0 brdrbottom mb10" *ngIf="tripMadeenaHotel?.status=='processing' || tripMadeenaHotel?.status=='available'">
                                 <div class="d-flex justify-content-between w-100 bookdpdng">
-                                    <div class="fs14 fw600 clrOrng mt2p">{{'UNDER PROCESSING - Please Contact Customer care' | translate}} : 42008 05505</div>
+                                    <div class="fs14 fw600 clrOrng mt2p">{{'UNDER PROCESSING - Please Contact Customer care' | translate}} : +91 9321116965</div>
 
                                 </div>
                             </div>
@@ -593,7 +593,7 @@
                             </div>
                             <div class="col-md-12 p-0 brdrbottom mb10" *ngIf="tripTransport?.status=='processing' || tripTransport?.status=='available'">
                                 <div class="d-flex justify-content-between w-100 bookdpdng">
-                                    <div class="fs14 fw600 clrOrng mt2p">{{'UNDER PROCESSING - Please Contact Customer care' | translate}} : 42008 05505</div>
+                                    <div class="fs14 fw600 clrOrng mt2p">{{'UNDER PROCESSING - Please Contact Customer care' | translate}} : +91 9321116965</div>
 
                                 </div>
                             </div>
