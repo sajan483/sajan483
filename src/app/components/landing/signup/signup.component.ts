@@ -132,7 +132,7 @@ export class SignupComponent implements OnInit {
         Swal.fire({
           icon: 'error',
           title: 'Oops...',
-          text: 'Contact person phone number already exist',
+          text: 'Contact person phone number already exist or IBAN already exist',
         })
       });
     }
@@ -172,7 +172,7 @@ export class SignupComponent implements OnInit {
       Swal.fire({
         icon: 'error',
         title: 'Oops...',
-        text: 'Contact person phone number already exist or IBAN already exist',
+        text: 'Contact person phone number already exist',
       })
     });
     } 
