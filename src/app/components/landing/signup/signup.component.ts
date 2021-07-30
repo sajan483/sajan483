@@ -127,7 +127,9 @@ export class SignupComponent implements OnInit {
             this.router.navigate(["/login"]);
           }
         }) 
-      },error=>{
+      },(err) => {
+        console.log(err);
+        
         this.spinner.hide();
         Swal.fire({
           icon: 'error',

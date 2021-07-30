@@ -741,6 +741,9 @@ export class CreateTripFrontPageComponent implements OnInit, DoCheck, AfterViewI
    */
 
   onServiceItemChange(value,check:boolean) {
+    this.activateMakkaSearch = false;
+    this.activateMadeenaSearch = false;
+    this.activateTransportSearch = false;
     this.service = value;
     sessionStorage.setItem('service', this.service)
     if (value == "All") {
