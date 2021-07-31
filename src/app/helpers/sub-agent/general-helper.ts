@@ -120,7 +120,7 @@ export class SubAgentGeneralHelper {
     // First four characters must be letter-letter-digit-digit
     let letterDigit: RegExp = /^\D\D\d\d.+/;
     if(letterDigit.test(iban) == false){
-      return "Invalid IBAN structure";
+      return "Invalid IBAN Number";
     }
 
     // Check digits cannot be 00, 01 or 99
@@ -142,7 +142,7 @@ export class SubAgentGeneralHelper {
 
     // Validate BBAN structure
     if (sa_bban.test(iban.substr(4, sa_ilen - 4)) == false){
-      return "Invalid IBAN structure";
+      return "Invalid IBAN Number";
     }
 
     // Convert to upper case

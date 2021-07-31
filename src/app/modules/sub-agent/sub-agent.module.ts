@@ -48,6 +48,7 @@ import { CancelationPopupComponent } from 'src/app/components/sub-agent/cancelat
 import { IBANAccountDetailsComponent } from 'src/app/components/sub-agent/iban-account-details/iban-account-details.component';
 import { DateRangePickerModule } from '@syncfusion/ej2-angular-calendars';
 import { TermsAndConditionComponent } from 'src/app/components/sub-agent/terms-and-condition/terms-and-condition.component';
+import { IbanCreaterComponent } from 'src/app/components/sub-agent/iban-creater/iban-creater.component';
 @NgModule({
   declarations: [
     BookingHistoryComponent,
@@ -71,7 +72,8 @@ import { TermsAndConditionComponent } from 'src/app/components/sub-agent/terms-a
     ItineraryViewComponent,
     CancelationPopupComponent,
     IBANAccountDetailsComponent,
-    TermsAndConditionComponent
+    TermsAndConditionComponent,
+    IbanCreaterComponent
   ],
 
   imports: [

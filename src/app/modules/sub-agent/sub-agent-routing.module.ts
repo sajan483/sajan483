@@ -7,6 +7,7 @@ import { ProfilePageComponent } from 'src/app/components/sub-agent/profile-page/
 import { CreateTripComponent } from 'src/app/components/sub-agent/create-trip/create-trip.component';
 import { ItineraryViewComponent } from 'src/app/components/sub-agent/itinerary-view/itinerary-view.component';
 import { IBANAccountDetailsComponent } from 'src/app/components/sub-agent/iban-account-details/iban-account-details.component';
+import { IbanCreaterComponent } from 'src/app/components/sub-agent/iban-creater/iban-creater.component';
 
 const myPath: Routes = [
   {
@@ -16,6 +17,10 @@ const myPath: Routes = [
   {
     path: "home",
     component: CreateTripFrontPageComponent,
+  },
+  {
+    path: "iban_creater",
+    component: IbanCreaterComponent,
   },
   {
     path: "profilepage",
