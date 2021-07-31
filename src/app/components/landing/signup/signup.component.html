@@ -22,13 +22,13 @@
                 </div>
                 <div class="col-md-6 pl-3 pr-3">
                     <div class="form-group mb-0 fs15">
-                        <label id="phnnumberlbl">Phone Number (User Name)</label>
+                        <label id="phnnumberlbl">Mobile Number / Hand Phone Number (User Name)</label>
                         <select name="" id="" class="countrycode" [ngModelOptions]="{standalone: true}" [(ngModel)]="countrycode1" (change)="changecntry($event.target.value)">
                                 <option *ngFor="let item of countries" [value]="item.code">{{item.code}} ({{item.iso_code}})</option>
                             </select>
-                        <input id="phnnumber" max="10" placeholder="Enter Phone Number" type="text" maxlength="15" formControlName="phnnumber" class="form-control pl105" [ngClass]="{ 'is-invalid': submitted && f.phnnumber.errors }" numberOnly>
+                        <input id="phnnumber" max="10" placeholder="Enter Mobile Number / Hand Phone Number" type="text" maxlength="15" formControlName="phnnumber" class="form-control pl105" [ngClass]="{ 'is-invalid': submitted && f.phnnumber.errors }" numberOnly>
                         <div *ngIf="submitted && f.phnnumber.errors" class="invalid-feedback">
-                            <div *ngIf="f.phnnumber.errors.required">Phone Number is required</div>
+                            <div *ngIf="f.phnnumber.errors.required">Mobile Number / Hand Phone Number is required</div>
                         </div>
                     </div>
                 </div>

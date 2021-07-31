@@ -28,6 +28,9 @@ export class UploadDocsComponent implements OnInit {
   sign : boolean = false;
   country : Country;
   countrycode : any = '91';
+  contract_file: any;
+  bank_file: any;
+  passport_file: any;
   
   
   constructor(private router:ActivatedRoute,private rout:Router,
@@ -37,16 +40,19 @@ export class UploadDocsComponent implements OnInit {
 
   passportfile(event){
     this.passportFile = <File>event.target.files[0];
+    this.passport_file = this.passportFile.name;
     this.passport = true;
   }
 
   Bankletter(event){
     this.bankLetter = <File>event.target.files[0];
+    this.bank_file = this.bankLetter.name;
     this.bank = true;
   }
 
   Contract(event){
     this.contractsign = <File>event.target.files[0];
+    this.contract_file = this.contractsign.name;
     this.sign = true;
   }
   
