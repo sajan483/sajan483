@@ -128,13 +128,12 @@ export class SignupComponent implements OnInit {
           }
         }) 
       },(err) => {
-        console.log(err);
-        
+        let y = err._body.replace("/\\/","").replace("{","").replace("}","").replace('"',"").replace('message',"").replace(':',"").replace('"',"").replace('"',"").replace('"',"")
         this.spinner.hide();
         Swal.fire({
           icon: 'error',
           title: 'Oops...',
-          text: 'Contact person phone number already exist or IBAN already exist',
+          text: y,
         })
       });
     }
