@@ -93,7 +93,7 @@ export class SignupComponent implements OnInit {
         title: 'Oops...',
         text: 'Password and Confirm Password is not match',
       })
-      return;
+      return; 
     }
     else{
       if(this.licensefield){
