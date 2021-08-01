@@ -151,46 +151,56 @@ export class SignupComponent implements OnInit {
       // }
       );
     }
-    // else{
-    //   const body = {
-    //     "name": this.signupForm.value.cmpnyname, 
-    //     "iban": "",
-    //     "licence_no": "",
-    //     "address": this.signupForm.value.cmpnyadress, 
-    //     "city": this.signupForm.value.city, 
-    //     "state": this.signupForm.value.state,
-    //     "country": this.slctcntry,
-    //     "phn_country_code": this.countrycode1,
-    //     "phone_number": this.signupForm.value.phnnumber,
-    //     "email": this.signupForm.value.email,
-    //     "primary_contact": {
-    //       "phn_country_code": this.countrycode1,
-    //       "phone_number": this.signupForm.value.phnnumberp, 
-    //       "name": this.signupForm.value.cname, 
-    //       "password": this.signupForm.value.password, 
-    //       "confirmation_password": this.signupForm.value.cnfrmpasswrd
-    //     }
-    //   }
-    //   this.common.signup(body).subscribe(data => {
-    //   this.spinner.hide();
-    //   Swal.fire({
-    //     icon: 'success',
-    //     title: data.message,
-    //     showConfirmButton: true,
-    //   }).then((result) => {
-    //     if (result.value) {
-    //       this.router.navigate(["/login"]);
-    //     }
-    //   }) 
-    // },error=>{
-    //   this.spinner.hide();
-    //   Swal.fire({
-    //     icon: 'error',
-    //     title: 'Oops...',
-    //     text: 'Contact person phone number already exist',
-    //   })
-    // });
-    // } 
+    else{
+      const body = {
+        "name": this.signupForm.value.cmpnyname, 
+        "iban": "",
+        "licence_no": "",
+        "address": this.signupForm.value.cmpnyadress, 
+        "city": this.signupForm.value.city, 
+        "state": this.signupForm.value.state,
+        "country": this.slctcntry,
+        "phn_country_code": this.countrycode1,
+        "phone_number": this.signupForm.value.phnnumber,
+        "email": this.signupForm.value.email,
+        "primary_contact": {
+          "phn_country_code": this.countrycode1,
+          "phone_number": this.signupForm.value.phnnumberp, 
+          "name": this.signupForm.value.cname, 
+          "password": this.signupForm.value.password, 
+          "confirmation_password": this.signupForm.value.cnfrmpasswrd
+        }
+      }
+      this.common.signup(body).subscribe(data => {
+
+      if(data.status_code == 202){
+        this.spinner.hide();
+        Swal.fire({
+          icon: 'error',
+          title: data.message,
+          showConfirmButton: true,
+        })
+      }else{
+        this.spinner.hide();
+        Swal.fire({
+          icon: 'success',
+          title: data.message,
+          showConfirmButton: true,
+        }).then((result) => {
+          if (result.value) {
+            this.router.navigate(["/login"]);
+          }
+        }) 
+      }
+    },error=>{
+      this.spinner.hide();
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: 'Contact person phone number already exist',
+      })
+    });
+    } 
     }
   }
 
