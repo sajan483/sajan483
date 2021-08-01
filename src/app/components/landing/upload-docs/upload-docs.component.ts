@@ -113,15 +113,18 @@ export class UploadDocsComponent implements OnInit {
         if(this.profile.is_licence_agent){
           this.isiban = true;
           if(response.approval_requests.length != 0){
-              this.isProcess = true;
+              this.isProcess = false;
               let dif = response.approval_requests.length
+              if(response.approval_requests[(dif-1)].status == 'requested'){
+                this.isProcess = true;
+                this.isiban = false;
+              }
               if(response.approval_requests[(dif-1)].status == 'rejected'){
                 Swal.fire({
                   icon: 'error',
                   title: 'Rejected...',
                   text: response.approval_requests[0].comment,
                 });
-                this.isProcess = false;
               }
             }else{
               this.isProcess = false;

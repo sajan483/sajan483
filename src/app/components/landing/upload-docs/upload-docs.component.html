@@ -45,7 +45,7 @@
                 </div>
             </div>
 
-            <div class="borderof mt30 p30" *ngIf="isiban && !isProcess">
+            <div class="borderof mt30 p30" *ngIf="isiban">
                 <div class="row wdth80">
                     <div class="col-md-6 pl-3 pr-3">
                         <div class="form-group fontSize13 mb-0">
@@ -96,7 +96,7 @@
                     <div class="row">
                         <div class="col-md-12 col-12 mtmb10 d-flex justify-content-between">
                             <div>Copy of the Valid passport who will sign the contract:</div>
-                            <div *ngIf="passport" class="imgfile">
+                            <div *ngIf="passport" class="imgfile" title="{{passport_file}}">
                                 {{passport_file}}
                             </div>
                             <div>
@@ -108,7 +108,7 @@
                         </div>
                         <div class="col-md-12 col-12 mtmb10 d-flex justify-content-between">
                             <div>copy of 200,000 SR Bank Guarantee Letter or 200,000 SR Cash Guarantee:</div>
-                            <div *ngIf="bank" class="imgfile">
+                            <div *ngIf="bank" class="imgfile" title="{{bank_file}}">
                                 {{bank_file}}
                             </div>
                             <div>
@@ -120,7 +120,7 @@
                         </div>
                         <div class="col-md-12 col-12 mtmb10 d-flex justify-content-between">
                             <div>Sign and Stamp the Addendum of Contract:</div>
-                            <div *ngIf="sign" class="imgfile">
+                            <div *ngIf="sign" class="imgfile" title="{{contract_file}}">
                                 {{contract_file}}
                             </div>
                             <div>
