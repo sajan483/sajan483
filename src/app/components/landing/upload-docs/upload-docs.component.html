@@ -45,6 +45,12 @@
                 </div>
             </div>
 
+            <div *ngIf="!isiban" class="text-center mt30 p30">
+                <div class="d-flex justify-content-center">
+                    <p class="backlog" (click)="navigatelogin();">Back to Login</p>
+                </div>
+            </div>
+
             <div class="borderof mt30 p30" *ngIf="isiban">
                 <div class="row wdth80">
                     <div class="col-md-6 pl-3 pr-3">
