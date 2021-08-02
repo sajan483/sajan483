@@ -17,6 +17,8 @@ import { HelperService} from 'src/app/common/services/helper-service';
 import { CommonApiService } from 'src/app/Services/common-api-services';
 import { CookieService } from 'ngx-cookie-service';
 import { LandingApiService } from 'src/app/Services/landing-api-services';
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+export function TranslatorFactory(httpClient: HttpClient) { return new TranslateHttpLoader(httpClient, './assets/i18n/', '.json'); }
 
 
 @NgModule({
@@ -36,20 +38,24 @@ import { LandingApiService } from 'src/app/Services/landing-api-services';
     FormsModule,
     MatSliderModule,
     MatCheckboxModule,
-    // TranslateModule.forChild({
-    //   loader: {
-    //     provide: TranslateLoader,
-    //     useFactory: TranslatorFactory,
-    //     deps: [HttpClient]
-    //   },
-    //   isolate: true
-    // }),
+    TranslateModule.forChild({
+      loader: {
+        provide: TranslateLoader,
+        useFactory: TranslatorFactory,
+        deps: [HttpClient]
+      },
+      isolate: true
+    }),
+  ],
+  exports: [
+    TranslateModule,
   ],
   providers: [GeneralHelper,HelperService,CommonApiService,CookieService,LandingApiService]
 })
 
 export class LandingModule {
-  // constructor(public translateService: TranslateService) {
-  //   translateService.setDefaultLang('en-US'); /* Setting up the Translate Json to English - `en` */
-  // }
+  constructor(public translateService: TranslateService) {
+    translateService.addLangs(["en-US", "ar-AE"]);
+    translateService.setDefaultLang('en-US'); /* Setting up the Translate Json to English - `en` */
+  }
 }

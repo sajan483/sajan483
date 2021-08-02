@@ -547,5 +547,9 @@
     "Invalid country code - Saudi IBANs must begin with 'SA'": "Invalid country code - Saudi IBANs must begin with 'SA'",
     "Invalid length - Saudi IBANs must be '24' characters long": "Invalid length - Saudi IBANs must be '24' characters long",
     "Incorrect IBAN check digits": "Incorrect IBAN check digits",
-    "child policies": "child policies"
+    "child policies": "child policies",
+    "TRAVEL AGENCY REGISTRATION": "TRAVEL AGENCY REGISTRATION",
+    "Travel Agency Name": "Travel Agency Name",
+    "Enter Travel Agency Name": "Enter Travel Agency Name",
+    "Travel Agency Name is required": "Travel Agency Name is required"
 }
