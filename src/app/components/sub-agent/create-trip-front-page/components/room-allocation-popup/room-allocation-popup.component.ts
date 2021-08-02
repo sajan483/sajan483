@@ -32,6 +32,7 @@ export class RoomAllocationPopupComponent implements OnInit {
   ngOnInit() {
   this.showRoomAllocationPopup = true;
   this.rooms = this.appStore.roomArray;
+  
   /**
    * This method for allocating rooms according to trveller count
    */
