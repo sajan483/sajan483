@@ -44,7 +44,6 @@ export class RoomAllocationPopupComponent implements OnInit {
    */
   setRoomAllocation() {
       var obj = JSON.parse(sessionStorage.getItem('userObject'))
-      console.log(obj)
       this.userRooms = [];
       let adultsPerRoom = 6;
       this.countAdult = obj.adults;
