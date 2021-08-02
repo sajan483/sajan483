@@ -258,6 +258,7 @@ export class SignupComponent implements OnInit {
   /**
    * this method for block spacial characters
    */
+  
   omit_special_char(event){   
    var k;  
    k = event.charCode;  //         k = event.keyCode;  (Both can be used)
