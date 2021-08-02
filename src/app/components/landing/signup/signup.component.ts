@@ -39,7 +39,7 @@ export class SignupComponent implements OnInit {
     private router: Router,private formBuilder: FormBuilder
     ,private spinner: NgxSpinnerService,
     private _commonApiService:CommonApiService,
-    private translate: TranslateService,) { 
+    private translate: TranslateService) { 
     this.signupAdapter = new signupAdapter();
     this.signupForm = this.signupAdapter.createSignupGroup();
     this.commonApiService = this._commonApiService
@@ -265,11 +265,11 @@ export class SignupComponent implements OnInit {
    
   }
 
-  changeLangValue(value) {
-    this.translate.use((this.appStore.langCode === 'ar-AE') ? "ar-AE" : "en-US");
-    localStorage.setItem("userLanguage", value)
-    sessionStorage.setItem("userLanguage", value)
-    if (value == "ar-AE") {
+  changeLangValue(lng: any) {
+    this.translate.use(lng);
+    localStorage.setItem("userLanguage", lng)
+    sessionStorage.setItem("userLanguage",lng)
+    if (lng == "ar-AE") {
       (<HTMLInputElement>document.getElementById("body")).classList.add('mirror_css');
     } else {
       (<HTMLInputElement>document.getElementById("body")).classList.remove('mirror_css');

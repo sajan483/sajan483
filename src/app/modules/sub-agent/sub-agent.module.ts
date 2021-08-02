@@ -130,9 +130,6 @@ import { IbanCreaterComponent } from 'src/app/components/sub-agent/iban-creater/
 })
 
 export class SubAgentModule {
-  //constructor(public translateService: TranslateService) {
-  //   translateService.setDefaultLang('en-US'); /* Setting up the Translate Json to English - `en` */
-  //}
   constructor(public translateService: TranslateService) {
     translateService.addLangs(["en-US", "ar-AE"]);
     translateService.setDefaultLang('en-US'); /* Setting up the Translate Json to English - `en` */

@@ -39,7 +39,7 @@
                 </div>
                 <div class="col-md-6 pl-3 pr-3">
                     <div class="form-group mb-0 fs15">
-                        <label id="emaillbl">Email</label>
+                        <label id="emaillbl">{{'EMAIL' | translate}}</label>
                         <input id="email" placeholder="Enter Email" type="text" formControlName="email" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.email.errors }">
                         <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
                             <div *ngIf="f.email.errors.required">Email is required</div>
