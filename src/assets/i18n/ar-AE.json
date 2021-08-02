@@ -527,5 +527,9 @@
     "Invalid country code - Saudi IBANs must begin with 'SA'": "رمز البلد غير صالح - يجب أن تبدأ أرقام IBAN السعودية بـ 'SA'",
     "Invalid length - Saudi IBANs must be '24' characters long": "الطول غير صالح - يجب أن يتكون رقم الحساب المصرفي الدولي (IBAN) السعودي من 24 حرفًا",
     "Incorrect IBAN check digits": "أرقام التحقق من IBAN غير صحيحة",
-    "child policies": "سياسات الطفل"
+    "child policies": "سياسات الطفل",
+    "TRAVEL AGENCY REGISTRATION": "تسجيل وكالة السفر",
+    "Travel Agency Name": "اسم وكالة السفر",
+    "Enter Travel Agency Name": "أدخل اسم وكالة السفر",
+    "Travel Agency Name is required": "اسم وكالة السفر مطلوب"
 }
