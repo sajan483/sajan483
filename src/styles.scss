@@ -13,6 +13,7 @@
 @import '~ngx-owl-carousel-o/lib/styles/scss/owl.carousel';
 @import '~ngx-owl-carousel-o/lib/styles/scss/owl.theme.default';
 @import '../src/assets/css/mirror_css';
+@import '../src/assets/css/pading_font';
 @mixin styleStepLine($index) {
     .mat-horizontal-stepper-header {
         &+.mat-stepper-horizontal-line:nth-child(#{$index}) {

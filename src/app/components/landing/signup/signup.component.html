@@ -1,4 +1,8 @@
-<section class="container-fluid bg">
+<section class="container-fluid bg mirr_text_right">
+    <div class="transilaterposition">
+        <div class="mirr_display" (click)="changeLangValue('en-US')">Click here to View in English</div>
+        <div class="mirr_hide" (click)="changeLangValue('ar-AE')">انقر هنا للعرض باللغة العربية</div>
+    </div>
     <div class="text-center padngtopimg">
         <img src="/assets/images/logo.png" class="logoimg" alt="">
     </div>
@@ -11,10 +15,10 @@
 
         <form class="form-container" [formGroup]="signupForm" (ngSubmit)="onSubmit()">
 
-            <div class="row">
+            <div class="row" id="signUpForm">
                 <div class="col-md-6 pl-3 pr-3">
                     <div class="form-group mb-0 fs15">
-                        <label id="cmpnynamelbl">Travel Agency Name</label>
+                        <label id="cmpnynamelbl">{{'Travel Agency Name' | translate}}</label>
                         <input id="cmpnyname" formControlName="cmpnyname" placeholder="Enter Travel Agency Name" type="text" (keypress)="omit_special_char($event)" class="form-control text-capitalize" [ngClass]="{ 'is-invalid': submitted && f.cmpnyname.errors }">
                         <div *ngIf="submitted && f.cmpnyname.errors" class="invalid-feedback">
                             <div *ngIf="f.cmpnyname.errors.required">Travel Agency Name is required</div>
@@ -52,8 +56,8 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-6 row pl-3 pr-3">
-                    <div class="col-md-6">
+                <div class="col-md-6 row mx-0 pl-3 pr-3">
+                    <div class="col-md-6 px-0">
                         <div class="form-group mb-0 fs15">
                             <label id="citylbl">City</label>
                             <input id="city" placeholder="Enter city" type="text" formControlName="city" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.city.errors }">
@@ -62,7 +66,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-6 pdngstate">
+                    <div class="col-md-6 pr0 pl10 mpl0 mpr10">
                         <div class="form-group mb-0 fs15">
                             <label id="statelbl">State</label>
                             <input id="state" placeholder="Enter state" type="text" formControlName="state" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.state.errors }">
@@ -130,12 +134,12 @@
 
                         <div class="form-check-inline pr-3 ">
                             <label class="form-check-label cursor-pointer" for="radio1" (click)="licenseyes()">
-                                  <input type="radio" class="form-check-input" id="radio1" name="optradio" value="option1" >Yes
+                                  <input type="radio" class="form-check-input mml5" id="radio1" name="optradio" value="option1" >Yes
                                 </label>
                         </div>
                         <div class="form-check-inline ">
                             <label class="form-check-label cursor-pointer" for="radio2" (click)="licenseno()">
-                                  <input type="radio" class="form-check-input" id="radio2" name="optradio" value="option2">No
+                                  <input type="radio" class="form-check-input mml5" id="radio2" name="optradio" value="option2">No
                                 </label>
                         </div>
                     </div>
@@ -178,7 +182,7 @@
                 <p class="textemailphone">info@akbarumrah.com</p>
             </div>
         </div>
-        <div class="w158">
+        <div class="w158" style="width: 158px;">
             <div class="emailicon">
                 <img src="/assets/images/call-us-icon.png" alt="">
             </div>

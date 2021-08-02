@@ -9,6 +9,8 @@ import { environment } from '../../../../environments/environment';
 import { LandingApiService } from 'src/app/Services/landing-api-services';
 import { CommonApiService } from 'src/app/Services/common-api-services';
 import { SubAgentGeneralHelper } from 'src/app/helpers/sub-agent/general-helper';
+import { TranslateService } from '@ngx-translate/core';
+import { AppStore } from "src/app/stores/app.store";
 
 @Component({
   selector: 'app-signup',
@@ -33,9 +35,11 @@ export class SignupComponent implements OnInit {
   private subagentHelper: SubAgentGeneralHelper = new SubAgentGeneralHelper(null);
 
   constructor(private common: LandingApiService,
+    private appStore: AppStore,
     private router: Router,private formBuilder: FormBuilder
     ,private spinner: NgxSpinnerService,
-    private _commonApiService:CommonApiService) { 
+    private _commonApiService:CommonApiService,
+    private translate: TranslateService,) { 
     this.signupAdapter = new signupAdapter();
     this.signupForm = this.signupAdapter.createSignupGroup();
     this.commonApiService = this._commonApiService
@@ -259,6 +263,17 @@ export class SignupComponent implements OnInit {
    k = event.charCode;  //         k = event.keyCode;  (Both can be used)
    return((k > 64 && k < 91) || (k > 96 && k < 123) || k == 8 || k == 32 || (k >= 48 && k <= 57)); 
    
+  }
+
+  changeLangValue(value) {
+    this.translate.use((this.appStore.langCode === 'ar-AE') ? "ar-AE" : "en-US");
+    localStorage.setItem("userLanguage", value)
+    sessionStorage.setItem("userLanguage", value)
+    if (value == "ar-AE") {
+      (<HTMLInputElement>document.getElementById("body")).classList.add('mirror_css');
+    } else {
+      (<HTMLInputElement>document.getElementById("body")).classList.remove('mirror_css');
+    }
   }
 
 }
