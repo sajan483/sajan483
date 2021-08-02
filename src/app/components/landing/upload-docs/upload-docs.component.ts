@@ -115,7 +115,7 @@ export class UploadDocsComponent implements OnInit {
           if(response.approval_requests.length != 0){
               this.isProcess = false;
               let dif = response.approval_requests.length
-              if(response.approval_requests[(dif-1)].status == 'requested'){
+              if(response.approval_requests[(dif-1)].status == 'submitted'){
                 this.isProcess = true;
                 this.isiban = false;
               }
@@ -129,6 +129,8 @@ export class UploadDocsComponent implements OnInit {
             }else{
               this.isProcess = false;
             }
+            console.log(this.isiban);
+            
         }else{
           this.isiban = false;
           this.isProcess = true;
